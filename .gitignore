@@ -6,3 +6,4 @@ tmp/
 .settings/*
 .project
 .redcar/*
+/nbproject/private/

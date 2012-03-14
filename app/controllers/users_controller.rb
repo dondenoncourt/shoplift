@@ -46,7 +46,8 @@ class UsersController < ApplicationController
   # * *Args*    :
   #   - :user -> Array of user data  
   def create
-    @user = User.new(params[:user])
+#    @user = User.new(params[:user])
+    @user = User.new(params)
     if @user.save
       render :partial => 'user', :locals => {:user => @user}, :status => 201
     else
