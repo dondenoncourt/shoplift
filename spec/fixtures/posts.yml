@@ -1,0 +1,82 @@
+---
+posts_001:
+  id: 1
+  name: Item 1
+  description: Lorem ipsum dolor sit amet, aliquet feugiat. Convallis morbi fringilla
+    gravida, phasellus feugiat dapibus velit nunc, pulvinar eget sollicitudin venenatis
+    cum nullam, vivamus ut a sed, mollitia lectus. Nulla vestibulum massa neque ut
+    et, id hendrerit sit, feugiat in taciti enim proin nibh, tempor dignissim, rhoncus
+    duis vestibulum nunc mattis convallis.
+  brand: Lorem ipsum dolor sit amet
+  retailer: Lorem ipsum dolor sit amet
+  url: http://www.jcrew.com/index.jsp
+  price: 1.1
+  hashtags_allowed: 1
+  comment: !!null 
+  user_id: 1
+  created_at: 2011-12-06 15:46:45.000000000Z
+  updated_at: 2011-12-06 15:46:45.000000000Z
+  status: 1
+posts_002:
+  id: 2
+  name: Item 2
+  description: Lorem ipsum dolor sit amet, aliquet feugiat. Convallis morbi fringilla
+    gravida, phasellus feugiat dapibus velit nunc, pulvinar eget sollicitudin venenatis
+    cum nullam, vivamus ut a sed, mollitia lectus. Nulla vestibulum massa neque ut
+    et, id hendrerit sit, feugiat in taciti enim proin nibh, tempor dignissim, rhoncus
+    duis vestibulum nunc mattis convallis.
+  brand: Lorem ipsum dolor sit amet
+  retailer: Lorem ipsum dolor sit amet
+  url: http://www.jcrew.com/index.jsp
+  price: 1.1
+  hashtags_allowed: 1
+  comment: !!null 
+  user_id: 1
+  created_at: 2011-12-06 15:47:42.000000000Z
+  updated_at: 2011-12-06 15:47:42.000000000Z
+  status: 1
+posts_003:
+  id: 3
+  name: Item 3
+  description: Lorem ipsum dolor sit amet, aliquet feugiat. giat in taciti enim proin
+    nibh, tempor dignissim, rhoncus duis vestibulum nunc mattis convallis.
+  brand: New brand name
+  retailer: Lorem ipsum dolor sit amet
+  url: http://www.jcrew.com/index.jsp
+  price: 1.1
+  hashtags_allowed: 1
+  comment: testing comments
+  user_id: 3
+  created_at: 2011-12-06 23:21:49.000000000Z
+  updated_at: 2011-12-06 23:21:56.000000000Z
+  status: 1
+posts_004:
+  id: 4
+  name: Item 4
+  description: Lorem ipsum dolor sit amet, aliquet feugiat. giat in taciti enim proin
+    nibh, tempor dignissim, rhoncus duis vestibulum nunc mattis convallis.
+  brand: New brand name
+  retailer: Lorem ipsum dolor sit amet
+  url: http://www.jcrew.com/index.jsp
+  price: 1.1
+  hashtags_allowed: 1
+  comment: testing comments
+  user_id: 3
+  created_at: 2011-12-06 23:21:49.000000000Z
+  updated_at: 2011-12-06 23:21:56.000000000Z
+  status: 1
+posts_005:
+  id: 5
+  name: Item 5
+  description: Lorem ipsum dolor sit amet, aliquet feugiat. giat in taciti enim proin
+    nibh, tempor dignissim, rhoncus duis vestibulum nunc mattis convallis.
+  brand: New brand name
+  retailer: Lorem ipsum dolor sit amet
+  url: http://www.jcrew.com/index.jsp
+  price: 1.1
+  hashtags_allowed: 1
+  comment: testing comments
+  user_id: 4
+  created_at: 2011-12-06 23:21:49.000000000Z
+  updated_at: 2011-12-06 23:21:56.000000000Z
+  status: 1

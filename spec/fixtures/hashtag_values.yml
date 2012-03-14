@@ -1,0 +1,21 @@
+---
+hashtag_values_001:
+  id: 1
+  value: jeans
+  created_at: 2011-12-06 15:46:45.000000000Z
+  updated_at: 2011-12-06 15:46:45.000000000Z
+hashtag_values_002:
+  id: 2
+  value: polo
+  created_at: 2011-12-06 15:46:45.000000000Z
+  updated_at: 2011-12-06 15:46:45.000000000Z
+hashtag_values_003:
+  id: 3
+  value: buttondown
+  created_at: 2011-12-06 15:46:45.000000000Z
+  updated_at: 2011-12-06 15:46:45.000000000Z
+hashtag_values_004:
+  id: 4
+  value: sneakers
+  created_at: 2011-12-06 15:46:45.000000000Z
+  updated_at: 2011-12-06 15:46:45.000000000Z

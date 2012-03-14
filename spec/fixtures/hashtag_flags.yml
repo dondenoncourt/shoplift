@@ -1,0 +1,25 @@
+---
+hashtag_flags_001:
+  id: 1
+  flag_type_id: 1
+  hashtag_id: 1
+  user_id: 1
+  created_at: 2011-12-06 15:46:45.000000000Z
+  updated_at: 2011-12-06 15:46:45.000000000Z
+  status: 1
+hashtag_flags_002:
+  id: 2
+  flag_type_id: 2
+  hashtag_id: 3
+  user_id: 2
+  created_at: 2011-12-06 15:46:45.000000000Z
+  updated_at: 2011-12-06 15:46:45.000000000Z
+  status: 1
+hashtag_flags_003:
+  id: 3
+  flag_type_id: 2
+  hashtag_id: 4
+  user_id: 3
+  created_at: 2011-12-06 15:46:45.000000000Z
+  updated_at: 2011-12-06 15:46:45.000000000Z
+  status: 0

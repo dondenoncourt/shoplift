@@ -1,0 +1,16 @@
+---
+flag_types_001:
+  id: 1
+  name: Inappropriate
+  created_at: 2011-12-06 15:46:45.000000000Z
+  updated_at: 2011-12-06 15:46:45.000000000Z
+flag_types_002:
+  id: 2
+  name: Not a Product
+  created_at: 2011-12-06 15:46:45.000000000Z
+  updated_at: 2011-12-06 15:46:45.000000000Z
+flag_types_003:
+  id: 3
+  name: Link Broken
+  created_at: 2011-12-06 15:46:45.000000000Z
+  updated_at: 2011-12-06 15:46:45.000000000Z

@@ -1,0 +1,88 @@
+users_001:
+  id: 1
+  email: mark@38media.net
+  encrypted_password: $2a$10$QPZysJIN42ChRiPWxjDBuejTTQ1p2Wqzwkcvlfq74RitYsVOt26YC
+  reset_password_token: null 
+  reset_password_sent_at: null 
+  sign_in_count: 15
+  current_sign_in_at: 2012-02-09 16:50:43.000000000Z
+  last_sign_in_at: 2012-02-07 20:21:04.000000000Z
+  current_sign_in_ip: 127.0.0.1
+  last_sign_in_ip: 127.0.0.1
+  created_at: 2011-12-20 05:04:53.000000000Z
+  updated_at: 2012-02-09 16:50:43.000000000Z
+  full_name: Mark Roseboom
+  username: mroseboom
+  sex: 1
+  biography: I like computers
+  url: http://38media.net
+  hometown: Boston, MA
+  birthdate: 1987-05-24
+  private: 0
+  status: 1
+users_002:
+  id: 2
+  email: patrick@38media.net
+  encrypted_password: $2a$10$QPZysJIN42ChRiPWxjDBuejTTQ1p2Wqzwkcvlfq74RitYsVOt26YC
+  reset_password_token: null 
+  reset_password_sent_at: null 
+  sign_in_count: 5
+  current_sign_in_at: 2012-02-09 17:31:33.000000000Z
+  last_sign_in_at: 2012-02-09 17:12:29.000000000Z
+  current_sign_in_ip: 127.0.0.1
+  last_sign_in_ip: 127.0.0.1
+  created_at: 2011-12-20 05:06:53.000000000Z
+  updated_at: 2012-02-09 17:31:33.000000000Z
+  full_name: Patrick Camacho
+  username: camachgk
+  sex: 1
+  biography: I like dogs
+  url: http://38media.net
+  hometown: Waltham, MA
+  birthdate: 1988-04-22
+  private: 0
+  status: 1
+users_003:
+  id: 3
+  email: iain@38media.net
+  encrypted_password: $2a$10$QPZysJIN42ChRiPWxjDBuejTTQ1p2Wqzwkcvlfq74RitYsVOt26YC
+  reset_password_token: null 
+  reset_password_sent_at: null 
+  sign_in_count: 0
+  current_sign_in_at: null 
+  last_sign_in_at: null 
+  current_sign_in_ip: null 
+  last_sign_in_ip: null 
+  created_at: 2011-12-20 05:06:53.000000000Z
+  updated_at: 2011-12-20 05:06:53.000000000Z
+  full_name: Iain Duggan
+  username: iduggan
+  sex: 1
+  biography: I like mobile development
+  url: http://38media.net
+  hometown: Waltham, MA
+  birthdate: 1988-03-01
+  private: 1
+  status: 1
+users_004:
+  id: 4
+  email: dead@38media.net
+  encrypted_password: $2a$10$QPZysJIN42ChRiPWxjDBuejTTQ1p2Wqzwkcvlfq74RitYsVOt26YC
+  reset_password_token: null 
+  reset_password_sent_at: null 
+  sign_in_count: 0
+  current_sign_in_at: null 
+  last_sign_in_at: null 
+  current_sign_in_ip: null 
+  last_sign_in_ip: null 
+  created_at: 2011-12-20 05:06:53.000000000Z
+  updated_at: 2011-12-20 05:06:53.000000000Z
+  full_name: Dead User
+  username: dead
+  sex: 1
+  biography: I like being dead
+  url: http://styx-river-4ever.com
+  hometown: River Styx
+  birthdate: 1900-01-01
+  private: 0
+  status: 0

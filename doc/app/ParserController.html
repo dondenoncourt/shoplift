@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+
+<title>class ParserController - Rails Application Documentation</title>
+
+<link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet">
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+</script>
+
+<script type="text/javascript" charset="utf-8" src="./js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/navigation.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/search_index.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/search.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/searcher.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/darkfish.js"></script>
+
+
+<body id="top" class="class">
+<nav id="metadata">
+  <nav id="home-section" class="section">
+  <h3 class="section-header">
+    <a href="./index.html">Home</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </h3>
+</nav>
+
+
+  <nav id="search-section" class="section project-section" class="initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <h3 class="section-header">
+      <input type="text" name="search" placeholder="Search" id="search-field"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </h3>
+  </form>
+
+  <ul id="search-results" class="initially-hidden"></ul>
+</nav>
+
+
+  <div id="file-metadata">
+    <nav id="file-list-section" class="section">
+  <h3 class="section-header">Defined In</h3>
+  <ul>
+    <li>app/controllers/parser_controller.rb
+  </ul>
+</nav>
+
+    
+  </div>
+
+  <div id="class-metadata">
+    
+    <nav id="parent-class-section" class="section">
+  <h3 class="section-header">Parent</h3>
+  
+  <p class="link"><a href="ApplicationController.html">ApplicationController</a>
+  
+</nav>
+
+    
+    <!-- Method Quickref -->
+<nav id="method-list-section" class="section">
+  <h3 class="section-header">Methods</h3>
+
+  <ul class="link-list">
+    
+    <li><a href="#method-i-parse">#parse</a>
+    
+  </ul>
+</nav>
+
+  </div>
+
+  <div id="project-metadata">
+    <nav id="fileindex-section" class="section project-section">
+  <h3 class="section-header">Pages</h3>
+
+  <ul>
+  
+    <li class="file"><a href="./doc/README_FOR_APP.html">README_FOR_APP</a>
+  
+  </ul>
+</nav>
+
+    <nav id="classindex-section" class="section project-section">
+  <h3 class="section-header">Class and Module Index</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="./StatusModule.html">StatusModule</a>
+  
+    <li><a href="./StatusModule/ModelInstanceMethods.html">StatusModule::ModelInstanceMethods</a>
+  
+    <li><a href="./Ability.html">Ability</a>
+  
+    <li><a href="./ApplicationController.html">ApplicationController</a>
+  
+    <li><a href="./FlagType.html">FlagType</a>
+  
+    <li><a href="./FlagsController.html">FlagsController</a>
+  
+    <li><a href="./FollowersController.html">FollowersController</a>
+  
+    <li><a href="./Hashtag.html">Hashtag</a>
+  
+    <li><a href="./HashtagFlag.html">HashtagFlag</a>
+  
+    <li><a href="./HashtagValue.html">HashtagValue</a>
+  
+    <li><a href="./HashtagsController.html">HashtagsController</a>
+  
+    <li><a href="./Item.html">Item</a>
+  
+    <li><a href="./ItemVisit.html">ItemVisit</a>
+  
+    <li><a href="./ItemsController.html">ItemsController</a>
+  
+    <li><a href="./ParserController.html">ParserController</a>
+  
+    <li><a href="./Post.html">Post</a>
+  
+    <li><a href="./PostFlag.html">PostFlag</a>
+  
+    <li><a href="./Role.html">Role</a>
+  
+    <li><a href="./RolesUser.html">RolesUser</a>
+  
+    <li><a href="./SetAside.html">SetAside</a>
+  
+    <li><a href="./SetAsidesController.html">SetAsidesController</a>
+  
+    <li><a href="./StatisticsController.html">StatisticsController</a>
+  
+    <li><a href="./StringBlacklist.html">StringBlacklist</a>
+  
+    <li><a href="./Subscription.html">Subscription</a>
+  
+    <li><a href="./SubscriptionsController.html">SubscriptionsController</a>
+  
+    <li><a href="./SuggestionsController.html">SuggestionsController</a>
+  
+    <li><a href="./TimelinesController.html">TimelinesController</a>
+  
+    <li><a href="./User.html">User</a>
+  
+    <li><a href="./UsernameBlacklist.html">UsernameBlacklist</a>
+  
+    <li><a href="./UsersController.html">UsersController</a>
+  
+    <li><a href="./UsersHelper.html">UsersHelper</a>
+  
+  </ul>
+</nav>
+
+  </div>
+</nav>
+
+<div id="documentation">
+  <h1 class="class">class ParserController</h1>
+
+  <div id="description" class="description">
+    
+  </div><!-- description -->
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    <!-- Methods -->
+    
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Instance Methods</h3>
+
+    
+      <div id="method-i-parse" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">parse</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Parse url</p>
+<ul><li>
+<p><strong>Request</strong>    :</p>
+<ul><li>
+<p>GET /parse</p>
+</li></ul>
+</li><li>
+<p><strong>Args</strong>    :</p>
+<ul><li>
+<p>:url -&gt; URL of page to be parsed</p>
+</li></ul>
+</li></ul>
+          
+
+          
+          <div class="method-source-code" id="parse-source">
+            <pre><span class="ruby-comment"># File app/controllers/parser_controller.rb, line 8</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">parse</span>
+  <span class="ruby-comment"># Authenticate user</span>
+  <span class="ruby-identifier">authenticate_user!</span>
+  
+  <span class="ruby-comment"># Gem for determine image size on the fly</span>
+  <span class="ruby-identifier">require</span> <span class="ruby-string">'fastimage'</span>
+  
+  <span class="ruby-comment"># Set variables</span>
+  <span class="ruby-identifier">params</span>[<span class="ruby-value">:url</span>] = <span class="ruby-string">&quot;http://www.amazon.com/HP-658553-001-ProLiant-Server-System/dp/B005KKJPCO/ref=sr_1_3?ie=UTF8&amp;qid=1330188488&amp;sr=8-3&quot;</span>
+  <span class="ruby-ivar">@results</span> = {<span class="ruby-value">:title</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;&quot;</span>, <span class="ruby-value">:description</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;&quot;</span>, <span class="ruby-value">:price</span> =<span class="ruby-operator">&gt;</span> [], <span class="ruby-value">:brand</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;&quot;</span>, <span class="ruby-value">:retailer</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:url</span>].<span class="ruby-identifier">split</span>(<span class="ruby-string">'/'</span>)[<span class="ruby-value">2</span>], <span class="ruby-value">:images</span> =<span class="ruby-operator">&gt;</span> [], <span class="ruby-value">:hashtags</span> =<span class="ruby-operator">&gt;</span> []}
+  
+  <span class="ruby-comment"># Parse contents</span>
+  <span class="ruby-identifier">html</span> = <span class="ruby-constant">Nokogiri</span><span class="ruby-operator">::</span><span class="ruby-constant">HTML</span>(<span class="ruby-identifier">open</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:url</span>]))
+  
+  <span class="ruby-comment"># Find title </span>
+  <span class="ruby-ivar">@results</span>[<span class="ruby-value">:title</span>] = <span class="ruby-identifier">html</span>.<span class="ruby-identifier">xpath</span>(<span class="ruby-string">'//meta[@property=&quot;og:title&quot;]'</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-ivar">@results</span>[<span class="ruby-value">:title</span>].<span class="ruby-identifier">blank?</span>
+     <span class="ruby-ivar">@results</span>[<span class="ruby-value">:title</span>] = <span class="ruby-ivar">@results</span>[<span class="ruby-value">:title</span>].<span class="ruby-identifier">first</span>.<span class="ruby-identifier">attr</span>(<span class="ruby-string">&quot;content&quot;</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-ivar">@results</span>[<span class="ruby-value">:title</span>] = <span class="ruby-identifier">html</span>.<span class="ruby-identifier">title</span>
+  <span class="ruby-keyword">end</span>
+  
+  <span class="ruby-comment"># Find description</span>
+  <span class="ruby-ivar">@results</span>[<span class="ruby-value">:description</span>] = <span class="ruby-identifier">html</span>.<span class="ruby-identifier">xpath</span>(<span class="ruby-string">'//meta[@property=&quot;og:description&quot;]'</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-ivar">@results</span>[<span class="ruby-value">:description</span>].<span class="ruby-identifier">blank?</span>
+    <span class="ruby-ivar">@results</span>[<span class="ruby-value">:description</span>] = <span class="ruby-ivar">@results</span>[<span class="ruby-value">:description</span>].<span class="ruby-identifier">first</span>.<span class="ruby-identifier">attr</span>(<span class="ruby-string">&quot;content&quot;</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-ivar">@results</span>[<span class="ruby-value">:description</span>] = <span class="ruby-identifier">html</span>.<span class="ruby-identifier">xpath</span>(<span class="ruby-string">'//meta[@name=&quot;description&quot;]'</span>)
+    <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-ivar">@results</span>[<span class="ruby-value">:description</span>].<span class="ruby-identifier">blank?</span>
+      <span class="ruby-ivar">@results</span>[<span class="ruby-value">:description</span>] = <span class="ruby-ivar">@results</span>[<span class="ruby-value">:description</span>].<span class="ruby-identifier">first</span>.<span class="ruby-identifier">attr</span>(<span class="ruby-string">&quot;content&quot;</span>)
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-ivar">@results</span>[<span class="ruby-value">:description</span>] = <span class="ruby-identifier">html</span>.<span class="ruby-identifier">at_css</span>(<span class="ruby-string">&quot;*[id*='desc']&quot;</span>)
+      <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-ivar">@results</span>[<span class="ruby-value">:description</span>].<span class="ruby-identifier">blank?</span>
+        <span class="ruby-ivar">@results</span>[<span class="ruby-value">:description</span>] = <span class="ruby-ivar">@results</span>[<span class="ruby-value">:description</span>].<span class="ruby-identifier">text</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-ivar">@results</span>[<span class="ruby-value">:description</span>] = <span class="ruby-identifier">html</span>.<span class="ruby-identifier">at_css</span>(<span class="ruby-string">&quot;*[class*='desc']&quot;</span>)
+        <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-ivar">@results</span>[<span class="ruby-value">:description</span>].<span class="ruby-identifier">blank?</span>
+          <span class="ruby-ivar">@results</span>[<span class="ruby-value">:description</span>] = <span class="ruby-ivar">@results</span>[<span class="ruby-value">:description</span>].<span class="ruby-identifier">text</span>
+        <span class="ruby-keyword">end</span>  
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>  
+  <span class="ruby-keyword">end</span>
+  
+  <span class="ruby-comment"># Find brand</span>
+  <span class="ruby-ivar">@results</span>[<span class="ruby-value">:brand</span>] = <span class="ruby-identifier">html</span>.<span class="ruby-identifier">xpath</span>(<span class="ruby-string">'//meta[@property=&quot;og:site_name&quot;]'</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-ivar">@results</span>[<span class="ruby-value">:brand</span>].<span class="ruby-identifier">blank?</span>
+    <span class="ruby-ivar">@results</span>[<span class="ruby-value">:brand</span>] = <span class="ruby-ivar">@results</span>[<span class="ruby-value">:brand</span>].<span class="ruby-identifier">first</span>.<span class="ruby-identifier">attr</span>(<span class="ruby-string">&quot;content&quot;</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-ivar">@results</span>[<span class="ruby-value">:brand</span>] = <span class="ruby-identifier">html</span>.<span class="ruby-identifier">at_css</span>(<span class="ruby-string">&quot;*[id*='brand']&quot;</span>)
+    <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-ivar">@results</span>[<span class="ruby-value">:brand</span>].<span class="ruby-identifier">blank?</span>
+      <span class="ruby-ivar">@results</span>[<span class="ruby-value">:brand</span>] = <span class="ruby-ivar">@results</span>[<span class="ruby-value">:brand</span>].<span class="ruby-identifier">text</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+  
+  <span class="ruby-comment"># Find price</span>
+  <span class="ruby-ivar">@results</span>[<span class="ruby-value">:price</span>] = <span class="ruby-identifier">html</span>.<span class="ruby-identifier">text</span>.<span class="ruby-identifier">scan</span>(<span class="ruby-regexp">%r\$[0-9\.]+/</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-ivar">@results</span>[<span class="ruby-value">:price</span>].<span class="ruby-identifier">blank?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@results</span>[<span class="ruby-value">:price</span>].<span class="ruby-identifier">count</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span>
+    <span class="ruby-ivar">@results</span>[<span class="ruby-value">:price</span>] = <span class="ruby-ivar">@results</span>[<span class="ruby-value">:price</span>].<span class="ruby-identifier">text</span>
+  <span class="ruby-keyword">else</span>  
+    <span class="ruby-ivar">@results</span>[<span class="ruby-value">:price</span>] = <span class="ruby-identifier">html</span>.<span class="ruby-identifier">at_css</span>(<span class="ruby-string">&quot;*[id*='price']&quot;</span>)
+    <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-ivar">@results</span>[<span class="ruby-value">:price</span>].<span class="ruby-identifier">blank?</span>
+      <span class="ruby-ivar">@results</span>[<span class="ruby-value">:price</span>] = <span class="ruby-ivar">@results</span>[<span class="ruby-value">:price</span>].<span class="ruby-identifier">text</span>[<span class="ruby-regexp">%r\$[0-9\.]+/</span>]
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-ivar">@results</span>[<span class="ruby-value">:price</span>] = <span class="ruby-identifier">html</span>.<span class="ruby-identifier">at_css</span>(<span class="ruby-string">&quot;*[class*='price']&quot;</span>)
+      <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-ivar">@results</span>[<span class="ruby-value">:price</span>].<span class="ruby-identifier">blank?</span>
+        <span class="ruby-ivar">@results</span>[<span class="ruby-value">:price</span>] = <span class="ruby-ivar">@results</span>[<span class="ruby-value">:price</span>].<span class="ruby-identifier">text</span>[<span class="ruby-regexp">%r\$[0-9\.]+/</span>]
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>  
+  <span class="ruby-keyword">end</span>
+  
+  <span class="ruby-comment"># Find images large than 200x200px</span>
+  <span class="ruby-identifier">html</span>.<span class="ruby-identifier">xpath</span>(<span class="ruby-string">'//img'</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">img_tag</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">img_tag</span>.<span class="ruby-identifier">attributes</span>.<span class="ruby-identifier">first</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">value</span>[<span class="ruby-value">0</span>,<span class="ruby-value">4</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;http&quot;</span>
+      <span class="ruby-identifier">size</span> = <span class="ruby-constant">FastImage</span>.<span class="ruby-identifier">size</span>(<span class="ruby-identifier">img_tag</span>.<span class="ruby-identifier">attributes</span>.<span class="ruby-identifier">first</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">value</span>)
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">size</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">&gt;=</span> <span class="ruby-value">150</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">size</span>[<span class="ruby-value">1</span>] <span class="ruby-operator">&gt;=</span> <span class="ruby-value">150</span>
+        <span class="ruby-ivar">@results</span>[<span class="ruby-value">:images</span>] <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">img_tag</span>.<span class="ruby-identifier">attributes</span>.<span class="ruby-identifier">first</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">value</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-keyword">begin</span>
+        <span class="ruby-identifier">size</span> = <span class="ruby-constant">FastImage</span>.<span class="ruby-identifier">size</span>(<span class="ruby-ivar">@results</span>[<span class="ruby-value">:retailer</span>]<span class="ruby-operator">+</span><span class="ruby-identifier">img_tag</span>.<span class="ruby-identifier">attributes</span>.<span class="ruby-identifier">first</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">value</span>)
+        <span class="ruby-keyword">if</span> <span class="ruby-identifier">size</span>.<span class="ruby-identifier">blank?</span>
+          <span class="ruby-keyword">next</span>
+        <span class="ruby-keyword">else</span>
+          <span class="ruby-keyword">if</span> <span class="ruby-identifier">size</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">&gt;=</span> <span class="ruby-value">150</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">size</span>[<span class="ruby-value">1</span>] <span class="ruby-operator">&gt;=</span> <span class="ruby-value">150</span>
+            <span class="ruby-ivar">@results</span>[<span class="ruby-value">:images</span>] <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">img_tag</span>.<span class="ruby-identifier">attributes</span>.<span class="ruby-identifier">first</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">value</span>
+          <span class="ruby-keyword">end</span> 
+        <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">rescue</span> <span class="ruby-constant">URI</span><span class="ruby-operator">::</span><span class="ruby-constant">InvalidURIError</span>
+        <span class="ruby-keyword">next</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-comment"># Find hashtags and camelcase</span>
+  <span class="ruby-identifier">hashtags</span> = <span class="ruby-identifier">html</span>.<span class="ruby-identifier">xpath</span>(<span class="ruby-string">'//meta[@name=&quot;keywords&quot;]'</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">hashtags</span>.<span class="ruby-identifier">blank?</span>
+    <span class="ruby-identifier">hashtags</span> = <span class="ruby-identifier">hashtags</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">attr</span>(<span class="ruby-string">&quot;content&quot;</span>)
+    <span class="ruby-identifier">hashtags</span> = <span class="ruby-identifier">hashtags</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot;,&quot;</span>)
+    <span class="ruby-identifier">hashtags</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">hashtag</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">hashtag</span> = <span class="ruby-identifier">hashtag</span>.<span class="ruby-identifier">squish</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">%r[^[:alnum:]]/</span>,<span class="ruby-string">''</span>).<span class="ruby-identifier">gsub</span>(<span class="ruby-string">' '</span>,<span class="ruby-string">'_'</span>)
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">hashtag</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">40</span>
+        <span class="ruby-ivar">@results</span>[<span class="ruby-value">:hashtags</span>] <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">hashtag</span>.<span class="ruby-identifier">camelcase</span>
+      <span class="ruby-keyword">end</span>  
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+  
+  <span class="ruby-identifier">render</span> <span class="ruby-value">:json</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@results</span>, <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">200</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- parse-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- parse-method -->
+
+    
+    </section><!-- public-instance-method-details -->
+  
+  </section><!-- 5Buntitled-5D -->
+
+</div><!-- documentation -->
+
+
+<footer id="validator-badges">
+  <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.12.
+  <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
+</footer>
+

@@ -1,0 +1,24 @@
+/opt/local/bin/ruby extconf.rb
+checking for mysql_ssl_set()... no
+checking for rb_str_set_len()... no
+checking for rb_thread_start_timer()... no
+checking for mysql.h... no
+checking for mysql/mysql.h... no
+*** extconf.rb failed ***
+Could not create Makefile due to some reason, probably lack of
+necessary libraries and/or headers.  Check the mkmf.log file for more
+details.  You may need configuration options.
+
+Provided configuration options:
+	--with-opt-dir
+	--with-opt-include
+	--without-opt-include=${opt-dir}/include
+	--with-opt-lib
+	--without-opt-lib=${opt-dir}/lib
+	--with-make-prog
+	--without-make-prog
+	--srcdir=.
+	--curdir
+	--ruby=/opt/local/bin/ruby
+	--with-mysql-config
+	--without-mysql-config

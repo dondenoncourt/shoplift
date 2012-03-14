@@ -1,0 +1,113 @@
+---
+set_asides_001:
+  id: 1
+  user_id: 1
+  item_id: 1
+  created_at: 2011-12-20 05:04:53.000000000Z
+  updated_at: 2011-12-20 05:04:53.000000000Z
+  status: 1
+set_asides_002:
+  id: 2
+  user_id: 1
+  item_id: 2
+  created_at: 2011-12-20 05:04:53.000000000Z
+  updated_at: 2011-12-20 05:04:53.000000000Z
+  status: 1
+set_asides_003:
+  id: 3
+  user_id: 1
+  item_id: 3
+  created_at: 2011-12-20 05:04:53.000000000Z
+  updated_at: 2011-12-20 05:04:53.000000000Z
+  status: 0
+set_asides_004:
+  id: 4
+  user_id: 2
+  item_id: 1
+  created_at: 2011-12-20 05:04:53.000000000Z
+  updated_at: 2011-12-20 05:04:53.000000000Z
+  status: 1
+set_asides_005:
+  id: 5
+  user_id: 2
+  item_id: 2
+  created_at: 2011-12-20 05:04:53.000000000Z
+  updated_at: 2011-12-20 05:04:53.000000000Z
+  status: 1
+set_asides_006:
+  id: 6
+  user_id: 2
+  item_id: 3
+  created_at: 2011-12-20 05:04:53.000000000Z
+  updated_at: 2011-12-20 05:04:53.000000000Z
+  status: 1
+set_asides_007:
+  id: 7
+  user_id: 2
+  item_id: 4
+  created_at: 2011-12-20 05:04:53.000000000Z
+  updated_at: 2011-12-20 05:04:53.000000000Z
+  status: 1
+set_asides_008:
+  id: 8
+  user_id: 2
+  item_id: 5
+  created_at: 2011-12-20 05:04:53.000000000Z
+  updated_at: 2011-12-20 05:04:53.000000000Z
+  status: 0
+set_asides_009:
+  id: 9
+  user_id: 3
+  item_id: 1
+  created_at: 2011-12-20 05:04:53.000000000Z
+  updated_at: 2011-12-20 05:04:53.000000000Z
+  status: 0
+set_asides_010:
+  id: 10
+  user_id: 3
+  item_id: 2
+  created_at: 2011-12-20 05:04:53.000000000Z
+  updated_at: 2011-12-20 05:04:53.000000000Z
+  status: 1
+set_asides_011:
+  id: 11
+  user_id: 3
+  item_id: 4
+  created_at: 2011-12-20 05:04:53.000000000Z
+  updated_at: 2011-12-20 05:04:53.000000000Z
+  status: 1
+set_asides_012:
+  id: 12
+  user_id: 4
+  item_id: 1
+  created_at: 2011-12-20 05:04:53.000000000Z
+  updated_at: 2011-12-20 05:04:53.000000000Z
+  status: 1
+set_asides_013:
+  id: 13
+  user_id: 4
+  item_id: 2
+  created_at: 2011-12-20 05:04:53.000000000Z
+  updated_at: 2011-12-20 05:04:53.000000000Z
+  status: 0
+set_asides_014:
+  id: 14
+  user_id: 4
+  item_id: 3
+  created_at: 2011-12-20 05:04:53.000000000Z
+  updated_at: 2011-12-20 05:04:53.000000000Z
+  status: 1
+set_asides_015:
+  id: 15
+  user_id: 4
+  item_id: 4
+  created_at: 2011-12-20 05:04:53.000000000Z
+  updated_at: 2011-12-20 05:04:53.000000000Z
+  status: 1
+set_asides_016:
+  id: 16
+  user_id: 4
+  item_id: 5
+  created_at: 2011-12-20 05:04:53.000000000Z
+  updated_at: 2011-12-20 05:04:53.000000000Z
+  status: 1

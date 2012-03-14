@@ -1,0 +1,41 @@
+---
+hashtags_001:
+  id: 1
+  hashtag_value_id: 1
+  post_id: 1
+  user_id: 1
+  created_at: 2011-12-06 15:46:45.000000000Z
+  updated_at: 2011-12-06 15:46:45.000000000Z
+  status: 1
+hashtags_002:
+  id: 2
+  hashtag_value_id: 2
+  post_id: 1
+  user_id: 2
+  created_at: 2011-12-06 15:46:45.000000000Z
+  updated_at: 2011-12-06 15:46:45.000000000Z
+  status: 1
+hashtags_003:
+  id: 3
+  hashtag_value_id: 3
+  post_id: 4
+  user_id: 3
+  created_at: 2011-12-06 15:46:45.000000000Z
+  updated_at: 2011-12-06 15:46:45.000000000Z
+  status: 1
+hashtags_004:
+  id: 4
+  hashtag_value_id: 2
+  post_id: 2
+  user_id: 3
+  created_at: 2011-12-06 15:46:45.000000000Z
+  updated_at: 2011-12-06 15:46:45.000000000Z
+  status: 1
+hashtags_005:
+  id: 5
+  hashtag_value_id: 3
+  post_id: 8
+  user_id: 2
+  created_at: 2011-12-06 15:46:45.000000000Z
+  updated_at: 2011-12-06 15:46:45.000000000Z
+  status: 1

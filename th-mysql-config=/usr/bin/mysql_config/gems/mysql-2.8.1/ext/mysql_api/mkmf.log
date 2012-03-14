@@ -1,0 +1,196 @@
+have_func: checking for mysql_ssl_set()... -------------------- no
+
+"/usr/bin/gcc-4.2 -o conftest -I. -I/opt/local/lib/ruby/1.8/i686-darwin10 -I. -I/opt/local/include -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE  -I/opt/local/include -I/usr/local/mysql/include  -Os -g -fno-common -fno-strict-aliasing -arch i386 -pipe -O2 -arch x86_64  -fno-common -pipe -fno-common   conftest.c  -L. -L/opt/local/lib -L/opt/local/lib -L. -L/opt/local/lib -arch x86_64  -arch x86_64  -L/usr/local/mysql/lib -lmysqlclient   -lpthread  -lruby-static -L/usr/local/mysql/lib -lmysqlclient   -lpthread  -lpthread -ldl -lobjc  "
+conftest.c: In function ‘t’:
+conftest.c:3: error: ‘mysql_ssl_set’ undeclared (first use in this function)
+conftest.c:3: error: (Each undeclared identifier is reported only once
+conftest.c:3: error: for each function it appears in.)
+conftest.c: In function ‘t’:
+conftest.c:3: error: ‘mysql_ssl_set’ undeclared (first use in this function)
+conftest.c:3: error: (Each undeclared identifier is reported only once
+conftest.c:3: error: for each function it appears in.)
+lipo: can't figure out the architecture type of: /var/tmp//ccJCxEJt.out
+checked program was:
+/* begin */
+1: /*top*/
+2: int main() { return 0; }
+3: int t() { void ((*volatile p)()); p = (void ((*)()))mysql_ssl_set; return 0; }
+/* end */
+
+"/usr/bin/gcc-4.2 -o conftest -I. -I/opt/local/lib/ruby/1.8/i686-darwin10 -I. -I/opt/local/include -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE  -I/opt/local/include -I/usr/local/mysql/include  -Os -g -fno-common -fno-strict-aliasing -arch i386 -pipe -O2 -arch x86_64  -fno-common -pipe -fno-common   conftest.c  -L. -L/opt/local/lib -L/opt/local/lib -L. -L/opt/local/lib -arch x86_64  -arch x86_64  -L/usr/local/mysql/lib -lmysqlclient   -lpthread  -lruby-static -L/usr/local/mysql/lib -lmysqlclient   -lpthread  -lpthread -ldl -lobjc  "
+ld: warning: ignoring file /opt/local/lib/libruby-static.a, file was built for archive which is not the architecture being linked (i386)
+ld: warning: ignoring file /usr/local/mysql/lib/libmysqlclient.dylib, file was built for unsupported file format which is not the architecture being linked (x86_64)
+Undefined symbols for architecture x86_64:
+  "_mysql_ssl_set", referenced from:
+      _t in ccehRpZa.o
+ld: symbol(s) not found for architecture x86_64
+collect2: ld returned 1 exit status
+lipo: can't open input file: /var/tmp//ccxeMLef.out (No such file or directory)
+checked program was:
+/* begin */
+1: /*top*/
+2: int main() { return 0; }
+3: int t() { mysql_ssl_set(); return 0; }
+/* end */
+
+"/usr/bin/gcc-4.2 -o conftest -I. -I/opt/local/lib/ruby/1.8/i686-darwin10 -I. -I/opt/local/include -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE  -I/opt/local/include -I/usr/local/mysql/include  -Os -g -fno-common -fno-strict-aliasing -arch i386 -pipe -O2 -arch x86_64  -fno-common -pipe -fno-common   conftest.c  -L. -L/opt/local/lib -L/opt/local/lib -L. -L/opt/local/lib -arch x86_64  -arch x86_64  -L/usr/local/mysql/lib -lmysqlclient   -lpthread  -lruby-static -L/usr/local/mysql/lib -lmysqlclient   -lpthread  -lpthread -ldl -lobjc  "
+ld: warning: ignoring file /opt/local/lib/libruby-static.a, file was built for archive which is not the architecture being linked (i386)
+ld: warning: ignoring file /usr/local/mysql/lib/libmysqlclient.dylib, file was built for unsupported file format which is not the architecture being linked (x86_64)
+Undefined symbols for architecture x86_64:
+  "_mysql_ssl_set", referenced from:
+      _t in ccJX1lcm.o
+ld: symbol(s) not found for architecture x86_64
+collect2: ld returned 1 exit status
+lipo: can't open input file: /var/tmp//ccgeKqWS.out (No such file or directory)
+checked program was:
+/* begin */
+1: int mysql_ssl_set();
+2: /*top*/
+3: /*
+4:  * http://trac.macports.org/ticket/3604
+5:  * gcc 4.0 on 10.4 has a problem
+6:  */
+7: int main() { return 0; }
+8: int t() { mysql_ssl_set(); return 0; }
+/* end */
+
+--------------------
+
+have_func: checking for rb_str_set_len()... -------------------- no
+
+"/usr/bin/gcc-4.2 -o conftest -I. -I/opt/local/lib/ruby/1.8/i686-darwin10 -I. -I/opt/local/include -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE  -I/opt/local/include -I/usr/local/mysql/include  -Os -g -fno-common -fno-strict-aliasing -arch i386 -pipe -O2 -arch x86_64  -fno-common -pipe -fno-common   conftest.c  -L. -L/opt/local/lib -L/opt/local/lib -L. -L/opt/local/lib -arch x86_64  -arch x86_64  -L/usr/local/mysql/lib -lmysqlclient   -lpthread  -lruby-static -L/usr/local/mysql/lib -lmysqlclient   -lpthread  -lpthread -ldl -lobjc  "
+conftest.c: In function ‘t’:
+conftest.c:3: error: ‘rb_str_set_len’ undeclared (first use in this function)
+conftest.c:3: error: (Each undeclared identifier is reported only once
+conftest.c:3: error: for each function it appears in.)
+conftest.c: In function ‘t’:
+conftest.c:3: error: ‘rb_str_set_len’ undeclared (first use in this function)
+conftest.c:3: error: (Each undeclared identifier is reported only once
+conftest.c:3: error: for each function it appears in.)
+lipo: can't figure out the architecture type of: /var/tmp//ccLzesb6.out
+checked program was:
+/* begin */
+1: /*top*/
+2: int main() { return 0; }
+3: int t() { void ((*volatile p)()); p = (void ((*)()))rb_str_set_len; return 0; }
+/* end */
+
+"/usr/bin/gcc-4.2 -o conftest -I. -I/opt/local/lib/ruby/1.8/i686-darwin10 -I. -I/opt/local/include -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE  -I/opt/local/include -I/usr/local/mysql/include  -Os -g -fno-common -fno-strict-aliasing -arch i386 -pipe -O2 -arch x86_64  -fno-common -pipe -fno-common   conftest.c  -L. -L/opt/local/lib -L/opt/local/lib -L. -L/opt/local/lib -arch x86_64  -arch x86_64  -L/usr/local/mysql/lib -lmysqlclient   -lpthread  -lruby-static -L/usr/local/mysql/lib -lmysqlclient   -lpthread  -lpthread -ldl -lobjc  "
+ld: warning: ignoring file /opt/local/lib/libruby-static.a, file was built for archive which is not the architecture being linked (i386)
+Undefined symbols for architecture i386:
+  "_rb_str_set_len", referenced from:
+      _t in ccy4ECVa.o
+ld: symbol(s) not found for architecture i386
+collect2: ld returned 1 exit status
+ld: warning: ignoring file /usr/local/mysql/lib/libmysqlclient.dylib, file was built for unsupported file format which is not the architecture being linked (x86_64)
+lipo: can't open input file: /var/tmp//ccxPk33W.out (No such file or directory)
+checked program was:
+/* begin */
+1: /*top*/
+2: int main() { return 0; }
+3: int t() { rb_str_set_len(); return 0; }
+/* end */
+
+"/usr/bin/gcc-4.2 -o conftest -I. -I/opt/local/lib/ruby/1.8/i686-darwin10 -I. -I/opt/local/include -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE  -I/opt/local/include -I/usr/local/mysql/include  -Os -g -fno-common -fno-strict-aliasing -arch i386 -pipe -O2 -arch x86_64  -fno-common -pipe -fno-common   conftest.c  -L. -L/opt/local/lib -L/opt/local/lib -L. -L/opt/local/lib -arch x86_64  -arch x86_64  -L/usr/local/mysql/lib -lmysqlclient   -lpthread  -lruby-static -L/usr/local/mysql/lib -lmysqlclient   -lpthread  -lpthread -ldl -lobjc  "
+ld: warning: ignoring file /opt/local/lib/libruby-static.a, file was built for archive which is not the architecture being linked (i386)
+Undefined symbols for architecture i386:
+  "_rb_str_set_len", referenced from:
+      _t in cctuGch1.o
+ld: symbol(s) not found for architecture i386
+collect2: ld returned 1 exit status
+ld: warning: ignoring file /usr/local/mysql/lib/libmysqlclient.dylib, file was built for unsupported file format which is not the architecture being linked (x86_64)
+lipo: can't open input file: /var/tmp//ccGPJFcn.out (No such file or directory)
+checked program was:
+/* begin */
+1: int rb_str_set_len();
+2: /*top*/
+3: /*
+4:  * http://trac.macports.org/ticket/3604
+5:  * gcc 4.0 on 10.4 has a problem
+6:  */
+7: int main() { return 0; }
+8: int t() { rb_str_set_len(); return 0; }
+/* end */
+
+--------------------
+
+have_func: checking for rb_thread_start_timer()... -------------------- no
+
+"/usr/bin/gcc-4.2 -o conftest -I. -I/opt/local/lib/ruby/1.8/i686-darwin10 -I. -I/opt/local/include -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE  -I/opt/local/include -I/usr/local/mysql/include  -Os -g -fno-common -fno-strict-aliasing -arch i386 -pipe -O2 -arch x86_64  -fno-common -pipe -fno-common   conftest.c  -L. -L/opt/local/lib -L/opt/local/lib -L. -L/opt/local/lib -arch x86_64  -arch x86_64  -L/usr/local/mysql/lib -lmysqlclient   -lpthread  -lruby-static -L/usr/local/mysql/lib -lmysqlclient   -lpthread  -lpthread -ldl -lobjc  "
+conftest.c: In function ‘t’:
+conftest.c:3: error: ‘rb_thread_start_timer’ undeclared (first use in this function)
+conftest.c:3: error: (Each undeclared identifier is reported only once
+conftest.c:3: error: for each function it appears in.)
+conftest.c: In function ‘t’:
+conftest.c:3: error: ‘rb_thread_start_timer’ undeclared (first use in this function)
+conftest.c:3: error: (Each undeclared identifier is reported only once
+conftest.c:3: error: for each function it appears in.)
+lipo: can't figure out the architecture type of: /var/tmp//ccVr1Xyx.out
+checked program was:
+/* begin */
+1: /*top*/
+2: int main() { return 0; }
+3: int t() { void ((*volatile p)()); p = (void ((*)()))rb_thread_start_timer; return 0; }
+/* end */
+
+"/usr/bin/gcc-4.2 -o conftest -I. -I/opt/local/lib/ruby/1.8/i686-darwin10 -I. -I/opt/local/include -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE  -I/opt/local/include -I/usr/local/mysql/include  -Os -g -fno-common -fno-strict-aliasing -arch i386 -pipe -O2 -arch x86_64  -fno-common -pipe -fno-common   conftest.c  -L. -L/opt/local/lib -L/opt/local/lib -L. -L/opt/local/lib -arch x86_64  -arch x86_64  -L/usr/local/mysql/lib -lmysqlclient   -lpthread  -lruby-static -L/usr/local/mysql/lib -lmysqlclient   -lpthread  -lpthread -ldl -lobjc  "
+ld: warning: ignoring file /opt/local/lib/libruby-static.a, file was built for archive which is not the architecture being linked (i386)
+Undefined symbols for architecture i386:
+  "_rb_thread_start_timer", referenced from:
+      _t in ccUt0In1.o
+ld: symbol(s) not found for architecture i386
+collect2: ld returned 1 exit status
+ld: warning: ignoring file /usr/local/mysql/lib/libmysqlclient.dylib, file was built for unsupported file format which is not the architecture being linked (x86_64)
+lipo: can't open input file: /var/tmp//cco5uL20.out (No such file or directory)
+checked program was:
+/* begin */
+1: /*top*/
+2: int main() { return 0; }
+3: int t() { rb_thread_start_timer(); return 0; }
+/* end */
+
+"/usr/bin/gcc-4.2 -o conftest -I. -I/opt/local/lib/ruby/1.8/i686-darwin10 -I. -I/opt/local/include -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE  -I/opt/local/include -I/usr/local/mysql/include  -Os -g -fno-common -fno-strict-aliasing -arch i386 -pipe -O2 -arch x86_64  -fno-common -pipe -fno-common   conftest.c  -L. -L/opt/local/lib -L/opt/local/lib -L. -L/opt/local/lib -arch x86_64  -arch x86_64  -L/usr/local/mysql/lib -lmysqlclient   -lpthread  -lruby-static -L/usr/local/mysql/lib -lmysqlclient   -lpthread  -lpthread -ldl -lobjc  "
+ld: warning: ignoring file /opt/local/lib/libruby-static.a, file was built for archive which is not the architecture being linked (i386)
+Undefined symbols for architecture i386:
+  "_rb_thread_start_timer", referenced from:
+      _t in ccPGzc2R.o
+ld: symbol(s) not found for architecture i386
+collect2: ld returned 1 exit status
+ld: warning: ignoring file /usr/local/mysql/lib/libmysqlclient.dylib, file was built for unsupported file format which is not the architecture being linked (x86_64)
+lipo: can't open input file: /var/tmp//ccMWaHpE.out (No such file or directory)
+checked program was:
+/* begin */
+1: int rb_thread_start_timer();
+2: /*top*/
+3: /*
+4:  * http://trac.macports.org/ticket/3604
+5:  * gcc 4.0 on 10.4 has a problem
+6:  */
+7: int main() { return 0; }
+8: int t() { rb_thread_start_timer(); return 0; }
+/* end */
+
+--------------------
+
+have_header: checking for mysql.h... -------------------- no
+
+"/usr/bin/gcc-4.2 -E -I. -I/opt/local/lib/ruby/1.8/i686-darwin10 -I. -I/opt/local/include -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE  -I/opt/local/include -I/usr/local/mysql/include  -Os -g -fno-common -fno-strict-aliasing -arch i386 -pipe -O2 -arch x86_64  -fno-common -pipe -fno-common    conftest.c -o conftest.i"
+gcc-4.2: -E, -S, -save-temps and -M options are not allowed with multiple -arch flags
+checked program was:
+/* begin */
+1: #include <mysql.h>
+/* end */
+
+--------------------
+
+have_header: checking for mysql/mysql.h... -------------------- no
+
+"/usr/bin/gcc-4.2 -E -I. -I/opt/local/lib/ruby/1.8/i686-darwin10 -I. -I/opt/local/include -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE  -I/opt/local/include -I/usr/local/mysql/include  -Os -g -fno-common -fno-strict-aliasing -arch i386 -pipe -O2 -arch x86_64  -fno-common -pipe -fno-common    conftest.c -o conftest.i"
+gcc-4.2: -E, -S, -save-temps and -M options are not allowed with multiple -arch flags
+checked program was:
+/* begin */
+1: #include <mysql/mysql.h>
+/* end */
+
+--------------------
+
