@@ -16,6 +16,6 @@ test:
 production:
   adapter: mysql2
   encoding: utf8
-  database: shoplift_app
-  username: shoplift_app
+  database: shoplift
+  username: shoplift
   password: vo2max
