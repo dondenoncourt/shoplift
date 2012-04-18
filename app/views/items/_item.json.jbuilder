@@ -20,7 +20,7 @@ end
 # Check if item is a relift
 if item.parent_id.blank?
 	json.user do |json|
-		json.partial! item.user	
+		json.partial! item.user
 	end
 else
 	json.relift do |json|

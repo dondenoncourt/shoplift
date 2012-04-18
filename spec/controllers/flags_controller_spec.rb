@@ -4,7 +4,7 @@ describe FlagsController do
   fixtures :users, :post_flags
   
   before(:each) do
-    #sign_in users(:users_001)
+    sign_in users(:users_001)
   end
   
   describe "GET index" do

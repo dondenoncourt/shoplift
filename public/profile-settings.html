@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>The Shoplift :: Settings</title>
+	
+	<meta name="description" content="The Shoplift" />
+	<meta name="keywords" content="The Shoplift" />	
+	<meta name="author" content="The Shoplift" />
+	
+  	<link rel="stylesheet" type="text/css" href="css/main.css" />
+  <!--[if lt IE 9]>
+	<link rel="stylesheet" type="text/css" href="css/ie.css" />
+<![endif]-->
+
+  	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.js"></script>
+  	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.min.js"></script>
+	<script src="js/jquery.mousewheel.min.3.0.6.js"></script>
+	<script src="js/jquery.sbscroller.js"></script>
+	<script src="js/jquery.scrollTo-min.js"></script>
+	<script src="js/jquery.simplemodal.js"></script>
+	<script src="js/sitefuncs.js"></script>
+
+</head>
+<body>
+	<a id="top"></a>
+	<div class="headWrap">
+		<div class="header">
+			<h1><a href="">The Shoplift</a></h1>
+			<div class="navigation">
+				<a class="logout" href="#">Sign Out</a>
+				<ul class="mainNav">
+					<li><a href="#">Add</a></li>
+					<li><a href="#">Follow</a></li>
+					<li><a href="#">Saved</a></li>
+				</ul>
+				<form action="#" class="search">
+					<input type="text" class="text search" name="search" value="Search" /><input type="submit" name="submit" class="searchSubmit" />
+				</form>
+				<a href="#" class="profilePhoto"><img src="img/user-large-kelly.jpg" alt="Bio Photo" /></a>
+			</div>
+		</div>	<!-- End .header -->
+	</div>	<!-- End .headWrap -->
+	
+	<div id="content">		<div class="leftCol profile">
+			<div class="person">
+				<img src="img/user-large-john.jpg" width="200" height="200" alt="profile-large"/>
+				<h2>John Harrington<br/><span class="location">New York, NY</span></h2>
+				<a class="button buttonOn" href="#">Edit Profile</a>
+			</div>
+			<ul class="personStats">
+				<li class="current"><a href="#">200 Items Shoplifted</a></li>
+				<li><a href="#">200 Followers</a></li>
+				<li><a href="#">200 Followees</a></li>
+			</ul>
+			<div class="profileText">Profile quis hendrerit et tation, facilisi vel duis commodo vulputate. Profile quis hendrerit et tation, facilisi vel duis commodo vulputate.</div>
+			<div class="profileUrl">
+				<a href="#">individualurl.com</a>
+			</div>
+			<h3>Top Tags</h3>
+			<ul class="topTags">
+				<li><a href="#">Lorem Ipsum Tag</a></li>
+				<li><a href="#">Lorem Ipsum Tag</a></li>
+				<li><a href="#">Lorem Ipsum Tag</a></li>
+				<li><a href="#">Lorem Ipsum Tag</a></li>
+				<li><a href="#">Lorem Ipsum Tag</a></li>
+			</ul>
+			<a href="#">Show More</a>
+		</div>
+
+		<div class="rightCol">
+			<div class="entry settings">
+				<h2>Edit Your Profile Settings</h2>
+				<form action="#" method="post">
+					<h3>Account Settings</h3>
+					<ul class="formList">
+						<li>
+							<label for="firstName">First Name</label>
+							<input type="text" class="text" name="firstName" id="firstName" value="John"/>
+						</li>
+						<li>
+							<label for="lastName">Last Name</label>
+							<input type="text" class="text" name="lastName" id="lastName" value="Harrington"/>
+						</li>
+						<li>
+							<label for="email">Email</label>
+							<input type="text" class="text" name="email" id="email" value="email@gmail.com"/>
+						</li>
+						<li>
+							<label for="password">Password</label>
+							<input type="password" class="text" name="password" id="password" value="xxxxxxx"/>
+							<a href="#">Change Password</a>
+						</li>
+						<li>
+							<label for="url">Vanity URL</label>
+							<input type="text" class="text" name="url" id="url" value="johnharrington"/>
+						</li>
+					</ul>
+					<h3>Personal Settings</h3>
+					<ul class="formList">
+						<li>
+							<label for="country">Country</label>
+							<select name="country" id="country">
+								<option>United States</option>
+							</select>
+						</li>
+						<li>
+							<label for="zipcode">Zip Code</label>
+							<input type="text" class="text" name="zipcode" id="zipcode" value="10001"/>
+						</li>
+						<li>
+							<label for="bio">Bio</label>
+							<textarea name="bio" id="bio">Profile quis hendrerit et tation, facilisi vel duis commodo vulputate. Profile quis hendrerit et tation, facilisi vel duis commodo vulputate.</textarea>
+							<span class="characterCount">XXX Characters Left</span>
+						</li>
+						<li>
+							<label for="website">Website</label>
+							<input type="text" class="text" name="website" id="website" value="individualurl.com"/>
+						</li>
+						<li>
+							<label for="photo">Photo or Logo</label>
+							<img src="img/user-large-john.jpg" alt="profile-large"/>
+							<p>
+								<a href="#">Upload a New Photo</a><br/>
+								<a href="#">Refresh from Facebook</a><br/>
+								<a href="#">Refresh from Twitter</a>
+							</p>
+						</li>
+					</ul>
+					<h3>Notification Settings</h3>
+					<ul class="formList radioList">
+						<li>
+							<div class="radioDesc">Tell me when someone new starts following me:</div>
+							<input type="radio" class="radio" name="newFollow" value="yes" id="newFollow-yes" /><label for="newFollow-yes">Yes</label>
+							<input type="radio" class="radio" name="newFollow" value="no" id="newFollow-no" /><label for="newFollow-no">No</label>
+						</li>
+						<li>
+							<div class="radioDesc">Tell me when someone relifts an item of mine:</div>
+							<input type="radio" class="radio" name="relift" value="yes" id="relift-yes" /><label for="relift-yes">Yes</label>
+							<input type="radio" class="radio" name="relift" value="no" id="relift-no" /><label for="relift-no">No</label>
+						</li>
+						<li>
+							<div class="radioDesc">Update me on what I've been missing:</div>
+							<input type="radio" class="radio" name="missing" value="daily" id="missing-daily" /><label for="missing-daily">Daily</label>
+							<input type="radio" class="radio" name="missing" value="weekly" id="missing-weekly" /><label for="missing-weekly">Weekly</label>
+							<input type="radio" class="radio" name="missing" value="monthly" id="missing-monthly" /><label for="missing-monthly">Monthly</label>
+							<input type="radio" class="radio" name="missing" value="never" id="missing-never" /><label for="missing-never">Never</label>
+						</li>
+					</ul>
+					<h3>Linked Accounts</h3>
+					<ul class="formList">
+						<li>
+							<label>Facebook</label>
+							<div class="pillbox"><a href="#" class="current onLink">On</a><a href="#" class="offLink">Off</a></div>
+						</li>
+						<li>
+							<label>Twitter</label>
+							<div class="pillbox"><a href="#" class="onLink">On</a><a href="#" class="current offLink">Off</a></div>
+						</li>
+						<li>
+							<label>Pinterest</label>
+							<div class="pillbox"><a href="#" class="current onLink">On</a><a href="#" class="offLink">Off</a></div>
+						</li>
+					</ul>
+					<h3>Follow Me</h3>
+					<p>Embed this button on your blog or website! Just copy the code below and paste it into your site where you'd like it to appear.</p>
+					<div class="code">&lt;a href="#"&gt;Lorem Ipsum Code Lorem Ipsum Code Lorem Ipsum Code Lorem Ipsum Code&lt;/a&gt;</div>
+					<div class="divider"></div>
+					<input type="submit" name="submit" value="Save Settings" class="submit" />
+				</form>
+			</div>
+		</div>
+
+		<div class="clear"></div>
+	</div>	<!-- End #content -->
+	<ul class="footer">
+		<li class="first"><a href="#">Help</a></li>
+		<li><a href="#">About</a></li>
+		<li><a href="#">Buttons</a></li>
+		<li><a href="#">Mobile</a></li>
+		<li><a href="#">Blog</a></li>
+		<li><a href="#">Terms</a></li>
+		<li><a href="#">Privacy</a></li>
+		<li><a href="#">Contact</a></li>
+		<li class="last"><a href="#">Invite</a></li>
+	</ul>
+	<a href="#top" class="scrollTo">Scroll to Top</a>
+	
+	<div id="basic-modal-content"></div>
+</body>
+</html>

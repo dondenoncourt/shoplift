@@ -108,7 +108,7 @@
 						self.destroy();
 					}),
 				iframe : jQuery('<iframe style="display:none !important;" action="' + this.form_url + '" class="sl-bookmarklet"></iframe>'),
-				form : jQuery('<form class="sl-bookmarklet" method="post"></form>')
+				form : jQuery('<form class="sl-bookmarklet" action="' + this.form_url + '"  method="post"></form>')
 					.css(jQuery.extend(
 						{},
 						this.defaultCSS,
@@ -377,6 +377,7 @@
 			this.el.form
 				.submit(function(){
 					self.validateForm(inputs);
+                    if (window.console) console.log(' in submit function invocation');
 					return false;
 				})
 				.append(
@@ -617,6 +618,7 @@
 			// Open the iFrame for writing and clone in the form for submission
 			ifrm.open();
 			this.el.form.clone().appendTo(jQuery('body',ifrm)).submit();
+jQuery('form.sl-bookmarklet').submit();
 			// Set the message and display it
 			this.setError('Product added!');
 			this.displayError();

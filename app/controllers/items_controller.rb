@@ -56,7 +56,7 @@ class ItemsController < ApplicationController
   def create
     authenticate_user!
     post = {:user_id => current_user.id}
-    post_include = ["name", "description", "brand", "retailer", "url", "price", "comment", "hashtags_allowed"]
+    post_include = ["name", "description", "brand", "retailer", "url", "price", "comment"]#, "hashtags_allowed"]
     
     if params[:item].blank?
       post_include.each do |element| 
@@ -75,6 +75,7 @@ class ItemsController < ApplicationController
                 
     @item = Item.new({:user_id => current_user.id, :post_id => @post.id})
     if @item.save
+
       render :partial => 'item', :locals => {:item => @item}, :status => 201
     else
       return_error_messages(@item,"Failed to create item")
@@ -113,17 +114,10 @@ class ItemsController < ApplicationController
   #   - :item -> Array of item details
   def update
     authenticate_user!
-    @item
-    begin
-    # denoncourt, was ISNULL(items.parent_id) but null wasn't used
     @item = Item.joins(:post,:user) \
                 .joins("INNER JOIN users AS post_users on posts.user_id = post_users.id AND users.status = 1") \
-                .where("items.id = ? AND items.user_id = ? \
-                        AND items.parent_id = 0 \
-                        AND items.status = 1", params[:id],current_user.id).first!
-    rescue ActiveRecord::RecordNotFound
-        puts "record not found"
-    end 
+                .where("items.id = ? AND items.user_id = ? AND ISNULL(items.parent_id) AND items.status = 1", 
+                        params[:id],current_user.id).first!
                     
     post = {:user_id => current_user.id}
     post_include = ["name", "description", "brand", "retailer", "url", "price", "comment", "hashtags_allowed"]
