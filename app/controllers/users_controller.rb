@@ -7,10 +7,13 @@ class UsersController < ApplicationController
   #   - :id -> User id
   #   - :username -> Username
   def show
+    
+    logger.debug params
+    logger.debug params['username']
     if params[:identifier] == "user_id"
       @user = User.find(params[:id])
     elsif params[:identifier] == "username"  
-      @user = User.find_by_username(:username => params[:username])
+      @user = User.find_by_username(params['username'])
     else
       return render_error(404,"User not found") 
     end  
@@ -33,7 +36,7 @@ class UsersController < ApplicationController
   # * *Args*    :
   #   - :username -> Username 
   def validate_username
-    if @user = User.find_by_username(lower(params[:username]))
+    if @user = User.find_by_username(params[:username].downcase)
       render :partial => "user", :locals => {:user => @user} 
     else
       render_error(404,"User not found")
@@ -46,8 +49,8 @@ class UsersController < ApplicationController
   # * *Args*    :
   #   - :user -> Array of user data  
   def create
-#    @user = User.new(params[:user])
-    @user = User.new(params)
+    @user = User.new(params[:user])
+#    @user = User.new(params) denoncourt put this here assuming atomic list of arguments in RESTful API
     if @user.save
       render :partial => 'user', :locals => {:user => @user}, :status => 201
     else

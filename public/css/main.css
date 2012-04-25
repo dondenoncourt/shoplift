@@ -298,7 +298,9 @@ a.profilePhoto img {
 
 
 /*---------- Entries ----------*/
-
+.entryTemplate {
+    display: none;
+}
 .entry {
 	width: 615px;
 	background: #141414;

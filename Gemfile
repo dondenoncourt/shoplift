@@ -8,6 +8,7 @@ gem 'cancan'
 gem 'thinking-sphinx'
 gem 'jbuilder'
 gem 'fastimage'
+# gem 'will_paginate' TODO consider using this plugin
 
 group :test, :development do
   gem 'rspec-rails'

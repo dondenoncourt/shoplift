@@ -2,6 +2,17 @@ App::Application.routes.draw do
   
   resources :images
 
+  # 
+  # Posts
+  # 
+  get "posts/myposts", :to => "posts#myposts" 
+  
+devise_scope :user do
+#  get "register"  => "devise/registrations#new" 
+#  get "login"  => "devise/sessions#new"    
+  get "logout" => "devise/sessions#destroy"
+end 
+  
   #
   # Users
   #
@@ -10,7 +21,8 @@ App::Application.routes.draw do
   get "users/validate_username/:username", :to => "users#validate_username", :defaults => { :format => :json }, :constraints => {:format => :json}
   get "users/username/:username", :to => "users#show", :identifier => "username", :defaults => { :format => :json }, :constraints => {:format => :json}
   post 'login', :to => 'devise/sessions#create', :defaults => {:format => :json}, :constraints => {:format => :json}
-  delete 'logout', :to => 'devise/sessions#destroy', :defaults => {:format => :json}, :constraints => {:format => :json}
+#  get 'logout', :to => 'devise/sessions#destroy' 
+  #delete 'logout', :to => 'devise/sessions#destroy', :defaults => {:format => :json}, :constraints => {:format => :json}
   # Browser / system compatability
   post "users/:id/edit", :to => "users#update", :defaults => { :format => :json }, :constraints => {:format => :json}
   post "users/:id/delete", :to => "users#destroy", :defaults => { :format => :json }, :constraints => {:format => :json}
@@ -19,7 +31,7 @@ App::Application.routes.draw do
   # Timelines
   #
   get "timelines", :to => "timelines#index", :defaults => { :format => :json }, :constraints => {:format => :json}
-  get "timelines/users/:id", :to => "timelines#show_user", :defaults => { :format => :json }, :constraints => {:format => :json}
+  get "timelines/users/:id", :to => "timelines#s/how_user", :defaults => { :format => :json }, :constraints => {:format => :json}
   get "timelines/recent", :to => "timelines#show_recent", :defaults => { :format => :json }, :constraints => {:format => :json}
   get "timelines/hashtags/:name", :to => "timelines#show_hashtags", :defaults => { :format => :json }, :constraints => {:format => :json}
   

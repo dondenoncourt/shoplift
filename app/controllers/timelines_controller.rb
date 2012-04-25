@@ -8,7 +8,7 @@ class TimelinesController < ApplicationController
   #   - :below -> Lowest id to obtain items between
   #   - :limit -> Number of items to return
   def index
-    authenticate_user!
+    #authenticate_user!
     above_below_statement = ""
     if !params[:above].blank? || !params[:below].blank?
       if !params[:above].blank? && !params[:below].blank?
@@ -30,7 +30,7 @@ class TimelinesController < ApplicationController
                  .where("items.status = 1 AND (subscriptions.follower_id = ? OR items.user_id = ?) #{above_below_statement}",current_user.id,current_user.id) \
                  .order("items.created_at DESC") \
                  .group("items.id") \
-                 .limit(limit)
+                 .limit(limit) 
   end
   
   # Fetch up to 50 items of a specified user

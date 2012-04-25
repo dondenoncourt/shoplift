@@ -21,7 +21,7 @@ describe UsersController do
       it "creates a new User" do
         sign_in @user
         expect {
-          post :create, :user => valid_attributes, :format => :json
+            post :create, :user => valid_attributes,  :format => :json
         }.to change(User, :count).by(1)
       end
 
