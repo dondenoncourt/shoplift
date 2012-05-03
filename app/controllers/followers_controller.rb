@@ -17,6 +17,7 @@ class FollowersController < ApplicationController
   # * *Args*    :
   #   - :id -> User id
   def show
+    authenticate_user!
     @user = User.where(:id => params[:id], :status => 1).first!
      if @user.private
       authenticate_user!

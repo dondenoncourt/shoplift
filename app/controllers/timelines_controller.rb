@@ -1,5 +1,12 @@
 class TimelinesController < ApplicationController
   
+  def home 
+    if user_signed_in?
+      redirect_to "/home.html"
+    else
+      redirect_to "/login"
+    end
+  end
   # Fetch up to 50 items of current user and that of his/her subscriptions 
   # * *Request*    :
   #   - GET /timelines
@@ -8,7 +15,7 @@ class TimelinesController < ApplicationController
   #   - :below -> Lowest id to obtain items between
   #   - :limit -> Number of items to return
   def index
-    #authenticate_user!
+    authenticate_user!
     above_below_statement = ""
     if !params[:above].blank? || !params[:below].blank?
       if !params[:above].blank? && !params[:below].blank?
@@ -24,13 +31,18 @@ class TimelinesController < ApplicationController
       return render_error(406,"Limit must be less than or equal to 50")
     end
     
+
+    if (current_user)
+        logger.debug "xcurrent_user:" 
+    end
+
     limit = params[:limit].blank? ? 20 : params[:limit]
-    @items = Item.joins(:post,:user,"INNER JOIN subscriptions ON subscriptions.user_id = items.user_id AND subscriptions.status = 1") \
-                 .joins("INNER JOIN users AS post_users on posts.user_id = post_users.id AND users.status = 1") \
-                 .where("items.status = 1 AND (subscriptions.follower_id = ? OR items.user_id = ?) #{above_below_statement}",current_user.id,current_user.id) \
-                 .order("items.created_at DESC") \
-                 .group("items.id") \
-                 .limit(limit) 
+    @items = Item.joins(:post,:user,"INNER JOIN subscriptions ON subscriptions.user_id = items.user_id AND subscriptions.status = 1")
+                 .joins("INNER JOIN users AS post_users on posts.user_id = post_users.id AND users.status = 1")
+                 .where("items.status = 1 AND (subscriptions.follower_id = ? OR items.user_id = ?) #{above_below_statement}",current_user.id,current_user.id)
+                 .order("items.created_at DESC")
+                 .group("items.id")
+                 .limit(limit)
   end
   
   # Fetch up to 50 items of a specified user
