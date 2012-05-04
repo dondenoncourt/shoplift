@@ -1,5 +1,7 @@
 App::Application.routes.draw do
   
+  get "page/home"
+
   resources :images
 
   # home page after login
