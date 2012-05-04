@@ -1,6 +1,6 @@
 App::Application.routes.draw do
   
-  get "page/home"
+  get "page/home", :to => "page#home"
   get "page/saved"
 
   resources :images
