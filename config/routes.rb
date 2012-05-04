@@ -5,8 +5,7 @@ App::Application.routes.draw do
 
   resources :images
 
-  # home page after login
-  root :to => "timelines#home"
+  root :to => "page#home"
 
   #
   # Users

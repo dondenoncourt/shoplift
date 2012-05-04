@@ -2,6 +2,7 @@
 <div class="headWrap">
   <div class="header">
     <h1><a href="">The Shoplift</a></h1>
+    <% if user_signed_in? %>
     <div class="navigation">
       <a class="logout" href="#">Sign Out</a>
       <ul class="mainNav">
@@ -14,5 +15,6 @@
       </form>
       <a href="#" class="profilePhoto"><img src="../img/user-large-kelly.jpg" width="70" height="70" alt="Bio Photo" />change</a>
     </div>
-  </div>	<!-- End .header -->
-</div>	<!-- End .headWrap -->
+  <% end %>
+  </div>	
+</div>	

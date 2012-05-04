@@ -1,12 +1,5 @@
 class TimelinesController < ApplicationController
   
-  def home 
-    if user_signed_in?
-      redirect_to "/home.html"
-    else
-      redirect_to "/login"
-    end
-  end
   # Fetch up to 50 items of current user and that of his/her subscriptions 
   # * *Request*    :
   #   - GET /timelines
