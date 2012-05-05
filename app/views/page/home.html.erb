@@ -44,7 +44,6 @@
         }
 	});
     function showPost(index) {
-        console.log('showPost('+index+')');
         var post = timeline.timeline[index];
         var entry = $('div .entryTemplate');
         $('div .clear').before('<div class="entry">'+entry.html()+'</div>');
@@ -62,11 +61,11 @@
             $('div.entry:last ul.tagList').remove();
         }
         $('div.comment p span.commentText').last().html(post.comment);
-        $('div.comment p span.commentDate').last().html(post.created_at);
+        $('div.comment p span.commentDate').last().html(formatDate(post.created_at));
         $('div.price').last().html('$'+post.price);
-        $('div.productDetails span.productDescription').last().html(post.description);
+        $('div.productDetails span.productName').last().html(post.name);
         var html = $('div.productDetails h2').last().html();
-        $('div.productDetails h2').last().html(post.name+html);
+        $('div.productDetails h2').last().html(post.brand+html);
     }
     </script>
 </body>
