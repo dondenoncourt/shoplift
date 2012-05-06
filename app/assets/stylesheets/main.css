@@ -357,6 +357,12 @@ a.profilePhoto img {
 	float: left;
 }
 
+.product img {
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+}
+
 .productDetails,
 .productStats {
 	width: 383px;

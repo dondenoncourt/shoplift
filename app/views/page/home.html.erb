@@ -1,73 +1,64 @@
-<!doctype html>
-<html lang="en">
-  <%= render "header" %>
-<body>
-  <%= render "subhead" %>
-	<div id="content">
-    <%= render "posts" %>
-    <%= render "postsTOBEREMOVED" %>
-		<div class="clear"></div>
-	</div>	
-  <%= render "footer" %>
-    <script>
-    var timeline ;
-    $.ajax({
-        url:'/timelines',
-        type:'GET',
-        dataType:'json',
-        success:function(data) {
-            timeline = data;
-            initPage();
-        },
-        error:function(XMLHttpRequest,textStatus,errorThrown){}
-    });
+<%= render "posts" %>
+<%= render "postsTOBEREMOVED" %>
+<div class="clear"></div>
+<div id="basic-modal-content"></div>
 
-    var postCount = 0;
-    var scrollCount = 0;
-    var lastScrollTop = 0;
-    var scrollHeight = $('div .entryTemplate').height()-300;
+<script>
+  var timeline ;
+  $.ajax({
+    url:'/timelines',
+    type:'GET',
+    dataType:'json',
+    success:function(data) {
+        timeline = data;
+        initPage();
+    },
+    error:function(XMLHttpRequest,textStatus,errorThrown){}
+  });
 
-    // setup scroll counts and load first two entries
-    function initPage() {
-        postCount = timeline.timeline.length
-        for (i = 0; i < 2; i++) {
-            showPost(i);
-            scrollCount++;
-        }
+  var postCount = 0;
+  var scrollCount = 0;
+  var lastScrollTop = 0;
+  var scrollHeight = $('div .entryTemplate').height()-300;
+
+  // setup scroll counts and load first two entries
+  function initPage() {
+      postCount = timeline.timeline.length
+      for (i = 0; i < 2; i++) {
+          showPost(i);
+          scrollCount++;
+      }
+  }
+  $(window).scroll(function(){
+    var scrolltop = $(window).scrollTop();
+    if ((scrolltop - lastScrollTop > scrollHeight) && scrollCount < postCount ) {
+        showPost(scrollCount);
+        lastScrollTop = scrolltop;
+        scrollCount++;
     }
-	$(window).scroll(function(){
-		var scrolltop = $(window).scrollTop();
-        if ((scrolltop - lastScrollTop > scrollHeight) && scrollCount < postCount ) {
-            showPost(scrollCount);
-            lastScrollTop = scrolltop;
-            scrollCount++;
-        }
-	});
-    function showPost(index) {
-        var post = timeline.timeline[index];
-        var entry = $('div .entryTemplate');
-        $('div .clear').before('<div class="entry">'+entry.html()+'</div>');
-        $('div.entryHead p a').last().html(post.user.extract.full_name); 
-        $('div.entryHead span.location').last().html(post.user.extract.hometown);
-        if (post.hashtags_allowed) {
-            for (iTag = 0; iTag < post.hashtags.length; iTag++) {
-               var clone = $('div.entryTemplate ul.tagList li').clone();
-               clone.appendTo('div.entry:last ul.tagList');
-               clone.find('a').html(clone.find('a').html()+post.hashtags[iTag].value);
-            }
-            $('div.entry:last ul.tagList a:first').remove();
-        } else {
-            $('div.add-tag').last().remove();
-            $('div.entry:last ul.tagList').remove();
-        }
-        $('div.comment p span.commentText').last().html(post.comment);
-        $('div.comment p span.commentDate').last().html(formatDate(post.created_at));
-        $('div.price').last().html('$'+post.price);
-        $('div.productDetails span.productName').last().html(post.name);
-        var html = $('div.productDetails h2').last().html();
-        $('div.productDetails h2').last().html(post.brand+html);
+  });
+  function showPost(index) {
+    var post = timeline.timeline[index];
+    var entry = $('div .entryTemplate');
+    $('div .clear').before('<div class="entry">'+entry.html()+'</div>');
+    $('div.entryHead p a').last().html(post.user.extract.full_name); 
+    $('div.entryHead span.location').last().html(post.user.extract.hometown);
+    if (post.hashtags_allowed) {
+      for (iTag = 0; iTag < post.hashtags.length; iTag++) {
+       var clone = $('div.entryTemplate ul.tagList li').clone();
+       clone.appendTo('div.entry:last ul.tagList');
+       clone.find('a').html(clone.find('a').html()+post.hashtags[iTag].value);
+      }
+      $('div.entry:last ul.tagList a:first').remove();
+    } else {
+      $('div.add-tag').last().remove();
+      $('div.entry:last ul.tagList').remove();
     }
-    </script>
-</body>
-</html>
-
+    $('div.comment p span.commentText').last().html(post.comment);
+    $('div.comment p span.commentDate').last().html(formatDate(post.created_at));
+    $('div.price').last().html('$'+Math.round(post.price));
+    $('div.productDetails span.productName').last().html(post.name);
+    var html = $('div.productDetails h2').last().html();
+    $('div.productDetails h2').last().html(post.brand+html);
+  }
+  </script>
