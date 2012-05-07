@@ -20,14 +20,10 @@ class TimelinesController < ApplicationController
       end
     end
     
-    if !params[:limit].blank? && params[:limit] >= 50
-      return render_error(406,"Limit must be less than or equal to 50")
-    end
+    #if !params[:limit].blank? && params[:limit] >= 50
+      #return render_error(406,"Limit must be less than or equal to 50")
+    #end
     
-
-    if (current_user)
-        logger.debug "xcurrent_user:" 
-    end
 
     limit = params[:limit].blank? ? 20 : params[:limit]
     @items = Item.joins(:post,:user,"INNER JOIN subscriptions ON subscriptions.user_id = items.user_id AND subscriptions.status = 1")
