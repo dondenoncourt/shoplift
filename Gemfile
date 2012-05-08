@@ -8,6 +8,11 @@ gem 'cancan'
 gem 'thinking-sphinx'
 gem 'jbuilder'
 gem 'fastimage'
+gem 'paperclip'
+gem 'aws-s3'
+gem 'aws-sdk'
+gem 'jquery-rails', '>= 1.0.12'
+
 # gem 'will_paginate' TODO consider using this plugin
 
 group :test, :development do
