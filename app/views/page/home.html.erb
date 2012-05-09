@@ -57,8 +57,14 @@
     $('div.comment p span.commentText').last().html(post.comment);
     $('div.comment p span.commentDate').last().html(formatDate(post.created_at));
     $('div.price').last().html('$'+Math.round(post.price));
-    $('div.productDetails span.productName').last().html(post.name);
+    $('div.product span.productName').last().html(post.name);
+    $('div.product img').last().attr('src', post.photo_url);
     var html = $('div.productDetails h2').last().html();
     $('div.productDetails h2').last().html(post.brand+html);
+    $('.product').hover(function(){
+      $(this).find('.productDetails').stop().animate({ bottom:'0' },100)
+    }, function() {
+      $(this).find('.productDetails').stop().animate({ bottom:'-30px' },100)
+    });
   }
   </script>

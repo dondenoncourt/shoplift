@@ -6,6 +6,7 @@ json.retailer item.post.retailer
 json.url item.post.url
 json.price item.post.price
 json.comment item.post.comment
+json.photo_url item.post.photo.url(:small)
 json.hashtags_allowed item.post.hashtags_allowed
 json.created_at item.post.created_at
 if item.post.hashtags_allowed

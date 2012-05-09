@@ -19,6 +19,7 @@ describe ItemsController do
       :url => "http://www.jcrew.com/index.jsp",
       :price => "1.1",
       :comment => nil,
+      :photo => File.new("#{Rails.root}/spec/fixtures/product-large-dress.jpg"),
       :hashtags_allowed => true,
       :hashtags => {
         "1" => {

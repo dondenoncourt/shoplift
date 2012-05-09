@@ -9,8 +9,8 @@ class Post < ActiveRecord::Base
   has_attached_file :photo,
                     # resizing requires ImageMagick
                     :styles => {
-                      :thumb => "100x100#",
-                      :small => "400x400>"
+                      #:thumb => "100x100#", TODO put this in user
+                      :small => "383x383#"
                     },
                     :storage => :s3,
                     :s3_credentials => "#{Rails.root}/config/s3.yml",
