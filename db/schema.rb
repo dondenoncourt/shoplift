@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120417131507) do
+ActiveRecord::Schema.define(:version => 20120508013553) do
 
   create_table "flag_types", :force => true do |t|
     t.string   "name",       :limit => 60, :null => false
@@ -98,21 +98,25 @@ ActiveRecord::Schema.define(:version => 20120417131507) do
   add_index "post_flags", ["user_id"], :name => "fk_post_flags_users"
 
   create_table "posts", :force => true do |t|
-    t.string   "name",             :limit => 110,                                                   :null => false
+    t.string   "name",               :limit => 110,                                                   :null => false
     t.text     "description"
-    t.string   "brand",                                                                             :null => false
-    t.string   "retailer",                                                                          :null => false
-    t.string   "url",              :limit => 2083,                                                  :null => false
-    t.decimal  "price",                            :precision => 10, :scale => 2
-    t.boolean  "hashtags_allowed",                                                :default => true, :null => false
-    t.string   "comment",          :limit => 100
-    t.integer  "user_id",                                                                           :null => false
-    t.datetime "created_at",                                                                        :null => false
-    t.datetime "updated_at",                                                                        :null => false
-    t.integer  "status",                                                          :default => 1,    :null => false
-    t.integer  "views",                                                           :default => 0,    :null => false
-    t.integer  "visits",                                                          :default => 0,    :null => false
-    t.integer  "relifts",                                                         :default => 0,    :null => false
+    t.string   "brand",                                                                               :null => false
+    t.string   "retailer",                                                                            :null => false
+    t.string   "url",                :limit => 2083,                                                  :null => false
+    t.decimal  "price",                              :precision => 10, :scale => 2
+    t.boolean  "hashtags_allowed",                                                  :default => true, :null => false
+    t.string   "comment",            :limit => 100
+    t.integer  "user_id",                                                                             :null => false
+    t.datetime "created_at",                                                                          :null => false
+    t.datetime "updated_at",                                                                          :null => false
+    t.integer  "status",                                                            :default => 1,    :null => false
+    t.integer  "views",                                                             :default => 0,    :null => false
+    t.integer  "visits",                                                            :default => 0,    :null => false
+    t.integer  "relifts",                                                           :default => 0,    :null => false
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
   end
 
   add_index "posts", ["user_id"], :name => "fk_posts_users"

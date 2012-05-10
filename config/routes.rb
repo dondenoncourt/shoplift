@@ -1,9 +1,11 @@
 App::Application.routes.draw do
   
+
   get "page/home", :to => "page#home"
   get "page/saved"
 
-  resources :images
+  #resources :images TODO delete this and any other image artifacts
+  resources :posts
 
   root :to => "page#home"
 
