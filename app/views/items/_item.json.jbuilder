@@ -8,6 +8,16 @@ json.price item.post.price
 json.comment item.post.comment
 json.hashtags_allowed item.post.hashtags_allowed
 json.created_at item.post.created_at
+
+json.set_asides item.set_asides do |json, set_aside|
+  if set_aside.user_id == item.user.id
+    json.set_aside 'true'
+  else
+    next
+  end
+end
+
+
 if item.post.hashtags_allowed
 	json.hashtags item.post.hashtags do |json, hashtag|
 		json.id hashtag.id
