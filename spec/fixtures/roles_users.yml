@@ -1,3 +1,11 @@
+# == Schema Information
+#
+# Table name: roles_users
+#
+#  role_id :integer(4)
+#  user_id :integer(4)
+#
+
 ---
 roles_users_001:
   role_id: 1

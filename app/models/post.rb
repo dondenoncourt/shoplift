@@ -1,3 +1,29 @@
+# == Schema Information
+#
+# Table name: posts
+#
+#  id                 :integer(4)      not null, primary key
+#  name               :string(110)     not null
+#  description        :text
+#  brand              :string(255)     not null
+#  retailer           :string(255)     not null
+#  url                :string(2083)    not null
+#  price              :decimal(10, 2)
+#  hashtags_allowed   :boolean(1)      default(TRUE), not null
+#  comment            :string(100)
+#  user_id            :integer(4)      not null
+#  created_at         :datetime        not null
+#  updated_at         :datetime        not null
+#  status             :integer(4)      default(1), not null
+#  views              :integer(4)      default(0), not null
+#  visits             :integer(4)      default(0), not null
+#  relifts            :integer(4)      default(0), not null
+#  photo_file_name    :string(255)
+#  photo_content_type :string(255)
+#  photo_file_size    :integer(4)
+#  photo_updated_at   :datetime
+#
+
 class Post < ActiveRecord::Base
   require 'status'
   
@@ -7,9 +33,7 @@ class Post < ActiveRecord::Base
   has_many :post_flags, :conditions => ["post_flags.status = 1"]
 
   has_attached_file :photo,
-                    # resizing requires ImageMagick
                     :styles => {
-                      #:thumb => "100x100#", TODO put this in user
                       :small => "383x383#"
                     },
                     :storage => :s3,

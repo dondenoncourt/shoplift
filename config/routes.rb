@@ -2,7 +2,8 @@ App::Application.routes.draw do
   
 
   get "page/home", :to => "page#home"
-  get "page/saved"
+  get "page/saved", :to => "page#saved"
+  get "page/profile/edit", :to => "page#profile_edit"
 
   #resources :images TODO delete this and any other image artifacts
   resources :posts

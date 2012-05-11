@@ -8,4 +8,7 @@ class PageController < ApplicationController
 
   def saved
   end
+
+  def profile_edit
+  end
 end

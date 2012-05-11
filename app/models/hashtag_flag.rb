@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: hashtag_flags
+#
+#  id           :integer(4)      not null, primary key
+#  flag_type_id :integer(4)      not null
+#  hashtag_id   :integer(4)      not null
+#  user_id      :integer(4)      not null
+#  created_at   :datetime        not null
+#  updated_at   :datetime        not null
+#  status       :integer(4)      default(1), not null
+#
+
 class HashtagFlag < ActiveRecord::Base
   require 'status'
   

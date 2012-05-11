@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: hashtags
+#
+#  id               :integer(4)      not null, primary key
+#  hashtag_value_id :integer(4)      not null
+#  post_id          :integer(4)      not null
+#  user_id          :integer(4)      not null
+#  created_at       :datetime        not null
+#  updated_at       :datetime        not null
+#  status           :integer(4)      default(1), not null
+#
+
 ---
 hashtags_001:
   id: 1

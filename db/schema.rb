@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120508013553) do
+ActiveRecord::Schema.define(:version => 20120510205812) do
 
   create_table "flag_types", :force => true do |t|
     t.string   "name",       :limit => 60, :null => false
@@ -50,13 +50,6 @@ ActiveRecord::Schema.define(:version => 20120508013553) do
   add_index "hashtags", ["hashtag_value_id"], :name => "fk_hashtags_hashtag_values"
   add_index "hashtags", ["post_id"], :name => "fk_hashtags_posts"
   add_index "hashtags", ["user_id"], :name => "fk_hashtags_users"
-
-  create_table "images", :force => true do |t|
-    t.string   "uri"
-    t.binary   "image"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
 
   create_table "item_visits", :force => true do |t|
     t.integer  "item_id",    :null => false
@@ -185,6 +178,19 @@ ActiveRecord::Schema.define(:version => 20120508013553) do
     t.date     "birthdate"
     t.boolean  "private",                               :default => false, :null => false
     t.integer  "status",                                :default => 1,     :null => false
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "vanity_url"
+    t.string   "country"
+    t.string   "zipcode"
+    t.string   "missing"
+    t.boolean  "notify_new_follower"
+    t.boolean  "notify_relift"
+    t.string   "notify_missing"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
