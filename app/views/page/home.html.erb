@@ -61,10 +61,6 @@
     $('div.product img').last().attr('src', post.photo_url);
     var html = $('div.productDetails h2').last().html();
     $('div.productDetails h2').last().html(post.brand+html);
-    $('.product').hover(function(){
-      $(this).find('.productDetails').stop().animate({ bottom:'0' },100)
-    }, function() {
-      $(this).find('.productDetails').stop().animate({ bottom:'-30px' },100)
-    });
+    sitefuncs(); // run page actions written by seamlesscreative.com
   }
   </script>

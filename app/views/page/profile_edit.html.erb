@@ -27,7 +27,7 @@
   <div class="rightCol">
     <div class="entry settings">
       <h2>Edit Your Profile Settings</h2>
-      <form action="/users/<%= current_user.id %>/edit" id="user_form" method="post" enctype="multipart/form-data">
+      <form action="/users/<%= current_user.id %>/edit" id="user_form" method="post" >
           <input name="utf8" type="hidden" value="&#x2713;" />
         <h3>Account Settings</h3>
         <ul class="formList">
@@ -79,8 +79,7 @@
             <label for="photo">Photo or Logo</label>
             <img src="img/user-large-john.jpg" id="formImage" alt="profile-large"/>
             <p>
-              <a href="#" id="uploadNewPhoto">Upload a New Photo</a>
-              <input id="user_avatar" name="user[avatar]" type="file"/><br/>
+              <a href="#" class="modal" data-modalType="upload_avatar">Upload a New Photo</a><br/>
               <a href="#">Refresh from Facebook</a><br/>
               <a href="#">Refresh from Twitter</a>
             </p>
@@ -131,27 +130,46 @@
   </div>
 
   <div class="clear"></div>
+  <div id="basic-modal-content"></div>
   <script>
-    $('#user_avatar').hide();
-    $('#uploadNewPhoto').click(function () {
-      $('#user_avatar').show();
+    $('#user_form').submit(function () {
+      $.ajax({
+        url:'/users/<%= current_user.id %>/edit',
+        type:'POST',
+        data: $('#user_form').serialize(),
+        dataType:'json',
+        success:function(data) {
+          alert('Updated but we need to decide what page to show next');
+        },
+        error:function(XMLHttpRequest,textStatus,errorThrown){
+            alert(XMLHttpRequest.responseText);
+        }
+      });
+      return false;
     });
-
     var user;
     var avatar_url_thumb;
     var avatar_url_small;
-    $.ajax({
-      url:'/users/username/<%= current_user.username%>',
-      type:'GET',
-      dataType:'json',
-      success:function(data) {
-          user = data.extract;
-          avatar_url_thumb = data.avatar_url_thumb;
-          avatar_url_small = data.avatar_url_small;
-          initPage();
-      },
-      error:function(XMLHttpRequest,textStatus,errorThrown){}
-    });
+    var first_time = true;
+    function getUserInfo() {
+      $.ajax({
+        url:'/users/username/<%= current_user.username%>',
+        type:'GET',
+        dataType:'json',
+        success:function(data) {
+            user = data.extract;
+            avatar_url_thumb = data.avatar_url_thumb;
+            avatar_url_small = data.avatar_url_small;
+            if (first_time) {
+              initPage();
+            }
+            setAvatars();
+            first_time = false;
+        },
+        error:function(XMLHttpRequest,textStatus,errorThrown){}
+      });
+    }
+    getUserInfo();
     function initPage() {
       if (window.console) console.log(user.last_name);
       $('#firstName').val(user.first_name);
@@ -182,7 +200,12 @@
       } else if (user.notify_missing == 'never') {
         $('#missing-never').attr('checked', true);
       }
+    }
+    function setAvatars() {
       $('div.person img').last().attr('src', avatar_url_small);
       $('#formImage').attr('src', avatar_url_thumb);
+    }
+    function reloadAvatars() {
+      getUserInfo();
     }
   </script>
