@@ -59,6 +59,7 @@
     $('div.price').last().html('$'+Math.round(post.price));
     $('div.product span.productName').last().html(post.name);
     $('div.product img').last().attr('src', post.photo_url);
+    $('.bioPhoto').last().attr('src', post.user.avatar_url_small);
     var html = $('div.productDetails h2').last().html();
     $('div.productDetails h2').last().html(post.brand+html);
     sitefuncs(); // run page actions written by seamlesscreative.com
