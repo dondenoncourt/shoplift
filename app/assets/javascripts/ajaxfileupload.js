@@ -1,4 +1,5 @@
 
+//http://www.phpletter.com/Our-Projects/AjaxFileUpload/
 jQuery.extend({
 	
 
@@ -113,7 +114,8 @@ jQuery.extend({
                 } catch(e) 
 				{
                     status = "error";
-                    jQuery.handleError(s, xml, status, e);
+                    //jQuery.handleError(s, xml, status, e); handleError no longer supported
+                    if (window.console) console.log('ajaxfileupload error: '+ e);
                 }
 
                 // The request was completed

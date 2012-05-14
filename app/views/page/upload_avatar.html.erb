@@ -8,14 +8,20 @@
   </form>
 </div>
 <script>
+  $("#uploading").hide();
 	function ajaxFileUpload() {
+    $('#user_avatar').hide();
+    $('name[submit]').hide();
 		$.ajaxFileUpload ({
 				url:'/users/<%= current_user.id %>/edit',
 				secureuri:false,
 				fileElementId:'user_avatar',
 				dataType: 'json',
+        complete: function(data, status) {
+          reloadAvatars();
+          $('.simplemodal-close').trigger('click');
+        },
 				success: function (data, status) {
-          alert('it worked');
 					if(typeof(data.error) != 'undefined') {
 						if(data.error != '') {
 							alert(data.error);
@@ -26,8 +32,6 @@
 				},
 				error: function (data, status, e) { alert(e); }
 		});
-    reloadAvatars();
-    $('.simplemodal-close').trigger('click');
 		return false;
 	}
   $('#user_avatar_form').submit(function () {
