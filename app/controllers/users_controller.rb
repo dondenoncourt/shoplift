@@ -50,7 +50,7 @@ class UsersController < ApplicationController
   #   - :user -> Array of user data  
   def create
     @user = User.new(params[:user])
-#    @user = User.new(params) denoncourt put this here assuming atomic list of arguments in RESTful API
+    @user.full_name = 'bogus' #params[:user][:first_name] + params[:user][:last_name]
     if @user.save
       render :partial => 'user', :locals => {:user => @user}, :status => 201
     else
