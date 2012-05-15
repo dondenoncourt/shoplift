@@ -48,7 +48,7 @@
       for (iTag = 0; iTag < post.hashtags.length; iTag++) {
        var clone = $('div.entryTemplate ul.tagList li').clone();
        clone.appendTo('div.entry:last ul.tagList');
-       clone.find('a').html(clone.find('a').html()+post.hashtags[iTag].value);
+       clone.find('a').html(clone.find('a').html()+'<span>'+post.hashtags[iTag].value+'</span>');
       }
       $('div.entry:last ul.tagList a:first').remove();
     } else {
@@ -57,6 +57,28 @@
     }
     $('div.comment p span.commentText').last().html(post.comment);
     $('div.comment p span.commentDate').last().html(formatDate(post.created_at));
+    $('div.add-tag input[name=item_id]').last().val(post.id);
+    $('form[name=add_tag_form]').last().submit(function () {
+      var this_form = $(this);
+      $.ajax({
+        url:'/hashtags',
+        type:'POST',
+        dataType:'json',
+        data: $(this).serialize(),
+        success:function(data) {
+          var clone = this_form.parent().parent().find('.tagList li').last().clone();
+          clone.appendTo(this_form.parent().parent().find('.tagList'));
+          var lastLink = clone.find('a').last();
+          console.log(lastLink.text());
+          $(lastLink).find('span').html(data.value);
+          $(this_form).find('input[name=hashtag_value]').val('');
+        },
+        error:function(xhr,textStatus,errorThrown){
+          alert(xhr.responseText);
+        }
+      });
+      return false;
+    });
     $('div.price').last().html('$'+Math.round(post.price));
     $('div.product span.productName').last().html(post.name);
     $('div.product img').last().attr('src', post.photo_url);
@@ -65,4 +87,4 @@
     $('div.productDetails h2').last().html(post.brand+html);
     sitefuncs(); // run page actions written by seamlesscreative.com
   }
-  </script>
+</script>

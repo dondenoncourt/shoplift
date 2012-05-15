@@ -60,6 +60,7 @@ App::Application.routes.draw do
   #
   # Hashtags
   # 
+  post "hashtags", :to => "hashtags#create", :defaults => { :format => :json }, :constraints => {:format => :json}
   get "hashtags/popular", :to => "hashtags#show_popular", :defaults => { :format => :json }, :constraints => {:format => :json}
   get "hashtags/search", :to => "hashtags#search", :defaults => { :format => :json }, :constraints => {:format => :json}
   delete "hashtags/:id" => "hashtags#destroy", :defaults => { :format => :json }, :constraints => {:format => :json}
