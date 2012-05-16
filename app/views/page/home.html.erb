@@ -1,3 +1,4 @@
+<% provide(:title, 'Home') %>
 <%= render "posts" %>
 <%= render "postsTOBEREMOVED" %>
 <div class="clear"></div>
@@ -40,37 +41,49 @@
   function showPost(index) {
     var post = timeline.timeline[index];
     var entry = $('div .entryTemplate');
-    
     $('div .clear').before('<div class="entry">'+entry.html()+'</div>');
-    $('div.entryHead p a').last().html(post.user.extract.full_name);      
-    $('div.entryHead span.location').last().html(post.user.extract.hometown);    
-    
+    $('div.entryHead p a').last().html(post.user.extract.full_name); 
+    $('div.entryHead span.location').last().html(post.user.extract.hometown);
     if (post.hashtags_allowed) {
       for (iTag = 0; iTag < post.hashtags.length; iTag++) {
        var clone = $('div.entryTemplate ul.tagList li').clone();
        clone.appendTo('div.entry:last ul.tagList');
-       clone.find('a').html(clone.find('a').html()+post.hashtags[iTag].value);
+       clone.find('a').html(clone.find('a').html()+'<span>'+post.hashtags[iTag].value+'</span>');
       }
       $('div.entry:last ul.tagList a:first').remove();
     } else {
       $('div.add-tag').last().remove();
       $('div.entry:last ul.tagList').remove();
     }
-    
     $('div.comment p span.commentText').last().html(post.comment);
     $('div.comment p span.commentDate').last().html(formatDate(post.created_at));
+    $('div.add-tag input[name=item_id]').last().val(post.id);
+    $('form[name=add_tag_form]').last().submit(function () {
+      var this_form = $(this);
+      $.ajax({
+        url:'/hashtags/create',
+        type:'POST',
+        dataType:'json',
+        data: $(this).serialize(),
+        success:function(data) {
+          var clone = this_form.parent().parent().find('.tagList li').last().clone();
+          clone.appendTo(this_form.parent().parent().find('.tagList'));
+          var lastLink = clone.find('a').last();
+          $(lastLink).find('span').html(data.value);
+          $(this_form).find('input[name=hashtag_value]').val('');
+        },
+        error:function(xhr,textStatus,errorThrown){
+          alert(xhr.responseText);
+        }
+      });
+      return false;
+    });
     $('div.price').last().html('$'+Math.round(post.price));
     $('div.product span.productName').last().html(post.name);
-    $('div.product img').last().attr('src', post.photo_url);    
-    
+    $('div.product img').last().attr('src', post.photo_url);
+    $('.bioPhoto').last().attr('src', post.user.avatar_url_small);
     var html = $('div.productDetails h2').last().html();
     $('div.productDetails h2').last().html(post.brand+html);
-    $('.product').hover(function(){
-      $(this).find('.productDetails').stop().animate({ bottom:'0' },100)
-    }, function() {
-      $(this).find('.productDetails').stop().animate({ bottom:'-30px' },100)
-    });
-    
     // If the set_aside is not defined then make the appearance of the entry convey that.
     $('a.btnSetAside').last().data('item_id', post.id);
     if(post.set_aside == undefined){
@@ -81,9 +94,9 @@
       $('a.btnSetAside').last().data('set_aside_id', post.set_aside.id);
       $('a.btnSetAside').last().html('Un-Save');
       $('img.saved').last().show();      
-    }    
+    }     
+    sitefuncs(); // run page actions written by seamlesscreative.com
   }
-  
   // Add a click listener to Save/Un-Save item
   $('a.[class^=btn]').live('click', function(e){
     e.preventDefault(); // Keeps from invoking the href="#" of the anchor tag after the ajax completes
@@ -112,7 +125,5 @@
         }
       });     
     }
-  });
-  
-  </script>
-
+  });  
+</script>

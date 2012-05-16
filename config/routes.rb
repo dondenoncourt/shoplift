@@ -4,6 +4,7 @@ App::Application.routes.draw do
   get "page/home", :to => "page#home"
   get "page/saved", :to => "page#saved"
   get "page/profile/edit", :to => "page#profile_edit"
+  get "page/profile/modal/upload_avatar.html", :to => "page#upload_avatar"
 
   #resources :images TODO delete this and any other image artifacts
   resources :posts
@@ -62,6 +63,7 @@ App::Application.routes.draw do
   get "hashtags/popular", :to => "hashtags#show_popular", :defaults => { :format => :json }, :constraints => {:format => :json}
   get "hashtags/search", :to => "hashtags#search", :defaults => { :format => :json }, :constraints => {:format => :json}
   delete "hashtags/:id" => "hashtags#destroy", :defaults => { :format => :json }, :constraints => {:format => :json}
+  post "hashtags/create", :to => "hashtags#create", :defaults => { :format => :json }, :constraints => {:format => :json}
   # Browser / system compatability
   post "hashtags/:id/delete" => "hashtags#destroy", :defaults => { :format => :json }, :constraints => {:format => :json}
   

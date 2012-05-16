@@ -1,7 +1,7 @@
 <div class="entryTemplate"> 
     <div class="entryHead">
-        <a href="#"><img src="../img/REPLACE.jpg" width="70" height="70" alt="Bio Photo" /></a>        
-        <p class="user"><a href="#">REPLACE</a><br/><span class="location">REPLACE</span></p>        
+        <a href="#"><img class="bioPhoto" src="../img/REPLACE.jpg" width="70" height="70" alt="Bio Photo" /></a>
+        <p class="user"><a href="#">REPLACE</a><br/><span class="location">REPLACE</span></p>
     </div>
     <div class="productMain">
         <div class="product">
@@ -17,7 +17,7 @@
                 </ul>
             </div>
             <img src="/img/global/saved.png" alt="Saved" border="0" class="saved" />
-            <img src="../img/REPLACE.jpg" alt="REPLACE" width="383" height="383" />            
+            <img src="../img/REPLACE.jpg" alt="REPLACE" width="383" height="383" />
         </div>
         <div class="productMeta">
             <div class="comment">
@@ -25,8 +25,11 @@
                 <p><span class="commentDate">REPLACE</span></p>
             </div>
             <div class="add-tag">
-                <form action="#">
-                    <img src="../img/global/user-thumb-holder.gif" alt="user-thumb-holder" width="25" height="25" class="user-tiny-thumb"/> <input type="text" class="text" name="tag" value="Add a Tag" /> <input type="submit" name="submit" class="addSubmit" />
+                <form action="hashtags" method="post" name="add_tag_form">
+                  <img src="../img/global/user-thumb-holder.gif" alt="user-thumb-holder" width="25" height="25" class="user-tiny-thumb"/>
+                  <input type="text" class="text" name="hashtag_value" value="Add a Tag" /> 
+                  <input type="hidden" name="item_id" /> 
+                  <input type="submit" name="submit" class="addSubmit" />
                 </form>
             </div>
             <div class="tags">

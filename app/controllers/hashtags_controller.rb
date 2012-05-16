@@ -5,18 +5,24 @@ class HashtagsController < ApplicationController
   #   - POST /hashtags
   # * *Args*    :
   #   - :hashtag_value -> Hashtag value
+  #   - :item_id -> id of the item the hashtags is to be added to
   def create
     authenticate_user!
     
     params[:hashtag_value].gsub(/[^[:alnum:]]/,'')
     
-    @item = Item.joins(:post,:user) \
-                .joins("INNER JOIN users AS post_users on posts.user_id = post_users.id AND users.status = 1") \
-                .where("items.id = :id AND ISNULL(items.parent_id) AND items.status = 1").first!
+    begin
+      @item = Item.joins(:post,:user) \
+                  .joins("INNER JOIN users AS post_users on posts.user_id = post_users.id AND users.status = 1") \
+                  .where("items.id = #{params[:item_id]} AND (ISNULL(items.parent_id) || items.parent_id = 0) AND items.status = 1").first!
+    rescue
+      puts "something bad happened here, error: #{$!}"
+      return render_error(404,"Item not found")
+    end
                  
     if !@item.post.hashtags_allowed
       return render_error(403, "Hashtags not allowed")   
-    elsif item.user.private
+    elsif @item.user.private
       authenticate_user!
       if !current_user.subscribed_to(@item.user)
         return render_error(404,"Item not found")
@@ -28,7 +34,7 @@ class HashtagsController < ApplicationController
       return render_error(500,"Failed to create hashtag")
     end
     
-    @hashtag = Hashtag.new({:user_id => user_id, :post_id => @item.post.id, :hashtag_value_id => @hashtag_value.id})
+    @hashtag = Hashtag.new({:user_id => current_user.id, :post_id => @item.post.id, :hashtag_value_id => @hashtag_value.id})
     
     if !@hashtag.save
       return render_error(500,"Failed to create hashtag")

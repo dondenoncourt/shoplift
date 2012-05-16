@@ -1,7 +1,7 @@
 class PageController < ApplicationController
   before_filter :authenticate_user!
 
-  layout "standard"
+  layout "standard", :except => [:upload_avatar]
 
   def home
   end
@@ -10,5 +10,8 @@ class PageController < ApplicationController
   end
 
   def profile_edit
+  end
+
+  def upload_avatar
   end
 end

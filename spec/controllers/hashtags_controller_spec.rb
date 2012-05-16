@@ -24,4 +24,26 @@ describe HashtagsController do
     end
   end
 
+  describe "POST create" do
+    it "returns status code of 201" do
+      post :create, :hashtag_value => 'test tag', :item_id => items(:items_001).id, :format => :json
+      response.response_code.should == 201
+    end
+
+    it "returns status code of 500" do
+      @existing_hashtag_value = hashtag_values(:hashtag_values_001)
+      post :create, :hashtag_value => @existing_hashtag_value.value , :item_id => items(:items_001).id, :format => :json
+      response.response_code.should == 500
+    end
+
+    it "returns status code of 403 forbidden" do
+      @post = items(:items_001).post
+      @post.should_not be_nil
+      @post.hashtags_allowed = false
+      @post.save!
+      post :create, :hashtag_value => 'test tag', :item_id => items(:items_001).id, :format => :json
+      response.response_code.should == 403
+    end
+  end
+
 end

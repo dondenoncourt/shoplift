@@ -43,7 +43,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :recoverable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :password, :full_name, :username, :sex,
+  attr_accessible :email, :password, :password_confirmation, :full_name, :username, :sex,
                   :biography, :url, :hometown, :birthdate, :private, :status,
                   :first_name, :last_name, :country, :vanity_url, :zipcode,
                   :notify_new_follower, :notify_relift, :notify_missing,

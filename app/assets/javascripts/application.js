@@ -8,4 +8,5 @@
 //= require "jquery.simplemodal"
 //= require "sitefuncs"
 //= require "page"
+//= require "ajaxfileupload.js"
 //= require_tree .

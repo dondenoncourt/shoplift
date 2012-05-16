@@ -1,5 +1,8 @@
 $(document).ready(function(){
+  sitefuncs();
+});
 
+function sitefuncs() {
 /*---------- Scroll Modify ----------*/
 
 	var scrollTopStart = $(window).scrollTop();
@@ -80,7 +83,7 @@ $(document).ready(function(){
 		return false;
 	});
 
-});
+}
 
 
 
