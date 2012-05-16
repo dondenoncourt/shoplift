@@ -10,11 +10,9 @@ json.photo_url item.post.photo.url(:small)
 json.hashtags_allowed item.post.hashtags_allowed
 json.created_at item.post.created_at
 
-json.set_asides item.set_asides do |json, set_aside|
-  if set_aside.user_id == item.user.id
-    json.set_aside 'true'
-  else
-    next
+item.set_asides.each do |set_aside|
+  if set_aside.user_id == current_user.id 
+    json.set_aside set_aside
   end
 end
 

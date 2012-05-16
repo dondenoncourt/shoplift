@@ -48,11 +48,11 @@ class SetAsidesController < ApplicationController
   # * *Request*    :
   #   - DELETE /set_asides/items/:id
   # * *Args*    :
-  #   - :id -> Item id
+  #   - :id -> id
   def destroy
-    @set_aside = SetAside.where("item_id = ? AND user_id = ? AND status = 1",params[:id],current_user.id).first!
-    if @set_aside.deactivate
-      render :json => "Set aside successfully deleted", :status => 200
+    @set_aside = SetAside.where("id = ?",params[:id]).first!
+    if @set_aside.delete
+      render :json => '{"dummy":"dummy"}', :status => 200
     else
       return_error_messages(@set_aside,"Set aside delete failed")
     end
