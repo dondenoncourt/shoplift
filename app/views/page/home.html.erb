@@ -40,9 +40,11 @@
   function showPost(index) {
     var post = timeline.timeline[index];
     var entry = $('div .entryTemplate');
+    
     $('div .clear').before('<div class="entry">'+entry.html()+'</div>');
-    $('div.entryHead p a').last().html(post.user.extract.full_name); 
-    $('div.entryHead span.location').last().html(post.user.extract.hometown);
+    $('div.entryHead p a').last().html(post.user.extract.full_name);      
+    $('div.entryHead span.location').last().html(post.user.extract.hometown);    
+    
     if (post.hashtags_allowed) {
       for (iTag = 0; iTag < post.hashtags.length; iTag++) {
        var clone = $('div.entryTemplate ul.tagList li').clone();
@@ -54,11 +56,13 @@
       $('div.add-tag').last().remove();
       $('div.entry:last ul.tagList').remove();
     }
+    
     $('div.comment p span.commentText').last().html(post.comment);
     $('div.comment p span.commentDate').last().html(formatDate(post.created_at));
     $('div.price').last().html('$'+Math.round(post.price));
     $('div.product span.productName').last().html(post.name);
-    $('div.product img').last().attr('src', post.photo_url);
+    $('div.product img').last().attr('src', post.photo_url);    
+    
     var html = $('div.productDetails h2').last().html();
     $('div.productDetails h2').last().html(post.brand+html);
     $('.product').hover(function(){
@@ -66,5 +70,49 @@
     }, function() {
       $(this).find('.productDetails').stop().animate({ bottom:'-30px' },100)
     });
+    
+    // If the set_aside is not defined then make the appearance of the entry convey that.
+    $('a.btnSetAside').last().data('item_id', post.id);
+    if(post.set_aside == undefined){
+      $('a.btnSetAside').last().html('Save');
+      $('a.btnSetAside').last().data('set_aside_id', '');
+      $('img.saved').last().hide();
+    }else{
+      $('a.btnSetAside').last().data('set_aside_id', post.set_aside.id);
+      $('a.btnSetAside').last().html('Un-Save');
+      $('img.saved').last().show();      
+    }    
   }
+  
+  // Add a click listener to Save/Un-Save item
+  $('a.[class^=btn]').live('click', function(e){
+    e.preventDefault(); // Keeps from invoking the href="#" of the anchor tag after the ajax completes
+    _this = $(this);
+    if($(_this).data('set_aside_id') == ''){  
+      // set_aside doesn't exist so create it
+      $.ajax({
+        url: '/set_asides',
+        type: 'POST',
+        data:  'item_id=' + $(_this).data('item_id'),
+        success: function(post){
+          $(_this).closest('div.productDetails').next('img.saved').show();
+          $(_this).html('Un-Save');
+          $(_this).data('set_aside_id', post.set_aside.id);
+        }
+      }); 
+    }else{
+      // set_aside exists so delete it
+      $.ajax({
+        url: '/set_asides/items/' + $(_this).data('set_aside_id') + '/delete',
+        type: 'POST',
+        success: function(rsp){
+          $(_this).closest('div.productDetails').next('img.saved').hide();          
+          $(_this).html('Save');
+          $(_this).data('set_aside_id', '');
+        }
+      });     
+    }
+  });
+  
   </script>
+
