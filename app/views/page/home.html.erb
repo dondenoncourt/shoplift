@@ -61,7 +61,7 @@
     $('form[name=add_tag_form]').last().submit(function () {
       var this_form = $(this);
       $.ajax({
-        url:'/hashtags',
+        url:'/hashtags/create',
         type:'POST',
         dataType:'json',
         data: $(this).serialize(),
@@ -69,7 +69,6 @@
           var clone = this_form.parent().parent().find('.tagList li').last().clone();
           clone.appendTo(this_form.parent().parent().find('.tagList'));
           var lastLink = clone.find('a').last();
-          console.log(lastLink.text());
           $(lastLink).find('span').html(data.value);
           $(this_form).find('input[name=hashtag_value]').val('');
         },

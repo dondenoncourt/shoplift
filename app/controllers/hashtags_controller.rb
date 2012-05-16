@@ -11,9 +11,14 @@ class HashtagsController < ApplicationController
     
     params[:hashtag_value].gsub(/[^[:alnum:]]/,'')
     
-    @item = Item.joins(:post,:user) \
-                .joins("INNER JOIN users AS post_users on posts.user_id = post_users.id AND users.status = 1") \
-                .where("items.id = #{params[:item_id]} AND ISNULL(items.parent_id) AND items.status = 1").first!
+    begin
+      @item = Item.joins(:post,:user) \
+                  .joins("INNER JOIN users AS post_users on posts.user_id = post_users.id AND users.status = 1") \
+                  .where("items.id = #{params[:item_id]} AND (ISNULL(items.parent_id) || items.parent_id = 0) AND items.status = 1").first!
+    rescue
+      puts "something bad happened here, error: #{$!}"
+      return render_error(404,"Item not found")
+    end
                  
     if !@item.post.hashtags_allowed
       return render_error(403, "Hashtags not allowed")   
