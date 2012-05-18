@@ -7,8 +7,22 @@
 
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :multipart => true }) do |f| %>
   <%= devise_error_messages! %>
-
-  <%= render "/page/profile_fields" %>
+  <input name="utf8" type="hidden" value="&#x2713;" />
+  <li>
+    <label for="fullName">Name</label>
+    <input type="text" class="text" name="user[full_name]" id="fullName" />
+  </li>
+  <li>
+    <label for="email">Email</label>
+    <input type="text" class="text" name="user[email]" id="email" />
+  </li>
+  <li>
+      <label for="password">Password</label>
+      <input type="password" class="text" name="user[password]" id="password" />
+      <label for="password_confirmation">Confirmation</label>
+      <input type="password" class="text" name="user[password_confirmation]" id="password_confirmation" />
+      <input type="hidden" class="text" name="user[username]" id="username" value="may not use" />
+  </li>
   <div><%= f.submit "Sign up" %></div>
 <% end %>
 
