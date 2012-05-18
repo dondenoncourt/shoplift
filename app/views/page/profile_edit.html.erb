@@ -29,7 +29,6 @@
     <div class="entry settings">
       <h2>Edit Your Profile Settings</h2>
       <form action="/users/<%= current_user.id %>/edit" id="user_form" method="post" >
-        <%= render "profile_fields" %>
         <h3>Personal Settings</h3>
         <ul class="formList">
           <li>
