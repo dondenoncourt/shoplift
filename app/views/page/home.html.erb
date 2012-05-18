@@ -65,6 +65,8 @@
     $('.bioPhoto').last().attr('src', post.user.avatar_url_small);
     var html = $('div.productDetails h2').last().html();
     $('div.productDetails h2').last().html(post.brand+html);
+    // set the report a tag item id
+    $('div.productTattle a[data-modal-rails="report_tag"]').last().attr('data-modal-rails', 'report_tag?post_id='+post.id);
 
     // add a tag handler
     $('form[name=add_tag_form]').last().submit(function () {

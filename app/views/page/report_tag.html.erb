@@ -1,0 +1,62 @@
+<h2>Report a Tag</h2>
+<div class="modalContent">
+  <span id="flag_selection">
+    <p>Report tags when they're inappropriate or misleading. If it's just a matter of opinion, consider adding a tag of your own instead.</p>
+    <div class="divider"></div>
+    <form action="#" name="report_tag_form">
+      <select id="hashtag_id">
+        <% @hashtags.each do |hashtag| %>
+          <option value="<%= hashtag.id %>"><%= hashtag.hashtag_value.value%></option>
+        <% end %>
+      </select>
+      <div class="divider"></div>
+      <p>What's wrong with this item?<p>
+      <% @flagtypes.each do |flag| %>
+        <div class="checkWrap">
+          <input type="radio" class="radio" name="flag_type_id" id="<%=flag.name.gsub(/\s/, '-')%>" value="<%= flag.id%>" />
+          <label for="<%=flag.name.gsub(/\s/, '-')%>"><%=flag.name%></label>
+        </div>
+      <% end %>
+      <div class="submitWrap">
+        <input type="submit" class="submit" name="submit" value="Report Tag Now" />
+        <input type="submit" class="submit simplemodal-close" name="submit" value="Never Mind" />
+      </div>
+    </form>
+  </span>
+  <span id="flag_added">
+    <p>Thanks for letting us know.</p>
+    <p>We'll look into the issue right away.</p>
+    <p>Hope you're enjoying The Shoplift.</p>
+    <form action="#">
+      <input type="submit" class="submit simplemodal-close" name="submit" value="OK" />
+    </form>
+  </span>
+
+</div>
+<script>
+  $('#flag_added').hide();
+  // todo: must select a flag_type_id
+  $('form[name=report_tag_form]').submit(function () {
+    console.log('/flags/hashtags/'+$('#hashtag_id option:selected').val());
+    var this_form = $(this);
+    $.ajax({
+      url:'/flags/hashtags/'+$('#hashtag_id').val(),
+      type:'POST',
+      dataType:'json',
+      data: $(this).serialize(),
+      success:function(data) {
+        if (window.console) console.log(data);
+        $('#flag_added').show();
+        $('#flag_selection').hide();
+      },
+      error:function(xhr,textStatus,errorThrown){
+        alert(xhr.responseText);
+      }
+    });
+    return false;
+  });
+  $('.simplemodal-close').click(function () {
+      $.modal.close();
+      return false;
+  });
+</script>

@@ -28,11 +28,14 @@
 #  vanity_url             :string(255)
 #  country                :string(255)
 #  zipcode                :string(255)
-#  bio                    :string(512)
 #  missing                :string(255)
 #  notify_new_follower    :boolean(1)
 #  notify_relift          :boolean(1)
-#  notify_missing         :string(1)
+#  notify_missing         :string(255)
+#  avatar_file_name       :string(255)
+#  avatar_content_type    :string(255)
+#  avatar_file_size       :integer(4)
+#  avatar_updated_at      :datetime
 #
 
 class User < ActiveRecord::Base

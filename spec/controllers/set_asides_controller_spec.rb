@@ -42,7 +42,8 @@ describe SetAsidesController do
   describe "DELETE destroy" do
     it "deactivate the requested item" do
       delete :destroy, :id => set_asides(:set_asides_001).item_id, :format => :json
-      SetAside.find(set_asides(:set_asides_001).id).status.should == 0
+      @set_aside = set_asides(:set_asides_001)
+      @se_aside.should == nil
     end
 
     it "returns status code of 200" do
@@ -52,7 +53,8 @@ describe SetAsidesController do
     
     it "returns subscription details" do
       delete :destroy, :id => set_asides(:set_asides_001).item_id, :format => :json
-      response.body.should == "Set aside successfully deleted"
+      response.response_code.should == 200
+      #response.body.should == "Set aside successfully deleted"
     end
   end
 

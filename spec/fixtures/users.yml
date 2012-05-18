@@ -28,11 +28,14 @@
 #  vanity_url             :string(255)
 #  country                :string(255)
 #  zipcode                :string(255)
-#  bio                    :string(512)
 #  missing                :string(255)
 #  notify_new_follower    :boolean(1)
 #  notify_relift          :boolean(1)
-#  notify_missing         :string(1)
+#  notify_missing         :string(255)
+#  avatar_file_name       :string(255)
+#  avatar_content_type    :string(255)
+#  avatar_file_size       :integer(4)
+#  avatar_updated_at      :datetime
 #
 
 users_001:
@@ -59,6 +62,10 @@ users_001:
   birthdate: 1987-05-24
   private: 0
   status: 1
+  avatar_file_name: bella_4.5_mths.jpg
+  avatar_content_type: image/jpeg
+  avatar_file_size: 151209
+  avatar_updated_at: 2012-05-17 00:05:57.000000000Z
 users_002:
   id: 2
   email: patrick@38media.net
@@ -90,6 +97,10 @@ users_002:
   notify_new_follower: true
   notify_relift: false
   notify_missing: daily
+  avatar_file_name: headless.jpg
+  avatar_content_type: image/jpeg
+  avatar_file_size: 1508425
+  avatar_updated_at: 2012-05-17 00:17:07.000000000Z
 users_003:
   id: 3
   email: iain@38media.net
@@ -114,6 +125,10 @@ users_003:
   birthdate: 1988-03-01
   private: 1
   status: 1
+  avatar_file_name: user-large-john.jpg
+  avatar_content_type: image/jpeg
+  avatar_file_size: 12812
+  avatar_updated_at: 2012-05-17 00:18:33.000000000Z
 users_004:
   id: 4
   email: dead@38media.net

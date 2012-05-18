@@ -11,7 +11,7 @@ json.hashtags_allowed item.post.hashtags_allowed
 json.created_at item.post.created_at
 
 item.set_asides.each do |set_aside|
-  if set_aside.user_id == current_user.id 
+  if current_user && set_aside.user_id == current_user.id 
     json.set_aside set_aside
   end
 end
