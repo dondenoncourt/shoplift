@@ -1,6 +1,6 @@
 <% provide(:title, 'Home') %>
 <%= render "posts" %>
-<%= render "postsTOBEREMOVED" %>
+<%# render "postsTOBEREMOVED" %>
 <div class="clear"></div>
 <div id="basic-modal-content"></div>
 
@@ -67,6 +67,7 @@
     $('div.productDetails h2').last().html(post.brand+html);
     // set the report a tag item id
     $('div.productTattle a[data-modal-rails="report_tag"]').last().attr('data-modal-rails', 'report_tag?post_id='+post.id);
+    $('div.productTattle a[data-modal-rails="report_item"]').last().attr('data-modal-rails', 'report_item?post_id='+post.id);
 
     // add a tag handler
     $('form[name=add_tag_form]').last().submit(function () {
