@@ -43,6 +43,10 @@ posts_001:
   created_at: 2011-12-06 15:46:45.000000000Z
   updated_at: 2011-12-06 15:46:45.000000000Z
   status: 1
+  photo_file_name: product-large-1.jpg
+  photo_content_type: image/jpeg
+  photo_file_size: 21759
+  photo_updated_at: 2012-05-17 00:02:24.000000000Z
 posts_002:
   id: 2
   name: Item 2
@@ -61,6 +65,10 @@ posts_002:
   created_at: 2011-12-06 15:47:42.000000000Z
   updated_at: 2011-12-06 15:47:42.000000000Z
   status: 1
+  photo_file_name: product-large-2.jpg
+  photo_content_type: image/jpeg
+  photo_file_size: 36053
+  photo_updated_at: 2012-05-17 00:02:41.000000000Z
 posts_003:
   id: 3
   name: Item 3
@@ -76,6 +84,10 @@ posts_003:
   created_at: 2011-12-06 23:21:49.000000000Z
   updated_at: 2011-12-06 23:21:56.000000000Z
   status: 1
+  photo_file_name: product-large-3.jpg
+  photo_content_type: image/jpeg
+  photo_file_size: 55729
+  photo_updated_at: 55729
 posts_004:
   id: 4
   name: Item 4
@@ -91,6 +103,10 @@ posts_004:
   created_at: 2011-12-06 23:21:49.000000000Z
   updated_at: 2011-12-06 23:21:56.000000000Z
   status: 1
+  photo_file_name: product-large-4.jpg
+  photo_content_type: image/jpeg
+  photo_file_size: 23784
+  photo_updated_at: 2012-05-17 00:03:06.000000000Z
 posts_005:
   id: 5
   name: Item 5
@@ -106,3 +122,7 @@ posts_005:
   created_at: 2011-12-06 23:21:49.000000000Z
   updated_at: 2011-12-06 23:21:56.000000000Z
   status: 1
+  photo_file_name: product-large-5.jpg
+  photo_content_type: image/jpeg
+  photo_file_size: 36118
+  photo_updated_at: 2012-05-17 00:03:18 .000000000Z

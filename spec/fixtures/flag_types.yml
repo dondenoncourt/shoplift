@@ -2,25 +2,41 @@
 #
 # Table name: flag_types
 #
-#  id         :integer(4)      not null, primary key
-#  name       :string(60)      not null
-#  created_at :datetime        not null
-#  updated_at :datetime        not null
+#  id          :integer(4)      not null, primary key
+#  name        :string(60)      not null
+#  created_at  :datetime        not null
+#  updated_at  :datetime        not null
+#  domain_name :string(255)
 #
 
 ---
 flag_types_001:
   id: 1
-  name: Inappropriate
+  name: It contains inappropriate language
+  domain_name: hashtag
   created_at: 2011-12-06 15:46:45.000000000Z
   updated_at: 2011-12-06 15:46:45.000000000Z
 flag_types_002:
   id: 2
-  name: Not a Product
+  name: "It's not a real product"
+  domain_name: post
   created_at: 2011-12-06 15:46:45.000000000Z
   updated_at: 2011-12-06 15:46:45.000000000Z
 flag_types_003:
   id: 3
-  name: Link Broken
+  name: Product details are incorrect
+  domain_name: post
+  created_at: 2011-12-06 15:46:45.000000000Z
+  updated_at: 2011-12-06 15:46:45.000000000Z
+flag_types_004:
+  id: 4
+  name: "It's sold out / no longer available"
+  domain_name: post
+  created_at: 2011-12-06 15:46:45.000000000Z
+  updated_at: 2011-12-06 15:46:45.000000000Z
+flag_types_005:
+  id: 5
+  name: "It's misleading or dishonest"
+  domain_name: hashtag
   created_at: 2011-12-06 15:46:45.000000000Z
   updated_at: 2011-12-06 15:46:45.000000000Z

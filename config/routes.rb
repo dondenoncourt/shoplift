@@ -6,6 +6,9 @@ App::Application.routes.draw do
   get "page/profile/edit", :to => "page#profile_edit"
   get "page/profile/modal/upload_avatar.html", :to => "page#upload_avatar"
 
+  get "modal/report_tag", :to => "page#report_tag"
+  get "modal/report_item", :to => "page#report_item"
+
   #resources :images TODO delete this and any other image artifacts
   resources :posts
 

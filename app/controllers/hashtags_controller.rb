@@ -2,7 +2,7 @@ class HashtagsController < ApplicationController
   
   # Create hashtag
   # * *Request*    :
-  #   - POST /hashtags
+  #   - POST /hashtags/create
   # * *Args*    :
   #   - :hashtag_value -> Hashtag value
   #   - :item_id -> id of the item the hashtags is to be added to
@@ -10,6 +10,8 @@ class HashtagsController < ApplicationController
     authenticate_user!
     
     params[:hashtag_value].gsub(/[^[:alnum:]]/,'')
+
+    # todo tell user when parent_id or status not 1
     
     begin
       @item = Item.joins(:post,:user) \

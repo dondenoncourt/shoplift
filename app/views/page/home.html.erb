@@ -1,6 +1,6 @@
 <% provide(:title, 'Home') %>
 <%= render "posts" %>
-<%= render "postsTOBEREMOVED" %>
+<%# render "postsTOBEREMOVED" %>
 <div class="clear"></div>
 <div id="basic-modal-content"></div>
 
@@ -58,6 +58,18 @@
     $('div.comment p span.commentText').last().html(post.comment);
     $('div.comment p span.commentDate').last().html(formatDate(post.created_at));
     $('div.add-tag input[name=item_id]').last().val(post.id);
+
+    $('div.price').last().html('$'+Math.round(post.price));
+    $('div.product span.productName').last().html(post.name);
+    $('div.product img').last().attr('src', post.photo_url);
+    $('.bioPhoto').last().attr('src', post.user.avatar_url_small);
+    var html = $('div.productDetails h2').last().html();
+    $('div.productDetails h2').last().html(post.brand+html);
+    // set the report a tag item id
+    $('div.productTattle a[data-modal-rails="report_tag"]').last().attr('data-modal-rails', 'report_tag?post_id='+post.id);
+    $('div.productTattle a[data-modal-rails="report_item"]').last().attr('data-modal-rails', 'report_item?post_id='+post.id);
+
+    // add a tag handler
     $('form[name=add_tag_form]').last().submit(function () {
       var this_form = $(this);
       $.ajax({
@@ -66,10 +78,16 @@
         dataType:'json',
         data: $(this).serialize(),
         success:function(data) {
-          var clone = this_form.parent().parent().find('.tagList li').last().clone();
-          clone.appendTo(this_form.parent().parent().find('.tagList'));
+          var lastLi = this_form.parent().parent().find('.tagList li').last();
+          var clone = lastLi.clone();
           var lastLink = clone.find('a').last();
-          $(lastLink).find('span').html(data.value);
+          if (lastLink.html() != null) {
+            console.log(lastLink.html());
+            clone.appendTo(this_form.parent().parent().find('.tagList'));
+            $(lastLink).find('span').html(data.value);
+          } else {
+            lastLi.html('<a href="#"><img src="../img/global/user-thumb-holder.gif" alt="user-thumb-holder" width="25" height="25" class="user-tiny-thumb"/>'+data.value+'</a>');
+          }
           $(this_form).find('input[name=hashtag_value]').val('');
         },
         error:function(xhr,textStatus,errorThrown){
@@ -78,12 +96,6 @@
       });
       return false;
     });
-    $('div.price').last().html('$'+Math.round(post.price));
-    $('div.product span.productName').last().html(post.name);
-    $('div.product img').last().attr('src', post.photo_url);
-    $('.bioPhoto').last().attr('src', post.user.avatar_url_small);
-    var html = $('div.productDetails h2').last().html();
-    $('div.productDetails h2').last().html(post.brand+html);
     // If the set_aside is not defined then make the appearance of the entry convey that.
     $('a.btnSetAside').last().data('item_id', post.id);
     if(post.set_aside == undefined){

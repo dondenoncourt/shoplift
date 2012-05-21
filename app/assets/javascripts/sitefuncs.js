@@ -56,7 +56,13 @@ function sitefuncs() {
 	
 	$('.modal').click(function (e) {
 
-		var modaltype = $(this).attr('data-modaltype') + '.html';
+    /* denoncourt mod: 
+     * if rails attribute exists, don't append .html
+     */
+    var modaltype = $(this).attr('data-modal-rails');
+    if (modaltype == null) {
+      modaltype = $(this).attr('data-modaltype') + '.html';
+    }
 		if($(this).attr('data-modaltype')=="share") {
 			var containerWidth = 428;
 		} else {
