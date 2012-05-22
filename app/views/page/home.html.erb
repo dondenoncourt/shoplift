@@ -101,11 +101,11 @@
     if(post.set_aside == undefined){
       $('a.btnSetAside').last().html('Save');
       $('a.btnSetAside').last().data('set_aside_id', '');
-      $('img.saved').last().hide();
+      $('img.saved').last().removeClass('saved');
     }else{
       $('a.btnSetAside').last().data('set_aside_id', post.set_aside.id);
       $('a.btnSetAside').last().html('Un-Save');
-      $('img.saved').last().show();      
+      $('div.entry').last().addClass('saved');      
     }     
     sitefuncs(); // run page actions written by seamlesscreative.com
   }
@@ -120,7 +120,7 @@
         type: 'POST',
         data:  'item_id=' + $(_this).data('item_id'),
         success: function(post){
-          $(_this).closest('div.productDetails').next('img.saved').show();
+          $(_this).closest('div.entry').addClass('saved');
           $(_this).html('Un-Save');
           $(_this).data('set_aside_id', post.set_aside.id);
         }
@@ -131,7 +131,7 @@
         url: '/set_asides/items/' + $(_this).data('set_aside_id') + '/delete',
         type: 'POST',
         success: function(rsp){
-          $(_this).closest('div.productDetails').next('img.saved').hide();          
+          $(_this).closest('div.entry').removeClass('saved');
           $(_this).html('Save');
           $(_this).data('set_aside_id', '');
         }
