@@ -1,0 +1,58 @@
+<h2>re-lift this item</h2>
+<div class="modalContent">
+  <p>Product Details:</p>
+  <ul>
+    <li>Brand: <%= @item.post.brand %></li>
+    <li>Item Name: <%= @item.post.name %></li>
+    <li>Price: $<%= @item.post.price.ceil %></li>
+  </ul>
+  <div class="divider"></div>
+  <form action="#" name="report_item_form">
+    <p>Comment (<span id="chars_left">0</span> characters left)</strong><p>
+    <textarea name="comment" id="comment" rows="3" columns="40"></textarea>
+    <div class="divider"></div>
+    <ul>
+      <li>list of tags to add</li>
+    </ul>
+    <div class="submitWrap">
+      <input type="submit" class="submit" name="submit" value="Re-lift this item now" />
+      <input type="submit" class="submit simplemodal-close" name="submit" value="Never Mind" />
+    </div>
+  </form>
+  <div class="divider"></div>
+</div>
+<script>
+  function commentCharsLeft() {
+    var chars = 500-$('#comment').val().length;
+    $('#chars_left').html(chars);
+    if (chars < 0) {
+      $('input[name=submit]').hide();
+    } else {
+      $('input[name=submit]').show();
+    }
+  }
+  commentCharsLeft();
+  $('#comment').keyup(function () {
+    commentCharsLeft();
+  });
+  $('form[name=report_item_form]').submit(function () {
+    var this_form = $(this);
+    $.ajax({
+      url:'items/<%= @item.id%>/relift',
+      type:'POST',
+      dataType:'json',
+      data: $(this).serialize(),
+      success:function(data) {
+        $.modal.close();
+      },
+      error:function(xhr,textStatus,errorThrown){
+        alert(xhr.responseText);
+      }
+    });
+    return false;
+  });
+  $('.simplemodal-close').click(function () {
+      $.modal.close();
+      return false;
+  });
+</script>

@@ -40,6 +40,7 @@
 
 class User < ActiveRecord::Base
   require 'status'
+  after_create :welcome
   
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
@@ -64,11 +65,19 @@ class User < ActiveRecord::Base
                     :s3_credentials => "#{Rails.root}/config/s3.yml",
                     :path => "/:style/:id/:filename"
 
+  validates(:zipcode, presence: true)
+  validates(:sex, presence: true)
+  validates(:password_confirmation, presence: true)
+
   def subscribed_to(user)
     if self.id != user.id && Subscription.where('user_id = ? AND follower_id = ? AND status = 1',user.id,self.id).blank?
       return false
      else
        return true 
     end
+  end
+
+  def welcome
+    UserMailer.welcome(self).deliver
   end
 end

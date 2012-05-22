@@ -41,7 +41,7 @@
           </li>
           <li>
             <label for="password">Password</label>
-            <input type="password" class="text" name="fake-dummy" value="xxxxxxxxx />
+            ********************
               <a href="#">Change Password</a>
           </li>
           <li>
@@ -72,6 +72,13 @@
               <a href="#">Refresh from Facebook</a><br/>
               <a href="#">Refresh from Twitter</a>
             </p>
+          </li>
+        </ul>
+        <ul class="formList radioList">
+          <li>
+            <div class="radioDesc">Gender:</div>
+            <input type="radio" class="radio" name="user[sex]" value="true" id="sex-male" /><label for="sex-male">Male</label>
+            <input type="radio" class="radio" name="user[sex]" value="false" id="sex-female" /><label for="sex-female">Female</label>
           </li>
         </ul>
         <h3>Notification Settings</h3>
@@ -170,7 +177,11 @@
       $('#country').val(user.country);
       $('#zipcode').val(user.zipcode);
       $('#bio').val(user.biography);
-      <%#$('.characterCount').html(110-user.biography.length+' Characters Left');%>
+      if (user.sex == true) {
+        $('#sex-male').attr('checked', true);
+      } else {
+        $('#sex-female').attr('checked', true);
+      }
       if (user.notify_new_follower == true) {
         $('#newFollow-yes').attr('checked', true);
       } else {

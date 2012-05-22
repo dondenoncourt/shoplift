@@ -2,4 +2,26 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
+  activerecord:
+    attributes:
+      user:
+        email: "e-mail address"
+        sex: "Gender"
+    errors:
+      models:
+        user:
+          attributes:
+            email:
+              blank: is required
+            password:
+              blank: is required
+            password_confirmation:
+              blank: is required
+            sex:
+              blank: is required
+            zipcode:
+              blank: is required
+  user_mailer:
+    welcome:
+      subject: Welcome to The Shoplift
   hello: "Hello world"

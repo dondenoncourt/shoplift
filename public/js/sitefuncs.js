@@ -2,18 +2,45 @@ $(document).ready(function(){
 
 /*---------- Scroll Modify ----------*/
 
+	if($('body').hasClass('landing')) {
+		var scrollNum = 195;
+	} else {
+		var scrollNum = 145;
+	}
+
+
 	var scrollTopStart = $(window).scrollTop();
-	if(scrollTopStart>=145 && !$('.headWrap').hasClass('small')){
+	if(scrollTopStart>=scrollNum && !$('.headWrap').hasClass('small')){
 		$('.headWrap').addClass('small');
 	} 
 
 	$(window).scroll(function(){
 		var scrolltop = $(window).scrollTop();
-		if(scrolltop>=145 && !$('.headWrap').hasClass('small')){
+		if(scrolltop>=scrollNum && !$('.headWrap').hasClass('small')){
 			$('.headWrap').addClass('small');
-		} else if(scrolltop<=145) {
+		} else if(scrolltop<=scrollNum) {
 			$('.headWrap').removeClass('small');
 		}		
+	});
+
+/*---------- Sign In ----------*/
+
+	$('a.showSignup').click(function(){
+		if($('div.signinOptions').is(':hidden')) {
+			$('div.signinOptions').slideDown();
+		}
+		return false;
+	});
+
+/*---------- Help Page ----------*/
+
+	$('.questionList h4 a').click(function(){
+		if($(this).closest('li').hasClass('currentQ')) {
+			$(this).closest('li').removeClass('currentQ');
+		} else {
+			$(this).closest('li').addClass('currentQ');
+		}
+		return false;
 	});
 
 /*---------- Search ----------*/
@@ -32,6 +59,20 @@ $(document).ready(function(){
 		$(this).find('.productDetails').stop().animate({ bottom:'-30px' },100)
 	});
 
+/*---------- Tabs ----------*/
+
+	$('ul.tabs a').click(function(){
+		$(this).closest('ul.tabs').children('li.current').removeClass('current');
+		$(this).parent('li').addClass('current');
+		var showDiv = $(this).attr('href');
+		
+		$(this).parents('div.productMeta').children('div.toggleWrap').hide();
+		$(this).parents('div.productMeta').children(showDiv).show();
+		$('div.scrollWrap').sbscroller('refresh');
+		
+		return false;
+	});
+
 /*---------- Tag Scrollbar ----------*/
 	
 	$('div.scrollWrap').sbscroller();
@@ -43,7 +84,7 @@ $(document).ready(function(){
 
 /*---------- Page Scroll ----------*/
 	
-	$('a.scrollTo').click(function(){
+	$('a.scrollTo, ol.topicList a').click(function(){
 		var destination = $(this).attr('href');
 		$.scrollTo(destination,300);
 		return false;

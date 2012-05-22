@@ -3,11 +3,14 @@ App::Application.routes.draw do
 
   get "page/home", :to => "page#home"
   get "page/saved", :to => "page#saved"
+  get "page/follow_interests", :to => "page#follow_interests"
+
   get "page/profile/edit", :to => "page#profile_edit"
   get "page/profile/modal/upload_avatar.html", :to => "page#upload_avatar"
 
   get "modal/report_tag", :to => "page#report_tag"
   get "modal/report_item", :to => "page#report_item"
+  get "modal/relift", :to => "page#relift"
 
   #resources :images TODO delete this and any other image artifacts
   resources :posts
