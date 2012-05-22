@@ -59,6 +59,20 @@ App::Application.configure do
   config.active_support.deprecation = :notify
   
   # Devise mailer
-  config.action_mailer.default_url_options = { :host => 'app.shoplift.it' }
+  #config.action_mailer.default_url_options = { :host => 'app.shoplift.it' }
+  config.action_mailer.default_url_options = { :host => 'ec2-23-23-244-185.compute-1.amazonaws.com' }
+
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.raise_delivery_errors = false
+  #config.action_mailer.perform_deliveries = true
+  config.action_mailer.smtp_settings = {
+    :address              => "smtp.gmail.com",
+    :port                 => 587,
+    :domain               => 'gmail.com',
+    :user_name            => 'dondenoncourt@gmail.com',
+    :password             => 'jMzd6uzn9rfrVT',
+    :authentication       => 'plain',
+    :enable_starttls_auto => true
+  }
 
 end
