@@ -16,20 +16,20 @@
 				url:'/users/<%= current_user.id %>/edit',
 				secureuri:false,
 				fileElementId:'user_avatar',
-				dataType: 'json',
+        dataType: 'json',
         complete: function(data, status) {
           reloadAvatars();
           $('.simplemodal-close').trigger('click');
         },
-				success: function (data, status) {
-					if(typeof(data.error) != 'undefined') {
-						if(data.error != '') {
-							alert(data.error);
-						}else {
-							alert(data.msg);
-						}
-					}
-				},
+        success: function (data, status) {
+          if(typeof(data.error) != 'undefined') {
+            if(data.error != '') {
+              alert(data.error);
+            }else {
+              alert(data.msg);
+            }
+          }
+        },
 				error: function (data, status, e) { alert(e); }
 		});
 		return false;

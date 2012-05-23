@@ -67,7 +67,7 @@ class User < ActiveRecord::Base
 
   validates(:zipcode, presence: true)
   validates(:sex, presence: true)
-  validates(:password_confirmation, presence: true)
+  validates(:password_confirmation, presence: true, :unless => lambda {|u| u.password.nil? })
 
   def subscribed_to(user)
     if self.id != user.id && Subscription.where('user_id = ? AND follower_id = ? AND status = 1',user.id,self.id).blank?
