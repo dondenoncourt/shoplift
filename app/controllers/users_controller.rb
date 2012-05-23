@@ -10,7 +10,7 @@ class UsersController < ApplicationController
     
     logger.debug params
     logger.debug params['username']
-    if params[:identifier] == "user_id"
+    if params[:id]
       @user = User.find(params[:id])
     elsif params[:identifier] == "username"  
       @user = User.find_by_username(params['username'])
