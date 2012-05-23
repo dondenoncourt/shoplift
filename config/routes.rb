@@ -20,7 +20,7 @@ App::Application.routes.draw do
   #
   # Users
   #
-  devise_for :users#, :skip => [:registrations,:passwords,:unlocks]
+  devise_for :users, :controllers => {:registrations => "registrations"} #, :skip => [:registrations,:passwords,:unlocks]
   # makes domain/login work as well as domain/users/login
   devise_scope :user do
     get "login"  => "devise/sessions#new"
