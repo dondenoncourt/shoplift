@@ -4,6 +4,7 @@ App::Application.routes.draw do
   get "page/home", :to => "page#home"
   get "page/saved", :to => "page#saved"
   get "page/follow_interests", :to => "page#follow_interests"
+  get "page/follow", :to => "page#follow"
 
   get "page/profile/edit", :to => "page#profile_edit"
   get "page/profile/modal/upload_avatar.html", :to => "page#upload_avatar"
@@ -89,7 +90,7 @@ App::Application.routes.draw do
   #
   get "subscriptions", :to => "subscriptions#index", :defaults => { :format => :json }, :constraints => {:format => :json}
   get "subscriptions/users/:id", :to => "subscriptions#show", :defaults => { :format => :json }, :constraints => {:format => :json}
-  post "subscriptions/approve", :to => "subscriptions#create", :defaults => { :format => :json }, :constraints => {:format => :json}
+  post "subscriptions", :to => "subscriptions#create", :defaults => { :format => :json }, :constraints => {:format => :json}
   delete "subscriptions/users/:id", :to => "subscriptions#destroy", :defaults => { :format => :json }, :constraints => {:format => :json}
   # Browser / system compatability
   post "subscriptions/users/:id/delete", :to => "subscriptions#destroy", :defaults => { :format => :json }, :constraints => {:format => :json}

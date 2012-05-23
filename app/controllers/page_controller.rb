@@ -19,6 +19,10 @@ class PageController < ApplicationController
   def upload_avatar
   end
 
+  def follow
+    @users = User.where('status = 1').limit(50).offset(0)
+  end
+
   def relift
     @item = Item.find(params[:post_id])
   end

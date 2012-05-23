@@ -1,13 +1,13 @@
 <a id="top"></a>
 <div class="headWrap">
   <div class="header">
-    <h1><a href="">The Shoplift</a></h1>
+    <h1><%= link_to "The Shoplift", root_path %> </h1>
     <% if user_signed_in? %>
     <div class="navigation">
       <a class="logout" href="/logout">Sign Out</a>
       <ul class="mainNav">
         <li><a href="#">Add</a></li>
-        <li><a href="#">Follow</a></li>
+        <li> <%= link_to "Follow", page_follow_path %> </li>
         <li><a href="#">Saved</a></li>
       </ul>
       <form action="#" class="search">

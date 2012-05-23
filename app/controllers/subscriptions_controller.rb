@@ -38,7 +38,7 @@ class SubscriptionsController < ApplicationController
   def create
     authenticate_user!
     if Subscription.where("user_id = ? AND follower_id = ? AND status != 0",params[:user_id],current_user.id).first
-      render_error(406,"Subscription already exists")
+      return render_error(406,"Subscription already exists")
     end
     @user = User.where(:id => params[:user_id], :status => 1).first!
     status = @user.private ? 2 : 1
