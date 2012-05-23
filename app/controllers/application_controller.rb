@@ -69,4 +69,9 @@ class ApplicationController < ActionController::Base
     return render_error(406,notice)  
   end
  
+  protected
+      def after_sign_up_path_for(resource)
+        #"http://google.com"
+        page_follow_interests_path
+      end
 end
