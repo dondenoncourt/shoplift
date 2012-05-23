@@ -16,9 +16,10 @@ class HashtagsController < ApplicationController
     begin
       @item = Item.joins(:post,:user) \
                   .joins("INNER JOIN users AS post_users on posts.user_id = post_users.id AND users.status = 1") \
-                  .where("items.id = #{params[:item_id]} AND (ISNULL(items.parent_id) || items.parent_id = 0) AND items.status = 1").first!
+                  .where("items.id = #{params[:item_id]} AND items.status = 1").first!
+                  #.where("items.id = #{params[:item_id]} AND (ISNULL(items.parent_id) || items.parent_id = 0) AND items.status = 1").first!
     rescue
-      puts "something bad happened here, error: #{$!}"
+      puts "error: #{$!}"
       return render_error(404,"Item not found")
     end
                  

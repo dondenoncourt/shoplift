@@ -25,6 +25,10 @@
   // setup scroll counts and load first two entries
   function initPage() {
       postCount = timeline.timeline.length
+      if (postCount == 0) {
+        window.location.href = '<%= page_follow_interests_path %>';
+        return;
+      }
       for (i = 0; i < 2; i++) {
           showPost(i);
           scrollCount++;

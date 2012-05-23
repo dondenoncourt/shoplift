@@ -7,7 +7,7 @@
     <li>Price: $<%= @item.post.price.ceil %></li>
   </ul>
   <div class="divider"></div>
-  <form action="#" name="report_item_form">
+  <form action="/items/<%= @item.id%>/relift" name="report_item_form" id="report_item_form">
     <p>Comment (<span id="chars_left">0</span> characters left)</strong><p>
     <textarea name="comment" id="comment" rows="3" columns="40"></textarea>
     <div class="divider"></div>
@@ -35,14 +35,15 @@
   $('#comment').keyup(function () {
     commentCharsLeft();
   });
-  $('form[name=report_item_form]').submit(function () {
+  $('#report_item_form').submit(function () {
     var this_form = $(this);
     $.ajax({
-      url:'items/<%= @item.id%>/relift',
+      url:'/items/<%= @item.id%>/relift',
       type:'POST',
       dataType:'json',
       data: $(this).serialize(),
       success:function(data) {
+        alert(data.message);
         $.modal.close();
       },
       error:function(xhr,textStatus,errorThrown){
