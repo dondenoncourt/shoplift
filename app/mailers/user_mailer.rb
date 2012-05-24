@@ -7,7 +7,6 @@ class UserMailer < ActionMailer::Base
   #   en.user_mailer.todon.subject
   #
   def todon
-    puts "in todon mailer method"
     @greeting = "Hi"
 
     mail to: "dondenoncourt@gmail.com",

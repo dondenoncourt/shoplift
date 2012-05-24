@@ -83,7 +83,8 @@ class UsersController < ApplicationController
     authenticate_user!
     ## Check if user is updating themselve or another (must be admin) ##
     @user = User.find(params[:id])
-    if @user.deactivate
+    @user.deactivate
+    if @user.status == 0
       return render :json => @user, :status => 200
     else
       return_error_messages(@user,"Failed to delete user")

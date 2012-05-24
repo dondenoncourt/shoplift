@@ -42,6 +42,9 @@ class PageController < ApplicationController
     @item = Item.find(params[:post_id])
   end
 
+  def follow_interests_subcat
+  end
+
   def follow_interests
     if current_user.created_at.to_date == Date.today && 
        Subscription.find_by_follower_id(current_user.id) == nil

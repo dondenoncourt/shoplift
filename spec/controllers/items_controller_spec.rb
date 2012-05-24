@@ -300,7 +300,9 @@ describe ItemsController do
      it "deactivate the requested post" do
       sign_in @user
       delete :destroy, :id => items(:items_001).id, :format => :json
-      Item.find(items(:items_001).id).post.blank?.should == false
+      #Item.find(items(:items_001).id).post.blank?.should == false
+      # denoncourt: it seems to me this is correct....
+      Item.find(items(:items_001).id).post.blank?.should == true
     end
 
     it "returns status code of 200" do
