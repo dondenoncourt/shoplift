@@ -1,0 +1,29 @@
+<div class="leftCol profile">
+  <div class="person">
+    <%= image_tag user.avatar.url(:small) %>
+    <h2><%= user.full_name %><br/><span class="location"><%= user.hometown %></span></h2>
+    <% if current_user.following?(user) %>
+      <%= link_to "Following", '#', :class => "button buttonOn" %>
+    <% else %>
+      <%= link_to_function "Follow", 'alert("Not implemented yet.");', :class => "button buttonOn" %>
+    <% end %>
+  </div>
+  <ul class="personStats">
+    <li class="current"><a href="#"><%= user.posts.count %> Items Shoplifted</a></li>
+    <li><a href="#"><%= user.followers.count %> Followers</a></li>
+    <li><a href="#"><%= user.followees.count %> Followees</a></li>
+  </ul>
+  <div class="profileText"><%= user.biography %></div>
+  <div class="profileUrl">
+    <a href="#"><%= user.url %></a>
+  </div>
+  <h3>Top Tags</h3>
+  <ul class="topTags">
+    <li><a href="#">Lorem Ipsum Tag</a></li>
+    <li><a href="#">Lorem Ipsum Tag</a></li>
+    <li><a href="#">Lorem Ipsum Tag</a></li>
+    <li><a href="#">Lorem Ipsum Tag</a></li>
+    <li><a href="#">Lorem Ipsum Tag</a></li>
+  </ul>
+  <a href="#">Show More</a>
+</div>

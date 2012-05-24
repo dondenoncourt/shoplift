@@ -1,12 +1,12 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <%= render "header" %>
+  <%= render "page/header" %>
 <body>
-  <%= render "subhead" %>
-	<div id="content">
+  <%= render "page/subhead" %>
+  <div id="content">
     <%= yield :layout %>
-	</div>	
-  <%= render "footer" %>
+  </div>
+  <%= render "page/footer" %>
 </body>
 </html>
 

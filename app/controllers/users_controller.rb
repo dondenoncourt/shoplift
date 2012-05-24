@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  layout 'standard'
 
   # Fetch information about user, searched by id or username
   # * *Request*    :
@@ -7,26 +8,32 @@ class UsersController < ApplicationController
   #   - :id -> User id
   #   - :username -> Username
   def show
-    
+
     logger.debug params
     logger.debug params['username']
     if params[:id]
       @user = User.find(params[:id])
-    elsif params[:identifier] == "username"  
+    elsif params[:identifier] == "username"
       @user = User.find_by_username(params['username'])
     else
-      return render_error(404,"User not found") 
-    end  
-    
+      return render_error(404,"User not found")
+    end
+
     if @user.private?
       authenticate_user!
       if !current_user.subscribed_to(@user)
         render_error(404,"Item not found")
       else
-        render :partial => 'user', :locals => {:user => @user}
+        respond_to do |format|
+          format.html # show.html.erb
+          format.json { render :partial => 'user', :locals => {:user => @user} }
+        end
       end
     else
-      render :partial => 'user', :locals => {:user => @user}  
+      respond_to do |format|
+        format.html # show.html.erb
+        format.json { render :partial => 'user', :locals => {:user => @user} }
+      end
     end
   end
 
@@ -34,20 +41,20 @@ class UsersController < ApplicationController
   # * *Request*    :
   #   - GET /users/validate_username/:username
   # * *Args*    :
-  #   - :username -> Username 
+  #   - :username -> Username
   def validate_username
     if @user = User.find_by_username(params[:username].downcase)
-      render :partial => "user", :locals => {:user => @user} 
+      render :partial => "user", :locals => {:user => @user}
     else
       render_error(404,"User not found")
     end
   end
 
-  # Create user 
+  # Create user
   # * *Request*    :
   #   - POST /users
   # * *Args*    :
-  #   - :user -> Array of user data  
+  #   - :user -> Array of user data
   def create
     @user = User.new(params[:user])
     if @user.save
@@ -62,7 +69,7 @@ class UsersController < ApplicationController
   #   - PUT /users/:id
   # * *Args*    :
   #   - :id -> User id
-  #   - :user -> Array of user data  
+  #   - :user -> Array of user data
   def update
     authenticate_user!
     ## Check if user is updating themselve or another (must be admin) ##
@@ -89,5 +96,5 @@ class UsersController < ApplicationController
       return_error_messages(@user,"Failed to delete user")
     end
   end
-  
+
 end

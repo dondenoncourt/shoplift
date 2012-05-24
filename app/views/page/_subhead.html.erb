@@ -3,20 +3,18 @@
   <div class="header">
     <h1><%= link_to "The Shoplift", root_path %> </h1>
     <% if user_signed_in? %>
-    <div class="navigation">
-      <a class="logout" href="/logout">Sign Out</a>
-      <ul class="mainNav">
-        <li><a href="#">Add</a></li>
-        <li> <%= link_to "Follow", page_follow_path %> </li>
-        <li><a href="#">Saved</a></li>
-      </ul>
-      <form action="#" class="search">
-        <input type="text" class="text search" name="search" value="Search" /><input type="submit" name="submit" class="searchSubmit" />
-      </form>
-      <a href="#" class="profilePhoto">
-        <%= image_tag current_user.avatar.url(:thumb) %>
-      </a>
-    </div>
-  <% end %>
-  </div>	
-</div>	
+      <div class="navigation">
+        <a class="logout" href="/logout">Sign Out</a>
+        <ul class="mainNav">
+          <li><a href="#">Add</a></li>
+          <li> <%= link_to "Follow", page_follow_path %> </li>
+          <li><a href="#">Saved</a></li>
+        </ul>
+        <form action="#" class="search">
+          <input type="text" class="text search" name="search" value="Search" /><input type="submit" name="submit" class="searchSubmit" />
+        </form>
+        <%= link_to image_tag(current_user.avatar.url(:thumb)), user_path(current_user), :class => "profilePhoto" %>
+      </div>
+    <% end %>
+  </div>
+</div>

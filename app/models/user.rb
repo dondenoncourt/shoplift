@@ -41,7 +41,7 @@
 class User < ActiveRecord::Base
   require 'status'
   after_create :welcome
-  
+
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :recoverable, :trackable, :validatable
@@ -55,11 +55,13 @@ class User < ActiveRecord::Base
   has_many :posts
   has_many :subscriptions
   has_many :followers, :class_name => "Subscription"
+  has_many :hashtags
+  has_many :hashtag_values, :through => :hashtags
 
   has_attached_file :avatar,
                     :styles => {
-                      :thumb => "80x80#",
-                      :small => "200x200#"
+                      :thumb => "70x70>",
+                      :small => "200x200>"
                     },
                     :storage => :s3,
                     :s3_credentials => "#{Rails.root}/config/s3.yml",
@@ -73,11 +75,16 @@ class User < ActiveRecord::Base
     if self.id != user.id && Subscription.where('user_id = ? AND follower_id = ? AND status = 1',user.id,self.id).blank?
       return false
      else
-       return true 
+       return true
     end
   end
+  alias following? subscribed_to
 
   def welcome
     UserMailer.welcome(self).deliver
+  end
+
+  def followees
+    Subscription.where(follower_id: self.id)
   end
 end

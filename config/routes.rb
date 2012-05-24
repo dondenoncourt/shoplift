@@ -1,5 +1,5 @@
 App::Application.routes.draw do
-  
+
 
   get "page/home", :to => "page#home"
   get "page/saved", :to => "page#saved"
@@ -28,27 +28,27 @@ App::Application.routes.draw do
     get "logout" => "devise/sessions#destroy"
     #delete "logout" => "devise/sessions#destroy"
   end
-  resources :users, :only => [:show,:create,:update,:destroy], :defaults => { :format => :json }, :constraints => {:format => :json}
+  resources :users, :only => [:show,:create,:update,:destroy]
   get "users/validate_username/:username", :to => "users#validate_username", :defaults => { :format => :json }, :constraints => {:format => :json}
   get "users/username/:username", :to => "users#show", :identifier => "username", :defaults => { :format => :json }, :constraints => {:format => :json}
   # Browser / system compatability
   post "users/:id/edit", :to => "users#update", :defaults => { :format => :json }, :constraints => {:format => :json}
   post "users/:id/delete", :to => "users#destroy", :defaults => { :format => :json }, :constraints => {:format => :json}
-  
+
   #
   # Timelines
   #
   get "timelines", :to => "timelines#index", :defaults => { :format => :json }, :constraints => {:format => :json}
-  get "timelines/users/:id", :to => "timelines#s/how_user", :defaults => { :format => :json }, :constraints => {:format => :json}
+  get "timelines/users/:id", :to => "timelines#show_user", :defaults => { :format => :json }, :constraints => {:format => :json}
   get "timelines/recent", :to => "timelines#show_recent", :defaults => { :format => :json }, :constraints => {:format => :json}
   get "timelines/hashtags/:name", :to => "timelines#show_hashtags", :defaults => { :format => :json }, :constraints => {:format => :json}
-  
+
   #
   # Parser and Bookmarklet
   #
   get "bookmarklet", :to => "parser#bookmarklet", :constraints => {:format => :js}
   post "parse", :to => "parser#parse", :defaults => { :format => :json }, :constraints => {:format => :json}
-  
+
   #
   # Items
   #
@@ -63,17 +63,17 @@ App::Application.routes.draw do
   # Browser / system compatability
   post "items/:id/edit", :to => "items#update", :defaults => { :format => :json }, :constraints => {:format => :json}
   post "items/:id/delete", :to => "items#destroy", :defaults => { :format => :json }, :constraints => {:format => :json}
-  
+
   #
   # Hashtags
-  # 
+  #
   get "hashtags/popular", :to => "hashtags#show_popular", :defaults => { :format => :json }, :constraints => {:format => :json}
   get "hashtags/search", :to => "hashtags#search", :defaults => { :format => :json }, :constraints => {:format => :json}
   delete "hashtags/:id" => "hashtags#destroy", :defaults => { :format => :json }, :constraints => {:format => :json}
   post "hashtags/create", :to => "hashtags#create", :defaults => { :format => :json }, :constraints => {:format => :json}
   # Browser / system compatability
   post "hashtags/:id/delete" => "hashtags#destroy", :defaults => { :format => :json }, :constraints => {:format => :json}
-  
+
   #
   # Followers
   #
@@ -84,7 +84,7 @@ App::Application.routes.draw do
   post "followers/approve", :to => "followers#approve", :defaults => { :format => :json }, :constraints => {:format => :json}
   delete "followers/users/:id", :to => "followers#destroy", :defaults => { :format => :json }, :constraints => {:format => :json}
   post "followers/users/:id/delete", :to => "followers#destroy", :defaults => { :format => :json }, :constraints => {:format => :json}
-  
+
   #
   # Subscriptions
   #
@@ -94,12 +94,12 @@ App::Application.routes.draw do
   delete "subscriptions/users/:id", :to => "subscriptions#destroy", :defaults => { :format => :json }, :constraints => {:format => :json}
   # Browser / system compatability
   post "subscriptions/users/:id/delete", :to => "subscriptions#destroy", :defaults => { :format => :json }, :constraints => {:format => :json}
-  
+
   #
   # Suggestions
   #
   get "suggestions", :to => "suggestions#index", :defaults => { :format => :json }, :constraints => {:format => :json}
-  
+
   #
   # Set Asides
   #
@@ -108,24 +108,24 @@ App::Application.routes.draw do
   delete "set_asides/items/:id", :to => "set_asides#destroy", :defaults => { :format => :json }, :constraints => {:format => :json}
   # Browser / system compatability
   post "set_asides/items/:id/delete", :to => "set_asides#destroy", :defaults => { :format => :json }, :constraints => {:format => :json}
-  
+
   #
   # Flags
   #
   get "flags", :to => "flags#index", :defaults => { :format => :json }, :constraints => {:format => :json}
   post "flags/items/:id", :to => "flags#create_item", :defaults => { :format => :json }, :constraints => {:format => :json}
   post "flags/hashtags/:id", :to => "flags#create_hashtag", :defaults => { :format => :json }, :constraints => {:format => :json}
-  
+
   #
   # Statistics
   #
   get "statistics/users/:id", :to => "statistics#show_user", :defaults => { :format => :json }, :constraints => {:format => :json}
   get "statistics/items/:id", :to => "statistics#show_item", :defaults => { :format => :json }, :constraints => {:format => :json}
-  
+
   #
   #Error Handling
   #
   match "/", :to => "application#render_error", :status => 404
   match "*path", :to => "application#render_error", :status => 404
-  
+
 end
