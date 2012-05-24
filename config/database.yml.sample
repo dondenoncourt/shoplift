@@ -1,0 +1,21 @@
+development:
+  adapter: mysql2
+  encoding: utf8
+  database: shoplift_app_dev
+  username: shoplift_app
+  password: vo2max
+  socket: /tmp/mysql.sock
+
+test:
+  adapter: mysql2
+  encoding: utf8
+  database: shoplift_app_test
+  username: shoplift_app
+  password: vo2max
+
+production:
+  adapter: mysql2
+  encoding: utf8
+  database: shoplift
+  username: shoplift
+  password: Shoplift123
