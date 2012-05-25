@@ -1,3 +1,5 @@
+<!-- DEPRECATED by Alfie -->
+
 <% provide(:title, 'Home') %>
 <%= render "posts" %>
 <%# render "postsTOBEREMOVED" %>
@@ -46,7 +48,7 @@
     var post = timeline.timeline[index];
     var entry = $('div .entryTemplate');
     $('div .clear').before('<div class="entry">'+entry.html()+'</div>');
-    $('div.entryHead p a').last().html(post.user.extract.full_name); 
+    $('div.entryHead p a').last().html(post.user.extract.full_name);
     $('div.entryHead span.location').last().html(post.user.extract.hometown);
     if (post.hashtags_allowed) {
       for (iTag = 0; iTag < post.hashtags.length; iTag++) {
@@ -109,15 +111,15 @@
     }else{
       $('a.btnSetAside').last().data('set_aside_id', post.set_aside.id);
       $('a.btnSetAside').last().html('Un-Save');
-      $('div.entry').last().addClass('saved');      
-    }     
-    sitefuncs(); // run page actions written by seamlesscreative.com
+      $('div.entry').last().addClass('saved');
+    }
+
   }
   // Add a click listener to Save/Un-Save item
   $('a.[class^=btn]').live('click', function(e){
     e.preventDefault(); // Keeps from invoking the href="#" of the anchor tag after the ajax completes
     _this = $(this);
-    if($(_this).data('set_aside_id') == ''){  
+    if($(_this).data('set_aside_id') == ''){
       // set_aside doesn't exist so create it
       $.ajax({
         url: '/set_asides',
@@ -128,7 +130,7 @@
           $(_this).html('Un-Save');
           $(_this).data('set_aside_id', post.set_aside.id);
         }
-      }); 
+      });
     }else{
       // set_aside exists so delete it
       $.ajax({
@@ -139,7 +141,7 @@
           $(_this).html('Save');
           $(_this).data('set_aside_id', '');
         }
-      });     
+      });
     }
-  });  
+  });
 </script>

@@ -7,7 +7,7 @@
       <%= render partial: 'posts/post', collection: @posts %>
       <div id="results"></div>
       <%= will_paginate(@posts) %>
-      <%= pageless(@posts.total_pages, user_posts_user_path(@user)) %>
+      <%= pageless(@posts.total_pages, user_path(@user)) %>
     <% end %>
   <div class="clear"></div>
 </div>

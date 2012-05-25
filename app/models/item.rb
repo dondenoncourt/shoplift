@@ -34,4 +34,28 @@ class Item < ActiveRecord::Base
     where("#{table_name}.id BETWEEN #{params[:above]} AND #{params[:below]}")
   end
 
+  def retailer
+    post.retailer
+  end
+
+  def name
+    post.name
+  end
+
+  def price
+    post.price
+  end
+
+  def photo
+    post.photo
+  end
+
+  def comment
+    post.comment
+  end
+
+  def items
+    post.items
+  end
+
 end

@@ -5,6 +5,7 @@ class PageController < ApplicationController
   layout nil, :only => [:upload_avatar, :report_tag, :report_item, :relift]
 
   def home
+    redirect_to timelines_path
   end
 
   def saved

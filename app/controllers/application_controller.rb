@@ -70,7 +70,7 @@ class ApplicationController < ActionController::Base
   end
 
   layout Proc.new { |controller|
-    nil if controller.request.xhr? || devise_controller?
+    (controller.request.xhr? || devise_controller?) ? nil : 'application'
   }
 
 end
