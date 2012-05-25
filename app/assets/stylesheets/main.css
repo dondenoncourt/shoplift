@@ -1,6 +1,5 @@
-@charset "UTF-8";
 /* The Shoplift */
-/* 04.11 */
+/* Updated - 04.29.11 */
 
 
 /*---------- CSS Reset ----------*/
@@ -8,44 +7,45 @@
 Copyright (c) 2010, Yahoo! Inc. All rights reserved.
 Code licensed under the BSD License:
 http://developer.yahoo.com/yui/license.html
+version: 2.8.2r1
 */
 body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,button,textarea,p,blockquote,th,td{margin:0;padding:0;}table{border-collapse:collapse;border-spacing:0;}fieldset,img{border:0;}address,caption,cite,code,dfn,em,strong,th,var,optgroup{font-style:inherit;font-weight:inherit;}del,ins,a{text-decoration:none;}li{list-style:none;}caption,th{text-align:left;}h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal;}q:before,q:after{content:'';}abbr,acronym{border:0;font-variant:normal;}sup{vertical-align:baseline;}sub{vertical-align:baseline;}legend{color:#000;}input,button,textarea,select,optgroup,option{font-family:inherit;font-size:inherit;font-style:inherit;font-weight:inherit;}input,button,textarea,select{font-size:100%;}*{outline:none;}
 
 /* @license
  * MyFonts Webfont Build ID 2182675, 2012-03-28T10:00:10-0400
- * 
+ *
  * The fonts listed in this notice are subject to the End User License
- * Agreement(s) entered into by the website owner. All other parties are 
+ * Agreement(s) entered into by the website owner. All other parties are
  * explicitly restricted from using the Licensed Webfonts(s).
- * 
+ *
  * You may obtain a valid license at the URLs below.
- * 
+ *
  * Webfont: Brandon Grotesque Bold by HVD Fonts
  * URL: http://www.myfonts.com/fonts/hvdfonts/brandon-grotesque/bold/
- * 
+ *
  * Webfont: Brandon Grotesque Italic by HVD Fonts
  * URL: http://www.myfonts.com/fonts/hvdfonts/brandon-grotesque/italic/
- * 
+ *
  * Webfont: Brandon Grotesque Bold Italic by HVD Fonts
  * URL: http://www.myfonts.com/fonts/hvdfonts/brandon-grotesque/bold-italic/
- * 
+ *
  * Webfont: Brandon Grotesque Regular by HVD Fonts
  * URL: http://www.myfonts.com/fonts/hvdfonts/brandon-grotesque/regular/
- * 
- * 
+ *
+ *
  * License: http://www.myfonts.com/viewlicense?type=web&buildid=2182675
  * Licensed pageviews: 100,000
  * Webfonts copyright: Copyright (c) 2009 by Hannes von Doehren. All rights reserved.
- * 
- * � 2012 Bitstream Inc
+ *
+ * © 2012 Bitstream Inc
 */
 
  @font-face {font-family: 'BrandonGrotesque';src: url('webfonts/214E13_3_0.eot');src: url('webfonts/214E13_3_0.eot?#iefix') format('embedded-opentype'),url('webfonts/214E13_3_0.woff') format('woff'),url('webfonts/214E13_3_0.ttf') format('truetype');}
 
- @font-face {font-family: 'BrandonGrotesque';src: url('webfonts/214E13_0_0.eot');src: url('webfonts/214E13_0_0.eot?#iefix') format('embedded-opentype'),url('webfonts/214E13_0_0.woff') format('woff'),url('webfonts/214E13_0_0.ttf') format('truetype');font-weight:bold;} 
-  
+ @font-face {font-family: 'BrandonGrotesque';src: url('webfonts/214E13_0_0.eot');src: url('webfonts/214E13_0_0.eot?#iefix') format('embedded-opentype'),url('webfonts/214E13_0_0.woff') format('woff'),url('webfonts/214E13_0_0.ttf') format('truetype');font-weight:bold;}
+
  @font-face {font-family: 'BrandonGrotesque';src: url('webfonts/214E13_1_0.eot');src: url('webfonts/214E13_1_0.eot?#iefix') format('embedded-opentype'),url('webfonts/214E13_1_0.woff') format('woff'),url('webfonts/214E13_1_0.ttf') format('truetype');font-style:italic;}
-  
+
  @font-face {font-family: 'BrandonGrotesque';src: url('webfonts/214E13_2_0.eot');src: url('webfonts/214E13_2_0.eot?#iefix') format('embedded-opentype'),url('webfonts/214E13_2_0.woff') format('woff'),url('webfonts/214E13_2_0.ttf') format('truetype');font-weight:bold;font-style:italic;}
 
 
@@ -74,7 +74,7 @@ strong {
 /*---------- Structure ----------*/
 
 .headWrap {
-	background: #1E2B41;
+	background: #1E2B41 url(../img/global/scaffold-bar.gif) left 141px repeat-x;
 	width: 100%;
 	height: 195px;
 	margin: -195px 0 0 0;
@@ -104,11 +104,33 @@ strong {
 	height: 50px;
 }
 
+.landing .headWrap {
+	height: 245px;
+	background: #1E2B41 url(../img/global/scaffold-bar.gif) left 178px repeat-x;
+}
+
+.landing .small {
+	top: -195px;
+}
+
+.landing .header {
+	height: 245px;
+}
+
+.landing .small .header {
+	padding-top: 195px;
+	height: 50px;
+}
+
 #content {
 	width: 910px;
 	padding: 55px 22px 30px 22px;
 	margin: 0 auto;
 	overflow: hidden;
+}
+
+.internal {
+	width: 657px !important;
 }
 
 .leftCol {
@@ -140,13 +162,30 @@ h1 a {
 }
 
 .small h1,
-.small h1 a {
-	width: 200px;
-	height: 50px;
+.small h1 a,
+.landing .small h1,
+.landing .small h1 a {
+	width: 200px !important;
+	height: 50px !important;
 }
 
 .small h1 a {
 	background: url(../img/global/shoplift-logo.png) 0 -197px no-repeat;
+}
+
+.landing h1 {
+	width: 1000px;
+	height: 245px;
+}
+
+.landing h1 a {
+	width: 1000px;
+	height: 245px;
+	background: url(../img/global/shoplift-logo-large.png) -20px -20px no-repeat;
+}
+
+.landing .small h1 a {
+	background: url(../img/global/shoplift-logo-large.png) 0 -267px no-repeat;
 }
 
 
@@ -200,7 +239,7 @@ a.profilePhoto img {
 }
 
 .mainNav li {
-	margin-bottom: 8px;
+	margin-bottom: 9px;
 	font-weight: bold;
 }
 
@@ -297,10 +336,110 @@ a.profilePhoto img {
 }
 
 
-/*---------- Entries ----------*/
-.entryTemplate {
-    display: none;
+/*---------- Signup ----------*/
+
+.signupWrap {
+	width: 168px;
+	background: #141414;
+	border: 1px solid #272727;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	padding: 15px;
+	margin: 0 auto 20px auto;
 }
+
+.leftCol .signupWrap h2 {
+	font-weight: normal !important;
+	line-height: 26px;
+	margin-bottom: 0;
+}
+
+p.option {
+	font-weight: bold;
+	text-align: center;
+	font-size: 13px;
+	border-top: 1px solid #1C1C1C;
+	text-transform: uppercase;
+	margin: 20px 0 10px;
+}
+
+p.option span {
+	display: block;
+	width: 35px;
+	background: #141414;
+	margin: -9px auto 0 auto;
+	text-align: center;
+}
+
+a.facebookSignup {
+	display: block;
+	color: #FFF;
+	height: 28px;
+	line-height: 28px;
+	padding: 0 10px;
+	background: #00A4E2;
+	font-family: Arial;
+	font-size: 13px;
+	text-align: center;
+}
+
+.leftCol div.signinOptions {
+	padding-bottom: 0;
+	border-style: none;
+	margin-bottom: 0;
+	display: none;
+}
+
+.signupWrap input.text {
+	height: 30px;
+	line-height: 30px;
+	padding: 0 10px;
+	margin-bottom: 10px;
+}
+
+a.forgotPassword {
+	font-size: 12px;
+}
+
+.leftCol form.signIn {
+	margin-bottom: 0;
+}
+
+.blogFollow {
+	font-size: 18px;
+}
+
+.blogFollow a.facebook,
+.blogFollow a.twitter,
+.blogFollow a.pinterest,
+.blogFollow a.tumblr {
+	width: 25px;
+	height: 24px;
+	display: inline-block;
+	overflow: hidden;
+	text-indent: 100%;
+	background-image:url(../img/global/social-icons-small.gif);
+	background-repeat: no-repeat;
+	margin: 0 0 -8px 5px;
+	border-style: none !important;
+}
+
+.blogFollow a.facebook {background-position: 0 0}
+.blogFollow a.facebook:hover {background-position: 0 -33px}
+
+.blogFollow a.twitter {background-position: -34px 0}
+.blogFollow a.twitter:hover {background-position: -34px -33px}
+
+.blogFollow a.pinterest {background-position: -68px 0}
+.blogFollow a.pinterest:hover {background-position: -68px -33px}
+
+.blogFollow a.tumblr {background-position: -102px 0}
+.blogFollow a.tumblr:hover {background-position: -102px -33px}
+
+
+/*---------- Entries ----------*/
+
 .entry {
 	width: 615px;
 	background: #141414;
@@ -349,9 +488,9 @@ a.profilePhoto img {
 	width: 383px;
 	height: 383px;
 	border: 1px solid #272727;
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-	border-radius: 5px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
 	overflow: hidden;
 	position: relative;
 	float: left;
@@ -424,10 +563,10 @@ ul.actions a:hover {
 }
 
 .comment {
-	border-bottom: 1px solid #000;
 	width: 100%;
 	height: 90px;
 	overflow: hidden;
+	margin-bottom: 5px;
 }
 
 .comment p {
@@ -435,44 +574,141 @@ ul.actions a:hover {
 	margin: 0 0 10px 0;
 }
 
-.add-tag,
-.tags {
-	border-top: 1px solid #2D2D2D;
-	border-bottom: 1px solid #000;
+.add-tag {
+	border-bottom: 1px solid #272727;
+	height: 25px;
+	padding: 5px 0 10px;
+}
+.itemList {
+	border-top: 1px solid #424242;
+	height: 155px;
+	overflow:auto;
 	padding: 10px 0;
 }
-.add-tag {
-	height: 25px;
-  width: 215px;
+#historyWrap .itemList {
+	height: 135px;
 }
-.tags {
-	height: 190px;
-	overflow:auto;
-}
+
 .user-tiny-thumb {
 	width: 25px;
 	height: 25px;
 	margin-right: 6px;
 	float: left;
 }
-ul.tagList li {
-	margin-bottom: 7px;
-	line-height: 25px;
+
+.toggleWrap ul .user-tiny-thumb {
+	width: 20px;
+	height: 20px;
 }
-ul.tagList li a {
+.toggleWrap ul li {
+	margin-bottom: 7px;
+	line-height: 20px;
+}
+.toggleWrap ul li a {
 	display: block;
 	font-size: 13px;
 	width: 100%;
-	height: 25px;
-	line-height: 25px;
+	height: 20px;
+	line-height: 20px;
 }
-ul.tagList li a:hover {background: #142E3B;}
+.toggleWrap ul li a:hover {background: #142E3B;}
+
+.toggleWrap p {
+	font-size: 13px;
+	border-bottom: 1px solid #272727;
+	padding-bottom: 5px;
+}
+
+
+ul.tabs {
+	width: 210px;
+	height: 25px;
+	overflow: hidden;
+}
+
+ul.tabs li {
+	float: left;
+	display: inline;
+	width: 103px;
+	font-size: 13px;
+}
+
+ul.tabs a {
+	display: block;
+	height: 24px;
+	line-height: 22px;
+	text-align: center;
+	-webkit-border-top-left-radius: 5px;
+	-webkit-border-top-right-radius: 5px;
+	-moz-border-radius-topleft: 5px;
+	-moz-border-radius-topright: 5px;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	border: 1px solid #343434;
+	border-width: 1px 1px 0 1px;
+	color: #BEC3C6 !important;
+}
+
+ul.tabs li.current a {
+	background: #343434;
+}
+
+.toggleWrap {
+	background: #343434;
+	padding: 10px 10px 0 10px;
+	height: 254px;
+	position: relative;
+}
+
+#historyWrap {
+	display: none;
+}
 
 .productTattle {
-	border-top: 1px solid #2D2D2D;
-	padding-top: 10px;
+	width: 210px;
+	height: 30px;
+	margin: 0 -10px;
+	position: absolute;
+	bottom: 0;
+	overflow: hidden;
+	background: #141414;
+	border-top: 1px solid #111;
+}
+.productTattle a {
+	float: left;
+	display: block;
+	width: 103px;
+	height: 29px;
+	background: #1E1E1E;
+	font-size: 13px;
+	line-height: 28px;
+	text-align: center;
+	border: 1px solid #434343;
+	border-width: 0 1px 1px 1px;
 }
 
+.productTattle a.reportTag {
+	-webkit-border-bottom-right-radius: 3px;
+	-moz-border-radius-bottomright: 3px;
+	border-bottom-right-radius: 3px;
+}
+
+.productTattle a.flagItem {
+	-webkit-border-bottom-left-radius: 3px;
+	-moz-border-radius-bottomleft: 3px;
+	border-bottom-left-radius: 3px;
+	border-right: 1px solid #111;
+}
+
+.productTattle a:hover {
+	background: rgb(37,84,99);
+	background: rgba(17,134,170,.4);
+}
+
+ul.firstLifted {
+	padding-top: 10px;
+	border-top: 1px solid #424242;
+}
 
 /*---------- Entry - Person ----------*/
 
@@ -493,7 +729,7 @@ ul.tagList li a:hover {background: #142E3B;}
 	height: 100px;
 	width: 145px;
 	border-top: 1px solid #2D2D2D;
-	border-right: 1px solid #000;	
+	border-right: 1px solid #000;
 	float: left;
 	padding: 10px 10px 0 0;
 }
@@ -590,6 +826,116 @@ div.personProducts li img {
 }
 
 
+/*---------- Internal Pages ----------*/
+
+.internal h2 {
+	font-size: 28px;
+	margin-bottom: 25px;
+}
+
+.internal a { border-bottom: 1px dotted #BEC3C6; }
+.internal a:hover { border-bottom: 1px dotted #00A4E2; }
+
+.internal h3 {
+	font-size: 20px;
+	margin-bottom: 10px;
+}
+
+.internal .entryHead {
+	padding-bottom: 0;
+}
+
+.internal .entryContent {
+	border-top: 1px solid #2D2D2D;
+	padding-top: 15px;
+}
+
+.internal .entryContent .callout {
+	background: #1C1C1C;
+	padding: 15px;
+	margin-top: 20px;
+}
+
+.internal p {
+	font-size: 16px;
+	margin-bottom: 15px;
+}
+
+.internal p.intro {
+	font-size: 18px;
+}
+
+.internal ul,
+.internal ol {
+	font-size: 16px;
+}
+
+.internal ol li {
+	margin: 0 40px 10px 22px;
+	list-style: decimal;
+}
+
+a.bookmarklet {
+	margin-top: 10px;
+}
+
+.entryContent div.code {
+	width: 565px;
+}
+
+p.shoplift-stores {
+	padding-right: 135px;
+	background: url(../img/global/shoplift-for-stores.png) right 5px no-repeat;
+}
+
+.buttonCode {
+	padding-left: 150px;
+	background-image: url(../img/global/shoplift-follow.png);
+	background-repeat: no-repeat;
+}
+
+.buttonLarge { background-position: 0 center; }
+.buttonMedium { background-position: -175px center; }
+.buttonSmall { background-position: -350px center; }
+
+.buttonCode div.code {
+	width: 415px;
+}
+
+/*---------- Internal - Help ----------*/
+
+.internal ol.topicList li,
+.internal ol.questionList li {
+	list-style: none;
+	font-size: 18px;
+}
+
+.internal ol.topicList li {
+	font-weight: bold;
+	margin: 0 40px 15px 0;
+}
+
+.internal ol.questionList li {
+	padding: 0 15px 15px 15px;
+	margin: 0 0 10px 0;
+}
+
+.internal ol.questionList li.currentQ {
+	background: #1C1C1C;
+	padding: 15px;
+}
+
+div.answer {
+	display: none;
+	margin-top: 10px;
+}
+li.currentQ div.answer { display: block; }
+
+li.currentQ h4 a {
+	border-style: none !important;
+	color: #00A4E2 !important;
+}
+
 /*---------- Sidebar - Filter ----------*/
 
 ul.filter {
@@ -605,12 +951,14 @@ ul.filter a {
 	padding-left: 17px;
 	font-size: 15px;
 	line-height: 20px;
-	background: url(../img/global/checkbox.png) no-repeat 0 5px;
+	background-image: url(../img/global/checkbox.png);
+	background-repeat: no-repeat;
+	background-position: 0 5px;
 }
 
 ul.filter li.current a,
 ul.filter a:hover {
-	background: url(../img/global/checkbox.png) no-repeat 0 -84px;
+	background-position: 0 -84px;
 }
 
 .leftCol form {
@@ -695,7 +1043,24 @@ ul.filter a:hover {
 	-moz-box-shadow:    0px 0px 15px #6b0101;
 	box-shadow:         0px 0px 15px #6b0101;
 	background: #141414 url(../img/global/saved.png) right -4px no-repeat;
-	
+}
+
+.saved a:hover {
+	color: #FD0008;
+}
+
+.saved ul.actions a:hover {
+	background: rgb(68,21,22);
+	background: rgba(50,0,3,.6);
+}
+
+.saved .toggleWrap ul li a:hover {
+	background: #36181A;
+}
+
+.saved .productTattle a:hover {
+	background: rgb(50,20,21);
+	background: rgba(50,0,3,.6);
 }
 
 /*---------- Hx ----------*/
@@ -1091,14 +1456,17 @@ a.button:hover {
 
 .scrollWrap {
 	width: 100%;
-	height: 190px;
+	height: 155px;
+}
+#historyWrap .scrollWrap {
+	height: 135px;
 }
 .scroll-content {position:absolute;top:0;left:0;width:100%;}
 .scroll-pane{position:relative;}
 .slider-wrap{position:absolute;right:0;top:0;background-color:transparent;width:10px;}
 .slider-vertical{position:relative;height:100%}
 .ui-slider-handle{
-	background:rgb(9,91,122);
+	background:rgb(25,107,138);
 	background:rgba(0,164,226,.5);
 	width:10px;
 	height:10px;
@@ -1109,6 +1477,10 @@ a.button:hover {
 	-moz-border-radius: 5px;
 	border-radius: 5px;
 	display: none;
+}
+.saved .ui-slider-handle {
+	background:rgb(160,34,49);
+	background:rgba(253,0,8,.35);
 }
 .ui-slider-handle img{border:none}
 .scrollbar-top{position:absolute;top:0;}
@@ -1244,6 +1616,22 @@ a.scrollTo:hover {
 	margin: 0 0 10px 0;
 }
 
+.modalContent ul.filter li {
+	margin-bottom: 3px;
+}
+
+.modalContent ul.filter a {
+	color: #000;
+	font-size: 12px;
+	background-position: 0 -163px;
+}
+
+.modalContent ul.filter li.current a,
+.modalContent ul.filter a:hover {
+	background-position: 0 -252px;
+}
+
+
 .modalContent div.divider {
 	overflow: hidden;
 	margin: 10px -20px;
@@ -1271,9 +1659,33 @@ a.scrollTo:hover {
 	clear: both;
 }
 
+.modalContent textarea {
+	width: 298px;
+	border: 1px solid #959595;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	margin-bottom: 7px;
+}
+
+
+.modalContent input.text {
+	width: 265px;
+	border: 1px solid #959595;
+}
+
+.modalContent input.addSubmit {
+	border: 1px solid #959595;
+	margin: 0 0 0 -3px;
+}
+
+
 .modalContent input.submit,
-.settings input.submit {
+.settings input.submit,
+a.bookmarklet,
+.leftCol .signupWrap input#submit {
 	padding: 0 10px;
+	width: auto;
 	height: 30px;
 	line-height: 30px;
 	display: inline-block;
@@ -1296,8 +1708,15 @@ a.scrollTo:hover {
 	font-family: Arial,sans-serif;
 }
 
+.leftCol .signupWrap input#submit {
+	height: 24px;
+	line-height: 24px;
+}
+
 .modalContent input.submit:hover,
-.settings input.submit:hover {
+.settings input.submit:hover,
+a.bookmarklet:hover,
+.leftCol .signupWrap input#submit:hover {
 	background: #00A4E2;
 	color: #FFF;
 	text-shadow: 1px 1px 1px #355FC7;
@@ -1344,3 +1763,17 @@ ul.shareLinks {
 .shareLinks li a.pinterest:hover {background-position: -210px -105px}
 .shareLinks li a.email:hover {background-position: -315px -105px}
 
+.reliftItem {
+	overflow: hidden;
+	padding-bottom: 5px;
+}
+
+.reliftItem img {
+	float: left;
+	display: inline;
+}
+
+.reliftItem p {
+	float: right;
+	width: 215px;
+}
