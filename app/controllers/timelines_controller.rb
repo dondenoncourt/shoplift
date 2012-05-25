@@ -16,9 +16,7 @@ class TimelinesController < ApplicationController
                  .group("items.id")
                  .paginate(per_page: 2, page: params[:page])
 
-    if request.xhr?
-      render partial: 'posts/post', collection: @items, as: :post
-    end
+    render partial: @items if request.xhr?
   end
 
   # Fetch up to 50 items of a specified user

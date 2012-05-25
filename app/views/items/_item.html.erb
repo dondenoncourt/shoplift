@@ -1,16 +1,16 @@
 <div class="entry">
   <div class="entryHead">
-    <%= link_to image_tag(post.user.avatar.url(:thumb)), '#' %>
+    <%= link_to image_tag(item.user.avatar.url(:thumb)), '#' %>
     <p class="user">
-      <%= link_to post.user.full_name, user_path(post.user) %>
-      <br/><span class="location"><%= post.user.hometown %></span>
+      <%= link_to item.user.full_name, user_path(item.user) %>
+      <br/><span class="location"><%= item.user.hometown %></span>
     </p>
   </div>
   <div class="productMain">
     <div class="product">
       <div class="productDetails">
-        <h2><%= post.retailer %><br/><span class="productDescription"><%= post.name %></span></h2>
-        <div class="price"><%= number_to_currency(post.price) %></div>
+        <h2><%= item.retailer %><br/><span class="productDescription"><%= item.name %></span></h2>
+        <div class="price"><%= number_to_currency(item.price) %></div>
         <ul class="actions">
           <li><a href="#" class="modal" data-modalType="relift">Re-lift</a></li>
           <li><a href="#">Save</a></li>
@@ -18,12 +18,12 @@
           <li><a href="#">Buy</a></li>
         </ul>
       </div>
-      <%= image_tag post.photo.url(:small) %>
+      <%= image_tag item.photo.url(:small) %>
     </div>
     <div class="productMeta">
       <div class="comment">
-        <p><%= post.comment %></p>
-        <p>Lifted <%= time_ago_in_words(post.created_at) %> Ago</p>
+        <p><%= item.comment %></p>
+        <p>Lifted <%= time_ago_in_words(item.created_at) %> Ago</p>
       </div>
       <ul class="tabs">
         <li class="current"><a href="#tagWrap">Tags</a></li>
@@ -38,7 +38,7 @@
         <div class="itemList">
           <div class="scrollWrap">
             <ul>
-              <% post.hashtags.each do |tag| %>
+              <% item.hashtags.each do |tag| %>
                 <li><%= link_to user_image_and_value(tag.user, tag.hashtag_value.value), '#' %></li>
               <% end %>
             </ul>
@@ -50,21 +50,21 @@
         </div>
       </div>
       <div class="toggleWrap" id="historyWrap" style="display:none;">
-        <% if post.items.any? %>
+        <% if item.items.any? %>
           <p>Re-Lifted By:</p>
           <div class="itemList">
             <div class="scrollWrap">
               <ul>
-                <% post.items.each do |item| %>
-                  <% next unless item.user.present? %>
-                  <li><%= link_to user_image_and_value(item.user, item.user.full_name), '#' %></li>
+                <% item.items.each do |i| %>
+                  <% next unless i.user.present? %>
+                  <li><%= link_to user_image_and_value(i.user, i.user.full_name), '#' %></li>
                 <% end %>
               </ul>
             </div>
           </div>
           <p>First Lifted By:</p>
           <ul class="firstLifted">
-            <li><%= link_to user_image_and_value(post.items.first.user, post.items.first.user.full_name), '#' %></li>
+            <li><%= link_to user_image_and_value(item.items.first.user, item.items.first.user.full_name), '#' %></li>
           </ul>
         <% else %>
           <p>No Re-lifts yet.</p>

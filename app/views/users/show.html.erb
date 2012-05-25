@@ -1,13 +1,13 @@
 <div id="content">
   <%= render 'profile_info', user: @user %>
   <div class="rightCol">
-    <% if @user.posts.empty? %>
+    <% if @items.empty? %>
       This user doesn't have any posts yet.
     <% else %>
-      <%= render partial: 'posts/post', collection: @posts %>
+      <%= render @items %>
       <div id="results"></div>
-      <%= will_paginate(@posts) %>
-      <%= pageless(@posts.total_pages, user_path(@user)) %>
+      <%= will_paginate(@items) %>
+      <%= pageless(@items.total_pages, user_path(@user)) %>
     <% end %>
   <div class="clear"></div>
 </div>

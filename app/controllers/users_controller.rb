@@ -15,9 +15,9 @@ class UsersController < ApplicationController
     end
 
     if request.xhr?
-      render partial: posts
+      render partial: items
     else
-      posts
+      items
       if @user.private?
         authenticate_user!
         if !current_user.subscribed_to(@user)
@@ -160,7 +160,7 @@ class UsersController < ApplicationController
     @user ||= User.find(params[:id])
   end
 
-  def posts
-    @posts ||= user.posts.paginate(per_page: 2, page: params[:page])
+  def items
+    @items ||= user.items.between(params).paginate(per_page: 2, page: params[:page])
   end
 end

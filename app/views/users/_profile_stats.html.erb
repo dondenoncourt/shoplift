@@ -1,5 +1,5 @@
 <ul class="personStats">
-  <li class="current"><a href="#"><%= pluralize(user.posts.count, 'Item') %> Shoplifted</a></li>
+  <li class="current"><a href="#"><%= pluralize(user.items.length, 'Item') %> Shoplifted</a></li>
   <li><a href="#"><%= pluralize(user.followers.count, 'Follower') %></a></li>
   <li><a href="#"><%= pluralize(user.followees.count, 'Followee') %></a></li>
 </ul>
