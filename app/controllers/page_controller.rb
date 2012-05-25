@@ -2,7 +2,7 @@ class PageController < ApplicationController
   before_filter :authenticate_user!
   #after_filter :email_don
 
-  layout "standard", :except => [:upload_avatar, :report_tag, :report_item, :relift]
+  layout nil, :only => [:upload_avatar, :report_tag, :report_item, :relift]
 
   def home
   end
@@ -39,7 +39,7 @@ class PageController < ApplicationController
   end
 
   def follow_interests
-    if current_user.created_at.to_date == Date.today && 
+    if current_user.created_at.to_date == Date.today &&
        Subscription.find_by_follower_id(current_user.id) == nil
         @new_user = true
     end

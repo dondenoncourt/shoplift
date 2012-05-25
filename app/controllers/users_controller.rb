@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  layout 'standard', :except => [:recommended]
+  layout nil, :only => [:recommended]
 
 
   # Fetch information about user, searched by id or username
@@ -147,7 +147,7 @@ class UsersController < ApplicationController
     naive_suggestions
   end
 
-  private 
+  private
 
   def naive_suggestions
     @users = User.where('status = 1').order("RAND()")
