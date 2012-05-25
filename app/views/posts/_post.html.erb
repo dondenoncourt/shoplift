@@ -1,0 +1,65 @@
+<div class="entry">
+  <div class="entryHead">
+    <%= link_to image_tag(post.user.avatar.url(:thumb)), '#' %>
+    <p class="user">
+      <%= link_to post.user.full_name, user_path(post.user) %>
+      <br/><span class="location"><%= post.user.hometown %></span>
+    </p>
+  </div>
+  <div class="productMain">
+    <div class="product">
+      <div class="productDetails">
+        <h2><%= post.retailer %><br/><span class="productDescription"><%= post.name %></span></h2>
+        <div class="price"><%= number_to_currency(post.price) %></div>
+        <ul class="actions">
+          <li><a href="#" class="modal" data-modalType="relift">Re-lift</a></li>
+          <li><a href="#">Save</a></li>
+          <li><a href="#" class="modal" data-modalType="share">Share</a></li>
+          <li><a href="#">Buy</a></li>
+        </ul>
+      </div>
+      <%= image_tag post.photo.url(:small) %>
+    </div>
+    <div class="productMeta">
+      <div class="comment">
+        <p><%= post.comment %></p>
+        <p>Lifted <%= time_ago_in_words(post.created_at) %> Ago</p>
+      </div>
+      <ul class="tabs">
+        <li class="current"><a href="#tagWrap">Tags</a></li>
+        <li style="float:right"><a href="#historyWrap">History</a></li>
+      </ul>
+      <div class="toggleWrap" id="tagWrap" style="display:block;">
+        <div class="add-tag">
+          <form action="#">
+            <img src="../img/global/user-thumb-holder.gif" alt="user-thumb-holder" width="25" height="25" class="user-tiny-thumb"/><input type="text" class="text" name="tag" value="Add a Tag" style="width:118px"/><input type="submit" name="submit" class="addSubmit" />
+          </form>
+        </div>
+        <div class="itemList">
+          <div class="scrollWrap">
+            <ul>
+              <% post.hashtags.each do |tag| %>
+                <li><%= link_to image_and_value(tag), '#' %></li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+        <div class="productTattle"><a href="#" class="modal flagItem" data-modalType="flagItem">Flag Item</a><a href="#" class="modal reportTag" data-modalType="reportTag">Report a Tag</a></div>
+      </div>
+      <div class="toggleWrap" id="historyWrap" style="display:none;">
+        <p>Re-Lifted By:</p>
+        <div class="itemList">
+          <div class="scrollWrap">
+            <ul>
+              <li><a href="#"><img src="../img/global/user-thumb-holder.gif" alt="user-thumb-holder" width="20" height="20" class="user-tiny-thumb"/>Lorem Ipsum Name</a></li>
+            </ul>
+          </div>
+        </div>
+        <p>First Lifted By:</p>
+          <ul class="firstLifted">
+            <li><a href="#"><img src="../img/global/user-thumb-holder.gif" alt="user-thumb-holder" width="25" height="25" class="user-tiny-thumb"/>Lorem Ipsum Tag</a></li>
+          </ul>
+      </div>
+    </div>
+  </div>
+</div>

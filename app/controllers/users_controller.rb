@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
   layout nil, :only => [:recommended]
 
-
   # Fetch information about user, searched by id or username
   # * *Request*    :
   #   - GET /users/:id
@@ -9,15 +8,10 @@ class UsersController < ApplicationController
   #   - :id -> User id
   #   - :username -> Username
   def show
-
-    logger.debug params
-    logger.debug params['username']
     if params[:id]
       @user = User.find(params[:id])
     elsif params[:identifier] == "username"
       @user = User.find_by_username(params['username'])
-    else
-      return render_error(404,"User not found")
     end
 
     if @user.private?
@@ -26,13 +20,13 @@ class UsersController < ApplicationController
         render_error(404,"Item not found")
       else
         respond_to do |format|
-          format.html # show.html.erb
+          format.html
           format.json { render :partial => 'user', :locals => {:user => @user} }
         end
       end
     else
       respond_to do |format|
-        format.html # show.html.erb
+        format.html
         format.json { render :partial => 'user', :locals => {:user => @user} }
       end
     end

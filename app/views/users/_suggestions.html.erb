@@ -5,11 +5,7 @@
       <a href="#"><%= image_tag user.avatar.url(:small), :size => "175x175" %></a>
       <div class="personMeta">
         <h2><%= user.full_name %><br/><span class="location"><%= user.hometown %></span></h2>
-        <ul class="personStats">
-          <li class="current"><a href="#"><%= user.posts.count %> Items Shoplifted</a></li>
-          <li><a href="#"><%= user.followers.count %> Followers</a></li>
-          <li><a href="#"><%= user.followees.count %> Followees</a></li>
-        </ul>
+        <%= render 'profile_stats', user: user %>
         <div class="profileText"><%= user.biography %></div>
         <a class="button can_follow" href="#" userId="<%= user.id %>">Follow</a>
       </div>

@@ -2,28 +2,24 @@
   <div class="person">
     <%= image_tag user.avatar.url(:small) %>
     <h2><%= user.full_name %><br/><span class="location"><%= user.hometown %></span></h2>
-    <% if current_user.following?(user) %>
+    <% if current_user.id == user.id %>
+      <%= link_to "Edit Profile", page_profile_edit_path, :class => "button buttonOn" %>
+    <% elsif current_user && current_user.following?(user) %>
       <%= link_to "Following", '#', :class => "button buttonOn" %>
     <% else %>
       <%= link_to_function "Follow", 'alert("Not implemented yet.");', :class => "button buttonOn" %>
     <% end %>
   </div>
-  <ul class="personStats">
-    <li class="current"><a href="#"><%= user.posts.count %> Items Shoplifted</a></li>
-    <li><a href="#"><%= user.followers.count %> Followers</a></li>
-    <li><a href="#"><%= user.followees.count %> Followees</a></li>
-  </ul>
+  <%= render 'users/profile_stats', user: user %>
   <div class="profileText"><%= user.biography %></div>
   <div class="profileUrl">
     <a href="#"><%= user.url %></a>
   </div>
   <h3>Top Tags</h3>
   <ul class="topTags">
-    <li><a href="#">Lorem Ipsum Tag</a></li>
-    <li><a href="#">Lorem Ipsum Tag</a></li>
-    <li><a href="#">Lorem Ipsum Tag</a></li>
-    <li><a href="#">Lorem Ipsum Tag</a></li>
-    <li><a href="#">Lorem Ipsum Tag</a></li>
+    <% user.hashtag_values.each do |tag| %>
+      <li><%= link_to tag.value, '#' %></li>
+    <% end %>
   </ul>
   <a href="#">Show More</a>
 </div>
