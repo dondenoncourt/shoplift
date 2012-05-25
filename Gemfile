@@ -13,8 +13,7 @@ gem 'aws-s3'
 gem 'aws-sdk'
 gem 'jquery-rails', '>= 1.0.12'
 gem 'country_select'
-
-# gem 'will_paginate' TODO consider using this plugin
+gem 'will_paginate'
 
 group :test, :development do
   gem 'rspec-rails'

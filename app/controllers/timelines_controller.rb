@@ -15,7 +15,7 @@ class TimelinesController < ApplicationController
 
     @items = Item.joins(:post,:user,"INNER JOIN subscriptions ON subscriptions.user_id = items.user_id AND subscriptions.status = 1")
                  .joins("INNER JOIN users AS post_users on posts.user_id = post_users.id AND users.status = 1")
-                 .where("items.status = 1 AND (subscriptions.follower_id = ? OR items.user_id = ?)",current_user.id,current_user.id)
+                 .where("items.status = 1 AND (subscriptions.follower_id = ? )",current_user.id)
                  .between(params)
                  .order("items.created_at DESC")
                  .group("items.id")

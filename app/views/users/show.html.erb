@@ -4,9 +4,10 @@
     <% if @user.posts.empty? %>
       This user doesn't have any posts yet.
     <% else %>
-      <% @user.posts.each do |post| %>
-        <%= render 'posts/post', post: post %>
-      <% end %>
+      <%= render partial: 'posts/post', collection: @posts %>
+      <div id="results"></div>
+      <%= will_paginate(@posts) %>
+      <%= pageless(@posts.total_pages, user_posts_user_path(@user)) %>
     <% end %>
   <div class="clear"></div>
 </div>
