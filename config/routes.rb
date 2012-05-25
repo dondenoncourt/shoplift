@@ -5,7 +5,6 @@ App::Application.routes.draw do
   get "page/saved", :to => "page#saved"
   get "page/follow_interests", :to => "page#follow_interests"
   get "page/follow_interests_subcat", :to => "page#follow_interests_subcat"
-  get "page/follow", :to => "page#follow"
 
   get "page/profile/edit", :to => "page#profile_edit"
   get "page/profile/modal/upload_avatar.html", :to => "page#upload_avatar"
@@ -35,6 +34,14 @@ App::Application.routes.draw do
   # Browser / system compatability
   post "users/:id/edit", :to => "users#update", :defaults => { :format => :json }, :constraints => {:format => :json}
   post "users/:id/delete", :to => "users#destroy", :defaults => { :format => :json }, :constraints => {:format => :json}
+
+  get "recommended", :to => "users#recommended"
+  get "staff_picks", :to => "users#staff_picks"
+  get "popular", :to => "users#popular"
+  get "trending", :to => "users#trending"
+  get "local_favorites", :to => "users#local_favorites"
+  get "friends", :to => "users#friends"
+  get "staff_picks", :to => "users#staff_picks"
 
   #
   # Timelines

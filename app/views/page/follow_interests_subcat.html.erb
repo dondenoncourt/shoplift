@@ -1,33 +1,32 @@
 <% provide(:title, 'Follow sub categories') %>
 <div class="leftCol">
-  <h2>Choose More Followees</h2>
-  <ul class="followOptions">
-    <li><a href="#">Recommended</a></li>
-    <li><a href="#">Staff Picks</a></li>
-    <li><a href="#">Most Popular</a></li>
-    <li><a href="#">Trending Now</a></li>
-    <li><a href="#">Local Favorites</a></li>
-    <li><a href="#">Your Friends</a></li>
-    <li class="current"><a href="#">By Interest</a></li>
-  </ul>
-  <ul class="followInterest">
-    <li class="current"><a href="#">Runway Fashion</a></li>
-    <li><a href="#">Wear-to-work</a></li>
-    <li><a href="#">School Clothes</a></li>
-    <li><a href="#">The Life of Leisure</a></li>
-    <li><a href="#">Beauty Products</a></li>
-    <li><a href="#">The Modern Home</a></li>
-    <li><a href="#">Worthwhile Technology</a></li>
-    <li><a href="#">Foodie Supplies</a></li>
-  </ul>
+  <%= render "follow_options" %>
 </div>
 
 <div class="rightCol">
-  <%= render "follow_person" %>
 </div>
 
 <div class="clear"></div>
 <script>
-  $('.entryTemplate').show();
+  suggestions('/recommended');
+  function handle_follow() {
+    $('.can_follow').click(function () {
+      var that = $(this);
+      $.ajax({
+        url:'/subscriptions',
+        type:'POST',
+        data: 'user_id='+$(that).attr('userId'),
+        dataType:'json',
+        success:function(data) {
+          that.removeClass('can_follow');
+          that.disable();
+        },
+        error:function(xhr,textStatus,errorThrown){
+          alert(xhr.responseText);
+        }
+      });
+    });
+  }
+</script>
 </script>
 

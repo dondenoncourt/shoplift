@@ -5,9 +5,6 @@ class PageController < ApplicationController
   layout "standard", :except => [:upload_avatar, :report_tag, :report_item, :relift]
 
   def home
-    #if current_user.created_at.to_date() == Date.today
-      #redirect_to controller:'page', action:'follow_interests', new_user:'true'
-    #end
   end
 
   def saved
@@ -17,10 +14,6 @@ class PageController < ApplicationController
   end
 
   def upload_avatar
-  end
-
-  def follow
-    @users = User.where('status = 1').limit(50).offset(0)
   end
 
   def relift

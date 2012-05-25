@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  layout 'standard'
+  layout 'standard', :except => [:recommended]
+
 
   # Fetch information about user, searched by id or username
   # * *Request*    :
@@ -98,4 +99,61 @@ class UsersController < ApplicationController
     end
   end
 
+  # Recommended users
+  # * *Request*    :
+  #   - GET /recommended
+  def recommended
+    authenticate_user!
+    naive_suggestions
+  end
+
+  # Staff Picks of users
+  # * *Request*    :
+  #   - GET /staff_picks
+  def staff_picks
+    authenticate_user!
+    naive_suggestions
+  end
+
+  # Popular users
+  # * *Request*    :
+  #   - GET /popular
+  def popular
+    authenticate_user!
+    naive_suggestions
+  end
+
+  # Trending users
+  # * *Request*    :
+  #   - GET /trending
+  def trending
+    authenticate_user!
+    naive_suggestions
+  end
+
+  # favorite users local to requestor
+  # * *Request*    :
+  #   - GET /staff_picks
+  def local_favorites
+    authenticate_user!
+    naive_suggestions
+  end
+
+  # friends of users
+  # * *Request*    :
+  #   - GET /friends
+  def friends
+    authenticate_user!
+    naive_suggestions
+  end
+
+  private 
+
+  def naive_suggestions
+    @users = User.where('status = 1').order("RAND()")
+    respond_to do |format|
+      format.html { render :partial => 'suggestions', :locals => {:users => @users} }
+      format.json #{ render :partial => 'user', :locals => {:user => @user} }
+    end
+  end
 end

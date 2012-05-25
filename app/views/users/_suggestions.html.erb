@@ -1,0 +1,25 @@
+<% users.each do |user| %>
+  <% next if user.posts.count == 0 %>
+  <div class="entry person">
+    <div class="entryHead">
+      <a href="#"><%= image_tag user.avatar.url(:small), :size => "175x175" %></a>
+      <div class="personMeta">
+        <h2><%= user.full_name %><br/><span class="location"><%= user.hometown %></span></h2>
+        <ul class="personStats">
+          <li class="current"><a href="#"><%= user.posts.count %> Items Shoplifted</a></li>
+          <li><a href="#"><%= user.followers.count %> Followers</a></li>
+          <li><a href="#"><%= user.followees.count %> Followees</a></li>
+        </ul>
+        <div class="profileText"><%= user.biography %></div>
+        <a class="button can_follow" href="#" userId="<%= user.id %>">Follow</a>
+      </div>
+    </div>
+    <div class="personProducts">
+      <ul>
+        <% user.posts.first(5).each do |post| %>
+          <li><a href="#"><%= image_tag post.photo.url(:small), :size => "113x113" %></a></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+<% end %>
