@@ -1,145 +1,29 @@
-<% provide(:title, 'Home') %>
-<%= render "posts" %>
-<%# render "postsTOBEREMOVED" %>
-<div class="clear"></div>
-<div id="basic-modal-content"></div>
+<div id="content">
+  <div class="leftCol">
+    <div class="signupWrap">
+      <h2><a href="#" class="showSignup">Sign In</a></h2>
+      <div class="signinOptions">
+        <div class="divider"></div>
+        <%= link_to_function "Sign in with Facebook", "alert('Not Yet!')", :class => 'facebookSignup' %>
+        <p class="option"><span>or</span></p>
+        <%= form_for @user, :url => session_path(@user), :class => 'signIn' do |f| %>
+          <%= f.email_field :email, :class => 'text', :placeholder => 'Email Address' %>
+          <%= f.password_field :password, :class => 'text', :placeholder => 'Password' %>
+          <%= f.submit "Sign In", :id => 'submit' %>
+        <% end %>
+        <div class="divider" style="margin-bottom:5px;padding-bottom:10px"></div>
+        <%= link_to "Forgot Password?", new_password_path(@user), :class => 'forgotPassword' %>
+      </div>
+    </div>
+    <div class="signupWrap">
+      <h2>Not a member?<br/><%= link_to "Sign Up!", new_user_registration_path %></h2>
+    </div>
+  </div>
 
-<script>
-  var timeline ;
-  $.ajax({
-    url:'/timelines',
-    type:'GET',
-    dataType:'json',
-    success:function(data) {
-        timeline = data;
-        initPage();
-    },
-    error:function(XMLHttpRequest,textStatus,errorThrown){}
-  });
+  <div class="rightCol internal">
+    <p style="margin-bottom:20px"><img src="../img/slideshow-fpo.gif" alt="slideshow-fpo" width="652" height="394" /></p>
+    <div class="blogFollow"><a href="#">Visit our blog</a>. <span style="padding: 0 5px">|</span> Follow us: <a href="#" class="facebook">Facebook</a> <a href="#" class="twitter">Twitter</a> <a href="#" class="pinterest">Pinterest</a>  <a href="#" class="tumblr">Tumblr</a></div>
+  </div>
 
-  var postCount = 0;
-  var scrollCount = 0;
-  var lastScrollTop = 0;
-  var scrollHeight = $('div .entryTemplate').height()-300;
-
-  // setup scroll counts and load first two entries
-  function initPage() {
-      postCount = timeline.timeline.length
-      if (postCount == 0) {
-        window.location.href = '<%= page_follow_interests_path %>';
-        return;
-      }
-      for (i = 0; i < 2; i++) {
-          showPost(i);
-          scrollCount++;
-      }
-  }
-  $(window).scroll(function(){
-    var scrolltop = $(window).scrollTop();
-    if ((scrolltop - lastScrollTop > scrollHeight) && scrollCount < postCount ) {
-        showPost(scrollCount);
-        lastScrollTop = scrolltop;
-        scrollCount++;
-    }
-  });
-  function showPost(index) {
-    var post = timeline.timeline[index];
-    var entry = $('div .entryTemplate');
-    $('div .clear').before('<div class="entry">'+entry.html()+'</div>');
-    $('div.entryHead p a').last().html(post.user.extract.full_name); 
-    $('div.entryHead span.location').last().html(post.user.extract.hometown);
-    if (post.hashtags_allowed) {
-      for (iTag = 0; iTag < post.hashtags.length; iTag++) {
-       var clone = $('div.entryTemplate ul.tagList li').clone();
-       clone.appendTo('div.entry:last ul.tagList');
-       clone.find('a').html(clone.find('a').html()+'<span>'+post.hashtags[iTag].value+'</span>');
-      }
-      $('div.entry:last ul.tagList a:first').remove();
-    } else {
-      $('div.add-tag').last().remove();
-      $('div.entry:last ul.tagList').remove();
-    }
-    $('div.comment p span.commentText').last().html(post.comment);
-    $('div.comment p span.commentDate').last().html(formatDate(post.created_at));
-    $('div.add-tag input[name=item_id]').last().val(post.id);
-
-    $('div.price').last().html('$'+Math.round(post.price));
-    $('div.product span.productName').last().html(post.name);
-    $('div.product img').last().attr('src', post.photo_url);
-    $('.bioPhoto').last().attr('src', post.user.avatar_url_small);
-    var html = $('div.productDetails h2').last().html();
-    $('div.productDetails h2').last().html(post.brand+html);
-    $('a[data-modal-rails="report_tag"]').last().attr('data-modal-rails', 'report_tag?post_id='+post.id);
-    $('a[data-modal-rails="report_item"]').last().attr('data-modal-rails', 'report_item?post_id='+post.id);
-    $('a[data-modal-rails="relift"]').last().attr('data-modal-rails', 'relift?post_id='+post.id);
-
-    // add a tag handler
-    $('form[name=add_tag_form]').last().submit(function () {
-      var this_form = $(this);
-      $.ajax({
-        url:'/hashtags/create',
-        type:'POST',
-        dataType:'json',
-        data: $(this).serialize(),
-        success:function(data) {
-          var lastLi = this_form.parent().parent().find('.tagList li').last();
-          var clone = lastLi.clone();
-          var lastLink = clone.find('a').last();
-          if (lastLink.html() != null) {
-            console.log(lastLink.html());
-            clone.appendTo(this_form.parent().parent().find('.tagList'));
-            $(lastLink).find('span').html(data.value);
-          } else {
-            lastLi.html('<a href="#"><img src="../img/global/user-thumb-holder.gif" alt="user-thumb-holder" width="25" height="25" class="user-tiny-thumb"/>'+data.value+'</a>');
-          }
-          $(this_form).find('input[name=hashtag_value]').val('');
-        },
-        error:function(xhr,textStatus,errorThrown){
-          alert(xhr.responseText);
-        }
-      });
-      return false;
-    });
-    // If the set_aside is not defined then make the appearance of the entry convey that.
-    $('a.btnSetAside').last().data('item_id', post.id);
-    if(post.set_aside == undefined){
-      $('a.btnSetAside').last().html('Save');
-      $('a.btnSetAside').last().data('set_aside_id', '');
-      $('img.saved').last().removeClass('saved');
-    }else{
-      $('a.btnSetAside').last().data('set_aside_id', post.set_aside.id);
-      $('a.btnSetAside').last().html('Un-Save');
-      $('div.entry').last().addClass('saved');      
-    }     
-    sitefuncs(); // run page actions written by seamlesscreative.com
-  }
-  // Add a click listener to Save/Un-Save item
-  $('a.[class^=btn]').live('click', function(e){
-    e.preventDefault(); // Keeps from invoking the href="#" of the anchor tag after the ajax completes
-    _this = $(this);
-    if($(_this).data('set_aside_id') == ''){  
-      // set_aside doesn't exist so create it
-      $.ajax({
-        url: '/set_asides',
-        type: 'POST',
-        data:  'item_id=' + $(_this).data('item_id'),
-        success: function(post){
-          $(_this).closest('div.entry').addClass('saved');
-          $(_this).html('Un-Save');
-          $(_this).data('set_aside_id', post.set_aside.id);
-        }
-      }); 
-    }else{
-      // set_aside exists so delete it
-      $.ajax({
-        url: '/set_asides/items/' + $(_this).data('set_aside_id') + '/delete',
-        type: 'POST',
-        success: function(rsp){
-          $(_this).closest('div.entry').removeClass('saved');
-          $(_this).html('Save');
-          $(_this).data('set_aside_id', '');
-        }
-      });     
-    }
-  });  
-</script>
+  <div class="clear"></div>
+</div>

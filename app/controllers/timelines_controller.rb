@@ -1,25 +1,22 @@
 class TimelinesController < ApplicationController
 
-  # Fetch up to 50 items of current user and that of his/her subscriptions
+  # Fetch items of current user and that of his/her subscriptions
   # * *Request*    :
   #   - GET /timelines
   # * *Args*    :
   #   - :above -> Highest id to obtain items between
   #   - :below -> Lowest id to obtain items between
-  #   - :limit -> Number of items to return
   def index
     authenticate_user!
-    #if !params[:limit].blank? && params[:limit] >= 50
-      #return render_error(406,"Limit must be less than or equal to 50")
-    #end
-
     @items = Item.joins(:post,:user,"INNER JOIN subscriptions ON subscriptions.user_id = items.user_id AND subscriptions.status = 1")
                  .joins("INNER JOIN users AS post_users on posts.user_id = post_users.id AND users.status = 1")
                  .where("items.status = 1 AND (subscriptions.follower_id = ? )",current_user.id)
                  .between(params)
                  .order("items.created_at DESC")
                  .group("items.id")
-                 .limit(limit)
+                 .paginate(per_page: 2, page: params[:page])
+
+    render partial: @items if request.xhr?
   end
 
   # Fetch up to 50 items of a specified user

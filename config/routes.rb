@@ -28,9 +28,7 @@ App::Application.routes.draw do
     get "logout" => "devise/sessions#destroy"
     #delete "logout" => "devise/sessions#destroy"
   end
-  resources :users, :only => [:show,:create,:update,:destroy] do
-    get :user_posts, on: :member
-  end
+  resources :users, :only => [:show,:create,:update,:destroy]
   get "users/validate_username/:username", :to => "users#validate_username", :defaults => { :format => :json }, :constraints => {:format => :json}
   get "users/username/:username", :to => "users#show", :identifier => "username", :defaults => { :format => :json }, :constraints => {:format => :json}
   # Browser / system compatability
@@ -48,7 +46,7 @@ App::Application.routes.draw do
   #
   # Timelines
   #
-  get "timelines", :to => "timelines#index", :defaults => { :format => :json }, :constraints => {:format => :json}
+  get "timelines", :to => "timelines#index"
   get "timelines/users/:id", :to => "timelines#show_user", :defaults => { :format => :json }, :constraints => {:format => :json}
   get "timelines/recent", :to => "timelines#show_recent", :defaults => { :format => :json }, :constraints => {:format => :json}
   get "timelines/hashtags/:name", :to => "timelines#show_hashtags", :defaults => { :format => :json }, :constraints => {:format => :json}

@@ -14,22 +14,25 @@ class UsersController < ApplicationController
       @user = User.find_by_username(params['username'])
     end
 
-    posts
-
-    if @user.private?
-      authenticate_user!
-      if !current_user.subscribed_to(@user)
-        render_error(404,"Item not found")
+    if request.xhr?
+      render partial: items
+    else
+      items
+      if @user.private?
+        authenticate_user!
+        if !current_user.subscribed_to(@user)
+          render_error(404,"Item not found")
+        else
+          respond_to do |format|
+            format.html
+            format.json { render :partial => 'user', :locals => {:user => @user} }
+          end
+        end
       else
         respond_to do |format|
           format.html
           format.json { render :partial => 'user', :locals => {:user => @user} }
         end
-      end
-    else
-      respond_to do |format|
-        format.html
-        format.json { render :partial => 'user', :locals => {:user => @user} }
       end
     end
   end
@@ -143,10 +146,6 @@ class UsersController < ApplicationController
     naive_suggestions
   end
 
-  def user_posts
-    render partial: posts
-  end
-
   private
 
   def naive_suggestions
@@ -161,7 +160,7 @@ class UsersController < ApplicationController
     @user ||= User.find(params[:id])
   end
 
-  def posts
-    @posts ||= user.posts.paginate(per_page: 2, page: params[:page])
+  def items
+    @items ||= user.items.between(params).paginate(per_page: 2, page: params[:page])
   end
 end

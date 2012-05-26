@@ -1,10 +1,12 @@
 class PageController < ApplicationController
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, :except => :home
   #after_filter :email_don
 
   layout nil, :only => [:upload_avatar, :report_tag, :report_item, :relift]
 
   def home
+    redirect_to timelines_path if user_signed_in?
+    @user = User.new
   end
 
   def saved

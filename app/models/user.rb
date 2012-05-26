@@ -88,4 +88,11 @@ class User < ActiveRecord::Base
   def followees
     Subscription.where(follower_id: self.id)
   end
+
+  def items
+    Item.joins(:post => :user)
+        .where("items.status = 1 AND items.user_id = ?", self.id)
+        .order("items.created_at DESC")
+        .group("items.id")
+  end
 end

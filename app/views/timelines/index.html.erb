@@ -1,0 +1,8 @@
+<div id="content">
+  <div class="rightCol">
+    <%= render @items %>
+    <div id="results"></div>
+    <%= will_paginate(@items) %>
+    <%= pageless(@items.total_pages, timelines_path) %>
+  <div class="clear"></div>
+</div>
