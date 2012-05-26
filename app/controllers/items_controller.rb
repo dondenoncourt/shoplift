@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-
+  require 'open-uri'
   # Fetch item
   # * *Request*    :
   #   - GET /items/:id
@@ -57,6 +57,9 @@ class ItemsController < ApplicationController
     authenticate_user!
     post = {:user_id => current_user.id}
     post_include = ["name", "description", "brand", "retailer", "url", "price", "comment"]#, "hashtags_allowed"]
+
+puts "HACK: stuff values in required attributes"
+params[:name] ||= 'TODO get name in bookmarklet.js'
     
     if params[:item].blank?
       post_include.each do |element| 
@@ -69,6 +72,7 @@ class ItemsController < ApplicationController
     end
     
     @post = Post.new(post)
+    @post.photo = open('http://'+params[:retailer]+params[:image].gsub(/\s/, "%20")) if params[:image]
     if !@post.save
       return return_error_messages(@post,"Failed to create item")
     end

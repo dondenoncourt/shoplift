@@ -1,4 +1,6 @@
 class ParserController < ApplicationController
+  layout nil, :only => [:bookmarklet]
+  
   # Parse url
   # * *Request*    :
   #   - GET /parse
@@ -112,5 +114,10 @@ class ParserController < ApplicationController
     
     render :json => @results, :status => 200
   end 
+
+  def bookmarklet
+    puts 'running bookmarklet'
+    puts params
+  end
   
 end

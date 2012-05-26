@@ -72,7 +72,8 @@
 			
 			// URLs we need for form submissions
 			//this.submit_url = 'http://shoplift.it.patrick/items';
-			this.submit_url = 'http://localhost:3000/items';
+			//this.submit_url = 'http://localhost:3000/items';
+      this.submit_url = '<%= url_for(:controller => 'items', :action => 'items') %>';
 			
 			// Create the elements we need
 			this.el = {
@@ -360,13 +361,14 @@
 						.css(jQuery.extend({},r_style,i_style)),
 					description : jQuery('<textarea name="description">' + parsed.description + '</textarea>')
 						.css(t_style),
-					brand : jQuery('<input type="text" name="brand" />')
+					brand : jQuery('<input type="text" name="brand" value="denon"/>')
 						.css(jQuery.extend({},r_style,i_style)),
 					price : jQuery('<input type="text" name="price" value="' + parsed.price.replace('$','') + '"/>')
 						.css(jQuery.extend({},r_style,i_style)),
 					image : jQuery('<input type="hidden" name="image" />'),
 					retailer : jQuery('<input type="hidden" name="retailer" value="' + window.location.hostname + '"/>'),
-					comment : jQuery('<textarea name="comment"></textarea>')
+					url : jQuery('<input type="hidden" name="url" value="' + window.location.pathname + '"/>'),
+					comment : jQuery('<textarea name="comment">denoncourt test</textarea>')
 						.css(t_style),
 					submit : jQuery('<input type="submit" value="Submit"/>')
 						.css(jQuery.extend({},r_style,{color:'#000',width:'auto','margin-top':10}))
@@ -394,6 +396,8 @@
 					inputs.description,
 					label.clone().text('Comment').css(jQuery.extend({},f_style,{'margin-top':5})),
 					inputs.comment.css('height',50),
+          inputs.retailer,
+          inputs.url,
 					inputs.submit
 				);
 			
