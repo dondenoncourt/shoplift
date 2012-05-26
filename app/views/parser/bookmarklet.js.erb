@@ -50,6 +50,7 @@
 			// Form URL
 			//this.form_url = 'http://app.shoplift.com.patrick/items';
 			this.form_url = 'http://mccreary.no-ip.biz:3000/items';
+      this.form_url = '<%= url_for(:controller => 'items', :action => 'items') %>';
 			
 			// Starting CSS reset
 			this.defaultCSS = {
@@ -376,21 +377,17 @@
 						.css(jQuery.extend({},r_style,i_style)),
 					description : jQuery('<textarea name="description">' + parsed.description + '</textarea>')
 						.css(t_style),
-					brand : jQuery('<input type="text" name="brand" value="denon"/>')
+					brand : jQuery('<input type="text" name="brand" />')
 						.css(jQuery.extend({},r_style,i_style)),
 					retailer : jQuery('<input type="hidden" name="retailer" value="' + parsed.retailer + '"/>'),
 					url : jQuery('<input type="hidden" name="url" value="' + parsed.url + '"/>'),
 					price : jQuery('<input type="text" name="price" value="' + parsed.price.replace('$','') + '"/>')
 						.css(jQuery.extend({},r_style,i_style)),
 					image : jQuery('<input type="hidden" name="image" />'),
-<<<<<<< HEAD:app/views/parser/bookmarklet.js.erb
 					retailer : jQuery('<input type="hidden" name="retailer" value="' + window.location.hostname + '"/>'),
 					url : jQuery('<input type="hidden" name="url" value="' + window.location.pathname + '"/>'),
-					comment : jQuery('<textarea name="comment">denoncourt test</textarea>')
-=======
 					comment : jQuery('<textarea name="comment" maxlength="140"></textarea>')
 						.attr('id', 'comment_area')
->>>>>>> 88d6c09c69410762d93cc465b106d0415781e919:app/views/parser/bookmarklet.js
 						.css(t_style),
 					submit : jQuery('<input type="submit" value="Shoplift It"/>')
 						.css(jQuery.extend({},r_style,{color:'#000',width:'auto','margin-top':10}))
@@ -425,13 +422,9 @@
 						.after(label.clone().text('characters left)')
 							.css(jQuery.extend({},c_style,{'marginLeft':4}))),
 					inputs.comment.css('height',50),
-<<<<<<< HEAD:app/views/parser/bookmarklet.js.erb
           inputs.retailer,
           inputs.url,
-					inputs.submit
-=======
 					inputs.submit.css({marginLeft:0})
->>>>>>> 88d6c09c69410762d93cc465b106d0415781e919:app/views/parser/bookmarklet.js
 				);
 			return true;
 			

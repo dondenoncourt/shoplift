@@ -200,7 +200,7 @@ describe ItemsController do
       it "returns validation error" do
         sign_in @user
         post :create, :item => {}, :format => :json
-        response.body.should =~ /Name can't be blank/m
+        response.body.should =~ /Url can't be blank/m
       end
     end
     
