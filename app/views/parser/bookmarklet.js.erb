@@ -49,8 +49,8 @@
 			
 			// Form URL
 			//this.form_url = 'http://app.shoplift.com.patrick/items';
-			this.form_url = 'http://mccreary.no-ip.biz:3000/items';
-      this.form_url = '<%= url_for(:controller => 'items', :action => 'items') %>';
+			//this.form_url = 'http://mccreary.no-ip.biz:3000/items';
+      this.form_url = '<%= "http://#{request.host}:#{request.port}/items" %>';
 			
 			// Starting CSS reset
 			this.defaultCSS = {
@@ -77,7 +77,7 @@
 			// URLs we need for form submissions
 			//this.submit_url = 'http://shoplift.it.patrick/items';
 			//this.submit_url = 'http://localhost:3000/items';
-      this.submit_url = '<%= url_for(:controller => 'items', :action => 'items') %>';
+      this.submit_url = '<%= "http://#{request.host}:#{request.port}/items" %>';
 			
 			// Create the elements we need
 			this.el = {

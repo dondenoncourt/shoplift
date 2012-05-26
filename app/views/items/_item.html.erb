@@ -55,7 +55,7 @@
           <div class="itemList">
             <div class="scrollWrap">
               <ul>
-                <% item.items.each do |i| %>
+                <% item.items.sort.each do |i| %>
                   <% next unless i.user.present? %>
                   <li><%= link_to user_image_and_value(i.user, i.user.full_name), '#' %></li>
                 <% end %>

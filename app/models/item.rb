@@ -58,4 +58,9 @@ class Item < ActiveRecord::Base
     post.items
   end
 
+  def <=> other
+    self.created_at <=> other.created_at
+  end
+  
+
 end
