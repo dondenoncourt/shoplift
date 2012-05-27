@@ -21,6 +21,7 @@ group :test, :development do
   gem 'autotest-growl'
   gem 'spork', '>=0.9.0.rc9'
   gem 'webrat'
+  gem 'thin' # to stop: WARN  Could not determine content-length of response body. Set content-length of the response or set Response#chunked = true
 end
 group :development do
   gem 'annotate', '~> 2.4.1.beta'

@@ -115,7 +115,7 @@ jQuery.extend({
 				{
                     status = "error";
                     //jQuery.handleError(s, xml, status, e); handleError no longer supported
-                    if (window.console) console.log('ajaxfileupload error: '+ e);
+                    //if (window.console) console.log('ajaxfileupload error: '+ e);
                 }
 
                 // The request was completed

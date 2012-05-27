@@ -1,6 +1,21 @@
 class UsersController < ApplicationController
   layout nil, :only => [:recommended]
 
+
+  # Fetch information about user, searched by id or username
+  # * *Request*    :
+  #   - GET /users/:id/info
+  # * *Args*    :
+  #   - :id -> User id
+  def info
+    authenticate_user!
+    @user = User.find(params[:id])
+    respond_to do |format|
+      format.html
+      format.json { render :partial => 'user', :locals => {:user => @user} }
+    end
+  end
+
   # Fetch information about user, searched by id or username
   # * *Request*    :
   #   - GET /users/:id
