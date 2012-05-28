@@ -1,5 +1,7 @@
-<div class="entry">
-  <div class="entryHead">
+<%
+   aside = item.set_asides.find_by_user_id(current_user.id)
+%>
+<div class="entry <%= ((aside)?'saved':'')%>"> <div class="entryHead">
     <%= link_to image_tag(item.user.avatar.url(:thumb)), '#' %>
     <p class="user">
       <%= link_to item.user.full_name, user_path(item.user) %>
@@ -12,8 +14,16 @@
         <h2><%= item.retailer %><br/><span class="productDescription"><%= item.name %></span></h2>
         <div class="price"><%= number_to_currency(item.price) %></div>
         <ul class="actions">
-          <li><a href="#" class="modal" data-modalType="relift" data-modal-rails="relift?post_id=<%= item.id%>">>Re-lift</a></li>
-          <li><a href="#" class="btnSetAside">Save</a></li>
+          <li>
+          <a href="#" class="modal" data-modalType="relift" data-modal-rails="relift?post_id=<%= item.id%>">Re-lift</a></li>
+          <li>
+            <a href="#" class="btnSetAside <%= ((aside)?'has_aside':'')%>"
+              item_id="<%= item.id %>"
+              set_aside_id="<%= aside.id if aside %>"
+            >
+              <%= ((aside)?'Un-Save':'Save')%>
+            </a>
+          </li>
           <li><a href="#" class="modal" data-modalType="share">Share</a></li>
           <li><a href="#">Buy</a></li>
         </ul>
@@ -78,9 +88,7 @@
 </div>
 <script>
   handleAddTag();
+  handleSave();
   sitefuncs();
-  <%#$('a[data-modal-rails="report_tag"]').last().attr('data-modal-rails', 'report_tag?post_id='+post.id);%>
-  <%#$('a[data-modal-rails="report_item"]').last().attr('data-modal-rails', 'report_item?post_id='+post.id);%>
-  <%#$('a[data-modal-rails="relift"]').last().attr('data-modal-rails', 'relift?post_id='+post.id);%>
 </script>
 
