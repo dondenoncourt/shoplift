@@ -142,21 +142,6 @@ function showModal(href, method, data) {
       $('#basic-modal-content').html('Sorry, there was a problem with your request.');
     }
   });
-
-  // $('#basic-modal-content').load(href, data, function() {
-  //   var modalWidth = $('#basic-modal-content').height();
-  //   $("#basic-modal-content").modal({
-  //     opacity:80,
-  //     overlayClose:true,
-  //     onShow: function () {
-  //       $('#simplemodal-container').css('height', 'auto');
-  //     },
-  //     focus:false,
-  //     containerCss:{
-  //       width: containerWidth
-  //     }
-  //   });
-  // });
 }
 
 

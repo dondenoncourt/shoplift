@@ -18,7 +18,7 @@
           <li><a href="#">Buy</a></li>
         </ul>
       </div>
-      <%= image_tag item.photo.url(:small) %>
+      <%= link_to image_tag(item.photo.url(:small)), image_item_path(item), :class => 'modal_link' %>
     </div>
     <div class="productMeta">
       <div class="comment">

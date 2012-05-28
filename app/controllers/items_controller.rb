@@ -17,7 +17,7 @@ class ItemsController < ApplicationController
       render_error(404,"Item not found")
     end
   end
-  
+
   # Fetch item URL
   # * *Request*    :
   #   - GET /items
@@ -35,7 +35,7 @@ class ItemsController < ApplicationController
       render_error(404,"Item not found")
     end
   end
-  
+
   # Search items
   # * *Request*    :
   #   - GET /items/search
@@ -47,7 +47,7 @@ class ItemsController < ApplicationController
                  .where("items.status = 1 AND (posts.name LIKE '%#{params[:search]}%' OR posts.description LIKE '%#{params[:search]}%' OR posts.brand LIKE '%#{params[:search]}%') OR posts.retailer LIKE '%#{params[:search]}%'")
     render :template => 'timelines/index', :locals => {:items => @items}
   end
-  
+
   # Create item
   # * *Request*    :
   #   - POST /items
@@ -60,23 +60,23 @@ class ItemsController < ApplicationController
 
 puts "HACK: stuff values in required attributes"
 params[:name] ||= 'TODO get name in bookmarklet.js'
-    
+
     if params[:item].blank?
-      post_include.each do |element| 
+      post_include.each do |element|
         post = post.merge({element => params[element]})
       end
     else
-      post_include.each do |element| 
+      post_include.each do |element|
         post = post.merge({element => params[:item][element]})
       end
     end
-    
+
     @post = Post.new(post)
     @post.photo = open('http://'+params[:retailer]+params[:image].gsub(/\s/, "%20")) if params[:image]
     if !@post.save
       return return_error_messages(@post,"Failed to create item")
     end
-                
+
     @item = Item.new({:user_id => current_user.id, :post_id => @post.id})
     if @item.save
 
@@ -85,7 +85,7 @@ params[:name] ||= 'TODO get name in bookmarklet.js'
       return_error_messages(@item,"Failed to create item")
     end
   end
-  
+
   # Relift item
   # * *Request*    :
   #   - POST /items/:id/relift
@@ -100,7 +100,7 @@ params[:name] ||= 'TODO get name in bookmarklet.js'
     if !validate_item_results?
       return render_error(404,"Item not found")
     end
-    
+
     @new_item = Item.new({:user_id => current_user.id, :post_id => @item.post.id, :parent_id => @item.id})
     if @new_item.save
       @item.increment!(:relifts)
@@ -109,9 +109,9 @@ params[:name] ||= 'TODO get name in bookmarklet.js'
     else
       puts 'oh no'
       return_error_messages(@new_item,"Failed to relift item")
-    end 
-  end 
-  
+    end
+  end
+
   # Update item
   # * *Request*    :
   #   - PUT /items
@@ -121,29 +121,29 @@ params[:name] ||= 'TODO get name in bookmarklet.js'
     authenticate_user!
     @item = Item.joins(:post,:user) \
                 .joins("INNER JOIN users AS post_users on posts.user_id = post_users.id AND users.status = 1") \
-                .where("items.id = ? AND items.user_id = ? AND ISNULL(items.parent_id) AND items.status = 1", 
+                .where("items.id = ? AND items.user_id = ? AND ISNULL(items.parent_id) AND items.status = 1",
                         params[:id],current_user.id).first!
-                    
+
     post = {:user_id => current_user.id}
     post_include = ["name", "description", "brand", "retailer", "url", "price", "comment", "hashtags_allowed"]
-    
+
     if params[:item].blank?
-      post_include.each do |element| 
+      post_include.each do |element|
         post = post.merge({element => params[element]})
       end
     else
-      post_include.each do |element| 
+      post_include.each do |element|
         post = post.merge({element => params[:item][element]})
       end
     end
-    
+
     if @item.post.update_attributes(post)
       render :partial => 'item', :locals => {:item => @item}, :status => 200
     else
       return_error_messages(@item,"Failed to update item")
-    end 
+    end
   end
-  
+
   # Delete item
   # * *Request*    :
   #   - DELETE /items
@@ -155,7 +155,7 @@ params[:name] ||= 'TODO get name in bookmarklet.js'
                 .joins("INNER JOIN users AS post_users on posts.user_id = post_users.id AND users.status = 1") \
                 .where("items.id = ? AND items.user_id = ? AND items.status = 1",params[:id],current_user.id) \
                 .readonly(false).first!
-    
+
     if @item.deactivate
       # Item is a relift and post should not be deactivated
       if !@item.parent_id.blank?
@@ -165,15 +165,19 @@ params[:name] ||= 'TODO get name in bookmarklet.js'
           render :json => "Item successfully deleted", :status => 200
         else
           return_error_messages(@item.post,"Failed to delete item")
-        end    
-      end    
+        end
+      end
     else
       return_error_messages(@item,"Failed to delete item")
     end
   end
-  
+
+  def image
+    @item = Item.find(params[:id])
+  end
+
   protected
-  
+
   # Validates whether user has access to item
   # * *Args*    :
   #   - void
@@ -186,5 +190,5 @@ params[:name] ||= 'TODO get name in bookmarklet.js'
     end
     return true
   end
-  
+
 end
