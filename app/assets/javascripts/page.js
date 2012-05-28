@@ -34,3 +34,79 @@ function formatDate(date) {
   }
   return formattedDate;
 }
+function handleAddTag() {
+  $('form[name=add_tag_form]').last().submit(function () {
+    var this_form = $(this);
+    $.ajax({
+      url:'/hashtags/create',
+      type:'POST',
+      dataType:'json',
+      data: $(this).serialize(),
+      success:function(data) {
+        var lastLi = this_form.parent().parent().find('.tagList li').last();
+        var clone = lastLi.clone();
+        var lastLink = clone.find('a').last();
+        if (lastLink.html() != null) {
+          console.log(lastLink.html());
+          clone.appendTo(this_form.parent().parent().find('.tagList'));
+          //$(lastLink).find('img').html(data.value);
+          lastLi.html('<a href="#"><img src="../img/global/user-thumb-holder.gif" alt="user-thumb-holder" width="25" height="25" class="user-tiny-thumb"/>'+data.value+'</a>');
+        } else {
+          lastLi.html('<a href="#"><img src="../img/global/user-thumb-holder.gif" alt="user-thumb-holder" width="25" height="25" class="user-tiny-thumb"/>'+data.value+'</a>');
+        }
+        $(this_form).find('input[name=hashtag_value]').val('');
+      },
+      error:function(xhr,textStatus,errorThrown){
+        alert(xhr.responseText);
+      }
+    });
+    return false;
+  });
+}
+function toCode() {
+  /*
+    // If the set_aside is not defined then make the appearance of the entry convey that.
+    $('a.btnSetAside').last().data('item_id', post.id);
+    if(post.set_aside == undefined){
+      $('a.btnSetAside').last().html('Save');
+      $('a.btnSetAside').last().data('set_aside_id', '');
+      $('img.saved').last().removeClass('saved');
+    }else{
+      $('a.btnSetAside').last().data('set_aside_id', post.set_aside.id);
+      $('a.btnSetAside').last().html('Un-Save');
+      $('div.entry').last().addClass('saved');
+    }
+
+  }
+  // Add a click listener to Save/Un-Save item
+  $('a.[class^=btn]').live('click', function(e){
+    e.preventDefault(); // Keeps from invoking the href="#" of the anchor tag after the ajax completes
+    _this = $(this);
+    if($(_this).data('set_aside_id') == ''){
+      // set_aside doesn't exist so create it
+      $.ajax({
+        url: '/set_asides',
+        type: 'POST',
+        data:  'item_id=' + $(_this).data('item_id'),
+        success: function(post){
+          $(_this).closest('div.entry').addClass('saved');
+          $(_this).html('Un-Save');
+          $(_this).data('set_aside_id', post.set_aside.id);
+        }
+      });
+    }else{
+      // set_aside exists so delete it
+      $.ajax({
+        url: '/set_asides/items/' + $(_this).data('set_aside_id') + '/delete',
+        type: 'POST',
+        success: function(rsp){
+          $(_this).closest('div.entry').removeClass('saved');
+          $(_this).html('Save');
+          $(_this).data('set_aside_id', '');
+        }
+      });
+    }
+  });
+
+   */
+}
