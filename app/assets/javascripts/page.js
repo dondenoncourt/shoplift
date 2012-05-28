@@ -63,50 +63,44 @@ function handleAddTag() {
     return false;
   });
 }
-function toCode() {
-  /*
-    // If the set_aside is not defined then make the appearance of the entry convey that.
-    $('a.btnSetAside').last().data('item_id', post.id);
-    if(post.set_aside == undefined){
-      $('a.btnSetAside').last().html('Save');
-      $('a.btnSetAside').last().data('set_aside_id', '');
-      $('img.saved').last().removeClass('saved');
-    }else{
-      $('a.btnSetAside').last().data('set_aside_id', post.set_aside.id);
-      $('a.btnSetAside').last().html('Un-Save');
-      $('div.entry').last().addClass('saved');
-    }
+function handleSave() {
 
-  }
   // Add a click listener to Save/Un-Save item
-  $('a.[class^=btn]').live('click', function(e){
+  $('a.[class^=btnSetAside]').unbind();
+  $('a.[class^=btnSetAside]').click(function(e){
     e.preventDefault(); // Keeps from invoking the href="#" of the anchor tag after the ajax completes
     _this = $(this);
-    if($(_this).data('set_aside_id') == ''){
+    if($(_this).hasClass('has_aside')){
+      // set_aside exists so delete it
+      $.ajax({
+        url: '/set_asides/items/' + $(_this).attr('set_aside_id') + '/delete',
+        type: 'POST',
+        success: function(rsp){
+          $(_this).closest('div.entry').removeClass('saved');
+          $(_this).removeClass('has_aside');
+          $(_this).html('Save');
+          $(_this).data('item_id', '');
+        }
+      });
+    }else{
       // set_aside doesn't exist so create it
       $.ajax({
         url: '/set_asides',
         type: 'POST',
-        data:  'item_id=' + $(_this).data('item_id'),
+        data:  'item_id=' + $(_this).attr('item_id'),
         success: function(post){
+          console.log(post);
           $(_this).closest('div.entry').addClass('saved');
+          $(_this).addClass('has_aside');
           $(_this).html('Un-Save');
-          $(_this).data('set_aside_id', post.set_aside.id);
-        }
-      });
-    }else{
-      // set_aside exists so delete it
-      $.ajax({
-        url: '/set_asides/items/' + $(_this).data('set_aside_id') + '/delete',
-        type: 'POST',
-        success: function(rsp){
-          $(_this).closest('div.entry').removeClass('saved');
-          $(_this).html('Save');
-          $(_this).data('set_aside_id', '');
+          $(_this).attr('item_id', post.id);
+          $(_this).attr('set_aside_id', post.set_aside.id);
+        },
+        error: function(xhr, textStatus, errorThrown) {
+          alert(xhr.responseText);
         }
       });
     }
   });
 
-   */
 }
