@@ -96,40 +96,52 @@ function sitefuncs() {
 /*---------- Modal ----------*/
 
   $('.modal').click(function (e) {
-
     // denoncourt mod: * if rails attribute exists, don't append .html
     var modaltype = $(this).attr('data-modal-rails');
     if (modaltype == null) {
       modaltype = $(this).attr('data-modaltype') + '.html';
     }
-    
-    if($(this).attr('data-modaltype')=="share") {
-      var containerWidth = 428;
-    } else {
-      var containerWidth = 350;
-    }
 
-    $('#basic-modal-content').load('modal/' + modaltype, function() {
+    showModal('modal/' + modaltype);
+    return false;
+  });
 
-      var modalWidth = $('#basic-modal-content').height();
+  // show modal based on the link's url
+  $('.modal_link').live('click', function() {
+    showModal(this.href);
+    return false;
+  });
 
-      $("#basic-modal-content").modal({
-        opacity:80,
-        overlayClose:true,
-        onShow: function () {
-          $('#simplemodal-container').css('height', 'auto');
-        },
-        focus:false,
-        containerCss:{
-          width:containerWidth
-        }
-      });
-    });
-
+  // show modal based on form submission
+  $('.modal_form').live('submit', function() {
+    showModal(this.action, this.method, $(this).serialize());
     return false;
   });
 
 }
 
+function showModal(href, method, data) {
+  $.ajax({
+    url: href,
+    type: method || 'get',
+    data: data,
+    complete: function(xhr, textStatus) {
+      $("#basic-modal-content").modal({
+        opacity:80,
+        overlayClose:true,
+        onShow: function () {
+          $('#simplemodal-container').css('height', 'auto').css('width', 'auto');
+        },
+        focus:false
+      });
+    },
+    success: function(data, textStatus, xhr) {
+      $('#basic-modal-content').html(data);
+    },
+    error: function(xhr, textStatus, errorThrown) {
+      $('#basic-modal-content').html('Sorry, there was a problem with your request.');
+    }
+  });
+}
 
 

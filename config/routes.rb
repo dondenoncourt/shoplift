@@ -24,7 +24,7 @@ App::Application.routes.draw do
   devise_for :users, :controllers => {:registrations => "registrations"} #, :skip => [:registrations,:passwords,:unlocks]
   # makes domain/login work as well as domain/users/login
   devise_scope :user do
-    get "login"  => "devise/sessions#new"
+    get "login"  => "page#home"
     get "logout" => "devise/sessions#destroy"
     #delete "logout" => "devise/sessions#destroy"
   end
@@ -61,15 +61,15 @@ App::Application.routes.draw do
   #
   # Items
   #
-  get "items/search", :to => "items#search", :defaults => { :format => :json }, :constraints => {:format => :json}
-  get "items/:id", :to => "items#show", :defaults => { :format => :json }, :constraints => {:format => :json}
-  get "items/:id/visit", :to => "items#visit", :defaults => { :format => :json }, :constraints => {:format => :json}
-  post "items", :to => "items#create", :defaults => { :format => :json }, :constraints => {:format => :json}
-  post "items/:id/relift", :to => "items#relift", :defaults => { :format => :json }, :constraints => {:format => :json}
-  post "items/:id/hashtags", :to => "hashtag#create", :defaults => { :format => :json }, :constraints => {:format => :json}
-  put "items/:id", :to => "items#update", :defaults => { :format => :json }, :constraints => {:format => :json}
-  delete "items/:id", :to => "items#destroy", :defaults => { :format => :json }, :constraints => {:format => :json}
-  # Browser / system compatability
+  resources :items do
+    member do
+      get :image, :visit
+      post :relift
+    end
+    get :search, :on => :collection
+    resources :hashtags, :only => [:create]
+  end
+  # # Browser / system compatability
   post "items/:id/edit", :to => "items#update", :defaults => { :format => :json }, :constraints => {:format => :json}
   post "items/:id/delete", :to => "items#destroy", :defaults => { :format => :json }, :constraints => {:format => :json}
 
