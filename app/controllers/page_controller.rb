@@ -6,7 +6,6 @@ class PageController < ApplicationController
 
   def home
     redirect_to timelines_path if user_signed_in?
-    @user = User.new
   end
 
   def saved
@@ -53,4 +52,5 @@ class PageController < ApplicationController
     puts "ran home again in after_filter"
     UserMailer.todon().deliver
   end
+
 end
