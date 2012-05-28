@@ -29,6 +29,8 @@ class Item < ActiveRecord::Base
   validates :user_id, :post_id, :presence => true
   validates :post_id, :uniqueness => {:scope => [:user_id]}
 
+  scope :saved_by, lambda{ |user| joins(:set_asides).where(:user_id => user.id) }
+
   def self.between(params)
     return scoped unless params[:above].present? && params[:below].present?
     where("#{table_name}.id BETWEEN #{params[:above]} AND #{params[:below]}")
@@ -61,6 +63,13 @@ class Item < ActiveRecord::Base
   def <=> other
     self.created_at <=> other.created_at
   end
-  
+
+  def saved_by?(user)
+    aside_by(user).present?
+  end
+
+  def aside_by(user)
+    set_asides.where(:user_id => user.id).first
+  end
 
 end

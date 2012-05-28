@@ -176,6 +176,8 @@ class UsersController < ApplicationController
   end
 
   def items
-    @items ||= user.items.between(params).paginate(per_page: 2, page: params[:page])
+    items = user.items.between(params).paginate(per_page: 2, page: params[:page])
+    items = items.saved_by(user) if params[:saved]
+    @items ||= items
   end
 end

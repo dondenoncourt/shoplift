@@ -1,7 +1,4 @@
-<%
-   aside = item.set_asides.find_by_user_id(current_user.id)
-%>
-<div class="entry <%= ((aside)?'saved':'')%>"> <div class="entryHead">
+<div class="entry <%= item.saved_by?(current_user) ? 'saved' : '' %>"> <div class="entryHead">
     <%= link_to image_tag(item.user.avatar.url(:thumb)), '#' %>
     <p class="user">
       <%= link_to item.user.full_name, user_path(item.user) %>
@@ -17,11 +14,11 @@
           <li>
           <a href="#" class="modal" data-modalType="relift" data-modal-rails="relift?post_id=<%= item.id%>">Re-lift</a></li>
           <li>
-            <a href="#" class="btnSetAside <%= ((aside)?'has_aside':'')%>"
+            <a href="#" class="btnSetAside <%= item.saved_by?(current_user) ? 'has_aside' : '' %>"
               item_id="<%= item.id %>"
-              set_aside_id="<%= aside.id if aside %>"
+              set_aside_id="<%= item.aside_by(current_user).id if item.saved_by?(current_user) %>"
             >
-              <%= ((aside)?'Un-Save':'Save')%>
+              <%= item.saved_by?(current_user) ? 'Un-Save' : 'Save' %>
             </a>
           </li>
           <li><a href="#" class="modal" data-modalType="share">Share</a></li>
