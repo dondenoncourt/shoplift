@@ -6,9 +6,9 @@
       <div class="navigation">
         <a class="logout" href="/logout">Sign Out</a>
         <ul class="mainNav">
-          <li><a href="#">Add</a></li>
-          <li> <%= link_to "Follow", page_follow_interests_subcat_path %> </li>
-          <li><a href="#">Saved</a></li>
+          <li><%= link_to "Add", new_post_path, :class => 'modal_link' %></li>
+          <li><%= link_to "Follow", page_follow_interests_subcat_path %> </li>
+          <li><%= link_to "Saved", user_path(current_user, :saved => true) %></li>
         </ul>
         <form action="#" class="search">
           <input type="text" class="text search" name="search" value="Search" /><input type="submit" name="submit" class="searchSubmit" />

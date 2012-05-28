@@ -102,7 +102,7 @@ function sitefuncs() {
       modaltype = $(this).attr('data-modaltype') + '.html';
     }
 
-    showModal('modal/' + modaltype);
+    showModal('/modal/' + modaltype);
     return false;
   });
 

@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-  <%= render "page/header" %>
+  <%= render "layouts/header" %>
 <body>
-  <%= render "page/subhead" %>
+  <%= render "layouts/subhead" %>
   <div id="content">
     <% flash.each do |name, msg| %>
       <%= content_tag :div, msg, :id => "flash_#{name}" %>
     <% end %>
     <%= yield :layout %>
   </div>
-  <%= render "page/footer" %>
+  <%= render "layouts/footer" %>
   <div id="basic-modal-content"></div>
 </body>
 </html>

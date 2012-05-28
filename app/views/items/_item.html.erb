@@ -10,7 +10,7 @@
     <div class="product">
       <div class="productDetails">
         <h2><%= item.retailer %><br/><span class="productDescription"><%= item.name %></span></h2>
-        <div class="price"><%= number_to_currency(item.price) %></div>
+        <div class="price"><%= number_to_currency(item.price, :precision => 0) %></div>
         <ul class="actions">
           <li><a href="#" class="modal" data-modalType="relift" data-modal-rails="relift?post_id=<%= item.id%>">>Re-lift</a></li>
           <li><a href="#" class="btnSetAside">Save</a></li>
