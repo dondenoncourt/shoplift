@@ -1,5 +1,5 @@
 class PageController < ApplicationController
-  before_filter :authenticate_user!, :except => :home
+  before_filter :authenticate_user!, :except => [:home, :terms_of_service]
   #after_filter :email_don
 
   layout nil, :only => [:upload_avatar, :report_tag, :report_item, :relift]
@@ -44,6 +44,10 @@ class PageController < ApplicationController
        Subscription.find_by_follower_id(current_user.id) == nil
         @new_user = true
     end
+  end
+
+  def terms_of_service
+
   end
 
   private

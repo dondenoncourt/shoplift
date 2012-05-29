@@ -51,7 +51,7 @@ class User < ActiveRecord::Base
                   :biography, :url, :hometown, :birthdate, :private, :status,
                   :first_name, :last_name, :country, :vanity_url, :zipcode,
                   :notify_new_follower, :notify_relift, :notify_missing,
-                  :avatar
+                  :avatar, :tos
   has_many :posts
   has_many :subscriptions
   has_many :followers, :class_name => "Subscription"
@@ -71,6 +71,7 @@ class User < ActiveRecord::Base
 
   validates :zipcode, :sex, :username, presence: true
   validates(:password_confirmation, presence: true, :unless => lambda {|u| u.password.nil? })
+  validates :tos, :acceptance => true
 
   before_validation :set_username
 

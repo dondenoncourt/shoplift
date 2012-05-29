@@ -5,8 +5,9 @@ en:
   activerecord:
     attributes:
       user:
-        email: "e-mail address"
+        email: "Email Address"
         sex: "Gender"
+        tos: "Terms of Service"
     errors:
       models:
         user:

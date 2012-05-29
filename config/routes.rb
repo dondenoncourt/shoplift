@@ -5,6 +5,7 @@ App::Application.routes.draw do
   get "page/saved", :to => "page#saved"
   get "page/follow_interests", :to => "page#follow_interests"
   get "page/follow_interests_subcat", :to => "page#follow_interests_subcat"
+  get "/terms_of_service", :to => 'page#terms_of_service'
 
   get "page/profile/edit", :to => "page#profile_edit"
   get "modal/upload_avatar", :to => "page#upload_avatar"
