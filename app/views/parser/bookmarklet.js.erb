@@ -649,21 +649,31 @@
 			// Open the iFrame for writing and clone in the form for submission
 			ifrm.open();
 			this.el.form.clone().appendTo(jQuery('body',ifrm)).submit(); // TODO figure out what this is supposed to do
-      <%#jQuery('form.sl-bookmarklet').submit();%>
+      jQuery('form.sl-bookmarklet').submit();
+      /*
       jQuery.ajax({
+        url: this.form_url,
         type: 'POST',
         dataType: 'json',
-        url: this.form_url,
         data: jQuery('form.sl-bookmarklet').serialize(),
         success: function() {
-          if (window.console) console.log('post ran');
+          if (window.console) console.log('post ran with success');
+          // Set the message and display it
+          self.setError('Product added!');
+          self.displayError();
+          // Timeout for hiding the message
+          setTimeout(function(){self.destroy()},1000);
+        },
+        error:function(xhr,textStatus,errorThrown){
+          if (window.console) console.log(xhr.responseText);
+          // Set the message and display it
+          self.setError(xhr.responseText);
+          self.displayError();
+          // Timeout for hiding the message
+          setTimeout(function(){self.destroy()},1000);
         }
       });
-			// Set the message and display it
-			this.setError('Product added!');
-			this.displayError();
-			// Timeout for hiding the message
-			setTimeout(function(){self.destroy()},1000);
+      */
 		}
 		
 		/**
