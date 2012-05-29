@@ -66,7 +66,8 @@ class User < ActiveRecord::Base
                     },
                     :storage => :s3,
                     :s3_credentials => "#{Rails.root}/config/s3.yml",
-                    :path => "/:style/:id/:filename"
+                    :path => "/:style/:id/:filename",
+                    :default_url => "/assets/avatars/:style/missing.png"
 
   validates :zipcode, :sex, :username, presence: true
   validates(:password_confirmation, presence: true, :unless => lambda {|u| u.password.nil? })
