@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120516202627) do
+ActiveRecord::Schema.define(:version => 20120529133415) do
 
   create_table "flag_types", :force => true do |t|
     t.string   "name",        :limit => 60, :null => false
@@ -63,15 +63,16 @@ ActiveRecord::Schema.define(:version => 20120516202627) do
   add_index "item_visits", ["user_id"], :name => "fk_item_visits_users"
 
   create_table "items", :force => true do |t|
-    t.integer  "user_id",                   :null => false
-    t.integer  "post_id",                   :null => false
+    t.integer  "user_id",                                  :null => false
+    t.integer  "post_id",                                  :null => false
     t.integer  "parent_id"
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
-    t.integer  "status",     :default => 1, :null => false
-    t.integer  "views",      :default => 0, :null => false
-    t.integer  "visits",     :default => 0, :null => false
-    t.integer  "relifts",    :default => 0, :null => false
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
+    t.integer  "status",                    :default => 1, :null => false
+    t.integer  "views",                     :default => 0, :null => false
+    t.integer  "visits",                    :default => 0, :null => false
+    t.integer  "relifts",                   :default => 0, :null => false
+    t.string   "comment",    :limit => 100
   end
 
   add_index "items", ["parent_id"], :name => "fk_items_parents"

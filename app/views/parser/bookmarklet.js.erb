@@ -674,6 +674,11 @@
         }
       });
       */
+      // Set the message and display it
+      self.setError('Product added!');
+      self.displayError();
+      // Timeout for hiding the message
+      setTimeout(function(){self.destroy()},1000);
 		}
 		
 		/**

@@ -12,6 +12,7 @@
 #  views      :integer(4)      default(0), not null
 #  visits     :integer(4)      default(0), not null
 #  relifts    :integer(4)      default(0), not null
+#  comment    :string(100)
 #
 
 class Item < ActiveRecord::Base
@@ -52,9 +53,9 @@ class Item < ActiveRecord::Base
     post.photo
   end
 
-  def comment
-    post.comment
-  end
+  #def comment
+    #post.comment
+  #end
 
   def items
     post.items

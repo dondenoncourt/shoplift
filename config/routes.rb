@@ -7,7 +7,7 @@ App::Application.routes.draw do
   get "page/follow_interests_subcat", :to => "page#follow_interests_subcat"
 
   get "page/profile/edit", :to => "page#profile_edit"
-  get "page/profile/modal/upload_avatar.html", :to => "page#upload_avatar"
+  get "modal/upload_avatar", :to => "page#upload_avatar"
 
   get "modal/report_tag", :to => "page#report_tag"
   get "modal/report_item", :to => "page#report_item"

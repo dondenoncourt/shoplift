@@ -101,7 +101,7 @@ params[:name] ||= 'TODO get name in bookmarklet.js'
       return render_error(404,"Item not found")
     end
 
-    @new_item = Item.new({:user_id => current_user.id, :post_id => @item.post.id, :parent_id => @item.id})
+    @new_item = Item.new({:user_id => current_user.id, :post_id => @item.post.id, :parent_id => @item.id, :comment => params[:comment]})
     if @new_item.save
       @item.increment!(:relifts)
       @item.post.increment!(:relifts)

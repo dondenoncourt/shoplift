@@ -12,6 +12,7 @@
 #  views      :integer(4)      default(0), not null
 #  visits     :integer(4)      default(0), not null
 #  relifts    :integer(4)      default(0), not null
+#  comment    :string(100)
 #
 
 ---
