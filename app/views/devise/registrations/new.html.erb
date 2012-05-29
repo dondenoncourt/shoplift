@@ -1,40 +1,121 @@
-<html lang="en">
-  <%= render "page/header" %>
-<body>
-  <%= render "page/subhead" %>
 <% provide(:title, 'Register') %>
-<h2>Sign up</h2>
+<div class="centerCol">
+  <div class="entry new_user_signup">
 
-<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :multipart => true }) do |f| %>
-  <%= devise_error_messages! %>
-  <input name="utf8" type="hidden" value="&#x2713;" />
-  <li>
-    <label for="fullName">Name</label>
-    <input type="text" class="text" name="user[full_name]" id="fullName"  value="<%= @user.full_name%>" />
-  </li>
-  <li>
-    <label for="email">Email</label>
-    <input type="text" class="text" name="user[email]" id="email" value="<%= @user.email%>" />
-  </li>
-  <li>
-    <label for="gender">Gender:</label>
-    <input type="radio" class="radio" name="user[sex]" value="true" id="sex-male" checked="<%= @user.sex %>" /><label for="sex">Male</label>
-    <input type="radio" class="radio" name="user[sex]" value="false" id="sex-female" checked="<%= !(@user.sex) %>" /><label for="sex">Female</label>
-  </li>
-  <li>
-    <label for="zipcode">Zip Code</label>
-    <input type="text" class="text" name="user[zipcode]" id="zipcode"  value="<%= @user.zipcode%>" />
-  </li>
-  <li>
-      <label for="password">Password</label>
-      <input type="password" class="text" name="user[password]" id="password" />
-      <label for="password_confirmation">Confirmation</label>
-      <input type="password" class="text" name="user[password_confirmation]" id="password_confirmation" />
-      <input type="hidden" class="text" name="user[username]" id="username" value="may not use" />
-  </li>
-  <div><%= f.submit "Sign up" %></div>
-<% end %>
+    <%= link_to_function "Sign up with Facebook", "alert('Not Yet!')", :class => 'facebookSignup' %>
+    <br />
+    <p class="option"><span>or</span></p>
 
-<%= render "links" %>
-</body>
-</html>
+    <h2>Create an Account</h2>
+    <p>*Indicates Required Field</p>
+    <br />
+    <h3>Account Settings</h3>
+
+    <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+      <%= devise_error_messages! %>
+      <ul>
+        <li>
+          <%= f.label :full_name, "Name*" %>
+          <br />
+          <%= f.text_field :full_name %>
+        </li>
+
+        <li>
+          <%= f.label :password, "Password*" %>
+          <br />
+          <%= f.password_field :password %>
+        </li>
+
+        <li>
+          <%= f.label :email, "Email Address*" %>
+          <br />
+          <%= f.email_field :email %>
+        </li>
+
+        <li>
+          <%= f.label :password_confirmation, "Password Confirmation*" %>
+          <br />
+          <%= f.password_field :password_confirmation %>
+        </li>
+
+        <li>
+          <%= f.label :vanity_url, "Vanity URL" %><span class="question"><%= link_to_function "?", "alert('This should explain the Vanity URL')" %></span>
+          <br />
+          <%= f.text_field :vanity_url %>
+        </li>
+
+        <div class="clear"></div>
+
+        <p class="option"><span></span></p>
+        <br />
+        <h3>Personal Settings</h3>
+
+        <li>
+          <%= f.label :country, "Country*" %>
+          <br />
+          <%= f.country_select :country, ["United States", "Canada", "United Kingdom"] %>
+        </li>
+
+        <li>
+          <%= f.label :zipcode, "Zip Code" %>
+          <br />
+          <%= f.text_field :zipcode %>
+        </li>
+
+        <li>
+          <%= f.label :sex, "I am:*" %>
+          <br />
+          <%= f.select :sex, options_for_select([["Male", true], ["Female", false]]), :prompt => true %>
+        </li>
+
+        <li>
+          <%= f.label :birthdate, "Birthdate" %>
+          <br />
+          <%= f.date_select :birthdate, :order => [:month, :day, :year], :start_year => 1920, :end_year => Time.now.year - 13, :prompt => true %>
+        </li>
+
+        <div class="clear"></div>
+
+        <li>
+          <%= f.label :biography, "Blurb" %><span class="question"><%= link_to_function "?", "alert('This should explain the biography')" %></span>
+          <br />
+          <%= f.text_area :biography, :size => "60x5" %>
+        </li>
+
+        <div class="clear"></div>
+
+        <li>
+          <%= f.label :website %><span class="question"><%= link_to_function "?", "alert('This should explain the website')" %></span>
+          <br />
+          <%= f.text_field :url %>
+        <li>
+      </ul>
+      <div class="clear"></div>
+
+      <p class="option"><span></span></p>
+      <br />
+      <h3>Linked Accounts<span class="question"><%= link_to_function "?", "alert('This should explain the linked accounts')" %></span></h3>
+      <p><%= link_to_function "Link to your Facebook account", "alert('Coming Soon!')" %></p>
+      <p><%= link_to_function "Link to your Twitter account", "alert('Coming Soon!')" %></p>
+      <p><%= link_to_function "Link to your Pinterest account", "alert('Coming Soon!')" %></p>
+
+      <div class="clear"></div>
+
+      <p class="option"><span></span></p>
+      <br />
+      <p><%= link_to_function "Terms of Service", "alert('This will link to the terms of service page')" %></p>
+
+      <div class="clear"></div>
+
+      <p class="option"><span></span></p>
+      <br />
+      <ul>
+        <li>
+          <%= f.submit "Continue", :class => 'submit' %>
+        </li>
+      </ul>
+      <div class="clear"></div>
+    <% end %>
+
+  </div>
+</div>

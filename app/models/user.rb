@@ -68,9 +68,14 @@ class User < ActiveRecord::Base
                     :s3_credentials => "#{Rails.root}/config/s3.yml",
                     :path => "/:style/:id/:filename"
 
-  validates(:zipcode, presence: true)
-  validates(:sex, presence: true)
+  validates :zipcode, :sex, :username, presence: true
   validates(:password_confirmation, presence: true, :unless => lambda {|u| u.password.nil? })
+
+  before_validation :set_username
+
+  def set_username
+    self.username = self.email
+  end
 
   def subscribed_to(user)
     if self.id != user.id && Subscription.where('user_id = ? AND follower_id = ? AND status = 1',user.id,self.id).blank?

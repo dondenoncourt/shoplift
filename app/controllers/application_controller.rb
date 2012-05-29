@@ -69,8 +69,6 @@ class ApplicationController < ActionController::Base
     return render_error(406,notice)
   end
 
-  layout Proc.new { |controller|
-    (controller.request.xhr? || devise_controller?) ? nil : 'application'
-  }
+  layout Proc.new { |controller| controller.request.xhr? ? nil : 'application' }
 
 end
