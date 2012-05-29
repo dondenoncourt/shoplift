@@ -11,9 +11,16 @@
     <p>Comment (<span id="chars_left">0</span> characters left)</strong><p>
     <textarea name="comment" id="comment" rows="3" columns="40"></textarea>
     <div class="divider"></div>
-    <ul>
-      <li>list of tags to add</li>
-    </ul>
+    <div>
+      <div >
+          <img src="../img/global/user-thumb-holder.gif" alt="user-thumb-holder" width="25" height="25" class="user-tiny-thumb"/>
+          <input type="text" class="text" id="hashtag" name="hashtag" value="Add a Tag" style="width: 215px;" />
+          <input type="button" name="submit" class="addSubmit" id="addTag" style="float: right;"/>
+      </div>
+      <ul id="tagList">
+      </ul>
+    </div>
+    <div class="divider"></div>
     <div class="submitWrap">
       <input type="submit" class="submit" name="submit" value="Re-lift this item now" />
       <input type="submit" class="submit simplemodal-close" name="submit" value="Never Mind" />
@@ -22,8 +29,14 @@
   <div class="divider"></div>
 </div>
 <script>
+  $('#addTag').click(function () {
+    var countOfTags = $('#tagList li').size();
+    $('#tagList').append('<li><input type="hidden" name="hashtag_value['+countOfTags+']" value="'+$('#hashtag').val()+'"/>'+$('#hashtag').val()+'</li>');
+    $('#hashtag').val('Add another Tag');
+  });
+
   function commentCharsLeft() {
-    var chars = 500-$('#comment').val().length;
+    var chars = 100-$('#comment').val().length;
     $('#chars_left').html(chars);
     if (chars < 0) {
       $('input[name=submit]').hide();
@@ -43,7 +56,7 @@
       dataType:'json',
       data: $(this).serialize(),
       success:function(data) {
-        alert(data.message);
+        // now add the hashtags
         $.modal.close();
       },
       error:function(xhr,textStatus,errorThrown){
