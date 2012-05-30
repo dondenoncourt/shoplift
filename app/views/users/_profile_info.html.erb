@@ -3,7 +3,7 @@
     <%= image_tag user.avatar.url(:small) %>
     <h2><%= user.full_name %><br/><span class="location"><%= user.hometown %></span></h2>
     <% if current_user.id == user.id %>
-      <%= link_to "Edit Profile", page_profile_edit_path, :class => "button buttonOn" %>
+      <%= link_to "Edit Profile", edit_user_registration_path, :class => "button buttonOn" %>
     <% elsif current_user && current_user.following?(user) %>
       <%= link_to "Following", '#', :class => "button buttonOn" %>
     <% else %>

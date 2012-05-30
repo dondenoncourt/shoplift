@@ -7,9 +7,6 @@ App::Application.routes.draw do
   get "page/follow_interests_subcat", :to => "page#follow_interests_subcat"
   get "/terms_of_service", :to => 'page#terms_of_service'
 
-  get "page/profile/edit", :to => "page#profile_edit"
-  get "modal/upload_avatar", :to => "page#upload_avatar"
-
   get "modal/report_tag", :to => "page#report_tag"
   get "modal/report_item", :to => "page#report_item"
   get "modal/relift", :to => "page#relift"

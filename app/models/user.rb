@@ -60,8 +60,8 @@ class User < ActiveRecord::Base
 
   has_attached_file :avatar,
                     :styles => {
-                      :tiny => "20x20>",
-                      :thumb => "70x70>",
+                      :tiny => "20x20#",
+                      :thumb => "70x70#",
                       :small => "200x200>"
                     },
                     :storage => :s3,
@@ -101,5 +101,13 @@ class User < ActiveRecord::Base
         .where("items.status = 1 AND items.user_id = ?", self.id)
         .order("items.created_at DESC")
         .group("items.id")
+  end
+
+  def update_with_password(params={})
+    if params[:password].blank?
+      params.delete(:password)
+      params.delete(:password_confirmation) if params[:password_confirmation].blank?
+    end
+    update_attributes(params)
   end
 end

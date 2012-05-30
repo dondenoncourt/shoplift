@@ -11,12 +11,6 @@ class PageController < ApplicationController
   def saved
   end
 
-  def profile_edit
-  end
-
-  def upload_avatar
-  end
-
   def relift
     @item = Item.find(params[:post_id])
   end

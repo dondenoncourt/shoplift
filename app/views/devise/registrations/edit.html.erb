@@ -1,113 +1,128 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<% provide(:title, 'Profile Edit') %>
+<%= render 'users/profile_info', user: resource %>
 
-<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
-  <%= devise_error_messages! %>
-  <ul>
-    <li>
-      <%= f.label :full_name, "Name*" %>
-      <br />
-      <%= f.text_field :full_name %>
-    </li>
+  <div class="rightCol">
+    <div class="entry settings">
+      <h2>Edit Your Profile Settings</h2>
 
-    <li>
-      <%= f.label :password, "Password*" %>
-      <br />
-      <%= f.password_field :password %>
-    </li>
+      <h3>Personal Settings</h3>
+      <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
+        <%= devise_error_messages! %>
+        <ul class="formList">
+          <li>
+            <%= f.label :full_name, "Name" %>
+            <%= f.text_field :full_name, :class => 'text' %>
+          </li>
+          <li>
+            <%= f.label :email %>
+            <%= f.email_field :email, :class => 'text' %>
+          </li>
+          <li>
+            <%= f.label :password %>
+            <%= f.password_field :password, :class => 'text' %>
+          </li>
+          <li>
+            <%= f.label :password_confirmation %>
+            <%= f.password_field :password_confirmation, :class => 'text' %>
+          </li>
+          <li>
+            <%= f.label :country, "Country*" %>
+            <%= f.country_select :country, ["United States", "Canada", "United Kingdom"], :class => 'text' %>
+          </li>
+          <li>
+            <%= f.label :zipcode, "Zip Code" %>
+            <%= f.text_field :zipcode, :class => 'text' %>
+          </li>
+          <li>
+            <%= f.label :biography, "Blurb" %>
+            <%= f.text_area :biography, :size => "80x5" %>
+            <span class="characterCount"><%= 110 - current_user.biography.length %> Characters Left</span>
+          </li>
+          <li>
+            <%= f.label :website %>
+            <%= f.text_field :url, :class => 'text' %>
+          </li>
+          <li>
+            <%= f.label :avatar, "Photo or Logo" %>
+            <%= image_tag resource.avatar.url(:thumb), :id => "avatar_thumb" %>
+            <p>
+              <%= f.file_field :avatar, :id => 'fileupload' %>
+              <%= link_to_function "Refresh from Facebook", "alert('Not yet!')" %><br />
+              <%= link_to_function "Refresh from Twitter", "alert('Not yet!')" %>
+            </p>
+          </li>
+          <li>
+            <%= f.label :sex %>
+            <%= f.select :sex, options_for_select([["Male", true], ["Female", false]]) %>
+          </li>
+          <li>
+            <%= f.label :birthdate, "Birthdate" %>
+            <%= f.date_select :birthdate, :order => [:month, :day, :year], :start_year => 1920, :end_year => Time.now.year - 13, :prompt => true %>
+          </li>
+        </ul>
 
-    <li>
-      <%= f.label :email, "Email Address*" %>
-      <br />
-      <%= f.email_field :email %>
-    </li>
+        <h3>Notification Settings</h3>
+        <ul class="formList radioList">
+          <li>
+            <div class="radioDesc">Tell me when someone new starts following me:</div>
+            <%= f.radio_button :notify_new_follower, true, :id => "user_new_follow_yes" %>
+            <%= f.label :new_follow_yes, "Yes" %>
 
-    <li>
-      <%= f.label :password_confirmation, "Password Confirmation*" %>
-      <br />
-      <%= f.password_field :password_confirmation %>
-    </li>
+            <%= f.radio_button :notify_new_follower, false, :id => "user_new_follow_no"  %>
+            <%= f.label :new_follow_no, "No" %>
+          </li>
+          <li>
+            <div class="radioDesc">Tell me when someone relifts an item of mine:</div>
+            <%= f.radio_button :notify_relift, true, :id => "user_relift_yes" %>
+            <%= f.label :relift_yes, "Yes" %>
 
-    <li>
-      <%= f.label :vanity_url, "Vanity URL" %><span class="question"><%= link_to_function "?", "alert('This should explain the Vanity URL')" %></span>
-      <br />
-      <%= f.text_field :vanity_url %>
-    </li>
+            <%= f.radio_button :notify_relift, false, :id => "user_relift_no"  %>
+            <%= f.label :relift_no, "No" %>
+          </li>
+          <li>
+            <div class="radioDesc">Update me on what I've been missing:</div>
+            <%= f.radio_button :notify_missing, "daily", :id => "user_missing_daily" %>
+            <%= f.label :missing_daily, "Daily" %>
 
-    <div class="clear"></div>
+            <%= f.radio_button :notify_missing, "weekly", :id => "user_missing_weekly"  %>
+            <%= f.label :missing_weekly, "Weekly" %>
 
-    <p class="option"><span></span></p>
-    <br />
-    <h3>Personal Settings</h3>
+            <%= f.radio_button :notify_missing, "monthly", :id => "user_missing_monthly" %>
+            <%= f.label :missing_monthly, "Monthly" %>
 
-    <li>
-      <%= f.label :country, "Country*" %>
-      <br />
-      <%= f.country_select :country, ["United States", "Canada", "United Kingdom"] %>
-    </li>
+            <%= f.radio_button :notify_missing, "never", :id => "user_missing_never"  %>
+            <%= f.label :missing_never, "Never" %>
+          </li>
+        </ul>
 
-    <li>
-      <%= f.label :zipcode, "Zip Code" %>
-      <br />
-      <%= f.text_field :zipcode %>
-    </li>
+        <div style="display:none;">
+          <h3>Linked Accounts</h3>
+          <ul class="formList">
+            <li>
+              <label>Facebook</label>
+              <div class="pillbox"><a href="#" class="onLink">On</a><a href="#" class="current offLink">Off</a></div>
+            </li>
+            <li>
+              <label>Twitter</label>
+              <div class="pillbox"><a href="#" class="onLink">On</a><a href="#" class="current offLink">Off</a></div>
+            </li>
+            <li>
+              <label>Pinterest</label>
+              <div class="pillbox"><a href="#" class="onLink">On</a><a href="#" class="current offLink">Off</a></div>
+            </li>
+          </ul>
 
-    <li>
-      <%= f.label :sex, "I am:*" %>
-      <br />
-      <%= f.select :sex, options_for_select([["Male", true], ["Female", false]]), :prompt => true %>
-    </li>
+          <h3>Follow Me</h3>
+          <p>Embed this button on your blog or website! Just copy the code below and paste it into your site where you'd like it to appear.</p>
+          <div class="code">&lt;a href="#"&gt;Lorem Ipsum Code Lorem Ipsum Code Lorem Ipsum Code Lorem Ipsum Code&lt;/a&gt;</div>
+          <div class="divider"></div>
+        </div>
+        <div>
+          <%= f.submit "Save Settings", :class => 'submit' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
 
-    <li>
-      <%= f.label :birthdate, "Birthdate" %>
-      <br />
-      <%= f.date_select :birthdate, :order => [:month, :day, :year], :start_year => 1920, :end_year => Time.now.year - 13, :prompt => true %>
-    </li>
-
-    <div class="clear"></div>
-
-    <li>
-      <%= f.label :biography, "Blurb" %><span class="question"><%= link_to_function "?", "alert('This should explain the biography')" %></span>
-      <br />
-      <%= f.text_area :biography, :size => "60x5" %>
-    </li>
-
-    <div class="clear"></div>
-
-    <li>
-      <%= f.label :website %><span class="question"><%= link_to_function "?", "alert('This should explain the website')" %></span>
-      <br />
-      <%= f.text_field :url %>
-    <li>
-  </ul>
   <div class="clear"></div>
-
-  <p class="option"><span></span></p>
-  <br />
-  <h3>Linked Accounts<span class="question"><%= link_to_function "?", "alert('This should explain the linked accounts')" %></span></h3>
-  <p><%= link_to_function "Link to your Facebook account", "alert('Coming Soon!')" %></p>
-  <p><%= link_to_function "Link to your Twitter account", "alert('Coming Soon!')" %></p>
-  <p><%= link_to_function "Link to your Pinterest account", "alert('Coming Soon!')" %></p>
-
-  <div class="clear"></div>
-
-  <p class="option"><span></span></p>
-  <br />
-  <p><%= link_to_function "Terms of Service", "alert('This will link to the terms of service page')" %></p>
-
-  <div class="clear"></div>
-
-  <p class="option"><span></span></p>
-  <br />
-  <div><%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-  <%= f.password_field :current_password %></div>
-  <ul>
-    <li>
-      <%= f.submit "Update", :class => 'submit' %>
-    </li>
-  </ul>
-  <div class="clear"></div>
-<% end %>
-
-<h3>Cancel my account</h3>
-
-<p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), :confirm => "Are you sure?", :method => :delete %>.</p>
+  <div id="basic-modal-content"></div>
