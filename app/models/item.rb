@@ -30,7 +30,7 @@ class Item < ActiveRecord::Base
   validates :user_id, :post_id, :presence => true
   validates :post_id, :uniqueness => {:scope => [:user_id]}
 
-  scope :saved_by, lambda{ |user| joins(:set_asides).where(:user_id => user.id) }
+  scope :saved_by, lambda{ |user| joins(:set_asides).where('set_asides.user_id = ?', user.id) }
 
   def self.between(params)
     return scoped unless params[:above].present? && params[:below].present?
