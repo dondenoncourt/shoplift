@@ -1,17 +1,15 @@
 App::Application.routes.draw do
 
-
   get "page/home", :to => "page#home"
   get "page/saved", :to => "page#saved"
   get "page/follow_interests", :to => "page#follow_interests"
-  get "page/follow_interests_subcat", :to => "page#follow_interests_subcat"
-
-  get "page/profile/edit", :to => "page#profile_edit"
-  get "modal/upload_avatar", :to => "page#upload_avatar"
+  get "/terms_of_service", :to => 'page#terms_of_service'
 
   get "modal/report_tag", :to => "page#report_tag"
   get "modal/report_item", :to => "page#report_item"
   get "modal/relift", :to => "page#relift"
+
+  get 'shoplifters', :to => 'users#index'
 
   #resources :images TODO delete this and any other image artifacts
   resources :posts

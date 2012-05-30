@@ -1,25 +1,128 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<% provide(:title, 'Profile Edit') %>
+<%= render 'users/profile_info', user: resource %>
 
-<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
-  <%= devise_error_messages! %>
+  <div class="rightCol">
+    <div class="entry settings">
+      <h2>Edit Your Profile Settings</h2>
 
-  <div><%= f.label :email %><br />
-  <%= f.email_field :email %></div>
+      <h3>Personal Settings</h3>
+      <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
+        <%= devise_error_messages! %>
+        <ul class="formList">
+          <li>
+            <%= f.label :full_name, "Name" %>
+            <%= f.text_field :full_name, :class => 'text' %>
+          </li>
+          <li>
+            <%= f.label :email %>
+            <%= f.email_field :email, :class => 'text' %>
+          </li>
+          <li>
+            <%= f.label :password %>
+            <%= f.password_field :password, :class => 'text' %>
+          </li>
+          <li>
+            <%= f.label :password_confirmation %>
+            <%= f.password_field :password_confirmation, :class => 'text' %>
+          </li>
+          <li>
+            <%= f.label :country, "Country*" %>
+            <%= f.country_select :country, ["United States", "Canada", "United Kingdom"], :class => 'text' %>
+          </li>
+          <li>
+            <%= f.label :zipcode, "Zip Code" %>
+            <%= f.text_field :zipcode, :class => 'text' %>
+          </li>
+          <li>
+            <%= f.label :biography, "Blurb" %>
+            <%= f.text_area :biography, :size => "80x5" %>
+            <span class="characterCount"><%= 110 - current_user.biography.length %> Characters Left</span>
+          </li>
+          <li>
+            <%= f.label :website %>
+            <%= f.text_field :url, :class => 'text' %>
+          </li>
+          <li>
+            <%= f.label :avatar, "Photo or Logo" %>
+            <%= image_tag resource.avatar.url(:thumb), :id => "avatar_thumb" %>
+            <p>
+              <%= f.file_field :avatar, :id => 'fileupload' %>
+              <%= link_to_function "Refresh from Facebook", "alert('Not yet!')" %><br />
+              <%= link_to_function "Refresh from Twitter", "alert('Not yet!')" %>
+            </p>
+          </li>
+          <li>
+            <%= f.label :sex %>
+            <%= f.select :sex, options_for_select([["Male", true], ["Female", false]]) %>
+          </li>
+          <li>
+            <%= f.label :birthdate, "Birthdate" %>
+            <%= f.date_select :birthdate, :order => [:month, :day, :year], :start_year => 1920, :end_year => Time.now.year - 13, :prompt => true %>
+          </li>
+        </ul>
 
-  <div><%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-  <%= f.password_field :password, :autocomplete => "off" %></div>
+        <h3>Notification Settings</h3>
+        <ul class="formList radioList">
+          <li>
+            <div class="radioDesc">Tell me when someone new starts following me:</div>
+            <%= f.radio_button :notify_new_follower, true, :id => "user_new_follow_yes" %>
+            <%= f.label :new_follow_yes, "Yes" %>
 
-  <div><%= f.label :password_confirmation %><br />
-  <%= f.password_field :password_confirmation %></div>
+            <%= f.radio_button :notify_new_follower, false, :id => "user_new_follow_no"  %>
+            <%= f.label :new_follow_no, "No" %>
+          </li>
+          <li>
+            <div class="radioDesc">Tell me when someone relifts an item of mine:</div>
+            <%= f.radio_button :notify_relift, true, :id => "user_relift_yes" %>
+            <%= f.label :relift_yes, "Yes" %>
 
-  <div><%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-  <%= f.password_field :current_password %></div>
+            <%= f.radio_button :notify_relift, false, :id => "user_relift_no"  %>
+            <%= f.label :relift_no, "No" %>
+          </li>
+          <li>
+            <div class="radioDesc">Update me on what I've been missing:</div>
+            <%= f.radio_button :notify_missing, "daily", :id => "user_missing_daily" %>
+            <%= f.label :missing_daily, "Daily" %>
 
-  <div><%= f.submit "Update" %></div>
-<% end %>
+            <%= f.radio_button :notify_missing, "weekly", :id => "user_missing_weekly"  %>
+            <%= f.label :missing_weekly, "Weekly" %>
 
-<h3>Cancel my account</h3>
+            <%= f.radio_button :notify_missing, "monthly", :id => "user_missing_monthly" %>
+            <%= f.label :missing_monthly, "Monthly" %>
 
-<p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), :confirm => "Are you sure?", :method => :delete %>.</p>
+            <%= f.radio_button :notify_missing, "never", :id => "user_missing_never"  %>
+            <%= f.label :missing_never, "Never" %>
+          </li>
+        </ul>
 
-<%= link_to "Back", :back %>
+        <div style="display:none;">
+          <h3>Linked Accounts</h3>
+          <ul class="formList">
+            <li>
+              <label>Facebook</label>
+              <div class="pillbox"><a href="#" class="onLink">On</a><a href="#" class="current offLink">Off</a></div>
+            </li>
+            <li>
+              <label>Twitter</label>
+              <div class="pillbox"><a href="#" class="onLink">On</a><a href="#" class="current offLink">Off</a></div>
+            </li>
+            <li>
+              <label>Pinterest</label>
+              <div class="pillbox"><a href="#" class="onLink">On</a><a href="#" class="current offLink">Off</a></div>
+            </li>
+          </ul>
+
+          <h3>Follow Me</h3>
+          <p>Embed this button on your blog or website! Just copy the code below and paste it into your site where you'd like it to appear.</p>
+          <div class="code">&lt;a href="#"&gt;Lorem Ipsum Code Lorem Ipsum Code Lorem Ipsum Code Lorem Ipsum Code&lt;/a&gt;</div>
+          <div class="divider"></div>
+        </div>
+        <div>
+          <%= f.submit "Save Settings", :class => 'submit' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="clear"></div>
+  <div id="basic-modal-content"></div>

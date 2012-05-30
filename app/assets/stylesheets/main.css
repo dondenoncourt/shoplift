@@ -1228,7 +1228,6 @@ ul.formList li {
 
 ul.formList input.text,
 ul.formList select {
-	width: 200px;
 	margin-right: 10px;
 }
 
@@ -1248,8 +1247,6 @@ input#photo {
 }
 
 ul.formList img {
-	width: 80px;
-	height: 80px;
 	float: left;
 	display: inline;
 	margin-right: 10px;

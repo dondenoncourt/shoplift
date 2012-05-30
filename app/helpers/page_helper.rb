@@ -14,9 +14,7 @@ module PageHelper
       :url        => url,
       :loaderMsg  => 'Loading more results'
     }
-
     container && opts[:container] ||= container
-
     javascript_tag("$('#results').pageless(#{opts.to_json});")
   end
 

@@ -15,6 +15,7 @@ describe TimelinesController do
     end
 
     it "returns recent items" do
+      pending 'in progress'
       sign_in @user
       get :index, :format => :json
       response.body.should =~ /"id":#{Item.find_by_user_id(@user.id).id}/m

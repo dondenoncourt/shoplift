@@ -53,10 +53,6 @@ class Item < ActiveRecord::Base
     post.photo
   end
 
-  #def comment
-    #post.comment
-  #end
-
   def items
     post.items
   end

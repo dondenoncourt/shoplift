@@ -1,5 +1,5 @@
 class PageController < ApplicationController
-  before_filter :authenticate_user!, :except => :home
+  before_filter :authenticate_user!, :except => [:home, :terms_of_service]
   #after_filter :email_don
 
   layout nil, :only => [:upload_avatar, :report_tag, :report_item, :relift]
@@ -9,12 +9,6 @@ class PageController < ApplicationController
   end
 
   def saved
-  end
-
-  def profile_edit
-  end
-
-  def upload_avatar
   end
 
   def relift
@@ -36,14 +30,14 @@ class PageController < ApplicationController
     @item = Item.find(params[:post_id])
   end
 
-  def follow_interests_subcat
-  end
-
   def follow_interests
     if current_user.created_at.to_date == Date.today &&
        Subscription.find_by_follower_id(current_user.id) == nil
         @new_user = true
     end
+  end
+
+  def terms_of_service
   end
 
   private

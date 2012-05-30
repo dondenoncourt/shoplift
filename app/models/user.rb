@@ -51,7 +51,7 @@ class User < ActiveRecord::Base
                   :biography, :url, :hometown, :birthdate, :private, :status,
                   :first_name, :last_name, :country, :vanity_url, :zipcode,
                   :notify_new_follower, :notify_relift, :notify_missing,
-                  :avatar
+                  :avatar, :tos
   has_many :posts
   has_many :subscriptions
   has_many :followers, :class_name => "Subscription"
@@ -60,18 +60,39 @@ class User < ActiveRecord::Base
 
   has_attached_file :avatar,
                     :styles => {
-                      :tiny => "20x20>",
-                      :thumb => "70x70>",
+                      :tiny => "20x20#",
+                      :thumb => "70x70#",
                       :small => "200x200>"
                     },
                     :storage => :s3,
                     :s3_credentials => "#{Rails.root}/config/s3.yml",
-                    :path => "/:style/:id/:filename"
+                    :path => "/:style/:id/:filename",
+                    :default_url => "/assets/avatars/:style/missing.png"
 
   validates :zipcode, :sex, :username, presence: true
   validates(:password_confirmation, presence: true, :unless => lambda {|u| u.password.nil? })
+  validates :tos, :acceptance => true
 
   before_validation :set_username
+
+  default_scope where('users.status = 1')
+  #
+  ### Scopes for followee suggestions. They could also be methods if needed but must return an AR relation
+  #
+  # scope :popular
+  # scope :recommended
+  # scope :staff_picks
+  # scope :trending
+  # scope :local_favorites
+  # scope :friends
+
+  def self.by_option(option)
+    if option.present? && self.respond_to?(option)
+      self.send(option)
+    else
+      scoped
+    end
+  end
 
   def set_username
     self.username = self.email
@@ -99,5 +120,13 @@ class User < ActiveRecord::Base
         .where("items.status = 1 AND items.user_id = ?", self.id)
         .order("items.created_at DESC")
         .group("items.id")
+  end
+
+  def update_with_password(params={})
+    if params[:password].blank?
+      params.delete(:password)
+      params.delete(:password_confirmation) if params[:password_confirmation].blank?
+    end
+    update_attributes(params)
   end
 end
