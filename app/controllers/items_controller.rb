@@ -107,7 +107,6 @@ params[:name] ||= 'TODO get name in bookmarklet.js'
       @item.post.increment!(:relifts)
       render :partial => 'item', :locals => {:item => @new_item}, :status => 201
     else
-      puts 'oh no'
       return_error_messages(@new_item,"Failed to relift item")
     end
   end
