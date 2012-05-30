@@ -31,7 +31,7 @@
 <script>
   $('#addTag').click(function () {
     var countOfTags = $('#tagList li').size();
-    $('#tagList').append('<li><input type="hidden" name="hashtag_value['+countOfTags+']" value="'+$('#hashtag').val()+'"/>'+$('#hashtag').val()+'</li>');
+    $('#tagList').append('<li>'+$('#hashtag').val()+'</li>');
     $('#hashtag').val('Add another Tag');
   });
 
@@ -56,15 +56,32 @@
       dataType:'json',
       data: $(this).serialize(),
       success:function(data) {
-        // now add the hashtags
+        var itemId = data.id;
+        addHashtags(itemId)
         $.modal.close();
       },
       error:function(xhr,textStatus,errorThrown){
         alert(xhr.responseText);
+        $.modal.close();
       }
     });
     return false;
   });
+  function addHashtags(itemId) {
+    $('#tagList').find('li').each(function () {
+      var hashtag = $(this).html();
+      $.ajax({
+        url:'/hashtags/create',
+        type:'POST',
+        dataType:'json',
+        data: 'item_id='+itemId+'&hashtag_value='+hashtag,
+        success:function(data) {},
+        error:function(xhr,textStatus,errorThrown){
+          alert(xhr.responseText);
+        }
+      });
+    });
+  }
   $('.simplemodal-close').click(function () {
       $.modal.close();
       return false;
