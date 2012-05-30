@@ -46,6 +46,14 @@ class PageController < ApplicationController
   def contact
   end
 
+  def about
+    if Rails.env.production?
+      @users = User.where('full_name IN (?)', ['John Harrington', 'Brandon Fail']).limit(2)
+    else
+      @users = [User.first, User.last]
+    end
+  end
+
   private
 
   def email_don

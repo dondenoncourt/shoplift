@@ -3,7 +3,7 @@
     <a href="#"><%= image_tag user.avatar.url(:small), :size => "175x175" %></a>
     <div class="personMeta">
       <h2><%= user.full_name %><br/><span class="location"><%= user.hometown %></span></h2>
-      <%= render 'profile_stats', user: user %>
+      <%= render 'users/profile_stats', user: user %>
       <div class="profileText"><%= user.biography %></div>
       <% if current_user.following?(user) %>
         <%= link_to "Unfollow", "#", :class => 'button' %>

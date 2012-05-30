@@ -1,0 +1,23 @@
+<% provide(:title, 'About Us') %>
+<div id="content" class="internal help">
+  <h2>The Idea</h2>
+  <div class="entry">
+    <p>Our goal is to create the best possible place to go shopping.</p>
+
+    <p>A mall where you get to handpick all the stores you see.<br />
+    A catalog that's always got fresh new items.<br />
+    A place to showcase your unique taste.<br />
+    A chance to try your hand at curating a collection that sells.</p>
+
+    <p>For more of our thoughts, check out our blog.</p>
+    <p>For a quick tutorial, check out How it works.</p>
+  </div>
+
+  <h2>The Founders</h2>
+  <%= render @users %>
+
+  <h2>Contact Us</h2>
+  <div class='entry'>
+    <p>Get in touch with us <%= link_to "here", contact_path %>.</p>
+  </div>
+</div>
