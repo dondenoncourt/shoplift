@@ -42,7 +42,6 @@ class SubscriptionsController < ApplicationController
     subscription.update_attribute(:status, status)
 
     if subscription.persisted?
-      # send email to user
       render :partial => 'users/user', :locals => { :user => user }, :status => 201
     else
       return_error_messages(subscription, "Error adding subscription")

@@ -1,5 +1,5 @@
 class UserMailer < ActionMailer::Base
-  default from: "dondenoncourt@gmail.com"
+  default from: "[The Shoplift] <no-reply@theshoplift.com>"
 
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:
@@ -11,7 +11,7 @@ class UserMailer < ActionMailer::Base
 
     mail to: "dondenoncourt@gmail.com",
         subject: "test"
-        
+
   end
 
   # Subject can be set in your I18n file at config/locales/en.yml
@@ -22,5 +22,13 @@ class UserMailer < ActionMailer::Base
   def welcome(user)
     @user = user
     mail to: @user.email
+  end
+
+  def follower_notification(user, follower)
+    @user = user
+    @follower = follower
+    mail to: user.email,
+         subject: "[The Shoplift] You have a new follower!",
+         content_type: "text/html"
   end
 end

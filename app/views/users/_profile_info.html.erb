@@ -4,10 +4,8 @@
     <h2><%= user.full_name %><br/><span class="location"><%= user.hometown %></span></h2>
     <% if current_user.id == user.id %>
       <%= link_to "Edit Profile", edit_user_registration_path, :class => "button buttonOn" %>
-    <% elsif current_user && current_user.following?(user) %>
-      <%= link_to "Following", '#', :class => "button buttonOn" %>
     <% else %>
-      <%= link_to_function "Follow", 'alert("Not implemented yet.");', :class => "button buttonOn" %>
+    <%= link_to_function current_user.following?(user) ? 'Unfollow' : 'Follow', "handleFollow(#{user.id}, $(this))", :class => 'button buttonOn' %>
     <% end %>
   </div>
   <%= render 'users/profile_stats', user: user %>
