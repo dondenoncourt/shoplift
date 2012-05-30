@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_filter :authenticate_user!
 
   def index
     users
@@ -91,7 +92,6 @@ class UsersController < ApplicationController
   #   - :id -> User id
   #   - :user -> Array of user data
   def update
-    authenticate_user!
     ## Check if user is updating themselve or another (must be admin) ##
     @user = User.find(params[:id])
     if @user.update_attributes(params[:user])
@@ -107,7 +107,6 @@ class UsersController < ApplicationController
   # * *Args*    :
   #   - :id -> User id
   def destroy
-    authenticate_user!
     ## Check if user is updating themselve or another (must be admin) ##
     @user = User.find(params[:id])
     @user.deactivate

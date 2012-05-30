@@ -39,17 +39,38 @@ function setBioCount() {
 }
 
 function handleFollow(user_id, link) {
+  if (link.text() == 'Follow') {
+    followUser(user_id, link);
+  } else {
+    unfollowUser(user_id, link);
+  };
+}
+
+function followUser(user_id, link) {
   $.ajax({
     url:'/subscriptions',
     type:'POST',
-    data: 'user_id=' + user_id,
+    data: { user_id: user_id },
     dataType:'json',
     success:function(data) {
-      link.attr('disabled', 'disabled');
       link.text("Unfollow");
     },
     error:function(xhr,textStatus,errorThrown){
-      alert(xhr.responseText);
+      alert(errorThrown);
+    }
+  });
+}
+
+function unfollowUser(user_id, link) {
+  $.ajax({
+    url:'/subscriptions/users/' + user_id,
+    type:'DELETE',
+    dataType:'json',
+    success:function(data) {
+      link.text("Follow");
+    },
+    error:function(xhr,textStatus,errorThrown){
+      alert('Error: ' + errorThrown);
     }
   });
 }

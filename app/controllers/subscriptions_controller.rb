@@ -1,16 +1,16 @@
 class SubscriptionsController < ApplicationController
-  
+  before_filter :authenticate_user!, :except => [:show]
+
   # Fetch all current users subscriptions
   # * *Request*    :
   #   - GET /subscriptions
   # * *Args*    :
   #   - void
   def index
-    authenticate_user!
     params[:id] = current_user.id
     return show
   end
-  
+
   # Fetch all subscriptions for specified user
   # * *Request*    :
   #   - GET /subscriptions/users/:id
@@ -24,46 +24,44 @@ class SubscriptionsController < ApplicationController
         return render_error(404,"Subscriptions not found")
       end
     end
-    
+
     @subscriptions = Subscription.joins(:user) \
                                  .where("subscriptions.follower_id = ? AND subscriptions.status = 1",@user.id)
     render :show
   end
-  
+
   # Subscribed to user
   # * *Request*    :
   #   - POST /subscriptions
   # * *Args*    :
   #   - :user_id -> User id
   def create
-    authenticate_user!
-    if Subscription.where("user_id = ? AND follower_id = ? AND status != 0",params[:user_id],current_user.id).first
-      return render_error(406,"Subscription already exists")
+    user = User.find(params[:user_id])
+    status = user.private ? 2 : 1
+    subscription = Subscription.where(:user_id => user.id, :follower_id => current_user.id).first_or_create
+    subscription.update_attribute(:status, status)
+
+    if subscription.persisted?
+      # send email to user
+      render :partial => 'users/user', :locals => { :user => user }, :status => 201
+    else
+      return_error_messages(subscription, "Error adding subscription")
     end
-    @user = User.where(:id => params[:user_id], :status => 1).first!
-    status = @user.private ? 2 : 1
-    @subscription = Subscription.new(:user_id => params[:user_id], :follower_id => current_user.id, :status => status)
-    
-    if !@subscription.save
-      return return_error_messages(@subscripion,"Error adding subscription")
-    end
-    
-    render :partial => 'users/user', :locals => {:user => @subscription.user}, :status => 201
   end
 
   # Unsubscribe
   # * *Request*    :
   #   - DELETE /subscriptions/users/:id
   # * *Args*    :
-  #   - :id -> User id  
+  #   - :id -> User id
   def destroy
-    authenticate_user!
-    @subscription = Subscription.where("user_id = ? AND follower_id = ? AND status != 0",params[:id],current_user.id).first!
-    
-    if !@subscription.deactivate
-      return return_error_messages(@subscription,"Failed to delete subscription")
+    subscription = Subscription.where(:user_id => params[:id], :follower_id => current_user.id).first
+
+    if subscription.deactivate
+      render :json => "Subscription successfully deleted".to_json, :status => 200
+    else
+      return_error_messages(subscription, "Failed to delete subscription")
     end
-    render :json => "Subscription successfully deleted", :status => 200
   end
-  
+
 end

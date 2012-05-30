@@ -58,8 +58,8 @@ class ItemsController < ApplicationController
     post = {:user_id => current_user.id}
     post_include = ["name", "description", "brand", "retailer", "url", "price", "comment"]#, "hashtags_allowed"]
 
-puts "HACK: stuff values in required attributes"
-params[:name] ||= 'TODO get name in bookmarklet.js'
+    # puts "HACK: stuff values in required attributes"
+    params[:name] ||= 'TODO get name in bookmarklet.js'
 
     if params[:item].blank?
       post_include.each do |element|
@@ -79,7 +79,6 @@ params[:name] ||= 'TODO get name in bookmarklet.js'
 
     @item = Item.new({:user_id => current_user.id, :post_id => @post.id})
     if @item.save
-
       render :partial => 'item', :locals => {:item => @item}, :status => 201
     else
       return_error_messages(@item,"Failed to create item")

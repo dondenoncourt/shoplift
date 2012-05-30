@@ -99,11 +99,7 @@ class User < ActiveRecord::Base
   end
 
   def subscribed_to(user)
-    if self.id != user.id && Subscription.where('user_id = ? AND follower_id = ? AND status = 1',user.id,self.id).blank?
-      return false
-     else
-       return true
-    end
+    self.id != user.id && Subscription.where(:user_id => user.id, :follower_id => self.id, :status => 1).first.present?
   end
   alias following? subscribed_to
 
