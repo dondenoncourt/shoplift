@@ -40,6 +40,9 @@ class PageController < ApplicationController
   def terms_of_service
   end
 
+  def privacy
+  end
+
   private
 
   def email_don

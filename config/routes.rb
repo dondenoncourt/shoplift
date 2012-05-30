@@ -4,6 +4,7 @@ App::Application.routes.draw do
   get "page/saved", :to => "page#saved"
   get "page/follow_interests", :to => "page#follow_interests"
   get "/terms_of_service", :to => 'page#terms_of_service'
+  get "/privacy", :to => 'page#privacy'
 
   get "modal/report_tag", :to => "page#report_tag"
   get "modal/report_item", :to => "page#report_item"
