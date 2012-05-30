@@ -830,6 +830,11 @@ div.personProducts li img {
 	border-radius: 3px;
 }
 
+.interestWrap .small_edit {
+  font-size: 12px;
+  float: right;
+}
+
 
 /*---------- Internal Pages ----------*/
 

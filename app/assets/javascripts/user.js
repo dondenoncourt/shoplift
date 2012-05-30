@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-  $('.onLink, .offLink, .byInterest').live('click', function () {
+  $('.onLink, .offLink').live('click', function () {
     alert('Coming Soon!');
     return false;
   });

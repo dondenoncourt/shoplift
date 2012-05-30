@@ -57,6 +57,7 @@ class User < ActiveRecord::Base
   has_many :followers, :class_name => "Subscription"
   has_many :hashtags
   has_many :hashtag_values, :through => :hashtags
+  has_and_belongs_to_many :roles
 
   has_attached_file :avatar,
                     :styles => {
@@ -95,6 +96,14 @@ class User < ActiveRecord::Base
     end
   end
 
+  def self.by_category(category)
+    if category.present? && Category.where(:param => category).first.present?
+      scoped # TODO
+    else
+      scoped
+    end
+  end
+
   def set_username
     self.username = self.email
   end
@@ -126,4 +135,13 @@ class User < ActiveRecord::Base
     end
     update_attributes(params)
   end
+
+  def is_following_enough?
+    followees.count > 0
+  end
+
+  def has_role?(role)
+    self.roles.send(role).present?
+  end
+  alias role? has_role?
 end

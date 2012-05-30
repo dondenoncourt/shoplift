@@ -1,0 +1,21 @@
+<div id="content" class="internal help">
+  <h2>Edit Category: <%= @category.name %></h2>
+  <div class="entry">
+    <%= form_for @category do |f| -%>
+      <h3>Add/Remove Tags</h3>
+      <ul>
+        <% @hashtags.each do |hashtag| %>
+          <li>
+            <label>
+              <%= check_box_tag "category[hashtag_value_ids][]", hashtag.id, @category.hashtag_values.include?(hashtag) %>
+              <%= hashtag.value %>
+            </label>
+          </li>
+        <% end %>
+      </ul>
+      <br />
+      <%= hidden_field_tag "category[hashtag_value_ids][]", nil %>
+      <p><%= f.submit "Update Category", :class => "submit" %></p>
+    <% end -%>
+  </div>
+</div>

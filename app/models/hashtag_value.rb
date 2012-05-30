@@ -9,5 +9,7 @@
 #
 
 class HashtagValue < ActiveRecord::Base
-  
+  has_many :hashtags
+  has_many :category_hashtag_values
+  has_many :categories, :through => :category_hashtag_values
 end
