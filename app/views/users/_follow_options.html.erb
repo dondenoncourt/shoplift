@@ -1,0 +1,26 @@
+  <h2>Follow Shoplifters</h2>
+  <ul class="followOptions">
+    <li><%= link_to "Recommended", shoplifters_path(:option => 'recommended'), :class => 'suggestions' %></li>
+    <li><%= link_to "Staff Picks", shoplifters_path(:option => 'staff_picks'), :class => 'suggestions' %></li>
+    <li><%= link_to "Most Popular", shoplifters_path(:option => 'popular'), :class => 'suggestions' %></li>
+    <li><%= link_to "Trending Now", shoplifters_path(:option => 'trending'), :class => 'suggestions' %></li>
+    <li><%= link_to "Local Favorites", shoplifters_path(:option => 'local_favorites'), :class => 'suggestions' %></li>
+    <li><%= link_to "Your Friends", shoplifters_path(:option => 'friends'), :class => 'suggestions' %></li>
+
+    <li> <%= link_to "By Interest", page_follow_interests_path %> </li>
+  </ul>
+  <ul class="followInterest">
+    <li><a href="#" class="byInterest">Runway Fashion</a></li>
+    <li><a href="#" class="byInterest">Wear-to-work</a></li>
+    <li><a href="#" class="byInterest">School Clothes</a></li>
+    <li><a href="#" class="byInterest">The Life of Leisure</a></li>
+    <li><a href="#" class="byInterest">Beauty Products</a></li>
+    <li><a href="#" class="byInterest">The Modern Home</a></li>
+    <li><a href="#" class="byInterest">Worthwhile Technology</a></li>
+    <li><a href="#" class="byInterest">Foodie Supplies</a></li>
+  </ul>
+<script>
+
+
+</script>
+

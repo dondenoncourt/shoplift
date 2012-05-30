@@ -1,0 +1,13 @@
+<% provide(:title, 'Follow Shoplifters') %>
+<div class="leftCol">
+  <%= render "follow_options" %>
+</div>
+
+<div class="rightCol">
+  <div id="results"><%= render @users %></div>
+  <%= will_paginate(@users) %>
+  <%= pageless(@users.total_pages, shoplifters_path(:option => params[:option])) %>
+</div>
+
+
+<div class="clear"></div>

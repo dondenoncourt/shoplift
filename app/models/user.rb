@@ -75,6 +75,25 @@ class User < ActiveRecord::Base
 
   before_validation :set_username
 
+  default_scope where('users.status = 1')
+  #
+  ### Scopes for followee suggestions. They could also be methods if needed but must return an AR relation
+  #
+  # scope :popular
+  # scope :recommended
+  # scope :staff_picks
+  # scope :trending
+  # scope :local_favorites
+  # scope :friends
+
+  def self.by_option(option)
+    if option.present? && self.respond_to?(option)
+      self.send(option)
+    else
+      scoped
+    end
+  end
+
   def set_username
     self.username = self.email
   end
