@@ -43,6 +43,9 @@ class PageController < ApplicationController
   def privacy
   end
 
+  def contact
+  end
+
   private
 
   def email_don

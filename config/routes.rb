@@ -5,6 +5,7 @@ App::Application.routes.draw do
   get "page/follow_interests", :to => "page#follow_interests"
   get "/terms_of_service", :to => 'page#terms_of_service'
   get "/privacy", :to => 'page#privacy'
+  get "/contact", :to => 'page#contact'
 
   get "modal/report_tag", :to => "page#report_tag"
   get "modal/report_item", :to => "page#report_item"
