@@ -36,7 +36,7 @@
           <li>
             <%= f.label :biography, "Blurb" %>
             <%= f.text_area :biography, :size => "80x5" %>
-            <span class="characterCount"><%= 110 - current_user.biography.length %> Characters Left</span>
+            <span class="characterCount"><%= 110 - (current_user.biography ||= '').length %> Characters Left</span>
           </li>
           <li>
             <%= f.label :website %>
