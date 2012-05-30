@@ -116,8 +116,7 @@ class ParserController < ApplicationController
   end 
 
   def bookmarklet
-    puts 'running bookmarklet'
-    puts params
+    authenticate_user!
   end
   
 end
