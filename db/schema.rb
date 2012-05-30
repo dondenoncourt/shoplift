@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120529133415) do
+ActiveRecord::Schema.define(:version => 20120530192940) do
 
   create_table "flag_types", :force => true do |t|
     t.string   "name",        :limit => 60, :null => false
@@ -193,6 +193,7 @@ ActiveRecord::Schema.define(:version => 20120529133415) do
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
+    t.string   "authentication_token"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
