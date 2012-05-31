@@ -3,6 +3,7 @@ App::Application.routes.draw do
   get "page/home", :to => "page#home"
   get "page/saved", :to => "page#saved"
   get "/terms_of_service", :to => 'page#terms_of_service'
+  get "/buttons", :to => 'page#buttons'
   get "/privacy", :to => 'page#privacy'
   get "/contact", :to => 'page#contact'
   get "/about", :to => 'page#about'
