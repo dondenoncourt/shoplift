@@ -40,6 +40,8 @@
 #  count_of_followers     :integer(4)      default(0)
 #  latitude               :float
 #  longitude              :float
+#  count_of_posts         :integer(4)      default(0)
+#  count_of_hashtags      :integer(4)      default(0)
 #
 
 class User < ActiveRecord::Base
@@ -86,9 +88,9 @@ class User < ActiveRecord::Base
   ### Scopes for followee suggestions. They could also be methods if needed but must return an AR relation
   #
   scope :popular, order('count_of_followers DESC')
-  scope :recommended, order('count_of_followers DESC')
-  scope :staff_picks, order('count_of_followers DESC')
-  scope :trending, order('count_of_followers DESC')
+  scope :recommended, order('count_of_posts DESC, count_of_hashtags DESC')
+  scope :staff_picks, order('count_of_followers DESC, count_of_posts DESC, count_of_hashtags DESC')
+  scope :trending, where("exists (select * from items where items.user_id = users.id and items.created_at > ? ) ", Date.today - 7).order('count_of_followers DESC')
   scope :local_favorites, lambda{ |user| User.near([user.latitude, user.longitude], 20) }
   # scope :friends
 
