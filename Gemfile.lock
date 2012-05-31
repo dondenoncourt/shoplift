@@ -69,6 +69,7 @@ GEM
     faraday (0.8.1)
       multipart-post (~> 1.1)
     fastimage (1.2.13)
+    geocoder (1.1.2)
     hashie (1.2.0)
     highline (1.6.12)
     hike (1.2.1)
@@ -212,6 +213,7 @@ DEPENDENCIES
   country_select
   devise
   fastimage
+  geocoder
   jbuilder
   jquery-rails (>= 1.0.12)
   mysql2

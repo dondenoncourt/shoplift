@@ -37,6 +37,11 @@
 #  avatar_file_size       :integer(4)
 #  avatar_updated_at      :datetime
 #  authentication_token   :string(255)
+#  count_of_followers     :integer(4)      default(0)
+#  latitude               :float
+#  longitude              :float
+#  count_of_posts         :integer(4)      default(0)
+#  count_of_hashtags      :integer(4)      default(0)
 #
 
 users_001:

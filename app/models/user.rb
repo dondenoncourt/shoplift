@@ -37,6 +37,11 @@
 #  avatar_file_size       :integer(4)
 #  avatar_updated_at      :datetime
 #  authentication_token   :string(255)
+#  count_of_followers     :integer(4)      default(0)
+#  latitude               :float
+#  longitude              :float
+#  count_of_posts         :integer(4)      default(0)
+#  count_of_hashtags      :integer(4)      default(0)
 #
 
 class User < ActiveRecord::Base
@@ -82,16 +87,16 @@ class User < ActiveRecord::Base
   #
   ### Scopes for followee suggestions. They could also be methods if needed but must return an AR relation
   #
-  # scope :popular
-  # scope :recommended
-  # scope :staff_picks
-  # scope :trending
-  # scope :local_favorites
+  scope :popular, order('count_of_followers DESC')
+  scope :recommended, order('count_of_posts DESC, count_of_hashtags DESC')
+  scope :staff_picks, order('count_of_followers DESC, count_of_posts DESC, count_of_hashtags DESC')
+  scope :trending, where("exists (select * from items where items.user_id = users.id and items.created_at > ? ) ", Date.today - 7).order('count_of_followers DESC')
+  scope :local_favorites, lambda{ |user| User.near([user.latitude, user.longitude], 20) }
   # scope :friends
 
-  def self.by_option(option)
+  def self.by_option(option, args=nil)
     if option.present? && self.respond_to?(option)
-      self.send(option)
+      self.send(option, args)
     else
       scoped
     end
@@ -156,4 +161,16 @@ class User < ActiveRecord::Base
     self.roles.send(role).present?
   end
   alias role? has_role?
+
+  def full_street_address
+    %{hometown zipcode country}
+  end
+
+  #geocoded_by :full_street_address   # can also be an IP address
+  def address
+    [hometown, zipcode, country].compact.join(', ')
+  end
+  geocoded_by :address   # can also be an IP address
+  after_validation :geocode          # auto-fetch coordinates
+
 end

@@ -13,7 +13,7 @@
 class Subscription < ActiveRecord::Base
   require 'status'
 
-  belongs_to :user, :conditions => ["users.status = 1"]
+  belongs_to :user, :conditions => ["users.status = 1"], :counter_cache => :count_of_followers
   belongs_to :follower, :class_name => 'User', :foreign_key => 'follower_id', :conditions => ["users.status = 1"]
 
   validates :user_id, :follower_id, :presence => true
