@@ -121,7 +121,7 @@ class UsersController < ApplicationController
 
   def users
     # we should probably remove the current user from this list
-    @users ||= User.by_option(params[:option]).by_category(params[:category]).paginate(per_page: 2, page: params[:page])
+    @users ||= User.by_option(params[:option], current_user).by_category(params[:category]).paginate(per_page: 2, page: params[:page])
   end
 
   def user

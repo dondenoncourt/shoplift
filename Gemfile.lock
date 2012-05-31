@@ -67,6 +67,7 @@ GEM
     execjs (1.4.0)
       multi_json (~> 1.0)
     fastimage (1.2.13)
+    geocoder (1.1.2)
     highline (1.6.12)
     hike (1.2.1)
     httparty (0.8.3)
@@ -195,6 +196,7 @@ DEPENDENCIES
   country_select
   devise
   fastimage
+  geocoder
   jbuilder
   jquery-rails (>= 1.0.12)
   mysql2

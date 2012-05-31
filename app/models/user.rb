@@ -38,6 +38,8 @@
 #  avatar_updated_at      :datetime
 #  authentication_token   :string(255)
 #  count_of_followers     :integer(4)      default(0)
+#  latitude               :float
+#  longitude              :float
 #
 
 class User < ActiveRecord::Base
@@ -87,13 +89,12 @@ class User < ActiveRecord::Base
   scope :recommended, order('count_of_followers DESC')
   scope :staff_picks, order('count_of_followers DESC')
   scope :trending, order('count_of_followers DESC')
-  # consider: http://paulbarry.com/articles/2009/06/27/zip-code-proximity-search-with-rails
-  # scope :local_favorites
+  scope :local_favorites, lambda{ |user| User.near([user.latitude, user.longitude], 20) }
   # scope :friends
 
-  def self.by_option(option)
+  def self.by_option(option, args=nil)
     if option.present? && self.respond_to?(option)
-      self.send(option)
+      self.send(option, args)
     else
       scoped
     end
@@ -147,4 +148,16 @@ class User < ActiveRecord::Base
     self.roles.send(role).present?
   end
   alias role? has_role?
+
+  def full_street_address
+    %{hometown zipcode country}
+  end
+
+  #geocoded_by :full_street_address   # can also be an IP address
+  def address
+    [hometown, zipcode, country].compact.join(', ')
+  end
+  geocoded_by :address   # can also be an IP address
+  after_validation :geocode          # auto-fetch coordinates
+  
 end
