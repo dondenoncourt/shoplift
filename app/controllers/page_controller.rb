@@ -6,6 +6,8 @@ class PageController < ApplicationController
 
   def home
     redirect_to timelines_path if user_signed_in?
+    path = Rails.root.to_s + "/app/assets/images/galleria/images/*"
+    @images = Dir.glob(path).collect{|f| File.basename(f)}
   end
 
   def saved

@@ -22,8 +22,19 @@
 </div>
 
 <div class="rightCol internal">
-  <p style="margin-bottom:20px"><img src="../img/slideshow-fpo.gif" alt="slideshow-fpo" width="652" height="394" /></p>
+  <div id="galleria"></div>
   <div class="blogFollow"><a href="#">Visit our blog</a>. <span style="padding: 0 5px">|</span> Follow us: <a href="#" class="facebook">Facebook</a> <a href="#" class="twitter">Twitter</a> <a href="#" class="pinterest">Pinterest</a>  <a href="#" class="tumblr">Tumblr</a></div>
 </div>
 
 <div class="clear"></div>
+
+<script>
+  var data = [
+    <% for image in @images[0..-1] %>
+      { image: "assets/galleria/images/<%= image %>" },
+    <% end %>
+    { image: "assets/galleria/images/<%= @images.last %>" }
+    ];
+  Galleria.loadTheme('assets/galleria.dots.js');
+  Galleria.run('#galleria', { dataSource: data });
+</script>
