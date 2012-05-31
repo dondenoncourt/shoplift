@@ -41,11 +41,10 @@
 
 class User < ActiveRecord::Base
   require 'status'
-  after_create :welcome
 
   # Include default devise modules. Others available are:
   # :encryptable, :confirmable, :lockable, :timeoutable
-  devise :database_authenticatable, :registerable, :recoverable, :trackable, :validatable, :token_authenticatable#, :omniauthable
+  devise :database_authenticatable, :registerable, :recoverable, :trackable, :validatable, :token_authenticatable, :omniauthable
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :full_name, :username, :sex,
@@ -71,12 +70,13 @@ class User < ActiveRecord::Base
                     :path => "/:style/:id/:filename",
                     :default_url => "/assets/avatars/:style/missing.png"
 
-  validates :zipcode, :sex, :username, presence: true
-  validates(:password_confirmation, presence: true, :unless => lambda {|u| u.password.nil? })
+  validates :sex, :username, :full_name, presence: true
   validates :tos, :acceptance => true
 
   before_validation :set_username
   before_save :ensure_authentication_token
+  after_create :send_welcome_email
+
 
   default_scope where('users.status = 1')
   #
@@ -105,6 +105,17 @@ class User < ActiveRecord::Base
     end
   end
 
+  def self.find_for_facebook_oauth(access_token, signed_in_resource=nil)
+    data = access_token.extra.raw_info
+    if user = self.find_by_email(data.email)
+      user
+    else # Create a user with a stub password.
+      hometown = data.location.name if data.location.present?
+      sex = data.gender == 'male'
+      self.create!(:full_name => data.name, :email => data.email, :password => Devise.friendly_token[0,20], :hometown => hometown, :sex => sex )
+    end
+  end
+
   def set_username
     self.username = self.email
   end
@@ -114,7 +125,7 @@ class User < ActiveRecord::Base
   end
   alias following? subscribed_to
 
-  def welcome
+  def send_welcome_email
     UserMailer.welcome(self).deliver
   end
 

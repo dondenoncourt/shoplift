@@ -2,7 +2,7 @@
 <div class="centerCol">
   <div class="entry new_user_signup">
 
-    <%= link_to_function "Sign up with Facebook", "alert('Not Yet!')", :class => 'facebookSignup' %>
+    <%= link_to "Sign up with Facebook", user_omniauth_authorize_path(:facebook), :class => 'facebookSignup' %>
     <br />
     <p class="option"><span>or</span></p>
 

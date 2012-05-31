@@ -14,6 +14,7 @@ gem 'aws-sdk'
 gem 'jquery-rails', '>= 1.0.12'
 gem 'country_select'
 gem 'will_paginate'
+gem 'omniauth-facebook'
 
 group :test, :development do
   gem 'rspec-rails'

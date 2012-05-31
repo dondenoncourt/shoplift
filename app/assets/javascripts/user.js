@@ -20,6 +20,10 @@ $(document).ready(function() {
     }
   });
 
+  $('.facebookSignup').live('click', function() {
+    $(this).replaceWith('<div style="text-align: center;"><img alt="Loading" src="/assets/loading.gif" /></div>');
+  });
+
   // We'd like to load shoplifter followee suggestions with ajax but that doesn't play nice with pageless.js
   // $('.suggestions').live('click', function () {
   //   $('li.current').removeClass('current');

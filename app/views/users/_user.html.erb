@@ -5,7 +5,11 @@
       <h2><%= user.full_name %><br/><span class="location"><%= user.hometown %></span></h2>
       <%= render 'users/profile_stats', user: user %>
       <div class="profileText"><%= user.biography %></div>
-      <%= link_to_function current_user.following?(user) ? 'Unfollow' : 'Follow', "handleFollow(#{user.id}, $(this))", :class => 'button' %>
+      <% if user_signed_in? %>
+        <%= link_to_function current_user.following?(user) ? 'Unfollow' : 'Follow', "handleFollow(#{user.id}, $(this))", :class => 'button' %>
+      <% else %>
+          <%= link_to "Follow", root_url, :class => 'button' %>
+      <% end %>
     </div>
   </div>
   <div class="personProducts">

@@ -3,7 +3,7 @@
     <h2><a href="#" class="showSignup">Sign In</a></h2>
     <div class="signinOptions" style="display: <%= params[:login_failed] ? 'block' : 'none' %>">
       <div class="divider"></div>
-      <%= link_to_function "Sign in with Facebook", "alert('Not Yet!')", :class => 'facebookSignup' %>
+      <%= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook), :class => 'facebookSignup' %>
       <p class="option"><span>or</span></p>
       <%= form_for :user, :url => user_session_path, :class => 'signIn' do |f| %>
         <%= devise_error_messages! %>

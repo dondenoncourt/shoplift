@@ -22,12 +22,13 @@ App::Application.routes.draw do
   #
   # Users
   #
-  devise_for :users, :controllers => {:registrations => "registrations"} #, :skip => [:registrations,:passwords,:unlocks]
+  devise_for :users, :controllers => { :registrations => "registrations", :omniauth_callbacks => "omniauth_callbacks" } #, :skip => [:registrations,:passwords,:unlocks]
   # makes domain/login work as well as domain/users/login
   devise_scope :user do
     get "login"  => "devise/sessions#new"
     get "logout" => "devise/sessions#destroy"
     #delete "logout" => "devise/sessions#destroy"
+    get '/users/auth/:provider' => 'users/omniauth_callbacks#passthru'
   end
   resources :users, :only => [:show,:create,:update,:destroy]
   get "users/validate_username/:username", :to => "users#validate_username", :defaults => { :format => :json }, :constraints => {:format => :json}

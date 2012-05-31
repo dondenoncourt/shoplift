@@ -1,5 +1,5 @@
 class PageController < ApplicationController
-  before_filter :authenticate_user!, :except => [:home, :terms_of_service]
+  before_filter :authenticate_user!, :only => [:saved, :relift, :report_tag, :report_item]
   #after_filter :email_don
 
   layout nil, :only => [:upload_avatar, :report_tag, :report_item, :relift]
