@@ -2,7 +2,6 @@ App::Application.routes.draw do
 
   get "page/home", :to => "page#home"
   get "page/saved", :to => "page#saved"
-  get "page/follow_interests", :to => "page#follow_interests"
   get "/terms_of_service", :to => 'page#terms_of_service'
   get "/privacy", :to => 'page#privacy'
   get "/contact", :to => 'page#contact'
@@ -16,6 +15,7 @@ App::Application.routes.draw do
 
   #resources :images TODO delete this and any other image artifacts
   resources :posts
+  resources :categories, :only => [:index, :edit, :update]
 
   root :to => "page#home"
 

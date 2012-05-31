@@ -11,7 +11,21 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120530192940) do
+ActiveRecord::Schema.define(:version => 20120530204233) do
+
+  create_table "categories", :force => true do |t|
+    t.string   "name"
+    t.string   "param"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "category_hashtag_values", :force => true do |t|
+    t.integer  "category_id"
+    t.integer  "hashtag_value_id"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
 
   create_table "flag_types", :force => true do |t|
     t.string   "name",        :limit => 60, :null => false

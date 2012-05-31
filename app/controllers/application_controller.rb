@@ -2,6 +2,9 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   # Return 404 when record is not found
   rescue_from ActiveRecord::RecordNotFound, :with => :render_active_record_error
+  rescue_from CanCan::AccessDenied do |exception|
+    redirect_to root_path, :alert => exception.message
+  end
 
   # Fetch all Room objects with boundaries
   #
