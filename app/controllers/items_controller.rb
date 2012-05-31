@@ -79,7 +79,10 @@ class ItemsController < ApplicationController
 
     @item = Item.new({:user_id => current_user.id, :post_id => @post.id})
     if @item.save
-      render :partial => 'item', :locals => {:item => @item}, :status => 201
+      respond_to do |format|
+        format.html { redirect_to user_path(current_user) }
+        format.json { render :partial => 'item', :locals => {:item => @item}, :status => 201 }
+      end
     else
       return_error_messages(@item,"Failed to create item")
     end

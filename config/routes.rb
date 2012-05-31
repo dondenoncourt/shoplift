@@ -74,6 +74,8 @@ App::Application.routes.draw do
   post "items/:id/edit", :to => "items#update", :defaults => { :format => :json }, :constraints => {:format => :json}
   post "items/:id/delete", :to => "items#destroy", :defaults => { :format => :json }, :constraints => {:format => :json}
 
+  get "createItem", :to => "items#create", :defaults => { :format => :html }
+
   #
   # Hashtags
   #

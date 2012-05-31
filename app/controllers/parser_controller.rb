@@ -116,7 +116,6 @@ class ParserController < ApplicationController
   end 
 
   def bookmarklet
-    authenticate_user!
   end
   
 end

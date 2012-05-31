@@ -36,6 +36,7 @@
 #  avatar_content_type    :string(255)
 #  avatar_file_size       :integer(4)
 #  avatar_updated_at      :datetime
+#  authentication_token   :string(255)
 #
 
 class User < ActiveRecord::Base
