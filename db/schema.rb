@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120530204233) do
+ActiveRecord::Schema.define(:version => 20120531133313) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -208,6 +208,7 @@ ActiveRecord::Schema.define(:version => 20120530204233) do
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
     t.string   "authentication_token"
+    t.integer  "count_of_followers",                    :default => 0
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

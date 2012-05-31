@@ -37,6 +37,7 @@
 #  avatar_file_size       :integer(4)
 #  avatar_updated_at      :datetime
 #  authentication_token   :string(255)
+#  count_of_followers     :integer(4)      default(0)
 #
 
 class User < ActiveRecord::Base
@@ -82,10 +83,11 @@ class User < ActiveRecord::Base
   #
   ### Scopes for followee suggestions. They could also be methods if needed but must return an AR relation
   #
-  # scope :popular
-  # scope :recommended
-  # scope :staff_picks
-  # scope :trending
+  scope :popular, order('count_of_followers DESC')
+  scope :recommended, order('count_of_followers DESC')
+  scope :staff_picks, order('count_of_followers DESC')
+  scope :trending, order('count_of_followers DESC')
+  # consider: http://paulbarry.com/articles/2009/06/27/zip-code-proximity-search-with-rails
   # scope :local_favorites
   # scope :friends
 
