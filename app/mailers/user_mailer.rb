@@ -1,5 +1,5 @@
 class UserMailer < ActionMailer::Base
-  default from: "[The Shoplift] <no-reply@theshoplift.com>"
+  default from: "no-reply@theshoplift.com"
 
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:
@@ -21,7 +21,7 @@ class UserMailer < ActionMailer::Base
   #
   def welcome(user)
     @user = user
-    mail to: @user.email
+    mail to: @user.email, from: "welcome@theshoplift.com"
   end
 
   def follower_notification(user, follower)
