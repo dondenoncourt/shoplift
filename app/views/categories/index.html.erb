@@ -4,13 +4,6 @@
 </div>
 
 <div class="rightCol">
-  <% if (@new_user) %>
-    <h2>Congrats! You're all signed up.</h2>
-    <p>
-      Get started by choosing a handful of Shoplifters to follow. You can follow friends and celebrities, or your favorite brands and stores. The items they share are the items you'll see when you log in.
-    </p>
-    <p>Click Follow to add a member to your list. If you change your mind, just click again to unfollow.</p>
-  <% end %>
   <ul class="interestWrap">
     <% @categories.each do |category| %>
       <li>
