@@ -1840,4 +1840,13 @@ ul.shareLinks {
 .field_with_errors {
   font-size: 1.3em;
   font-weight: 600;
-  color: #FF0202; }
+  color: #FF0202;
+}
+
+/*---------------------- GALLERIA --------------------------*/
+#galleria {
+  display: block;
+  height: 390px !important;
+  padding: 5px 10px;
+  width: 650px !important;
+}
