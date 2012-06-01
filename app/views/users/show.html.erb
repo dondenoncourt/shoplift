@@ -2,7 +2,15 @@
   <%= render 'profile_info', user: @user %>
   <div class="rightCol">
     <% if @items.empty? %>
-      This user doesn't have any posts yet.
+      <h2>You do not have any posts yet.</h2>
+      <p>You can add posts in several ways:</p>
+      <ul>
+        <li>
+         Click <%= link_to "Add", new_post_path, :class => 'modal_link' %> and insert TheShopList bookmarket to your browser's bookmarks, 
+          then, when shopping at a page you wish to post, simply click the Lift It bookmark in your bookmarks.
+        </li>
+        <li> Click re-lift on one of the posts on the <%= link_to "Follow", shoplifters_path %> page. </li>
+      </ul>
     <% else %>
       <%= render @items %>
       <div id="results"></div>

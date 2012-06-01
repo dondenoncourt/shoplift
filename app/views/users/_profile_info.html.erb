@@ -11,7 +11,7 @@
   <%= render 'users/profile_stats', user: user %>
   <div class="profileText"><%= user.biography %></div>
   <div class="profileUrl">
-    <a href="#"><%= user.url %></a>
+  <a href="http://<%= user.url %>"><%= user.url %></a>
   </div>
   <h3>Top Tags</h3>
   <ul class="topTags">
