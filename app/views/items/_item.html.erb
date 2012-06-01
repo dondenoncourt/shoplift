@@ -47,7 +47,7 @@
         </div>
         <div class="itemList">
           <div class="scrollWrap">
-            <ul class="tagList">
+            <ul class="tagList" id="tagListForItemId<%= item.id %>">
               <% item.hashtags.each do |tag| %>
                 <li><%= link_to user_image_and_value(tag.user, tag.hashtag_value.value), '#' %></li>
               <% end %>

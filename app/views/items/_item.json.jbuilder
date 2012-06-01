@@ -1,4 +1,5 @@
 json.id item.id
+json.parent_id item.parent_id
 json.name item.post.name
 json.description item.post.description
 json.brand item.post.brand

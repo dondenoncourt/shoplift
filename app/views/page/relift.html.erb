@@ -7,7 +7,7 @@
     <li>Price: $<%= @item.post.price.ceil %></li>
   </ul>
   <div class="divider"></div>
-  <form action="/items/<%= @item.id%>/relift" name="report_item_form" id="report_item_form">
+  <form action="/items/<%= @item.id%>/relift" name="relift_item_form" id="relift_item_form">
     <p>Comment (<span id="chars_left">0</span> characters left)</strong><p>
     <textarea name="comment" id="comment" rows="3" columns="40"></textarea>
     <div class="divider"></div>
@@ -32,7 +32,7 @@
   $('#addTag').click(function () {
     var countOfTags = $('#tagList li').size();
     $('#tagList').append('<li>'+$('#hashtag').val()+'</li>');
-    $('#hashtag').val('Add another Tag');
+    $('#hashtag').val('');
   });
 
   function commentCharsLeft() {
@@ -48,7 +48,7 @@
   $('#comment').keyup(function () {
     commentCharsLeft();
   });
-  $('#report_item_form').submit(function () {
+  $('#relift_item_form').submit(function () {
     var this_form = $(this);
     $.ajax({
       url:'/items/<%= @item.id%>/relift',
@@ -57,7 +57,8 @@
       data: $(this).serialize(),
       success:function(data) {
         var itemId = data.id;
-        addHashtags(itemId)
+        var parentId = data.parent_id;
+        addHashtags(itemId, parentId)
         $.modal.close();
       },
       error:function(xhr,textStatus,errorThrown){
@@ -67,7 +68,7 @@
     });
     return false;
   });
-  function addHashtags(itemId) {
+  function addHashtags(itemId, parentId) {
     $('#tagList').find('li').each(function () {
       var hashtag = $(this).html();
       $.ajax({
@@ -75,7 +76,18 @@
         type:'POST',
         dataType:'json',
         data: 'item_id='+itemId+'&hashtag_value='+hashtag,
-        success:function(data) {},
+        success:function(data) {
+          var tagList = $('#tagListForItemId'+parentId);
+          var lastLi = tagList.find('li').last();
+          var clone = lastLi.clone();
+          var lastLink = clone.find('a').last();
+          if (lastLink.html() != null) {
+            clone.appendTo(tagList);
+            lastLi.html('<a href="#"><img src="../img/global/user-thumb-holder.gif" alt="user-thumb-holder" width="25" height="25" class="user-tiny-thumb"/>'+data.value+'</a>');
+          } else {
+            lastLi.html('<a href="#"><img src="../img/global/user-thumb-holder.gif" alt="user-thumb-holder" width="25" height="25" class="user-tiny-thumb"/>'+data.value+'</a>');
+          }
+        },
         error:function(xhr,textStatus,errorThrown){
           alert(xhr.responseText);
         }
