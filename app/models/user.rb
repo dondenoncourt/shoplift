@@ -75,7 +75,7 @@ class User < ActiveRecord::Base
                     :path => "/:style/:id/:filename",
                     :default_url => "/assets/avatars/:style/missing.png"
 
-  validates :sex, :username, :full_name, presence: true
+  validates :username, :full_name, presence: true
   validates :tos, :acceptance => true
 
   before_validation :set_username
