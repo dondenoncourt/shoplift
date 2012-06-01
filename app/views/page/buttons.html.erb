@@ -5,9 +5,6 @@
     <h3>Try Out Our Bookmarklet</h3>
 
     <p>Add items as you see them on the web - with one click.</p>
-    <div class="rightCol internal">
-      <div id="galleria"></div>
-    </div>
 
     <h3>To install the bookmarklet in <span id="browser"></span></h3>
     <ol>
@@ -34,15 +31,6 @@
   </div>
 </div>
 <script>
-  var data = [
-    <% for image in @images[0..-1] %>
-      { image: "assets/galleria/images/<%= image %>" },
-    <% end %>
-    { image: "assets/galleria/images/<%= @images.last %>" }
-    ];
-  Galleria.loadTheme('assets/galleria.dots.js');
-  Galleria.run('#galleria', { dataSource: data });
-
   function getBrowserName(){
     var userAgent = navigator.userAgent.toLowerCase();
     $.browser.chrome = /chrome/.test(navigator.userAgent.toLowerCase());
