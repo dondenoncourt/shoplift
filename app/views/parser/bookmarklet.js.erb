@@ -48,8 +48,7 @@
 			this.page_contents = document.body.innerHTML;
 			
 			// Form URL
-			//this.form_url = 'http://app.shoplift.com.patrick/items';
-			//this.form_url = 'http://mccreary.no-ip.biz:3000/items';
+      this.domain =  '<%= root_url %>';
       this.form_url = '<%= items_url %>';
 			
 			// Starting CSS reset
@@ -58,10 +57,10 @@
 				margin : 0,
 				padding : 0,
 				border : 0,
-				color : '#FFF',
-				'font-size' : 14,
+                                color: '#e8e3e3',
+                                'font-family': 'arial',
+                                'font-size': '12px',
 				'line-height' : 'normal',
-				'font-family' : 'Verdanna',
 				'vertical-align' : 'baseline',
 				'text-shadow' : 'none',
 				'text-align' : 'left',
@@ -75,8 +74,6 @@
 			}
 			
 			// URLs we need for form submissions
-			//this.submit_url = 'http://shoplift.it.patrick/items';
-			//this.submit_url = 'http://localhost:3000/items';
       this.submit_url = '<%= items_url %>';
 			
 			// Create the elements we need
@@ -366,12 +363,12 @@
 			
 			// Set all the styles, and build the elements
 			var self = this,
-				i_style = jQuery.extend({},this.defaultCSS,{width:285,height:18,marginLeft:5,color:'#000'}),
+				i_style = jQuery.extend({},this.defaultCSS,{width:285,height:18,marginLeft:5,color:'#000', 'font-family': 'arial', 'font-size': '12px', 'background-color': '#CCCCCC', 'border-radius':'3px', '-moz-border-radius':'3px', '-webkit-border-radius':'3px'}),
 				h_style = jQuery.extend({},this.defaultCSS,{width:450,'float':'left',position:'relative'}),
 				r_style = jQuery.extend({},this.defaultCSS,{width:285,marginLeft:5,'float':'left',position:'relative',paddingTop:5}),
 				f_style = jQuery.extend({},this.defaultCSS,{width:460,'float':'left',position:'relative'}),
-				t_style = jQuery.extend({},this.defaultCSS,{width:450,'float':'left',position:'relative',padding:5,height:80,'max-width':460,'max-height':100,color:'#000'}),
-				c_style = jQuery.extend({},this.defaultCSS,{'float':'left',position:'relative',fontSize:14}),
+				t_style = jQuery.extend({},this.defaultCSS,{width:450,'float':'left',position:'relative',padding:5,height:80,'max-width':460,'max-height':100,color:'#000', 'font-family': 'arial', 'font-size': '12px', 'background-color': '#CCCCCC', 'border-radius':'3px', '-moz-border-radius':'3px', '-webkit-border-radius':'3px'}),
+				c_style = jQuery.extend({},this.defaultCSS,{'float':'left',position:'relative',fontSize:12}),
 				inputs = {
 					name : jQuery('<input type="text" name="name" value="' + parsed.title + '" />')
 						.css(jQuery.extend({},r_style,i_style)),
@@ -389,8 +386,9 @@
 					comment : jQuery('<textarea name="comment" maxlength="140"></textarea>')
 						.attr('id', 'comment_area')
 						.css(t_style),
-					submit : jQuery('<input type="submit" value="Shoplift It"/>')
-						.css(jQuery.extend({},r_style,{color:'#000',width:'auto','margin-top':10}))
+					submit : jQuery('<input type="submit" value="Lift this item now"/>')
+						.css(jQuery.extend({},r_style,{color:'#000',width:'auto','margin-top':10, padding: 5, 'font-family': 'arial', 'font-size': '12px', 'background-color': '#CCCCCC', 'border-radius':'3px', '-moz-border-radius':'3px', '-webkit-border-radius':'3px'}))
+            
 				},
 				label = jQuery('<label />');
 			
@@ -402,7 +400,12 @@
 					return false;
 				})
 				.append(
-					label.clone().text('Shoplift This Item').css(jQuery.extend({},h_style,{'font-size':18,paddingBottom:15})),
+					//for logo image
+					label.clone().text('')
+						.css(jQuery.extend({},c_style, {background: 'url("' + this.domain + '/assets/shoplift-parser-logo.png") 0 0 no-repeat', 'float': 'left', height: '36px', 'margin-bottom': '20px', display: 'block', width: '100%'}))
+						.after(jQuery('<span></span> ').css(c_style).attr('id', 'logo_image')),
+					
+					//end
 					inputs.image,
 					assembleImageGallery(parsed.images,inputs.image),
 					label.clone().text('Brand').css(jQuery.extend({},r_style,{'padding-top':0,'margin-bottom':3})),
