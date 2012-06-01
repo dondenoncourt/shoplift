@@ -93,6 +93,7 @@ class User < ActiveRecord::Base
   scope :trending, where("exists (select * from items where items.user_id = users.id and items.created_at > ? ) ", Date.today - 7).order('count_of_followers DESC')
   scope :local_favorites, lambda{ |user| User.near([user.latitude, user.longitude], 20) }
   # scope :friends
+  scope :without_user, lambda{ |user| where('users.id != ?', user.id) }
 
   def self.by_option(option, args=nil)
     if option.present? && self.respond_to?(option)

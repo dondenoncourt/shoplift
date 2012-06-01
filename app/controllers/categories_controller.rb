@@ -3,7 +3,6 @@ class CategoriesController < ApplicationController
 
   def index
     @categories = Category.all
-    @new_user = current_user.created_at.to_date == Date.today && current_user.is_following_enough?
   end
 
   def edit

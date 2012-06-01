@@ -3,6 +3,7 @@ class UsersController < ApplicationController
 
   def index
     users
+    @new_user = current_user.created_at.to_date == Date.today && !current_user.is_following_enough?
     if request.xhr?
       render partial: users
     end
@@ -121,7 +122,7 @@ class UsersController < ApplicationController
 
   def users
     # we should probably remove the current user from this list
-    @users ||= User.by_option(params[:option], current_user).by_category(params[:category]).paginate(per_page: 2, page: params[:page])
+    @users ||= User.by_option(params[:option], current_user).by_category(params[:category]).without_user(current_user).paginate(per_page: 2, page: params[:page])
   end
 
   def user
