@@ -13,6 +13,11 @@ class PageController < ApplicationController
   def saved
   end
 
+  def buttons
+    path = Rails.root.to_s + "/app/assets/images/galleria/images/*"
+    @images = Dir.glob(path).collect{|f| File.basename(f)}
+  end
+
   def relift
     @item = Item.find(params[:post_id])
   end

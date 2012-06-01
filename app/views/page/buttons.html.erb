@@ -6,10 +6,10 @@
 
     <p>Add items as you see them on the web - with one click.</p>
     <div class="rightCol internal">
-      <p style="margin-bottom:20px"><img src="../img/slideshow-fpo.gif" alt="slideshow-fpo" width="652" height="394" /></p>
+      <div id="galleria"></div>
     </div>
 
-    <h3>To install the bookmarklet in <%= request.env['HTTP_USER_AGENT'] %> [Browser you're using]:</h3>
+    <h3>To install the bookmarklet in <span id="browser"></span></h3>
     <ol>
       <li>Make sure your bookmarks bar is showing. If it's not, click [wrench > tools > always show bookmarks bar] (need to customize this language to each browser)</li>
       <li>
@@ -21,15 +21,49 @@
       <li>When you see an item you like, just click the button to Shoplift it - we'll take care of all the rest.</li>
     </ol>
 
-    <h3>Install the Follow Me Button</h3>
-    <p>Give your fans more of what they want: you.</p>
-    <p>The Follow Me Button is basically a fancy type of link: your friends and followers can click on it, and we'll take them directly to your profile at The Shoplift. It's like walking through a door into a store you've curated.</p>
-    <p>You can embed the buttons on your website, blog, or anyplace else. Just choose the button below that you want, and copy and paste the HTML code into your site, wherever you want it to appear.</p>
-    <p>Steal business with Shoplift for stores</p>
-    <p>Invite your customers to Shoplift your items - and let them do the selling for you.</p>
-    <p>The Shoplift Button for Stores works just like the "Tweet" or "Like" buttons: you place it near an item you're selling, and your customers can click it to add your items to their collection at The Shoplift. Members who follow those customers, in turn, see the item the next time they visit The Shoplift.</p>
-    <p>To install the Shoplift Button for Stores, add the following code to your page, right where you want the button to appear. (It works best if you place it near other social buttons, such as Tweet, Like, and Pin.)</p>
-    <p>And add this code to your page, directly above the closing </body> tag:</p>
-    <p>That's it! For more info, see our Help page.</p>
+    <%#<h3>Install the Follow Me Button</h3>%>
+    <%#<p>Give your fans more of what they want: you.</p>%>
+    <%#<p>The Follow Me Button is basically a fancy type of link: your friends and followers can click on it, and we'll take them directly to your profile at The Shoplift. It's like walking through a door into a store you've curated.</p>%>
+    <%#<p>You can embed the buttons on your website, blog, or anyplace else. Just choose the button below that you want, and copy and paste the HTML code into your site, wherever you want it to appear.</p>%>
+    <%#<p>Steal business with Shoplift for stores</p>%>
+    <%#<p>Invite your customers to Shoplift your items - and let them do the selling for you.</p>%>
+    <%#<p>The Shoplift Button for Stores works just like the "Tweet" or "Like" buttons: you place it near an item you're selling, and your customers can click it to add your items to their collection at The Shoplift. Members who follow those customers, in turn, see the item the next time they visit The Shoplift.</p>%>
+    <%#<p>To install the Shoplift Button for Stores, add the following code to your page, right where you want the button to appear. (It works best if you place it near other social buttons, such as Tweet, Like, and Pin.)</p>%>
+    <%#<p>And add this code to your page, directly above the closing </body> tag:</p>%>
+    <%#<p>That's it! For more info, see our Help page.</p>%>
   </div>
 </div>
+<script>
+  var data = [
+    <% for image in @images[0..-1] %>
+      { image: "assets/galleria/images/<%= image %>" },
+    <% end %>
+    { image: "assets/galleria/images/<%= @images.last %>" }
+    ];
+  Galleria.loadTheme('assets/galleria.dots.js');
+  Galleria.run('#galleria', { dataSource: data });
+
+  function getBrowserName(){
+    var userAgent = navigator.userAgent.toLowerCase();
+    $.browser.chrome = /chrome/.test(navigator.userAgent.toLowerCase());
+
+    if($.browser.msie){
+      return 'Internet Explorer';
+    } else if($.browser.chrome){
+      return 'Chrome';
+    } else if($.browser.safari){
+      return 'Safari';
+    } else if($.browser.mozilla){
+      if(navigator.userAgent.toLowerCase().indexOf('firefox') != -1){
+        return 'Firefox';
+      } else{
+        return 'Mozilla';
+      }
+    } else if($.browser.opera){
+      return 'Mozilla';
+    }
+    return 'browser';
+  }
+  $('#browser').html(getBrowserName());
+  
+</script>
