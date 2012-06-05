@@ -1,0 +1,13 @@
+<% provide(:title, "#{@user.full_name}'s Followees") %>
+<div id="content">
+  <%= render 'users/profile_info', user: @user %>
+  <div class="rightCol">
+    <% if @users.empty? %>
+      <%= @user.full_name %> doesn't have any followees yet.
+    <% else %>
+      <div id="results"><%= render @users %></div>
+      <%= will_paginate(@users) %>
+      <%= pageless(@users.total_pages, user_following_index_path(@user)) %>
+    <% end %>
+  </div>
+</div>

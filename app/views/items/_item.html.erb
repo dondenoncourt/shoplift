@@ -1,7 +1,7 @@
 <div class="entry <%= item.saved_by?(current_user) ? 'saved' : '' %>"> <div class="entryHead">
-    <%= link_to image_tag(item.user.avatar.url(:thumb)), '#' %>
+    <%= link_to image_tag(item.user.avatar.url(:thumb)), item.user %>
     <p class="user">
-      <%= link_to item.user.full_name, user_path(item.user) %>
+      <%= link_to item.user.full_name, item.user %>
       <br/><span class="location"><%= item.user.hometown %></span>
     </p>
   </div>

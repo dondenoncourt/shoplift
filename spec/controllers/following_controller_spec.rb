@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe FollowersController do
+describe FollowingController do
   fixtures :users
 
   before do

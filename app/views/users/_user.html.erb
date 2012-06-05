@@ -1,8 +1,8 @@
 <div class="entry person">
   <div class="entryHead">
-    <a href="#"><%= image_tag user.avatar.url(:small), :size => "175x175" %></a>
+    <%= link_to (image_tag user.avatar.url(:small), :size => "175x175"), user %>
     <div class="personMeta">
-      <h2><%= user.full_name %><br/><span class="location"><%= user.hometown %></span></h2>
+      <h2><%= link_to user.full_name, user %><br/><span class="location"><%= user.hometown %></span></h2>
       <%= render 'users/profile_stats', user: user %>
       <div class="profileText"><%= user.biography %></div>
       <% if user_signed_in? %>

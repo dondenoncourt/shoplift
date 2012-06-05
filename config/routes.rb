@@ -12,7 +12,7 @@ App::Application.routes.draw do
   get "modal/report_item", :to => "page#report_item"
   get "modal/relift", :to => "page#relift"
 
-  get 'shoplifters', :to => 'users#index'
+  get '/shoplifters', :to => 'users#index'
 
   #resources :images TODO delete this and any other image artifacts
   resources :posts
@@ -31,7 +31,10 @@ App::Application.routes.draw do
     #delete "logout" => "devise/sessions#destroy"
     get '/users/auth/:provider' => 'users/omniauth_callbacks#passthru'
   end
-  resources :users, :only => [:show,:create,:update,:destroy]
+  resources :users, :only => [:show,:create,:update,:destroy] do
+    resources :followers, :only => [:index]
+    resources :following, :only => [:index]
+  end
   get "users/validate_username/:username", :to => "users#validate_username", :defaults => { :format => :json }, :constraints => {:format => :json}
   get "users/username/:username", :to => "users#show", :identifier => "username", :defaults => { :format => :json }, :constraints => {:format => :json}
   # Browser / system compatability
@@ -87,17 +90,6 @@ App::Application.routes.draw do
   post "hashtags/create", :to => "hashtags#create", :defaults => { :format => :json }, :constraints => {:format => :json}
   # Browser / system compatability
   post "hashtags/:id/delete" => "hashtags#destroy", :defaults => { :format => :json }, :constraints => {:format => :json}
-
-  #
-  # Followers
-  #
-  get "followers", :to => "followers#index", :defaults => { :format => :json }, :constraints => {:format => :json}
-  get "followers/users/:id", :to => "followers#show", :defaults => { :format => :json }, :constraints => {:format => :json}
-  get "followers/pending", :to => "followers#show_pending", :defaults => { :format => :json }, :constraints => {:format => :json}
-  put "followers", :to => "followers#approve", :defaults => { :format => :json }, :constraints => {:format => :json}
-  post "followers/approve", :to => "followers#approve", :defaults => { :format => :json }, :constraints => {:format => :json}
-  delete "followers/users/:id", :to => "followers#destroy", :defaults => { :format => :json }, :constraints => {:format => :json}
-  post "followers/users/:id/delete", :to => "followers#destroy", :defaults => { :format => :json }, :constraints => {:format => :json}
 
   #
   # Subscriptions

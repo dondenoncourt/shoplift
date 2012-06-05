@@ -59,7 +59,7 @@ class User < ActiveRecord::Base
                   :avatar, :tos
   has_many :posts
   has_many :subscriptions
-  has_many :followers, :class_name => "Subscription"
+  has_many :followers, :through => :subscriptions, :foreign_key => :follower_id, :class_name => 'User', :conditions => ["subscriptions.status = 1"]
   has_many :hashtags
   has_many :hashtag_values, :through => :hashtags
   has_and_belongs_to_many :roles
@@ -136,7 +136,7 @@ class User < ActiveRecord::Base
   end
 
   def followees
-    Subscription.where(follower_id: self.id, status: 1)
+    User.joins(:subscriptions).where('subscriptions.follower_id = ? AND subscriptions.status = 1', self.id)
   end
 
   def items
