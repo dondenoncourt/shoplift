@@ -72,7 +72,7 @@ class ItemsController < ApplicationController
     end
 
     @post = Post.new(post)
-    @post.photo = open('http://'+params[:retailer]+params[:image].gsub(/\s/, "%20")) if params[:image]
+    @post.photo = open(params[:image].gsub(/\s/, "%20")) if params[:image]
     if !@post.save
       return return_error_messages(@post,"Failed to create item")
     end
