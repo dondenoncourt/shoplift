@@ -144,7 +144,9 @@ strong {
   width: 910px;
   margin: 0 auto;
 }
-
+.red {
+  color: red;
+}
 
 /*---------- Header ----------*/
 
@@ -1842,10 +1844,30 @@ ul.shareLinks {
   color: #FF0202;
 }
 
+/* -------------------- Flash Messages ---------------------- */
+
+#flash_alert {
+  border: 2px solid #921013;
+  background: #550000;
+  font-size: 1.2em;
+  color: #FFFFFF;
+}
+
+#flash_notice {
+  border: 2px solid #00A4E2;
+  background: #1E2B41;
+  font-size: 1.2em;
+  color: #FFFFFF;
+}
+
 /*---------------------- GALLERIA --------------------------*/
 #galleria {
   display: block;
   height: 390px !important;
   padding: 5px 10px;
   width: 650px !important;
+}
+
+.following_count {
+  margin: 5px;
 }

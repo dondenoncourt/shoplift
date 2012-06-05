@@ -3,7 +3,6 @@ class UsersController < ApplicationController
 
   def index
     users
-    @new_user = current_user.created_at.to_date == Date.today && !current_user.is_following_enough?
     if request.xhr?
       render partial: users
     end

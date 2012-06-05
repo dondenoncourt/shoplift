@@ -1,4 +1,5 @@
   <h2>Follow Shoplifters</h2>
+  <h3>Currently Following:<span class="following_count"><%= current_user.followees.count %><span></h3>
   <ul class="followOptions">
     <li><%= link_to "Recommended", shoplifters_path(:option => 'recommended'), :class => 'suggestions' %></li>
     <li><%= link_to "Staff Picks", shoplifters_path(:option => 'staff_picks'), :class => 'suggestions' %></li>

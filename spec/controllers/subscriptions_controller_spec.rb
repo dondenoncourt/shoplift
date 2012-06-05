@@ -54,6 +54,11 @@ describe SubscriptionsController do
         post :create, :user_id => valid_attributes[:user_id], :format => :json
         response.body.should =~ /"id":#{valid_attributes[:user_id]}/m
       end
+
+      it "returns the current_user's followee count" do
+        post :create, :user_id => valid_attributes[:user_id], :format => :json
+        response.body.should match(/followee_count/)
+      end
     end
   end
 
@@ -70,7 +75,7 @@ describe SubscriptionsController do
 
     it "returns subscription details" do
       delete :destroy, :id => subscriptions(:subscriptions_004).user_id, :format => :json
-      response.body.should == "Subscription successfully deleted".to_json
+      response.body.should == { :followee_count => 0 }.to_json
     end
   end
 

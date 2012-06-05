@@ -136,7 +136,7 @@ class User < ActiveRecord::Base
   end
 
   def followees
-    Subscription.where(follower_id: self.id)
+    Subscription.where(follower_id: self.id, status: 1)
   end
 
   def items

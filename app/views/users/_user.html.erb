@@ -6,7 +6,7 @@
       <%= render 'users/profile_stats', user: user %>
       <div class="profileText"><%= user.biography %></div>
       <% if user_signed_in? %>
-        <%= link_to_function current_user.following?(user) ? 'Unfollow' : 'Follow', "handleFollow(#{user.id}, $(this))", :class => 'button' %>
+        <%= link_to_function current_user.following?(user) ? 'Following' : 'Follow', "handleFollow(#{user.id}, $(this))", :class => current_user.following?(user) ? 'following button' : 'button' %>
       <% else %>
           <%= link_to "Follow", root_url, :class => 'button' %>
       <% end %>

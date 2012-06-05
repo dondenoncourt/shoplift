@@ -57,7 +57,7 @@ class SubscriptionsController < ApplicationController
     subscription = Subscription.where(:user_id => params[:id], :follower_id => current_user.id).first
 
     if subscription.deactivate
-      render :json => "Subscription successfully deleted".to_json, :status => 200
+      render :json => { :followee_count => current_user.followees.count }, :status => 200
     else
       return_error_messages(subscription, "Failed to delete subscription")
     end

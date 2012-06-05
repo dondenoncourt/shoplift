@@ -24,6 +24,17 @@ $(document).ready(function() {
     $(this).replaceWith('<div style="text-align: center;"><img alt="Loading" src="/assets/loading.gif" /></div>');
   });
 
+  $('.following').live({
+    mouseenter:
+      function() {
+        $(this).text("Unfollow");
+      },
+    mouseleave:
+      function() {
+        $(this).text("Following");
+      }
+  });
+
   // We'd like to load shoplifter followee suggestions with ajax but that doesn't play nice with pageless.js
   // $('.suggestions').live('click', function () {
   //   $('li.current').removeClass('current');
@@ -35,6 +46,18 @@ $(document).ready(function() {
   // });
 
 });
+
+$(window).load(function () {
+  setFollowingCountColor();
+});
+
+function setFollowingCountColor() {
+  if ($('.following_count').length > 0) {
+    if (parseInt($('.following_count').text()) < 5) {
+      $('.following_count').addClass('red');
+    };
+  };
+}
 
 function setBioCount() {
   if ($('#user_biography').length > 0) {
@@ -57,7 +80,13 @@ function followUser(user_id, link) {
     data: { user_id: user_id },
     dataType:'json',
     success:function(data) {
-      link.text("Unfollow");
+      link.text("Following");
+      link.addClass('following');
+      count = data.followee_count
+      if (count >= 5) {
+        $('.following_count').removeClass('red');
+      };
+      $('.following_count').text(count)
     },
     error:function(xhr,textStatus,errorThrown){
       alert(errorThrown);
@@ -72,6 +101,12 @@ function unfollowUser(user_id, link) {
     dataType:'json',
     success:function(data) {
       link.text("Follow");
+      link.removeClass('following');
+      count = data.followee_count
+      if (count < 5) {
+        $('.following_count').addClass('red');
+      };
+      $('.following_count').text(count)
     },
     error:function(xhr,textStatus,errorThrown){
       alert('Error: ' + errorThrown);

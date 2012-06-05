@@ -4,18 +4,6 @@
 </div>
 
 <div class="rightCol">
-  <% if (@new_user) %>
-    <div class="entry">
-      <h2>Congrats! You're all signed up.</h2>
-      <br />
-      <p>
-        Get started by choosing a handful of Shoplifters to follow. You can follow friends and celebrities, or your favorite brands and stores. The items they share are the items you'll see when you log in.
-      </p>
-      <br />
-      <p>Click Follow to add a member to your list. If you change your mind, just click again to unfollow.</p>
-    </div>
-  <% end %>
-
   <div id="results"><%= render @users %></div>
   <%= will_paginate(@users) %>
   <%= pageless(@users.total_pages, shoplifters_path(:option => params[:option])) %>
