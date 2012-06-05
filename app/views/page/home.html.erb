@@ -23,8 +23,13 @@
 
 <div class="rightCol internal">
   <div id="galleria"></div>
-  <div style="display:none;">
-      <div class="blogFollow"><a href="#">Visit our blog</a>. <span style="padding: 0 5px">|</span> Follow us: <a href="#" class="facebook">Facebook</a> <a href="#" class="twitter">Twitter</a> <a href="#" class="pinterest">Pinterest</a>  <a href="#" class="tumblr">Tumblr</a></div>
+  <div class="blogFollow">
+    <%= link_to_function "Visit our blog", "alert('Not yet!')" %>.
+    <span style="padding: 0 5px">|</span> Follow us:
+    <%= link_to_function "Facebook", "alert('Not yet!')", :class => 'facebook' %>
+    <%= link_to_function "Twitter", "alert('Not yet!')", :class => 'twitter' %>
+    <%= link_to_function "Pinterest", "alert('Not yet!')", :class => 'pinterest' %>
+    <%= link_to_function "Tumblr", "alert('Not yet!')", :class => 'tumblr' %>
   </div>
 </div>
 

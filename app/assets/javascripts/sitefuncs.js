@@ -87,9 +87,16 @@ function sitefuncs() {
 
 /*---------- Page Scroll ----------*/
 
+  $(window).scroll(function () {
+    if ($(window).scrollTop() >= $(document).height() - $(window).height() - 10) {
+      $('.scrollTo').show();
+    } else {
+      $('.scrollTo').hide();
+    }
+  });
+
   $('a.scrollTo, ol.topicList a').click(function(){
-    var destination = $(this).attr('href');
-    $.scrollTo(destination,300);
+    $.scrollTo('body');
     return false;
   });
 
