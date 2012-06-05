@@ -88,7 +88,7 @@ function sitefuncs() {
 /*---------- Page Scroll ----------*/
 
   $(window).scroll(function () {
-    if ($(window).scrollTop() >= $(document).height() - $(window).height() - 10) {
+    if ($(window).scrollTop() >= $(document).height() - $(window).height() - 35) {
       $('.scrollTo').show();
     } else {
       $('.scrollTo').hide();
@@ -96,7 +96,7 @@ function sitefuncs() {
   });
 
   $('a.scrollTo, ol.topicList a').click(function(){
-    $.scrollTo('body');
+    $.scrollTo(window);
     return false;
   });
 
