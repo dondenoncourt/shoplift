@@ -1,3 +1,9 @@
+GIT
+  remote: git://github.com/belighted/rapi_doc.git
+  revision: 34f584aaaa7259e8063757482cb654652f8dcdba
+  specs:
+    rapi_doc (0.3.3)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -220,6 +226,7 @@ DEPENDENCIES
   omniauth-facebook
   paperclip
   rails (= 3.2)
+  rapi_doc!
   rspec-rails
   spork (>= 0.9.0.rc9)
   therubyracer

@@ -1,0 +1,3 @@
+users:
+ location: "/shoplifters"
+ controller_name: "users_controller.rb"

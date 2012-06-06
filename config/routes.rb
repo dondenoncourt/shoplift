@@ -35,33 +35,25 @@ App::Application.routes.draw do
     resources :followers, :only => [:index]
     resources :following, :only => [:index]
   end
-  get "users/validate_username/:username", :to => "users#validate_username", :defaults => { :format => :json }, :constraints => {:format => :json}
-  get "users/username/:username", :to => "users#show", :identifier => "username", :defaults => { :format => :json }, :constraints => {:format => :json}
+  get "users/validate_username/:username", :to => "users#validate_username"
+  get "users/username/:username", :to => "users#show", :identifier => "username"
   # Browser / system compatability
-  post "users/:id/edit", :to => "users#update", :defaults => { :format => :json }, :constraints => {:format => :json}
-  post "users/:id/delete", :to => "users#destroy", :defaults => { :format => :json }, :constraints => {:format => :json}
-
-  get "recommended", :to => "users#recommended"
-  get "staff_picks", :to => "users#staff_picks"
-  get "popular", :to => "users#popular"
-  get "trending", :to => "users#trending"
-  get "local_favorites", :to => "users#local_favorites"
-  get "friends", :to => "users#friends"
-  get "staff_picks", :to => "users#staff_picks"
+  post "users/:id/edit", :to => "users#update"
+  post "users/:id/delete", :to => "users#destroy"
 
   #
   # Timelines
   #
   get "timelines", :to => "timelines#index"
-  get "timelines/users/:id", :to => "timelines#show_user", :defaults => { :format => :json }, :constraints => {:format => :json}
-  get "timelines/recent", :to => "timelines#show_recent", :defaults => { :format => :json }, :constraints => {:format => :json}
-  get "timelines/hashtags/:name", :to => "timelines#show_hashtags", :defaults => { :format => :json }, :constraints => {:format => :json}
+  get "timelines/users/:id", :to => "timelines#show_user"
+  get "timelines/recent", :to => "timelines#show_recent"
+  get "timelines/hashtags/:name", :to => "timelines#show_hashtags"
 
   #
   # Parser and Bookmarklet
   #
-  get "bookmarklet", :to => "parser#bookmarklet", :constraints => {:format => :js}
-  post "parse", :to => "parser#parse", :defaults => { :format => :json }, :constraints => {:format => :json}
+  get "bookmarklet", :to => "parser#bookmarklet"
+  post "parse", :to => "parser#parse"
 
   #
   # Items
@@ -75,57 +67,57 @@ App::Application.routes.draw do
     resources :hashtags, :only => [:create]
   end
   # # Browser / system compatability
-  post "items/:id/edit", :to => "items#update", :defaults => { :format => :json }, :constraints => {:format => :json}
-  post "items/:id/delete", :to => "items#destroy", :defaults => { :format => :json }, :constraints => {:format => :json}
+  post "items/:id/edit", :to => "items#update"
+  post "items/:id/delete", :to => "items#destroy"
 
-  get "createItem", :to => "items#create", :defaults => { :format => :html }
+  get "createItem", :to => "items#create"
 
   #
   # Hashtags
   #
-  get "hashtags/popular", :to => "hashtags#show_popular", :defaults => { :format => :json }, :constraints => {:format => :json}
-  get "hashtags/search", :to => "hashtags#search", :defaults => { :format => :json }, :constraints => {:format => :json}
-  delete "hashtags/:id" => "hashtags#destroy", :defaults => { :format => :json }, :constraints => {:format => :json}
-  post "hashtags/create", :to => "hashtags#create", :defaults => { :format => :json }, :constraints => {:format => :json}
+  get "hashtags/popular", :to => "hashtags#show_popular"
+  get "hashtags/search", :to => "hashtags#search"
+  delete "hashtags/:id" => "hashtags#destroy"
+  post "hashtags/create", :to => "hashtags#create"
   # Browser / system compatability
-  post "hashtags/:id/delete" => "hashtags#destroy", :defaults => { :format => :json }, :constraints => {:format => :json}
+  post "hashtags/:id/delete" => "hashtags#destroy"
 
   #
   # Subscriptions
   #
-  get "subscriptions", :to => "subscriptions#index", :defaults => { :format => :json }, :constraints => {:format => :json}
-  get "subscriptions/users/:id", :to => "subscriptions#show", :defaults => { :format => :json }, :constraints => {:format => :json}
-  post "subscriptions", :to => "subscriptions#create", :defaults => { :format => :json }, :constraints => {:format => :json}
-  delete "subscriptions/users/:id", :to => "subscriptions#destroy", :defaults => { :format => :json }, :constraints => {:format => :json}
+  get "subscriptions", :to => "subscriptions#index"
+  get "subscriptions/users/:id", :to => "subscriptions#show"
+  post "subscriptions", :to => "subscriptions#create"
+  delete "subscriptions/users/:id", :to => "subscriptions#destroy"
   # Browser / system compatability
-  post "subscriptions/users/:id/delete", :to => "subscriptions#destroy", :defaults => { :format => :json }, :constraints => {:format => :json}
+  post "subscriptions/users/:id/delete", :to => "subscriptions#destroy"
 
   #
   # Suggestions
   #
-  get "suggestions", :to => "suggestions#index", :defaults => { :format => :json }, :constraints => {:format => :json}
+  get "suggestions", :to => "suggestions#index"
 
   #
   # Set Asides
   #
-  get "set_asides", :to => "set_asides#index", :defaults => { :format => :json }, :constraints => {:format => :json}
-  post "set_asides", :to => "set_asides#create", :defaults => { :format => :json }, :constraints => {:format => :json}
-  delete "set_asides/items/:id", :to => "set_asides#destroy", :defaults => { :format => :json }, :constraints => {:format => :json}
+  get "set_asides", :to => "set_asides#index"
+  post "set_asides", :to => "set_asides#create"
+  delete "set_asides/items/:id", :to => "set_asides#destroy"
   # Browser / system compatability
-  post "set_asides/items/:id/delete", :to => "set_asides#destroy", :defaults => { :format => :json }, :constraints => {:format => :json}
+  post "set_asides/items/:id/delete", :to => "set_asides#destroy"
 
   #
   # Flags
   #
-  get "flags", :to => "flags#index", :defaults => { :format => :json }, :constraints => {:format => :json}
-  post "flags/items/:id", :to => "flags#create_item", :defaults => { :format => :json }, :constraints => {:format => :json}
-  post "flags/hashtags/:id", :to => "flags#create_hashtag", :defaults => { :format => :json }, :constraints => {:format => :json}
+  get "flags", :to => "flags#index"
+  post "flags/items/:id", :to => "flags#create_item"
+  post "flags/hashtags/:id", :to => "flags#create_hashtag"
 
   #
   # Statistics
   #
-  get "statistics/users/:id", :to => "statistics#show_user", :defaults => { :format => :json }, :constraints => {:format => :json}
-  get "statistics/items/:id", :to => "statistics#show_item", :defaults => { :format => :json }, :constraints => {:format => :json}
+  get "statistics/users/:id", :to => "statistics#show_user"
+  get "statistics/items/:id", :to => "statistics#show_item"
 
   #
   #Error Handling
