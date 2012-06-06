@@ -36,7 +36,7 @@
 #  avatar_content_type    :string(255)
 #  avatar_file_size       :integer(4)
 #  avatar_updated_at      :datetime
-#  authentication_token   :string(255)
+#  api_token              :string(255)
 #  count_of_followers     :integer(4)      default(0)
 #  latitude               :float
 #  longitude              :float

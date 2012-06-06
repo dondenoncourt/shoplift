@@ -4,8 +4,9 @@ class FollowingController < ApplicationController
   # =begin apidoc
   # url:: /users/:user_id/following.json
   # method:: GET
-  # access:: FREE
+  # access:: API Token Required
   # return:: users that user is following
+  # param:: api_token:string - the current user's api_token
   # param:: user_id:int - the id of the user
   # param:: page:int - the page, default is 1 (optional)
   # param:: per_page:int - max items per page, default is 2 (optional)
