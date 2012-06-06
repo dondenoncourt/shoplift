@@ -4,9 +4,8 @@ class FollowersController < ApplicationController
   # =begin apidoc
   # url:: /users/:user_id/followers.json
   # method:: GET
-  # access:: API Token Required
+  # access:: FREE
   # return:: user's followers
-  # param:: api_token:string - the current user's api_token
   # param:: user_id:int - the id of the user
   # param:: page:int - the page, default is 1 (optional)
   # param:: per_page:int - max items per page, default is 2 (optional)

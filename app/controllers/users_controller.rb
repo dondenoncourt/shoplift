@@ -4,9 +4,8 @@ class UsersController < ApplicationController
   # =begin apidoc
   # url:: /shoplifters.json
   # method:: GET
-  # access:: API Token Required
+  # access:: FREE
   # return:: list of users
-  # param:: api_token:string - the current user's api_token
   # param:: page:int - the page, default is 1 (optional)
   # param:: per_page:int - max items per page, default is 2 (optional)
   # output:: json
@@ -40,9 +39,8 @@ class UsersController < ApplicationController
   # =begin apidoc
   # url:: /users/:id.json
   # method:: GET
-  # access:: API Token Required
+  # access:: FREE
   # return:: user data
-  # param:: api_token:string - the current user's api_token
   # param:: id:int - the id of the user
   # output:: json
   # {
