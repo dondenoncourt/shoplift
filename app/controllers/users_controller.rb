@@ -8,7 +8,6 @@ class UsersController < ApplicationController
   # return:: list of users
   # param:: page:int - the page, default is 1 (optional)
   # param:: per_page:int - max items per page, default is 2 (optional)
-  #
   # output:: json
   # [
   #   {
@@ -23,7 +22,6 @@ class UsersController < ApplicationController
   #   }
   # ]
   # ::output-end::
-  #
   # Get a list of all users in the system with pagination.  Defaults to 2 per page
   # =end
   def index
@@ -38,37 +36,37 @@ class UsersController < ApplicationController
     end
   end
 
-  # Fetch information about user, searched by id or username
-  # * *Request*    :
-  #   - GET /users/:id
-  # * *Args*    :
-  #   - :id -> User id
-  #   - :username -> Username
+  # =begin apidoc
+  # url:: /users/:id.json
+  # method:: GET
+  # access:: FREE
+  # return:: user data
+  # param:: id:int - the id of the user
+  # output:: json
+  # {
+  #   "extract":
+  #     {
+  #       "id":18,"email":"bozo@test.com","username":"bozo@test.com","full_name":"Bozo Clown","first_name":null,
+  #       "last_name":null,"vanity_url":null,"country":"United States","biography":null,"notify_new_follower":null,
+  #       "notify_relift":null,"notify_missing":null,"hometown":null,"zipcode":"","sex":null
+  #     },
+  #   "sex":"Female","avatar_url_small":"/assets/avatars/small/missing.png",
+  #   "avatar_url_thumb":"/assets/avatars/thumb/missing.png","followee_count":5
+  # }
+  # ::output-end::
+  # Get the user's information
+  # =end
   def show
-    if params[:id]
-      @user = User.find(params[:id])
-    elsif params[:identifier] == "username"
-      @user = User.find_by_username(params['username'])
-    end
-
     if request.xhr?
       render partial: items
     else
       items
-      if @user.private?
-        authenticate_user!
-        if !current_user.subscribed_to(@user)
-          render_error(404,"Item not found")
-        else
-          respond_to do |format|
-            format.html
-            format.json { render :partial => 'user', :locals => {:user => @user} }
-          end
-        end
+      if user.private? && !current_user.subscribed_to(user)
+        render_error(404,"Item not found")
       else
         respond_to do |format|
           format.html
-          format.json { render :partial => 'user', :locals => {:user => @user} }
+          format.json { render user }
         end
       end
     end

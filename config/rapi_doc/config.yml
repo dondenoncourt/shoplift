@@ -1,3 +1,13 @@
 users:
  location: "/shoplifters"
  controller_name: "users_controller.rb"
+ location: "/users/:id"
+ controller_name: "users_controller.rb"
+
+following:
+  location: "/users/:user_id/following"
+  controller_name: "following_controller.rb"
+
+followers:
+  location: "/users/:user_id/followers"
+  controller_name: "followers_controller.rb"

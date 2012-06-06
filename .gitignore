@@ -12,3 +12,4 @@ tmp/
 app/.DS_Store
 database.yml
 .rvmrc
+public/apidoc/*

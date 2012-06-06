@@ -74,14 +74,14 @@ function handleFollow(user_id, link) {
 }
 
 function followUser(user_id, link) {
+  link.text("Following");
+  link.addClass('following');
   $.ajax({
     url:'/subscriptions',
     type:'POST',
     data: { user_id: user_id },
     dataType:'json',
     success:function(data) {
-      link.text("Following");
-      link.addClass('following');
       count = data.followee_count
       if (count >= 5) {
         $('.following_count').removeClass('red');
@@ -89,19 +89,21 @@ function followUser(user_id, link) {
       $('.following_count').text(count)
     },
     error:function(xhr,textStatus,errorThrown){
+      link.text("Follow");
+      link.removeClass('following');
       alert(errorThrown);
     }
   });
 }
 
 function unfollowUser(user_id, link) {
+  link.text("Follow");
+  link.removeClass('following');
   $.ajax({
     url:'/subscriptions/users/' + user_id,
     type:'DELETE',
     dataType:'json',
     success:function(data) {
-      link.text("Follow");
-      link.removeClass('following');
       count = data.followee_count
       if (count < 5) {
         $('.following_count').addClass('red');
@@ -109,6 +111,8 @@ function unfollowUser(user_id, link) {
       $('.following_count').text(count)
     },
     error:function(xhr,textStatus,errorThrown){
+      link.text("Following");
+      link.addClass('following');
       alert('Error: ' + errorThrown);
     }
   });
