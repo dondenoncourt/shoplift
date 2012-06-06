@@ -10,20 +10,6 @@ class UsersController < ApplicationController
 
   # Fetch information about user, searched by id or username
   # * *Request*    :
-  #   - GET /users/:id/info
-  # * *Args*    :
-  #   - :id -> User id
-  def info
-    authenticate_user!
-    @user = User.find(params[:id])
-    respond_to do |format|
-      format.html
-      format.json { render :partial => 'user', :locals => {:user => @user} }
-    end
-  end
-
-  # Fetch information about user, searched by id or username
-  # * *Request*    :
   #   - GET /users/:id
   # * *Args*    :
   #   - :id -> User id
@@ -130,6 +116,11 @@ class UsersController < ApplicationController
 
   def items
     items = params[:saved] ? Item.saved_by(user) : user.items
-    @items ||= items.between(params).paginate(per_page: 2, page: params[:page])
+    per_page = 2
+    if params[:item_id].present?
+      item = Item.find(params[:item_id])
+      per_page = [items.index(item) + 1, per_page].max
+    end
+    @items ||= items.between(params).paginate(per_page: per_page, page: params[:page])
   end
 end

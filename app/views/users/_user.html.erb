@@ -14,8 +14,10 @@
   </div>
   <div class="personProducts">
     <ul>
-      <% user.posts.first(5).each do |post| %>
-        <li><a href="#"><%= image_tag post.photo.url(:small), :size => "113x113" %></a></li>
+      <% user.items.first(5).each do |item| %>
+        <li>
+          <%= link_to (image_tag item.photo.url(:small), :size => "113x113"), user_path(user, :anchor => "item_#{item.id}", :item_id => item.id) %>
+        </li>
       <% end %>
     </ul>
   </div>

@@ -40,7 +40,6 @@ App::Application.routes.draw do
   # Browser / system compatability
   post "users/:id/edit", :to => "users#update", :defaults => { :format => :json }, :constraints => {:format => :json}
   post "users/:id/delete", :to => "users#destroy", :defaults => { :format => :json }, :constraints => {:format => :json}
-  get "users/:id/info", :to => "users#info", :defaults => { :format => :json }, :constraints => {:format => :json}
 
   get "recommended", :to => "users#recommended"
   get "staff_picks", :to => "users#staff_picks"
