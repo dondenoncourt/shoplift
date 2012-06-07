@@ -8,8 +8,8 @@
   <div class="divider">OR</div>
 
   <p>Add an Item from a url:</p>
-  <%= form_for @post do |f| -%>
-    <%= f.text_field :url, :placeholder => 'This feature is still in development' %>
-    <%= f.submit "Add", :class => 'submit', :disabled => true %>
+  <%= form_for @post, :html => { :class => 'modal_form' } do |f| -%>
+    <%= text_field_tag :url %>
+    <%= f.submit "Add", :class => 'submit' %>
   <% end -%>
 </div>

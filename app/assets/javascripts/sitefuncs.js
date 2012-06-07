@@ -1,5 +1,17 @@
 $(document).ready(function(){
   sitefuncs();
+
+  // show modal based on the link's url
+  $('.modal_link').live('click', function() {
+    showModal(this.href);
+    return false;
+  });
+
+  // show modal based on form submission
+  $('.modal_form').live('submit', function() {
+    showModal(this.action, this.method, $(this).serialize());
+    return false;
+  });
 });
 
 function sitefuncs() {
@@ -110,18 +122,6 @@ function sitefuncs() {
     }
 
     showModal('/modal/' + modaltype);
-    return false;
-  });
-
-  // show modal based on the link's url
-  $('.modal_link').live('click', function() {
-    showModal(this.href);
-    return false;
-  });
-
-  // show modal based on form submission
-  $('.modal_form').live('submit', function() {
-    showModal(this.action, this.method, $(this).serialize());
     return false;
   });
 

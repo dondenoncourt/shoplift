@@ -16,6 +16,7 @@ gem 'country_select'
 gem 'will_paginate'
 gem 'omniauth-facebook'
 gem 'geocoder'
+gem 'mechanize'
 
 group :test, :development do
   gem 'rspec-rails'
