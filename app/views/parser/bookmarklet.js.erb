@@ -7,6 +7,25 @@
 
 // NobleCount plugin
 (function(c){c.fn.NobleCount=function(i,h){var j;var g=false;if(typeof i=="string"){j=c.extend({},c.fn.NobleCount.settings,h);if(typeof h!="undefined"){g=((typeof h.max_chars=="number")?true:false)}return this.each(function(){var k=c(this);f(k,i,j,g)})}return this};c.fn.NobleCount.settings={on_negative:null,on_positive:null,on_update:null,max_chars:140,block_negative:false,cloak:false,in_dom:false};function f(g,m,n,h){var l=n.max_chars;var j=c(m);if(!h){var k=j.text();var i=(/^[1-9]\d*$/).test(k);if(i){l=k}}b(g,j,n,l,true);c(g).keydown(function(o){b(g,j,n,l,false);if(a(o,g,n,l)==false){return false}});c(g).keyup(function(o){b(g,j,n,l,false);if(a(o,g,n,l)==false){return false}})}function a(k,g,l,j){if(l.block_negative){var h=k.which;var i;if(typeof document.selection!="undefined"){i=(document.selection.createRange().text.length>0)}else{i=(g[0].selectionStart!=g[0].selectionEnd)}if((!((e(g,j)<1)&&(h>47||h==32||h==0||h==13)&&!k.ctrlKey&&!k.altKey&&!i))==false){return false}}return true}function e(g,h){return h-(c(g).val()).length}function b(g,i,l,j,h){var k=e(g,j);if(k<0){d(l.on_negative,l.on_positive,g,i,l,k)}else{d(l.on_positive,l.on_negative,g,i,l,k)}if(l.cloak){if(l.in_dom){i.attr("data-noblecount",k)}}else{i.text(k)}if(!h&&jQuery.isFunction(l.on_update)){l.on_update(g,i,l,k)}}function d(i,g,h,j,l,k){if(i!=null){if(typeof i=="string"){j.addClass(i)}else{if(jQuery.isFunction(i)){i(h,j,l,k)}}}if(g!=null){if(typeof g=="string"){j.removeClass(g)}}}})(jQuery);
+(function(c){
+    c.fn.AddTag=function(){
+        var tagName = $("#tag_entry").val();
+        var tagId = item_tags.length;
+        item_tags.push(tagName);
+        $("#tag_entry").val(null);
+        $("#tag_list").append('<a href="javascript: $(\'#tag_list\').RemoveTag(' + tagId + ');">X</a> ' + tagName + '<br/>');
+    },
+    c.fn.RemoveTag=function(tagId) {
+        item_tags.splice(tagId, 1);
+        $("#tag_list").html(null);
+        for (var i = 0; i < item_tags.length; i++) {
+            $("#tag_list").append('<a href="javascript: $(\'#tag_list\').RemoveTag(' + i + ');">X</a> ' + item_tags[i] + '<br/>');
+        }
+    }
+}
+)(jQuery);
+
+item_tags = new Array();
 
  //Load in jquery to be used
  if (typeof jQuery == 'undefined') 
@@ -367,8 +386,9 @@
 				h_style = jQuery.extend({},this.defaultCSS,{width:450,'float':'left',position:'relative'}),
 				r_style = jQuery.extend({},this.defaultCSS,{width:285,marginLeft:5,'float':'left',position:'relative',paddingTop:5}),
 				f_style = jQuery.extend({},this.defaultCSS,{width:460,'float':'left',position:'relative'}),
-				t_style = jQuery.extend({},this.defaultCSS,{width:450,'float':'left',position:'relative',padding:5,height:80,'max-width':460,'max-height':100,color:'#000', 'font-family': 'arial', 'font-size': '12px', 'background-color': '#CCCCCC', 'border-radius':'3px', '-moz-border-radius':'3px', '-webkit-border-radius':'3px'}),
+				t_style = jQuery.extend({},this.defaultCSS,{width:445,'float':'left',position:'relative',padding:5,height:80,'max-width':460,'max-height':100,color:'#000', 'font-family': 'arial', 'font-size': '12px', 'background-color': '#CCCCCC', 'border-radius':'3px', '-moz-border-radius':'3px', '-webkit-border-radius':'3px'}),
 				c_style = jQuery.extend({},this.defaultCSS,{'float':'left',position:'relative',fontSize:12}),
+                                k_style = jQuery.extend({},this.defaultCSS,{width:435,height:18,color:'#000', 'font-family': 'arial', 'font-size': '12px', 'background-color': '#CCCCCC', 'border-radius':'3px', '-moz-border-radius':'3px', '-webkit-border-radius':'3px', 'float': 'left'}),
 				inputs = {
 					name : jQuery('<input type="text" name="name" value="' + parsed.title + '" />')
 						.css(jQuery.extend({},r_style,i_style)),
@@ -386,6 +406,9 @@
 					comment : jQuery('<textarea name="comment" maxlength="140"></textarea>')
 						.attr('id', 'comment_area')
 						.css(t_style),
+                                        tag : jQuery('<input type="text" />')
+						.attr('id', 'tag_entry')
+						.css(jQuery.extend({}, k_style)),
 					submit : jQuery('<input type="submit" value="Lift this item now"/>')
 						.css(jQuery.extend({},r_style,{color:'#000',width:'auto','margin-top':10, padding: 5, 'font-family': 'arial', 'font-size': '12px', 'background-color': '#CCCCCC', 'border-radius':'3px', '-moz-border-radius':'3px', '-webkit-border-radius':'3px'}))
             
@@ -425,8 +448,14 @@
 						.after(label.clone().text('characters left)')
 							.css(jQuery.extend({},c_style,{'marginLeft':4}))),
 					inputs.comment.css('height',50),
-          inputs.retailer,
-          inputs.url,
+                                        label.clone().text('Add a Tag').css(jQuery.extend({},c_style,{'margin-top':6,'margin-bottom':3})),
+                                        inputs.tag,
+                                        jQuery('<a href="javascript: $(\'#tag_entry\').AddTag();">+</a>')
+                                                .css({width:20,'position':'relative','color':'#FFF','text-decoration':'none','font-size':20,'float':'left','padding-left':5}),
+                                        jQuery('<div> </div>').attr('id', 'tag_list')
+                                                .css({width:455,height: 55,color:'#FFF','font-family':'arial','font-size':'12px','border-radius':'3px','float':'left'}),
+                                        inputs.retailer,
+                                        inputs.url,
 					inputs.submit.css({marginLeft:0})
 				);
 			return true;
