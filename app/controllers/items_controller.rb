@@ -77,7 +77,7 @@ class ItemsController < ApplicationController
       return return_error_messages(@post,"Failed to create item")
     end
 
-    @item = Item.new({:user_id => current_user.id, :post_id => @post.id})
+    @item = Item.new({:user_id => current_user.id, :post_id => @post.id, :comment => @post.comment})
     if @item.save
       respond_to do |format|
         format.html { redirect_to user_path(current_user) }

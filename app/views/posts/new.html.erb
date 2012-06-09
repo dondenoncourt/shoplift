@@ -2,7 +2,7 @@
 <div class="modalContent">
   <p>Install our Bookmarklet by dragging this button to your bookmarks bar:</p>
   <center>
-    <%= link_to "Shoplift It", "javascript:(function(){var%20id='shoplift-bookmarklet-script',s=document.getElementById(id);if(s)s.parentNode.removeChild(s);s=document.createElement('script');s.setAttribute('src','#{bookmarklet_url(:format => :js)}?z='+(Math.random()));s.setAttribute('type','text/javascript');s.setAttribute('id',id);document.body.appendChild(s);})();", :class => 'button' %>
+    <%= link_to "Shoplift It", "javascript:(function(){var%20id='shoplift-bookmarklet-script',s=document.getElementById(id);if(s)s.parentNode.removeChild(s);s=document.createElement('script');s.setAttribute('src','#{bookmarklet_url(:format => :js)}?z='+(Math.random())+'&url='+escape(document.URL));s.setAttribute('type','text/javascript');s.setAttribute('id',id);document.body.appendChild(s);})();", :class => 'button' %>
     </center>
 
   <div class="divider">OR</div>

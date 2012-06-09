@@ -6,7 +6,8 @@ class PostsController < ApplicationController
   end
 
   def create
-    post_params = parse(params[:url])
+    authenticate_user!
+    post_params = parse("http://"+params[:retailer]+params[:url])
     @images = post_params.delete(:images)
     @post = current_user.posts.create(post_params)
     respond_to do |format|

@@ -1,12 +1,13 @@
 class ParserController < ApplicationController
   layout nil, :only => [:bookmarklet]
+  include Parser
   
   # Parse url
   # * *Request*    :
   #   - GET /parse
   # * *Args*    :
   #   - :url -> URL of page to be parsed
-  def parse
+  def parse_obsolete
     # Authenticate user
     authenticate_user!
     
@@ -116,6 +117,11 @@ class ParserController < ApplicationController
   end 
 
   def bookmarklet
+    post_params = parse(params[:url])
+    @images = post_params.delete(:images)
+puts post_params
+    @post = current_user.posts.create(post_params)
+puts @post.to_json
   end
   
 end
