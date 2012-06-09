@@ -72,9 +72,12 @@ class ItemsController < ApplicationController
     end
 
     @post = Post.new(post)
-    @post.photo = open(params[:image].gsub(/\s/, "%20")) if params[:image]
-    if !@post.save
-      return return_error_messages(@post,"Failed to create item")
+    if params[:image]
+      params[:image] = "http://"+params[:retailer]+params[:image] if !params[:image].include? 'http:'
+      @post.photo = open(params[:image].gsub(/\s/, "%20")) 
+      if !@post.save
+        return return_error_messages(@post,"Failed to create item")
+      end
     end
 
     @item = Item.new({:user_id => current_user.id, :post_id => @post.id, :comment => @post.comment})
@@ -85,6 +88,20 @@ class ItemsController < ApplicationController
       end
     else
       return_error_messages(@item,"Failed to create item")
+    end
+    if params[:hashtags]
+      # TODO: this code is duplicated in hashtags_controller::create
+      params[:hashtags].each do |key, hashtag_value|
+        puts 'adding hashtag:'+hashtag_value
+        @hashtag_value = HashtagValue.find_or_create_by_value(hashtag_value)
+        if @hashtag_value.blank?
+          return render_error(500,"Failed to create hashtag")
+        end
+        @hashtag = Hashtag.new({:user_id => current_user.id, :post_id => @item.post.id, :hashtag_value_id => @hashtag_value.id})
+        if !@hashtag.save
+          return render_error(500,"Failed to create hashtag: "+hashtag_value+' '+@hashtag.errors[:hashtag_value_id][0])
+        end
+      end
     end
   end
 

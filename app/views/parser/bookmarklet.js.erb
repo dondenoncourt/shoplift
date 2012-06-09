@@ -284,7 +284,6 @@ item_tags = new Array();
 						.css(jQuery.extend({},r_style,i_style)),
           brand : jQuery('<input type="text" name="brand" value="<%= @post.brand %>" />')
 						.css(jQuery.extend({},r_style,i_style)),
-					retailer : jQuery('<input type="hidden" name="retailer" value="<%= @post.retailer %>"/>'),
 					url : jQuery('<input type="hidden" name="url" value="<%= @post.url ||= 'somehting' %>"/>'),
 					price : jQuery('<input type="text" name="price" value="<%= number_to_currency(@post.price, :precision => 0) %>"/>')
 						.css(jQuery.extend({},r_style,i_style)),
@@ -528,11 +527,16 @@ item_tags = new Array();
         window.open('<%= createItem_url %>?'+jQuery('form.sl-bookmarklet').serialize(),'login ','width=900,height=800');
         self.destroy();
       } else {
+        var queryString = jQuery('form.sl-bookmarklet').serialize()+'&authentication_token='+authentication_token;
+        $.each( item_tags, function(index, tag){
+           if (window.console) console.log(" tag: " +tag );
+           queryString += '&hashtags['+index+']='+tag;
+         });
         jQuery.ajax({
           url: this.form_url,
           type: 'POST',
           dataType: 'json',
-          data: jQuery('form.sl-bookmarklet').serialize()+'&authentication_token='+authentication_token,
+          data: queryString,
           success: function() {
             if (window.console) console.log('post ran with success');
             self.setError('Product added!');
