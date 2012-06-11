@@ -19,7 +19,8 @@ describe ItemsController do
       :url => "http://www.jcrew.com/index.jsp",
       :price => "1.1",
       :comment => nil,
-      :photo => File.new("#{Rails.root}/spec/fixtures/product-large-dress.jpg"),
+      :image => 'http://s7.jcrew.com/is/image/jcrew/90312_WO7718?$pdp_fs418$',
+      #:photo => File.new("#{Rails.root}/spec/fixtures/product-large-dress.jpg"),
       :hashtags_allowed => true,
       :hashtags => {
         "1" => {
@@ -200,7 +201,7 @@ describe ItemsController do
       it "returns validation error" do
         sign_in @user
         post :create, :item => {}, :format => :json
-        response.body.should =~ /Url can't be blank/m
+        response.body.should =~ /Post can't be blank/m
       end
     end
     

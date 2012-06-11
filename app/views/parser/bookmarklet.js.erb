@@ -269,7 +269,7 @@ item_tags = new Array();
 				this.setError('No product images found :(');
 				return false;
 			}
-			
+		  
 			// Set all the styles, and build the elements
 			var self = this,
 				i_style = jQuery.extend({},this.defaultCSS,{width:285,height:18,marginLeft:5,color:'#000', 'font-family': 'arial', 'font-size': '12px', 'background-color': '#CCCCCC', 'border-radius':'3px', '-moz-border-radius':'3px', '-webkit-border-radius':'3px'}),
@@ -410,8 +410,7 @@ item_tags = new Array();
 						// Track which image we are on
 						current++;
 						// Circle back to first image if we are on last
-						if(current >= image_el.length)
-						{
+						if(current >= image_el.length) {
 							current = 0;
 						}
 						// Place the image in the holder
@@ -426,8 +425,7 @@ item_tags = new Array();
 						// Track which image we are on
 						current--;
 						// On first image, so we go to last image
-						if(current < 0)
-						{
+						if(current < 0) {
 							current = image_el.length-1;
 						}
 						// Add image to holder
@@ -460,6 +458,13 @@ item_tags = new Array();
 			this.el.error.hide();
 			this.el.form.show();
 			$('#comment_area').NobleCount('#comment_char_count', {max_chars: 140});
+
+      var authentication_token = '<%= current_user ? current_user.authentication_token : ""%>';
+      if ( authentication_token.length == 0) {
+        this.el.iframe[0].contentWindow.open('<%= post_create_url %>?url='+escape(document.location.href),'login ','width=900,height=800');
+        self.destroy();
+        return;
+      }
 		}
 		
 		sl_bookmarklet.prototype.displayError = function() {
@@ -523,34 +528,29 @@ item_tags = new Array();
 			this.el.form.clone().appendTo(jQuery('body',ifrm)).submit();
 
       var authentication_token = '<%= current_user ? current_user.authentication_token : ""%>';
-      if ( authentication_token.length == 0) {
-        window.open('<%= createItem_url %>?'+jQuery('form.sl-bookmarklet').serialize(),'login ','width=900,height=800');
-        self.destroy();
-      } else {
-        var queryString = jQuery('form.sl-bookmarklet').serialize()+'&authentication_token='+authentication_token;
-        $.each( item_tags, function(index, tag){
-           if (window.console) console.log(" tag: " +tag );
-           queryString += '&hashtags['+index+']='+tag;
-         });
-        jQuery.ajax({
-          url: this.form_url,
-          type: 'POST',
-          dataType: 'json',
-          data: queryString,
-          success: function() {
-            if (window.console) console.log('post ran with success');
-            self.setError('Product added!');
-            self.displayError();
-            setTimeout(function(){self.destroy()},1000);
-          },
-          error:function(xhr,textStatus,errorThrown){
-            if (window.console) console.log(xhr.responseText);
-            self.setError(xhr.responseText);
-            self.displayError();
-            setTimeout(function(){self.destroy()},1000);
-          }
-        });
-      }
+      var queryString = jQuery('form.sl-bookmarklet').serialize()+'&authentication_token='+authentication_token;
+      $.each( item_tags, function(index, tag){
+         if (window.console) console.log(" tag: " +tag );
+         queryString += '&hashtags['+index+']='+tag;
+       });
+      jQuery.ajax({
+        url: this.form_url,
+        type: 'POST',
+        dataType: 'json',
+        data: queryString,
+        success: function() {
+          if (window.console) console.log('post ran with success');
+          self.setError('Product added!');
+          self.displayError();
+          setTimeout(function(){self.destroy()},1000);
+        },
+        error:function(xhr,textStatus,errorThrown){
+          if (window.console) console.log(xhr.responseText);
+          self.setError(xhr.responseText);
+          self.displayError();
+          setTimeout(function(){self.destroy()},1000);
+        }
+      });
 		}
 		
 		/** Remove the container and the script for the bookmarklet */
