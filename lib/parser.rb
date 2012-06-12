@@ -22,6 +22,7 @@ module Parser
   #// Grab the title from meta tag if not already set
   #// Grab description from meta tag if not set already
   #// Use the referrer for url
+  # I'm thinking for brand, if none is found, maybe the retailer is the brand?
 
   # bookmarklet.js.erb still has parsing for keywords/tags that ought to be in here...
   def parse(url)
@@ -88,6 +89,41 @@ module Parser
       return brand.strip if brand.present?
     end
     nil
+  end
+
+  # if the user overrode and values returned from parser
+  # attempt to retrieve and save the xpath and regex to retrieve those values
+  def parser_audit(url, post)
+    puts post[:brand]
+    agent = Mechanize.new
+    agent.user_agent_alias = 'Windows Mozilla'
+    begin
+      agent.get(url) do |page|
+        #puts page.search('//h1')
+        puts '<'
+        puts page.search("//h1[text()='KETTCAR KABRIO']")
+        puts '>'
+        puts '<'
+        puts page.search("//*[text()='KETTCAR KABRIO']/.")
+        puts '>'
+        it = page.search("//*[text()='KETTCAR KABRIO']")
+        it.each {|x| puts x}
+        #match =  page.body.match /#{post[:brand]}/
+        match =  page.body.match /kettler/
+        #match =  page.body.match /mickeymouse/
+        if match
+          #puts 'match.length:'+(match ? match.length: 0)
+          puts 'match'
+          puts match.length
+          p match
+        end
+      end
+    rescue => ex
+      puts ex.message
+      puts ex.backtrace
+    end
+    'done'
+
   end
 
 end
