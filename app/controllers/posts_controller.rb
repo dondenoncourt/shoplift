@@ -24,9 +24,30 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
 
     @post.photo = open(params[:image].gsub(/\s/, "%20")) if params[:image]
+# for parser_audit:
+# would have to update_attributes manually so we can save modified attributes
+# "learn" what has changed
+# by looping through params[:post].each {|k, v| 
+# delay.parser_audit...
     if @post.update_attributes(params[:post])
       @item = @post.items.create({ :user_id => current_user.id })
       if @item.persisted?
+        if params[:hashtags]
+          # TODO: change to the new syntax: .where (:value => hashtag_value).first_or_create
+          params[:hashtags].each do |key, hashtag_value|
+            puts 'adding hashtag:'+hashtag_value
+            @hashtag_value = HashtagValue.find_or_create_by_value(hashtag_value)
+            if @hashtag_value.blank?
+              # post.errors[:base] << 'fails to create...' if entry_url.blank?
+              return render_error(500,"Failed to create hashtag")
+            end
+            # TODO change to Hashtag.create so a new and save both are not needed
+            @hashtag = Hashtag.new({:user_id => current_user.id, :post_id => @item.post.id, :hashtag_value_id => @hashtag_value.id})
+            if !@hashtag.save
+              return render_error(500,"Failed to create hashtag: "+hashtag_value+' '+@hashtag.errors[:hashtag_value_id][0])
+            end
+          end
+        end
         respond_to do |format|
           format.html { redirect_to current_user }
           format.json { render :partial => 'item', :locals => {:item => @item}, :status => 201 }

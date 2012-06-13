@@ -93,6 +93,21 @@ module Parser
 
   # if the user overrode and values returned from parser
   # attempt to retrieve and save the xpath and regex to retrieve those values
+  # Notes:
+  #  a new post was already created so, in the update/changed, then we 
+  #  can get the changed parameters (try dirty object rails method)
+  #  http://archives.ryandaigle.com/articles/2008/3/31/what-s-new-in-edge-rails-dirty-objects
+  # delayed jobs??? gem 
+  #   set up a worker task 
+  #   has its own database table
+  #   would not need a web request
+  # would save "learned" results on a site (or even more detailed)
+  #
+  # Add log for issues for humans to review
+  #   one area of concern is user changing when there already is "learned" data
+  #   mispellings 
+  #
+  # Alfie: only add if the parser returns a blank!
   def parser_audit(url, post)
     puts post[:brand]
     agent = Mechanize.new
@@ -100,23 +115,31 @@ module Parser
     begin
       agent.get(url) do |page|
         #puts page.search('//h1')
+        #puts '<'
+        #puts page.search("//h1[text()='KETTCAR KABRIO']")
+        #puts '>'
+        #puts '<'
+        #puts page.search("//*[text()='KETTCAR KABRIO']/..")
+        #puts '>'
+        #it = page.search("//*[text()='KETTCAR KABRIO']")
+        #it.each {|x| puts x}
         puts '<'
-        puts page.search("//h1[text()='KETTCAR KABRIO']")
-        puts '>'
-        puts '<'
-        puts page.search("//*[text()='KETTCAR KABRIO']/.")
-        puts '>'
-        it = page.search("//*[text()='KETTCAR KABRIO']")
-        it.each {|x| puts x}
-        #match =  page.body.match /#{post[:brand]}/
-        match =  page.body.match /kettler/
-        #match =  page.body.match /mickeymouse/
-        if match
-          #puts 'match.length:'+(match ? match.length: 0)
-          puts 'match'
-          puts match.length
-          p match
+        page.parser.xpath("//*[text()='KETTCAR KABRIO']").each do |node|
+          puts node.parent.name
+          node.parent.keys.each {|key| puts key}
+          node.parent.values.each {|val| puts val}
+          puts node.parent[:id]
+
+          puts "end of this one....."
         end
+        puts '>'
+        #match =  page.body.match /kettler/
+        #if match
+          ##puts 'match.length:'+(match ? match.length: 0)
+          #puts 'match'
+          #puts match.length
+          #p match
+        #end
       end
     rescue => ex
       puts ex.message
@@ -125,5 +148,11 @@ module Parser
     'done'
 
   end
+  # "scoring" points on a page (above the fold)
+  # h1 has more weight than h3
+  # text in a hyper-link -- for google
+  # span with and id
+  # use font sizes or bold, is the included css file info available?
+  #
 
 end

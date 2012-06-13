@@ -91,20 +91,6 @@ class ItemsController < ApplicationController
     else
       return_error_messages(@item,"Failed to create item")
     end
-    if params[:hashtags]
-      # TODO: this code is duplicated in hashtags_controller::create
-      params[:hashtags].each do |key, hashtag_value|
-        puts 'adding hashtag:'+hashtag_value
-        @hashtag_value = HashtagValue.find_or_create_by_value(hashtag_value)
-        if @hashtag_value.blank?
-          return render_error(500,"Failed to create hashtag")
-        end
-        @hashtag = Hashtag.new({:user_id => current_user.id, :post_id => @item.post.id, :hashtag_value_id => @hashtag_value.id})
-        if !@hashtag.save
-          return render_error(500,"Failed to create hashtag: "+hashtag_value+' '+@hashtag.errors[:hashtag_value_id][0])
-        end
-      end
-    end
   end
 
   # Relift item

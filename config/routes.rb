@@ -18,6 +18,7 @@ App::Application.routes.draw do
   resources :posts
   resources :categories, :only => [:index, :edit, :update]
   get "post/create", :to => "posts#create"
+  post "posts/:id/update", :to => "posts#update"
 
   root :to => "page#home"
 
