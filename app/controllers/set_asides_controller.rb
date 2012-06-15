@@ -28,7 +28,11 @@ class SetAsidesController < ApplicationController
 
     @set_aside = @item.set_asides.where(:user_id => current_user.id, :status => 1).first_or_create
     if @set_aside.persisted?
-      render :partial => 'items/item', :locals => {:item => @set_aside.item}, :status => 201
+      if request.xhr?
+        render :json => @set_aside, :locals => {:item => @set_aside.item}, :status => 201
+      else
+        render :partial => 'items/item', :locals => {:item => @set_aside.item}, :status => 201
+      end
     else
       return_error_messages(@set_asides,"Item failed to save")
     end

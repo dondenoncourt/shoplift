@@ -88,13 +88,13 @@ function handleSave() {
         url: '/set_asides',
         type: 'POST',
         data:  'item_id=' + $(_this).attr('item_id'),
-        success: function(post){
-          console.log(post);
+        success: function(rsp){
+          console.log(rsp);
           $(_this).closest('div.entry').addClass('saved');
           $(_this).addClass('has_aside');
           $(_this).html('Un-Save');
-          $(_this).attr('item_id', post.id);
-          $(_this).attr('set_aside_id', post.set_aside.id);
+          $(_this).attr('item_id', rsp.item_id);
+          $(_this).attr('set_aside_id', rsp.id);
         },
         error: function(xhr, textStatus, errorThrown) {
           alert(xhr.responseText);
