@@ -1,9 +1,11 @@
 require 'spec_helper'
+require 'fakeweb'
 include Parser
+include FakePage
+
+FakeWeb.register_uri(:get, "http://www.kettlerusa.com/fitness/exercise-bikes/2761", :body => getKettcarKabrio(), :content_type => "text/html")
 
 describe 'Parse' do
-
-  # TODO use mocking for html
 
   describe " on Kettler " do
     it "returns a " do
@@ -19,5 +21,12 @@ describe 'Parse' do
     end
   end
 
-end
+  describe "on kettler" do
+    it "returns audit information" do
+      response = parser_audit 'http://www.kettlerusa.com/fitness/exercise-bikes/2761',
+                        {:brand => 'kettler'}
+      response.should == 'done'
+    end
+  end
 
+end

@@ -11,7 +11,7 @@ module Parser
   # known elements from sites like:
   # Amazon, eBay, Nordstroms, Macys, J. Crew, Abercrombie, ThinkGeek, Overstock, Zappos
   # these can later be replaced by 'learned' elements stored elsewhere
-  BRAND_IDENTIFIERS = %w(.brandLink .header-logo #logo)
+  BRAND_IDENTIFIERS = %w(.brandLink .header-logo #logo .brand )
   ITEM_IDENTIFIERS = %w(.product-name h1 h2 #btAsinTitle)
   PRICE_IDENTIFIERS = %w(#actualPriceValue .priceLarge .select-sale-single .price-single .priceSale .offer-price .cat-glo-tex-saleP .cat-pro-price .price)
 
@@ -27,7 +27,7 @@ module Parser
   # bookmarklet.js.erb still has parsing for keywords/tags that ought to be in here...
   def parse(url)
     agent = Mechanize.new
-    agent.user_agent_alias = 'Windows Mozilla'
+    #agent.user_agent_alias = 'Windows Mozilla'
     begin
       agent.get(url) do |page|
         images = []
@@ -91,6 +91,9 @@ module Parser
     nil
   end
 
+  UPPER = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+  LOWER = 'abcdefghijklmnopqrstuvwxyz'
+
   # if the user overrode and values returned from parser
   # attempt to retrieve and save the xpath and regex to retrieve those values
   # Notes:
@@ -108,38 +111,45 @@ module Parser
   #   mispellings 
   #
   # Alfie: only add if the parser returns a blank!
-  def parser_audit(url, post)
-    puts post[:brand]
+  #
+  # handle brand being in the prefix of the item name
+  #     if brand changed and the new brand is in the item name, add a regex?
+  # "scoring" points on a page (above the fold)
+  # h1 has more weight than h3
+  # text in a hyper-link -- for google
+  # span with and id
+  # use font sizes or bold, is the included css file info available?
+  #
+  # if the brand is in the post.itemName or the xml item name has the brand in it
+  #    then use the brand prefix in the item name from the xml
+  # brand node weights:
+  # h1|h2|h3 has only brand
+  # h1|h2|h3 starts-with brand and contains item name
+  # h1|h2|h3 starts-with brand
+  # h1|h2|h3|span only brand
+  #
+  #
+  def parser_audit(post)
     agent = Mechanize.new
     agent.user_agent_alias = 'Windows Mozilla'
     begin
-      agent.get(url) do |page|
-        #puts page.search('//h1')
-        #puts '<'
-        #puts page.search("//h1[text()='KETTCAR KABRIO']")
-        #puts '>'
-        #puts '<'
-        #puts page.search("//*[text()='KETTCAR KABRIO']/..")
-        #puts '>'
-        #it = page.search("//*[text()='KETTCAR KABRIO']")
-        #it.each {|x| puts x}
-        puts '<'
-        page.parser.xpath("//*[text()='KETTCAR KABRIO']").each do |node|
-          puts node.parent.name
-          node.parent.keys.each {|key| puts key}
-          node.parent.values.each {|val| puts val}
-          puts node.parent[:id]
-
-          puts "end of this one....."
+      agent.get(post[:url]) do |page|
+        puts "header_has_only_brand(page, #{post[:brand]})"
+        puts '     '+header_has_only_brand(page, post[:brand]).to_s
+        puts "header_starts_with_brand_contains_name(page, #{post[:brand]}, #{post[:name]})"
+        puts '     '+header_starts_with_brand_contains_name(page, post[:brand], post[:name]).to_s
+        puts "header_starts_with_brand(page, #{post[:brand]})"
+        puts '     '+header_starts_with_brand(page, post[:brand]).to_s
+        puts "text_nodes_for_brand(page, #{post[:brand]}).each"
+        text_nodes_for_brand(page, post[:brand]).each do |node|
+          if node['class'] || node['id']
+            puts '     '+node.name +
+                        (node['class']?' class='+node['class'] : '') +
+                        (node['id']?' id='+node['id'] : '')
+          end
         end
-        puts '>'
-        #match =  page.body.match /kettler/
-        #if match
-          ##puts 'match.length:'+(match ? match.length: 0)
-          #puts 'match'
-          #puts match.length
-          #p match
-        #end
+        #match = regex(page, post[:brand])
+        #puts "match /#{post[:brand]}/ length:"+ match.length.to_s if match
       end
     rescue => ex
       puts ex.message
@@ -148,11 +158,74 @@ module Parser
     'done'
 
   end
-  # "scoring" points on a page (above the fold)
-  # h1 has more weight than h3
-  # text in a hyper-link -- for google
-  # span with and id
-  # use font sizes or bold, is the included css file info available?
-  #
 
+  private
+
+  def regex(page, str) 
+    page.body.match /#{str}/
+  end
+
+  def header_has_only_brand(page, brand)
+    %w{h1 h2 h3}.each do |header|
+      header = 
+        page.parser.xpath("//#{header}[translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') = '#{brand.downcase}']")
+      return header if header
+    end
+  end
+  
+  def header_starts_with_brand(page, brand)
+    %w{h1 h2 h3}.each do |header|
+      header = 
+        page.parser.xpath("//#{header}[starts-with(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'#{brand.downcase}')]")
+      return header if header
+    end
+  end
+  
+  def header_starts_with_brand_contains_name(page, brand, name)
+    %w{h1 h2 h3}.each do |header|
+      hdr =
+        page.parser.xpath("//#{header}[starts-with(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'#{brand.downcase}')]")
+      if hdr
+        hdr =
+          page.parser.xpath("//#{header}[contains(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'#{name.downcase}')]")
+        return hdr if hdr
+      end
+    end
+  end
+
+  def text_nodes_for_brand(page, brand)
+    page.parser.xpath("//*[translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') = '#{brand.downcase}']")
+  end
+
+  # http://stackoverflow.com/questions/2279513/how-can-i-create-a-nokogiri-case-insensitive-xpath-selector
+  def case_insensitive_equals(node_set, str_to_match)
+    node_set.find_all {|node| node.to_s.downcase == str_to_match.to_s.downcase }
+  end
+
+  # top retailer clothing sites:
+  # http://www.fashionbug.com/
+  # http://www.redoute.com/
+  # http://www.oldnavy.com/
+  # http://www.bcoutlet.com/
+  # http://www.getheavenly.com/
+  # http://www.spiegel.com/
+  # http://www.modcloth.com/
+  # http://www.nyandcompany.com/
+  # http://www.wetseal.com/
+  # http://www.urbanladiesoutfits.com/
+
+  def run_some()
+    @sites = [
+      {brand: 'Tignanello', name: 'Multi Pocket Organizer Crossbody', url: 'http://bags.bcoutlet.com/product/tignanello/multi-pocket-organizer-crossbody/130799/p/1338439'}
+      #'http://fashionbug.lanebryant.com/shoes/boots/13833c5116/index.cat?intid=LPxSH060312xL4',
+      #'http://oldnavy.gap.com/browse/product.do?cid=82576&vid=1&pid=106420',
+      #'http://www.getheavenly.com/Co-Sheer-Stroke-Blouse-Orange/dp/B0074W34SC',
+      #'http://www.spiegel.com/long-asymmetrical-dress.html',
+      #'http://www.modcloth.com/shop/blouses/coach-tour-top-in-sand'
+    ]
+    @sites.each do |post|
+      p post
+      parser_audit(post)
+    end
+  end
 end
