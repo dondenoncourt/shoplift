@@ -134,20 +134,15 @@ module Parser
     agent.user_agent_alias = 'Windows Mozilla'
     begin
       agent.get(post[:url]) do |page|
-        puts "header_has_only_brand(page, #{post[:brand]})"
-        puts '     '+header_has_only_brand(page, post[:brand]).to_s
-        puts "header_starts_with_brand_contains_name(page, #{post[:brand]}, #{post[:name]})"
-        puts '     '+header_starts_with_brand_contains_name(page, post[:brand], post[:name]).to_s
-        puts "header_starts_with_brand(page, #{post[:brand]})"
-        puts '     '+header_starts_with_brand(page, post[:brand]).to_s
-        puts "text_nodes_for_brand(page, #{post[:brand]}).each"
-        text_nodes_for_brand(page, post[:brand]).each do |node|
-          if node['class'] || node['id']
-            puts '     '+node.name +
-                        (node['class']?' class='+node['class'] : '') +
-                        (node['id']?' id='+node['id'] : '')
-          end
-        end
+        puts "tag_has_only_brand(page, %w{h1 h2 h3 span}, #{post[:brand]})"
+        puts '     '+tag_has_only_brand(page, %w{h1 h2 h3 span}, post[:brand]).to_s.gsub(/\s\s/, ' ')
+        puts "tag_starts_with_brand_contains_name(page, %w{h1 h2 h3 span}, #{post[:brand]}, #{post[:name]})"
+        puts '     '+tag_starts_with_brand_contains_name(page, %w{h1 h2 h3 span}, post[:brand], post[:name]).to_s.gsub(/\s\s/, ' ')
+        puts "tag_starts_with_brand(page, %w{h1 h2 h3 span}, #{post[:brand]})"
+        puts '     '+tag_starts_with_brand(page, %w{h1 h2 h3 span}, post[:brand]).to_s.gsub(/\s\s/, ' ')
+        puts "text_nodes_for_brand(page, %w{h1 h2 h3 span}, #{post[:brand]}).each"
+        text_nodes_for_brand(page, post[:brand]).each {|node| puts buildXpath(node, "text = #{post[:brand]}")}
+        tag_starts_with_brand_contains_name(page, %w{h1 h2 h3 span}, post[:brand], post[:name]) .each {|node| puts buildXpath(node, ">>> text contains #{post[:brand]}")}
         #match = regex(page, post[:brand])
         #puts "match /#{post[:brand]}/ length:"+ match.length.to_s if match
       end
@@ -161,40 +156,51 @@ module Parser
 
   private
 
+  def buildXpath(node, xPathType=nil)
+    node.name +
+        (node['class']?' class='+node['class'] : '') +
+        (node['id']?' id='+node['id'] : '') +
+        ' ' + xPathType ||= ''
+  end
+
   def regex(page, str) 
     page.body.match /#{str}/
   end
 
-  def header_has_only_brand(page, brand)
-    %w{h1 h2 h3}.each do |header|
-      header = 
-        page.parser.xpath("//#{header}[translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') = '#{brand.downcase}']")
-      return header if header
+  def tag_has_only_brand(page, tags, brand)
+    tags.each do |tag|
+      node = page.parser.xpath("//#{tag}[translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') = '#{brand.downcase}']")
+      puts ('     node.length:'+node.length.to_s) if !node.blank?
+      return node if !node.blank?
     end
   end
   
-  def header_starts_with_brand(page, brand)
-    %w{h1 h2 h3}.each do |header|
-      header = 
-        page.parser.xpath("//#{header}[starts-with(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'#{brand.downcase}')]")
-      return header if header
+  def tag_starts_with_brand(page, tags, brand)
+    tags.each do |tag|
+      node = page.parser.xpath("//#{tag}[starts-with(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'#{brand.downcase}')]")
+      return node if !node.blank?
     end
+    nil
   end
   
-  def header_starts_with_brand_contains_name(page, brand, name)
-    %w{h1 h2 h3}.each do |header|
-      hdr =
-        page.parser.xpath("//#{header}[starts-with(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'#{brand.downcase}')]")
-      if hdr
-        hdr =
-          page.parser.xpath("//#{header}[contains(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'#{name.downcase}')]")
-        return hdr if hdr
+  def tag_starts_with_brand_contains_name(page, tags, brand, name)
+    %w{h1 h2 h3 span}.each do |tag|
+      node = page.parser.xpath("//#{tag}[starts-with(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'#{brand.downcase}')]")
+      if node
+        node = page.parser.xpath("//#{tag}[contains(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),\""+name.downcase+"\")]")
+        return node if !node.blank?
       end
     end
+    nil
   end
 
   def text_nodes_for_brand(page, brand)
-    page.parser.xpath("//*[translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') = '#{brand.downcase}']")
+    begin
+      page.parser.xpath("//*[translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') = '#{brand.downcase}']")
+    rescue
+      puts "       Note: could not translate text to lowercase, using standard case sensitive xpath..."
+      page.parser.xpath("//*[text()='#{brand.downcase}']")
+    end
   end
 
   # http://stackoverflow.com/questions/2279513/how-can-i-create-a-nokogiri-case-insensitive-xpath-selector
@@ -216,7 +222,8 @@ module Parser
 
   def run_some()
     @sites = [
-      {brand: 'Tignanello', name: 'Multi Pocket Organizer Crossbody', url: 'http://bags.bcoutlet.com/product/tignanello/multi-pocket-organizer-crossbody/130799/p/1338439'}
+      {brand: 'Tignanello', name: 'Multi Pocket Organizer Crossbody', url: 'http://bags.bcoutlet.com/product/tignanello/multi-pocket-organizer-crossbody/130799/p/1338439'},
+      {brand: 'Russell Athletic', name: "Men's Crew Neck T-Shirt", url: 'http://www.sears.com/russell-athletic-men-s-crew-neck-t-shirt/p-043M6725000P?prdNo=2&blockNo=2&blockType=G2'}
       #'http://fashionbug.lanebryant.com/shoes/boots/13833c5116/index.cat?intid=LPxSH060312xL4',
       #'http://oldnavy.gap.com/browse/product.do?cid=82576&vid=1&pid=106420',
       #'http://www.getheavenly.com/Co-Sheer-Stroke-Blouse-Orange/dp/B0074W34SC',
