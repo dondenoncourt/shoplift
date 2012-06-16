@@ -135,14 +135,24 @@ module Parser
     begin
       agent.get(post[:url]) do |page|
         puts "tag_has_only_brand(page, %w{h1 h2 h3 span}, #{post[:brand]})"
-        puts '     '+tag_has_only_brand(page, %w{h1 h2 h3 span}, post[:brand]).to_s.gsub(/\s\s/, ' ')
+        has_only_brand = tag_has_only_brand(page, %w{h1 h2 h3 span}, post[:brand])
+        printNode(has_only_brand)
+        has_only_brand.each {|node| puts "     #{buildXpath(node)}"} if has_only_brand
+
         puts "tag_starts_with_brand_contains_name(page, %w{h1 h2 h3 span}, #{post[:brand]}, #{post[:name]})"
-        puts '     '+tag_starts_with_brand_contains_name(page, %w{h1 h2 h3 span}, post[:brand], post[:name]).to_s.gsub(/\s\s/, ' ')
+        starts_with_brand_contains_name = tag_starts_with_brand_contains_name(page, %w{h1 h2 h3 span}, post[:brand], post[:name])
+        printNode(starts_with_brand_contains_name)
+        starts_with_brand_contains_name.each {|node| puts "     #{buildXpath(node)}"} if starts_with_brand_contains_name
+
         puts "tag_starts_with_brand(page, %w{h1 h2 h3 span}, #{post[:brand]})"
-        puts '     '+tag_starts_with_brand(page, %w{h1 h2 h3 span}, post[:brand]).to_s.gsub(/\s\s/, ' ')
-        puts "text_nodes_for_brand(page, %w{h1 h2 h3 span}, #{post[:brand]}).each"
-        text_nodes_for_brand(page, post[:brand]).each {|node| puts buildXpath(node, "text = #{post[:brand]}")}
-        tag_starts_with_brand_contains_name(page, %w{h1 h2 h3 span}, post[:brand], post[:name]) .each {|node| puts buildXpath(node, ">>> text contains #{post[:brand]}")}
+        starts_with_brand = tag_starts_with_brand(page, %w{h1 h2 h3 span}, post[:brand])
+        printNode(starts_with_brand)
+        starts_with_brand.each {|node| puts "     #{buildXpath(node)}"} if starts_with_brand
+
+        puts "text_nodes_for_brand(page,  #{post[:brand]})"
+        text_nodes_for_brand = text_nodes_for_brand(page, post[:brand])
+        printNode(text_nodes_for_brand)
+        text_nodes_for_brand.each {|node| puts "     #{buildXpath(node)}"} if text_nodes_for_brand
         #match = regex(page, post[:brand])
         #puts "match /#{post[:brand]}/ length:"+ match.length.to_s if match
       end
@@ -156,11 +166,18 @@ module Parser
 
   private
 
-  def buildXpath(node, xPathType=nil)
-    node.name +
-        (node['class']?' class='+node['class'] : '') +
-        (node['id']?' id='+node['id'] : '') +
-        ' ' + xPathType ||= ''
+  def printNode(node)
+    puts ("     found #{node.length.to_s}:") if !node.blank?
+    puts ('     '+node.to_s.gsub(/\s\s/, ' '))
+  end
+  def buildXpath(node)
+    xpath = "//#{node.name}"
+    if node.attributes.length > 0
+      xpath += '['
+      node.attributes.each { |attr,value| xpath += "@#{attr}='#{value}'"}
+      xpath += ']'
+    end
+    xpath
   end
 
   def regex(page, str) 
@@ -170,9 +187,9 @@ module Parser
   def tag_has_only_brand(page, tags, brand)
     tags.each do |tag|
       node = page.parser.xpath("//#{tag}[translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') = '#{brand.downcase}']")
-      puts ('     node.length:'+node.length.to_s) if !node.blank?
       return node if !node.blank?
     end
+    nil
   end
   
   def tag_starts_with_brand(page, tags, brand)
@@ -223,7 +240,8 @@ module Parser
   def run_some()
     @sites = [
       {brand: 'Tignanello', name: 'Multi Pocket Organizer Crossbody', url: 'http://bags.bcoutlet.com/product/tignanello/multi-pocket-organizer-crossbody/130799/p/1338439'},
-      {brand: 'Russell Athletic', name: "Men's Crew Neck T-Shirt", url: 'http://www.sears.com/russell-athletic-men-s-crew-neck-t-shirt/p-043M6725000P?prdNo=2&blockNo=2&blockType=G2'}
+      {brand: 'Russell Athletic', name: "Men's Crew Neck T-Shirt", url: 'http://www.sears.com/russell-athletic-men-s-crew-neck-t-shirt/p-043M6725000P?prdNo=2&blockNo=2&blockType=G2'},
+      {brand: 'miss me jeans', name: "Miss Me Jeans Fleur-de-Lis Bermuda Denim Shorts", url:'http://www.dillards.com/product/Miss-Me-Jeans-FleurdeLis-Bermuda-Denim-Shorts_301_-1_301_503199762'}
       #'http://fashionbug.lanebryant.com/shoes/boots/13833c5116/index.cat?intid=LPxSH060312xL4',
       #'http://oldnavy.gap.com/browse/product.do?cid=82576&vid=1&pid=106420',
       #'http://www.getheavenly.com/Co-Sheer-Stroke-Blouse-Orange/dp/B0074W34SC',
