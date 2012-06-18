@@ -134,27 +134,33 @@ module Parser
     agent.user_agent_alias = 'Windows Mozilla'
     begin
       agent.get(post[:url]) do |page|
+        xpaths = []
+
         puts "tag_has_only_brand(page, %w{h1 h2 h3 span}, #{post[:brand]})"
         has_only_brand = tag_has_only_brand(page, %w{h1 h2 h3 span}, post[:brand])
         printNode(has_only_brand)
-        has_only_brand.each {|node| puts "     #{buildXpath(node)}"} if has_only_brand
+        has_only_brand.each {|node| xpaths << buildXpath(node)} if has_only_brand
 
         puts "tag_starts_with_brand_contains_name(page, %w{h1 h2 h3 span}, #{post[:brand]}, #{post[:name]})"
         starts_with_brand_contains_name = tag_starts_with_brand_contains_name(page, %w{h1 h2 h3 span}, post[:brand], post[:name])
         printNode(starts_with_brand_contains_name)
-        starts_with_brand_contains_name.each {|node| puts "     #{buildXpath(node)}"} if starts_with_brand_contains_name
+        starts_with_brand_contains_name.each {|node| xpaths << buildXpath(node)} if starts_with_brand_contains_name
 
         puts "tag_starts_with_brand(page, %w{h1 h2 h3 span}, #{post[:brand]})"
         starts_with_brand = tag_starts_with_brand(page, %w{h1 h2 h3 span}, post[:brand])
         printNode(starts_with_brand)
-        starts_with_brand.each {|node| puts "     #{buildXpath(node)}"} if starts_with_brand
+        starts_with_brand.each {|node| xpaths << buildXpath(node)} if starts_with_brand
 
         puts "text_nodes_for_brand(page,  #{post[:brand]})"
         text_nodes_for_brand = text_nodes_for_brand(page, post[:brand])
         printNode(text_nodes_for_brand)
-        text_nodes_for_brand.each {|node| puts "     #{buildXpath(node)}"} if text_nodes_for_brand
+        text_nodes_for_brand.each {|node| xpaths << buildXpath(node)} if text_nodes_for_brand
         #match = regex(page, post[:brand])
         #puts "match /#{post[:brand]}/ length:"+ match.length.to_s if match
+        xpaths.each do |xpath|
+          puts "xpath: #{xpath}"
+          puts "      "+page.parser.xpath(xpath).to_s.gsub(/\s\s/, ' ')
+        end
       end
     rescue => ex
       puts ex.message
