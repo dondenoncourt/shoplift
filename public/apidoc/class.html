@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Home</title>
+    <base id="base_target"></base>
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) {
+        document.getElementById('base_target').target = 'main';
+        document.body.className = 'frames'
+      }
+    </script>
+    <div class="content">
+      <h2>Resources</h2>
+      <div id="resources_dudul">
+        <ul>
+        
+          <li>
+            Users
+            
+              <ul>
+                
+                  <li><a href="/apidoc/users.html#method_1">GET /shoplifters.json</a></li>
+                
+                  <li><a href="/apidoc/users.html#method_2">GET /users/:id.json</a></li>
+                
+              </ul>
+            
+          </li>
+        
+          <li>
+            Following
+            
+              <ul>
+                
+                  <li><a href="/apidoc/following.html#method_1">GET /users/:user_id/following.json</a></li>
+                
+              </ul>
+            
+          </li>
+        
+          <li>
+            Followers
+            
+              <ul>
+                
+                  <li><a href="/apidoc/followers.html#method_1">GET /users/:user_id/followers.json</a></li>
+                
+              </ul>
+            
+          </li>
+        
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>
