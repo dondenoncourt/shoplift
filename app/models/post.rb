@@ -41,7 +41,7 @@ class Post < ActiveRecord::Base
                     :path => "/:style/:id/:filename"
   
   
-  validates :name, :brand, :url, :retailer, :user_id, :presence => true
+  validates :url, :retailer, :user_id, :presence => true
   
   # todo turn this on after unit tests are modified
   #validates_attachment_presence :photo

@@ -121,8 +121,6 @@ class ParserController < ApplicationController
       post_params = parse(params[:url])
       @images = post_params.delete(:images)
       @post = current_user.posts.create(post_params)
-      puts post_params
-      puts @post.to_json
     else
       @post = Post.new
     end
