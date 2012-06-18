@@ -109,7 +109,7 @@ class ParserController < ApplicationController
         hashtag = hashtag.squish.gsub(/[^[:alnum:]]/,'').gsub(' ','_')
         if hashtag.length < 40
           @results[:hashtags] << hashtag.camelcase
-        end  
+        end
       end
     end
     
