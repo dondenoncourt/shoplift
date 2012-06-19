@@ -27,6 +27,9 @@ class PostsController < ApplicationController
       puts 'image:'+image
       @post.photo = open(image.gsub(/\s/, "%20"))
     end
+
+    @post.brand = Brand.find_or_create_by_name(params[:brand])
+    
 # for parser_audit:
 # would have to update_attributes manually so we can save modified attributes
 # "learn" what has changed

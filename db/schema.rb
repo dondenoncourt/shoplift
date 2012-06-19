@@ -11,7 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120531195657) do
+ActiveRecord::Schema.define(:version => 20120619191556) do
+
+  create_table "brands", :force => true do |t|
+    t.string   "name"
+    t.boolean  "reviewed",   :default => false, :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+  end
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -109,7 +116,6 @@ ActiveRecord::Schema.define(:version => 20120531195657) do
   create_table "posts", :force => true do |t|
     t.string   "name",               :limit => 110,                                                   :null => false
     t.text     "description"
-    t.string   "brand",                                                                               :null => false
     t.string   "retailer",                                                                            :null => false
     t.string   "url",                :limit => 2083,                                                  :null => false
     t.decimal  "price",                              :precision => 10, :scale => 2
@@ -126,6 +132,7 @@ ActiveRecord::Schema.define(:version => 20120531195657) do
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
+    t.integer  "brand_id"
   end
 
   add_index "posts", ["user_id"], :name => "fk_posts_users"

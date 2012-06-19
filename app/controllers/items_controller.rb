@@ -56,7 +56,7 @@ class ItemsController < ApplicationController
   def create
     authenticate_user!
     post = {:user_id => current_user.id}
-    post_include = ["name", "description", "brand", "retailer", "url", "price", "comment"]#, "hashtags_allowed"]
+    post_include = ["name", "description", "retailer", "url", "price", "comment"]#, "hashtags_allowed"]
 
     # puts "HACK: stuff values in required attributes"
     params[:name] ||= 'TODO get name in bookmarklet.js'
@@ -77,6 +77,7 @@ class ItemsController < ApplicationController
       retailer = params[:retailer] ||= params[:item][:retailer]
       image = "http://"+retailer+image if !image.include? 'http:'
       @post.photo = open(image.gsub(/\s/, "%20")) 
+      @post.brand = Brand.find_or_create_by_name(params[:item][:brand])
       if !@post.save
         return return_error_messages(@post,"Failed to create item")
       end
@@ -131,17 +132,20 @@ class ItemsController < ApplicationController
                         params[:id],current_user.id).first!
 
     post = {:user_id => current_user.id}
-    post_include = ["name", "description", "brand", "retailer", "url", "price", "comment", "hashtags_allowed"]
+    post_include = ["name", "description", "retailer", "url", "price", "comment", "hashtags_allowed"]
 
     if params[:item].blank?
       post_include.each do |element|
         post = post.merge({element => params[element]})
       end
+      post[:brand]= Brand.find_or_create_by_name(params[:brand])
     else
       post_include.each do |element|
         post = post.merge({element => params[:item][element]})
       end
+      post[:brand]= Brand.find_or_create_by_name(params[:item][:brand])
     end
+
 
     if @item.post.update_attributes(post)
       render :partial => 'item', :locals => {:item => @item}, :status => 200

@@ -2,7 +2,7 @@
 <div class="modalContent">
   <p>Product Details:</p>
   <ul>
-    <li>Brand: <%= @item.post.brand %></li>
+    <li>Brand: <%= @item.post.brand.name %></li>
     <li>Item Name: <%= @item.post.name %></li>
     <li>Price: $<%= @item.post.price.ceil %></li>
   </ul>
