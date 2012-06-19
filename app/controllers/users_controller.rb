@@ -153,8 +153,8 @@ class UsersController < ApplicationController
   #   "zipcode" : null
   # }
   # ::output-end::
-  # Create a new user<br/><br/>
-  # Notes:<pre>curl -d "user[full_name]=Aaron Bartell3" -d "user[email]=aaronbartell@gmail.com3" -d "user[password]=poopydiaper" localhost:3000/users.json</pre>
+  # Create a new user
+  # <br/><br/>Notes:<pre>curl -d "user[full_name]=Aaron Bartell3" -d "user[email]=aaronbartell@gmail.com3" -d "user[password]=poopydiaper" localhost:3000/users.json</pre>
   # =end
   def create
     @user = User.new(params[:user])
@@ -195,8 +195,8 @@ class UsersController < ApplicationController
   #   "sex" : "Female"
   # }
   # ::output-end::
-  # Edit (update) user<br/><br/>
-  # Notes:<pre>curl -X POST --user aaronbartell@gmail.com:poopydiaper -d "user[full_name]=Aaron Bartell5" -d "user[email]=aaronbartell@gmail.com5" localhost:3000/users/13/edit.json</pre>
+  # Edit (update) user
+  # <br/><br/>Notes:<pre>curl -X POST --user aaronbartell@gmail.com:poopydiaper -d "user[full_name]=Aaron Bartell5" -d "user[email]=aaronbartell@gmail.com5" localhost:3000/users/13/edit.json</pre>
   # =end
   def update
     ## Check if user is updating themselve or another (must be admin) ##
@@ -249,8 +249,8 @@ class UsersController < ApplicationController
   #   "zipcode" : null
   # }
   # ::output-end::
-  # Update user<br/><br/>
-  # Notes:<pre>curl -X POST --user aaronbartell@gmail.com:poopydiaper localhost:3000/users/13/delete.json</pre>
+  # Update user
+  # <br/><br/>Notes:<pre>curl -X POST --user aaronbartell@gmail.com:poopydiaper localhost:3000/users/13/delete.json</pre>
   # =end
   def destroy
     ## Check if user is updating themselve or another (must be admin) ##

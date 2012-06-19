@@ -14,3 +14,6 @@ followers:
   
 timelines:
   controller_name: "timelines_controller.rb"
+
+setasides:
+  controller_name: "set_asides_controller.rb"
