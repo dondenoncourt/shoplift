@@ -11,3 +11,9 @@ following:
 followers:
   location: "/users/:user_id/followers"
   controller_name: "followers_controller.rb"
+  
+timelines:
+  controller_name: "timelines_controller.rb"
+
+setasides:
+  controller_name: "set_asides_controller.rb"
