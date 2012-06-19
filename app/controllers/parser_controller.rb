@@ -119,6 +119,8 @@ class ParserController < ApplicationController
   def bookmarklet
     if current_user
       post_params = parse(params[:url])
+      @brand_name = post_params[:brand]
+      post_params[:brand] = nil
       @images = post_params.delete(:images)
       @post = current_user.posts.create(post_params)
     else

@@ -41,7 +41,6 @@ class Post < ActiveRecord::Base
                     :s3_credentials => "#{Rails.root}/config/s3.yml",
                     :path => "/:style/:id/:filename"
   
-  
   validates :url, :retailer, :user_id, :presence => true
   
   # todo turn this on after unit tests are modified

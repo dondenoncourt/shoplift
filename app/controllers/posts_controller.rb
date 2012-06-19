@@ -9,6 +9,8 @@ class PostsController < ApplicationController
     authenticate_user!
     params[:url] = "http://"+params[:retailer]+params[:url] if !params[:url].include? 'http:'
     post_params = parse(params[:url])
+    @brand_name = post_params[:brand]
+    post_params[:brand] = nil
     @images = post_params.delete(:images)
     @post = current_user.posts.create(post_params)
     respond_to do |format|
