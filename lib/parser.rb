@@ -130,11 +130,11 @@ module Parser
   #
   #
   def parser_audit(post)
+    xpaths = []
     agent = Mechanize.new
     agent.user_agent_alias = 'Windows Mozilla'
     begin
       agent.get(post[:url]) do |page|
-        xpaths = []
 
         puts "tag_has_only_brand(page, %w{h1 h2 h3 span}, #{post[:brand]})"
         has_only_brand = tag_has_only_brand(page, %w{h1 h2 h3 span}, post[:brand])
@@ -155,26 +155,27 @@ module Parser
         text_nodes_for_brand = text_nodes_for_brand(page, post[:brand])
         printNode(text_nodes_for_brand)
         text_nodes_for_brand.each {|node| xpaths << buildXpath(node)} if text_nodes_for_brand
-        #match = regex(page, post[:brand])
-        #puts "match /#{post[:brand]}/ length:"+ match.length.to_s if match
-        xpaths.each do |xpath|
-          puts "xpath: #{xpath}"
-          puts "      "+page.parser.xpath(xpath).to_s.gsub(/\s\s/, ' ')
-        end
       end
     rescue => ex
       puts ex.message
       puts ex.backtrace
     end
-    'done'
+    xpathMap = Hash.new
+    xpaths.each do |xpath|
+      retailer = post[:url].split('/')[2]
+      xpathMap[retailer] = xpath
+    end
+    xpathMap
 
   end
 
   private
 
   def printNode(node)
-    puts ("     found #{node.length.to_s}:") if !node.blank?
-    puts ('     '+node.to_s.gsub(/\s\s/, ' '))
+    if !node.blank?
+      puts ("     found #{node.length.to_s}:")
+      puts ('     '+node.to_s.gsub(/\s\s/, ' '))
+    end
   end
   def buildXpath(node)
     xpath = "//#{node.name}"
@@ -193,7 +194,7 @@ module Parser
   def tag_has_only_brand(page, tags, brand)
     tags.each do |tag|
       node = page.parser.xpath("//#{tag}[translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') = '#{brand.downcase}']")
-      return node if !node.blank?
+      return node if !node.blank? && node.length == 1
     end
     nil
   end
@@ -201,7 +202,7 @@ module Parser
   def tag_starts_with_brand(page, tags, brand)
     tags.each do |tag|
       node = page.parser.xpath("//#{tag}[starts-with(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'#{brand.downcase}')]")
-      return node if !node.blank?
+      return node if !node.blank? && node.length == 1
     end
     nil
   end
@@ -211,7 +212,7 @@ module Parser
       node = page.parser.xpath("//#{tag}[starts-with(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'#{brand.downcase}')]")
       if node
         node = page.parser.xpath("//#{tag}[contains(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),\""+name.downcase+"\")]")
-        return node if !node.blank?
+        return node if !node.blank? && node.length == 1
       end
     end
     nil
@@ -219,7 +220,8 @@ module Parser
 
   def text_nodes_for_brand(page, brand)
     begin
-      page.parser.xpath("//*[translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') = '#{brand.downcase}']")
+      node = page.parser.xpath("//*[translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') = '#{brand.downcase}']")
+      return node if !node.blank? && node.length == 1
     rescue
       puts "       Note: could not translate text to lowercase, using standard case sensitive xpath..."
       page.parser.xpath("//*[text()='#{brand.downcase}']")
@@ -253,10 +255,16 @@ module Parser
       #'http://www.getheavenly.com/Co-Sheer-Stroke-Blouse-Orange/dp/B0074W34SC',
       #'http://www.spiegel.com/long-asymmetrical-dress.html',
       #'http://www.modcloth.com/shop/blouses/coach-tour-top-in-sand'
+      #http://www1.bloomingdales.com/shop/product/theodora-callum-flats-primaballet-with-ankle-strap?ID=596838&CategoryID=17367#fn=spp%3D1%26ppp%3D96%26sp%3D1%26rid%3D19
+
     ]
     @sites.each do |post|
       p post
-      parser_audit(post)
+      xpathsMap = parser_audit(post)
+
+    end
+    xpathsMap.each do |url, xpath|
+      puts "url: #{url} xpath: #{xpath}"
     end
   end
 end

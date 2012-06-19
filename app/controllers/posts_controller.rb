@@ -22,8 +22,11 @@ class PostsController < ApplicationController
 
   def update
     @post = Post.find(params[:id])
-
-    @post.photo = open(params[:image].gsub(/\s/, "%20")) if params[:image]
+    if params[:image]
+      image = (params[:image].include? 'http:') ? params[:image] : ("http://"+params[:retailer]+'/'+params[:image])
+      puts 'image:'+image
+      @post.photo = open(image.gsub(/\s/, "%20"))
+    end
 # for parser_audit:
 # would have to update_attributes manually so we can save modified attributes
 # "learn" what has changed
