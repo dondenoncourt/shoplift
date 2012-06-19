@@ -184,6 +184,317 @@
 </div>
 
       
+        <hr />
+        <div id="method_3">
+
+  
+  <p class='description'><strong>Description:</strong>  # Get the user's information by way of username
+</p>
+
+  <h2><span id='http_verb'>GET</span>/users/validate_username/:username.json</h2>
+
+  
+    <strong>Access:</strong> FREE<br />
+  
+
+  
+    <strong>Return:</strong>
+    user data
+    <br />
+  
+
+  
+    <strong>Parameters:</strong>
+    <ul>
+      <li>username:string - name of the user</li>
+    </ul>
+  
+
+  
+    <ul class="tabs">
+      
+        <li class="active"><a href='#json_3'>json</a></li>
+      
+    </ul>
+    <div class="pill-content">
+      
+        
+        <div class="active" id='json_3'>
+          <pre class="prettyprint" > # {
+ #    &quot;extract&quot;:{
+ #       &quot;id&quot;:11,
+ #       &quot;email&quot;:&quot;aaronbartell@gmail.com&quot;,
+ #       &quot;username&quot;:&quot;aaronbartell@gmail.com&quot;,
+ #       &quot;full_name&quot;:&quot;aaron&quot;,
+ #       &quot;first_name&quot;:null,
+ #       &quot;last_name&quot;:null,
+ #       &quot;vanity_url&quot;:null,
+ #       &quot;country&quot;:&quot;United States&quot;,
+ #       &quot;biography&quot;:null,
+ #       &quot;notify_new_follower&quot;:null,
+ #       &quot;notify_relift&quot;:null,
+ #       &quot;notify_missing&quot;:null,
+ #       &quot;hometown&quot;:null,
+ #       &quot;zipcode&quot;:&quot;56001&quot;,
+ #       &quot;sex&quot;:true
+ #    },
+ #    &quot;sex&quot;:&quot;Male&quot;,
+ #    &quot;avatar_url_small&quot;:&quot;/assets/avatars/small/missing.png&quot;,
+ #    &quot;avatar_url_thumb&quot;:&quot;/assets/avatars/thumb/missing.png&quot;,
+ #    &quot;followee_count&quot;:2
+ # }
+</pre>
+        </div>
+      
+    </div>
+    <br />
+  
+
+  
+
+  
+
+</div>
+
+      
+        <hr />
+        <div id="method_4">
+
+  
+  <p class='description'><strong>Description:</strong>  # Create a new user<br/><br/>
+ # Notes:<pre>curl -d "user[full_name]=Aaron Bartell3" -d "user[email]=aaronbartell@gmail.com3" -d "user[password]=poopydiaper" localhost:3000/users.json</pre>
+</p>
+
+  <h2><span id='http_verb'>POST</span>/users.json</h2>
+
+  
+    <strong>Access:</strong> FREE<br />
+  
+
+  
+    <strong>Return:</strong>
+    array of user data
+    <br />
+  
+
+  
+    <strong>Parameters:</strong>
+    <ul>
+      <li>HTML form submission. See curl example.</li>
+    </ul>
+  
+
+  
+    <ul class="tabs">
+      
+        <li class="active"><a href='#json_4'>json</a></li>
+      
+    </ul>
+    <div class="pill-content">
+      
+        
+        <div class="active" id='json_4'>
+          <pre class="prettyprint" > # { &quot;avatar_content_type&quot; : null,
+ #   &quot;avatar_file_name&quot; : null,
+ #   &quot;avatar_file_size&quot; : null,
+ #   &quot;avatar_updated_at&quot; : null,
+ #   &quot;biography&quot; : null,
+ #   &quot;birthdate&quot; : null,
+ #   &quot;count_of_followers&quot; : 0,
+ #   &quot;count_of_hashtags&quot; : 0,
+ #   &quot;count_of_posts&quot; : 0,
+ #   &quot;country&quot; : null,
+ #   &quot;created_at&quot; : &quot;2012-06-19T07:57:46-05:00&quot;,
+ #   &quot;email&quot; : &quot;aaronbartell@gmail.com3&quot;,
+ #   &quot;first_name&quot; : null,
+ #   &quot;full_name&quot; : &quot;Aaron Bartell3&quot;,
+ #   &quot;hometown&quot; : null,
+ #   &quot;id&quot; : 13,
+ #   &quot;last_name&quot; : null,
+ #   &quot;latitude&quot; : null,
+ #   &quot;longitude&quot; : null,
+ #   &quot;missing&quot; : null,
+ #   &quot;notify_missing&quot; : null,
+ #   &quot;notify_new_follower&quot; : null,
+ #   &quot;notify_relift&quot; : null,
+ #   &quot;private&quot; : false,
+ #   &quot;sex&quot; : null,
+ #   &quot;status&quot; : 1,
+ #   &quot;updated_at&quot; : &quot;2012-06-19T07:57:46-05:00&quot;,
+ #   &quot;url&quot; : null,
+ #   &quot;username&quot; : &quot;aaronbartell@gmail.com3&quot;,
+ #   &quot;vanity_url&quot; : null,
+ #   &quot;zipcode&quot; : null
+ # }
+</pre>
+        </div>
+      
+    </div>
+    <br />
+  
+
+  
+
+  
+
+</div>
+
+      
+        <hr />
+        <div id="method_5">
+
+  
+  <p class='description'><strong>Description:</strong>  # Edit (update) user<br/><br/>
+ # Notes:<pre>curl -X POST --user aaronbartell@gmail.com:poopydiaper -d "user[full_name]=Aaron Bartell5" -d "user[email]=aaronbartell@gmail.com5" localhost:3000/users/13/edit.json</pre>
+</p>
+
+  <h2><span id='http_verb'>POST</span>/users/:id/edit.json</h2>
+
+  
+    <strong>Access:</strong> FREE<br />
+  
+
+  
+    <strong>Return:</strong>
+    array of user data
+    <br />
+  
+
+  
+    <strong>Parameters:</strong>
+    <ul>
+      <li>id - user id on URL</li><li>HTML form in POST content. See curl example.</li>
+    </ul>
+  
+
+  
+    <ul class="tabs">
+      
+        <li class="active"><a href='#json_5'>json</a></li>
+      
+    </ul>
+    <div class="pill-content">
+      
+        
+        <div class="active" id='json_5'>
+          <pre class="prettyprint" > # { &quot;avatar_url_small&quot; : &quot;/assets/avatars/small/missing.png&quot;,
+ #   &quot;avatar_url_thumb&quot; : &quot;/assets/avatars/thumb/missing.png&quot;,
+ #   &quot;extract&quot; : { &quot;biography&quot; : null,
+ #       &quot;country&quot; : null,
+ #       &quot;email&quot; : &quot;aaronbartell@gmail.com5&quot;,
+ #       &quot;first_name&quot; : null,
+ #       &quot;full_name&quot; : &quot;Aaron Bartell5&quot;,
+ #       &quot;hometown&quot; : null,
+ #       &quot;id&quot; : 13,
+ #       &quot;last_name&quot; : null,
+ #       &quot;notify_missing&quot; : null,
+ #       &quot;notify_new_follower&quot; : null,
+ #       &quot;notify_relift&quot; : null,
+ #       &quot;sex&quot; : null,
+ #       &quot;username&quot; : &quot;aaronbartell@gmail.com5&quot;,
+ #       &quot;vanity_url&quot; : null,
+ #       &quot;zipcode&quot; : null
+ #     },
+ #   &quot;followee_count&quot; : 2,
+ #   &quot;sex&quot; : &quot;Female&quot;
+ # }
+</pre>
+        </div>
+      
+    </div>
+    <br />
+  
+
+  
+
+  
+
+</div>
+
+      
+        <hr />
+        <div id="method_6">
+
+  
+  <p class='description'><strong>Description:</strong>  # Update user<br/><br/>
+ # Notes:<pre>curl -X POST --user aaronbartell@gmail.com:poopydiaper localhost:3000/users/13/delete.json</pre>
+</p>
+
+  <h2><span id='http_verb'>POST</span>/users/:id/delete.json</h2>
+
+  
+    <strong>Access:</strong> FREE<br />
+  
+
+  
+    <strong>Return:</strong>
+    array of user data
+    <br />
+  
+
+  
+    <strong>Parameters:</strong>
+    <ul>
+      <li>id - user id to delete</li>
+    </ul>
+  
+
+  
+    <ul class="tabs">
+      
+        <li class="active"><a href='#json_6'>json</a></li>
+      
+    </ul>
+    <div class="pill-content">
+      
+        
+        <div class="active" id='json_6'>
+          <pre class="prettyprint" > # { &quot;avatar_content_type&quot; : null,
+ #   &quot;avatar_file_name&quot; : null,
+ #   &quot;avatar_file_size&quot; : null,
+ #   &quot;avatar_updated_at&quot; : null,
+ #   &quot;biography&quot; : null,
+ #   &quot;birthdate&quot; : null,
+ #   &quot;count_of_followers&quot; : 0,
+ #   &quot;count_of_hashtags&quot; : 0,
+ #   &quot;count_of_posts&quot; : 0,
+ #   &quot;country&quot; : null,
+ #   &quot;created_at&quot; : &quot;2012-06-19T07:57:46-05:00&quot;,
+ #   &quot;email&quot; : &quot;aaronbartell@gmail.com5&quot;,
+ #   &quot;first_name&quot; : null,
+ #   &quot;full_name&quot; : &quot;Aaron Bartell5&quot;,
+ #   &quot;hometown&quot; : null,
+ #   &quot;id&quot; : 13,
+ #   &quot;last_name&quot; : null,
+ #   &quot;latitude&quot; : null,
+ #   &quot;longitude&quot; : null,
+ #   &quot;missing&quot; : null,
+ #   &quot;notify_missing&quot; : null,
+ #   &quot;notify_new_follower&quot; : null,
+ #   &quot;notify_relift&quot; : null,
+ #   &quot;private&quot; : false,
+ #   &quot;sex&quot; : null,
+ #   &quot;status&quot; : 0,
+ #   &quot;updated_at&quot; : &quot;2012-06-19T08:36:22-05:00&quot;,
+ #   &quot;url&quot; : null,
+ #   &quot;username&quot; : &quot;aaronbartell@gmail.com5&quot;,
+ #   &quot;vanity_url&quot; : null,
+ #   &quot;zipcode&quot; : null
+ # }
+</pre>
+        </div>
+      
+    </div>
+    <br />
+  
+
+  
+
+  
+
+</div>
+
+      
     </div>
   </body>
 </html>

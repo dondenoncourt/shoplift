@@ -72,11 +72,39 @@ class UsersController < ApplicationController
     end
   end
 
-  # Validate a specified username
-  # * *Request*    :
-  #   - GET /users/validate_username/:username
-  # * *Args*    :
-  #   - :username -> Username
+  # =begin apidoc
+  # url:: /users/validate_username/:username.json
+  # method:: GET
+  # access:: FREE
+  # return:: user data
+  # param:: username:string - name of the user
+  # output:: json
+  # {
+  #    "extract":{
+  #       "id":11,
+  #       "email":"aaronbartell@gmail.com",
+  #       "username":"aaronbartell@gmail.com",
+  #       "full_name":"aaron",
+  #       "first_name":null,
+  #       "last_name":null,
+  #       "vanity_url":null,
+  #       "country":"United States",
+  #       "biography":null,
+  #       "notify_new_follower":null,
+  #       "notify_relift":null,
+  #       "notify_missing":null,
+  #       "hometown":null,
+  #       "zipcode":"56001",
+  #       "sex":true
+  #    },
+  #    "sex":"Male",
+  #    "avatar_url_small":"/assets/avatars/small/missing.png",
+  #    "avatar_url_thumb":"/assets/avatars/thumb/missing.png",
+  #    "followee_count":2
+  # }
+  # ::output-end::
+  # Get the user's information by way of username
+  # =end
   def validate_username
     if @user = User.find_by_username(params[:username].downcase)
       render :partial => "user", :locals => {:user => @user}
@@ -85,11 +113,49 @@ class UsersController < ApplicationController
     end
   end
 
-  # Create user
-  # * *Request*    :
-  #   - POST /users
-  # * *Args*    :
-  #   - :user -> Array of user data
+  # =begin apidoc
+  # url:: /users.json
+  # method:: POST
+  # access:: FREE
+  # return:: array of user data
+  # param:: HTML form submission. See curl example.
+  # output:: json
+  # { "avatar_content_type" : null,
+  #   "avatar_file_name" : null,
+  #   "avatar_file_size" : null,
+  #   "avatar_updated_at" : null,
+  #   "biography" : null,
+  #   "birthdate" : null,
+  #   "count_of_followers" : 0,
+  #   "count_of_hashtags" : 0,
+  #   "count_of_posts" : 0,
+  #   "country" : null,
+  #   "created_at" : "2012-06-19T07:57:46-05:00",
+  #   "email" : "aaronbartell@gmail.com3",
+  #   "first_name" : null,
+  #   "full_name" : "Aaron Bartell3",
+  #   "hometown" : null,
+  #   "id" : 13,
+  #   "last_name" : null,
+  #   "latitude" : null,
+  #   "longitude" : null,
+  #   "missing" : null,
+  #   "notify_missing" : null,
+  #   "notify_new_follower" : null,
+  #   "notify_relift" : null,
+  #   "private" : false,
+  #   "sex" : null,
+  #   "status" : 1,
+  #   "updated_at" : "2012-06-19T07:57:46-05:00",
+  #   "url" : null,
+  #   "username" : "aaronbartell@gmail.com3",
+  #   "vanity_url" : null,
+  #   "zipcode" : null
+  # }
+  # ::output-end::
+  # Create a new user<br/><br/>
+  # Notes:<pre>curl -d "user[full_name]=Aaron Bartell3" -d "user[email]=aaronbartell@gmail.com3" -d "user[password]=poopydiaper" localhost:3000/users.json</pre>
+  # =end
   def create
     @user = User.new(params[:user])
     if @user.save
@@ -99,12 +165,39 @@ class UsersController < ApplicationController
     end
   end
 
-  # Update user
-  # * *Request*    :
-  #   - PUT /users/:id
-  # * *Args*    :
-  #   - :id -> User id
-  #   - :user -> Array of user data
+  # =begin apidoc
+  # url:: /users/:id/edit.json
+  # method:: POST
+  # access:: FREE
+  # return:: array of user data
+  # param:: id - user id on URL
+  # param:: HTML form in POST content. See curl example.
+  # output:: json
+  # { "avatar_url_small" : "/assets/avatars/small/missing.png",
+  #   "avatar_url_thumb" : "/assets/avatars/thumb/missing.png",
+  #   "extract" : { "biography" : null,
+  #       "country" : null,
+  #       "email" : "aaronbartell@gmail.com5",
+  #       "first_name" : null,
+  #       "full_name" : "Aaron Bartell5",
+  #       "hometown" : null,
+  #       "id" : 13,
+  #       "last_name" : null,
+  #       "notify_missing" : null,
+  #       "notify_new_follower" : null,
+  #       "notify_relift" : null,
+  #       "sex" : null,
+  #       "username" : "aaronbartell@gmail.com5",
+  #       "vanity_url" : null,
+  #       "zipcode" : null
+  #     },
+  #   "followee_count" : 2,
+  #   "sex" : "Female"
+  # }
+  # ::output-end::
+  # Edit (update) user<br/><br/>
+  # Notes:<pre>curl -X POST --user aaronbartell@gmail.com:poopydiaper -d "user[full_name]=Aaron Bartell5" -d "user[email]=aaronbartell@gmail.com5" localhost:3000/users/13/edit.json</pre>
+  # =end
   def update
     ## Check if user is updating themselve or another (must be admin) ##
     @user = User.find(params[:id])
@@ -115,11 +208,50 @@ class UsersController < ApplicationController
     end
   end
 
-  # Delete user
-  # * *Request*    :
-  #   - DELETE /users/:id
-  # * *Args*    :
-  #   - :id -> User id
+  # =begin apidoc
+  # url:: /users/:id/delete.json
+  # curl:: curl -x POST something
+  # method:: POST
+  # access:: FREE
+  # return:: array of user data
+  # param:: id - user id to delete
+  # output:: json
+  # { "avatar_content_type" : null,
+  #   "avatar_file_name" : null,
+  #   "avatar_file_size" : null,
+  #   "avatar_updated_at" : null,
+  #   "biography" : null,
+  #   "birthdate" : null,
+  #   "count_of_followers" : 0,
+  #   "count_of_hashtags" : 0,
+  #   "count_of_posts" : 0,
+  #   "country" : null,
+  #   "created_at" : "2012-06-19T07:57:46-05:00",
+  #   "email" : "aaronbartell@gmail.com5",
+  #   "first_name" : null,
+  #   "full_name" : "Aaron Bartell5",
+  #   "hometown" : null,
+  #   "id" : 13,
+  #   "last_name" : null,
+  #   "latitude" : null,
+  #   "longitude" : null,
+  #   "missing" : null,
+  #   "notify_missing" : null,
+  #   "notify_new_follower" : null,
+  #   "notify_relift" : null,
+  #   "private" : false,
+  #   "sex" : null,
+  #   "status" : 0,
+  #   "updated_at" : "2012-06-19T08:36:22-05:00",
+  #   "url" : null,
+  #   "username" : "aaronbartell@gmail.com5",
+  #   "vanity_url" : null,
+  #   "zipcode" : null
+  # }
+  # ::output-end::
+  # Update user<br/><br/>
+  # Notes:<pre>curl -X POST --user aaronbartell@gmail.com:poopydiaper localhost:3000/users/13/delete.json</pre>
+  # =end
   def destroy
     ## Check if user is updating themselve or another (must be admin) ##
     @user = User.find(params[:id])
