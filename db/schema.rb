@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120619191556) do
+ActiveRecord::Schema.define(:version => 20120620122224) do
 
   create_table "brands", :force => true do |t|
     t.string   "name"
@@ -73,9 +73,9 @@ ActiveRecord::Schema.define(:version => 20120619191556) do
   add_index "hashtags", ["post_id"], :name => "fk_hashtags_posts"
   add_index "hashtags", ["user_id"], :name => "fk_hashtags_users"
 
-  create_table "item_visits", :force => true do |t|
+  create_table "item_visits", :id => false, :force => true do |t|
     t.integer  "item_id",    :null => false
-    t.integer  "user_id"
+    t.integer  "user_id",    :null => false
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -86,7 +86,7 @@ ActiveRecord::Schema.define(:version => 20120619191556) do
   create_table "items", :force => true do |t|
     t.integer  "user_id",                                  :null => false
     t.integer  "post_id",                                  :null => false
-    t.integer  "parent_id"
+    t.integer  "item_id"
     t.datetime "created_at",                               :null => false
     t.datetime "updated_at",                               :null => false
     t.integer  "status",                    :default => 1, :null => false
@@ -96,7 +96,7 @@ ActiveRecord::Schema.define(:version => 20120619191556) do
     t.string   "comment",    :limit => 100
   end
 
-  add_index "items", ["parent_id"], :name => "fk_items_parents"
+  add_index "items", ["item_id"], :name => "fk_items_items"
   add_index "items", ["post_id"], :name => "fk_items_posts"
   add_index "items", ["user_id"], :name => "fk_items_users"
 
@@ -115,7 +115,7 @@ ActiveRecord::Schema.define(:version => 20120619191556) do
 
   create_table "posts", :force => true do |t|
     t.string   "name",               :limit => 110,                                                   :null => false
-    t.text     "description"
+    t.text     "description",                                                                         :null => false
     t.string   "retailer",                                                                            :null => false
     t.string   "url",                :limit => 2083,                                                  :null => false
     t.decimal  "price",                              :precision => 10, :scale => 2
@@ -141,11 +141,6 @@ ActiveRecord::Schema.define(:version => 20120619191556) do
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
-  end
-
-  create_table "roles_users", :id => false, :force => true do |t|
-    t.integer "role_id"
-    t.integer "user_id"
   end
 
   create_table "set_asides", :force => true do |t|
@@ -200,7 +195,7 @@ ActiveRecord::Schema.define(:version => 20120619191556) do
     t.string   "hometown",               :limit => 110
     t.date     "birthdate"
     t.boolean  "private",                               :default => false, :null => false
-    t.integer  "status",                                :default => 1,     :null => false
+    t.boolean  "status",                                :default => true,  :null => false
     t.string   "first_name"
     t.string   "last_name"
     t.string   "vanity_url"
@@ -224,5 +219,12 @@ ActiveRecord::Schema.define(:version => 20120619191556) do
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+
+  create_table "xpaths", :force => true do |t|
+    t.string   "retailer",   :null => false
+    t.string   "xpath",      :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
 end
