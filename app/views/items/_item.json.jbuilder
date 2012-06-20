@@ -2,7 +2,7 @@ json.id item.id
 json.parent_id item.parent_id
 json.name item.post.name
 json.description item.post.description
-json.brand item.post.brand
+json.brand item.post.brand.name
 json.retailer item.post.retailer
 json.url item.post.url
 json.price item.post.price

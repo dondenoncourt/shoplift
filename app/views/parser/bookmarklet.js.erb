@@ -252,7 +252,7 @@ item_tags = new Array();
 				inputs = {
 					name : jQuery('<input type="text" name="name" value="<%=  j @post.name %>" />')
 						.css(jQuery.extend({},r_style,i_style)),
-          brand : jQuery('<input type="text" name="brand" value="<%= j @post.brand %>" />')
+          brand : jQuery('<input type="text" name="brand" value="<%= j @brand_name %>" />')
 						.css(jQuery.extend({},r_style,i_style)),
 					url : jQuery('<input type="hidden" name="url" value="<%= @post.url %>"/>'),
 					price : jQuery('<input type="text" name="price" value="<%= number_to_currency(@post.price, :precision => 0) %>"/>')

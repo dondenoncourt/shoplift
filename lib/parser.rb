@@ -16,13 +16,10 @@ module Parser
   PRICE_IDENTIFIERS = %w(#actualPriceValue .priceLarge .select-sale-single .price-single .priceSale .offer-price .cat-glo-tex-saleP .cat-pro-price .price)
 
   # TODO maybe...
-  # some things from removed parsing in bookmarklet.js.erb
-  #
   #// See if we have a price in the description or title
   #// Grab the title from meta tag if not already set
   #// Grab description from meta tag if not set already
-  #// Use the referrer for url
-  # I'm thinking for brand, if none is found, maybe the retailer is the brand?
+  # brand, if none is found, maybe the retailer is the brand?
 
   # bookmarklet.js.erb still has parsing for keywords/tags that ought to be in here...
   def parse(url)
@@ -249,22 +246,50 @@ module Parser
     @sites = [
       {brand: 'Tignanello', name: 'Multi Pocket Organizer Crossbody', url: 'http://bags.bcoutlet.com/product/tignanello/multi-pocket-organizer-crossbody/130799/p/1338439'},
       {brand: 'Russell Athletic', name: "Men's Crew Neck T-Shirt", url: 'http://www.sears.com/russell-athletic-men-s-crew-neck-t-shirt/p-043M6725000P?prdNo=2&blockNo=2&blockType=G2'},
-      {brand: 'miss me jeans', name: "Miss Me Jeans Fleur-de-Lis Bermuda Denim Shorts", url:'http://www.dillards.com/product/Miss-Me-Jeans-FleurdeLis-Bermuda-Denim-Shorts_301_-1_301_503199762'}
+      {brand: 'miss me jeans', name: "Miss Me Jeans Fleur-de-Lis Bermuda Denim Shorts", url:'http://www.dillards.com/product/Miss-Me-Jeans-FleurdeLis-Bermuda-Denim-Shorts_301_-1_301_503199762'},
+      {brand: 'Theodora & Callum', name:'Primaballet with Ankle Strap', url:'http://www1.bloomingdales.com/shop/product/theodora-callum-flats-primaballet-with-ankle-strap?ID=596838&CategoryID=17367#fn=spp%3D1%26ppp%3D96%26sp%3D1%26rid%3D19'}
       #'http://fashionbug.lanebryant.com/shoes/boots/13833c5116/index.cat?intid=LPxSH060312xL4',
       #'http://oldnavy.gap.com/browse/product.do?cid=82576&vid=1&pid=106420',
       #'http://www.getheavenly.com/Co-Sheer-Stroke-Blouse-Orange/dp/B0074W34SC',
       #'http://www.spiegel.com/long-asymmetrical-dress.html',
       #'http://www.modcloth.com/shop/blouses/coach-tour-top-in-sand'
-      #http://www1.bloomingdales.com/shop/product/theodora-callum-flats-primaballet-with-ankle-strap?ID=596838&CategoryID=17367#fn=spp%3D1%26ppp%3D96%26sp%3D1%26rid%3D19
 
     ]
+    xpaths = Hash.new
     @sites.each do |post|
       p post
-      xpathsMap = parser_audit(post)
+      hash = parser_audit(post)
+      hash.each do |retailer, xpath|
+        xpaths[retailer] = xpath
+      end
+    end
+    puts "List all URLs and their brand xpaths"
+    xpaths.each do |retailer, xpath|
+      puts "url: #{retailer} xpath: #{xpath}"
+    end
+    #reparse the sites using the xpaths
+    # and figure out how to get the darn brand out of the returned nodes?
+    # database should flag full match
+    # otherwise search in string for substring that is in the brand database
+    #  but how to do that, and effectively...
+    #  figure all text starts with domain
+    #  use first word to get a list from the domain database
+    #  then check each returned brand name with the xml text
+    #  once there's a hit, we got our domain????
+    #  or we could find_all that match two words/nodes from the xml until we no longer get rows
+    @sites.each do |post|
+      retailer = post[:url].split('/')[2]
+      agent = Mechanize.new
+      agent.user_agent_alias = 'Windows Mozilla'
+      begin
+        agent.get(post[:url]) do |page|
+          puts page.parser.xpath(xpaths[retailer])
+        end
+      rescue => ex
+        puts ex.message
+        puts ex.backtrace
+      end
+    end
 
-    end
-    xpathsMap.each do |url, xpath|
-      puts "url: #{url} xpath: #{xpath}"
-    end
   end
 end

@@ -1,0 +1,10 @@
+
+---
+brands_001:
+  id: 1
+  name: Lorem ipsum dolor
+  reviewed: 0
+brands_002:
+  id: 2
+  name: New brand name
+  reviewed: 0

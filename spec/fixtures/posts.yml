@@ -33,7 +33,6 @@ posts_001:
     cum nullam, vivamus ut a sed, mollitia lectus. Nulla vestibulum massa neque ut
     et, id hendrerit sit, feugiat in taciti enim proin nibh, tempor dignissim, rhoncus
     duis vestibulum nunc mattis convallis.
-  brand: Lorem ipsum dolor sit amet
   retailer: Lorem ipsum dolor sit amet
   url: http://www.jcrew.com/index.jsp
   price: 1.1
@@ -47,6 +46,7 @@ posts_001:
   photo_content_type: image/jpeg
   photo_file_size: 21759
   photo_updated_at: 2012-05-17 00:02:24.000000000Z
+  brand_id: 1
 posts_002:
   id: 2
   name: Item 2
@@ -55,7 +55,6 @@ posts_002:
     cum nullam, vivamus ut a sed, mollitia lectus. Nulla vestibulum massa neque ut
     et, id hendrerit sit, feugiat in taciti enim proin nibh, tempor dignissim, rhoncus
     duis vestibulum nunc mattis convallis.
-  brand: Lorem ipsum dolor sit amet
   retailer: Lorem ipsum dolor sit amet
   url: http://www.jcrew.com/index.jsp
   price: 1.1
@@ -69,12 +68,12 @@ posts_002:
   photo_content_type: image/jpeg
   photo_file_size: 36053
   photo_updated_at: 2012-05-17 00:02:41.000000000Z
+  brand_id: 1
 posts_003:
   id: 3
   name: Item 3
   description: Lorem ipsum dolor sit amet, aliquet feugiat. giat in taciti enim proin
     nibh, tempor dignissim, rhoncus duis vestibulum nunc mattis convallis.
-  brand: New brand name
   retailer: Lorem ipsum dolor sit amet
   url: http://www.jcrew.com/index.jsp
   price: 1.1
@@ -88,12 +87,12 @@ posts_003:
   photo_content_type: image/jpeg
   photo_file_size: 55729
   photo_updated_at: 55729
+  brand_id: 2
 posts_004:
   id: 4
   name: Item 4
   description: Lorem ipsum dolor sit amet, aliquet feugiat. giat in taciti enim proin
     nibh, tempor dignissim, rhoncus duis vestibulum nunc mattis convallis.
-  brand: New brand name
   retailer: Lorem ipsum dolor sit amet
   url: http://www.jcrew.com/index.jsp
   price: 1.1
@@ -107,12 +106,12 @@ posts_004:
   photo_content_type: image/jpeg
   photo_file_size: 23784
   photo_updated_at: 2012-05-17 00:03:06.000000000Z
+  brand_id: 2
 posts_005:
   id: 5
   name: Item 5
   description: Lorem ipsum dolor sit amet, aliquet feugiat. giat in taciti enim proin
     nibh, tempor dignissim, rhoncus duis vestibulum nunc mattis convallis.
-  brand: New brand name
   retailer: Lorem ipsum dolor sit amet
   url: http://www.jcrew.com/index.jsp
   price: 1.1
@@ -126,3 +125,4 @@ posts_005:
   photo_content_type: image/jpeg
   photo_file_size: 36118
   photo_updated_at: 2012-05-17 00:03:18 .000000000Z
+  brand_id: 2

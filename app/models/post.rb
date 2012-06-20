@@ -28,6 +28,7 @@ class Post < ActiveRecord::Base
   require 'status'
   
   belongs_to :user, :conditions => ["users.status = 1"], :counter_cache => :count_of_posts
+  belongs_to :brand
   has_many :hashtags, :conditions => ["hashtags.status = 1"]
   has_many :items, :conditions => ["items.status = 1"]
   has_many :post_flags, :conditions => ["post_flags.status = 1"]
@@ -39,7 +40,6 @@ class Post < ActiveRecord::Base
                     :storage => :s3,
                     :s3_credentials => "#{Rails.root}/config/s3.yml",
                     :path => "/:style/:id/:filename"
-  
   
   validates :url, :retailer, :user_id, :presence => true
   

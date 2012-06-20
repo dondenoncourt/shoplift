@@ -9,6 +9,8 @@ class PostsController < ApplicationController
     authenticate_user!
     params[:url] = "http://"+params[:retailer]+params[:url] if !params[:url].include? 'http:'
     post_params = parse(params[:url])
+    @brand_name = post_params[:brand]
+    post_params[:brand] = nil
     @images = post_params.delete(:images)
     @post = current_user.posts.create(post_params)
     respond_to do |format|
@@ -27,6 +29,9 @@ class PostsController < ApplicationController
       puts 'image:'+image
       @post.photo = open(image.gsub(/\s/, "%20"))
     end
+
+    @post.brand = Brand.find_or_create_by_name(params[:brand])
+    
 # for parser_audit:
 # would have to update_attributes manually so we can save modified attributes
 # "learn" what has changed
