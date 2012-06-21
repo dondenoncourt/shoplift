@@ -1,5 +1,5 @@
 json.id item.id
-json.parent_id item.parent_id
+json.item_id item.item_id
 json.name item.post.name
 json.description item.post.description
 json.brand item.post.brand.name
@@ -28,7 +28,7 @@ else
 end
 
 # Check if item is a relift
-if item.parent_id.blank?
+if item.item_id.blank?
 	json.user do |json|
 		json.partial! item.user
 	end
