@@ -94,7 +94,10 @@ puts "parser_audit(post) with "+post.to_s
     xpath = "//#{node.name}"
     if node.attributes.length > 0
       xpath += '['
-      node.attributes.each { |attr,value| xpath += "@#{attr}='#{value}'"}
+      node.attributes.each_with_index do |(attr,value), idx| 
+        xpath += " and " if idx > 0
+        xpath += "@#{attr}='#{value}'"
+      end
       xpath += ']'
     end
     xpath

@@ -26,12 +26,11 @@ class PostsController < ApplicationController
   def update
     @post = Post.find(params[:id])
     if params[:image]
-      image = (params[:image].include? 'http:') ? params[:image] : ("http://"+params[:retailer]+'/'+params[:image])
+      image = (params[:image].include? 'http:') ? params[:image] : ("http://"+params[:post][:retailer]+'/'+params[:image])
       puts 'image:'+image
       @post.photo = open(image.gsub(/\s/, "%20"))
     end
 
-    @post.brand = Brand.find_or_create_by_name(params[:post][:brand])
     if params[:post][:brand] != params[:parser_brand]
       # TODO delay.parser_audit...
       xpaths = parser_audit({url: params[:post][:url], brand: params[:post][:brand], name: params[:post][:name]})
@@ -40,8 +39,11 @@ class PostsController < ApplicationController
           Xpath.find_or_create_by_retailer_and_xpath(retailer, xpath)
         end
       end
-      params[:post].delete(:brand)
     end
+
+    @post.brand = Brand.find_or_create_by_name(params[:post][:brand])
+    params[:post].delete(:brand)
+    params[:post][:price] = params[:post][:price].gsub(/[^\d.]/, '') if params[:post][:price]
     
     if @post.update_attributes(params[:post])
       @item = @post.items.create({ :user_id => current_user.id })

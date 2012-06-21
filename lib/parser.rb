@@ -102,7 +102,7 @@ module Parser
 
   def find_brand(node)
     text = node.text.gsub(/^\s+/, '')
-    (1..8).each do |words|
+    text.split(' ').size().downto(1).each do |words|
       first_words = first_x_words(text, words)
       brand = Brand.find_by_name(first_words)
       return brand if brand
