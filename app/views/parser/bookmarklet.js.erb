@@ -250,16 +250,17 @@ item_tags = new Array();
 				c_style = jQuery.extend({},this.defaultCSS,{'float':'left',position:'relative',fontSize:12}),
                                 k_style = jQuery.extend({},this.defaultCSS,{width:435,height:18,color:'#000', 'font-family': 'arial', 'font-size': '12px', 'background-color': '#CCCCCC', 'border-radius':'3px', '-moz-border-radius':'3px', '-webkit-border-radius':'3px', 'float': 'left'}),
 				inputs = {
-					name : jQuery('<input type="text" name="name" value="<%=  j @post.name %>" />')
+					name : jQuery('<input type="text" name="post[name]" value="<%=  j @post.name %>" />')
 						.css(jQuery.extend({},r_style,i_style)),
-          brand : jQuery('<input type="text" name="brand" value="<%= j @brand_name %>" />')
+					parser_brand : jQuery('<input type="hidden" name="parser_brand" value="<%= j @brand_name %>"/>'),
+          brand : jQuery('<input type="text" name="post[brand]" value="<%= j @brand_name %>" />')
 						.css(jQuery.extend({},r_style,i_style)),
-					url : jQuery('<input type="hidden" name="url" value="<%= @post.url %>"/>'),
-					price : jQuery('<input type="text" name="price" value="<%= number_to_currency(@post.price, :precision => 0) %>"/>')
+					url : jQuery('<input type="hidden" name="post[url]" value="<%= @post.url %>"/>'),
+					price : jQuery('<input type="text" name="post[price]" value="<%= number_to_currency(@post.price, :precision => 0) %>"/>')
 						.css(jQuery.extend({},r_style,i_style)),
 					image : jQuery('<input type="hidden" name="image" />'),
-					retailer : jQuery('<input type="hidden" name="retailer" value="<%= @post.retailer %>"/>'),
-					comment : jQuery('<textarea name="comment" maxlength="140"></textarea>')
+					retailer : jQuery('<input type="hidden" name="post[retailer]" value="<%= @post.retailer %>"/>'),
+					comment : jQuery('<textarea name="post[comment]" maxlength="140"></textarea>')
 						.attr('id', 'comment_area')
 						.css(t_style),
           tag : jQuery('<input type="text" />')
@@ -284,6 +285,7 @@ item_tags = new Array();
 					inputs.image,
 					assembleImageGallery(parsed.images,inputs.image),
 					label.clone().text('Brand').css(jQuery.extend({},r_style,{'padding-top':0,'margin-bottom':3})),
+					inputs.parser_brand,
 					inputs.brand,
 					label.clone().text('Item Name').css(jQuery.extend({},r_style,{'margin-top':6,'margin-bottom':3})),
 					inputs.name,

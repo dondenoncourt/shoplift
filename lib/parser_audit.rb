@@ -59,6 +59,11 @@ puts "parser_audit(post) with "+post.to_s
         printNode(starts_with_brand)
         starts_with_brand.each {|node| xpaths << buildXpath(node)} if starts_with_brand
 
+        puts "tag_contains_brand(page, %w{h1 h2 h3 span}, #{post[:brand]})"
+        contains_brand = tag_contains_brand(page, %w{h1 h2 h3 span}, post[:brand])
+        printNode(contains_brand)
+        contains_brand.each {|node| xpaths << buildXpath(node)} if contains_brand
+
         puts "text_nodes_for_brand(page,  #{post[:brand]})"
         text_nodes_for_brand = text_nodes_for_brand(page, post[:brand])
         printNode(text_nodes_for_brand)
@@ -110,6 +115,14 @@ puts "parser_audit(post) with "+post.to_s
   def tag_starts_with_brand(page, tags, brand)
     tags.each do |tag|
       node = page.parser.xpath("//#{tag}[starts-with(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'#{brand.downcase}')]")
+      return node if !node.blank? && node.length == 1
+    end
+    nil
+  end
+  
+  def tag_contains_brand(page, tags, brand)
+    tags.each do |tag|
+      node = page.parser.xpath("//#{tag}[contains(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'#{brand.downcase}')]")
       return node if !node.blank? && node.length == 1
     end
     nil
@@ -206,18 +219,4 @@ puts "parser_audit(post) with "+post.to_s
     end
   end
 
-  def find_brand(node)
-    text = node.text.gsub(/^\s+/, '')
-    (1..8).each do |words|
-      first_words = first_x_words(text, words)
-      brand = Brand.find_by_name(first_words)
-      return brand if brand
-    end
-    nil
-  end
-
-  def first_x_words(str,n=10)
-    str.split(' ')[0,n].inject{|sum,word| sum + ' ' + word}
-  end
-  
 end

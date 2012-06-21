@@ -23,6 +23,7 @@ module Parser
 
   # bookmarklet.js.erb still has parsing for keywords/tags that ought to be in here...
   def parse(url)
+    retailer = url.split('/')[2]
     agent = Mechanize.new
     #agent.user_agent_alias = 'Windows Mozilla'
     begin
@@ -31,7 +32,6 @@ module Parser
         # try Open Graph first
         images << page.search("//meta[@property='#{OPEN_GRAPH[:image]}']/@content").map(&:value)
         name = page.search("//meta[@property='#{OPEN_GRAPH[:name]}']/@content")
-        brand = page.search("//meta[@property='#{OPEN_GRAPH[:brand]}']/@content")
         description = page.search("//meta[@property='#{OPEN_GRAPH[:description]}']/@content")
         # the passed URL is what I think we need...
         #url = page.search("//meta[@property='#{OPEN_GRAPH[:url]}']/@content")
@@ -46,7 +46,7 @@ module Parser
         images = page.image_urls if images.flatten!.empty? rescue nil # can't get images from Amazon for some reason
         price = get_price(page) if price.blank?
         name = get_name(page) if name.blank?
-        brand = get_brand(page) if brand.blank?
+        brand = get_brand(page, retailer) if brand.blank?
 
         return { brand: brand.to_s, retailer: url.split('/')[2], name: name.to_s, price: price.to_s.to_f, images: images, description: description.to_s, url: url.to_s }
       end
@@ -79,13 +79,39 @@ module Parser
     nil
   end
 
-  def get_brand(page)
-    BRAND_IDENTIFIERS.each do |field|
-      brand_field = page.search(field).first
-      brand = brand_field.text if brand_field.present?
-      return brand.strip if brand.present?
+  def get_brand(page, retailer)
+    brand = nil
+    xpath = Xpath.find_by_retailer(retailer)
+    if xpath
+      node = page.parser.xpath(xpath.xpath)
+      brand_obj = find_brand(node)
+      brand = brand_obj.name if brand_obj
+    end
+    if !brand
+        brand = page.search("//meta[@property='#{OPEN_GRAPH[:brand]}']/@content")
+    end
+    if !brand
+      BRAND_IDENTIFIERS.each do |field|
+        brand_field = page.search(field).first
+        brand = brand_field.text if brand_field.present?
+        return brand.strip if brand.present?
+      end
+    end
+    brand
+  end
+
+  def find_brand(node)
+    text = node.text.gsub(/^\s+/, '')
+    (1..8).each do |words|
+      first_words = first_x_words(text, words)
+      brand = Brand.find_by_name(first_words)
+      return brand if brand
     end
     nil
+  end
+
+  def first_x_words(str,n=10)
+    str.split(' ')[0,n].inject{|sum,word| sum + ' ' + word}
   end
 
 end

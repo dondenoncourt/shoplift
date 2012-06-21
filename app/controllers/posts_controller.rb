@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   include Parser
+  include ParserAudit
 
   def new
     @post = current_user.posts.build
@@ -30,28 +31,30 @@ class PostsController < ApplicationController
       @post.photo = open(image.gsub(/\s/, "%20"))
     end
 
-    @post.brand = Brand.find_or_create_by_name(params[:brand])
+    @post.brand = Brand.find_or_create_by_name(params[:post][:brand])
+    if params[:post][:brand] != params[:parser_brand]
+      # TODO delay.parser_audit...
+      xpaths = parser_audit({url: params[:post][:url], brand: params[:post][:brand], name: params[:post][:name]})
+      if xpaths.length
+        xpaths.each do |retailer, xpath|
+          Xpath.find_or_create_by_retailer_and_xpath(retailer, xpath)
+        end
+      end
+      params[:post].delete(:brand)
+    end
     
-# for parser_audit:
-# would have to update_attributes manually so we can save modified attributes
-# "learn" what has changed
-# by looping through params[:post].each {|k, v| 
-# delay.parser_audit...
     if @post.update_attributes(params[:post])
       @item = @post.items.create({ :user_id => current_user.id })
       if @item.persisted?
         if params[:hashtags]
-          # TODO: change to the new syntax: .where (:value => hashtag_value).first_or_create
           params[:hashtags].each do |key, hashtag_value|
             puts 'adding hashtag:'+hashtag_value
-            @hashtag_value = HashtagValue.find_or_create_by_value(hashtag_value)
+            @hashtag_value = HashtagValue.where(:value => hashtag_value).first_or_create #.find_or_create_by_value(hashtag_value)
             if @hashtag_value.blank?
-              # post.errors[:base] << 'fails to create...' if entry_url.blank?
+              # CONSIDER: post.errors[:base] << 'fails to create...' if entry_url.blank?
               return render_error(500,"Failed to create hashtag")
             end
-            # TODO change to Hashtag.create so a new and save both are not needed
-            @hashtag = Hashtag.new({:user_id => current_user.id, :post_id => @item.post.id, :hashtag_value_id => @hashtag_value.id})
-            if !@hashtag.save
+            if !Hashtag.create({:user_id => current_user.id, :post_id => @item.post.id, :hashtag_value_id => @hashtag_value.id})
               return render_error(500,"Failed to create hashtag: "+hashtag_value+' '+@hashtag.errors[:hashtag_value_id][0])
             end
           end
