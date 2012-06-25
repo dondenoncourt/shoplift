@@ -67,7 +67,7 @@
 
   
   <p class='description'><strong>Description:</strong>  # Fetch items of current user and that of his/her subscriptions.  Defaults 2 per page.
- # <br/><br/>Notes:<pre></pre>  
+ # <br/><br/>Notes:<pre>curl -X GET --user aaronbartell@gmail.com:poopydiaper localhost:3000/timelines.json&page=2</pre>  
 </p>
 
   <h2><span id='http_verb'>GET</span>/timelines.json&page=2</h2>
@@ -119,7 +119,7 @@
 
   
   <p class='description'><strong>Description:</strong>  # Fetch up to 50 items of a specified user
- # <br/><br/>Notes:<pre></pre>  
+ # <br/><br/>Notes:<pre>curl -X GET --user aaronbartell@gmail.com:poopydiaper localhost:3000/timelines/users/1.json?limit=2</pre>  
 </p>
 
   <h2><span id='http_verb'>GET</span>/timelines/users/:id.json?limit=2</h2>
@@ -171,7 +171,7 @@
 
   
   <p class='description'><strong>Description:</strong>  # Fetch up to 50 of the most recent items posted
- # <br/><br/>Notes:<pre></pre>  
+ # <br/><br/>Notes:<pre>curl -X GET --user aaronbartell@gmail.com:poopydiaper localhost:3000/timelines/recent.json?limit=1</pre>  
 </p>
 
   <h2><span id='http_verb'>GET</span>/timelines/recent.json?limit=1</h2>
@@ -223,7 +223,7 @@
 
   
   <p class='description'><strong>Description:</strong>  # Fetch unlimited items that match hashtag name. Default count retruned is 20 (if that many exist)
- # <br/><br/>Notes:<pre></pre>  
+ # <br/><br/>Notes:<pre>url -X GET --user aaronbartell@gmail.com:poopydiaper localhost:3000/timelines/hashtags/jeans.json</pre>  
 </p>
 
   <h2><span id='http_verb'>GET</span>/timelines/hashtags/:name.json?limit=1</h2>
@@ -241,7 +241,7 @@
   
     <strong>Parameters:</strong>
     <ul>
-      <li>id:int - User id</li><li>limit:int - Number of items to return  </li>
+      <li>name:string - hashtag name</li><li>limit:int - Number of items to return  </li>
     </ul>
   
 
