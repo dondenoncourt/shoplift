@@ -23,6 +23,7 @@ class UsersController < ApplicationController
   # ]
   # ::output-end::
   # Get a list of all users in the system with pagination.  Defaults to 2 per page
+  # <br/><br/>Notes:<pre>curl -X GET --user aaronbartell@gmail.com:poopydiaper localhost:3000/shoplifters.json</pre>
   # =end
   def index
     users
