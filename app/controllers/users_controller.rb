@@ -55,6 +55,7 @@ class UsersController < ApplicationController
   # }
   # ::output-end::
   # Get the user's information
+  # <br/><br/>Notes:<pre>curl -X GET --user aaronbartell@gmail.com:poopydiaper localhost:3000/users/1.json</pre>
   # =end
   def show
     if request.xhr?
@@ -104,6 +105,7 @@ class UsersController < ApplicationController
   # }
   # ::output-end::
   # Get the user's information by way of username
+  # <br/><br/>Notes:<pre>curl -X GET --user aaronbartell@gmail.com:poopydiaper00/users/validate_username/aaronbartell@gmail%2Ecom.json</pre>
   # =end
   def validate_username
     if @user = User.find_by_username(params[:username].downcase)
