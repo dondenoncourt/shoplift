@@ -37,7 +37,6 @@ module ParserAudit
   #
   #
   def parser_audit(post)
-puts "parser_audit(post) with "+post.to_s
     xpaths = Hash.new
     agent = Mechanize.new
     agent.user_agent_alias = 'Windows Mozilla'
@@ -57,6 +56,32 @@ puts "parser_audit(post) with "+post.to_s
       puts ex.message
       puts ex.backtrace
     end
+    # if found by retailer and brand, done
+    # else if found by retailer and brand is null, set brand
+    # otherwise add a new xpath
+    if xpaths[:brand]
+      if !Xpath.find_by_retailer_and_brand(post[:retailer], xpaths[:brand])
+        xpath_row = Xpath.find_by_retailer(post[:retailer], :conditions => "brand IS NULL")
+        if xpath_row
+          xpath_row.brand = xpaths[:brand]
+          xpath_row.save
+        else
+          Xpath.create({retailer: post[:retailer], brand: xpaths[:brand]})
+        end
+      end
+    end
+    if xpaths[:price]
+      if !Xpath.find_by_retailer_and_price(post[:retailer], xpaths[:price])
+        xpath_row = Xpath.find_by_retailer(post[:retailer], :conditions => "price IS NULL")
+        if xpath_row
+          xpath_row.price = xpaths[:price]
+          xpath_row.save
+        else
+          Xpath.create({retailer: post[:retailer], price: xpaths[:price]})
+        end
+      end
+    end
+
     xpaths
 
   end

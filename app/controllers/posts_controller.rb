@@ -31,22 +31,20 @@ class PostsController < ApplicationController
       @post.photo = open(image.gsub(/\s/, "%20"))
     end
 
+    audit_params = Hash.new
     if params[:post][:brand] != params[:parser_brand]
+      audit_params[:brand] = params[:post][:brand]
+      audit_params[:name] = params[:post][:name]
+    end
+    if params[:post][:price] != params[:parser_price]
+      audit_params[:price] = params[:post][:price]
+    end
+
+    if audit_params.length > 0
+      audit_params[:url] = params[:post][:url]
+      audit_params[:retailer] = params[:post][:retailer]
       # TODO delay.parser_audit...
-      xpath = parser_audit({url: params[:post][:url], brand: params[:post][:brand], name: params[:post][:name]})
-      # if found by retailer and brand, done
-      # else if found by retailer and brand is null, set brand
-      # otherwise add a new Xpath
-      # TODO perhaps this update logic should go in the parser_audit method?
-      if !Xpath.find_by_retailer_and_brand(params[:post][:retailer], xpath[:brand])
-        xpathRow = Xpath.find_by_retailer(params[:post][:retailer], :conditions => "brand IS NULL")
-        if xpathRow
-          xpathRow.brand = xpath[:brand]
-          xpathRow.save
-        else
-          Xpath.create({retailer: params[:post][:retailer], brand: xpath[:brand]})
-        end
-      end
+      parser_audit(audit_params)
     end
 
     @post.brand = Brand.find_or_create_by_name(params[:post][:brand])
