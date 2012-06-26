@@ -67,7 +67,7 @@
 
   
   <p class='description'><strong>Description:</strong>  # Fetch items of current user and that of his/her subscriptions.  Defaults 2 per page.
- # <br/><br/>Notes:<pre></pre>  
+ # <br/><br/>Notes:<pre>curl -X GET --user aaronbartell@gmail.com:poopydiaper localhost:3000/timelines.json&page=2</pre>  
 </p>
 
   <h2><span id='http_verb'>GET</span>/timelines.json&page=2</h2>
@@ -99,7 +99,7 @@
       
         
         <div class="active" id='json_1'>
-          <pre class="prettyprint" > # {&quot;timeline&quot;:[{&quot;id&quot;:1,&quot;parent_id&quot;:null,&quot;name&quot;:&quot;Item 1&quot;,&quot;description&quot;:&quot;Lorem ipsum dolor sit amet, aliquet feugiat. Convallis morbi fringilla gravida, phasellus feugiat dapibus velit nunc, pulvinar eget sollicitudin venenatis cum nullam, vivamus ut a sed, mollitia lectus. Nulla vestibulum massa neque ut et, id hendrerit sit, feugiat in taciti enim proin nibh, tempor dignissim, rhoncus duis vestibulum nunc mattis convallis.&quot;,&quot;brand&quot;:&quot;Lorem ipsum dolor sit amet&quot;,&quot;retailer&quot;:&quot;Lorem ipsum dolor sit amet&quot;,&quot;url&quot;:&quot;http://www.jcrew.com/index.jsp&quot;,&quot;price&quot;:&quot;1.1&quot;,&quot;comment&quot;:null,&quot;photo_url&quot;:&quot;http://s3.amazonaws.com/shoplift_dev/small/1/product-large-1.jpg?1337212944&quot;,&quot;hashtags_allowed&quot;:true,&quot;created_at&quot;:&quot;2011-12-06T09:46:45-06:00&quot;,&quot;hashtags&quot;:[{&quot;id&quot;:1,&quot;value&quot;:&quot;jeans&quot;},{&quot;id&quot;:2,&quot;value&quot;:&quot;polo&quot;},{&quot;id&quot;:20,&quot;value&quot;:&quot;tie&quot;}],&quot;user&quot;:{&quot;extract&quot;:{&quot;id&quot;:1,&quot;email&quot;:&quot;mark@38media.net&quot;,&quot;username&quot;:&quot;mark@38media.net&quot;,&quot;full_name&quot;:&quot;Mark A. Roseboom&quot;,&quot;first_name&quot;:&quot;Mark&quot;,&quot;last_name&quot;:&quot;Roseboom&quot;,&quot;vanity_url&quot;:null,&quot;country&quot;:null,&quot;biography&quot;:&quot;I like computers&quot;,&quot;notify_new_follower&quot;:null,&quot;notify_relift&quot;:null,&quot;notify_missing&quot;:null,&quot;hometown&quot;:&quot;Boston, MA&quot;,&quot;zipcode&quot;:&quot;23238&quot;,&quot;sex&quot;:true},&quot;sex&quot;:&quot;Male&quot;,&quot;avatar_url_small&quot;:&quot;http://s3.amazonaws.com/shoplift_dev/small/1/bella_4.5_mths.jpg?1337213157&quot;,&quot;avatar_url_thumb&quot;:&quot;http://s3.amazonaws.com/shoplift_dev/thumb/1/bella_4.5_mths.jpg?1337213157&quot;,&quot;followee_count&quot;:2},&quot;flag_total&quot;:1,&quot;flags&quot;:[{&quot;flag_type&quot;:&quot;It contains inappropriate language&quot;}]},{&quot;id&quot;:4,&quot;parent_id&quot;:null,&quot;name&quot;:&quot;Item 1&quot;,&quot;description&quot;:&quot;Lorem ipsum dolor sit amet, aliquet feugiat. Convallis morbi fringilla gravida, phasellus feugiat dapibus velit nunc, pulvinar eget sollicitudin venenatis cum nullam, vivamus ut a sed, mollitia lectus. Nulla vestibulum massa neque ut et, id hendrerit sit, feugiat in taciti enim proin nibh, tempor dignissim, rhoncus duis vestibulum nunc mattis convallis.&quot;,&quot;brand&quot;:&quot;Lorem ipsum dolor sit amet&quot;,&quot;retailer&quot;:&quot;Lorem ipsum dolor sit amet&quot;,&quot;url&quot;:&quot;http://www.jcrew.com/index.jsp&quot;,&quot;price&quot;:&quot;1.1&quot;,&quot;comment&quot;:null,&quot;photo_url&quot;:&quot;http://s3.amazonaws.com/shoplift_dev/small/1/product-large-1.jpg?1337212944&quot;,&quot;hashtags_allowed&quot;:true,&quot;created_at&quot;:&quot;2011-12-06T09:46:45-06:00&quot;,&quot;hashtags&quot;:[{&quot;id&quot;:1,&quot;value&quot;:&quot;jeans&quot;},{&quot;id&quot;:2,&quot;value&quot;:&quot;polo&quot;},{&quot;id&quot;:20,&quot;value&quot;:&quot;tie&quot;}],&quot;user&quot;:{&quot;extract&quot;:{&quot;id&quot;:2,&quot;email&quot;:&quot;patrick@38media.net&quot;,&quot;username&quot;:&quot;patrick@38media.net&quot;,&quot;full_name&quot;:&quot;Patrick Camacho&quot;,&quot;first_name&quot;:&quot;Patrick&quot;,&quot;last_name&quot;:&quot;Camacho&quot;,&quot;vanity_url&quot;:&quot;http://38media.net&quot;,&quot;country&quot;:&quot;United States&quot;,&quot;biography&quot;:&quot;I like dogs&quot;,&quot;notify_new_follower&quot;:true,&quot;notify_relift&quot;:false,&quot;notify_missing&quot;:&quot;daily&quot;,&quot;hometown&quot;:&quot;Waltham, MA&quot;,&quot;zipcode&quot;:&quot;23238&quot;,&quot;sex&quot;:true},&quot;sex&quot;:&quot;Male&quot;,&quot;avatar_url_small&quot;:&quot;http://s3.amazonaws.com/shoplift_dev/small/2/headless.jpg?1337213827&quot;,&quot;avatar_url_thumb&quot;:&quot;http://s3.amazonaws.com/shoplift_dev/thumb/2/headless.jpg?1337213827&quot;,&quot;followee_count&quot;:2},&quot;flag_total&quot;:1,&quot;flags&quot;:[{&quot;flag_type&quot;:&quot;It contains inappropriate language&quot;}]}]}
+          <pre class="prettyprint" > # {&quot;timeline&quot;:[{&quot;id&quot;:1,&quot;item_id&quot;:null,&quot;name&quot;:&quot;Item 1&quot;,&quot;description&quot;:&quot;Lorem ipsum dolor sit amet, aliquet feugiat. Convallis morbi fringilla gravida, phasellus feugiat dapibus velit nunc, pulvinar eget sollicitudin venenatis cum nullam, vivamus ut a sed, mollitia lectus. Nulla vestibulum massa neque ut et, id hendrerit sit, feugiat in taciti enim proin nibh, tempor dignissim, rhoncus duis vestibulum nunc mattis convallis.&quot;,&quot;brand&quot;:&quot;Lorem ipsum dolor sit amet&quot;,&quot;retailer&quot;:&quot;Lorem ipsum dolor sit amet&quot;,&quot;url&quot;:&quot;http://www.jcrew.com/index.jsp&quot;,&quot;price&quot;:&quot;1.1&quot;,&quot;comment&quot;:null,&quot;photo_url&quot;:&quot;http://s3.amazonaws.com/shoplift_dev/small/1/product-large-1.jpg?1337212944&quot;,&quot;hashtags_allowed&quot;:true,&quot;created_at&quot;:&quot;2011-12-06T09:46:45-06:00&quot;,&quot;hashtags&quot;:[{&quot;id&quot;:1,&quot;value&quot;:&quot;jeans&quot;},{&quot;id&quot;:2,&quot;value&quot;:&quot;polo&quot;},{&quot;id&quot;:20,&quot;value&quot;:&quot;tie&quot;}],&quot;user&quot;:{&quot;extract&quot;:{&quot;id&quot;:1,&quot;email&quot;:&quot;mark@38media.net&quot;,&quot;username&quot;:&quot;mark@38media.net&quot;,&quot;full_name&quot;:&quot;Mark A. Roseboom&quot;,&quot;first_name&quot;:&quot;Mark&quot;,&quot;last_name&quot;:&quot;Roseboom&quot;,&quot;vanity_url&quot;:null,&quot;country&quot;:null,&quot;biography&quot;:&quot;I like computers&quot;,&quot;notify_new_follower&quot;:null,&quot;notify_relift&quot;:null,&quot;notify_missing&quot;:null,&quot;hometown&quot;:&quot;Boston, MA&quot;,&quot;zipcode&quot;:&quot;23238&quot;,&quot;sex&quot;:true},&quot;sex&quot;:&quot;Male&quot;,&quot;avatar_url_small&quot;:&quot;http://s3.amazonaws.com/shoplift_dev/small/1/bella_4.5_mths.jpg?1337213157&quot;,&quot;avatar_url_thumb&quot;:&quot;http://s3.amazonaws.com/shoplift_dev/thumb/1/bella_4.5_mths.jpg?1337213157&quot;,&quot;followee_count&quot;:2},&quot;flag_total&quot;:1,&quot;flags&quot;:[{&quot;flag_type&quot;:&quot;It contains inappropriate language&quot;}]},{&quot;id&quot;:4,&quot;parent_id&quot;:null,&quot;name&quot;:&quot;Item 1&quot;,&quot;description&quot;:&quot;Lorem ipsum dolor sit amet, aliquet feugiat. Convallis morbi fringilla gravida, phasellus feugiat dapibus velit nunc, pulvinar eget sollicitudin venenatis cum nullam, vivamus ut a sed, mollitia lectus. Nulla vestibulum massa neque ut et, id hendrerit sit, feugiat in taciti enim proin nibh, tempor dignissim, rhoncus duis vestibulum nunc mattis convallis.&quot;,&quot;brand&quot;:&quot;Lorem ipsum dolor sit amet&quot;,&quot;retailer&quot;:&quot;Lorem ipsum dolor sit amet&quot;,&quot;url&quot;:&quot;http://www.jcrew.com/index.jsp&quot;,&quot;price&quot;:&quot;1.1&quot;,&quot;comment&quot;:null,&quot;photo_url&quot;:&quot;http://s3.amazonaws.com/shoplift_dev/small/1/product-large-1.jpg?1337212944&quot;,&quot;hashtags_allowed&quot;:true,&quot;created_at&quot;:&quot;2011-12-06T09:46:45-06:00&quot;,&quot;hashtags&quot;:[{&quot;id&quot;:1,&quot;value&quot;:&quot;jeans&quot;},{&quot;id&quot;:2,&quot;value&quot;:&quot;polo&quot;},{&quot;id&quot;:20,&quot;value&quot;:&quot;tie&quot;}],&quot;user&quot;:{&quot;extract&quot;:{&quot;id&quot;:2,&quot;email&quot;:&quot;patrick@38media.net&quot;,&quot;username&quot;:&quot;patrick@38media.net&quot;,&quot;full_name&quot;:&quot;Patrick Camacho&quot;,&quot;first_name&quot;:&quot;Patrick&quot;,&quot;last_name&quot;:&quot;Camacho&quot;,&quot;vanity_url&quot;:&quot;http://38media.net&quot;,&quot;country&quot;:&quot;United States&quot;,&quot;biography&quot;:&quot;I like dogs&quot;,&quot;notify_new_follower&quot;:true,&quot;notify_relift&quot;:false,&quot;notify_missing&quot;:&quot;daily&quot;,&quot;hometown&quot;:&quot;Waltham, MA&quot;,&quot;zipcode&quot;:&quot;23238&quot;,&quot;sex&quot;:true},&quot;sex&quot;:&quot;Male&quot;,&quot;avatar_url_small&quot;:&quot;http://s3.amazonaws.com/shoplift_dev/small/2/headless.jpg?1337213827&quot;,&quot;avatar_url_thumb&quot;:&quot;http://s3.amazonaws.com/shoplift_dev/thumb/2/headless.jpg?1337213827&quot;,&quot;followee_count&quot;:2},&quot;flag_total&quot;:1,&quot;flags&quot;:[{&quot;flag_type&quot;:&quot;It contains inappropriate language&quot;}]}]}
 </pre>
         </div>
       
@@ -119,7 +119,7 @@
 
   
   <p class='description'><strong>Description:</strong>  # Fetch up to 50 items of a specified user
- # <br/><br/>Notes:<pre></pre>  
+ # <br/><br/>Notes:<pre>curl -X GET --user aaronbartell@gmail.com:poopydiaper localhost:3000/timelines/users/1.json?limit=2</pre>  
 </p>
 
   <h2><span id='http_verb'>GET</span>/timelines/users/:id.json?limit=2</h2>
@@ -171,7 +171,7 @@
 
   
   <p class='description'><strong>Description:</strong>  # Fetch up to 50 of the most recent items posted
- # <br/><br/>Notes:<pre></pre>  
+ # <br/><br/>Notes:<pre>curl -X GET --user aaronbartell@gmail.com:poopydiaper localhost:3000/timelines/recent.json?limit=1</pre>  
 </p>
 
   <h2><span id='http_verb'>GET</span>/timelines/recent.json?limit=1</h2>
@@ -223,7 +223,7 @@
 
   
   <p class='description'><strong>Description:</strong>  # Fetch unlimited items that match hashtag name. Default count retruned is 20 (if that many exist)
- # <br/><br/>Notes:<pre></pre>  
+ # <br/><br/>Notes:<pre>url -X GET --user aaronbartell@gmail.com:poopydiaper localhost:3000/timelines/hashtags/jeans.json</pre>  
 </p>
 
   <h2><span id='http_verb'>GET</span>/timelines/hashtags/:name.json?limit=1</h2>
@@ -241,7 +241,7 @@
   
     <strong>Parameters:</strong>
     <ul>
-      <li>id:int - User id</li><li>limit:int - Number of items to return  </li>
+      <li>name:string - hashtag name</li><li>limit:int - Number of items to return  </li>
     </ul>
   
 
