@@ -3,7 +3,7 @@ require 'active_record/fixtures'
 
 # Set tables (order matters for dependencies)
 tables = ["subscriptions","set_asides","post_flags","hashtag_flags","flag_types","hashtags",
-          "hashtag_values","item_visits","items","posts","roles_users","users"]
+          "hashtag_values","item_visits","items","posts","roles_users","users","brands"]
 
 # Tables you don't want deleted
 skip_delete_tables = []

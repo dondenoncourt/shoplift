@@ -58,6 +58,10 @@ module Parser
   end
 
   def get_price(page)
+    # if multiple xpaths for price exist, get all of them then return the lowest
+    #xpath = Xpath.find_by_retailer(retailer)
+
+
     PRICE_IDENTIFIERS.each do |field|
       price_field = page.search(field).first
       price = price_field.text if price_field.present?
@@ -79,13 +83,17 @@ module Parser
     nil
   end
 
+  # CONSIDER multiple xpaths per retail site: loop while no brand is found
   def get_brand(page, retailer)
     brand = nil
-    xpath = Xpath.find_by_retailer(retailer)
-    if xpath
-      node = page.parser.xpath(xpath.xpath)
+    xpaths = Xpath.find_all_by_retailer(retailer, :conditions => "brand IS NOT NULL")
+    xpaths.each do |xpath|
+      node = page.parser.xpath(xpath.brand)
       brand_obj = find_brand(node)
-      brand = brand_obj.name if brand_obj
+      if brand_obj
+        brand = brand_obj.name if brand_obj
+      end
+      break if brand
     end
     if !brand
         brand = page.search("//meta[@property='#{OPEN_GRAPH[:brand]}']/@content")
@@ -109,6 +117,7 @@ module Parser
     end
     nil
   end
+
 
   def first_x_words(str,n=10)
     str.split(' ')[0,n].inject{|sum,word| sum + ' ' + word}

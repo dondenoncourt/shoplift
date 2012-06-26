@@ -33,10 +33,18 @@ class PostsController < ApplicationController
 
     if params[:post][:brand] != params[:parser_brand]
       # TODO delay.parser_audit...
-      xpaths = parser_audit({url: params[:post][:url], brand: params[:post][:brand], name: params[:post][:name]})
-      if xpaths.length
-        xpaths.each do |retailer, xpath|
-          Xpath.find_or_create_by_retailer_and_xpath(retailer, xpath)
+      xpath = parser_audit({url: params[:post][:url], brand: params[:post][:brand], name: params[:post][:name]})
+      # if found by retailer and brand, done
+      # else if found by retailer and brand is null, set brand
+      # otherwise add a new Xpath
+      # TODO perhaps this update logic should go in the parser_audit method?
+      if !Xpath.find_by_retailer_and_brand(params[:post][:retailer], xpath[:brand])
+        xpathRow = Xpath.find_by_retailer(params[:post][:retailer], :conditions => "brand IS NULL")
+        if xpathRow
+          xpathRow.brand = xpath[:brand]
+          xpathRow.save
+        else
+          Xpath.create({retailer: params[:post][:retailer], brand: xpath[:brand]})
         end
       end
     end

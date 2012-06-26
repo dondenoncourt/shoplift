@@ -38,51 +38,64 @@ module ParserAudit
   #
   def parser_audit(post)
 puts "parser_audit(post) with "+post.to_s
-    xpaths = []
+    xpaths = Hash.new
     agent = Mechanize.new
     agent.user_agent_alias = 'Windows Mozilla'
     begin
       agent.get(post[:url]) do |page|
+        if post[:brand]
+          xpath = get_brand_xpath(page, post)
+          xpaths[:brand] = xpath if xpath
+        end
+        if post[:price]
+          xpath = get_price_xpath(page, post)
+          xpaths[:price] = xpath if xpath
+        end
 
-        puts "tag_has_only_brand(page, %w{h1 h2 h3 span}, #{post[:brand]})"
-        has_only_brand = tag_has_only_brand(page, %w{h1 h2 h3 span}, post[:brand])
-        printNode(has_only_brand)
-        has_only_brand.each {|node| xpaths << buildXpath(node)} if has_only_brand
-
-        puts "tag_starts_with_brand_contains_name(page, %w{h1 h2 h3 span}, #{post[:brand]}, #{post[:name]})"
-        starts_with_brand_contains_name = tag_starts_with_brand_contains_name(page, %w{h1 h2 h3 span}, post[:brand], post[:name])
-        printNode(starts_with_brand_contains_name)
-        starts_with_brand_contains_name.each {|node| xpaths << buildXpath(node)} if starts_with_brand_contains_name
-
-        puts "tag_starts_with_brand(page, %w{h1 h2 h3 span}, #{post[:brand]})"
-        starts_with_brand = tag_starts_with_brand(page, %w{h1 h2 h3 span}, post[:brand])
-        printNode(starts_with_brand)
-        starts_with_brand.each {|node| xpaths << buildXpath(node)} if starts_with_brand
-
-        puts "tag_contains_brand(page, %w{h1 h2 h3 span}, #{post[:brand]})"
-        contains_brand = tag_contains_brand(page, %w{h1 h2 h3 span}, post[:brand])
-        printNode(contains_brand)
-        contains_brand.each {|node| xpaths << buildXpath(node)} if contains_brand
-
-        puts "text_nodes_for_brand(page,  #{post[:brand]})"
-        text_nodes_for_brand = text_nodes_for_brand(page, post[:brand])
-        printNode(text_nodes_for_brand)
-        text_nodes_for_brand.each {|node| xpaths << buildXpath(node)} if text_nodes_for_brand
       end
     rescue => ex
       puts ex.message
       puts ex.backtrace
     end
-    xpathMap = Hash.new
-    xpaths.each do |xpath|
-      retailer = post[:url].split('/')[2]
-      xpathMap[retailer] = xpath
-    end
-    xpathMap
+    xpaths
 
   end
 
   private
+
+  def get_price_xpath(page, post)
+    %w{h1 span}.each do |tag|
+      node = page.parser.xpath("//#{tag}[text()='$#{post[:price]}']")
+      puts "#{node} = page.parser.xpath(\"//#{tag}[text()='$#{post[:price]}']\")"
+      if node.blank? || node.length > 1
+        node = page.parser.xpath("//#{tag}[contains(text(), '#{post[:price]}')]")
+        puts "#{node} = page.parser.xpath(\"//#{tag}[contains(), '#{post[:price]}']\")"
+      end
+      if !node.blank? && node.length == 1
+        printNode(node)
+        return buildXpath(node[0])
+      end
+    end
+
+  end
+
+  def get_brand_xpath(page, post)
+    node = tag_has_only_brand(page, %w{h1 h2 h3 span}, post[:brand])
+    return buildXpath(node[0]) if node
+
+    node = tag_starts_with_brand_contains_name(page, %w{h1 h2 h3 span}, post[:brand], post[:name])
+    return buildXpath(node[0]) if node
+
+    node = tag_starts_with_brand(page, %w{h1 h2 h3 span}, post[:brand])
+    return buildXpath(node[0]) if node
+
+    node = tag_contains_brand(page, %w{h1 h2 h3 span}, post[:brand])
+    return buildXpath(node[0]) if node
+
+    node = text_nodes_for_brand(page, post[:brand])
+    return buildXpath(node[0]) if node
+    nil
+  end
 
   def printNode(node)
     if !node.blank?
@@ -90,6 +103,7 @@ puts "parser_audit(post) with "+post.to_s
       puts ('     '+node.to_s.gsub(/\s\s/, ' '))
     end
   end
+
   def buildXpath(node)
     xpath = "//#{node.name}"
     if node.attributes.length > 0
@@ -110,7 +124,10 @@ puts "parser_audit(post) with "+post.to_s
   def tag_has_only_brand(page, tags, brand)
     tags.each do |tag|
       node = page.parser.xpath("//#{tag}[translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') = '#{brand.downcase}']")
-      return node if !node.blank? && node.length == 1
+      if !node.blank? && node.length == 1
+        printNode(node)
+        return node
+      end
     end
     nil
   end
@@ -118,7 +135,10 @@ puts "parser_audit(post) with "+post.to_s
   def tag_starts_with_brand(page, tags, brand)
     tags.each do |tag|
       node = page.parser.xpath("//#{tag}[starts-with(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'#{brand.downcase}')]")
-      return node if !node.blank? && node.length == 1
+      if !node.blank? && node.length == 1
+        printNode(node)
+        return node
+      end
     end
     nil
   end
@@ -126,7 +146,10 @@ puts "parser_audit(post) with "+post.to_s
   def tag_contains_brand(page, tags, brand)
     tags.each do |tag|
       node = page.parser.xpath("//#{tag}[contains(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'#{brand.downcase}')]")
-      return node if !node.blank? && node.length == 1
+      if !node.blank? && node.length == 1
+        printNode(node)
+        return node
+      end
     end
     nil
   end
@@ -136,7 +159,10 @@ puts "parser_audit(post) with "+post.to_s
       node = page.parser.xpath("//#{tag}[starts-with(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'#{brand.downcase}')]")
       if !node.blank?
         node = page.parser.xpath("//#{tag}[contains(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),\""+name.downcase+"\")]")
-        return node if !node.blank? && node.length == 1
+        if !node.blank? && node.length == 1
+          printNode(node)
+          return node
+        end
       end
     end
     nil

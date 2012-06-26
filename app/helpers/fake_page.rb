@@ -1473,7 +1473,7 @@ class="altImage PDPImageDisplay">
 <h1>Theodora & Callum Flats - Primaballet with Ankle Strap</h1>
 <div id="PriceDisplay">
 <div class="priceSale">
-<div><span>Orig </span><span class="priceBig">$235.00</span></div>
+<div><span>Orig </span><span class="priceBig">$235.99</span></div>
 <div><span>Was </span><span class="priceBig">$164.50</span></div>
 <div><span class="priceSale">Now $115.15</span></div>
 </div>
