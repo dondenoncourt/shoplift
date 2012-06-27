@@ -23,8 +23,9 @@ describe 'Parser_Audit' do
     it "returns xpath" do
       response = parser_audit(
         {brand: 'Tignanello', 
-         name: 'Multi Pocket Organizer Crossbody', 
-         url: 'http://bags.bcoutlet.com/product/tignanello/multi-pocket-organizer-crossbody/130799/p/1338439'
+         name: 'Multi Pocket Organizer Crossbody',
+         url: 'http://bags.bcoutlet.com/product/tignanello/multi-pocket-organizer-crossbody/130799/p/1338439',
+         retailer: 'bag.bcoutlet.com'
         }
       )
       response.should == {:brand => "//span[@class='ebagsBrand']"}
@@ -36,7 +37,9 @@ describe 'Parser_Audit' do
       response = parser_audit(
           {brand: 'Theodora & Callum', 
            name:'Primaballet with Ankle Strap', 
-           url:'http://www1.bloomingdales.com/shop/product/theodora-callum-flats-primaballet-with-ankle-strap'}
+           url:'http://www1.bloomingdales.com/shop/product/theodora-callum-flats-primaballet-with-ankle-strap',
+           retailer:'www1.bloomingdales.com'
+          }
       )
       response.should == {:brand=>"//h1"}
     end
@@ -48,7 +51,9 @@ describe 'Parser_Audit' do
           {brand: 'Theodora & Callum', 
            name:'Primaballet with Ankle Strap', 
            price: 115.15,
-           url:'http://www1.bloomingdales.com/shop/product/theodora-callum-flats-primaballet-with-ankle-strap'}
+           url:'http://www1.bloomingdales.com/shop/product/theodora-callum-flats-primaballet-with-ankle-strap',
+           retailer:'www1.bloomingdales.com'
+          }
       )
       response.should == {:brand=>"//h1", :price => "//span[@class='priceSale']"}
     end

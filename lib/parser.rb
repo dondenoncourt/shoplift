@@ -71,8 +71,7 @@ module Parser
       end
     end
 
-    if xpathPrices.length
-      puts "sorting prices"
+    if xpathPrices.length > 0
       return xpathPrices.sort[0]
     end
 
