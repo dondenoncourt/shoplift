@@ -17,6 +17,7 @@ class PostsController < ApplicationController
     respond_to do |format|
       format.html { render :edit }
       format.js { render :json => @post }
+      format.json { render :json => @post }
     end
   end
 
