@@ -22,7 +22,7 @@
 #  hometown               :string(110)
 #  birthdate              :date
 #  private                :boolean(1)      default(FALSE), not null
-#  status                 :integer(4)      default(1), not null
+#  status                 :boolean(1)      default(TRUE), not null
 #  first_name             :string(255)
 #  last_name              :string(255)
 #  vanity_url             :string(255)

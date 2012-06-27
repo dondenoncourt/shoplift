@@ -250,12 +250,14 @@ item_tags = new Array();
 				c_style = jQuery.extend({},this.defaultCSS,{'float':'left',position:'relative',fontSize:12}),
                                 k_style = jQuery.extend({},this.defaultCSS,{width:435,height:18,color:'#000', 'font-family': 'arial', 'font-size': '12px', 'background-color': '#CCCCCC', 'border-radius':'3px', '-moz-border-radius':'3px', '-webkit-border-radius':'3px', 'float': 'left'}),
 				inputs = {
+					parser_name : jQuery('<input type="hidden" name="parser_name" value="<%= j @post.name %>"/>'),
 					name : jQuery('<input type="text" name="post[name]" value="<%=  j @post.name %>" />')
 						.css(jQuery.extend({},r_style,i_style)),
 					parser_brand : jQuery('<input type="hidden" name="parser_brand" value="<%= j @brand_name %>"/>'),
           brand : jQuery('<input type="text" name="post[brand]" value="<%= j @brand_name %>" />')
 						.css(jQuery.extend({},r_style,i_style)),
 					url : jQuery('<input type="hidden" name="post[url]" value="<%= @post.url %>"/>'),
+					parser_price : jQuery('<input type="hidden" name="parser_price" value="<%= @post.price %>"/>'),
 					price : jQuery('<input type="text" name="post[price]" value="<%= number_to_currency(@post.price, :precision => 0) %>"/>')
 						.css(jQuery.extend({},r_style,i_style)),
 					image : jQuery('<input type="hidden" name="image" />'),

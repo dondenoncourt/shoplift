@@ -44,7 +44,7 @@ module Parser
 
         # last resort...
         images = page.image_urls if images.flatten!.empty? rescue nil # can't get images from Amazon for some reason
-        price = get_price(page) if price.blank?
+        price = get_price(page, retailer) if price.blank?
         name = get_name(page) if name.blank?
         brand = get_brand(page, retailer) if brand.blank?
 
@@ -57,7 +57,25 @@ module Parser
     end
   end
 
-  def get_price(page)
+  def get_price(page, retailer)
+    xpathPrices = []
+    # if multiple xpaths for price exist, get all of them then return the lowest
+    xpaths = Xpath.find_all_by_retailer(retailer, :conditions => "price IS NOT NULL")
+    xpaths.each do |xpath|
+      node = page.parser.xpath(xpath.price)
+      begin
+        price = BigDecimal(node[0].to_s.gsub(/[^\d.]/, ''))
+        xpathPrices << price
+      rescue
+        puts "thought we had a price but it could not be converted to a big decimal"
+      end
+    end
+
+    if xpathPrices.length > 0
+      return xpathPrices.sort[0]
+    end
+
+
     PRICE_IDENTIFIERS.each do |field|
       price_field = page.search(field).first
       price = price_field.text if price_field.present?
@@ -79,13 +97,17 @@ module Parser
     nil
   end
 
+  # CONSIDER multiple xpaths per retail site: loop while no brand is found
   def get_brand(page, retailer)
     brand = nil
-    xpath = Xpath.find_by_retailer(retailer)
-    if xpath
-      node = page.parser.xpath(xpath.xpath)
+    xpaths = Xpath.find_all_by_retailer(retailer, :conditions => "brand IS NOT NULL")
+    xpaths.each do |xpath|
+      node = page.parser.xpath(xpath.brand)
       brand_obj = find_brand(node)
-      brand = brand_obj.name if brand_obj
+      if brand_obj
+        brand = brand_obj.name if brand_obj
+      end
+      break if brand
     end
     if !brand
         brand = page.search("//meta[@property='#{OPEN_GRAPH[:brand]}']/@content")
@@ -109,6 +131,7 @@ module Parser
     end
     nil
   end
+
 
   def first_x_words(str,n=10)
     str.split(' ')[0,n].inject{|sum,word| sum + ' ' + word}

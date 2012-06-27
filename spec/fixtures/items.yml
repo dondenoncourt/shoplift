@@ -5,7 +5,7 @@
 #  id         :integer(4)      not null, primary key
 #  user_id    :integer(4)      not null
 #  post_id    :integer(4)      not null
-#  parent_id  :integer(4)
+#  item_id    :integer(4)
 #  created_at :datetime        not null
 #  updated_at :datetime        not null
 #  status     :integer(4)      default(1), not null

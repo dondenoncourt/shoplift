@@ -11,11 +11,13 @@
     <p>
       <%= f.label :name %>
       <%= f.text_field :name %>
+      <%= f.hidden_field :parser_name, :value => @post.name %>
     </p>
 
     <p>
       <%= f.label :price %>
       <%= f.text_field :price %>
+      <%= f.hidden_field :parser_price, :value => @post.price %>
     </p>
 
     <p>

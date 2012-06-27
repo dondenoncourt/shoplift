@@ -4,8 +4,7 @@
 #
 #  id                 :integer(4)      not null, primary key
 #  name               :string(110)     not null
-#  description        :text
-#  brand              :string(255)     not null
+#  description        :text            default(""), not null
 #  retailer           :string(255)     not null
 #  url                :string(2083)    not null
 #  price              :decimal(10, 2)
@@ -22,6 +21,7 @@
 #  photo_content_type :string(255)
 #  photo_file_size    :integer(4)
 #  photo_updated_at   :datetime
+#  brand_id           :integer(4)
 #
 
 class Post < ActiveRecord::Base
