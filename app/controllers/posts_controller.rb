@@ -6,6 +6,20 @@ class PostsController < ApplicationController
     @post = current_user.posts.build
   end
 
+  # =begin apidoc
+  # url:: /post/create.json
+  # method:: GET
+  # access:: FREE
+  # return:: create new post
+  # param:: url:string - url
+  # param:: retailer:string - retailer
+  # param:: brand:string - brand
+  # output:: json
+  # 
+  # ::output-end::
+  # Create post
+  # <br/><br/>Notes:<pre></pre>  
+  # =end
   def create
     authenticate_user!
     params[:url] = "http://"+params[:retailer]+params[:url] if !params[:url].include? 'http:'

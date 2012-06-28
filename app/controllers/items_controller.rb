@@ -11,7 +11,7 @@ class ItemsController < ApplicationController
   # {"id":1,"item_id":null,"name":"Item 1","description":"Lorem ipsum dolor sit amet, aliquet feugiat. Convallis morbi fringilla gravida, phasellus feugiat dapibus velit nunc, pulvinar eget sollicitudin venenatis cum nullam, vivamus ut a sed, mollitia lectus. Nulla vestibulum massa neque ut et, id hendrerit sit, feugiat in taciti enim proin nibh, tempor dignissim, rhoncus duis vestibulum nunc mattis convallis.","brand":"Lorem ipsum dolor sit amet","retailer":"Lorem ipsum dolor sit amet","url":"http://www.jcrew.com/index.jsp","price":"1.1","comment":null,"photo_url":"http://s3.amazonaws.com/shoplift_dev/small/1/product-large-1.jpg?1337212944","hashtags_allowed":true,"created_at":"2011-12-06T09:46:45-06:00","hashtags":[{"id":1,"value":"jeans"},{"id":2,"value":"polo"},{"id":20,"value":"tie"}],"user":{"extract":{"id":1,"email":"mark@38media.net","username":"mark@38media.net","full_name":"Mark A. Roseboom","first_name":"Mark","last_name":"Roseboom","vanity_url":null,"country":null,"biography":"I like computers","notify_new_follower":null,"notify_relift":null,"notify_missing":null,"hometown":"Boston, MA","zipcode":"23238","sex":true},"sex":"Male","avatar_url_small":"http://s3.amazonaws.com/shoplift_dev/small/1/bella_4.5_mths.jpg?1337213157","avatar_url_thumb":"http://s3.amazonaws.com/shoplift_dev/thumb/1/bella_4.5_mths.jpg?1337213157"},"flag_total":1,"flags":[{"flag_type":"It contains inappropriate language"}]}
   # ::output-end::
   # Fetch item
-  # <br/><br/>Notes:<pre></pre>  
+  # <br/><br/>Notes:<pre>curl -X GET --user aaronbartell@gmail.com:poopydiaper localhost:3000/items/1.json</pre>  
   # =end  
   def show
     @item = Item.joins(:post,:user) \
@@ -36,7 +36,7 @@ class ItemsController < ApplicationController
   # http://www.jcrew.com/index.jsp
   # ::output-end::
   # Fetch item URL
-  # <br/><br/>Notes:<pre></pre>  
+  # <br/><br/>Notes:<pre>url -X GET --user aaronbartell@gmail.com:poopydiaper localhost:3000/items/1/visit</pre>  
   # =end  
   def visit
     @item = Item.joins(:post,:user) \
@@ -61,7 +61,7 @@ class ItemsController < ApplicationController
   # {"timeline":[{"id":1,"item_id":null,"name":"Item 1","description":"Lorem ipsum dolor sit amet, aliquet feugiat. Convallis morbi fringilla gravida, phasellus feugiat dapibus velit nunc, pulvinar eget sollicitudin venenatis cum nullam, vivamus ut a sed, mollitia lectus. Nulla vestibulum massa neque ut et, id hendrerit sit, feugiat in taciti enim proin nibh, tempor dignissim, rhoncus duis vestibulum nunc mattis convallis.","brand":"Lorem ipsum dolor sit amet","retailer":"Lorem ipsum dolor sit amet","url":"http://www.jcrew.com/index.jsp","price":"1.1","comment":null,"photo_url":"http://s3.amazonaws.com/shoplift_dev/small/1/product-large-1.jpg?1337212944","hashtags_allowed":true,"created_at":"2011-12-06T09:46:45-06:00","set_aside":{"created_at":"2012-06-20T12:28:44-05:00","id":18,"item_id":1,"status":1,"updated_at":"2012-06-20T12:28:44-05:00","user_id":12},"hashtags":[{"id":1,"value":"jeans"},{"id":2,"value":"polo"}],"user":{"extract":{"id":1,"email":"mark@38media.net","username":"mark@38media.net","full_name":"Mark A. Roseboom","first_name":"Mark","last_name":"Roseboom","vanity_url":null,"country":null,"biography":"I like computers","notify_new_follower":null,"notify_relift":null,"notify_missing":null,"hometown":"Boston, MA","zipcode":null,"sex":true},"sex":"Male","avatar_url_small":"http://s3.amazonaws.com/shoplift_dev/small/1/bella_4.5_mths.jpg?1337213157","avatar_url_thumb":"http://s3.amazonaws.com/shoplift_dev/thumb/1/bella_4.5_mths.jpg?1337213157","followee_count":1},"flag_total":1,"flags":[{"flag_type":"It contains inappropriate language"}]},{"id":4,"item_id":null,"name":"Item 1","description":"Lorem ipsum dolor sit amet, aliquet feugiat. Convallis morbi fringilla gravida, phasellus feugiat dapibus velit nunc, pulvinar eget sollicitudin venenatis cum nullam, vivamus ut a sed, mollitia lectus. Nulla vestibulum massa neque ut et, id hendrerit sit, feugiat in taciti enim proin nibh, tempor dignissim, rhoncus duis vestibulum nunc mattis convallis.","brand":"Lorem ipsum dolor sit amet","retailer":"Lorem ipsum dolor sit amet","url":"http://www.jcrew.com/index.jsp","price":"1.1","comment":null,"photo_url":"http://s3.amazonaws.com/shoplift_dev/small/1/product-large-1.jpg?1337212944","hashtags_allowed":true,"created_at":"2011-12-06T09:46:45-06:00","hashtags":[{"id":1,"value":"jeans"},{"id":2,"value":"polo"}],"user":{"extract":{"id":2,"email":"patrick@38media.net","username":"camachgk","full_name":"Patrick Camacho","first_name":"Patrick","last_name":"Camacho","vanity_url":"http://38media.net","country":"United States","biography":"I like dogs","notify_new_follower":true,"notify_relift":false,"notify_missing":"daily","hometown":"Waltham, MA","zipcode":"23238","sex":true},"sex":"Male","avatar_url_small":"http://s3.amazonaws.com/shoplift_dev/small/2/headless.jpg?1337213827","avatar_url_thumb":"http://s3.amazonaws.com/shoplift_dev/thumb/2/headless.jpg?1337213827","followee_count":1},"flag_total":1,"flags":[{"flag_type":"It contains inappropriate language"}]}]}
   # ::output-end::
   # Search items
-  # <br/><br/>Notes:<pre></pre>  
+  # <br/><br/>Notes:<pre>curl -X GET --user aaronbartell@gmail.com:poopydiaper localhost:3000/items/search.json?search=Item</pre>  
   # =end
   def search
     @items = Item.joins(:post,:user) \
@@ -78,18 +78,11 @@ class ItemsController < ApplicationController
   # return:: item object
   # param:: item object
   # output:: json
-  # 
+  # {"id":80,"item_id":null,"name":"Zoolander Coolness","description":"Zoolander Derek Zoolander School Heathered Royal Men's T-shirt","brand":"Zoolander","retailer":"Amazon.com","url":"http://www.amazon.com/Zoolander-Derek-School-Heathered-T-shirt/dp/B006UI5KUG/ref=sr_1_3?ie=UTF8","price":null,"comment":null,"photo_url":"http://s3.amazonaws.com/shoplift_dev/small/223/open-uri20120627-16385-1h6troz?1340829554","hashtags_allowed":true,"created_at":"2012-06-27T15:39:14-05:00","hashtags":[],"user":{"extract":{"id":12,"email":"aaronbartell@gmail.com","username":"aaronbartell@gmail.com","full_name":"Aaron","first_name":null,"last_name":null,"vanity_url":null,"country":"United States","biography":null,"notify_new_follower":null,"notify_relift":null,"notify_missing":null,"hometown":null,"zipcode":"56001","sex":true},"sex":"Male","avatar_url_small":"/assets/avatars/small/missing.png","avatar_url_thumb":"/assets/avatars/thumb/missing.png","followee_count":1},"flag_total":0,"flags":[]}
   # ::output-end::
   # Create item
-  # <br/><br/>Notes:<pre></pre>  
+  # <br/><br/>Notes:<pre>curl -X POST --user aaronbartell@gmail.com:poopydiaper -d "item[image]=http://ecx.images-amazon.com/images/I/51YeA77BaQL._SX342_.jpg" -d "item[retailer]=Amazon.com" -d "item[description]=Zoolander Derek Zoolander School Heathered Royal Men's T-shirt" -d "item[name]=Zoolander Coolness" -d "item[brand]=Zoolander" -d "item[url]=http://www.amazon.com/Zoolander-Derek-School-Heathered-T-shirt/dp/B006UI5KUG/ref=sr_1_3?ie=UTF8&qid=1340810439&sr=8-3&keywords=heathered+men+tshirt" localhost:3000/items.json</pre>  
   # =end
- 
-  # TODO finish putting curl example in here.
-  # 
-  # * *Request*    :
-  #   - POST /items
-  # * *Args*    :
-  #   - :item -> Array of item details
   def create
     authenticate_user!
     post = {:user_id => current_user.id}
@@ -131,11 +124,18 @@ class ItemsController < ApplicationController
     end
   end
 
-  # Relift item
-  # * *Request*    :
-  #   - POST /items/:id/relift
-  # * *Args*    :
-  #   - :id -> Item id
+  # =begin apidoc
+  # url:: /items/:id/relift.json
+  # method:: POST
+  # access:: FREE
+  # return:: item object
+  # param:: item object
+  # output:: json
+  # {"id":81,"item_id":2,"name":"Item 2","description":"Lorem ipsum dolor sit amet, aliquet feugiat. Convallis morbi fringilla gravida, phasellus feugiat dapibus velit nunc, pulvinar eget sollicitudin venenatis cum nullam, vivamus ut a sed, mollitia lectus. Nulla vestibulum massa neque ut et, id hendrerit sit, feugiat in taciti enim proin nibh, tempor dignissim, rhoncus duis vestibulum nunc mattis convallis.","brand":"Lorem ipsum dolor sit amet","retailer":"Lorem ipsum dolor sit amet","url":"http://www.jcrew.com/index.jsp","price":"1.1","comment":null,"photo_url":"http://s3.amazonaws.com/shoplift_dev/small/2/product-large-2.jpg?1337212961","hashtags_allowed":true,"created_at":"2011-12-06T09:47:42-06:00","hashtags":[{"id":4,"value":"polo"}],"relift":{"created_at":"2012-06-27T15:44:12-05:00","user":{"extract":{"id":1,"email":"mark@38media.net","username":"mark@38media.net","full_name":"Mark A. Roseboom","first_name":"Mark","last_name":"Roseboom","vanity_url":null,"country":null,"biography":"I like computers","notify_new_follower":null,"notify_relift":null,"notify_missing":null,"hometown":"Boston, MA","zipcode":null,"sex":true},"sex":"Male","avatar_url_small":"http://s3.amazonaws.com/shoplift_dev/small/1/bella_4.5_mths.jpg?1337213157","avatar_url_thumb":"http://s3.amazonaws.com/shoplift_dev/thumb/1/bella_4.5_mths.jpg?1337213157","followee_count":1}},"user":{"extract":{"id":12,"email":"aaronbartell@gmail.com","username":"aaronbartell@gmail.com","full_name":"Aaron","first_name":null,"last_name":null,"vanity_url":null,"country":"United States","biography":null,"notify_new_follower":null,"notify_relift":null,"notify_missing":null,"hometown":null,"zipcode":"56001","sex":true},"sex":"Male","avatar_url_small":"/assets/avatars/small/missing.png","avatar_url_thumb":"/assets/avatars/thumb/missing.png","followee_count":1},"flag_total":1,"flags":[{"flag_type":"It contains inappropriate language"}]}
+  # ::output-end::
+  # Create item
+  # <br/><br/>Notes:<pre>curl -X POST --user aaronbartell@gmail.com:poopydiaper localhost:3000/items/2/relift.json</pre>  
+  # =end
   def relift
     authenticate_user!
     @item = Item.joins(:post,:user) \
@@ -156,12 +156,20 @@ class ItemsController < ApplicationController
     end
   end
 
-  # Update item
-  # * *Request*    :
-  #   - PUT /items
-  # * *Args*    :
-  #   - :item -> Array of item details
-  def update
+  # =begin apidoc
+  # url:: /items/:id/edit.json
+  # method:: POST
+  # access:: FREE
+  # return:: item object
+  # param:: id:int - item id to update (URL)
+  # param:: item object (POST content)
+  # output:: json
+  # 
+  # ::output-end::
+  # Create item
+  # <br/><br/>Notes:<pre></pre>  
+  # =end
+  def update  
     authenticate_user!
     @item = Item.joins(:post,:user) \
                 .joins("INNER JOIN users AS post_users on posts.user_id = post_users.id AND users.status = 1") \
@@ -175,12 +183,12 @@ class ItemsController < ApplicationController
       post_include.each do |element|
         post = post.merge({element => params[element]})
       end
-      post[:brand]= Brand.find_or_create_by_name(params[:brand])
+      post[:brand]= Brand.find_or_create_by_name(params[:brand]) if !params[:brand].blank?
     else
       post_include.each do |element|
         post = post.merge({element => params[:item][element]})
       end
-      post[:brand]= Brand.find_or_create_by_name(params[:item][:brand])
+      post[:brand]= Brand.find_or_create_by_name(params[:item][:brand]) if !params[:item][:brand].blank?
     end
 
 
