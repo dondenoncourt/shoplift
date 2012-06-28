@@ -35,20 +35,23 @@ module ParserAudit
   # h1|h2|h3 starts-with brand
   # h1|h2|h3|span only brand
   #
-  #
-  def parser_audit(post)
+  def parser_audit(post_params)
     xpaths = Hash.new
     agent = Mechanize.new
     agent.user_agent_alias = 'Windows Mozilla'
     begin
-      agent.get(post[:url]) do |page|
-        if post[:brand]
-          xpath = get_brand_xpath(page, post)
+      agent.get(post_params[:url]) do |page|
+        if post_params[:brand]
+          xpath = get_brand_xpath(page, post_params)
           xpaths[:brand] = xpath if xpath
         end
-        if post[:price]
-          xpath = get_price_xpath(page, post)
+        if post_params[:price]
+          xpath = get_price_xpath(page, post_params[:price])
           xpaths[:price] = xpath if xpath
+        end
+        if post_params[:parsed_name] != post_params[:name]
+          xpath = get_name_xpath(page, post_params[:name])
+          xpaths[:name] = xpath if xpath
         end
 
       end
@@ -56,28 +59,17 @@ module ParserAudit
       puts ex.message
       puts ex.backtrace
     end
-    # if found by retailer and brand, done
-    # else if found by retailer and brand is null, set brand
+    # if found by retailer and attribute (brand|name|price), no need to update
+    # else if found by retailer and attribute is null, set attribute
     # otherwise add a new xpath
-    if xpaths[:brand]
-      if !Xpath.find_by_retailer_and_brand(post[:retailer], xpaths[:brand])
-        xpath_row = Xpath.find_by_retailer(post[:retailer], :conditions => "brand IS NULL")
+    xpaths.each do |key, value|
+      if Xpath.where("retailer = ? and #{key.to_sym} = ?", post_params[:retailer], value).length == 0
+        xpath_row = Xpath.find_by_retailer(post_params[:retailer], :conditions => "#{key.to_sym} IS NULL")
         if xpath_row
-          xpath_row.brand = xpaths[:brand]
+          xpath_row[key.to_sym] = value
           xpath_row.save
         else
-          Xpath.create({retailer: post[:retailer], brand: xpaths[:brand]})
-        end
-      end
-    end
-    if xpaths[:price]
-      if !Xpath.find_by_retailer_and_price(post[:retailer], xpaths[:price])
-        xpath_row = Xpath.find_by_retailer(post[:retailer], :conditions => "price IS NULL")
-        if xpath_row
-          xpath_row.price = xpaths[:price]
-          xpath_row.save
-        else
-          Xpath.create({retailer: post[:retailer], price: xpaths[:price]})
+          Xpath.create({retailer: post_params[:retailer], key.to_sym => value})
         end
       end
     end
@@ -88,36 +80,48 @@ module ParserAudit
 
   private
 
-  def get_price_xpath(page, post)
-    %w{h1 span}.each do |tag|
-      node = page.parser.xpath("//#{tag}[text()='$#{post[:price]}']")
-      puts "#{node} = page.parser.xpath(\"//#{tag}[text()='$#{post[:price]}']\")"
+  def get_price_xpath(page, value)
+    %w{h1 h2 h3 span}.each do |tag|
+      node = page.parser.xpath("//#{tag}[text()='$#{value}']")
+      puts "#{node} = page.parser.xpath(\"//#{tag}[text()='$#{value}']\")"
       if node.blank? || node.length > 1
-        node = page.parser.xpath("//#{tag}[contains(text(), '#{post[:price]}')]")
-        puts "#{node} = page.parser.xpath(\"//#{tag}[contains(), '#{post[:price]}']\")"
+        node = page.parser.xpath("//#{tag}[contains(text(), '#{value}')]")
+        puts "#{node} = page.parser.xpath(\"//#{tag}[contains(), '#{value}']\")"
       end
       if !node.blank? && node.length == 1
         printNode(node)
         return buildXpath(node[0])
       end
     end
-
+    nil
   end
 
-  def get_brand_xpath(page, post)
-    node = tag_has_only_brand(page, %w{h1 h2 h3 span}, post[:brand])
+  def get_name_xpath(page, value)
+    %w{h1 h2 h3 span}.each do |tag|
+      node = page.parser.xpath("//#{tag}[text()='$#{value}']")
+      puts "#{node} = page.parser.xpath(\"//#{tag}[text()='$#{value}']\")"
+      if !node.blank? && node.length == 1
+        printNode(node)
+        return buildXpath(node[0])
+      end
+    end
+    nil
+  end
+
+  def get_brand_xpath(page, post_params)
+    node = tag_has_only_brand(page, %w{h1 h2 h3 span}, post_params[:brand])
     return buildXpath(node[0]) if node
 
-    node = tag_starts_with_brand_contains_name(page, %w{h1 h2 h3 span}, post[:brand], post[:name])
+    node = tag_starts_with_brand_contains_name(page, %w{h1 h2 h3 span}, post_params[:brand], post_params[:name])
     return buildXpath(node[0]) if node
 
-    node = tag_starts_with_brand(page, %w{h1 h2 h3 span}, post[:brand])
+    node = tag_starts_with_brand(page, %w{h1 h2 h3 span}, post_params[:brand])
     return buildXpath(node[0]) if node
 
-    node = tag_contains_brand(page, %w{h1 h2 h3 span}, post[:brand])
+    node = tag_contains_brand(page, %w{h1 h2 h3 span}, post_params[:brand])
     return buildXpath(node[0]) if node
 
-    node = text_nodes_for_brand(page, post[:brand])
+    node = text_nodes_for_brand(page, post_params[:brand])
     return buildXpath(node[0]) if node
     nil
   end

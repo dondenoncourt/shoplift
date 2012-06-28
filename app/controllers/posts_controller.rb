@@ -31,6 +31,7 @@ class PostsController < ApplicationController
     respond_to do |format|
       format.html { render :edit }
       format.js { render :json => @post }
+      format.json { render :json => @post }
     end
   end
 
@@ -57,6 +58,7 @@ class PostsController < ApplicationController
     if audit_params.length > 0
       audit_params[:url] = params[:post][:url]
       audit_params[:retailer] = params[:post][:retailer]
+      audit_params[:parsed_name] = @post.name
       # TODO delay.parser_audit...
       parser_audit(audit_params)
     end
