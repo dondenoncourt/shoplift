@@ -44,6 +44,7 @@ class PostsController < ApplicationController
     if audit_params.length > 0
       audit_params[:url] = params[:post][:url]
       audit_params[:retailer] = params[:post][:retailer]
+      audit_params[:parsed_name] = @post.name
       # TODO delay.parser_audit...
       parser_audit(audit_params)
     end
