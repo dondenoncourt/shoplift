@@ -54,6 +54,7 @@ module Parser
       puts ex.message
       puts ex.backtrace
       "Error: #{ex.message}"
+      return { brand: 'invalid URL', retailer: url.split('/')[2], name: 'invalid URL', price: '', images: nil, description: '', url: 'invalid URL' }
     end
   end
 
