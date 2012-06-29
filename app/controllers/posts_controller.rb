@@ -1,3 +1,19 @@
+=begin documentation
+When a user clicks the bookmarklet while on a retailer page
+posts_controller::create is invoked 
+create calls Parser::parse to get the brand, name, price, and description (and images, which are currenlty ignored)
+note that the parsed value for brand is stored in a hidden parameter so the update action can determine
+if the user modified the brand.
+create then "creates" an initial post with initial values
+create then renders json, html, or bookmarklet.js for user input
+
+After the user has an opportunity to modify the brand, name, and price,
+posts_controller::update is invoked
+if the user modified the brand, name, or price
+parser_audit::parse_audit is invoked to see if it can "learn" by adding an xpath to the xpaths table
+
+=end
+
 class PostsController < ApplicationController
   include Parser
   include ParserAudit
