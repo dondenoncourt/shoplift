@@ -11,6 +11,8 @@ images and name
 
 3) use xpaths rows specific to the retailer to get:
 brand, price, and name
+Note, if there are multiple xpaths for price, the parser uses the smallest value
+brand and name, on the otherhand, uses the first value that is retrieved.
 
 4) use common hard-coded tags and tag attributes to get:
 brand, price, and name
