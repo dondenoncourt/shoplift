@@ -1,3 +1,39 @@
+=begin documentation
+When a user clicks the bookmarlet, the parser attempts to get brand, name, price, and description
+The popup then presents those for modification
+If the user modifies brand, name, or price, the parser audit routine is invoked to attempt to find
+an xpath for that retail site.
+
+For brand, the following is used to find an xpath for an h1, h2, h3, or span tag whose text:
+1) contains ONLY the user-keyed brand
+2) contains the user-keyed brand anywhere
+3) starts with the user-keyed brand
+Otherwise look for any tag that contains ONLY the user-keyed brand
+Note, the xpath is saved only if there is one tag that matches the user-keyed brand
+
+For price, the following is used to find an xpath for an h1, h2, h3, or span tag whose text:
+1) contains ONLY the user-keyed price
+2) contains the user-keyed price anywhere
+Note, the xpath is saved only if there is one tag that matches the user-keyed price
+
+For name, the following is used to find an xpath for an h1, h2, h3, or span tag whose text:
+1) contains ONLY the user-keyed name
+2) contains the user-keyed name anywhere
+Note, the xpath is saved only if there is one tag that matches the user-keyed name
+
+The xpaths table contains:
+retailer (URL)
+brand (xpath, may be null)
+name (xpath, may be null)
+price (xpath, may be null)
+id (integer key)
+created_at (date)
+updated_at (date)
+
+Note that m.ziray suggest a rating, which is planned to be added as we refine the learning parser
+
+=end
+
 include Parser
 module ParserAudit
 

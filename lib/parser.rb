@@ -1,3 +1,25 @@
+=begin documentation
+The parser takes a URL and returns an map of brand, item name, and price
+It contains relatively static code that uses very common XHTML id attribute values to retreive brand/name/price.
+But it also uses xpaths from a table (called xpaths) to search for 
+
+1) Use open graph (meta tags with standardized identifiers) to attempt to get:
+images, name, and description
+
+2) use other, relatively standard, meta tages to get:
+images and name
+
+3) use xpaths rows specific to the retailer to get:
+brand, price, and name
+
+4) use common hard-coded tags and tag attributes to get:
+brand, price, and name
+
+5) use image tag urls to get:
+images
+
+=end
+
 module Parser
 
   OPEN_GRAPH = {
@@ -45,7 +67,7 @@ module Parser
         # last resort...
         images = page.image_urls if images.flatten!.empty? rescue nil # can't get images from Amazon for some reason
         price = get_price(page, retailer) if price.blank?
-        name = get_name(page) if name.blank?
+        name = get_name(page, retailer) if name.blank?
         brand = get_brand(page, retailer) if brand.blank?
 
         return { brand: brand.to_s, retailer: url.split('/')[2], name: name.to_s, price: price.to_s.to_f, images: images, description: description.to_s, url: url.to_s }
@@ -89,7 +111,19 @@ module Parser
     price = price.to_s.match(/\d[\d.,]*/).to_s.gsub(/,/,'')
   end
 
-  def get_name(page)
+  def get_name(page, retailer)
+    name = nil
+    xpaths = Xpath.find_all_by_retailer(retailer, :conditions => "name IS NOT NULL")
+    xpaths.each do |xpath|
+      node = page.parser.xpath(xpath.name)
+      if node
+        name = node[0].text
+        break
+      end
+    end
+
+    return name if name
+
     ITEM_IDENTIFIERS.each do |field|
       item_field = page.search(field).first
       name = item_field.text if item_field.present?
