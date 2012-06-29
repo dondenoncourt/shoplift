@@ -63,7 +63,7 @@ class PostsController < ApplicationController
   # output:: json
   # 
   # ::output-end::
-  # Create post
+  # Update post
   # <br/><br/>Notes:<pre></pre>  
   # =end
   def update

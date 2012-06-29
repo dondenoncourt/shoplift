@@ -36,7 +36,7 @@ class ItemsController < ApplicationController
   # http://www.jcrew.com/index.jsp
   # ::output-end::
   # Fetch item URL
-  # <br/><br/>Notes:<pre>url -X GET --user aaronbartell@gmail.com:poopydiaper localhost:3000/items/1/visit</pre>  
+  # <br/><br/>Notes:<pre>curl -X GET --user aaronbartell@gmail.com:poopydiaper localhost:3000/items/1/visit</pre>  
   # =end  
   def visit
     @item = Item.joins(:post,:user) \
@@ -164,10 +164,10 @@ class ItemsController < ApplicationController
   # param:: id:int - item id to update (URL)
   # param:: item object (POST content)
   # output:: json
-  # 
+  # {"id":77,"item_id":null,"name":"Nicole Miller Strapless Gown | Bloomingdale's","description":"Zoolander Dereee","brand":"Nicole Miller","retailer":"www1.bloomingdales.com","url":"http://www1.bloomingdales.com/shop/product/nicole-miller-strapless-gown?ID=573044&CategoryID=21683#fn=DRESS_OCCASION%3DProm%26spp%3D2%26ppp%3D96%26sp%3D1%26rid%3D61","price":"1320.0","comment":null,"photo_url":"http://s3.amazonaws.com/shoplift_dev/small/221/open-uri20120619-4539-q11om4?1340142491","hashtags_allowed":true,"created_at":"2012-06-19T16:47:52-05:00","hashtags":[],"user":{"extract":{"id":11,"email":"dondenoncourt@gmail.com","username":"dondenoncourt@gmail.com","full_name":"Don Denoncourt","first_name":null,"last_name":null,"vanity_url":null,"country":"United States","biography":null,"notify_new_follower":null,"notify_relift":null,"notify_missing":null,"hometown":null,"zipcode":"23238","sex":true},"sex":"Male","avatar_url_small":"/assets/avatars/small/missing.png","avatar_url_thumb":"/assets/avatars/thumb/missing.png","followee_count":2},"flag_total":0,"flags":[]} 
   # ::output-end::
   # Create item
-  # <br/><br/>Notes:<pre></pre>  
+  # <br/><br/>Notes:<pre>curl -X POST --user dondenoncourt@gmail.com:vo2max -d "item[description]=Zoolander Dereee" -d "item[image]=http://ecx.images-amazon.com/images/I/51YeA77BaQL._SX342_.jpg" localhost:3000/items/77/edit.json</pre>  
   # =end
   def update  
     authenticate_user!
@@ -190,20 +190,28 @@ class ItemsController < ApplicationController
       end
       post[:brand]= Brand.find_or_create_by_name(params[:item][:brand]) if !params[:item][:brand].blank?
     end
-
-
-    if @item.post.update_attributes(post)
+    
+    # Delete any entries that are empty
+    post.delete_if{ |k, v| v.nil? }
+    if @item.post.update_attributes!(post)
       render :partial => 'item', :locals => {:item => @item}, :status => 200
-    else
+    else    
       return_error_messages(@item,"Failed to update item")
     end
   end
 
+  # =begin apidoc
+  # url:: /items/:id/delete.json
+  # method:: POST
+  # access:: FREE
+  # return:: item object
+  # param:: id:int - item id to update (URL)
+  # output:: json
+  # "Item successfully deleted"
+  # ::output-end::
   # Delete item
-  # * *Request*    :
-  #   - DELETE /items
-  # * *Args*    :
-  #   - :id -> Item id
+  # <br/><br/>Notes:<pre>curl -X POST --user dondenoncourt@gmail.com:vo2max localhost:3000/items/77/delete</pre>  
+  # =end
   def destroy
     authenticate_user!
      @item = Item.joins(:post,:user) \

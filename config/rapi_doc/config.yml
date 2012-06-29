@@ -17,3 +17,6 @@ timelines:
 
 setasides:
   controller_name: "set_asides_controller.rb"
+  
+items:
+  controller_name: "items_controller.rb"

@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="/assets/bootstrap.min.css">
+    <script src="/assets/jquery.js" type="text/javascript"></script>
+    <title>items</title>
+
+    <style>
+      body {
+        line-height: 1.5em;
+        color:#484848;
+        margin: 20px;
+      }
+
+      ul, ol {
+        margin-bottom: 0.8em;
+      }
+
+      li {
+        padding-left: 10px;
+        margin-right: 10px;
+      }
+
+      #resources {
+
+      }
+
+      h1, h2, h3 {
+        padding-top: 8px;
+        padding-bottom: 2px;
+      }
+
+      #method {
+        padding: 15px 30px;
+        border-top:1px solid #ddd;
+      }
+
+      #http_verb {
+        color:#ff6600;
+        width:200px;
+        margin-right:20px;'
+      }
+
+      .description{
+        font-size: 1.4em;
+        color:#262626;
+      }
+      .code {
+          font-family: monospace;
+      }
+    </style>
+
+  </head>
+  <body>
+    <div class="content">
+      <div id="navigation">
+        <a href="/apidoc/main.html">&laquo; Back to index</a>
+      </div>
+
+      <h1>Items</h1>
+      
+
+      
+        <hr />
+        <div id="method_1">
+
+  
+  <p class='description'><strong>Description:</strong>  # Fetch item
+ # <br/><br/>Notes:<pre>curl -X GET --user aaronbartell@gmail.com:poopydiaper localhost:3000/items/1.json</pre>  
+</p>
+
+  <h2><span id='http_verb'>GET</span>/items/:id.json</h2>
+
+  
+    <strong>Access:</strong> FREE<br />
+  
+
+  
+    <strong>Return:</strong>
+    item
+    <br />
+  
+
+  
+    <strong>Parameters:</strong>
+    <ul>
+      <li>id:int - item id</li>
+    </ul>
+  
+
+  
+    <ul class="tabs">
+      
+        <li class="active"><a href='#json_1'>json</a></li>
+      
+    </ul>
+    <div class="pill-content">
+      
+        
+        <div class="active" id='json_1'>
+          <pre class="prettyprint" > # {&quot;id&quot;:1,&quot;item_id&quot;:null,&quot;name&quot;:&quot;Item 1&quot;,&quot;description&quot;:&quot;Lorem ipsum dolor sit amet, aliquet feugiat. Convallis morbi fringilla gravida, phasellus feugiat dapibus velit nunc, pulvinar eget sollicitudin venenatis cum nullam, vivamus ut a sed, mollitia lectus. Nulla vestibulum massa neque ut et, id hendrerit sit, feugiat in taciti enim proin nibh, tempor dignissim, rhoncus duis vestibulum nunc mattis convallis.&quot;,&quot;brand&quot;:&quot;Lorem ipsum dolor sit amet&quot;,&quot;retailer&quot;:&quot;Lorem ipsum dolor sit amet&quot;,&quot;url&quot;:&quot;http://www.jcrew.com/index.jsp&quot;,&quot;price&quot;:&quot;1.1&quot;,&quot;comment&quot;:null,&quot;photo_url&quot;:&quot;http://s3.amazonaws.com/shoplift_dev/small/1/product-large-1.jpg?1337212944&quot;,&quot;hashtags_allowed&quot;:true,&quot;created_at&quot;:&quot;2011-12-06T09:46:45-06:00&quot;,&quot;hashtags&quot;:[{&quot;id&quot;:1,&quot;value&quot;:&quot;jeans&quot;},{&quot;id&quot;:2,&quot;value&quot;:&quot;polo&quot;},{&quot;id&quot;:20,&quot;value&quot;:&quot;tie&quot;}],&quot;user&quot;:{&quot;extract&quot;:{&quot;id&quot;:1,&quot;email&quot;:&quot;mark@38media.net&quot;,&quot;username&quot;:&quot;mark@38media.net&quot;,&quot;full_name&quot;:&quot;Mark A. Roseboom&quot;,&quot;first_name&quot;:&quot;Mark&quot;,&quot;last_name&quot;:&quot;Roseboom&quot;,&quot;vanity_url&quot;:null,&quot;country&quot;:null,&quot;biography&quot;:&quot;I like computers&quot;,&quot;notify_new_follower&quot;:null,&quot;notify_relift&quot;:null,&quot;notify_missing&quot;:null,&quot;hometown&quot;:&quot;Boston, MA&quot;,&quot;zipcode&quot;:&quot;23238&quot;,&quot;sex&quot;:true},&quot;sex&quot;:&quot;Male&quot;,&quot;avatar_url_small&quot;:&quot;http://s3.amazonaws.com/shoplift_dev/small/1/bella_4.5_mths.jpg?1337213157&quot;,&quot;avatar_url_thumb&quot;:&quot;http://s3.amazonaws.com/shoplift_dev/thumb/1/bella_4.5_mths.jpg?1337213157&quot;},&quot;flag_total&quot;:1,&quot;flags&quot;:[{&quot;flag_type&quot;:&quot;It contains inappropriate language&quot;}]}
+</pre>
+        </div>
+      
+    </div>
+    <br />
+  
+
+  
+
+  
+
+</div>
+
+      
+        <hr />
+        <div id="method_2">
+
+  
+  <p class='description'><strong>Description:</strong>  # Fetch item URL
+ # <br/><br/>Notes:<pre>url -X GET --user aaronbartell@gmail.com:poopydiaper localhost:3000/items/1/visit</pre>  
+</p>
+
+  <h2><span id='http_verb'>GET</span>/items/:id/visit</h2>
+
+  
+    <strong>Access:</strong> FREE<br />
+  
+
+  
+    <strong>Return:</strong>
+    item URL
+    <br />
+  
+
+  
+    <strong>Parameters:</strong>
+    <ul>
+      <li>id:int - item id</li>
+    </ul>
+  
+
+  
+    <ul class="tabs">
+      
+        <li class="active"><a href='#json_2'>json</a></li>
+      
+    </ul>
+    <div class="pill-content">
+      
+        
+        <div class="active" id='json_2'>
+          <pre class="prettyprint" > # http://www.jcrew.com/index.jsp
+</pre>
+        </div>
+      
+    </div>
+    <br />
+  
+
+  
+
+  
+
+</div>
+
+      
+        <hr />
+        <div id="method_3">
+
+  
+  <p class='description'><strong>Description:</strong>  # Search items
+ # <br/><br/>Notes:<pre>curl -X GET --user aaronbartell@gmail.com:poopydiaper localhost:3000/items/search.json?search=Item</pre>  
+</p>
+
+  <h2><span id='http_verb'>GET</span>/items/search.json?search=:search</h2>
+
+  
+    <strong>Access:</strong> FREE<br />
+  
+
+  
+    <strong>Return:</strong>
+    items list
+    <br />
+  
+
+  
+    <strong>Parameters:</strong>
+    <ul>
+      <li>search:string - value to search for in posts.name, posts.description, posts.brand or posts.retailer</li>
+    </ul>
+  
+
+  
+    <ul class="tabs">
+      
+        <li class="active"><a href='#json_3'>json</a></li>
+      
+    </ul>
+    <div class="pill-content">
+      
+        
+        <div class="active" id='json_3'>
+          <pre class="prettyprint" > # {&quot;timeline&quot;:[{&quot;id&quot;:1,&quot;item_id&quot;:null,&quot;name&quot;:&quot;Item 1&quot;,&quot;description&quot;:&quot;Lorem ipsum dolor sit amet, aliquet feugiat. Convallis morbi fringilla gravida, phasellus feugiat dapibus velit nunc, pulvinar eget sollicitudin venenatis cum nullam, vivamus ut a sed, mollitia lectus. Nulla vestibulum massa neque ut et, id hendrerit sit, feugiat in taciti enim proin nibh, tempor dignissim, rhoncus duis vestibulum nunc mattis convallis.&quot;,&quot;brand&quot;:&quot;Lorem ipsum dolor sit amet&quot;,&quot;retailer&quot;:&quot;Lorem ipsum dolor sit amet&quot;,&quot;url&quot;:&quot;http://www.jcrew.com/index.jsp&quot;,&quot;price&quot;:&quot;1.1&quot;,&quot;comment&quot;:null,&quot;photo_url&quot;:&quot;http://s3.amazonaws.com/shoplift_dev/small/1/product-large-1.jpg?1337212944&quot;,&quot;hashtags_allowed&quot;:true,&quot;created_at&quot;:&quot;2011-12-06T09:46:45-06:00&quot;,&quot;set_aside&quot;:{&quot;created_at&quot;:&quot;2012-06-20T12:28:44-05:00&quot;,&quot;id&quot;:18,&quot;item_id&quot;:1,&quot;status&quot;:1,&quot;updated_at&quot;:&quot;2012-06-20T12:28:44-05:00&quot;,&quot;user_id&quot;:12},&quot;hashtags&quot;:[{&quot;id&quot;:1,&quot;value&quot;:&quot;jeans&quot;},{&quot;id&quot;:2,&quot;value&quot;:&quot;polo&quot;}],&quot;user&quot;:{&quot;extract&quot;:{&quot;id&quot;:1,&quot;email&quot;:&quot;mark@38media.net&quot;,&quot;username&quot;:&quot;mark@38media.net&quot;,&quot;full_name&quot;:&quot;Mark A. Roseboom&quot;,&quot;first_name&quot;:&quot;Mark&quot;,&quot;last_name&quot;:&quot;Roseboom&quot;,&quot;vanity_url&quot;:null,&quot;country&quot;:null,&quot;biography&quot;:&quot;I like computers&quot;,&quot;notify_new_follower&quot;:null,&quot;notify_relift&quot;:null,&quot;notify_missing&quot;:null,&quot;hometown&quot;:&quot;Boston, MA&quot;,&quot;zipcode&quot;:null,&quot;sex&quot;:true},&quot;sex&quot;:&quot;Male&quot;,&quot;avatar_url_small&quot;:&quot;http://s3.amazonaws.com/shoplift_dev/small/1/bella_4.5_mths.jpg?1337213157&quot;,&quot;avatar_url_thumb&quot;:&quot;http://s3.amazonaws.com/shoplift_dev/thumb/1/bella_4.5_mths.jpg?1337213157&quot;,&quot;followee_count&quot;:1},&quot;flag_total&quot;:1,&quot;flags&quot;:[{&quot;flag_type&quot;:&quot;It contains inappropriate language&quot;}]},{&quot;id&quot;:4,&quot;item_id&quot;:null,&quot;name&quot;:&quot;Item 1&quot;,&quot;description&quot;:&quot;Lorem ipsum dolor sit amet, aliquet feugiat. Convallis morbi fringilla gravida, phasellus feugiat dapibus velit nunc, pulvinar eget sollicitudin venenatis cum nullam, vivamus ut a sed, mollitia lectus. Nulla vestibulum massa neque ut et, id hendrerit sit, feugiat in taciti enim proin nibh, tempor dignissim, rhoncus duis vestibulum nunc mattis convallis.&quot;,&quot;brand&quot;:&quot;Lorem ipsum dolor sit amet&quot;,&quot;retailer&quot;:&quot;Lorem ipsum dolor sit amet&quot;,&quot;url&quot;:&quot;http://www.jcrew.com/index.jsp&quot;,&quot;price&quot;:&quot;1.1&quot;,&quot;comment&quot;:null,&quot;photo_url&quot;:&quot;http://s3.amazonaws.com/shoplift_dev/small/1/product-large-1.jpg?1337212944&quot;,&quot;hashtags_allowed&quot;:true,&quot;created_at&quot;:&quot;2011-12-06T09:46:45-06:00&quot;,&quot;hashtags&quot;:[{&quot;id&quot;:1,&quot;value&quot;:&quot;jeans&quot;},{&quot;id&quot;:2,&quot;value&quot;:&quot;polo&quot;}],&quot;user&quot;:{&quot;extract&quot;:{&quot;id&quot;:2,&quot;email&quot;:&quot;patrick@38media.net&quot;,&quot;username&quot;:&quot;camachgk&quot;,&quot;full_name&quot;:&quot;Patrick Camacho&quot;,&quot;first_name&quot;:&quot;Patrick&quot;,&quot;last_name&quot;:&quot;Camacho&quot;,&quot;vanity_url&quot;:&quot;http://38media.net&quot;,&quot;country&quot;:&quot;United States&quot;,&quot;biography&quot;:&quot;I like dogs&quot;,&quot;notify_new_follower&quot;:true,&quot;notify_relift&quot;:false,&quot;notify_missing&quot;:&quot;daily&quot;,&quot;hometown&quot;:&quot;Waltham, MA&quot;,&quot;zipcode&quot;:&quot;23238&quot;,&quot;sex&quot;:true},&quot;sex&quot;:&quot;Male&quot;,&quot;avatar_url_small&quot;:&quot;http://s3.amazonaws.com/shoplift_dev/small/2/headless.jpg?1337213827&quot;,&quot;avatar_url_thumb&quot;:&quot;http://s3.amazonaws.com/shoplift_dev/thumb/2/headless.jpg?1337213827&quot;,&quot;followee_count&quot;:1},&quot;flag_total&quot;:1,&quot;flags&quot;:[{&quot;flag_type&quot;:&quot;It contains inappropriate language&quot;}]}]}
+</pre>
+        </div>
+      
+    </div>
+    <br />
+  
+
+  
+
+  
+
+</div>
+
+      
+        <hr />
+        <div id="method_4">
+
+  
+  <p class='description'><strong>Description:</strong>  # Create item
+ # <br/><br/>Notes:<pre>curl -X POST --user aaronbartell@gmail.com:poopydiaper -d "item[image]=http://ecx.images-amazon.com/images/I/51YeA77BaQL._SX342_.jpg" -d "item[retailer]=Amazon.com" -d "item[description]=Zoolander Derek Zoolander School Heathered Royal Men's T-shirt" -d "item[name]=Zoolander Coolness" -d "item[brand]=Zoolander" -d "item[url]=http://www.amazon.com/Zoolander-Derek-School-Heathered-T-shirt/dp/B006UI5KUG/ref=sr_1_3?ie=UTF8&qid=1340810439&sr=8-3&keywords=heathered+men+tshirt" localhost:3000/items.json</pre>  
+</p>
+
+  <h2><span id='http_verb'>POST</span>/items.json</h2>
+
+  
+    <strong>Access:</strong> FREE<br />
+  
+
+  
+    <strong>Return:</strong>
+    item object
+    <br />
+  
+
+  
+    <strong>Parameters:</strong>
+    <ul>
+      <li>item object</li>
+    </ul>
+  
+
+  
+    <ul class="tabs">
+      
+        <li class="active"><a href='#json_4'>json</a></li>
+      
+    </ul>
+    <div class="pill-content">
+      
+        
+        <div class="active" id='json_4'>
+          <pre class="prettyprint" > # {&quot;id&quot;:80,&quot;item_id&quot;:null,&quot;name&quot;:&quot;Zoolander Coolness&quot;,&quot;description&quot;:&quot;Zoolander Derek Zoolander School Heathered Royal Men's T-shirt&quot;,&quot;brand&quot;:&quot;Zoolander&quot;,&quot;retailer&quot;:&quot;Amazon.com&quot;,&quot;url&quot;:&quot;http://www.amazon.com/Zoolander-Derek-School-Heathered-T-shirt/dp/B006UI5KUG/ref=sr_1_3?ie=UTF8&quot;,&quot;price&quot;:null,&quot;comment&quot;:null,&quot;photo_url&quot;:&quot;http://s3.amazonaws.com/shoplift_dev/small/223/open-uri20120627-16385-1h6troz?1340829554&quot;,&quot;hashtags_allowed&quot;:true,&quot;created_at&quot;:&quot;2012-06-27T15:39:14-05:00&quot;,&quot;hashtags&quot;:[],&quot;user&quot;:{&quot;extract&quot;:{&quot;id&quot;:12,&quot;email&quot;:&quot;aaronbartell@gmail.com&quot;,&quot;username&quot;:&quot;aaronbartell@gmail.com&quot;,&quot;full_name&quot;:&quot;Aaron&quot;,&quot;first_name&quot;:null,&quot;last_name&quot;:null,&quot;vanity_url&quot;:null,&quot;country&quot;:&quot;United States&quot;,&quot;biography&quot;:null,&quot;notify_new_follower&quot;:null,&quot;notify_relift&quot;:null,&quot;notify_missing&quot;:null,&quot;hometown&quot;:null,&quot;zipcode&quot;:&quot;56001&quot;,&quot;sex&quot;:true},&quot;sex&quot;:&quot;Male&quot;,&quot;avatar_url_small&quot;:&quot;/assets/avatars/small/missing.png&quot;,&quot;avatar_url_thumb&quot;:&quot;/assets/avatars/thumb/missing.png&quot;,&quot;followee_count&quot;:1},&quot;flag_total&quot;:0,&quot;flags&quot;:[]}
+</pre>
+        </div>
+      
+    </div>
+    <br />
+  
+
+  
+
+  
+
+</div>
+
+      
+        <hr />
+        <div id="method_5">
+
+  
+  <p class='description'><strong>Description:</strong>  # Create item
+ # <br/><br/>Notes:<pre>curl -X POST --user aaronbartell@gmail.com:poopydiaper localhost:3000/items/2/relift.json</pre>  
+</p>
+
+  <h2><span id='http_verb'>POST</span>/items/:id/relift.json</h2>
+
+  
+    <strong>Access:</strong> FREE<br />
+  
+
+  
+    <strong>Return:</strong>
+    item object
+    <br />
+  
+
+  
+    <strong>Parameters:</strong>
+    <ul>
+      <li>item object</li>
+    </ul>
+  
+
+  
+    <ul class="tabs">
+      
+        <li class="active"><a href='#json_5'>json</a></li>
+      
+    </ul>
+    <div class="pill-content">
+      
+        
+        <div class="active" id='json_5'>
+          <pre class="prettyprint" > # {&quot;id&quot;:81,&quot;item_id&quot;:2,&quot;name&quot;:&quot;Item 2&quot;,&quot;description&quot;:&quot;Lorem ipsum dolor sit amet, aliquet feugiat. Convallis morbi fringilla gravida, phasellus feugiat dapibus velit nunc, pulvinar eget sollicitudin venenatis cum nullam, vivamus ut a sed, mollitia lectus. Nulla vestibulum massa neque ut et, id hendrerit sit, feugiat in taciti enim proin nibh, tempor dignissim, rhoncus duis vestibulum nunc mattis convallis.&quot;,&quot;brand&quot;:&quot;Lorem ipsum dolor sit amet&quot;,&quot;retailer&quot;:&quot;Lorem ipsum dolor sit amet&quot;,&quot;url&quot;:&quot;http://www.jcrew.com/index.jsp&quot;,&quot;price&quot;:&quot;1.1&quot;,&quot;comment&quot;:null,&quot;photo_url&quot;:&quot;http://s3.amazonaws.com/shoplift_dev/small/2/product-large-2.jpg?1337212961&quot;,&quot;hashtags_allowed&quot;:true,&quot;created_at&quot;:&quot;2011-12-06T09:47:42-06:00&quot;,&quot;hashtags&quot;:[{&quot;id&quot;:4,&quot;value&quot;:&quot;polo&quot;}],&quot;relift&quot;:{&quot;created_at&quot;:&quot;2012-06-27T15:44:12-05:00&quot;,&quot;user&quot;:{&quot;extract&quot;:{&quot;id&quot;:1,&quot;email&quot;:&quot;mark@38media.net&quot;,&quot;username&quot;:&quot;mark@38media.net&quot;,&quot;full_name&quot;:&quot;Mark A. Roseboom&quot;,&quot;first_name&quot;:&quot;Mark&quot;,&quot;last_name&quot;:&quot;Roseboom&quot;,&quot;vanity_url&quot;:null,&quot;country&quot;:null,&quot;biography&quot;:&quot;I like computers&quot;,&quot;notify_new_follower&quot;:null,&quot;notify_relift&quot;:null,&quot;notify_missing&quot;:null,&quot;hometown&quot;:&quot;Boston, MA&quot;,&quot;zipcode&quot;:null,&quot;sex&quot;:true},&quot;sex&quot;:&quot;Male&quot;,&quot;avatar_url_small&quot;:&quot;http://s3.amazonaws.com/shoplift_dev/small/1/bella_4.5_mths.jpg?1337213157&quot;,&quot;avatar_url_thumb&quot;:&quot;http://s3.amazonaws.com/shoplift_dev/thumb/1/bella_4.5_mths.jpg?1337213157&quot;,&quot;followee_count&quot;:1}},&quot;user&quot;:{&quot;extract&quot;:{&quot;id&quot;:12,&quot;email&quot;:&quot;aaronbartell@gmail.com&quot;,&quot;username&quot;:&quot;aaronbartell@gmail.com&quot;,&quot;full_name&quot;:&quot;Aaron&quot;,&quot;first_name&quot;:null,&quot;last_name&quot;:null,&quot;vanity_url&quot;:null,&quot;country&quot;:&quot;United States&quot;,&quot;biography&quot;:null,&quot;notify_new_follower&quot;:null,&quot;notify_relift&quot;:null,&quot;notify_missing&quot;:null,&quot;hometown&quot;:null,&quot;zipcode&quot;:&quot;56001&quot;,&quot;sex&quot;:true},&quot;sex&quot;:&quot;Male&quot;,&quot;avatar_url_small&quot;:&quot;/assets/avatars/small/missing.png&quot;,&quot;avatar_url_thumb&quot;:&quot;/assets/avatars/thumb/missing.png&quot;,&quot;followee_count&quot;:1},&quot;flag_total&quot;:1,&quot;flags&quot;:[{&quot;flag_type&quot;:&quot;It contains inappropriate language&quot;}]}
+</pre>
+        </div>
+      
+    </div>
+    <br />
+  
+
+  
+
+  
+
+</div>
+
+      
+        <hr />
+        <div id="method_6">
+
+  
+  <p class='description'><strong>Description:</strong>  # Create item
+ # <br/><br/>Notes:<pre>curl -X POST --user dondenoncourt@gmail.com:vo2max -d "item[description]=Zoolander Dereee" -d "item[image]=http://ecx.images-amazon.com/images/I/51YeA77BaQL._SX342_.jpg" localhost:3000/items/77/edit.json</pre>  
+</p>
+
+  <h2><span id='http_verb'>POST</span>/items/:id/edit.json</h2>
+
+  
+    <strong>Access:</strong> FREE<br />
+  
+
+  
+    <strong>Return:</strong>
+    item object
+    <br />
+  
+
+  
+    <strong>Parameters:</strong>
+    <ul>
+      <li>id:int - item id to update (URL)</li><li>item object (POST content)</li>
+    </ul>
+  
+
+  
+    <ul class="tabs">
+      
+        <li class="active"><a href='#json_6'>json</a></li>
+      
+    </ul>
+    <div class="pill-content">
+      
+        
+        <div class="active" id='json_6'>
+          <pre class="prettyprint" > # {&quot;id&quot;:77,&quot;item_id&quot;:null,&quot;name&quot;:&quot;Nicole Miller Strapless Gown | Bloomingdale's&quot;,&quot;description&quot;:&quot;Zoolander Dereee&quot;,&quot;brand&quot;:&quot;Nicole Miller&quot;,&quot;retailer&quot;:&quot;www1.bloomingdales.com&quot;,&quot;url&quot;:&quot;http://www1.bloomingdales.com/shop/product/nicole-miller-strapless-gown?ID=573044&amp;CategoryID=21683#fn=DRESS_OCCASION%3DProm%26spp%3D2%26ppp%3D96%26sp%3D1%26rid%3D61&quot;,&quot;price&quot;:&quot;1320.0&quot;,&quot;comment&quot;:null,&quot;photo_url&quot;:&quot;http://s3.amazonaws.com/shoplift_dev/small/221/open-uri20120619-4539-q11om4?1340142491&quot;,&quot;hashtags_allowed&quot;:true,&quot;created_at&quot;:&quot;2012-06-19T16:47:52-05:00&quot;,&quot;hashtags&quot;:[],&quot;user&quot;:{&quot;extract&quot;:{&quot;id&quot;:11,&quot;email&quot;:&quot;dondenoncourt@gmail.com&quot;,&quot;username&quot;:&quot;dondenoncourt@gmail.com&quot;,&quot;full_name&quot;:&quot;Don Denoncourt&quot;,&quot;first_name&quot;:null,&quot;last_name&quot;:null,&quot;vanity_url&quot;:null,&quot;country&quot;:&quot;United States&quot;,&quot;biography&quot;:null,&quot;notify_new_follower&quot;:null,&quot;notify_relift&quot;:null,&quot;notify_missing&quot;:null,&quot;hometown&quot;:null,&quot;zipcode&quot;:&quot;23238&quot;,&quot;sex&quot;:true},&quot;sex&quot;:&quot;Male&quot;,&quot;avatar_url_small&quot;:&quot;/assets/avatars/small/missing.png&quot;,&quot;avatar_url_thumb&quot;:&quot;/assets/avatars/thumb/missing.png&quot;,&quot;followee_count&quot;:2},&quot;flag_total&quot;:0,&quot;flags&quot;:[]} 
+</pre>
+        </div>
+      
+    </div>
+    <br />
+  
+
+  
+
+  
+
+</div>
+
+      
+        <hr />
+        <div id="method_7">
+
+  
+  <p class='description'><strong>Description:</strong>  # Delete item
+ # <br/><br/>Notes:<pre>curl -X POST --user dondenoncourt@gmail.com:vo2max localhost:3000/items/77/delete</pre>  
+</p>
+
+  <h2><span id='http_verb'>POST</span>/items/:id/delete.json</h2>
+
+  
+    <strong>Access:</strong> FREE<br />
+  
+
+  
+    <strong>Return:</strong>
+    item object
+    <br />
+  
+
+  
+    <strong>Parameters:</strong>
+    <ul>
+      <li>id:int - item id to update (URL)</li>
+    </ul>
+  
+
+  
+    <ul class="tabs">
+      
+        <li class="active"><a href='#json_7'>json</a></li>
+      
+    </ul>
+    <div class="pill-content">
+      
+        
+        <div class="active" id='json_7'>
+          <pre class="prettyprint" > # &quot;Item successfully deleted&quot;
+</pre>
+        </div>
+      
+    </div>
+    <br />
+  
+
+  
+
+  
+
+</div>
+
+      
+    </div>
+  </body>
+</html>
