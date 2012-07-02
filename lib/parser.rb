@@ -72,7 +72,12 @@ module Parser
         name = get_name(page, retailer) if name.blank?
         brand = get_brand(page, retailer) if brand.blank?
 
-        return { brand: brand.to_s, retailer: url.split('/')[2], name: name.to_s, price: price.to_s.to_f, images: images, description: description.to_s, url: url.to_s }
+        name = name.to_s.gsub(/Amazon.com:/, '')
+
+        # strip brand off item name prefix and remove slash anything else
+        name = name.to_s.gsub(brand.to_s, '').gsub(/^\s*/,'').gsub(/\|.*/,'')
+
+        return { brand: brand.to_s, retailer: url.split('/')[2], name: name.to_s, price: price.to_s.to_d, images: images, description: description.to_s, url: url.to_s }
       end
     rescue => ex
       puts ex.message
@@ -90,7 +95,7 @@ module Parser
       node = page.parser.xpath(xpath.price)
       begin
         price = BigDecimal(node[0].to_s.gsub(/[^\d.]/, ''))
-        xpathPrices << price
+        xpathPrices << price if price > 0
       rescue
         puts "thought we had a price but it could not be converted to a big decimal"
       end
@@ -140,10 +145,7 @@ module Parser
     xpaths = Xpath.find_all_by_retailer(retailer, :conditions => "brand IS NOT NULL")
     xpaths.each do |xpath|
       node = page.parser.xpath(xpath.brand)
-      brand_obj = find_brand(node)
-      if brand_obj
-        brand = brand_obj.name if brand_obj
-      end
+      brand = find_brand(node)
       break if brand
     end
     if !brand
@@ -163,8 +165,9 @@ module Parser
     text = node.text.gsub(/^\s+/, '')
     text.split(' ').size().downto(1).each do |words|
       first_words = first_x_words(text, words)
+      #brand = Brand.find_by_name(first_words.gsub(/\u00AE/, "\u00C1\u00AE"))
       brand = Brand.find_by_name(first_words)
-      return brand if brand
+      return first_words if brand
     end
     nil
   end

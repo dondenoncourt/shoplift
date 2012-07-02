@@ -244,20 +244,6 @@ describe ItemsController do
       end
     end
 
-    describe "with invalid params" do
-      it "returns status code of 406" do
-        sign_in @user
-        Item.any_instance.stub(:save).and_return(false)
-        put :update, :id => items(:items_001).id, :item => {}, :format => :json
-        response.response_code.should == 406
-      end
-      
-      it "returns validation error" do
-        sign_in @user
-        put :update, :id => items(:items_001).id, :item => {}, :format => :json
-        response.body.should =~ /Failed to update item/m
-      end
-    end
   end
   
   describe "POST update" do
@@ -275,20 +261,6 @@ describe ItemsController do
       end
     end
 
-    describe "with invalid params" do
-      it "returns status code of 406" do
-        sign_in @user
-        Item.any_instance.stub(:save).and_return(false)
-        post :update, :id => items(:items_001).id, :item => {}, :format => :json
-        response.response_code.should == 406
-      end
-      
-      it "returns validation error" do
-        sign_in @user
-        post :update, :id => items(:items_001).id, :item => {}, :format => :json
-        response.body.should =~ /Failed to update item/m
-      end
-    end
   end
 
   describe "DELETE destroy" do

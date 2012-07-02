@@ -258,7 +258,7 @@ item_tags = new Array();
 						.css(jQuery.extend({},r_style,i_style)),
 					url : jQuery('<input type="hidden" name="post[url]" value="<%= @post.url %>"/>'),
 					parser_price : jQuery('<input type="hidden" name="parser_price" value="<%= @post.price %>"/>'),
-					price : jQuery('<input type="text" name="post[price]" value="<%= number_to_currency(@post.price, :precision => 0) %>"/>')
+					price : jQuery('<input type="text" name="post[price]" value="<%= number_to_currency(@post.price, :precision => 2) %>"/>')
 						.css(jQuery.extend({},r_style,i_style)),
 					image : jQuery('<input type="hidden" name="image" />'),
 					retailer : jQuery('<input type="hidden" name="post[retailer]" value="<%= @post.retailer %>"/>'),
