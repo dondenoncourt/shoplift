@@ -205,7 +205,7 @@ class ItemsController < ApplicationController
   # method:: POST
   # access:: FREE
   # return:: item object
-  # param:: id:int - item id to update (URL)
+  # param:: id:int - item id to delete (URL)
   # output:: json
   # "Item successfully deleted"
   # ::output-end::
