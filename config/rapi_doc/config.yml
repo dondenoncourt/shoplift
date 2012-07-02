@@ -20,3 +20,6 @@ setasides:
   
 items:
   controller_name: "items_controller.rb"
+  
+posts:
+  controller_name: "posts_controller.rb"

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="/assets/bootstrap.min.css">
+    <script src="/assets/jquery.js" type="text/javascript"></script>
+    <title>posts</title>
+
+    <style>
+      body {
+        line-height: 1.5em;
+        color:#484848;
+        margin: 20px;
+      }
+
+      ul, ol {
+        margin-bottom: 0.8em;
+      }
+
+      li {
+        padding-left: 10px;
+        margin-right: 10px;
+      }
+
+      #resources {
+
+      }
+
+      h1, h2, h3 {
+        padding-top: 8px;
+        padding-bottom: 2px;
+      }
+
+      #method {
+        padding: 15px 30px;
+        border-top:1px solid #ddd;
+      }
+
+      #http_verb {
+        color:#ff6600;
+        width:200px;
+        margin-right:20px;'
+      }
+
+      .description{
+        font-size: 1.4em;
+        color:#262626;
+      }
+      .code {
+          font-family: monospace;
+      }
+    </style>
+
+  </head>
+  <body>
+    <div class="content">
+      <div id="navigation">
+        <a href="/apidoc/main.html">&laquo; Back to index</a>
+      </div>
+
+      <h1>Posts</h1>
+      <p class="summary">hen a user clicks the bookmarklet while on a retailer page
+ote that the parsed value for brand is stored in a hidden parameter so the update action can determine
+f the user modified the brand.
+reate then "creates" an initial post with initial values
+reate then renders json, html, or bookmarklet.js for user input
+fter the user has an opportunity to modify the brand, name, and price,
+f the user modified the brand, name, or price
+</p>
+
+
+
+
+      
+        <hr />
+        <div id="method_2">
+
+  
+  <p class='description'><strong>Description:</strong>  # Create post
+ # <br/><br/>Notes:<pre>curl -X GET --user dondenoncourt@gmail.com:vo2max localhost:3000/post/create.json?url=http%3A%2F%2Fwww.amazon.com%2FZoolander-Derek-School-Heathered-T-shirt%2Fdp%2FB006UI5KUG%2Fref%3Dsr_1_3%3Fie%3DUTF8%26qid%3D1340810439%26sr%3D8-3%26keywords%3Dheathered+men+tshirt</pre>  
+</p>
+
+  <h2><span id='http_verb'>GET</span>/post/create.json</h2>
+
+  
+    <strong>Access:</strong> FREE<br />
+  
+
+  
+    <strong>Return:</strong>
+    create new post
+    <br />
+  
+
+  
+    <strong>Parameters:</strong>
+    <ul>
+      <li>url:string - url</li><li>retailer:string - retailer</li><li>brand:string - brand</li>
+    </ul>
+  
+
+  
+    <ul class="tabs">
+      
+        <li class="active"><a href='#json_2'>json</a></li>
+      
+    </ul>
+    <div class="pill-content">
+      
+        
+        <div class="active" id='json_2'>
+          <pre class="prettyprint" > # {&quot;brand_id&quot;:null,&quot;comment&quot;:null,&quot;created_at&quot;:&quot;2012-06-28T14:59:46-05:00&quot;,&quot;description&quot;:&quot;&quot;,&quot;hashtags_allowed&quot;:true,&quot;id&quot;:224,&quot;name&quot;:&quot;Amazon.com: Zoolander Derek Zoolander School Heathered Royal Men's T-shirt: Clothing&quot;,&quot;photo_content_type&quot;:null,&quot;photo_file_name&quot;:null,&quot;photo_file_size&quot;:null,&quot;photo_updated_at&quot;:null,&quot;price&quot;:&quot;18.73&quot;,&quot;relifts&quot;:0,&quot;retailer&quot;:&quot;www.amazon.com&quot;,&quot;status&quot;:1,&quot;updated_at&quot;:&quot;2012-06-28T14:59:46-05:00&quot;,&quot;url&quot;:&quot;http://www.amazon.com/Zoolander-Derek-School-Heathered-T-shirt/dp/B006UI5KUG/ref=sr_1_3?ie=UTF8&amp;qid=1340810439&amp;sr=8-3&amp;keywords=heathered men tshirt&quot;,&quot;user_id&quot;:11,&quot;views&quot;:0,&quot;visits&quot;:0}
+</pre>
+        </div>
+      
+    </div>
+    <br />
+  
+
+  
+
+  
+
+</div>
+
+      
+        <hr />
+        <div id="method_3">
+
+  
+  <p class='description'><strong>Description:</strong>  # Update post
+ # <br/><br/>Notes:<pre>curl -X POST --user aaronbartell@gmail.com:poopydiaper -d "post[price]=12.35" localhost:3000/posts/223/update.json</pre>  
+</p>
+
+  <h2><span id='http_verb'>POST</span>/post/:id/update.json</h2>
+
+  
+    <strong>Access:</strong> FREE<br />
+  
+
+  
+    <strong>Return:</strong>
+    item object related to post
+    <br />
+  
+
+  
+    <strong>Parameters:</strong>
+    <ul>
+      <li>id:int - post id</li><li>post object (POST content)</li>
+    </ul>
+  
+
+  
+    <ul class="tabs">
+      
+        <li class="active"><a href='#json_3'>json</a></li>
+      
+    </ul>
+    <div class="pill-content">
+      
+        
+        <div class="active" id='json_3'>
+          <pre class="prettyprint" > # {&quot;item&quot;:{&quot;comment&quot;:null,&quot;created_at&quot;:null,&quot;id&quot;:null,&quot;item_id&quot;:null,&quot;post_id&quot;:223,&quot;relifts&quot;:0,&quot;status&quot;:1,&quot;updated_at&quot;:null,&quot;user_id&quot;:12,&quot;views&quot;:0,&quot;visits&quot;:0}}
+</pre>
+        </div>
+      
+    </div>
+    <br />
+  
+
+  
+
+  
+
+</div>
+
+      
+    </div>
+  </body>
+</html>

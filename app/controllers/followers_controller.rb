@@ -24,6 +24,7 @@ class FollowersController < ApplicationController
   # ]
   # ::output-end::
   # Get a list of the user's followers
+  # <br/><br/>Notes:<pre>curl -X GET --user aaronbartell@gmail.com:poopydiaper localhost:3000/users/1/followers.json</pre>
   # =end
   def index
     @user = User.find(params[:user_id])

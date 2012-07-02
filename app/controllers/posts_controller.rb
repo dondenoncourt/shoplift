@@ -1,4 +1,4 @@
-=begin documentation
+=begin apidoc
 When a user clicks the bookmarklet while on a retailer page
 posts_controller::create is invoked 
 create calls Parser::parse to get the brand, name, price, and description (and images, which are currenlty ignored)
@@ -10,8 +10,7 @@ create then renders json, html, or bookmarklet.js for user input
 After the user has an opportunity to modify the brand, name, and price,
 posts_controller::update is invoked
 if the user modified the brand, name, or price
-parser_audit::parse_audit is invoked to see if it can "learn" by adding an xpath to the xpaths table
-
+parser_audit::parse_audit is invoked to see if it can 'learn' by adding an xpath to the xpaths table
 =end
 
 class PostsController < ApplicationController
@@ -58,13 +57,14 @@ class PostsController < ApplicationController
   # url:: /post/:id/update.json
   # method:: POST
   # access:: FREE
-  # return:: update post
+  # return:: item object related to post
   # param:: id:int - post id
+  # param:: post object (POST content)
   # output:: json
-  # 
+  # {"item":{"comment":null,"created_at":null,"id":null,"item_id":null,"post_id":223,"relifts":0,"status":1,"updated_at":null,"user_id":12,"views":0,"visits":0}}
   # ::output-end::
   # Update post
-  # <br/><br/>Notes:<pre></pre>  
+  # <br/><br/>Notes:<pre>curl -X POST --user aaronbartell@gmail.com:poopydiaper -d "post[price]=12.35" localhost:3000/posts/223/update.json</pre>  
   # =end
   def update
     @post = Post.find(params[:id])
@@ -95,7 +95,7 @@ class PostsController < ApplicationController
     params[:post].delete(:brand)
     params[:post][:price] = params[:post][:price].gsub(/[^\d.]/, '') if params[:post][:price]
     
-    if @post.update_attributes(params[:post])
+    if @post.update_attributes!(params[:post])
       @item = @post.items.create({ :user_id => current_user.id })
       if @item.persisted?
         if params[:hashtags]
