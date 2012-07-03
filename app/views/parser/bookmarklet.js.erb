@@ -181,12 +181,15 @@ item_tags = new Array();
 				tmp = jQuery('meta[property="' + fb[i] + '"]');
 				
 				if(tmp.length) {
-					// Images has to be an array
-					if(i == 'images') {
-						parsed[i] = [tmp.attr('content')];
+          var image;
+					if(i == 'images') { // Images has to be an array
+            image = [tmp.attr('content')];
 					} else {
-						parsed[i] = tmp.attr('content');
+						image = tmp.attr('content');
 					}
+          if (image != null && image != '') {
+						parsed[i] = image;
+          }
 				}
 			}
 			

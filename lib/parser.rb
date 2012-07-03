@@ -24,6 +24,8 @@ images
 
 module Parser
 
+  REGISTERED_TRADEMARK = "\u00AE"
+
   OPEN_GRAPH = {
     name: 'og:title',
     image: 'og:image',
@@ -139,7 +141,6 @@ module Parser
     nil
   end
 
-  # CONSIDER multiple xpaths per retail site: loop while no brand is found
   def get_brand(page, retailer)
     brand = nil
     xpaths = Xpath.find_all_by_retailer(retailer, :conditions => "brand IS NOT NULL")
@@ -147,6 +148,10 @@ module Parser
       node = page.parser.xpath(xpath.brand)
       brand = find_brand(node)
       break if brand
+    end
+    if !brand
+      reg = page.body.match(/>.*&reg;/)
+      return reg.to_s.gsub(/>/,'').gsub(/&reg;/, REGISTERED_TRADEMARK) if reg
     end
     if !brand
         brand = page.search("//meta[@property='#{OPEN_GRAPH[:brand]}']/@content")
