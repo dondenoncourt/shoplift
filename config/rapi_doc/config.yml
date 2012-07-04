@@ -23,3 +23,6 @@ items:
   
 posts:
   controller_name: "posts_controller.rb"
+  
+hashtags:
+  controller_name: "hashtags_controller.rb"
