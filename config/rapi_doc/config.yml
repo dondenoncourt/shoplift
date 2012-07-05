@@ -29,3 +29,6 @@ hashtags:
   
 categories:
   controller_name: "categories_controller.rb"
+  
+flags:
+  controller_name: "flags_controller.rb"
