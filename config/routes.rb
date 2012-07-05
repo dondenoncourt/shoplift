@@ -17,6 +17,7 @@ App::Application.routes.draw do
   #resources :images TODO delete this and any other image artifacts
   resources :posts
   resources :categories, :only => [:index, :edit, :update]
+  post "categories/:id/update", :to => "categories#update"  
   get "post/create", :to => "posts#create"
   post "posts/:id/update", :to => "posts#update"
 
