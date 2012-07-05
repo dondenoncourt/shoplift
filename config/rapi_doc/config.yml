@@ -32,3 +32,6 @@ categories:
   
 flags:
   controller_name: "flags_controller.rb"
+  
+statistics:
+  controller_name: "statistics_controller.rb"
