@@ -59,14 +59,14 @@ class HashtagsController < ApplicationController
   # return:: hashtags list 
   # param:: search:string - search string value to be used on LIKE clause against table hashtag_values
   # output:: json
-  # {"hashtags":[{"created_at":"2012-07-04T16:09:05-05:00","hashtag_value_id":5,"id":6,"post_id":1,"status":1,"updated_at":"2012-07-04T16:09:05-05:00","user_id":12}]}
+  # [{"created_at":"2012-07-05T15:15:42-05:00","hashtag_value_id":8,"id":10,"post_id":1,"status":1,"updated_at":"2012-07-05T15:15:42-05:00","user_id":12}]
   # ::output-end::
   # Search hashtags
   # <br/><br/>Notes:<pre>curl -X GET --user aaronbartell@gmail.com:poopydiaper localhost:3000/hashtags/search?search=hat</pre>  
   # =end     
   def search
     @hashtags = Hashtag.joins(:hashtag_value).where("hashtags.status = 1 AND hashtag_values.value LIKE '%#{params[:search]}%'")
-    render :partial => 'hashtag', :locals => {:hashtags => @hashtags}, :status => 200
+    render :json => @hashtags, :status => 200
   end
   
   # =begin apidoc
@@ -75,14 +75,14 @@ class HashtagsController < ApplicationController
   # access:: FREE
   # return:: hashtags list
   # output:: json
-  # {"hashtags":[{"created_at":"2012-07-04T16:09:05-05:00","hashtag_value_id":5,"id":6,"post_id":1,"status":1,"updated_at":"2012-07-04T16:09:05-05:00","user_id":12}]}
+  # [{"created_at":"2012-07-05T15:15:42-05:00","hashtag_value_id":8,"id":10,"post_id":1,"status":1,"updated_at":"2012-07-05T15:15:42-05:00","user_id":12},{"created_at":"2012-07-05T15:01:54-05:00","hashtag_value_id":7,"id":9,"post_id":1,"status":1,"updated_at":"2012-07-05T15:01:54-05:00","user_id":11},{"created_at":"2012-07-05T14:57:17-05:00","hashtag_value_id":6,"id":8,"post_id":1,"status":1,"updated_at":"2012-07-05T14:57:17-05:00","user_id":11}]
   # ::output-end::
   # Show popular hashtags
   # <br/><br/>Notes:<pre>curl -X GET --user aaronbartell@gmail.com:poopydiaper localhost:3000/hashtags/popular.json</pre>  
   # =end
   def show_popular
     @hashtags = Hashtag.where("status = 1 AND created_at > ?",5.day.ago).order("hashtag_value_id DESC").group("hashtag_value_id")
-    render :partial => 'hashtag', :locals => {:hashtags => @hashtags}, :status => 200
+    render :json => @hashtags, :status => 200
   end
   
   # =begin apidoc
@@ -92,10 +92,10 @@ class HashtagsController < ApplicationController
   # return:: hashtags list
   # param:: id:int - id of hashtag to be deleted
   # output:: json
-  # {"hashtags":{"created_at":"2012-07-04T17:04:03-05:00","hashtag_value_id":5,"id":7,"post_id":2,"status":0,"updated_at":"2012-07-04T17:04:50-05:00","user_id":12}}
+  # {"created_at":"2012-07-05T15:15:42-05:00","hashtag_value_id":8,"id":10,"post_id":1,"status":0,"updated_at":"2012-07-05T15:20:30-05:00","user_id":12}
   # ::output-end::
-  # Create hashtag
-  # <br/><br/>Notes:<pre>curl -X POST --user aaronbartell@gmail.com:poopydiaper localhost:3000/hashtags/6/delete.json</pre>  
+  # Delete hashtag
+  # <br/><br/>Notes:<pre>curl -X POST --user aaronbartell@gmail.com:poopydiaper localhost:3000/hashtags/10/delete.json</pre>  
   # =end  
   def destroy
     authenticate_user!
@@ -104,8 +104,7 @@ class HashtagsController < ApplicationController
                       .where("hashtags.status = 1 AND hashtags.id = ? AND (hashtags.user_id = ? OR posts.user_id = ?)",params[:id],current_user.id,current_user.id) \
                       .readonly(false).first!
     if @hashtag.deactivate
-      render :partial => 'hashtag', :locals => {:hashtags => @hashtag}, :status => 200
-      #render :json => "Hashtag successfully deleted", :status => 200
+      render :json => @hashtag, :status => 200
     else
       render_error(500,"There was a problem deleting the hashtag")
     end  

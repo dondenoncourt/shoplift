@@ -123,38 +123,7 @@ class UsersController < ApplicationController
   # return:: array of user data
   # param:: HTML form submission. See curl example.
   # output:: json
-  # { "avatar_content_type" : null,
-  #   "avatar_file_name" : null,
-  #   "avatar_file_size" : null,
-  #   "avatar_updated_at" : null,
-  #   "biography" : null,
-  #   "birthdate" : null,
-  #   "count_of_followers" : 0,
-  #   "count_of_hashtags" : 0,
-  #   "count_of_posts" : 0,
-  #   "country" : null,
-  #   "created_at" : "2012-06-19T07:57:46-05:00",
-  #   "email" : "aaronbartell@gmail.com3",
-  #   "first_name" : null,
-  #   "full_name" : "Aaron Bartell3",
-  #   "hometown" : null,
-  #   "id" : 13,
-  #   "last_name" : null,
-  #   "latitude" : null,
-  #   "longitude" : null,
-  #   "missing" : null,
-  #   "notify_missing" : null,
-  #   "notify_new_follower" : null,
-  #   "notify_relift" : null,
-  #   "private" : false,
-  #   "sex" : null,
-  #   "status" : 1,
-  #   "updated_at" : "2012-06-19T07:57:46-05:00",
-  #   "url" : null,
-  #   "username" : "aaronbartell@gmail.com3",
-  #   "vanity_url" : null,
-  #   "zipcode" : null
-  # }
+  # { "avatar_content_type" : null,"avatar_file_name" : null,"avatar_file_size" : null,"avatar_updated_at" : null,"biography" : null,"birthdate" : null,"count_of_followers" : 0,"count_of_hashtags" : 0,"count_of_posts" : 0,"country" : null,"created_at" : "2012-06-19T07:57:46-05:00","email" : "aaronbartell@gmail.com3","first_name" : null,"full_name" : "Aaron Bartell3","hometown" : null, "id" : 13, "last_name" : null,"latitude" : null,"longitude" : null, "missing" : null,"notify_missing" : null,"notify_new_follower" : null,"notify_relift" : null, "private" : false, "sex" : null, "status" : 1,"updated_at" : "2012-06-19T07:57:46-05:00","url" : null,"username" : "aaronbartell@gmail.com3","vanity_url" : null,"zipcode" : null}
   # ::output-end::
   # Create a new user
   # <br/><br/>Notes:<pre>curl -d "user[full_name]=Aaron Bartell3" -d "user[email]=aaronbartell@gmail.com3" -d "user[password]=poopydiaper" localhost:3000/users.json</pre>
