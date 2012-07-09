@@ -119,10 +119,8 @@ module ParserAudit
   def get_price_xpath(page, value)
     %w{h1 h2 h3 span}.each do |tag|
       node = page.parser.xpath("//#{tag}[text()='$#{value}']")
-      puts "#{node} = page.parser.xpath(\"//#{tag}[text()='$#{value}']\")"
       if node.blank? || node.length > 1
         node = page.parser.xpath("//#{tag}[contains(text(), '#{value}')]")
-        puts "#{node} = page.parser.xpath(\"//#{tag}[contains(), '#{value}']\")"
       end
       if !node.blank? && node.length == 1
         printNode(node)
@@ -135,7 +133,6 @@ module ParserAudit
   def get_name_xpath(page, value)
     %w{h1 h2 h3 span}.each do |tag|
       node = page.parser.xpath("//#{tag}[text()='$#{value}']")
-      puts "#{node} = page.parser.xpath(\"//#{tag}[text()='$#{value}']\")"
       if !node.blank? && node.length == 1
         printNode(node)
         return buildXpath(node[0])
@@ -163,8 +160,8 @@ module ParserAudit
   end
 
   def printNode(node)
-    if !node.blank?
-      puts ("     found #{node.length.to_s}:")
+    if Rails.env.development? && !node.blank?
+      puts ("     found #{node.length.to_s}:")   
       puts ('     '+node.to_s.gsub(/\s\s/, ' '))
     end
   end
@@ -275,7 +272,6 @@ module ParserAudit
     ]
     xpaths = Hash.new
     @sites.each do |post|
-      p post
       hash = parser_audit(post)
       hash.each do |retailer, xpath|
         xpaths[retailer] = xpath
@@ -304,7 +300,6 @@ module ParserAudit
           node = page.parser.xpath(xpaths[retailer])
           puts node
           brand = find_brand(node)
-          puts ">>>>>>>>>>found one"+brand.name if brand
         end
       rescue => ex
         puts ex.message

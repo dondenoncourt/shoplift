@@ -20,7 +20,7 @@ describe HashtagsController do
     
     it "returns hashtag details" do
       delete :destroy, :id => hashtags(:hashtags_001).id, :format => :json
-      response.body.should == "Hashtag successfully deleted"
+      JSON.parse(response.body)[:status] == 0
     end
   end
 
