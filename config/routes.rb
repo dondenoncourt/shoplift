@@ -34,12 +34,14 @@ App::Application.routes.draw do
     #delete "logout" => "devise/sessions#destroy"
     get '/users/auth/:provider' => 'users/omniauth_callbacks#passthru'
   end
-  resources :users, :only => [:show,:create,:update,:destroy] do
+  get "users/avatar", :to => "users#avatar"  
+  resources :users, :only => [:avatar,:show,:create,:update,:destroy] do
     resources :followers, :only => [:index]
     resources :following, :only => [:index]
   end
+  
   get "users/validate_username/:username", :to => "users#validate_username"
-  get "users/username/:username", :to => "users#show", :identifier => "username"
+  get "users/username/:username", :to => "users#show", :identifier => "username"  
   # Browser / system compatability
   post "users/:id/edit", :to => "users#update"
   post "users/:id/delete", :to => "users#destroy"

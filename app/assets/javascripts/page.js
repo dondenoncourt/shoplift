@@ -34,8 +34,10 @@ function formatDate(date) {
   }
   return formattedDate;
 }
-function handleAddTag() {
-  $('form[name=add_tag_form]').last().submit(function () {
+//function handleAddTag() {
+$(document).ready(function() {
+  $(document).on('submit','form[name=add_tag_form]', function (e) {
+    e.preventDefault();
     var this_form = $(this);
     $.ajax({
       url:'/hashtags/create',
@@ -43,17 +45,11 @@ function handleAddTag() {
       dataType:'json',
       data: $(this).serialize(),
       success:function(data) {
-        var lastLi = this_form.parent().parent().find('.tagList li').last();
-        var clone = lastLi.clone();
-        var lastLink = clone.find('a').last();
-        if (lastLink.html() != null) {
-          console.log(lastLink.html());
-          clone.appendTo(this_form.parent().parent().find('.tagList'));
-          //$(lastLink).find('img').html(data.value);
-          lastLi.html('<a href="#"><img src="../img/global/user-thumb-holder.gif" alt="user-thumb-holder" width="25" height="25" class="user-tiny-thumb"/>'+data.value+'</a>');
-        } else {
-          lastLi.html('<a href="#"><img src="../img/global/user-thumb-holder.gif" alt="user-thumb-holder" width="25" height="25" class="user-tiny-thumb"/>'+data.value+'</a>');
-        }
+        $.get('users/avatar', function(url) {
+          this_form.parent().parent().find('.tagList').prepend(
+            '<li><a href="#"><img src="' + url + '" alt="user-thumb-holder" width="25" height="25" class="user-tiny-thumb"/>'+data.value+'</a></li>'
+          );
+        });        
         $(this_form).find('input[name=hashtag_value]').val('');
       },
       error:function(xhr,textStatus,errorThrown){
@@ -62,7 +58,8 @@ function handleAddTag() {
     });
     return false;
   });
-}
+});
+//}
 function handleSave() {
 
   // Add a click listener to Save/Un-Save item

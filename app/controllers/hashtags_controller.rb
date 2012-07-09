@@ -44,8 +44,7 @@ class HashtagsController < ApplicationController
       return render_error(500,"Failed to create hashtag")
     end
     
-    @hashtag = Hashtag.new({:user_id => current_user.id, :post_id => @item.post.id, :hashtag_value_id => @hashtag_value.id})
-    
+    @hashtag = Hashtag.new({:user_id => current_user.id, :post_id => @item.post.id, :hashtag_value_id => @hashtag_value.id})  
     if !@hashtag.save
       return render_error(500,"Failed to create hashtag: "+params[:hashtag_value]+' '+@hashtag.errors[:hashtag_value_id][0])
     end

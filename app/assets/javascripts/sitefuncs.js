@@ -60,7 +60,7 @@ function sitefuncs() {
 
 /*---------- Search ----------*/
 
-  $('input.text').focus(function(){
+  $(document).on('focus', 'input.text', function(){
     if($(this).val()=="Search" || $(this).val()=="Add a Tag") {
       $(this).val('');
     }
