@@ -1,0 +1,15 @@
+<% content_for :head do %>
+  <%= tag :meta, property: "fb:app_id", content: ENV["FACEBOOK_APP_ID"] %>
+  <%= tag :meta, property: "og:site_name", content: "theShoplift" %>
+  <%= tag :meta, property: "og:type", content: "theshoplift:postItem" %>
+  <%= tag :meta, property: "og:title", content: @item.post %>
+  <%= tag :meta, property: "og:url", content: item_url(@item) %>
+  <%= tag :meta, property: "og:image", content: image_path(@item.photo) %>
+<% end %>
+
+<div id="content">
+  <div class="centerCol">
+    <%= render @item  %>
+  </div>
+  <div class="clear"></div>
+</div>

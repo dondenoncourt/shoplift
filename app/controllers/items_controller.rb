@@ -20,7 +20,10 @@ class ItemsController < ApplicationController
     if validate_item_results?
       @item.increment!(:views)
       @item.post.increment!(:views)
-      render :partial => 'item', :locals => {:item => @item}, :status => 200
+      respond_to do |format|
+        format.html { render 'show'}
+        format.json { render :partial => 'item', :locals => {:item => @item}, :status => 200 }
+      end
     else
       render_error(404,"Item not found")
     end
