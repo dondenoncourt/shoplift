@@ -61,7 +61,7 @@ class PostsController < ApplicationController
   # param:: id:int - post id
   # param:: post object (POST content)
   # output:: json
-  # {"item":{"comment":null,"created_at":null,"id":null,"item_id":null,"post_id":223,"relifts":0,"status":1,"updated_at":null,"user_id":12,"views":0,"visits":0}}
+  # {"item":{"comment":null,"created_at":null,"id":null,"parent_id":null,"post_id":223,"relifts":0,"status":1,"updated_at":null,"user_id":12,"views":0,"visits":0}}
   # ::output-end::
   # Update post
   # <br/><br/>Notes:<pre>curl -X POST --user aaronbartell@gmail.com:poopydiaper -d "post[price]=12.35" localhost:3000/posts/223/update.json</pre>  

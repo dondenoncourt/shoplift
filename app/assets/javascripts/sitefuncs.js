@@ -68,11 +68,11 @@ function sitefuncs() {
 
 /*---------- Product Actions ----------*/
 
-  $('.product').hover(function(){
+  $(document).on('mouseenter','.product', function (e) {
     $(this).find('.productDetails').stop().animate({ bottom:'0' },100)
-  }, function() {
+  }).on('mouseleave','.product', function() {
     $(this).find('.productDetails').stop().animate({ bottom:'-30px' },100)
-  });
+  });  
 
 /*---------- Tabs ----------*/
 
