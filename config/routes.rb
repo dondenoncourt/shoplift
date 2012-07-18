@@ -35,7 +35,8 @@ App::Application.routes.draw do
     get '/users/auth/:provider' => 'users/omniauth_callbacks#passthru'
   end
   get "users/avatar", :to => "users#avatar"
-  get "users/validate_username/:username", :to => "users#validate_username"  
+  get "users/validate_username/:username", :to => "users#validate_username"
+  get "validate/:username", :to => "users#validate_username"  
   resources :users, :only => [:avatar,:show,:create,:update,:destroy] do
     resources :followers, :only => [:index]
     resources :following, :only => [:index]
