@@ -171,7 +171,7 @@
 
   
   <p class='description'><strong>Description:</strong>  # Get the user's information by way of username
- # <br/><br/>Notes:<pre>curl -X GET --user aaronbartell@gmail.com:poopydiaper00/users/validate_username/aaronbartell@gmail%2Ecom.json</pre>
+ # <br/><br/>Notes:<pre>curl -X POST --user aaronbartell@gmail.com:poopydiaper -d "username=aaronbartell@gmail.com" http://ec2-23-23-244-185.compute-1.amazonaws.com/users/validate_username.json</pre>
 </p>
 
   <h2><span id='http_verb'>GET</span>/users/validate_username/:username.json</h2>
