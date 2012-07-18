@@ -26,7 +26,7 @@ App::Application.routes.draw do
   #
   # Users
   #
-  get "users/validate_username/:username", :to => "users#validate_username"
+  post "users/validate_username", :to => "users#validate_username"
   devise_for :users, :controllers => { :registrations => "registrations", :omniauth_callbacks => "omniauth_callbacks" } #, :skip => [:registrations,:passwords,:unlocks]
   # makes domain/login work as well as domain/users/login
   devise_scope :user do
