@@ -114,7 +114,7 @@ function sitefuncs() {
 
 /*---------- Modal ----------*/
 
-  $('.modal').click(function (e) {
+  $(document).on('click', '.modal', function(){
     // denoncourt mod: * if rails attribute exists, don't append .html
     var modaltype = $(this).attr('data-modal-rails');
     if (modaltype == null) {
