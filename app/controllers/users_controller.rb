@@ -55,8 +55,8 @@ class UsersController < ApplicationController
   end
 
   # =begin apidoc
-  # url:: /users/validate_username/:username.json
-  # method:: GET
+  # url:: /users/validate_username.json
+  # method:: POST
   # access:: FREE
   # return:: user data
   # param:: username:string - name of the user
@@ -143,8 +143,8 @@ class UsersController < ApplicationController
   end
 
   # =begin apidoc
-  # url:: /users/avatar.json?username=:username&style=:style
-  # method:: GET
+  # url:: /users/avatar.json
+  # method:: POST
   # access:: FREE
   # return:: user data
   # param:: username:string (optional) - pass only if you want an avatar for a user that is different from the authenticated user.
@@ -153,7 +153,7 @@ class UsersController < ApplicationController
   # http://s3.amazonaws.com/shoplift_dev/thumb/2/headless.jpg?1337213827
   # ::output-end::
   # Get the user's avatar URL
-  # <br/><br/>Notes:<pre>curl -X GET --user patrick@38media.net:vo2max localhost:3000/users/avatar?style=thumb</pre>
+  # <br/><br/>Notes:<pre>curl -X POST --user aaronbartell@gmail.com:thinkpad -d "username=aaronbartell@gmail.com" -d "style=thumb" localhost:3000/users/avatar.json</pre>
   # =end
   def avatar
     @usrNam

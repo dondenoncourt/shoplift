@@ -174,7 +174,7 @@
  # <br/><br/>Notes:<pre>curl -X POST --user aaronbartell@gmail.com:poopydiaper -d "username=aaronbartell@gmail.com" http://ec2-23-23-244-185.compute-1.amazonaws.com/users/validate_username.json</pre>
 </p>
 
-  <h2><span id='http_verb'>GET</span>/users/validate_username/:username.json</h2>
+  <h2><span id='http_verb'>POST</span>/users/validate_username.json</h2>
 
   
     <strong>Access:</strong> FREE<br />
@@ -379,10 +379,10 @@
 
   
   <p class='description'><strong>Description:</strong>  # Get the user's avatar URL
- # <br/><br/>Notes:<pre>curl -X GET --user patrick@38media.net:vo2max localhost:3000/users/avatar?style=thumb</pre>
+ # <br/><br/>Notes:<pre>curl -X POST --user aaronbartell@gmail.com:thinkpad -d "username=aaronbartell@gmail.com" -d "style=thumb" localhost:3000/users/avatar.json</pre>
 </p>
 
-  <h2><span id='http_verb'>GET</span>/users/avatar.json?username=:username&style=:style</h2>
+  <h2><span id='http_verb'>POST</span>/users/avatar.json</h2>
 
   
     <strong>Access:</strong> FREE<br />
