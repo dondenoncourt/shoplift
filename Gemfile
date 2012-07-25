@@ -17,6 +17,7 @@ gem 'will_paginate'
 gem 'omniauth-facebook'
 gem 'geocoder'
 gem 'mechanize'
+gem 'koala'
 
 group :test, :development do
   gem 'rspec-rails'

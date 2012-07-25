@@ -111,15 +111,40 @@ class User < ActiveRecord::Base
     end
   end
 
-  def self.find_for_facebook_oauth(access_token, signed_in_resource=nil)
-    data = access_token.extra.raw_info
+  def self.find_for_facebook_oauth(response, signed_in_resource=nil)
+    facebook_token = response['credentials']['token']
+    data = response.extra.raw_info
     if user = self.find_by_email(data.email)
+      user.update_attribute('facebook_token',facebook_token)
       user
     else # Create a user with a stub password.
       hometown = data.location.name if data.location.present?
       sex = data.gender == 'male'
-      self.create!(:full_name => data.name, :email => data.email, :password => Devise.friendly_token[0,20], :hometown => hometown, :sex => sex )
+      self.create!(:full_name => data.name, :email => data.email, :password => Devise.friendly_token[0,20], :hometown => hometown, :sex => sex, :facebook_token => facebook_token )
     end
+  end
+
+  def facebook
+    #oauth_token = 'AAADhGIBXiVcBAKqRZCqOlusCytFaZBysC4TZCEJdhGZCz10ePmXPYxDHtMnPGs0I253Fk17BHRqzt6s1axWhlaYsQqbkjBAN4D5ssRNr3QZDZD'
+    @facebook ||= Koala::Facebook::API.new(facebook_token)
+    block_given? ? yield(@facebook) : @facebook
+  rescue Koala::Facebook::APIError => e
+    logger.info e.to_s
+    nil # or consider a custom null object
+  end
+
+  def friends_count
+    facebook { |fb| fb.get_connection("me", "friends").size }
+  end
+
+  def self.share_lift(user_id, lift_url)
+    user = User.find(user_id)
+    #user.facebook.put_connections("me", "cinematron:review", movie: movie_url)
+    # one way to handle reentrancy (rather than delay_job, which probably will be a better method)
+    Thread.new {
+        user.facebook.put_connections("me", "notes", :subject => "lifted", :message => lift_url)
+    }
+    
   end
 
   def set_username
@@ -173,5 +198,5 @@ class User < ActiveRecord::Base
   end
   geocoded_by :address   # can also be an IP address
   after_validation :geocode          # auto-fetch coordinates
-
+  
 end
