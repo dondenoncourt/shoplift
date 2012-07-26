@@ -55,8 +55,8 @@ class UsersController < ApplicationController
   end
 
   # =begin apidoc
-  # url:: /users/validate_username/:username.json
-  # method:: GET
+  # url:: /users/validate_username.json
+  # method:: POST
   # access:: FREE
   # return:: user data
   # param:: username:string - name of the user
@@ -64,7 +64,7 @@ class UsersController < ApplicationController
   # {"extract":{"id":11,"email":"aaronbartell@gmail.com","username":"aaronbartell@gmail.com","full_name":"aaron","first_name":null,"last_name":null,"vanity_url":null,"country":"United States","biography":null,"notify_new_follower":null,"notify_relift":null,"notify_missing":null,"hometown":null,"zipcode":"56001","sex":true},"sex":"Male","avatar_url_small":"/assets/avatars/small/missing.png","avatar_url_thumb":"/assets/avatars/thumb/missing.png","followee_count":2 }
   # ::output-end::
   # Get the user's information by way of username
-  # <br/><br/>Notes:<pre>curl -X GET --user aaronbartell@gmail.com:poopydiaper00/users/validate_username/aaronbartell@gmail%2Ecom.json</pre>
+  # <br/><br/>Notes:<pre>curl -X POST --user aaronbartell@gmail.com:poopydiaper -d "username=aaronbartell@gmail.com" http://ec2-23-23-244-185.compute-1.amazonaws.com/users/validate_username.json</pre>
   # =end
   def validate_username
     if @user = User.find_by_username(params[:username].downcase)
@@ -143,8 +143,8 @@ class UsersController < ApplicationController
   end
 
   # =begin apidoc
-  # url:: /users/avatar.json?username=:username&style=:style
-  # method:: GET
+  # url:: /users/avatar.json
+  # method:: POST
   # access:: FREE
   # return:: user data
   # param:: username:string (optional) - pass only if you want an avatar for a user that is different from the authenticated user.
@@ -153,7 +153,7 @@ class UsersController < ApplicationController
   # http://s3.amazonaws.com/shoplift_dev/thumb/2/headless.jpg?1337213827
   # ::output-end::
   # Get the user's avatar URL
-  # <br/><br/>Notes:<pre>curl -X GET --user patrick@38media.net:vo2max localhost:3000/users/avatar?style=thumb</pre>
+  # <br/><br/>Notes:<pre>curl -X POST --user aaronbartell@gmail.com:thinkpad -d "username=aaronbartell@gmail.com" -d "style=thumb" localhost:3000/users/avatar.json</pre>
   # =end
   def avatar
     @usrNam

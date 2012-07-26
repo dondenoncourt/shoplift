@@ -60,11 +60,13 @@ $(document).ready(function() {
   });
 });
 //}
-function handleSave() {
+//function handleSave() {
+$(document).ready(function() {
 
   // Add a click listener to Save/Un-Save item
-  $('a.[class^=btnSetAside]').unbind();
-  $('a.[class^=btnSetAside]').click(function(e){
+  //$('a.[class^=btnSetAside]').unbind();
+  //$('a.[class^=btnSetAside]').click(function(e){
+  $(document).on('click','a.[class^=btnSetAside]', function (e) {
     e.preventDefault(); // Keeps from invoking the href="#" of the anchor tag after the ajax completes
     _this = $(this);
     if($(_this).hasClass('has_aside')){
@@ -99,5 +101,5 @@ function handleSave() {
       });
     }
   });
-
-}
+});
+//}

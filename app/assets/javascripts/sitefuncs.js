@@ -68,11 +68,11 @@ function sitefuncs() {
 
 /*---------- Product Actions ----------*/
 
-  $('.product').hover(function(){
+  $(document).on('mouseenter','.product', function (e) {
     $(this).find('.productDetails').stop().animate({ bottom:'0' },100)
-  }, function() {
+  }).on('mouseleave','.product', function() {
     $(this).find('.productDetails').stop().animate({ bottom:'-30px' },100)
-  });
+  });  
 
 /*---------- Tabs ----------*/
 
@@ -114,7 +114,7 @@ function sitefuncs() {
 
 /*---------- Modal ----------*/
 
-  $('.modal').click(function (e) {
+  $(document).on('click', '.modal', function(){
     // denoncourt mod: * if rails attribute exists, don't append .html
     var modaltype = $(this).attr('data-modal-rails');
     if (modaltype == null) {
