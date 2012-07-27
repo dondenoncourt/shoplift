@@ -21,6 +21,7 @@ gem 'mechanize'
 gem 'koala'
 gem 'delayed_job_active_record'
 gem 'daemons'
+gem 'redis'
 
 group :test, :development do
   gem 'rspec-rails'
