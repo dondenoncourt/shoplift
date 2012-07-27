@@ -98,7 +98,10 @@ class PostsController < ApplicationController
     if @post.update_attributes!(params[:post])
       @item = @post.items.create({ :user_id => current_user.id })
       if @item.persisted?
-        User.delay.share_lift(current_user.id, item_url(@item))
+        #User.delay.share_lift(current_user.id, item_url(@item))
+        Thread.new do
+          User.share_lift(current_user.id, item_url(@item))
+        end
         if params[:hashtags]
           params[:hashtags].each do |key, hashtag_value|
             puts 'adding hashtag:'+hashtag_value
