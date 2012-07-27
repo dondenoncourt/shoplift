@@ -19,6 +19,8 @@ gem 'omniauth-twitter'
 gem 'geocoder'
 gem 'mechanize'
 gem 'koala'
+gem 'delayed_job_active_record'
+gem 'daemons'
 
 group :test, :development do
   gem 'rspec-rails'

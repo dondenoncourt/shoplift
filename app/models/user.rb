@@ -137,13 +137,12 @@ class User < ActiveRecord::Base
     facebook { |fb| fb.get_connection("me", "friends").size }
   end
 
-  def self.share_lift(user_id, lift_url)
+  def self.share_lift(user_id, item_url)
     user = User.find(user_id)
-    #user.facebook.put_connections("me", "cinematron:review", movie: movie_url)
-    # one way to handle reentrancy (rather than delay_job, which probably will be a better method)
-    Thread.new {
-        user.facebook.put_connections("me", "notes", :subject => "lifted", :message => lift_url)
-    }
+    if user.facebook_token
+      #user.facebook.put_connections("me", "cinematron:review", movie: movie_url)
+      user.facebook.put_connections("me", "notes", :subject => "lifted", :message => item_url)
+    end
     
   end
 
