@@ -62,10 +62,12 @@ class Item < ActiveRecord::Base
   end
 
   def saved_by?(user)
+    return false if user == nil
     aside_by(user).present?
   end
 
   def aside_by(user)
+    return false if user == nil
     set_asides.where(:user_id => user.id).first
   end
 
