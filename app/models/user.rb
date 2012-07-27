@@ -141,7 +141,7 @@ class User < ActiveRecord::Base
     user = User.find(user_id)
     if user.facebook_token
       #user.facebook.put_connections("me", "cinematron:review", movie: movie_url)
-      user.facebook.put_connections("me", "notes", :subject => "lifted", :message => item_url)
+      user.facebook.put_connections("me", "notes", :subject => "lifted", :message => item_url.gsub(/http:\/\/.*items/,'items'))
     end
     
   end
