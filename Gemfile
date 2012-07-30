@@ -32,6 +32,7 @@ group :test, :development do
   gem 'thin' # to stop: WARN  Could not determine content-length of response body. Set content-length of the response or set Response#chunked = true
   gem 'rapi_doc', :git => 'git://github.com/belighted/rapi_doc.git'
   gem 'fakeweb'
+  gem 'factory_girl_rails'
 end
 
 group :development do

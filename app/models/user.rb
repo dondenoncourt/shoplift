@@ -140,10 +140,10 @@ class User < ActiveRecord::Base
   def self.share_lift(user_id, item_url)
     user = User.find(user_id)
     if user.facebook_token
-      #user.facebook.put_connections("me", "cinematron:review", movie: movie_url)
       user.facebook.put_connections("me", "notes", :subject => "lifted", :message => item_url.gsub(/http:\/\/.*items/,'items'))
       begin
-        user.facebook.put_connections("me", "the_shoplift:lift", object: item_url)
+        # this works but comment until we go live
+        #user.facebook.put_connections("me", "the_shoplift:lift", object: item_url)
       rescue Exception => e
         puts e
       end

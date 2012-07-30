@@ -1,4 +1,9 @@
 App::Application.configure do
+
+  #config.logger = Logger.new(STDOUT) # don uncomments this and changes level to debug when he wants debug logging
+  #config.log_level = :debug
+  config.log_level = :warn
+
   # Settings specified here will take precedence over those in config/application.rb
 
   # The test environment is used exclusively to run your application's

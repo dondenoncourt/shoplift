@@ -70,7 +70,7 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     if params[:image]
       image = (params[:image].include? 'http:') ? params[:image] : ("http://"+params[:post][:retailer]+'/'+params[:image])
-      puts 'image:'+image
+      Rails.logger.debug 'image:'+image
       @post.photo = open(image.gsub(/\s/, "%20"))
     end
 
@@ -104,7 +104,7 @@ class PostsController < ApplicationController
         end
         if params[:hashtags]
           params[:hashtags].each do |key, hashtag_value|
-            puts 'adding hashtag:'+hashtag_value
+            Rails.logger.debug 'adding hashtag:'+hashtag_value
             @hashtag_value = HashtagValue.where(:value => hashtag_value).first_or_create #.find_or_create_by_value(hashtag_value)
             if @hashtag_value.blank?
               # CONSIDER: post.errors[:base] << 'fails to create...' if entry_url.blank?

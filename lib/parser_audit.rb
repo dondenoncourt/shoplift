@@ -78,14 +78,17 @@ module ParserAudit
     begin
       agent.get(post_params[:url]) do |page|
         if post_params[:brand]
+          Rails.logger.debug "looking for brand "+post_params[:brand]
           xpath = get_brand_xpath(page, post_params)
           xpaths[:brand] = xpath if xpath
         end
         if post_params[:price]
+          Rails.logger.debug "looking for price "+post_params[:price]
           xpath = get_price_xpath(page, post_params[:price])
           xpaths[:price] = xpath if xpath
         end
         if post_params[:parsed_name] != post_params[:name]
+          Rails.logger.debug "looking for name "+post_params[:name]
           xpath = get_name_xpath(page, post_params[:name])
           xpaths[:name] = xpath if xpath
         end
@@ -118,63 +121,76 @@ module ParserAudit
 
   def get_price_xpath(page, value)
     %w{h1 h2 h3 span}.each do |tag|
-      node = page.parser.xpath("//#{tag}[text()='$#{value}']")
-      if node.blank? || node.length > 1
-        node = page.parser.xpath("//#{tag}[contains(text(), '#{value}')]")
-      end
-      if !node.blank? && node.length == 1
-        printNode(node)
-        return buildXpath(node[0])
-      end
+      node = page.parser.xpath("//#{tag}[text()='$#{value.gsub(/\$/,'')}']")
+      return buildXpath(node[0], __method__) if node.length > 0
     end
     nil
   end
 
   def get_name_xpath(page, value)
-    %w{h1 h2 h3 span}.each do |tag|
-      node = page.parser.xpath("//#{tag}[text()='$#{value}']")
-      if !node.blank? && node.length == 1
-        printNode(node)
-        return buildXpath(node[0])
-      end
-    end
+    node = tag_has_only_text(page, %w{title h1 h2 h3 span}, value)
+    Rails.logger.debug "#{node} name tag found by tag_has_only_name" if node
+    return buildXpath(node[0], __method__) if node
+
+    node = tag_starts_with_text(page, %w{title h1 h2 h3 span}, value)
+    Rails.logger.debug "#{node} name tag found by tag_starts_with_text" if node
+    return buildXpath(node[0], __method__) if node
+
+    node = tag_contains_text(page, %w{title h1 h2 h3 span}, value)
+    Rails.logger.debug "#{node} name tag found by tag_contains_text" if node
+    return buildXpath(node[0], __method__) if node
+
+    node = text_nodes_for_text(page, value)
+    Rails.logger.debug "#{node} name tag found by text_nodes_for_text" if node
+    return buildXpath(node[0], __method__) if node
     nil
   end
 
   def get_brand_xpath(page, post_params)
-    node = tag_has_only_brand(page, %w{h1 h2 h3 span}, post_params[:brand])
-    return buildXpath(node[0]) if node
+    node = tag_has_only_text(page, %w{h1 h2 h3 span}, post_params[:brand])
+    Rails.logger.debug "#{node} brand tag found by tag_has_only_text" if node
+    return buildXpath(node[0], __method__) if node
 
     node = tag_starts_with_brand_contains_name(page, %w{h1 h2 h3 span}, post_params[:brand], post_params[:name])
-    return buildXpath(node[0]) if node
+    Rails.logger.debug "#{node} brand tag found by tag_starts_with_brand_contains_name" if node
+    return buildXpath(node[0], __method__) if node
 
-    node = tag_starts_with_brand(page, %w{h1 h2 h3 span}, post_params[:brand])
-    return buildXpath(node[0]) if node
+    node = tag_starts_with_text(page, %w{h1 h2 h3 span}, post_params[:brand])
+    Rails.logger.debug "#{node} brand tag found by tag_starts_with_text" if node
+    return buildXpath(node[0], __method__) if node
 
-    node = tag_contains_brand(page, %w{h1 h2 h3 span}, post_params[:brand])
-    return buildXpath(node[0]) if node
+    node = tag_contains_text(page, %w{h1 h2 h3 span}, post_params[:brand])
+    Rails.logger.debug "#{node} brand tag found by tag_contains_text" if node
+    return buildXpath(node[0], __method__) if node
 
-    node = text_nodes_for_brand(page, post_params[:brand])
-    return buildXpath(node[0]) if node
+    node = text_nodes_for_text(page, post_params[:brand])
+    Rails.logger.debug "#{node} brand tag found by text_nodes_for_brand" if node
+    return buildXpath(node[0], __method__) if node
     nil
   end
 
-  def printNode(node)
-    if Rails.env.development? && !node.blank?
-      puts ("     found #{node.length.to_s}:")   
-      puts ('     '+node.to_s.gsub(/\s\s/, ' '))
+  def printNode(node, method)
+    if !node.blank?
+      Rails.logger.debug "#{method} found #{node.length.to_s}: #{node.to_s.gsub(/\s\s/, ' ')}"
+      Rails.logger.debug "node.path: #{node[0].path()}"
     end
   end
 
-  def buildXpath(node)
-    xpath = "//#{node.name}"
+  def buildXpath(node, method)
     if node.attributes.length > 0
+      xpath = "//#{node.name}"
+      # for price only, use the full path
+      if method.to_s.include? "_price_"
+        xpath = '/'+node.path()
+      end
       xpath += '['
-      node.attributes.each_with_index do |(attr,value), idx| 
+      node.attributes.each_with_index do |(attr,value), idx|
         xpath += " and " if idx > 0
         xpath += "@#{attr}='#{value}'"
       end
       xpath += ']'
+    else # if no attributes, use full path
+      xpath = '/'+node.path()
     end
     xpath
   end
@@ -183,33 +199,33 @@ module ParserAudit
     page.body.match /#{str}/
   end
 
-  def tag_has_only_brand(page, tags, brand)
+  def tag_has_only_text(page, tags, text)
     tags.each do |tag|
-      node = page.parser.xpath("//#{tag}[translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') = '#{brand.downcase}']")
+      node = page.parser.xpath("//#{tag}[translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') = '#{text.downcase}']")
       if !node.blank? && node.length == 1
-        printNode(node)
+        printNode(node, __method__)
         return node
       end
     end
     nil
   end
   
-  def tag_starts_with_brand(page, tags, brand)
+  def tag_starts_with_text(page, tags, text)
     tags.each do |tag|
-      node = page.parser.xpath("//#{tag}[starts-with(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'#{brand.downcase}')]")
+      node = page.parser.xpath("//#{tag}[starts-with(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'#{text.downcase}')]")
       if !node.blank? && node.length == 1
-        printNode(node)
+        printNode(node, __method__)
         return node
       end
     end
     nil
   end
   
-  def tag_contains_brand(page, tags, brand)
+  def tag_contains_text(page, tags, text)
     tags.each do |tag|
-      node = page.parser.xpath("//#{tag}[contains(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'#{brand.downcase}')]")
+      node = page.parser.xpath("//#{tag}[contains(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'#{text.downcase}')]")
       if !node.blank? && node.length == 1
-        printNode(node)
+        printNode(node, __method__)
         return node
       end
     end
@@ -220,23 +236,29 @@ module ParserAudit
     %w{h1 h2 h3 span}.each do |tag|
       node = page.parser.xpath("//#{tag}[starts-with(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'#{brand.downcase}')]")
       if !node.blank?
-        node = page.parser.xpath("//#{tag}[contains(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),\""+name.downcase+"\")]")
-        if !node.blank? && node.length == 1
-          printNode(node)
-          return node
+        #node = page.parser.xpath("/#{tag}[contains(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),\""+name.downcase+"\")]")
+        #if !node.blank? && node.length == 1
+        goodNode = nil
+        [0..(node.length-1)].each do |idx|
+          if node && node[idx].text.downcase =~ /#{brand.downcase}.*#{name.downcase}/
+            printNode(node[idx], __method__)
+            goodNode = node[idx]
+            break
+          end
         end
+        return goodNode
       end
     end
     nil
   end
 
-  def text_nodes_for_brand(page, brand)
+  def text_nodes_for_text(page, text)
     begin
-      node = page.parser.xpath("//*[translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') = '#{brand.downcase}']")
+      node = page.parser.xpath("//*[translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') = '#{text.downcase}']")
       return node if !node.blank? && node.length == 1
     rescue
       puts "       Note: could not translate text to lowercase, using standard case sensitive xpath..."
-      page.parser.xpath("//*[text()='#{brand.downcase}']")
+      page.parser.xpath("//*[text()='#{text.downcase}']")
     end
   end
 

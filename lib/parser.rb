@@ -38,7 +38,7 @@ module Parser
   # Amazon, eBay, Nordstroms, Macys, J. Crew, Abercrombie, ThinkGeek, Overstock, Zappos
   # these can later be replaced by 'learned' elements stored elsewhere
   BRAND_IDENTIFIERS = %w(.brandLink .header-logo #logo .brand )
-  ITEM_IDENTIFIERS = %w(.product-name h1 h2 #btAsinTitle)
+  ITEM_IDENTIFIERS = %w(#btAsinTitle .product-name h1 h2 )
   PRICE_IDENTIFIERS = %w(#actualPriceValue .priceLarge .select-sale-single .price-single .priceSale .offer-price .cat-glo-tex-saleP .cat-pro-price .price)
 
   # TODO maybe...
@@ -59,22 +59,18 @@ module Parser
         images << page.search("//meta[@property='#{OPEN_GRAPH[:image]}']/@content").map(&:value)
         name = page.search("//meta[@property='#{OPEN_GRAPH[:name]}']/@content")
         description = page.search("//meta[@property='#{OPEN_GRAPH[:description]}']/@content")
-        # the passed URL is what I think we need...
-        #url = page.search("//meta[@property='#{OPEN_GRAPH[:url]}']/@content")
 
-        # try other tags
         images += page.search("link[@rel='image_src']/@href").map(&:value)
-        name = page.search("//meta[@itemprop='name']/@content") if name.blank?
-        name = page.search("//meta[@name='title']/@content") if name.blank?
-        #url = page.canonical_uri if url.blank?
-
-        # last resort...
         images = page.image_urls if images.flatten!.empty? rescue nil # can't get images from Amazon for some reason
+
         price = get_price(page, retailer) if price.blank?
         name = get_name(page, retailer) if name.blank?
-        brand = get_brand(page, retailer) if brand.blank?
+        name = page.search("//meta[@itemprop='name']/@content") if name.blank?
+        name = page.search("//meta[@name='title']/@content") if name.blank?
 
-        name = name.to_s.gsub(/Amazon.com:/, '')
+        name = name.to_s.gsub(/Amazon.com:/, '') if name
+
+        brand = get_brand(page, retailer)
 
         # strip brand off item name prefix and remove slash anything else
         name = name.to_s.gsub(brand.to_s, '').gsub(/^\s*/,'').gsub(/\|.*/,'')
@@ -82,8 +78,8 @@ module Parser
         return { brand: brand.to_s, retailer: url.split('/')[2], name: name.to_s, price: price.to_s.to_d, images: images, description: description.to_s, url: url.to_s }
       end
     rescue => ex
-      puts ex.message
-      puts ex.backtrace
+      Rails.logger.error ex.message
+      Rails.logger.error ex.backtrace
       "Error: #{ex.message}"
       return { brand: 'invalid URL', retailer: url.split('/')[2], name: 'invalid URL', price: '', images: nil, description: '', url: 'invalid URL' }
     end
@@ -99,7 +95,7 @@ module Parser
         price = BigDecimal(node[0].to_s.gsub(/[^\d.]/, ''))
         xpathPrices << price if price > 0
       rescue
-        puts "thought we had a price but it could not be converted to a big decimal"
+        Rails.logger.error "thought we had a price but it could not be converted to a big decimal"
       end
     end
 
@@ -125,13 +121,15 @@ module Parser
     xpaths = Xpath.find_all_by_retailer(retailer, :conditions => "name IS NOT NULL")
     xpaths.each do |xpath|
       node = page.parser.xpath(xpath.name)
+      Rails.logger.debug "get_name by #{xpath.name}"
       if node
+        Rails.logger.debug "found name node: #{node} = page.parser.xpath(#{xpath.name})"
         name = node[0].text
         break
       end
     end
 
-    return name if name
+    return name.gsub(/\$\d*\.*\d*/,'') if name
 
     ITEM_IDENTIFIERS.each do |field|
       item_field = page.search(field).first
@@ -146,33 +144,45 @@ module Parser
     xpaths = Xpath.find_all_by_retailer(retailer, :conditions => "brand IS NOT NULL")
     xpaths.each do |xpath|
       node = page.parser.xpath(xpath.brand)
-      brand = find_brand(node)
+      brand = find_brand_in_db(node)
+      Rails.logger.debug "#{brand} brand found by #{xpath.brand}" if brand
       break if brand
     end
-    if !brand
-      reg = page.body.match(/>.*&reg;/)
-      return reg.to_s.gsub(/>/,'').gsub(/&reg;/, REGISTERED_TRADEMARK) if reg
-    end
+    return brand.strip if brand.present?
+    #if !brand           #use of registered trademark needs more testing
+      #reg = page.body.match(/>.*&reg;/)
+      #Rails.logger.debug "#{reg} brand found by registered trademark" if reg
+      #return reg.to_s.gsub(/>/,'').gsub(/&reg;/, REGISTERED_TRADEMARK) if reg
+    #end
     if !brand
         brand = page.search("//meta[@property='#{OPEN_GRAPH[:brand]}']/@content")
+        Rails.logger.debug "#{brand} brand found by //meta[@property='#{OPEN_GRAPH[:brand]}']/@content" if brand
     end
     if !brand
       BRAND_IDENTIFIERS.each do |field|
         brand_field = page.search(field).first
         brand = brand_field.text if brand_field.present?
+        Rails.logger.debug "#{brand} brand found by BRAND_IDENTIFIERS[#{field}]" if brand
         return brand.strip if brand.present?
       end
     end
     brand
   end
 
-  def find_brand(node)
-    text = node.text.gsub(/^\s+/, '')
+  def find_brand_in_db(node)
+    text = ''
+    node.children.each { |node| text << node.text+' '}
+    text = text.gsub(/^\s+/, '')
     text.split(' ').size().downto(1).each do |words|
       first_words = first_x_words(text, words)
-      #brand = Brand.find_by_name(first_words.gsub(/\u00AE/, "\u00C1\u00AE"))
-      brand = Brand.find_by_name(first_words)
+      #brand = Brand.find_by_name(first_words)
+      brand = Brand.find(:first, :conditions => [ "lower(name) = ?", first_words.downcase ])
       return first_words if brand
+    end
+    text.split(' ').size().downto(1).each do |words|
+      last_words = last_x_words(text, words)
+      brand = Brand.find_by_name(last_words)
+      return last_words if brand
     end
     nil
   end
@@ -180,6 +190,11 @@ module Parser
 
   def first_x_words(str,n=10)
     str.split(' ')[0,n].inject{|sum,word| sum + ' ' + word}
+  end
+
+  def last_x_words(str,n=10)
+    words = str.split(' ').size()
+    str.split(' ')[n-1, words-1].inject{|sum,word| sum + ' ' + word}
   end
 
 end
