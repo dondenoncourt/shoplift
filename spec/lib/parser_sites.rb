@@ -17,19 +17,25 @@ describe 'Visit various retail sites:' do
     it "should learn" do
       Brand.all.collect{|x| x.delete}
       Brand.count.should == 0
-      sites.each_with_index do |(site, attr), index|
-        puts "#{index.to_s} #{attr['retailer']}"
+      sites.each do |site, attr|
+        puts attr['retailer']
         brand = Brand.find_or_create_by_name(attr['brand'])
         Brand.find_by_name(attr['brand']).name.should == attr['brand']
         post_params = parse(attr['page'])
         audit_params = {retailer: attr['retailer'], url: attr['page'], brand: attr['brand'], name: attr['page'], price: attr['price']}
         parser_audit(audit_params)
-        #Xpath.count.should == 1
+        if attr['brand_xpath']
+          puts " hard-coded brand_xpath"
+          xpath = Xpath.find_or_create_by_retailer(attr['retailer'])
+          xpath.brand = attr['brand_xpath']
+          xpath.save!
+        end
         post_params = parse(attr['page'])
         #post_params.delete(:images) # post_controller does this because the javascript then does it
         #p post_params
-        post_params[:brand].downcase.should == attr['brand'].downcase
-        "$#{post_params[:price]}".gsub(/0*$/, '').should == attr['price'].gsub(/0*$/,'')
+        puts "$"+post_params[:price].to_s.gsub(/0*$/, '')+".should == "+attr['price'].gsub(/0*$/,'')
+        #post_params[:price].to_s.gsub(/0*$/, '').should == attr['price'].gsub(/0*$/,'').gsub(/[$,]/,'')
+        post_params[:price].to_s.should == BigDecimal.new(attr['price'].gsub(/[$,]/,'')).to_s
       end
     end
   end

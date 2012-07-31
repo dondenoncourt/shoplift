@@ -121,8 +121,9 @@ module ParserAudit
 
   def get_price_xpath(page, value)
     %w{h1 h2 h3 span}.each do |tag|
-      node = page.parser.xpath("//#{tag}[text()='$#{value.gsub(/\$/,'')}']")
-      return buildXpath(node[0], __method__) if node.length > 0
+      #node = page.parser.xpath("//#{tag}[text()='$#{value.gsub(/\$/,'')}']")
+      node = page.parser.xpath("//#{tag}[contains(text(),'#{value}')]")
+      return buildXpath(page, node[0], __method__) if node.length > 0
     end
     nil
   end
@@ -130,42 +131,42 @@ module ParserAudit
   def get_name_xpath(page, value)
     node = tag_has_only_text(page, %w{title h1 h2 h3 span}, value)
     Rails.logger.debug "#{node} name tag found by tag_has_only_name" if node
-    return buildXpath(node[0], __method__) if node
+    return buildXpath(page, node[0], __method__) if node
 
     node = tag_starts_with_text(page, %w{title h1 h2 h3 span}, value)
     Rails.logger.debug "#{node} name tag found by tag_starts_with_text" if node
-    return buildXpath(node[0], __method__) if node
+    return buildXpath(page, node[0], __method__) if node
 
     node = tag_contains_text(page, %w{title h1 h2 h3 span}, value)
     Rails.logger.debug "#{node} name tag found by tag_contains_text" if node
-    return buildXpath(node[0], __method__) if node
+    return buildXpath(page, node[0], __method__) if node
 
     node = text_nodes_for_text(page, value)
     Rails.logger.debug "#{node} name tag found by text_nodes_for_text" if node
-    return buildXpath(node[0], __method__) if node
+    return buildXpath(page, node[0], __method__) if node
     nil
   end
 
   def get_brand_xpath(page, post_params)
     node = tag_has_only_text(page, %w{h1 h2 h3 span}, post_params[:brand])
     Rails.logger.debug "#{node} brand tag found by tag_has_only_text" if node
-    return buildXpath(node[0], __method__) if node
+    return buildXpath(page, node[0], __method__) if node
 
     node = tag_starts_with_brand_contains_name(page, %w{h1 h2 h3 span}, post_params[:brand], post_params[:name])
     Rails.logger.debug "#{node} brand tag found by tag_starts_with_brand_contains_name" if node
-    return buildXpath(node[0], __method__) if node
+    return buildXpath(page, node[0], __method__) if node
 
     node = tag_starts_with_text(page, %w{h1 h2 h3 span}, post_params[:brand])
     Rails.logger.debug "#{node} brand tag found by tag_starts_with_text" if node
-    return buildXpath(node[0], __method__) if node
+    return buildXpath(page, node[0], __method__) if node
 
     node = tag_contains_text(page, %w{h1 h2 h3 span}, post_params[:brand])
     Rails.logger.debug "#{node} brand tag found by tag_contains_text" if node
-    return buildXpath(node[0], __method__) if node
+    return buildXpath(page, node[0], __method__) if node
 
     node = text_nodes_for_text(page, post_params[:brand])
     Rails.logger.debug "#{node} brand tag found by text_nodes_for_brand" if node
-    return buildXpath(node[0], __method__) if node
+    return buildXpath(page, node[0], __method__) if node
     nil
   end
 
@@ -176,19 +177,26 @@ module ParserAudit
     end
   end
 
-  def buildXpath(node, method)
+  def buildXpath(page, node, method)
     if node.attributes.length > 0
       xpath = "//#{node.name}"
       # for price only, use the full path
       if method.to_s.include? "_price_"
         xpath = '/'+node.path()
       end
-      xpath += '['
+      attributes = ''
+      attributes += '['
       node.attributes.each_with_index do |(attr,value), idx|
-        xpath += " and " if idx > 0
-        xpath += "@#{attr}='#{value}'"
+        attributes += " and " if idx > 0
+        attributes += "@#{attr}='#{value}'"
       end
-      xpath += ']'
+      attributes += ']'
+      xpath += attributes
+      if !method.to_s.include? "_price_"
+        if page.parser.xpath(xpath).length > 1
+          xpath = '/'+node.path()+attributes
+        end
+      end
     else # if no attributes, use full path
       xpath = '/'+node.path()
     end

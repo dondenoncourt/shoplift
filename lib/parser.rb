@@ -63,7 +63,7 @@ module Parser
         images += page.search("link[@rel='image_src']/@href").map(&:value)
         images = page.image_urls if images.flatten!.empty? rescue nil # can't get images from Amazon for some reason
 
-        price = get_price(page, retailer) if price.blank?
+        price = get_price(page, retailer)
         name = get_name(page, retailer) if name.blank?
         name = page.search("//meta[@itemprop='name']/@content") if name.blank?
         name = page.search("//meta[@name='title']/@content") if name.blank?
@@ -92,7 +92,7 @@ module Parser
     xpaths.each do |xpath|
       node = page.parser.xpath(xpath.price)
       begin
-        price = BigDecimal(node[0].to_s.gsub(/[^\d.]/, ''))
+        price = BigDecimal(node[0].text.to_s.gsub(/[^\d.]/, '').gsub(/\s+/,''))
         xpathPrices << price if price > 0
       rescue
         Rails.logger.error "thought we had a price but it could not be converted to a big decimal"
@@ -108,12 +108,12 @@ module Parser
       price_field = page.search(field).first
       price = price_field.text if price_field.present?
       if price.present?
-        return price.match(/\d[\d.,]*/).to_s.gsub(/,/,'')
+        return price.match(/\d[\d.,]*/).to_s.gsub(/,/,'').gsub(/\s+/,'')
       end
     end
     price ||= page.body.match(/\$\d*\,*\d*\.\d+/) # try stricter regex first
     price ||= page.body.match(/\$\d[\d.,]*/)
-    price = price.to_s.match(/\d[\d.,]*/).to_s.gsub(/,/,'')
+    price = price.to_s.match(/\d[\d.,]*/).to_s.gsub(/,/,'').gsub(/\s+/,'')
   end
 
   def get_name(page, retailer)
