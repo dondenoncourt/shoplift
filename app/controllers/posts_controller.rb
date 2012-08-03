@@ -99,22 +99,6 @@ class PostsController < ApplicationController
       @item = @post.items.create({ :user_id => current_user.id })
       if @item.persisted?
         #User.delay.share_lift(current_user.id, item_url(@item))
-        Thread.new do
-          User.share_lift(current_user.id, item_url(@item))
-        end
-        if params[:hashtags]
-          params[:hashtags].each do |key, hashtag_value|
-            Rails.logger.debug 'adding hashtag:'+hashtag_value
-            @hashtag_value = HashtagValue.where(:value => hashtag_value).first_or_create #.find_or_create_by_value(hashtag_value)
-            if @hashtag_value.blank?
-              # CONSIDER: post.errors[:base] << 'fails to create...' if entry_url.blank?
-              return render_error(500,"Failed to create hashtag")
-            end
-            if !Hashtag.create({:user_id => current_user.id, :post_id => @item.post.id, :hashtag_value_id => @hashtag_value.id})
-              return render_error(500,"Failed to create hashtag: "+hashtag_value+' '+@hashtag.errors[:hashtag_value_id][0])
-            end
-          end
-        end
         respond_to do |format|
           format.html { redirect_to current_user }
           format.json { render :partial => 'item', :locals => {:item => @item}, :status => 201 }
@@ -124,6 +108,22 @@ class PostsController < ApplicationController
       end
     else
       render :edit
+    end
+    Thread.new do
+      User.share_lift(current_user.id, item_url(@item))
+    end
+    if params[:hashtags]
+      params[:hashtags].each do |key, hashtag_value|
+        Rails.logger.debug 'adding hashtag:'+hashtag_value
+        @hashtag_value = HashtagValue.where(:value => hashtag_value).first_or_create #.find_or_create_by_value(hashtag_value)
+        if @hashtag_value.blank?
+          # CONSIDER: post.errors[:base] << 'fails to create...' if entry_url.blank?
+          return render_error(500,"Failed to create hashtag")
+        end
+        if !Hashtag.create({:user_id => current_user.id, :post_id => @item.post.id, :hashtag_value_id => @hashtag_value.id})
+          return render_error(500,"Failed to create hashtag: "+hashtag_value+' '+@hashtag.errors[:hashtag_value_id][0])
+        end
+      end
     end
   end
 

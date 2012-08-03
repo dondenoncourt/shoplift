@@ -21,15 +21,6 @@ For name, the following is used to find an xpath for an h1, h2, h3, or span tag 
 2) contains the user-keyed name anywhere
 Note, the xpath is saved only if there is one tag that matches the user-keyed name
 
-The xpaths table contains:
-retailer (URL)
-brand (xpath, may be null)
-name (xpath, may be null)
-price (xpath, may be null)
-id (integer key)
-created_at (date)
-updated_at (date)
-
 Note that m.ziray suggest a rating, which is planned to be added as we refine the learning parser
 
 =end
@@ -37,39 +28,11 @@ Note that m.ziray suggest a rating, which is planned to be added as we refine th
 include Parser
 module ParserAudit
 
-  # if the user overrode and values returned from parser
-  # attempt to retrieve and save the xpath and regex to retrieve those values
-  # Notes:
-  #  a new post was already created so, in the update/changed, then we 
-  #  can get the changed parameters (try dirty object rails method)
-  #  http://archives.ryandaigle.com/articles/2008/3/31/what-s-new-in-edge-rails-dirty-objects
-  # delayed jobs??? gem 
-  #   set up a worker task 
-  #   has its own database table
-  #   would not need a web request
-  # would save "learned" results on a site (or even more detailed)
-  #
   # Add log for issues for humans to review
   #   one area of concern is user changing when there already is "learned" data
-  #   mispellings 
-  #
-  # Alfie: only add if the parser returns a blank!
   #
   # handle brand being in the prefix of the item name
   #     if brand changed and the new brand is in the item name, add a regex?
-  # "scoring" points on a page (above the fold)
-  # h1 has more weight than h3
-  # text in a hyper-link -- for google
-  # span with and id
-  # use font sizes or bold, is the included css file info available?
-  #
-  # if the brand is in the post.itemName or the xml item name has the brand in it
-  #    then use the brand prefix in the item name from the xml
-  # brand node weights:
-  # h1|h2|h3 has only brand
-  # h1|h2|h3 starts-with brand and contains item name
-  # h1|h2|h3 starts-with brand
-  # h1|h2|h3|span only brand
   #
   def parser_audit(post_params)
     xpaths = Hash.new
@@ -120,24 +83,24 @@ module ParserAudit
   private
 
   def get_price_xpath(page, value)
-    %w{h1 h2 h3 span}.each do |tag|
-      #node = page.parser.xpath("//#{tag}[text()='$#{value.gsub(/\$/,'')}']")
+    %w{h1 h2 h3 span div}.each do |tag|
       node = page.parser.xpath("//#{tag}[contains(text(),'#{value}')]")
+      node = page.parser.xpath("//#{tag}[text()='#{value.gsub(/\$/,'')}']") if !node
       return buildXpath(page, node[0], __method__) if node.length > 0
     end
     nil
   end
 
   def get_name_xpath(page, value)
-    node = tag_has_only_text(page, %w{title h1 h2 h3 span}, value)
+    node = tag_has_only_text(page, %w{title h1 h2 h3 span div}, value)
     Rails.logger.debug "#{node} name tag found by tag_has_only_name" if node
     return buildXpath(page, node[0], __method__) if node
 
-    node = tag_starts_with_text(page, %w{title h1 h2 h3 span}, value)
+    node = tag_starts_with_text(page, %w{title h1 h2 h3 span div}, value)
     Rails.logger.debug "#{node} name tag found by tag_starts_with_text" if node
     return buildXpath(page, node[0], __method__) if node
 
-    node = tag_contains_text(page, %w{title h1 h2 h3 span}, value)
+    node = tag_contains_text(page, %w{title h1 h2 h3 span div}, value)
     Rails.logger.debug "#{node} name tag found by tag_contains_text" if node
     return buildXpath(page, node[0], __method__) if node
 
@@ -148,19 +111,19 @@ module ParserAudit
   end
 
   def get_brand_xpath(page, post_params)
-    node = tag_has_only_text(page, %w{h1 h2 h3 span}, post_params[:brand])
+    node = tag_has_only_text(page, %w{h1 h2 h3 span div}, post_params[:brand])
     Rails.logger.debug "#{node} brand tag found by tag_has_only_text" if node
     return buildXpath(page, node[0], __method__) if node
 
-    node = tag_starts_with_brand_contains_name(page, %w{h1 h2 h3 span}, post_params[:brand], post_params[:name])
+    node = tag_starts_with_brand_contains_name(page, %w{h1 h2 h3 span div}, post_params[:brand], post_params[:name])
     Rails.logger.debug "#{node} brand tag found by tag_starts_with_brand_contains_name" if node
     return buildXpath(page, node[0], __method__) if node
 
-    node = tag_starts_with_text(page, %w{h1 h2 h3 span}, post_params[:brand])
+    node = tag_starts_with_text(page, %w{h1 h2 h3 span div}, post_params[:brand])
     Rails.logger.debug "#{node} brand tag found by tag_starts_with_text" if node
     return buildXpath(page, node[0], __method__) if node
 
-    node = tag_contains_text(page, %w{h1 h2 h3 span}, post_params[:brand])
+    node = tag_contains_text(page, %w{h1 h2 h3 span div}, post_params[:brand])
     Rails.logger.debug "#{node} brand tag found by tag_contains_text" if node
     return buildXpath(page, node[0], __method__) if node
 
@@ -241,7 +204,7 @@ module ParserAudit
   end
   
   def tag_starts_with_brand_contains_name(page, tags, brand, name)
-    %w{h1 h2 h3 span}.each do |tag|
+    %w{h1 h2 h3 span div}.each do |tag|
       node = page.parser.xpath("//#{tag}[starts-with(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'#{brand.downcase}')]")
       if !node.blank?
         #node = page.parser.xpath("/#{tag}[contains(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),\""+name.downcase+"\")]")
@@ -273,69 +236,6 @@ module ParserAudit
   # http://stackoverflow.com/questions/2279513/how-can-i-create-a-nokogiri-case-insensitive-xpath-selector
   def case_insensitive_equals(node_set, str_to_match)
     node_set.find_all {|node| node.to_s.downcase == str_to_match.to_s.downcase }
-  end
-
-  # top retailer clothing sites:
-  # http://www.fashionbug.com/
-  # http://www.redoute.com/
-  # http://www.oldnavy.com/
-  # http://www.bcoutlet.com/
-  # http://www.getheavenly.com/
-  # http://www.spiegel.com/
-  # http://www.modcloth.com/
-  # http://www.nyandcompany.com/
-  # http://www.wetseal.com/
-  # http://www.urbanladiesoutfits.com/
-
-  def run_some()
-    @sites = [
-      {brand: 'Tignanello', name: 'Multi Pocket Organizer Crossbody', url: 'http://bags.bcoutlet.com/product/tignanello/multi-pocket-organizer-crossbody/130799/p/1338439'},
-      {brand: 'Russell Athletic', name: "Men's Crew Neck T-Shirt", url: 'http://www.sears.com/russell-athletic-men-s-crew-neck-t-shirt/p-043M6725000P?prdNo=2&blockNo=2&blockType=G2'},
-      {brand: 'miss me jeans', name: "Miss Me Jeans Fleur-de-Lis Bermuda Denim Shorts", url:'http://www.dillards.com/product/Miss-Me-Jeans-FleurdeLis-Bermuda-Denim-Shorts_301_-1_301_503199762'},
-      {brand: 'Theodora & Callum', name:'Primaballet with Ankle Strap', url:'http://www1.bloomingdales.com/shop/product/theodora-callum-flats-primaballet-with-ankle-strap?ID=596838&CategoryID=17367#fn=spp%3D1%26ppp%3D96%26sp%3D1%26rid%3D19'}
-      #'http://fashionbug.lanebryant.com/shoes/boots/13833c5116/index.cat?intid=LPxSH060312xL4',
-      #'http://oldnavy.gap.com/browse/product.do?cid=82576&vid=1&pid=106420',
-      #'http://www.getheavenly.com/Co-Sheer-Stroke-Blouse-Orange/dp/B0074W34SC',
-      #'http://www.spiegel.com/long-asymmetrical-dress.html',
-      #'http://www.modcloth.com/shop/blouses/coach-tour-top-in-sand'
-
-    ]
-    xpaths = Hash.new
-    @sites.each do |post|
-      hash = parser_audit(post)
-      hash.each do |retailer, xpath|
-        xpaths[retailer] = xpath
-      end
-    end
-    puts "List all URLs and their brand xpaths"
-    xpaths.each do |retailer, xpath|
-      puts "url: #{retailer} xpath: #{xpath}"
-    end
-    #reparse the sites using the xpaths
-    # and figure out how to get the darn brand out of the returned nodes?
-    # database should flag full match
-    # otherwise search in string for substring that is in the brand database
-    #  but how to do that, and effectively...
-    #  figure all text starts with domain
-    #  use first word to get a list from the domain database
-    #  then check each returned brand name with the xml text
-    #  once there's a hit, we got our domain????
-    #  or we could find_all that match two words/nodes from the xml until we no longer get rows
-    @sites.each do |post|
-      retailer = post[:url].split('/')[2]
-      agent = Mechanize.new
-      agent.user_agent_alias = 'Windows Mozilla'
-      begin
-        agent.get(post[:url]) do |page|
-          node = page.parser.xpath(xpaths[retailer])
-          puts node
-          brand = find_brand(node)
-        end
-      rescue => ex
-        puts ex.message
-        puts ex.backtrace
-      end
-    end
   end
 
 end

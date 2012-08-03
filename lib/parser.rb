@@ -39,7 +39,7 @@ module Parser
   # these can later be replaced by 'learned' elements stored elsewhere
   BRAND_IDENTIFIERS = %w(.brandLink .header-logo #logo .brand )
   ITEM_IDENTIFIERS = %w(#btAsinTitle .product-name h1 h2 )
-  PRICE_IDENTIFIERS = %w(#actualPriceValue .priceLarge .select-sale-single .price-single .priceSale .offer-price .cat-glo-tex-saleP .cat-pro-price .price)
+  PRICE_IDENTIFIERS = %w(#actualPriceValue .priceLarge .select-sale-single .price-single .priceSale .offer-price .cat-glo-tex-saleP .cat-pro-price .price .bigPriceText1 .price-amount)
 
   # TODO maybe...
   #// See if we have a price in the description or title

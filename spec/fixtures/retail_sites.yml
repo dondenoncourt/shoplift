@@ -1,17 +1,9 @@
----
-#amazon_001:
-  #retailer: www.amazon.com
-  #page: http://www.amazon.com/Panasonic-Sensitivity-Digital-Camera-Optical/dp/B00728ZBA2/ref=sr_1_1?s=electronics&ie=UTF8&qid=1342634895&sr=1-1&keywords=panasonic
-  #brand: Panasonic
-  #name: Lumix ZS20 14.1 MP High Sensitivity MOS Digital Camera with 20x Optical Zoom
-  #price: $304.00
-
 site_000:
   retailer: www.amazon.com
   page: http://www.amazon.com/Takeya-Airtight-Drink-Maker-Pitcher/dp/B004TJ3ZUA/ref=sr_1_3?s=home-garden&ie=UTF8&qid=1342625938&sr=1-3
   brand: Takeya
   name: Airtight Drink Maker Pitcher / Jug, Set of Two
-  price: $28.98
+  price: $27.99
   brand_xpath:
 site_001:
   retailer: www.marahoffman.com
@@ -82,12 +74,12 @@ site_009:
 #parse_audit doesn't find price because it dollar/cents are in separate tags
 #<span class="bigPriceText1">$199.</span>
 #<span class="smallPriceText1">00</span>
-#site_010:
-  #retailer: www.walmart.com
-  #page: http://www.walmart.com/ip/Mongoose-Detain-700cc-Men-s-Street-Bike/15711162
-  #brand: Mongoose
-  #name: Detain 700cc Men's Street Bike
-  #price: $199.00
+site_010:
+  retailer: www.walmart.com
+  page: http://www.walmart.com/ip/Mongoose-Detain-700cc-Men-s-Street-Bike/15711162
+  brand: Mongoose
+  name: Detain 700cc Men's Street Bike
+  price: $199.00
 
 site_011:
   retailer: www.llbean.com
@@ -111,9 +103,24 @@ site_013:
   page: http://www.overstock.com/Jewelry-Watches/Pre-owned-Rolex-Mens-Datejust-Stainless-Steel-Silver-Dial-Watch/5324021/product.html
   brand: Pre-owned Rolex
   name: Pre-owned Rolex Men's Datejust Stainless Steel Silver Dial Watch
-  price: $3,499.99
+  price: $3,618.99
   brand_xpath:
   #brand_xpath: //*[@id="mainCenter_priceDescWrap"]/div[1]/div/div/span/span
 
+site_014:
+  retailer: www.barneys.com
+  page: http://www.barneys.com/Serapian-Leather-iPad%C2%AE-Zip-Case/00505012116362,default,pd.html?cgid=men&index=0#
+  brand: serapian
+  name: leather ipad
+  price: $215
+  brand_xpath:
 
+site_015:
+  retailer: www.williams-sonoma.com
+  page: http://www.williams-sonoma.com/products/hurom-slow-juicer/?cm_src=hphero&cm_re=071912-_-Hero-_-Hurom_Juicer
+  brand: williams-sonoma
+  name: Hurom Slow Juicer
+  price: $359.95
+  brand_xpath:
 
+# note www.yoox.com errors off in their javascript and we aren't able to fix that

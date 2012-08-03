@@ -33,7 +33,7 @@ describe 'Visit various retail sites:' do
         post_params = parse(attr['page'])
         #post_params.delete(:images) # post_controller does this because the javascript then does it
         #p post_params
-        puts "$"+post_params[:price].to_s.gsub(/0*$/, '')+".should == "+attr['price'].gsub(/0*$/,'')
+        #puts "$"+post_params[:price].to_s.gsub(/0*$/, '')+".should == "+attr['price'].gsub(/0*$/,'')
         #post_params[:price].to_s.gsub(/0*$/, '').should == attr['price'].gsub(/0*$/,'').gsub(/[$,]/,'')
         post_params[:price].to_s.should == BigDecimal.new(attr['price'].gsub(/[$,]/,'')).to_s
       end
