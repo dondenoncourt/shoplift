@@ -67,10 +67,10 @@
 
   
   <p class='description'><strong>Description:</strong>  # Fetch items of current user and that of his/her subscriptions.  Defaults 2 per page.
- # <br/><br/>Notes:<pre>curl -X GET --user aaronbartell@gmail.com:poopydiaper localhost:3000/timelines.json&page=2</pre>  
+ # <br/><br/>Notes:<pre>curl -X GET --user aaronbartell@gmail.com:password "localhost:3000/timelines.json?page=1&per_page=10"</pre>  
 </p>
 
-  <h2><span id='http_verb'>GET</span>/timelines.json&page=2</h2>
+  <h2><span id='http_verb'>GET</span>/timelines.json?page=2</h2>
 
   
     <strong>Access:</strong> FREE<br />
@@ -85,7 +85,7 @@
   
     <strong>Parameters:</strong>
     <ul>
-      <li>page:int - the page, default is 1 (optional)</li>
+      <li>page:int - the page, default is 1 (optional)</li><li>per_page:int - the page, default is 2 (optional)</li>
     </ul>
   
 
