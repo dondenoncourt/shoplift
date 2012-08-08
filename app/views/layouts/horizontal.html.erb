@@ -1,0 +1,55 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# the_shoplift: http://ogp.me/ns/fb/the_shoplift#">
+	<meta charset="utf-8">
+	<title>The Shoplift: <%= full_title(yield(:title)) %></title>
+	
+	<meta name="description" content="The Shoplift" />
+	<meta name="keywords" content="The Shoplift" />	
+	<meta name="author" content="The Shoplift" />
+  <%= yield :head %>
+  <!-- note: if you use any stylesheet other than the application.css manifest, it becomes manual --> 
+  <%= stylesheet_link_tag "style"%>	
+  <%= stylesheet_link_tag "webfonts/stylesheet"%>	
+
+  <%= javascript_include_tag "application" %>
+</head>
+<body>
+
+<!-- Header Start -->
+<div class="header">
+	<div class="logoPan">
+   	  <img src="images/logo.png" width="600" height="155" alt="" />
+    </div>
+    <div class="profilePan">
+    	<img src="images/profile-image.png" width="65" height="65" alt="" />
+        <ul>
+        	<li><a href="#" title="Add">Add</a></li>
+            <li><a href="#" title="Follow">Follow</a></li>
+            <li><a href="#" title="Profile">Profile</a></li>
+            <li><a href="#" title="Saved">Saved</a></li>
+            <li><a href="#" title="Search">Search</a></li>
+            <li class="arrowLink"><a href="#" class="arrow">></a>
+            	<ul>
+                	<li><a href="#" title="Invite">Invite</a></li>
+                    <li><a href="#" title="Help">Help</a></li>
+                    <li><a href="#" title="Buttons">Buttons</a></li>
+                    <li><a href="#" title="About">About</a></li>
+                    <li><a href="#" title="Blog">Blog</a></li>
+                    <li><a href="#" title="Sign Out">Sign Out</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+<!-- Header End -->
+
+<% flash.each do |name, msg| %>
+  <div class="rightCol">
+    <%= content_tag :div, msg.html_safe, :id => "flash_#{name}", :class => 'entry' %>
+  </div>
+<% end %>
+<%= yield :layout %>
+</body>
+</html>
+

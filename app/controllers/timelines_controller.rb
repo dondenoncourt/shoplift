@@ -1,5 +1,7 @@
 class TimelinesController < ApplicationController
 
+  layout :timeline_layout
+
   # =begin apidoc
   # url:: /timelines.json?page=2
   # method:: GET
@@ -14,7 +16,7 @@ class TimelinesController < ApplicationController
   # <br/><br/>Notes:<pre>curl -X GET --user aaronbartell@gmail.com:password "localhost:3000/timelines.json?page=1&per_page=10"</pre>  
   # =end
   def index
-    authenticate_user!
+    #authenticate_user!
     @items = Item.joins(:post,:user,"INNER JOIN subscriptions ON subscriptions.user_id = items.user_id AND subscriptions.status = 1")
                  .joins("INNER JOIN users AS post_users on posts.user_id = post_users.id AND users.status = 1")
                  .where("items.status = 1 AND (subscriptions.follower_id = ? )",current_user.id)
@@ -22,6 +24,19 @@ class TimelinesController < ApplicationController
                  .order("items.created_at DESC")
                  .group("items.id")
                  .paginate(per_page: params[:per_page].present? ? params[:per_page]: 2, page: params[:page])
+
+    render partial: @items if request.xhr?
+  end
+
+  def index2
+    authenticate_user!
+    @items = Item.joins(:post,:user,"INNER JOIN subscriptions ON subscriptions.user_id = items.user_id AND subscriptions.status = 1")
+                 .joins("INNER JOIN users AS post_users on posts.user_id = post_users.id AND users.status = 1")
+                 .where("items.status = 1 AND (subscriptions.follower_id = ? )",current_user.id)
+                 .between(params)
+                 .order("items.created_at DESC")
+                 .group("items.id")
+                 .paginate(per_page: 6, page: params[:page])
 
     render partial: @items if request.xhr?
   end
@@ -119,6 +134,12 @@ class TimelinesController < ApplicationController
 
   def limit
     params[:limit] || 20
+  end
+  
+  def timeline_layout
+    return 'horizontal' if params[:action] == 'index2'
+    puts "denoncourt timeline_layout returning application"
+    'application'
   end
 
 end
