@@ -52,8 +52,8 @@ $(function() {
 		items: 3,
 		scroll: {
 			items: 1,
-			duration: 9000,
-			pauseDuration: 9000,
+			duration: 500,
+			pauseDuration: 900,
 			pauseOnHover    : true
 		},
     auto	: {
