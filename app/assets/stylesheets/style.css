@@ -31,15 +31,24 @@ ul{
 	background:url(/images/logo-panel-bg.png) 0 0 no-repeat;
 	float:left;
 }
+.roundImage {
+  margin-top: -50px;
+  border-radius:100px; 
+  border:4px solid white; 
+  overflow:hidden;
+}
 
 /* Top Profile Panel Style */
 .profilePan{
 	float:right;
 	width:124px;
 	background:url(/images/profile-panel-bg.png) 0 0 no-repeat;
-	padding-top:41px;
+	padding-top:89px;
+  padding-right:32px;
+  padding-left:22px;
 	position:relative;
 	z-index:500;
+  width: 75px;
 }
 .profilePan img{
 	margin:0 auto;

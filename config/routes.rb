@@ -54,8 +54,6 @@ App::Application.routes.draw do
   get "timelines/recent", :to => "timelines#show_recent"
   get "timelines/hashtags/:name", :to => "timelines#show_hashtags"
 
-  get "timelines2", :to => "timelines#index2"
-
   #
   # Parser and Bookmarklet
   #

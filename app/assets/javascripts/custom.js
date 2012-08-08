@@ -5,16 +5,18 @@ $(document).ready(function(){
 	$('blockquote p').wrapInner('<span>');
 	$('.productBox:nth-child(3n)').addClass('active');
 
-$('.profilePan img').hover(
+$('.profilePan #userImage').hover(
 function () {
 	$(this).addClass('active');
-	$(this).next('ul').fadeIn('fast');
+	//$(this).next('ul').fadeIn('fast');
+	$('#mainMenu').fadeIn('fast');
 }
 );
 $('body, html').click(
 function () {
 	$(this).removeClass('active');
-	$('.profilePan img').next('ul').fadeOut();
+	//$('.profilePan img').next('ul').fadeOut();
+	$('#mainMenu').fadeOut();
 }
 );
 
@@ -50,7 +52,7 @@ $(function() {
 		items: 3,
 		scroll: {
 			items: 1,
-			duration: 500,
+			duration: 1000,
 			pauseDuration: 500,
 			pauseOnHover    : true
 		},

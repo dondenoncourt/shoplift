@@ -22,12 +22,14 @@
    	  <img src="images/logo.png" width="600" height="155" alt="" />
     </div>
     <div class="profilePan">
-    	<img src="images/profile-image.png" width="65" height="65" alt="" />
-        <ul>
+      <div id="userImage" class="roundImage">
+       <%= image_tag(current_user.avatar.url(:small), height: '65', width: '65') %>
+      </div>
+        <ul id="mainMenu">
         	<li><a href="#" title="Add">Add</a></li>
-            <li><a href="#" title="Follow">Follow</a></li>
+          <li><%= link_to "Follow", shoplifters_path %> </li>
             <li><a href="#" title="Profile">Profile</a></li>
-            <li><a href="#" title="Saved">Saved</a></li>
+          <li><%= link_to "Saved", user_path(current_user, :saved => true) %></li>
             <li><a href="#" title="Search">Search</a></li>
             <li class="arrowLink"><a href="#" class="arrow">></a>
             	<ul>
@@ -50,6 +52,7 @@
   </div>
 <% end %>
 <%= yield :layout %>
+  <div id="basic-modal-content"></div>
 </body>
 </html>
 

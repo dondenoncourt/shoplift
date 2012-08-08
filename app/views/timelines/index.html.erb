@@ -1,16 +1,16 @@
-<div id="content">
-  <div class="centerCol">
-    <% if @items.any? %>
-      <%= render @items %>
-      <div id="results"></div>
-      <%= will_paginate(@items) %>
-      <%= pageless(@items.total_pages, timelines_path) %>
-    <% else %>
-      <div id="content" class="internal help">
-        <div class='entry'>
-          <p>There are currently no items. You can <%= link_to "add items", new_post_path, :class => 'modal_link' %> or <%= link_to "follow shoplifters", shoplifters_path %> to see more items here.</p>
-        </div>
-      </div>
-    <% end %>
-  <div class="clear"></div>
+<div class="bodyPanel">
+	<div class="productPanel">
+
+    <div id="results" class="carousel">
+      <% if @items.any? %>
+        <%= render @items %>
+      <% end %>
+    </div>
+
+		<a href="JavaScript:void(0);" id="prev" title="Show previous"><!-- Prev --></a>
+		<a href="JavaScript:void(0);" id="next" title="Show next"><!-- Next --></a>
+    <span id="lastPage" style="display:none;"><%= @items.total_pages %></span>
+
+	</div>
 </div>
+
