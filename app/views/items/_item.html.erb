@@ -1,85 +1,21 @@
-<div class="entry <%= item.saved_by?(current_user) ? 'saved' : '' %>" id="item_<%= item.id %>"> <div class="entryHead">
-    <%= link_to image_tag(item.user.avatar.url(:thumb)), item.user %>
-    <p class="user">
-      <%= link_to item.user.full_name, item.user %>
-      <br/><span class="location"><%= item.user.hometown %></span>
-    </p>
-  </div>
-  <div class="productMain">
-    <div class="product">
-      <div class="productDetails">
-        <h2><%= item.retailer %><br/><span class="productDescription"><%= item.name %></span></h2>
-        <div class="price"><%= number_to_currency(item.price, :precision => 0) %></div>
-        <ul class="actions">
-          <li>
-          <a href="#" class="modal" data-modalType="relift" data-modal-rails="relift?post_id=<%= item.id%>">Re-lift</a></li>
-          <li>
-            <a href="#" class="btnSetAside <%= item.saved_by?(current_user) ? 'has_aside' : '' %>"
-              item_id="<%= item.id %>"
-              set_aside_id="<%= item.aside_by(current_user).id if item.saved_by?(current_user) %>"
-            >
-              <%= item.saved_by?(current_user) ? 'Un-Save' : 'Save' %>
-            </a>
-          </li>
-          <li><a href="#" class="modal" data-modalType="share">Share</a></li>
-          <li><a href="#">Buy</a></li>
-        </ul>
-      </div>
-      <%= link_to image_tag(item.photo.url(:small)), image_item_path(item), :class => 'modal_link' %>
+<div class="entry <%= item.saved_by?(current_user) ? 'saved' : '' %> productBox" id="item_<%= item.id %>">
+    <div class="profileImgPan">
+      <%= image_tag(item.user.avatar.url(:small), height: '120px', width: '120px') %>
     </div>
-    <div class="productMeta">
-      <div class="comment">
-        <p><%= item.comment %></p>
-        <p>Lifted <%= time_ago_in_words(item.created_at) %> Ago</p>
-      </div>
-      <ul class="tabs">
-        <li class="current"><a href="#tagWrap">Tags</a></li>
-        <li style="float:right"><a href="#historyWrap">History</a></li>
-      </ul>
-      <div class="toggleWrap" id="tagWrap" style="display:block;">
-        <div class="add-tag">
-          <form action="hashtags" method="post" name="add_tag_form">
-            <img src="../img/global/user-thumb-holder.gif" alt="user-thumb-holder" width="25" height="25" class="user-tiny-thumb"/>
-            <input type="text" class="text" name="hashtag_value" value="Add a Tag" style="width: 115px;" />
-            <input type="hidden" name="item_id" value="<%= item.id%>"/>
-            <input type="submit" name="submit" class="addSubmit" style="float: right;"/>
-          </form>
-        </div>
-        <div class="itemList">
-          <div class="scrollWrap">
-            <ul class="tagList" id="tagListForItemId<%= item.id %>">
-              <% item.hashtags.each do |tag| %>
-                <li><%= link_to user_image_and_value(tag.user, tag.hashtag_value.value), '#' %></li>
-              <% end %>
-            </ul>
-          </div>
-        </div>
-        <div class="productTattle">
-          <a href="#" class="modal flagItem" data-modalType="flagItem" data-modal-rails="report_item?post_id=<%= item.id%>">Flag Item</a>
-          <a href="#" class="modal reportTag" data-modalType="reportTag" data-modal-rails="report_tag?post_id=<%= item.id%>">Report a Tag</a>
-        </div>
-      </div>
-      <div class="toggleWrap" id="historyWrap" style="display:none;">
-        <% if item.items.any? %>
-          <p>Re-Lifted By:</p>
-          <div class="itemList">
-            <div class="scrollWrap">
-              <ul>
-                <% item.items.sort.each do |i| %>
-                  <% next unless i.user.present? %>
-                  <li><%= link_to user_image_and_value(i.user, i.user.full_name), '#' %></li>
-                <% end %>
-              </ul>
-            </div>
-          </div>
-          <p>First Lifted By:</p>
-          <ul class="firstLifted">
-            <li><%= link_to user_image_and_value(item.items.first.user, item.items.first.user.full_name), '#' %></li>
-          </ul>
-        <% else %>
-          <p>No Re-lifts yet.</p>
-        <% end %>
-      </div>
+    <h2 class="full_name"><%= item.user.full_name %></h2>
+    <blockquote>
+      <p><%= item.comment %></p>
+    </blockquote>
+    <div class="productImg">
+        <%= image_tag(item.photo.url(:small))  %>
     </div>
-  </div>
+    <div class="productPricePan">
+      <p class="productName"><%= item.post.brand.name %></p>
+      <p class="productPrice"><%= item.post.name %> <span><%= number_to_currency(item.price, :precision => 0) %></span></p>
+        <a href="#" class="liftBtn">RE-LIFT</a>
+    </div>
 </div>
+<script>
+  /* needs to be here so it runs when pulled via AJAX */
+  $('.full_name').quickfit({ max: 55, min: 12, truncate: false });
+</script>

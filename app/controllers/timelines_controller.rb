@@ -1,5 +1,7 @@
 class TimelinesController < ApplicationController
 
+  layout :timeline_layout
+
   # =begin apidoc
   # url:: /timelines.json?page=2
   # method:: GET
@@ -21,7 +23,7 @@ class TimelinesController < ApplicationController
                  .between(params)
                  .order("items.created_at DESC")
                  .group("items.id")
-                 .paginate(per_page: params[:per_page].present? ? params[:per_page]: 2, page: params[:page])
+                 .paginate(per_page: params[:per_page].present? ? params[:per_page]: 6, page: params[:page])
 
     render partial: @items if request.xhr?
   end
@@ -119,6 +121,11 @@ class TimelinesController < ApplicationController
 
   def limit
     params[:limit] || 20
+  end
+  
+  def timeline_layout
+    return 'horizontal' if params[:action] == 'index'
+    'application'
   end
 
 end

@@ -7,8 +7,10 @@
 	<meta name="author" content="The Shoplift" />
   <%= yield :head %>
   
-  <%= stylesheet_link_tag "main"%>	
-  <%= stylesheet_link_tag "page"%>	
+  <!-- note: if you use any stylesheet other than the application.css manifest, it becomes manual --> 
+  <%= stylesheet_link_tag "main"	%>
+  <%= stylesheet_link_tag "page"	%>
+
   <%= javascript_include_tag "application" %>
 </head>
 
