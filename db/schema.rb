@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120726220523) do
+ActiveRecord::Schema.define(:version => 20120806204916) do
 
   create_table "brands", :force => true do |t|
     t.string   "name"
@@ -88,6 +88,13 @@ ActiveRecord::Schema.define(:version => 20120726220523) do
   add_index "hashtags", ["hashtag_value_id"], :name => "fk_hashtags_hashtag_values"
   add_index "hashtags", ["post_id"], :name => "fk_hashtags_posts"
   add_index "hashtags", ["user_id"], :name => "fk_hashtags_users"
+
+  create_table "images", :force => true do |t|
+    t.string   "uri"
+    t.binary   "image"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "item_visits", :force => true do |t|
     t.integer  "item_id",    :null => false
@@ -198,7 +205,7 @@ ActiveRecord::Schema.define(:version => 20120726220523) do
 
   create_table "users", :force => true do |t|
     t.string   "email",                                 :default => "",    :null => false
-    t.string   "encrypted_password",                    :default => "",    :null => false
+    t.string   "encrypted_password",     :limit => 128, :default => "",    :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.integer  "sign_in_count",                         :default => 0
@@ -237,6 +244,8 @@ ActiveRecord::Schema.define(:version => 20120726220523) do
     t.integer  "count_of_posts",                        :default => 0
     t.integer  "count_of_hashtags",                     :default => 0
     t.string   "facebook_token"
+    t.string   "twitter_token"
+    t.string   "twitter_secret"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
