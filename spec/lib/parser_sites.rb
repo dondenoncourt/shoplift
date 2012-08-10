@@ -13,7 +13,7 @@ describe 'Visit various retail sites:' do
   # re-run parse(url)
   #   check brand, name, price
   describe "parser" do
-    sites = File.open("spec/fixtures/retail_sites.yml", "r") {|f| YAML.load(f)}
+    sites = File.open("spec/lib/retail_sites.yml", "r") {|f| YAML.load(f)}
     it "should learn" do
       Brand.all.collect{|x| x.delete}
       Brand.count.should == 0

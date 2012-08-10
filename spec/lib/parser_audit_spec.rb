@@ -14,8 +14,9 @@ describe 'Parser_Audit' do
     it "returns xpath" do
       response = parser_audit({url: 'http://www.kettlerusa.com/fitness/exercise-bikes/2761',
                               brand: 'kettler',
+                              retailer: 'www.kettlerusa.com',
                               name: 'race'})
-      response.should == {}
+      response.should == {:name => "//html/body/div/div[2]/div/div[2]/div[1]/h1"}
     end
   end
 
@@ -28,7 +29,8 @@ describe 'Parser_Audit' do
          retailer: 'bag.bcoutlet.com'
         }
       )
-      response.should == {:brand => "//span[@class='ebagsBrand']"}
+      response.should == {:brand=>"//html/body/div[2]/form/div[3]/div[3]/div/div[3]/div/div[3]/a/span[1][@class='ebagsBrand']", 
+                          :name=>"//html/body/div[2]/form/div[3]/div[3]/div/div[2]/h1"}
     end
   end
 
@@ -41,7 +43,9 @@ describe 'Parser_Audit' do
            retailer:'www1.bloomingdales.com'
           }
       )
-      response.should == {:brand=>"//h1"}
+      response.should == {:brand => "//html/body/div[2]/div[2]/div/div[1]/div[6]/div[2]/div[1]/div[2]/h1",
+                          :name => "//html/head/title"
+      }
     end
   end
 
@@ -50,12 +54,16 @@ describe 'Parser_Audit' do
       response = parser_audit(
           {brand: 'Theodora & Callum', 
            name:'Primaballet with Ankle Strap', 
-           price: 115.15,
+           price: '$115.15',
            url:'http://www1.bloomingdales.com/shop/product/theodora-callum-flats-primaballet-with-ankle-strap',
            retailer:'www1.bloomingdales.com'
           }
       )
-      response.should == {:brand=>"//h1", :price => "//span[@class='priceSale']"}
+      response.should == {
+        :brand => "//html/body/div[2]/div[2]/div/div[1]/div[6]/div[2]/div[1]/div[2]/h1",
+        :name => "//html/head/title",
+        :price => "//html/body/div[2]/div[2]/div/div[1]/div[6]/div[2]/div[1]/div[2]/div/div/div[3]/span[@class='priceSale']"
+      }
     end
   end
 
