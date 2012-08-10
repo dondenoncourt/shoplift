@@ -193,6 +193,7 @@ Devise.setup do |config|
   #config.omniauth :facebook, "247495348685143", "9adaad70c8721d06eab625affef7c301", { :scope => 'user_location', :client_options => { :ssl => { :ca_file => '/etc/ssl/certs/ca-certificates.crt' } } }
   config.omniauth :facebook, "247495348685143", "9adaad70c8721d06eab625affef7c301",
     { :scope => 'email, user_location, publish_stream', :client_options => { :ssl => { :ca_file => '/etc/ssl/certs/ca-certificates.crt' } } }
+  config.omniauth :twitter, "Mka8NshDT9rwsHZzU53lg", "m7nv7FfWMSH2h9pEr1RMJHUyaXZaAT4qfVTBa1mouI"
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or

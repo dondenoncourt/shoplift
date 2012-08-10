@@ -42,6 +42,9 @@
 #  longitude              :float
 #  count_of_posts         :integer(4)      default(0)
 #  count_of_hashtags      :integer(4)      default(0)
+#  facebook_token         :string(255)
+#  twitter_token          :string(255)
+#  twitter_secret         :string(255)
 #
 
 class User < ActiveRecord::Base
@@ -137,8 +140,35 @@ class User < ActiveRecord::Base
     facebook { |fb| fb.get_connection("me", "friends").size }
   end
 
-  def self.share_lift(user_id, item_url)
-    user = User.find(user_id)
+  def self.find_for_twitter_oauth(fromTwitter, params)
+    if user = User.find_by_email(params[:email])
+      user.twitter_token = fromTwitter['credentials']['token']
+      user.twitter_secret = fromTwitter['credentials']['secret']
+      user.save
+      user
+    else 
+      #TODO this should be some form of an error
+    end
+  end
+  
+  def twitter(tweet_text, oauth_token, oauth_token_secret)
+    #TODO These twitter hard coded values are also stored in config/devise.rb and should be placed in a single global constant
+    consumer = OAuth::Consumer.new("Mka8NshDT9rwsHZzU53lg", "m7nv7FfWMSH2h9pEr1RMJHUyaXZaAT4qfVTBa1mouI",
+      { :site => "http://api.twitter.com"}
+    )
+    # now create the access token object from passed values
+    token_hash = { :oauth_token => oauth_token,
+                   :oauth_token_secret => oauth_token_secret
+    }     
+    acsTkn = OAuth::AccessToken.from_hash(consumer, token_hash)
+    resp = acsTkn.request(:post, "http://api.twitter.com/1/statuses/update.json", :status => tweet_text)
+  rescue Exception => e
+    puts e.message  
+    puts e.backtrace.inspect  
+  end  
+
+  def self.share_lift(user_id, item_url)    
+    user = User.find(user_id) 
     if user.facebook_token
       # use this when the lift is commented
       #user.facebook.put_connections("me", "notes", :subject => "lifted", :message => item_url.gsub(/http:\/\/.*items/,'items'))
@@ -146,10 +176,18 @@ class User < ActiveRecord::Base
         # this works but comment until we go live
         user.facebook.put_connections("me", "the_shoplift:lift", object: item_url)
       rescue Exception => e
-        puts e
+        puts e.message  
+        puts e.backtrace.inspect  
       end
     end
     
+    if !user.twitter_token.blank? && !user.twitter_secret.blank?       
+      tweetText = user.full_name + ' shoplifted ' + item_url
+      user.twitter(tweetText, user.twitter_token, user.twitter_secret)
+    end    
+  rescue Exception => e
+    puts e.message  
+    puts e.backtrace.inspect  
   end
 
   def set_username
