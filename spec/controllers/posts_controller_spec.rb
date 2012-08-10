@@ -43,8 +43,8 @@ describe PostsController do
                          }
                     }
       xpathCount.should < Xpath.count
-      Xpath.first().brand.should == "//h1"
-      Xpath.first().price.should == "//span[@class='priceBig']"
+      Xpath.first().brand.should == "//html/body/div[2]/div[2]/div/div[1]/div[6]/div[2]/div[1]/div[2]/h1"
+      Xpath.first().price.should == "//html/body/div[2]/div[2]/div/div[1]/div[6]/div[2]/div[1]/div[2]/div/div/div[2]/span[2][@class='priceBig']"
     end
   end
 

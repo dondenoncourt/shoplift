@@ -37,7 +37,7 @@ module ParserAudit
   def parser_audit(post_params)
     xpaths = Hash.new
     agent = Mechanize.new
-    agent.user_agent_alias = 'Windows Mozilla'
+    #agent.user_agent_alias = 'Windows Mozilla'
     begin
       agent.get(post_params[:url]) do |page|
         if post_params[:brand]
@@ -50,7 +50,7 @@ module ParserAudit
           xpath = get_price_xpath(page, post_params[:price])
           xpaths[:price] = xpath if xpath
         end
-        if post_params[:parsed_name] != post_params[:name]
+        if post_params[:name] && post_params[:parsed_name] != post_params[:name]
           Rails.logger.debug "looking for name "+post_params[:name]
           xpath = get_name_xpath(page, post_params[:name])
           xpaths[:name] = xpath if xpath
@@ -83,10 +83,14 @@ module ParserAudit
   private
 
   def get_price_xpath(page, value)
-    %w{h1 h2 h3 span div}.each do |tag|
-      node = page.parser.xpath("//#{tag}[contains(text(),'#{value}')]")
-      node = page.parser.xpath("//#{tag}[text()='#{value.gsub(/\$/,'')}']") if !node
-      return buildXpath(page, node[0], __method__) if node.length > 0
+    value = value.gsub(/\$/,'')
+    # try with/without the doller, and with and without the cents
+    ["$#{value}", value, "$#{value[/\d*\./]}", value[/\d*\./] ].each do |price|
+      %w{h1 h2 h3 span div strong span p}.each do |tag|
+        node = page.parser.xpath("//#{tag}[contains(text(),'#{price}')]")
+        node = page.parser.xpath("//#{tag}[contains(text()[last()],'#{price}')]") if node.length == 0
+        return buildXpath(page, node[0], __method__) if node.length > 0
+      end
     end
     nil
   end
@@ -231,11 +235,6 @@ module ParserAudit
       puts "       Note: could not translate text to lowercase, using standard case sensitive xpath..."
       page.parser.xpath("//*[text()='#{text.downcase}']")
     end
-  end
-
-  # http://stackoverflow.com/questions/2279513/how-can-i-create-a-nokogiri-case-insensitive-xpath-selector
-  def case_insensitive_equals(node_set, str_to_match)
-    node_set.find_all {|node| node.to_s.downcase == str_to_match.to_s.downcase }
   end
 
 end

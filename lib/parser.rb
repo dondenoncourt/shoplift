@@ -51,7 +51,7 @@ module Parser
   def parse(url)
     retailer = url.split('/')[2]
     agent = Mechanize.new
-    #agent.user_agent_alias = 'Windows Mozilla'
+    agent.user_agent_alias = 'Windows Mozilla'
     begin
       agent.get(url) do |page|
         images = []
@@ -92,7 +92,8 @@ module Parser
     xpaths.each do |xpath|
       node = page.parser.xpath(xpath.price)
       begin
-        price = BigDecimal(node[0].text.to_s.gsub(/[^\d.]/, '').gsub(/\s+/,''))
+        #                                       dec or period    trim spaces  strip below cents
+        price = BigDecimal(node[0].text.to_s.gsub(/[^\d.]/, '').gsub(/\s+/,'')[/\d*\.*\d{0,2}/])
         xpathPrices << price if price > 0
       rescue
         Rails.logger.error "thought we had a price but it could not be converted to a big decimal"
@@ -142,6 +143,7 @@ module Parser
   def get_brand(page, retailer)
     brand = nil
     xpaths = Xpath.find_all_by_retailer(retailer, :conditions => "brand IS NOT NULL")
+    # maybe add hits to the row and then use that first.
     xpaths.each do |xpath|
       node = page.parser.xpath(xpath.brand)
       brand = find_brand_in_db(node)

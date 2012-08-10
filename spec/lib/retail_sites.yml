@@ -1,33 +1,10 @@
-site_000:
-  retailer: www.amazon.com
-  page: http://www.amazon.com/Takeya-Airtight-Drink-Maker-Pitcher/dp/B004TJ3ZUA/ref=sr_1_3?s=home-garden&ie=UTF8&qid=1342625938&sr=1-3
-  brand: Takeya
-  name: Airtight Drink Maker Pitcher / Jug, Set of Two
-  price: $27.99
-  brand_xpath:
-site_001:
-  retailer: www.marahoffman.com
-  page: http://www.marahoffman.com/ready-to-wear/bottoms/slouchy-pant-12
-  brand: mara hoffman
-  name: Slouchy pant
-  price: $304.00
-  brand_xpath:
-site_002:
-  retailer: www.marahoffman.com
-  page: http://www.marahoffman.com/ready-to-wear/bottoms/high-waisted-shorts-25
-  brand: mara hoffman
-  name: High Waisted Shorts
-  price: $235.00
-  brand_xpath:
 site_003:
-  retailer: shop.creaturesofcomfort.us
   page: http://shop.creaturesofcomfort.us/karen-walker-keep-the-faith-sunglasses-brass.aspx
   brand: Karen Walker
   name: Keep the Faith Sunglasses- Brass
   price: $250.00
   brand_xpath:
 site_004:
-  retailer: shop.creaturesofcomfort.us
   page: http://shop.creaturesofcomfort.us/karen-walker-pilgrim-sunglasses-black.aspx
   brand: Karen Walker
   name: Pilgrim Sunglasses- Black
@@ -35,21 +12,18 @@ site_004:
   brand_xpath:
 
 site_005:
-  retailer: www.urbanoutfitters.com
   page: http://www.urbanoutfitters.com/urban/catalog/productdetail.jsp?id=24524464a&parentid=M_APP_BASICS_TANKS
   brand: Koto
   name: Summer Jacquard Tank Top
   price: $15
   brand_xpath:
 site_006:
-  retailer: www.urbanoutfitters.com
   page: http://www.urbanoutfitters.com/urban/catalog/productdetail.jsp?id=24015026&parentid=BRANDS
   brand: General Assembly
   name: Original Blazer
   price: $59.99
   brand_xpath:
 site_007:
-  retailer: www.urbanoutfitters.com
   page: http://www.urbanoutfitters.com/urban/catalog/productdetail.jsp?id=24888752&parentid=BRANDS
   brand: Koto
   name: Coaches Jacket
@@ -57,41 +31,36 @@ site_007:
   brand_xpath:
 
 site_008:
-  retailer: www.neimanmarcus.com
-  page: http://www.neimanmarcus.com/p/Jan-Leslie-Sailboat-Cuff-Links-Men-s-Summer-Style/prod145910044_cat42480739_cat40980767_/?isEditorial=false&index=4&cmCat=cat000000cat000470cat40980767cat42480739
-  brand: Jan Leslie
-  name: Sailboat Cuff Links
-  price: $395.00
+  page: http://www.neimanmarcus.com/p/Nanette-Lepore-Paisley-Print-Silk-Dress-Contemporary/prod147790514/?eVar4=You%20May%20Also%20Like%20CS
+  brand: Nanette Lepore
+  name: Paisley-Print Silk Dress
+  price: $398.00
   brand_xpath:
 site_009:
-  retailer: www.neimanmarcus.com
   page: http://www.neimanmarcus.com/p/Simone-Perele-Celeste-Contour-Lace-Bra-Demi-Push-Up/prod143010016_cat9860737__/?icid=&searchType=EndecaDrivenCat&rte=%252Fcategory.jsp%253FitemId%253Dcat9860737%2526pageSize%253D30%2526No%253D0%2526refinements%253D&eItemId=prod143010016&cmCat=product
   brand: Simone Perele
   name: Celeste Contour Lace Bra
   price: $95.00
   brand_xpath:
 
-#parse_audit doesn't find price because it dollar/cents are in separate tags
-#<span class="bigPriceText1">$199.</span>
-#<span class="smallPriceText1">00</span>
+##parse_audit doesn't find price because it dollar/cents are in separate tags
+##<span class="bigPriceText1">$199.</span>
+##<span class="smallPriceText1">00</span>
 site_010:
-  retailer: www.walmart.com
   page: http://www.walmart.com/ip/Mongoose-Detain-700cc-Men-s-Street-Bike/15711162
   brand: Mongoose
   name: Detain 700cc Men's Street Bike
   price: $199.00
 
 site_011:
-  retailer: www.llbean.com
   page: http://www.llbean.com/llb/shop/75914?feat=594-GN1
   brand: l.l.bean
   name: "llbean's Sweater Fleece: Henleys and Zip-Necks"
   price: $59.00
   brand_xpath:
 
-# I gave up and hard-coded the xpath
+### I gave up and hard-coded the xpath
 site_012:
-  retailer: www.target.com
   page: http://www.target.com/p/c9-by-champion-men-s-ventilated-running-shirt-assorted-colors/-/A-13996508#?lnk=sc_qi_detaillink
   brand: C9 by Champion®
   name: Men's Ventilated Running Shirt
@@ -99,16 +68,14 @@ site_012:
   brand_xpath: //*[@id="giftCard"]/h2/span
 
 site_013:
-  retailer: www.overstock.com
   page: http://www.overstock.com/Jewelry-Watches/Pre-owned-Rolex-Mens-Datejust-Stainless-Steel-Silver-Dial-Watch/5324021/product.html
   brand: Pre-owned Rolex
   name: Pre-owned Rolex Men's Datejust Stainless Steel Silver Dial Watch
   price: $3,618.99
   brand_xpath:
-  #brand_xpath: //*[@id="mainCenter_priceDescWrap"]/div[1]/div/div/span/span
+  ##brand_xpath: //*[@id="mainCenter_priceDescWrap"]/div[1]/div/div/span/span
 
 site_014:
-  retailer: www.barneys.com
   page: http://www.barneys.com/Serapian-Leather-iPad%C2%AE-Zip-Case/00505012116362,default,pd.html?cgid=men&index=0#
   brand: serapian
   name: leather ipad
@@ -116,11 +83,65 @@ site_014:
   brand_xpath:
 
 site_015:
-  retailer: www.williams-sonoma.com
   page: http://www.williams-sonoma.com/products/hurom-slow-juicer/?cm_src=hphero&cm_re=071912-_-Hero-_-Hurom_Juicer
   brand: williams-sonoma
   name: Hurom Slow Juicer
   price: $359.95
   brand_xpath:
 
-# note www.yoox.com errors off in their javascript and we aren't able to fix that
+site_016:
+  page: http://shop.creaturesofcomfort.us/laura-urbinati-onepiece-swimsuit-multi.aspx
+  brand: Laura Urbinati
+  name: One-Piece Swimsuit- Multi
+  price: $247.00
+  brand_xpath:
+
+
+## consider meta lowprice content
+site_017:
+  page: http://www.backcountry.com/vonzipper-elmore-sunglasses
+  brand: VonZipper
+  name: Elmore Sunglasses
+  price: $94.95
+  brand_xpath:
+site_018:
+  page: http://www.backcountry.com/the-north-face-resolve-jacket-womens
+  brand: The North Face
+  name: One-Piece Swimsuit- Multi
+  price: $71.96
+  brand_xpath:
+
+site_019:
+  page: http://www.amazon.com/Takeya-Airtight-Drink-Maker-Pitcher/dp/B004TJ3ZUA/ref=sr_1_3?s=home-garden&ie=UTF8&qid=1342625938&sr=1-3
+  brand: Takeya
+  name: Airtight Drink Maker Pitcher / Jug, Set of Two
+  price: $27.37
+  brand_xpath:
+
+site_020:
+  page: http://www.qvc.com/Sleeping-Beauty-Turquoise-Cluster-Design-Ring,-14K.product.J271566.html?sc=J271566-WNEW&cm_sp=VIEWPOSITION-_-2-_-J271566&catentryImage=http://images-p.qvc.com/is/image/j/66/j271566.001?$uslarge$
+  brand: guess
+  name: Sleeping Beauty Turquoise Cluster Design Ring, 14K
+  price: $279.00
+  brand_xpath:
+
+site_021:
+  page: http://www.marahoffman.com/swimwear/high-waisted-twisted-bandeau-bikini-1448
+  brand: mara hoffman
+  name: High Waisted Twisted Bandeau Bikini
+  price: $216.00
+  brand_xpath:
+site_022:
+  page: http://www.marahoffman.com/ready-to-wear/bottoms/slouchy-pant-12
+  brand: mara hoffman
+  name: Slouchy pant
+  price: $304.00
+  brand_xpath:
+site_023:
+  page: http://www.marahoffman.com/ready-to-wear/bottoms/high-waisted-shorts-25
+  brand: mara hoffman
+  name: High Waisted Shorts
+  price: $235.00
+  brand_xpath:
+
+## note www.yoox.com errors off in their javascript and we aren't able to fix that
