@@ -94,7 +94,7 @@ function expandItems() {
   currentPage++;
   if (currentPage <= lastPage) {
     $.ajax({
-      url:'/timelines2?page='+currentPage,
+      url:'/timelines?page='+currentPage,
       type:'GET',
       success:function(data) {
         $('#results').append(data);
