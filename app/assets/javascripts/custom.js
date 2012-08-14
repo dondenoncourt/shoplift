@@ -52,9 +52,7 @@ $(function() {
 		items: 3,
 		scroll: {
 			items: 1,
-			duration: 500,
-			pauseDuration: 900,
-			pauseOnHover    : true
+			play: false
 		},
     auto	: {
       onBefore: function(oldItems, newItems) {
