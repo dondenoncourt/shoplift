@@ -34,7 +34,8 @@ function formatDate(date) {
   }
   return formattedDate;
 }
-//function handleAddTag() {
+
+
 $(document).ready(function() {
   $(document).on('submit','form[name=add_tag_form]', function (e) {
     e.preventDefault();
@@ -59,13 +60,9 @@ $(document).ready(function() {
     return false;
   });
 });
-//}
-//function handleSave() {
-$(document).ready(function() {
 
-  // Add a click listener to Save/Un-Save item
-  //$('a.[class^=btnSetAside]').unbind();
-  //$('a.[class^=btnSetAside]').click(function(e){
+
+$(document).ready(function() {
   $(document).on('click','a.[class^=btnSetAside]', function (e) {
     e.preventDefault(); // Keeps from invoking the href="#" of the anchor tag after the ajax completes
     _this = $(this);
@@ -102,4 +99,3 @@ $(document).ready(function() {
     }
   });
 });
-//}
