@@ -440,6 +440,7 @@ ul{
   width:185px;
   height:100%;
   overflow:hidden;
+  position:relative;top:135px;left: 4;
 }
 .bottomButtonPan .buyBtn{
   display:block;
