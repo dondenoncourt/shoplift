@@ -74,7 +74,7 @@ $(document).ready(function() {
         success: function(rsp){
           $(_this).closest('div.entry').removeClass('saved');
           $(_this).removeClass('has_aside');
-          $(_this).html('Save');
+          $(_this).html('SAVE');
           $(_this).data('item_id', '');
         }
       });
@@ -88,7 +88,7 @@ $(document).ready(function() {
           console.log(rsp);
           $(_this).closest('div.entry').addClass('saved');
           $(_this).addClass('has_aside');
-          $(_this).html('Un-Save');
+          $(_this).html('UN-SAVE');
           $(_this).attr('item_id', rsp.item_id);
           $(_this).attr('set_aside_id', rsp.id);
         },
