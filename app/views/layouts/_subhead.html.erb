@@ -7,18 +7,18 @@
           <%= image_tag(current_user.avatar.url(:small), height: '65', width: '65') %>
         </div>
         <ul id="mainMenu">
-        	<li><a href="#" title="Add">Add</a></li>
+          <li><%= link_to "Add", new_post_path, :class => 'modal_link' %></li>
           <li><%= link_to "Follow", shoplifters_path %> </li>
           <li><%= link_to "Profile", user_path(current_user) %></li>
           <li><%= link_to "Saved", user_path(current_user, :saved => true) %></li>
-          <li><a href="#" title="Search">Search</a></li>
+          <li><%= link_to_function "Search", "alert('Not yet!')" %></li>
           <li class="arrowLink"><a href="#" class="arrow">></a>
           	<ul>
-             	<li><a href="#" title="Invite">Invite</a></li>
-              <li><a href="#" title="Help">Help</a></li>
-              <li><a href="#" title="Buttons">Buttons</a></li>
+              <li><%= link_to_function "Invite", "alert('Not yet!')" %></li>
+              <li><%= link_to_function "Help", "alert('Not yet!')" %></li>
+              <li><%= link_to "Buttons", buttons_path %></li>
               <li><a href="#" title="About">About</a></li>
-              <li><a href="#" title="Blog">Blog</a></li>
+              <li><%= link_to_function "Blog", "alert('Not yet!')" %></li>
               <li><a href="/logout" title="Sign Out">Sign Out</a></li>
             </ul>
           </li>

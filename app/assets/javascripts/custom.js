@@ -41,8 +41,11 @@ function unhighlight( items ) {
   items.removeClass("active");
 }
 
-$(function() {
-  $('#carousel').carouFredSel({         
+var lastPage = 0;
+var currentPage = 1;
+$(function() { 
+  lastPage = $('#lastPage').html();
+  $('#carousel').carouFredSel({
     width: '100%',
     items: 3,
     auto : false,
@@ -62,6 +65,7 @@ $(function() {
     },
     next: {
       onBefore: function(oldItems, newItems) {
+        expandItems();
         unhighlight( oldItems );
       },
       onAfter : function(oldItems, newItems) {
@@ -134,3 +138,19 @@ $(function() {
       return false;
   });
 });
+function expandItems() {
+  currentPage++;
+  if (currentPage <= lastPage) {
+    $.ajax({
+      url:'/timelines?page='+currentPage,
+      type:'GET',
+      success:function(data) {
+        if (window.console) console.log(data);
+        $('#carousel').append(data);
+      },
+      error:function(xhr,textStatus,errorThrown){
+        alert(xhr.responseText);
+      }
+    });
+  }
+}
