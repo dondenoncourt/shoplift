@@ -8,13 +8,15 @@ $(document).ready(function(){
 $('.profilePan img').hover(
 function () {
   $(this).addClass('active');
-  $(this).next('ul').fadeIn('fast');
+  //$(this).next('ul').fadeIn('fast');
+  $('#mainMenu').fadeIn('fast');
 }
 );
 $('body, html').click(
 function () {
   $(this).removeClass('active');
-  $('.profilePan img').next('ul').fadeOut();
+  //$('.profilePan img').next('ul').fadeOut();
+  $('#mainMenu').fadeOut();
 }
 );
 
