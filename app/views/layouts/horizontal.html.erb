@@ -3,48 +3,19 @@
 <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# the_shoplift: http://ogp.me/ns/fb/the_shoplift#">
 	<meta charset="utf-8">
 	<title>The Shoplift: <%= full_title(yield(:title)) %></title>
-	
 	<meta name="description" content="The Shoplift" />
 	<meta name="keywords" content="The Shoplift" />	
 	<meta name="author" content="The Shoplift" />
   <%= yield :head %>
   <!-- note: if you use any stylesheet other than the application.css manifest, it becomes manual --> 
-  <%= stylesheet_link_tag "style"%>	
+  <%= stylesheet_link_tag "style"	%>
   <%= stylesheet_link_tag "webfonts/stylesheet"%>	
-
+  <!-- note: main.css and page.css that are in _header.html.erb cause issues --> 
   <%= javascript_include_tag "application" %>
 </head>
 <body>
 
-<!-- Header Start -->
-<div class="header">
-  <div class="logoPan">
-      <a href="#"><img src="images/logo.png" width="600" height="155" alt="" /></a>
-    </div>
-    <div class="profilePan">
-        <div class="roundImage" >
-          <%= image_tag(current_user.avatar.url(:small), height: '65', width: '65') %>
-        </div>
-        <ul id="mainMenu">
-        	<li><a href="#" title="Add">Add</a></li>
-          <li><%= link_to "Follow", shoplifters_path %> </li>
-          <li><%= link_to "Profile", user_path(current_user) %></li>
-          <li><%= link_to "Saved", user_path(current_user, :saved => true) %></li>
-          <li><a href="#" title="Search">Search</a></li>
-          <li class="arrowLink"><a href="#" class="arrow">></a>
-          	<ul>
-             	<li><a href="#" title="Invite">Invite</a></li>
-              <li><a href="#" title="Help">Help</a></li>
-              <li><a href="#" title="Buttons">Buttons</a></li>
-              <li><a href="#" title="About">About</a></li>
-              <li><a href="#" title="Blog">Blog</a></li>
-              <li><a href="/logout" title="Sign Out">Sign Out</a></li>
-            </ul>
-          </li>
-        </ul>
-    </div>
-</div>
-<!-- Header End -->
+  <%= render "layouts/subhead" %>
 
 <% flash.each do |name, msg| %>
   <div class="rightCol">
