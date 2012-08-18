@@ -242,6 +242,31 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
   end
 
+  # =begin apidoc
+  # url:: /history/:id
+  # method:: GET
+  # access:: FREE
+  # return:: item object
+  # param:: id:int - item id to list history for
+  # output:: json
+  # {"id":1,"items_count":6,"items":[{"id":1,"created_at":"2011-12-19T23:04:53-06:00","user":{"full_name":"Mark A. Roseboom"}},{"id":4,"created_at":"2011-12-19T23:04:53-06:00","user":{"full_name":"Patrick Camacho"}},{"id":12,"created_at":"2011-12-19T23:04:53-06:00","user":{}},{"id":17,"created_at":"2012-06-01T04:07:07-05:00","user":{"full_name":"Mike"}},{"id":20,"created_at":"2012-06-01T08:07:51-05:00","user":{"full_name":"Brandon Fail"}},{"id":23,"created_at":"2012-06-01T17:19:15-05:00","user":{"full_name":"John Harrington"}}],"first_lifter":{"created_at":"2011-12-06T09:46:45-06:00","full_name":"Mark A. Roseboom"}}
+  # ::output-end::
+  # Show item history
+  # <br/><br/>Notes:<pre> curl -X GET --user mark@elsewhere.net:vo2max localhost:3000/history/1.json</pre>  
+  # =end
+  def history
+    @post = Post.find(params[:id])
+    if @post != nil
+      respond_to do |format|
+        #format.html { render 'show'}
+        format.json { render :partial => 'history', :status => 200 }
+      end
+    else
+      render_error(404,"Item not found")
+    end
+
+  end
+
   protected
 
   # Validates whether user has access to item

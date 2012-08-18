@@ -76,7 +76,7 @@ App::Application.routes.draw do
   post "items/:id/delete", :to => "items#destroy"
 
   get "createItem", :to => "items#create"
-
+  get "history/:id", :to => "items#history"
   #
   # Hashtags
   #
