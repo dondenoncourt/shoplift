@@ -6,9 +6,11 @@
       <div class="profile-img-not-active-box"></div>
     </div>
     <h2 class="full_name"><%= item.user.full_name %></h2>
+    <% if item.comment %>
     <blockquote>
-      <p><%= item.comment %></p>
+      <p><span><%= item.comment %></span></p>
     </blockquote>
+  <% end %>
     <div class="productImg">
         <%= image_tag(item.photo.url(:small), height: '437px', width: '520px')  %>
     </div>
@@ -18,7 +20,7 @@
         <a href="#" class="liftBtn">RE-LIFT</a>
     </div>  
   </div>
-  <a href="#" class="slideBtn">Slide</a>
+  <a href="#" id="slideBtn<%=item.id%>" class="slideBtn">Slide</a>
   
   <div class="productBox2">
      <ul class="tabNav">
@@ -60,5 +62,8 @@
 </div>
 <script>
   /* needs to be here so it runs when pulled via AJAX */
+
   $('.full_name').quickfit({ max: 40, min: 12, truncate: false });
+
+  //$("#slideBtn<%=item.id%>").click(slideBtnHandler());
 </script>

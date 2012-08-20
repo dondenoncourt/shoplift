@@ -2,7 +2,7 @@
 
 // Drop Down
 $(document).ready(function(){
-  $('blockquote p').wrapInner('<span>');
+  /*$('blockquote p').wrapInner('<span>'); now in html of _item.htm.erb --- whoever: delete next time you see this */
   $('.productBox:nth-child(3n)').addClass('active');
 
 $('.profilePan img').hover(
@@ -100,43 +100,61 @@ $(function() {
 //  }
 //  );
 
-  // Right Slide Toggle
-  var clickevent = true;
-    $(".slideBtn").click(function() {
-      if(clickevent == true) {
-      $(this).addClass('slideOff');
-      $(this).next('.productBox2').fadeIn('fast');
-      $(this).next('.productBox2').animate({"right": "14" , "z-index": "0"},1000);
-      $(this).parent('.productBox').animate({width:"750px"},1000 , function() {
+// Right Slide Toggle
+var clickevent = true;
+$(".slideBtn").click(slideBtnHandler());
+/*
+ now in _item.html.erb
+$(".slideBtn").click(function() {
+  if(clickevent == true) {
+    $(this).addClass('slideOff');
+    $(this).next('.productBox2').fadeIn('fast');
+    $(this).next('.productBox2').animate({"right": "14" , "z-index": "0"},1000);
+    $(this).parent('.productBox').animate({width:"750px"},1000 , function() {});
+    clickevent = false;
+    return false;
+  } else {
+    $(this).next('.productBox2').animate({"z-index": "-5"},1);
+    $(this).removeClass('slideOff');    
+    $(this).next('.productBox2').animate({"right": "0"},1000);
+    $(this).parent('.productBox').animate({width:"545px"},1000);
+    $(this).next('.productBox2').fadeOut(200);
+    clickevent = true;
+    return false;
+  }
 });
-      
-      
-      
-      clickevent = false;
-      return false;
-    } else {
-      $(this).next('.productBox2').animate({"z-index": "-5"},1);
-      $(this).removeClass('slideOff');    
-      $(this).next('.productBox2').animate({"right": "0"},1000);
-      $(this).parent('.productBox').animate({width:"545px"},1000);
-      $(this).next('.productBox2').fadeOut(200);
-      clickevent = true;
-      return false;
-    }
-  });
+*/
+function slideBtnHandler() {
+  if(clickevent == true) {
+    $(this).addClass('slideOff');
+    $(this).next('.productBox2').fadeIn('fast');
+    $(this).next('.productBox2').animate({"right": "14" , "z-index": "0"},1000);
+    $(this).parent('.productBox').animate({width:"750px"},1000 , function() {});
+    clickevent = false;
+    return false;
+  } else {
+    $(this).next('.productBox2').animate({"z-index": "-5"},1);
+    $(this).removeClass('slideOff');    
+    $(this).next('.productBox2').animate({"right": "0"},1000);
+    $(this).parent('.productBox').animate({width:"545px"},1000);
+    $(this).next('.productBox2').fadeOut(200);
+    clickevent = true;
+    return false;
+  }
+}
 
 
-  //Tab Show Hide
-  $('.tabContent1').show();
-  $('.tabNav li:first-child').addClass('activeTab');
-  $('.tabNav li').click(function(){
-    var divId = "." + $(this).attr('rel');
-      $(this).parent().siblings('div.tabContent').hide();
-      $(this).parent().siblings(divId).fadeIn('fast');
-      $(this).siblings().removeClass('activeTab');
-      $(this).addClass('activeTab');
-      return false;
-  });
+//Tab Show Hide
+$('.tabContent1').show();
+$('.tabNav li:first-child').addClass('activeTab');
+$('.tabNav li').click(function(){
+  var divId = "." + $(this).attr('rel');
+    $(this).parent().siblings('div.tabContent').hide();
+    $(this).parent().siblings(divId).fadeIn('fast');
+    $(this).siblings().removeClass('activeTab');
+    $(this).addClass('activeTab');
+    return false;
+});
 });
 function expandItems() {
   currentPage++;
