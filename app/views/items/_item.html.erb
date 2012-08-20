@@ -5,7 +5,7 @@
       <%= image_tag(item.user.avatar.url(:small), height: '120px', width: '117px') %>
       <div class="profile-img-not-active-box"></div>
     </div>
-    <h2 class="full_name"><%= item.user.full_name %></h2>
+    <h2 class="full_name"><%= item.user.full_name %><%= item.id%></h2>
     <% if item.comment %>
     <blockquote>
       <p><span><%= item.comment %></span></p>
@@ -65,5 +65,4 @@
 
   $('.full_name').quickfit({ max: 40, min: 12, truncate: false });
 
-  //$("#slideBtn<%=item.id%>").click(slideBtnHandler());
 </script>

@@ -35,12 +35,14 @@ function () {
 // Slider
 function highlight( items ) {
   items.filter(":eq(1)").addClass("active");
+  console.log('highlight');
 } 
 function unhighlight( items ) {
   //items.addClass("inactive"),
   items.removeClass("active");
 }
 
+var clickevent = true; // for drawer slider
 var lastPage = 0;
 var currentPage = 1;
 $(function() { 
@@ -57,6 +59,7 @@ $(function() {
     },
     prev: {
       onBefore: function(oldItems, newItems) {
+        clickevent = true;
         unhighlight( oldItems );
       },
       onAfter : function(oldItems, newItems) {
@@ -65,6 +68,7 @@ $(function() {
     },
     next: {
       onBefore: function(oldItems, newItems) {
+        clickevent = true;
         expandItems();
         unhighlight( oldItems );
       },
@@ -100,49 +104,31 @@ $(function() {
 //  }
 //  );
 
+
 // Right Slide Toggle
-var clickevent = true;
-//$(".slideBtn").click(slideBtnHandler());
-/*
- now in _item.html.erb
-*/
-$(".slideBtn").click(function() {
+$(document).on('click', '.slideBtn', function() {
+  var that = this;
   if(clickevent == true) {
-    $(this).addClass('slideOff');
-    $(this).next('.productBox2').fadeIn('fast');
-    $(this).next('.productBox2').animate({"right": "14" , "z-index": "0"},1000);
-    $(this).parent('.productBox').animate({width:"750px"},1000 , function() {});
+    $(that).addClass('slideOff');
+    $(that).next('.productBox2').fadeIn('fast');
+    $(that).next('.productBox2').animate({"right": "14" , "z-index": "0"},1000);
+    $(that).parent('.productBox').animate({width:"750px"},1000);
+    // the following (for unknown reasons) is required for expanded items
+    $(that).parent('.productBox').css('width', "750px");
     clickevent = false;
     return false;
   } else {
-    $(this).next('.productBox2').animate({"z-index": "-5"},1);
-    $(this).removeClass('slideOff');    
-    $(this).next('.productBox2').animate({"right": "0"},1000);
-    $(this).parent('.productBox').animate({width:"545px"},1000);
-    $(this).next('.productBox2').fadeOut(200);
+    $(that).next('.productBox2').animate({"z-index": "-5"},1);
+    $(that).removeClass('slideOff');    
+    $(that).next('.productBox2').animate({"right": "0"},1000);
+    $(that).parent('.productBox').animate({width:"545px"},1000);
+    // the following (for unknown reasons) is required for expanded items
+    $(that).parent('.productBox').css('width', "545px");
+    $(that).next('.productBox2').fadeOut(200);
     clickevent = true;
     return false;
   }
 });
-function slideBtnHandler() {
-  if(clickevent == true) {
-    $(this).addClass('slideOff');
-    $(this).next('.productBox2').fadeIn('fast');
-    $(this).next('.productBox2').animate({"right": "14" , "z-index": "0"},1000);
-    $(this).parent('.productBox').animate({width:"750px"},1000 , function() {});
-    clickevent = false;
-    return false;
-  } else {
-    $(this).next('.productBox2').animate({"z-index": "-5"},1);
-    $(this).removeClass('slideOff');    
-    $(this).next('.productBox2').animate({"right": "0"},1000);
-    $(this).parent('.productBox').animate({width:"545px"},1000);
-    $(this).next('.productBox2').fadeOut(200);
-    clickevent = true;
-    return false;
-  }
-}
-
 
 //Tab Show Hide
 $('.tabContent1').show();
@@ -163,7 +149,6 @@ function expandItems() {
       url:'/timelines?page='+currentPage,
       type:'GET',
       success:function(data) {
-        if (window.console) console.log(data);
         $('#carousel').append(data);
       },
       error:function(xhr,textStatus,errorThrown){
