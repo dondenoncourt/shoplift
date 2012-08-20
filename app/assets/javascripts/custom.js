@@ -102,9 +102,10 @@ $(function() {
 
 // Right Slide Toggle
 var clickevent = true;
-$(".slideBtn").click(slideBtnHandler());
+//$(".slideBtn").click(slideBtnHandler());
 /*
  now in _item.html.erb
+*/
 $(".slideBtn").click(function() {
   if(clickevent == true) {
     $(this).addClass('slideOff');
@@ -123,7 +124,6 @@ $(".slideBtn").click(function() {
     return false;
   }
 });
-*/
 function slideBtnHandler() {
   if(clickevent == true) {
     $(this).addClass('slideOff');
