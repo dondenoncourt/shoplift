@@ -172,7 +172,6 @@ class UsersController < ApplicationController
   private
 
   def users
-puts params
     @users ||= User.by_option(params[:option], current_user).by_category(params[:category])
       .without_user(current_user).paginate(per_page: params[:per_page] ||= 2, page: params[:page])
   end
