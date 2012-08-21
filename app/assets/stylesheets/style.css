@@ -482,34 +482,134 @@ ul{
   text-shadow: 1px 1px 10px #fff;
     filter: dropshadow(color=#fff, offx=1, offy=1); 
 }
+.loginButtonPan{
+  display:block;
+  background:url(../images/buy-btn-bg.png) 0 0 no-repeat;
+  width:92px;
+  height:40px;
+  margin-right: 10px;
+  overflow:hidden;
+  font:bold 14px/40px "Trebuchet MS", Arial, Helvetica, sans-serif;
+  color:#f8ece5;
+  text-decoration:none;
+  text-align:center;
+  float:left;
+}
 
 
 /* Video Page Style */
-.bodyPanel2{
-  background:url(../images/border.png) 0 19px repeat-x;
-  clear:both;
-}
-.videoPanel{
-  background:url(../images/border.png) 0 474px repeat-x;
+.videoWrapper{
+  background:url(../images/video-side-line.png) 50% 0 repeat-y;
   position:relative;
 }
-.videoBG1{
-  background:url(../images/login-line.png) 1005px 0 no-repeat; 
+.videoWrapper2{
+  background:url(../images/border.png) 0 169px repeat-x;
 }
-.videoBg2{
-  background:url(../images/video-side-line.png) 50% 0 repeat-y;  
+.videoWrapper3{
+  background:url(../images/border.png) 0 624px repeat-x;
 }
-.videoWrapper{
+
+
+/* Header Style */
+.videoHeader{
+  height:115px;
+  width:100%;
+  background:url(../images/header-bg.png) 0 0 repeat-x;
+  position:absolute;
+  top:0;
+  left:0;
+}
+.videoHeader .logoPan{
+  background:url(../images/logo-panel-bg.png) 0 0 no-repeat;
+  float:left;
+}
+
+
+/* Video Page Style */
+.videoContainer{
+  background:url(../images/login-line.png) 705px 0 no-repeat;
   width:1000px;
+  margin:0 auto;
+}
+.videoContainer2{
+  padding-top:150px;
+}
+
+.videoPan{
   height:494px;
   background:url(../images/video-bg.png) 0 0 no-repeat;
   margin:0 auto;
+  position:relative;
 }
 .videoBox{
   width:951px;
   height:445px;
   padding:24px 0 0 24px;
 }
+
+/* Login Panel Style */
+.loginContainer{
+  width:248px;
+  height:445px;
+  background:url(../images/login-inner-line.png) 4px 0 repeat-y;
+  position:absolute;
+  top:24px;
+  right:51px;
+  z-index:100;
+}
+.loginBox{
+  width:220px;
+  height:326px;
+  background:url(../images/login-box-bg.png) 0 0 no-repeat;
+  margin-top:40px;
+  padding-left:28px;
+}
+.loginBox p{
+  font:bold 14px/16px "Trebuchet MS", Arial, Helvetica, sans-serif;
+  color:#fdf4e8;
+  padding:36px 0 18px;
+}
+.loginBox img{
+  border:0; 
+}
+.loginBox label{
+  font:bold 12px/14px "Trebuchet MS", Arial, Helvetica, sans-serif;
+  color:#fdf4e8;
+  display:block;
+  padding:10px 0 10px 70px;
+}
+.loginBox input[type=text], 
+.loginBox input[type=password]{
+  width:160px;
+  height:16px;
+  background-color:#fff;
+  border:0;
+  font:12px/16px "Trebuchet MS", Arial, Helvetica, sans-serif;
+  padding:5px;
+  color:#120223;
+  margin-bottom:10px;
+}
+.loginBox .forgotPassword{
+  font-size:10px;
+  line-height:12px;
+  padding:0;
+}
+.loginBox .forgotPassword a{
+  color:#fdf4e8;  
+}
+.loginBox .forgotPassword a:hover{
+  text-decoration:none; 
+}
+.loginBox .notMember{
+  padding:62px 0 0 0;
+}
+.loginBox .notMember a{
+  color:#fdf4e8;  
+}
+.loginBox .notMember a:hover{
+  text-decoration:none; 
+}
+
 
 /* RoR developer additions/changes */
 .roundImage {

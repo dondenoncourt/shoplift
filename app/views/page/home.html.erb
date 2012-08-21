@@ -1,47 +1,64 @@
-<div class="leftCol">
-  <div class="signupWrap">
-    <h2><a href="#" class="showSignup">Sign In</a></h2>
-    <div class="signinOptions" style="display: <%= params[:login_failed] ? 'block' : 'none' %>">
-      <div class="divider"></div>
-      <%= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook), :class => 'facebookSignup' %>
-      <p class="option"><span>or</span></p>
-      <%= form_for :user, :url => user_session_path, :class => 'signIn' do |f| %>
-        <%= devise_error_messages! %>
+<!-- Video Wrapper -->
+<div class="videoWrapper">
+  <div class="videoWrapper2">
+    <div class="videoWrapper3">
 
-        <%= f.email_field :email, :class => 'text', :placeholder => 'Email Address' %>
-        <%= f.password_field :password, :class => 'text', :placeholder => 'Password' %>
-        <%= f.submit "Sign In", :id => 'submit' %>
-      <% end %>
-      <div class="divider" style="margin-bottom:5px;padding-bottom:10px"></div>
-      <%= link_to "Forgot Password?", new_password_path(:user), :class => 'forgotPassword modal_link' %>
+      <!-- Header Start -->
+      <div class="videoHeader">
+        <div class="logoPan">
+          <img src="../images/logo.png" width="600" height="155" alt="" />
+        </div>
+      </div>
+      <!-- Header End -->
+
+      <!-- Video Container -->
+      <div class="videoContainer">
+        <div class="videoContainer2">
+
+          <!-- Video Box -->
+          <div class="videoPan">
+            <!-- Video Box -->
+            <div class="videoBox">
+        
+              <video controls width="951" height="445" » poster="../video/video-placeholder.jpg">
+                <source src="../video/test-video.webm" type="video/webm"> 
+                <source src="../video/test-video.mp4" type="video/mp4"> 
+                <object width="951" height="445" type="application/x-shockwave-flash"
+                    data="../video/player.swf?image=video/video-placeholder.jpg.jpg&file=video/test-video.mp4">
+                    <param name="movie" value="../video/player.swf?image=gallery-img1.jpg&file=video/test-video.mp4" />
+                </object>
+              </video>
+        
+            </div>
+            <!-- Video Box -->
+            <!-- Login Container -->
+            <div class="loginContainer">
+              <div class="loginBox">
+                  <p>Are you being followed?</p>
+                  
+                  <%= link_to image_tag("../images/facebook-login.gif", width:"170px", height:"27px"), user_omniauth_authorize_path(:facebook) %>
+                  <label>Or</label>
+                  <%= form_for :user, :url => user_session_path, :class => 'signIn' do |f| %>
+                    <%= devise_error_messages! %>                  
+                    <%= f.email_field :email, :class => 'name', :placeholder => 'Email Address', :type => 'text' %>
+                    <%= f.password_field :password, :class => 'name', :placeholder => 'Password' %>
+                    <%= f.submit "Sign In", :id => 'submit', :class => 'loginButtonPan' %>
+                  <% end %>                  
+                  <p class="forgotPassword"><%= link_to "Forgot Password?", new_password_path(:user)%></p>
+                  <p class='notMember'>Not a member?  <%= link_to "Sign Up!", new_user_registration_path %></p>
+                  
+              </div>
+            </div>
+            <!--/ Login Container -->                   
+              
+          </div>
+          <!--/ Video Box -->
+    
+        </div>
+      </div>
+      <!--/ Video Container -->
+
     </div>
   </div>
-  <div class="signupWrap">
-    <h2>Not a member?<br/><%= link_to "Sign Up!", new_user_registration_path %></h2>
-  </div>
 </div>
-
-<div class="rightCol internal">
-  <div id="galleria"></div>
-  <div class="blogFollow">
-    <%= link_to_function "Visit our blog", "alert('Not yet!')" %>.
-    <span style="padding: 0 5px">|</span> Follow us:
-    <%= link_to_function "Facebook", "alert('Not yet!')", :class => 'facebook' %>
-    <%= link_to_function "Twitter", "alert('Not yet!')", :class => 'twitter' %>
-    <%= link_to_function "Pinterest", "alert('Not yet!')", :class => 'pinterest' %>
-    <%= link_to_function "Tumblr", "alert('Not yet!')", :class => 'tumblr' %>
-  </div>
-</div>
-
-<div class="clear"></div>
-
-<script>
-  var data = [
-    <% for image in @images[0..-1] %>
-      { image: "assets/galleria/images/<%= image %>" },
-    <% end %>
-    { image: "assets/galleria/images/<%= @images.last %>" }
-    ];
-  Galleria.loadTheme('assets/galleria.dots.js');
-  Galleria.run('#galleria', { dataSource: data });
-</script>
+<!--/ Video Wrapper -->

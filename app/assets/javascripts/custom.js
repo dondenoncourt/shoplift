@@ -157,3 +157,7 @@ function expandItems() {
     });
   }
 }
+
+$(document).ready(function(){
+  $(".videoContainer").height($(document).height());
+});
