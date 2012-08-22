@@ -2,18 +2,24 @@
 <html lang="en">
   <%= render "layouts/header" %>
 <body>
-  <%= render "layouts/subhead" %>
-  <div id="content">
+  <% if params[:action] != 'home' %>
+  
+    <%= render "layouts/subhead" %>
+    <div id="content">
     <% flash.each do |name, msg| %>
       <div class="rightCol">
         <%= content_tag :div, msg.html_safe, :id => "flash_#{name}", :class => 'entry' %>
       </div>
     <% end %>
     <%= yield :layout %>
-  </div>
-  <%= render "layouts/footer" %>
-  <div id="basic-modal-content"></div>
-  <script type="text/javascript" src="http://s.skimresources.com/js/37030X960874.skimlinks.js"></script>  
+    </div>
+    <%= render "layouts/footer" %>
+    <div id="basic-modal-content"></div>
+    <script type="text/javascript" src="http://s.skimresources.com/js/37030X960874.skimlinks.js"></script>
+    
+  <% else %>
+    <%= yield :layout %>
+  <% end %>  
 </body>
 </html>
 
