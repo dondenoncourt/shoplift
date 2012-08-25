@@ -101,7 +101,7 @@ class PostsController < ApplicationController
         #User.delay.share_lift(current_user.id, item_url(@item))
         respond_to do |format|
           format.html { redirect_to current_user }
-          format.json { render :partial => 'item', :locals => {:item => @item}, :status => 201 }
+          format.json { render :partial => 'items/item', :locals => {:item => @item}, :status => 201 }
         end
       else
         render :edit
