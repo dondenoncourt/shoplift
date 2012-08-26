@@ -63,7 +63,7 @@ $(document).ready(function() {
 
 
 $(document).ready(function() {
-  /* TODO fix this as the jquery selector causes error in Sizzle.js */
+  /* TODO fix this as the jquery selector causes error in Sizzle.js 
   $(document).on('click','a.[class^=btnSetAside]', function (e) {
     e.preventDefault(); // Keeps from invoking the href="#" of the anchor tag after the ajax completes
     _this = $(this);
