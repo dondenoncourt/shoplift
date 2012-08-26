@@ -1,23 +1,22 @@
 <div class="<%= item.saved_by?(current_user) ? 'saved' : '' %> productBox" id="item_<%= item.id %>">
   <div class="productBox1">
-    <div class="not-active-box"></div>
-    <div class="profileImgPan roundImage">
-      <%= image_tag(item.user.avatar.url(:small), height: '120px', width: '117px') %>
-      <div class="profile-img-not-active-box"></div>
-    </div>
+    <div class="profileImgPan"></div>
+    <div class="circle-overflow">
+      <%= image_tag(item.user.avatar.url(:small), height: '116px', width: '87px') %>
+    </div><!--/circle-overflow-->
     <h2 class="full_name"><%= item.user.full_name %><%= item.id%></h2>
     <% if item.comment %>
-    <blockquote>
-      <p><span><%= item.comment %></span></p>
-    </blockquote>
-  <% end %>
+      <blockquote>
+        <p><%= item.comment %></p>
+      </blockquote>
+    <% end %>
     <div class="productImg">
-        <%= image_tag(item.photo.url(:small), height: '437px', width: '520px')  %>
+        <%= image_tag(item.photo.url(:small), width: '353px', height: '410px')  %>
     </div>
     <div class="productPricePan">
       <p class="productName"><%= item.post.brand.name %></p>
       <p class="productPrice"><%= item.post.name %> <span><%= number_to_currency(item.price, :precision => 0) %></span></p>
-        <a href="#" class="liftBtn">RE-LIFT</a>
+        <a href="#" class="liftBtn"></a>
     </div>  
   </div>
   <a href="#" id="slideBtn<%=item.id%>" class="slideBtn">Slide</a>
@@ -26,17 +25,27 @@
      <ul class="tabNav">
        <li class="tab1" rel="tabContent1"><a href="#">Tags</a></li>
        <li class="tab2" rel="tabContent2"><a href="#">History</a></li>
+       <div class="clear"></div>
      </ul>
      
      <div class="tabContent tabContent1">
-        <div class="tabLinkPan">
-          <div class="tabInnerLink tag-txt"><a href="#">Add a Tag</a></div>
-          <% item.hashtags.each do |tag| %>
-            <div class="tabInnerLink"><%= link_to tag.hashtag_value.value, '#' %></div>
-          <% end %>
-        </div>
+       <div class="tabLinkPan">
+         <div class="tabInnerLink tag-txt"><a href="#">Add a Tag</a></div>
+         <% item.hashtags.each do |tag| %>
+           <div class="tabInnerLink"><%= link_to tag.hashtag_value.value, '#' %></div>
+         <% end %>
+       </div>
+       <div class="bottomButtonPan">
+         <a href="<%= item.post.url %>" class="buyBtn" target="_blank">BUY</a>
+         <a href="#" class="btnSetAside saveBtn  <%= item.saved_by?(current_user) ? 'has_aside' : '' %>" 
+            item_id="<%= item.id %>" 
+            set_aside_id="<%= item.aside_by(current_user).id if item.saved_by?(current_user) %>" >
+               <%= item.saved_by?(current_user) ? 'UN-SAVE' : 'SAVE' %>
+         </a>
+         <a href="#" class="shareBtn">SHARE</a>
+       </div>
+       <div class="bottomButtonPan-shadow"></div>
      </div>
-     
      <div class="tabContent tabContent2">
        <div class="tabLinkPan">
          <% item.items.sort.slice(1..-1).each do |i| %>
@@ -45,24 +54,13 @@
          <% end %>
          <div class="tabInnerLink tag-txt"><a href="#">First Lifted By</a></div>
          <div class="tabInnerLink"><%= link_to user_image_and_value(item.items.first.user, item.items.first.user.full_name), '#' %></div>
-       </div>        
-     </div>     
-     
-     <div class="bottomButtonPan">
-       <a href="<%= item.post.url %>" class="buyBtn" target="_blank">BUY</a>
-       <a href="#" class="btnSetAside saveBtn  <%= item.saved_by?(current_user) ? 'has_aside' : '' %>" 
-          item_id="<%= item.id %>" 
-          set_aside_id="<%= item.aside_by(current_user).id if item.saved_by?(current_user) %>" >
-             <%= item.saved_by?(current_user) ? 'UN-SAVE' : 'SAVE' %>
-       </a>
-       <a href="#" class="shareBtn">SHARE</a>
+       </div>
      </div>
-          
   </div>
 </div>
 <script>
   /* needs to be here so it runs when pulled via AJAX */
 
-  $('.full_name').quickfit({ max: 40, min: 12, truncate: false });
+  $('.full_name').quickfit({ max: 24, min: 12, truncate: false });
 
 </script>

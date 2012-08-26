@@ -5,7 +5,7 @@ $(document).ready(function(){
   /*$('blockquote p').wrapInner('<span>'); now in html of _item.htm.erb --- whoever: delete next time you see this */
   $('.productBox:nth-child(3n)').addClass('active');
 
-$('.profilePan img').hover(
+$('.profilePan').hover(
 function () {
   $(this).addClass('active');
   //$(this).next('ul').fadeIn('fast');
@@ -34,8 +34,7 @@ function () {
 
 // Slider
 function highlight( items ) {
-  items.filter(":eq(1)").addClass("active");
-  console.log('highlight');
+  items.filter(":eq(2)").addClass("active");
 } 
 function unhighlight( items ) {
   //items.addClass("inactive"),
@@ -45,11 +44,11 @@ function unhighlight( items ) {
 var clickevent = true; // for drawer slider
 var lastPage = 0;
 var currentPage = 1;
-$(function() { 
+$(function() {
   lastPage = $('#lastPage').html();
   $('#carousel').carouFredSel({
     width: '100%',
-    items: 3,
+    items: 5,
     auto : false,
     scroll: {
       items: 1,
@@ -80,30 +79,15 @@ $(function() {
   $("#next").click(function() {
     $("#carousel").trigger("next", 1);
     $('.productBox2').animate({ width: 'hide' });
-    $('.productBox').animate({width:"545px"});
+    $('.productBox').animate({width:"374px"});
     $('.slideBtn').removeClass('slideOff');
   });
   $("#prev").click(function() {
     $("#carousel").trigger("prev", 1);
     $('.productBox2').animate({ width: 'hide' });
-    $('.productBox').animate({width:"545px"});
+    $('.productBox').animate({width:"374px"});
     $('.slideBtn').removeClass('slideOff');
   });
-  
-  
-//  $(".slide").click(function() {
-//     $(this).addClass('slideOff');
-//     $(this).removeClass('slide');
-//     $(this).next('.productBox2').animate({ width: 'show' });
-//  }
-//  );
-//  $(".slideOff").click(function() {
-//     $(this).removeClass('slideOff');
-//     $(this).addClass('slide');
-//     $(this).next('.productBox2').animate({ width: 'hide' });
-//  }
-//  );
-
 
 // Right Slide Toggle
 $(document).on('click', '.slideBtn', function() {
@@ -112,18 +96,18 @@ $(document).on('click', '.slideBtn', function() {
     $(that).addClass('slideOff');
     $(that).next('.productBox2').fadeIn('fast');
     $(that).next('.productBox2').animate({"right": "14" , "z-index": "0"},1000);
-    $(that).parent('.productBox').animate({width:"750px"},1000);
+    $(that).parent('.productBox').animate({width:"551px"},1000);
     // the following (for unknown reasons) is required for expanded items
-    $(that).parent('.productBox').css('width', "750px");
+    $(that).parent('.productBox').css('width', "551px");
     clickevent = false;
     return false;
   } else {
     $(that).next('.productBox2').animate({"z-index": "-5"},1);
     $(that).removeClass('slideOff');    
     $(that).next('.productBox2').animate({"right": "0"},1000);
-    $(that).parent('.productBox').animate({width:"545px"},1000);
+    $(that).parent('.productBox').animate({width:"374px"},1000);
     // the following (for unknown reasons) is required for expanded items
-    $(that).parent('.productBox').css('width', "545px");
+    $(that).parent('.productBox').css('width', "374px");
     $(that).next('.productBox2').fadeOut(200);
     clickevent = true;
     return false;

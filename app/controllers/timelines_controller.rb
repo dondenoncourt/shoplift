@@ -24,7 +24,7 @@ class TimelinesController < ApplicationController
                  .between(params)
                  .order("items.created_at DESC")
                  .group("items.id")
-                 .paginate(per_page: params[:per_page].present? ? params[:per_page]: 6, page: params[:page])
+                 .paginate(per_page: params[:per_page].present? ? params[:per_page]: 5, page: params[:page])
 
     render partial: @items if request.xhr?
   end

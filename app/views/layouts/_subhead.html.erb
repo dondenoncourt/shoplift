@@ -1,29 +1,31 @@
 <div class="header">
   <div class="logoPan">
-      <%= link_to image_tag("logo.png", width:"600px", height:"155px"), '/' %></a>
+      <%= link_to image_tag("shop-lift-logo.png", width:"414px", height:"102px"), '/' %></a>
   </div>
     <% if user_signed_in? %>
       <div class="profilePan">
-        <div class="roundImage" >
-          <%= image_tag(current_user.avatar.url(:small), height: '65', width: '65') %>
-        </div>
-        <ul id="mainMenu">
-          <li><%= link_to "Add", new_post_path, :class => 'modal_link' %></li>
-          <li><%= link_to "Follow", shoplifters_path %> </li>
-          <li><%= link_to "Profile", user_path(current_user) %></li>
-          <li><%= link_to "Saved", user_path(current_user, :saved => true) %></li>
-          <li><%= link_to_function "Search", "alert('Not yet!')" %></li>
-          <li class="arrowLink"><a href="#" class="arrow">></a>
-          	<ul>
-              <li><%= link_to_function "Invite", "alert('Not yet!')" %></li>
-              <li><%= link_to_function "Help", "alert('Not yet!')" %></li>
-              <li><%= link_to "Buttons", buttons_path %></li>
-              <li><a href="#" title="About">About</a></li>
-              <li><%= link_to_function "Blog", "alert('Not yet!')" %></li>
-              <li><a href="/logout" title="Sign Out">Sign Out</a></li>
+          <div class="profilePan-img-ring"></div><!--/profilePan-img-ring-->
+            <div class="profilePan-img-circle-overflow">
+              <%= image_tag(current_user.avatar.url(:small), height: '65', width: '65') %>
+            </div>
+            <ul id="mainMenu">
+              <li><%= link_to "Add", new_post_path, :class => 'modal_link' %></li>
+              <li><%= link_to "Follow", shoplifters_path %> </li>
+              <li><%= link_to "Profile", user_path(current_user) %></li>
+              <li><%= link_to "Saved", user_path(current_user, :saved => true) %></li>
+              <li><%= link_to_function "Search", "alert('Not yet!')" %></li>
+              <li class="arrowLink"><a href="#" class="arrow">></a>
+                <ul>
+                  <li><%= link_to_function "Invite", "alert('Not yet!')" %></li>
+                  <li><%= link_to_function "Help", "alert('Not yet!')" %></li>
+                  <li><%= link_to "Buttons", buttons_path %></li>
+                  <li><a href="#" title="About">About</a></li>
+                  <li><%= link_to_function "Blog", "alert('Not yet!')" %></li>
+                  <li><a href="/logout" title="Sign Out">Sign Out</a></li>
+                </ul>
+              </li>
             </ul>
-          </li>
-        </ul>
-    </div>
+          </div>
+      </div>
   <% end %>
 </div>
