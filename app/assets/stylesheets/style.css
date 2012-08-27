@@ -448,7 +448,7 @@ right: 22px;
 	filter: dropshadow(color=#fff, offx=1, offy=1);
 }
 .tabContent{
-	display:none;
+	/* display:none; do not use this (may try to come back with next j-j template but ignore it) */
 	padding:0 3px;
 }
 #tabContent1{

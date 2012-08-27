@@ -89,42 +89,40 @@ $(function() {
     $('.slideBtn').removeClass('slideOff');
   });
 
-// Right Slide Toggle
-$(document).on('click', '.slideBtn', function() {
-  var that = this;
-  if(clickevent == true) {
-    $(that).addClass('slideOff');
-    $(that).next('.productBox2').fadeIn('fast');
-    $(that).next('.productBox2').animate({"right": "14" , "z-index": "0"},1000);
-    $(that).parent('.productBox').animate({width:"551px"},1000);
-    // the following (for unknown reasons) is required for expanded items
-    $(that).parent('.productBox').css('width', "551px");
-    clickevent = false;
-    return false;
-  } else {
-    $(that).next('.productBox2').animate({"z-index": "-5"},1);
-    $(that).removeClass('slideOff');    
-    $(that).next('.productBox2').animate({"right": "0"},1000);
-    $(that).parent('.productBox').animate({width:"374px"},1000);
-    // the following (for unknown reasons) is required for expanded items
-    $(that).parent('.productBox').css('width', "374px");
-    $(that).next('.productBox2').fadeOut(200);
-    clickevent = true;
-    return false;
-  }
-});
+  // Right Slide Toggle
+  var clickevent = true;
+  $(document).on('click', '.slideBtn', function() {
+    if(clickevent == true) {
+      $(this).addClass('slideOff');
+      $(this).next('.productBox2').fadeIn('fast');
+      $(this).next('.productBox2').animate({"z-index": "0"},1000);
+      $('.productBox2-shadow').delay(800).fadeIn();
+      $(this).parent('.productBox').animate({width:"551px"},1000);				
+      clickevent = false;
+      return false;
+    } else {
+      $(this).next('.productBox2').animate({"z-index": "-15"},1);
+      $('.productBox2-shadow').fadeOut('fast');
+      $(this).removeClass('slideOff');		
+      $(this).next('.productBox2').animate({"right": "5"},1000);
+      $(this).parent('.productBox').animate({width:"374px"},1000);
+      $(this).next('.productBox2').fadeOut(200);
+      clickevent = true;
+      return false;
+    }
+  });
 
-//Tab Show Hide
-$('.tabContent1').show();
-$('.tabNav li:first-child').addClass('activeTab');
-$('.tabNav li').click(function(){
-  var divId = "." + $(this).attr('rel');
-    $(this).parent().siblings('div.tabContent').hide();
-    $(this).parent().siblings(divId).fadeIn('fast');
-    $(this).siblings().removeClass('activeTab');
-    $(this).addClass('activeTab');
-    return false;
-});
+  //Tab Show Hide
+  $('.tabContent1').show();
+  $('.tabNav li:first-child').addClass('activeTab');
+  $('.tabNav li').click(function(){
+    var divId = "." + $(this).attr('rel');
+      $(this).parent().siblings('div.tabContent').hide();
+      $(this).parent().siblings(divId).fadeIn('fast');
+      $(this).siblings().removeClass('activeTab');
+      $(this).addClass('activeTab');
+      return false;
+  });
 });
 function expandItems() {
   currentPage++;
