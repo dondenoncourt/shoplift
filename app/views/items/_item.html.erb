@@ -7,15 +7,19 @@
     <h2 class="full_name"><%= item.user.full_name %></h2>
     <% if item.comment && item.comment.strip != '' %>
       <blockquote>
-        <p><span><%= item.comment %></span></p>
+        <%= image_tag('begining-qoute.png', class: 'left') %>
+        <p class="item_comment"><%= item.comment %></p>
+        <%= image_tag('end-qoute.png') %>
       </blockquote>
     <% end %>
     <div class="productImg">
         <%= image_tag(item.photo.url(:small), width: '353px', height: '410px')  %>
     </div>
     <div class="productPricePan">
-      <p class="productName"><%= item.post.brand.name %></p>
-      <p class="productPrice"><%= item.post.name %> <span><%= number_to_currency(item.price, :precision => 0) %></span></p>
+      <p class="productName"><%= min_name(item.post.brand.name, 20) %></p>
+      <p class="productPrice">
+        <span class="name"><%= min_name(item.post.name, 22) %></span>
+        <span class="price"><%= number_to_currency(item.price, :precision => 0) %></span></p>
         <a href="#" class="liftBtn"></a>
     </div>  
   </div>
@@ -61,6 +65,7 @@
 <script>
   /* needs to be here so it runs when pulled via AJAX */
 
-  $('.full_name').quickfit({ max: 24, min: 12, truncate: false });
+  $('.full_name').quickfit({ max: 42, min: 12, truncate: false });
+  $('.item_comment').quickfit({ max: 24, min: 12, width: 630, truncate: true });
 
 </script>

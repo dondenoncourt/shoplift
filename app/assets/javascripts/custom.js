@@ -5,31 +5,48 @@ $(document).ready(function(){
   /*$('blockquote p').wrapInner('<span>'); now in html of _item.htm.erb --- whoever: delete next time you see this */
   $('.productBox:nth-child(3n)').addClass('active');
 
-$('.profilePan').hover(
-function () {
-  $(this).addClass('active');
-  //$(this).next('ul').fadeIn('fast');
-  $('#mainMenu').fadeIn('fast');
-}
-);
-$('body, html').click(
-function () {
-  $(this).removeClass('active');
-  //$('.profilePan img').next('ul').fadeOut();
-  $('#mainMenu').fadeOut();
-}
-);
+  $('.profilePan').hover(
+  function () {
+    $(this).addClass('active');
+    //$(this).next('ul').fadeIn('fast');
+    $('#mainMenu').fadeIn('fast');
+    $('.productBox1').addClass('not-active-box');
+  }
+  );
+  $('body, html').click(
+  function () {
+    $(this).removeClass('active');
+    //$('.profilePan img').next('ul').fadeOut();
+    $('#mainMenu').fadeOut();
+    $('.arrowLink').removeClass('active');
+    $('.arrowLink').children('ul').fadeOut();
+    $('.productBox1').removeClass('not-active-box');
+  }
+  );
 
-$('.arrowLink').hover(
-function () {
-  $(this).addClass('active');
-  $(this).children('ul').fadeIn('fast');
-},
-function () {
-  $(this).removeClass('active');
-  $(this).children('ul').fadeOut();
-}
-);
+  $('.arrowLink').hover(
+    function () {
+      $(this).addClass('active');
+      $(this).children('ul').fadeIn('fast');
+    }
+  );
+  /*
+  $('.arrowLink').hover(
+    function () {
+      $(this).addClass('active');
+      $(this).children('ul').fadeIn('fast');
+    },
+    function () {
+      $(this).removeClass('active');
+      $(this).children('ul').fadeOut();
+    }
+  );
+  $('.arrowLink a').click(function () {
+      $('.arrowLink').addClass('active');
+      $('.arrowLink').children('ul').fadeIn('fast');
+  });
+*/
+
 });
 
 // Slider

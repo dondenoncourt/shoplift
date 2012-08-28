@@ -53,7 +53,7 @@ ul{
 	max-height:42px !important;
 	position:absolute;
 	top: 28px;
-right: 22px;
+  right: 22px;
 	z-index:500;
 	overflow:hidden;
 }
@@ -80,8 +80,8 @@ right: 22px;
 }
 .profilePan ul{
   position:absolute;
-  top:105px;
-  left:-7px;
+  top:70px;
+  left:-23px;
   width:130px;
   font-size:13px;
   line-height:28px;
@@ -159,11 +159,13 @@ right: 22px;
 }
 .not-active-box {
   background:url(item-box-not-active.png) no-repeat;
+  /*
   width:521px;
   height:606px;
   position:absolute;
   top: 14px;
   left: 12px;
+  */
   z-index:500;
 }
 .profile-img-not-active-box {
@@ -217,12 +219,14 @@ right: 22px;
 }
 .productBox h2{
 	font-weight:normal;
-	font-size:33px;
+	font-size:30px;
 	line-height:60px;
 	font-family:"futura-pt", arial;
 	font-weight:400;
-	color:#FFF;
+	color: #F8ECE5; /* "milky" while */
 	text-transform:uppercase;
+  white-space: nowrap;
+  width: 255px;
 	position:absolute;
 	top:-37px;
 	left:74px;
@@ -233,26 +237,36 @@ right: 22px;
 }
 .productBox blockquote{
 	padding-top:31px;
-	width:364px;
-	margin:0 0 0 8px;
+	width:342px;
+	margin:0 4px 0 22px;
 	height:77px;
 }
 .productBox blockquote p{
-	font-size:12px;
-	line-height: 16px;
+	/*font-size:12px;*/
+	line-height: 26px;
 	font-family:"futura-pt", arial;
 	font-weight:400;
 	text-shadow:1px 1px 1px #413D48;
 	filter: dropshadow(color=#413D48, offx=1, offy=1);
 	text-indent:50px;
 	color:#F8ECE5;
-	background:url(begining-qoute.png) 48px 0 no-repeat;
-	padding:0 20px 0 20px;
+	/*background:url(begining-qoute.png) 48px 0 no-repeat;
+	padding:0 20px 0 20px;*/
+  display: inline;
 }
-.productBox blockquote p span{
+.productBox blockquote img.left {
+  margin-left: 16px;
+}
+.productBox blockquote img {
+  display: inline;
+  position: relative;
+  top: -5px;
+}
+/*
+.productBox blockquote span{
 	background:url(end-qoute.png) 100% 100% no-repeat;
-  padding-right:21px;
 }
+*/
 
 .productImg{
 	height:410px;
@@ -288,8 +302,12 @@ right: 22px;
 	font-family:"futura-pt", arial;
 	font-weight:400;
 }
-.productPricePan .productPrice span{
-  color:#D6FC56;  
+.productPricePan .productPrice span.price {
+  color:#D6FC56;
+}
+.productPricePan .productPrice span.name {
+  float: left;
+  width: 178px;
 }
 .liftBtn{
 	display:block;
