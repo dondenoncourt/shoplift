@@ -105,7 +105,7 @@
 		
 		/** Submit the form through the iframe */
 		sl_bookmarklet.prototype.submitForm = function() {
-      jQuery('#sl-booklet-error').html('Item being lifted...');
+      jQuery('#sl-booklet-error').html('Item being shoplifted...');
       jQuery('#sl-booklet-error').css('height', '40px');
       jQuery('#sl-booklet-error').show();
 			var self = this;
@@ -124,7 +124,7 @@
         dataType: 'json',
         data: queryString,
         complete: function() {
-          jQuery('#sl-booklet-error').html('Item successfully lifted');
+          jQuery('#sl-booklet-error').html('Item successfully shoplifted');
           setTimeout(function(){self.destroy()},1000);
         }
       });
@@ -231,6 +231,9 @@
         case 'post[name]':
           valid = value != '';
           if (!valid) error = 'Please enter an item name';
+          if (value.length > 22) {
+            value = value.substring(0, 21) + '...';
+          }
 	        jQuery(".tsl-booklet-item-text").text(value);
           break;
         case 'image':
