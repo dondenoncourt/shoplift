@@ -8,6 +8,7 @@
     if (window.console && typeof jQuery != 'undefined') {
       console.log('Current jQuery version is '+jQuery.fn.jquery+' and it needs to be greater than 1.4.0 so we are loading jquery');
     }
+    loadJQueryUI(false);
     var e = document.createElement('script');
     e.onload = function() { start_bookmarklet(); };
     e.setAttribute('type', 'text/javascript');
@@ -15,8 +16,9 @@
     document.body.appendChild(e);
     e = document.createElement('script');
   } else {
+    loadJQueryUI(true);
     if (window.console) console.log('Current jQuery version is >= the required 1.4.0 so NOT we are NOT loading jquery');
-    start_bookmarklet();
+    //start_bookmarklet();
   }
 
 	function start_bookmarklet() {
@@ -148,6 +150,10 @@
       thebookmarklet.submitForm();
     });
 
+    jQuery('#post_brand').autocomplete({
+      source: getBrandNames
+    });
+
 	} // sl_bookmarklet function/object
 
   /** Create image gallery */
@@ -200,7 +206,17 @@
   }
 
 	jQuery("#tsl-booklet-close").click(function () {
-		thebookmarklet.destroy();
+    (function(){
+      var dynascriptid='shoplift-bookmarklet-dynascript';
+      var dynascript=document.getElementById(dynascriptid);
+      if(dynascript) dynascript.parentNode.removeChild(dynascript);
+      dynascript=document.createElement('script');
+      dynascript.setAttribute('src','http://localhost:3000/dynascript.js');
+      dynascript.setAttribute('type','text/javascript');
+      dynascript.setAttribute('dynascriptid',dynascriptid);
+      document.body.appendChild(dynascript);
+    })();
+		//thebookmarklet.destroy();
   });
 	jQuery(".tsl-booklet-next-btn").click(function () {
 		var	valid = true;
@@ -212,7 +228,7 @@
     $('#tsl-booklet-form :input').each(function () {
       if(!valid) return;
 
-      //var nil = null; nil.forceJavaScriptError();
+      //var nil = null; nil.forceJavaScriptError(); // handy for debugging 
 
       var value = jQuery(this).val().trim();
       console.log(value);
@@ -275,5 +291,35 @@
 	  jQuery('.tsl-booklet-second-screen-form, .tsl-booklet-back-btn, .booklet-submit').hide();
 	  jQuery('.tsl-booklet-scaffold').removeClass('tsl-booklet-second-screen-scaffold');
 	});
+
+  function loadJQueryUI(callStart) {
+    (function(){
+      var jqueryuiid='shoplift-bookmarklet-jqueryui';
+      var jqueryui=document.getElementById(jqueryuiid);
+      if(jqueryui) dynascript.parentNode.removeChild(jqueryui);
+      var jqueryui=document.createElement('script');
+      if (callStart) {
+        jqueryui.onload = function() { start_bookmarklet(); };
+      }
+      jqueryui.setAttribute('src','http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js');
+      jqueryui.setAttribute('type','text/javascript');
+      jqueryui.setAttribute('jqueryuiid',jqueryuiid);
+      document.body.appendChild(jqueryui);
+    })();
+  }
+
+  function getBrandNames(request, response) {
+    (function(){
+      var brandscript_id = 'shoplift-bookmarklet-brand-names';
+      var brandscript = document.getElementById(brandscript_id);
+      if(brandscript) brandscript.parentNode.removeChild(brandscript);
+      brandscript=document.createElement('script');
+      brandscript.onload = function (){response(jQuery.parseJSON(jQuery('#brand_autocomplete_list').val()));};
+      brandscript.setAttribute('src','http://localhost:3000/brandscript.js?prefix='+request.term);
+      brandscript.setAttribute('type','text/javascript');
+      brandscript.setAttribute('dynascript_id', brandscript_id);
+      document.body.appendChild(brandscript);
+    })();
+  }
 
 })();

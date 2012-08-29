@@ -18,5 +18,16 @@ class ParserController < ApplicationController
     @html = render_to_string(:partial => 'prompt', :layout => false).gsub(/\n/,'')
     #render :template => "parser/bookmarklet_old"
   end
+
+  def dynascript
+  end
+
+  def brandscript
+    brandNames = []
+    Brand.find(:all, conditions: ["name like ?", params[:prefix]+'%']).each do |brand|
+      brandNames << brand.name
+    end
+    @brands = '['+ brandNames.map { |name| '"' + name.gsub(/&/, '&amp;').gsub(/'/, '&#39;') + '"' }.join(',') + ']'
+  end
   
 end
