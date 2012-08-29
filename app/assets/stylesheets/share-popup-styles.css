@@ -1,0 +1,255 @@
+.clear	{
+	clear:both;
+}
+.tsl-share-popup-wrap	{
+	background:url(share-email-popup/tsl-share-popup-vert-scaffolding.png) center repeat-y;
+	width:100%;
+	height:100%;
+	padding-top:70px; 
+}
+.tsl-share-popup	{
+	width:486px;
+	margin:0 auto 0;
+	position:relative;
+}
+.tsl-share-popup-header-wrap	{
+	background:url(share-email-popup/share-email-header.png) no-repeat;
+	width:486px;
+	height:32px;
+	margin-top: 90px;
+	position:relative;
+}
+.tsl-share-popup-icons-wrap	{
+	position:absolute;
+	height:100px;
+	top:-25px;
+	left:0px;
+	padding-left:23px;
+}
+.tsl-share-popup-icons-wrap	a{
+	-webkit-transition: all .5s;
+	-moz-transition: all .5s;
+	-ms-transition: all .5s;
+	-o-transition: all .5s;
+}
+.tsl-share-popup-icons-wrap	a:hover{
+	-webkit-transition: all .5s;
+	-moz-transition: all .5s;
+	-ms-transition: all .5s;
+	-o-transition: all .5s;
+}
+.tsl-share-popup-twitter-icon, .tsl-share-popup-facebook-icon, .tsl-share-popup-pinterest-icon, .tsl-share-popup-email-icon	{
+	float:left;
+	width:100px;
+	height:84px;
+}
+.tsl-share-popup-twitter-icon	{
+	background:url(share-email-popup/share-popup-twitter-icon.png) no-repeat;
+	margin-right:9px;
+}
+.tsl-share-popup-facebook-icon	{
+	background:url(share-email-popup/share-popup-facebook-icon.png) no-repeat;
+	margin-right:5px;
+}
+.tsl-share-popup-pinterest-icon	{
+	background:url(share-email-popup/share-popup-pintrist-icon.png) no-repeat;
+	margin-right:20px;
+}
+.tsl-share-popup-email-icon	{
+	background:url(share-email-popup/share-popup-email-icon.png) no-repeat;
+}
+.tsl-share-popup-twitter-icon:hover, .tsl-share-popup-twitter-icon.icon-active	{
+	background:url(share-email-popup/share-popup-twitter-icon-hover.png) no-repeat !important
+}
+.tsl-share-popup-facebook-icon:hover, .tsl-share-popup-facebook-icon.icon-active	{
+	background:url(share-email-popup/share-popup-facebook-icon-hover.png) no-repeat !important;
+}
+.tsl-share-popup-pinterest-icon:hover, .tsl-share-popup-pinterest-icon.icon-active	{
+	background:url(share-email-popup/share-popup-pintrist-icon-hover.png) no-repeat !important;
+}
+.tsl-share-popup-email-icon:hover, .tsl-share-popup-email-icon.icon-active	{
+	background:url(share-email-popup/share-popup-email-icon-hover.png) no-repeat !important;
+}
+
+.close	{
+	background:url(share-email-popup/tsl-share-popup-close-btn.png) no-repeat;
+	width:41px;
+	height:42px;
+	display:block;
+	position:absolute;
+	top: -19px;
+	right: -18px;
+}
+.share-above-image-txt	{
+	position:absolute;
+	top: -12px;
+	left: 8px;
+	font-family: "futura", arial;
+	font-size:14px !important;
+	line-height:14px;
+	padding-bottom:1px;
+	color:#ffece6 !important;
+}
+.tsl-share-popup-scaffold	{
+	background:url(share-email-popup/share-email-content-scaffold.png) no-repeat !important;
+	width:486px;
+	height:222px;
+	margin-top: 60px;
+	position:relative;
+	display:none;
+}
+.tsl-share-popup-img-shadow	{
+	background:url(share-email-popup/share-img-overlay.png) no-repeat;
+	width:197px;
+	height:197px;
+	position:absolute;
+	top: 6px;
+	left: 8px;
+	z-index:0;
+}
+.tsl-share-popup-img	{
+	background:url(share-email-popup/share-img.jpg) no-repeat;
+	width:195px;
+	height:195px;
+	z-index:-5;
+	position:absolute;
+	top: 7px;
+	left: 9px;
+}
+.tsl-share-popup-img-text-box	{
+	background:url(share-email-popup/share-img-txt-box.png) no-repeat;
+	width:182px;
+	height:41px;
+	position:absolute;
+	bottom:0px;
+	left:0px;
+	overflow:hidden;
+	padding:9px 13px 0;
+	text-shadow: 1px 1px 1px #000;
+	filter: dropshadow(color=#000, offx=1, offy=1);
+}
+.tsl-share-popup-brand-text	{
+	font-family: "futura", arial;
+	font-weight:400;
+	font-size:15px !important;
+	color:#f8ece5 !important;
+	height:15px;
+	padding-bottom:4px;
+	text-wrap:none;
+}
+.tsl-share-popup-item-text	{
+	font-family: "futura", arial;
+	font-size:11px !important;
+	font-weight:400;
+	color:#f8ece5 !important;
+	height:11px;
+	text-wrap:none;
+	float:left;
+	min-width:20px;
+}
+.tsl-share-popup-price-text	{
+	font-family: "futura", arial;
+	font-weight:400;
+	font-size:11px !important;
+	color:#d6fc56 !important;
+	height:148px;
+	text-wrap:none;
+	float:left;
+	min-width:20px;
+	padding-left:3px;
+}
+.tsl-share-popup-right-content	{
+	width:263px;	
+	height:294px;
+	position:absolute;
+	top: -19px;
+	right:9px;
+}
+.tsl-share-popup-form	{
+	width:263px;
+}
+.tsl-share-popup-form input	{
+	width:247px;
+	height:23px;
+	font-family: "futura", arial;
+	font-weight:400;
+	font-size:15px !important;
+	color:#18022e !important;
+	padding:0 8px;
+	margin-bottom:7px;
+}
+.blank-input	{
+	background-color:#FF99A4;
+}
+.tsl-share-popup-input-brand	{
+	margin-bottom:10px
+}
+.tsl-share-popup-input-item	{
+	margin-bottom:7px
+}
+.tsl-share-popup-input-price	{
+	margin-bottom:7px
+}
+
+.tsl-share-popup-form h4	{
+	font-family: "futura", arial;
+	font-size:14px !important;
+	line-height:14px;
+	padding-bottom:1px;
+	color:#ffece6 !important;
+}
+.tsl-share-popup-second-screen-form	{
+	padding-top:7px;
+}
+.tsl-share-popup-second-screen-form	 h4	{
+	padding-bottom:5px;
+}
+.tsl-share-popup-second-screen-form textarea{
+	font-family: "futura", arial;
+	font-weight:400;
+	font-size:15px !important;
+	color:#18022e !important;
+	padding:0 8px;
+}
+.tsl-share-popup-textarea-tags	{
+	width:247px;
+	height:50px;
+	max-height:50px;
+	margin-bottom:7px;
+}
+.tsl-share-popup-input-thoughts	{
+	width:247px;
+	height:67px;
+	max-height:62px;
+}
+#share-email-submit	{
+	background:none !important;
+	outline:none !important;
+	border:none !important;
+	font-family: "futura", arial !important;
+	font-weight:400;
+	font-size:18px !important;
+	line-height:18px;
+	color:#ffece6 !important;
+	text-align:right;
+	width:50px !important;
+	padding:0px;
+	position:absolute;
+	bottom:42px;
+	right:0px;
+	text-transform:uppercase;
+	-webkit-transition: all .5s;
+	-moz-transition: all .5s;
+	-ms-transition: all .5s;
+	-o-transition: all .5s;
+}
+#share-email-submit:hover	{
+	color:#D6FC56 !important;
+	text-shadow: 0px 0px 4px #e2ff59;
+    filter: dropshadow(color=#e2ff59, offx=0, offy=0);
+	-webkit-transition: all .5s;
+	-moz-transition: all .5s;
+	-ms-transition: all .5s;
+	-o-transition: all .5s;
+	
+}
