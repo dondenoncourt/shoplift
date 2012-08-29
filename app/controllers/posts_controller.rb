@@ -112,9 +112,10 @@ class PostsController < ApplicationController
     Thread.new do
       User.share_lift(current_user.id, item_url(@item))
     end
-    if params[:hashtags]
-      params[:hashtags].each do |key, hashtag_value|
-        Rails.logger.debug 'adding hashtag:'+hashtag_value
+    if params[:tags]
+      # tags could be separated by spaces or commas - we don't know what the user might do
+      hashtags = params[:tags].include?(',') ? params[:tags].split(',') : params[:tags].split(' ')
+      hashtags.each do |hashtag_value|
         @hashtag_value = HashtagValue.where(:value => hashtag_value).first_or_create #.find_or_create_by_value(hashtag_value)
         if @hashtag_value.blank?
           # CONSIDER: post.errors[:base] << 'fails to create...' if entry_url.blank?
