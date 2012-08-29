@@ -154,6 +154,21 @@ class ItemsController < ApplicationController
       @item.increment!(:relifts)
       @item.post.increment!(:relifts)
       render :partial => 'item', :locals => {:item => @new_item}, :status => 201
+      if params[:hashtags]
+        hashtags = params[:hashtags].include?(',') ? params[:hashtags].split(',') : params[:hashtags].split(' ')
+      
+        hashtags.each do |hashtag_value|   
+          @hashtag_value = HashtagValue.where(:value => hashtag_value).first_or_create #.find_or_create_by_value(hashtag_value)
+          if @hashtag_value.blank?
+            # CONSIDER: post.errors[:base] << 'fails to create...' if entry_url.blank?
+            return render_error(500,"Failed to create hashtag")
+          end
+          if !Hashtag.create({:user_id => current_user.id, :post_id => @item.post.id, :hashtag_value_id => @hashtag_value.id})
+            return render_error(500,"Failed to create hashtag: "+hashtag_value+' '+@hashtag.errors[:hashtag_value_id][0])
+          end
+        end
+      end      
+      #TODO social media posts.
     else
       return_error_messages(@new_item,"Failed to relift item")
     end
