@@ -1,3 +1,6 @@
+<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/base/jquery-ui.css" type="text/css" media="all"></link>
+  
+
 <div class="tsl-booklet-wrap" id="tsl-booklet" >
 
     <div class="tsl-booklet">
@@ -37,10 +40,11 @@
                         <h4>Tags</h4>
                         <textarea class="tsl-booklet-textarea-tags" name="tags" id="tag_entry"></textarea>
                         <h4>Thoughts</h4>
-                        <textarea class="tsl-booklet-input-thoughts" id="comment_area" name="post[comment]"></textarea>
+                        <textarea class="tsl-booklet-input-thoughts" id="comment_area" maxlength="90" name="post[comment]"></textarea>
                     </div><!--/tsl-booklet-second-screen-form-->
 
                  <input type="button" class="booklet-submit" src="<%= root_url %>/assets/booklet-submit-btn.png" alt="submit"  />
+                 <input type="hidden" id="brand_autocomplete_list" value=""/>
 
                 </form>
 

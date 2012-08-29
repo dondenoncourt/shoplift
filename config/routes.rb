@@ -59,6 +59,9 @@ App::Application.routes.draw do
   #
   get "bookmarklet", :to => "parser#bookmarklet"
   post "parse", :to => "parser#parse"
+  get "dynascript", :to => "parser#dynascript"
+  get "brandscript", :to => "parser#brandscript"
+
 
   #
   # Items
