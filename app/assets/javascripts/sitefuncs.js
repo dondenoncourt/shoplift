@@ -132,7 +132,7 @@ function showModal(href, selector) {
   $.ajax({
     url: href,
     type: 'get',
-    complete: function(xhr, textStatus) {     
+    complete: function(xhr, textStatus) {
     },
     success: function(data, textStatus, xhr) {
       $('body').append(data);
@@ -147,7 +147,7 @@ function showModal(href, selector) {
         closeOnClick: true,
         load: true,
         onClose: function(x, y){
-          $('#tsl-relift-popup').remove();
+          $(selector).remove();
         }
       });
     },
