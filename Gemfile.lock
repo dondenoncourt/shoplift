@@ -88,9 +88,9 @@ GEM
     faraday (0.8.4)
       multipart-post (~> 1.1)
     fastimage (1.2.13)
-    geocoder (1.1.2)
+    geocoder (1.1.3)
     hashie (1.2.0)
-    highline (1.6.13)
+    highline (1.6.14)
     hike (1.2.1)
     httparty (0.8.3)
       multi_json (~> 1.0)
@@ -146,7 +146,7 @@ GEM
       jwt (~> 0.1.4)
       multi_json (~> 1.0)
       rack (~> 1.2)
-    omniauth (1.1.0)
+    omniauth (1.1.1)
       hashie (~> 1.2)
       rack
     omniauth-facebook (1.4.1)
@@ -266,7 +266,7 @@ DEPENDENCIES
   fastimage
   geocoder
   jbuilder
-  jquery-rails (>= 1.0.12)
+  jquery-rails
   koala
   mechanize
   mysql2

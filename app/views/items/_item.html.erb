@@ -20,7 +20,7 @@
       <p class="productPrice">
         <span class="name"><%= min_name(item.post.name, 22) %></span>
         <span class="price"><%= number_to_currency(item.price, :precision => 0) %></span></p>
-        <a href="#" class="liftBtn"></a>
+        <a href="#" class="liftBtn modal" rel="#tsl-relift-popup" data-modalType="relift" data-modal-rails="relift?post_id=<%= item.id%>"></a>
     </div>  
   </div>
   <a href="#" id="slideBtn<%=item.id%>" class="slideBtn">Slide</a>

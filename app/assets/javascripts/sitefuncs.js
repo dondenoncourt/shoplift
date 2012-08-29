@@ -1,3 +1,4 @@
+
 $(document).ready(function(){
   sitefuncs();
 
@@ -11,7 +12,7 @@ $(document).ready(function(){
   $('.modal_form').live('submit', function() {
     showModal(this.action, this.method, $(this).serialize());
     return false;
-  });
+  });    
 });
 
 function sitefuncs() {
@@ -132,18 +133,23 @@ function showModal(href, method, data) {
     url: href,
     type: method || 'get',
     data: data,
-    complete: function(xhr, textStatus) {
-      $("#basic-modal-content").modal({
-        opacity:80,
-        overlayClose:true,
-        onShow: function () {
-          $('#simplemodal-container').css('height', 'auto').css('width', 'auto');
-        },
-        focus:false
-      });
+    complete: function(xhr, textStatus) {     
     },
     success: function(data, textStatus, xhr) {
-      $('#basic-modal-content').html(data);
+      $('body').append(data);
+      $('#tsl-relift-popup').overlay({
+        top:0,
+        mask: {
+          color: '#19032f',
+          loadSpeed: 200,
+          opacity: .8,
+        },
+        closeOnClick: true,
+        load: true,
+        onClose: function(x, y){
+          $('#tsl-relift-popup').remove();
+        }
+      });
     },
     error: function(xhr, textStatus, errorThrown) {
       $('#basic-modal-content').html('Sorry, there was a problem with your request.');

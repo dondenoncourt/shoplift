@@ -1,39 +1,48 @@
-<h2>re-lift this item</h2>
-<div class="modalContent">
-  <p>Product Details:</p>
-  <ul>
-    <li>Brand: <%= @item.post.brand.name %></li>
-    <li>Item Name: <%= @item.post.name %></li>
-    <li>Price: $<%= @item.post.price.ceil %></li>
-  </ul>
-  <div class="divider"></div>
-  <form action="/items/<%= @item.id%>/relift" name="relift_item_form" id="relift_item_form">
-    <p>Comment (<span id="chars_left">0</span> characters left)</strong><p>
-    <textarea name="comment" id="comment" rows="3" columns="40"></textarea>
-    <div class="divider"></div>
-    <div>
-      <div >
-          <img src="../img/global/user-thumb-holder.gif" alt="user-thumb-holder" width="25" height="25" class="user-tiny-thumb"/>
-          <input type="text" class="text" id="hashtag" name="hashtag" value="Add a Tag" style="width: 215px;" />
-          <input type="button" name="submit" class="addSubmit" id="addTag" style="float: right;"/>
-      </div>
-      <ul id="tagList">
-      </ul>
-    </div>
-    <div class="divider"></div>
-    <div class="submitWrap">
-      <input type="submit" class="submit" name="submit" value="Re-lift this item now" />
-      <input type="submit" class="submit simplemodal-close" name="submit" value="Never Mind" />
-    </div>
-  </form>
-  <div class="divider"></div>
-</div>
+<div class="tsl-relift-popup-wrap" id="tsl-relift-popup">
+    <div class="tsl-relift-popup">
+      <div class="tsl-relift-popup-header-wrap">
+            <div class="tsl-relift-popup-profile-ring"></div>
+            <div class="tsl-relift-popup-circle-overflow">
+                <%= image_tag(@item.user.avatar.url(:small), height: '116px', width: '87px') %>
+            </div><!--/tsl-relift-popup-circle-overflow-->
+            <h2><%= @item.user.full_name %></h2>
+<div class="clear"></div>
+      </div><!--/tsl-relift-popup-header-wrap-->
+        
+      <a href="javascript:;" class="close"></a>
+            
+      <div class="tsl-relift-popup-scaffold">
+          <div class="tsl-relift-popup-img-shadow"></div><!--/tsl-relift-popup-img-wrap-->
+            <div class="tsl-relift-popup-img">
+              <%= image_tag(@item.photo.url(:small), width: '242px', height: '243px')  %>
+              <div class="tsl-relift-popup-img-text-box">
+                  
+                  <div class="tsl-relift-popup-brand-text"><%= @item.post.brand.name %></div>         
+                  <div class="tsl-relift-popup-item-text"><%= @item.post.name %></div>
+                  <div class="tsl-relift-popup-price-text">$<%= @item.post.price.ceil %></div>     
+<div class="clear"></div>   
+                </div><!--/tsl-relift-popup-img-text-box-->
+            </div><!--/tsl-relift-popup-img-->
+            
+            <div class="tsl-relift-popup-right-content">
+              <form class="tsl-relift-popup-form" action="/items/<%= @item.id%>/relift" name="relift_item_form" id="relift_item_form">
+                    
+                    <div class="tsl-relift-popup-second-screen-form">
+                        <h4>Tags</h4>
+                        <textarea class="tsl-relift-popup-textarea-tags" name="hashtags" id="hashtags"></textarea>
+                        <h4>Thoughts</h4>
+                        <textarea class="tsl-relift-popup-input-thoughts" name="comment" id="comment"></textarea>
+                    </div><!--/tsl-relift-popup-second-screen-form-->
+                    
+                 <input type="image" class="relift-submit" src="assets/relift-popup/images/relift-btn.png" alt="submit" name="submit" />
+                                     
+                </form>
+            </div><!--/tsl-relift-popup-right-content-->
+        </div><!--/tsl-relift-popup-scaffold-->
+    </div><!--/tsl-relift-popup-->    
+</div><!--/tsl-relift-popup-wrap-->
+
 <script>
-  $('#addTag').click(function () {
-    var countOfTags = $('#tagList li').size();
-    $('#tagList').append('<li>'+$('#hashtag').val()+'</li>');
-    $('#hashtag').val('');
-  });
 
   function commentCharsLeft() {
     var chars = 100-$('#comment').val().length;
@@ -58,8 +67,7 @@
       success:function(data) {
         var itemId = data.id;
         var parentId = data.parent_id;
-        addHashtags(itemId, parentId)
-        $.modal.close();
+        $('#tsl-relift-popup').overlay().close();
       },
       error:function(xhr,textStatus,errorThrown){
         alert(xhr.responseText);
@@ -67,35 +75,5 @@
       }
     });
     return false;
-  });
-  function addHashtags(itemId, parentId) {
-    $('#tagList').find('li').each(function () {
-      var hashtag = $(this).html();
-      $.ajax({
-        url:'/hashtags/create',
-        type:'POST',
-        dataType:'json',
-        data: 'item_id='+itemId+'&hashtag_value='+hashtag,
-        success:function(data) {
-          var tagList = $('#tagListForItemId'+parentId);
-          var lastLi = tagList.find('li').last();
-          var clone = lastLi.clone();
-          var lastLink = clone.find('a').last();
-          if (lastLink.html() != null) {
-            clone.appendTo(tagList);
-            lastLi.html('<a href="#"><img src="../img/global/user-thumb-holder.gif" alt="user-thumb-holder" width="25" height="25" class="user-tiny-thumb"/>'+data.value+'</a>');
-          } else {
-            lastLi.html('<a href="#"><img src="../img/global/user-thumb-holder.gif" alt="user-thumb-holder" width="25" height="25" class="user-tiny-thumb"/>'+data.value+'</a>');
-          }
-        },
-        error:function(xhr,textStatus,errorThrown){
-          alert(xhr.responseText);
-        }
-      });
-    });
-  }
-  $('.simplemodal-close').click(function () {
-      $.modal.close();
-      return false;
   });
 </script>
