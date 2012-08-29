@@ -121,24 +121,24 @@ function sitefuncs() {
     if (modaltype == null) {
       modaltype = $(this).attr('data-modaltype') + '.html';
     }
-
-    showModal('/modal/' + modaltype);
+    var selector = $(this).attr('data-modal-selector');
+    showModal('/modal/' + modaltype, selector);
     return false;
   });
 
 }
 
-function showModal(href, method, data) {
+function showModal(href, selector) {
   $.ajax({
     url: href,
-    type: method || 'get',
-    data: data,
+    type: 'get',
     complete: function(xhr, textStatus) {     
     },
     success: function(data, textStatus, xhr) {
       $('body').append(data);
-      $('#tsl-relift-popup').overlay({
+      $(selector).overlay({
         top:0,
+        oneInstance: false,
         mask: {
           color: '#19032f',
           loadSpeed: 200,
@@ -152,6 +152,7 @@ function showModal(href, method, data) {
       });
     },
     error: function(xhr, textStatus, errorThrown) {
+      if (window.console) console.log(xhr);
       $('#basic-modal-content').html('Sorry, there was a problem with your request.');
     }
   });

@@ -11,6 +11,7 @@ App::Application.routes.draw do
   get "modal/report_tag", :to => "page#report_tag"
   get "modal/report_item", :to => "page#report_item"
   get "modal/relift", :to => "page#relift"
+  get "modal/share", :to => "page#share"
 
   get '/shoplifters', :to => 'users#index'
 

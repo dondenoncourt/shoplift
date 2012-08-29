@@ -1,7 +1,7 @@
 class PageController < ApplicationController
-  before_filter :authenticate_user!, :only => [:saved, :relift, :report_tag, :report_item]
+  before_filter :authenticate_user!, :only => [:saved, :relift, :share, :report_tag, :report_item]
 
-  layout nil, :only => [:upload_avatar, :report_tag, :report_item, :relift]
+  layout nil, :only => [:upload_avatar, :report_tag, :report_item, :relift, :share]
 
   def home
     redirect_to timelines_path if user_signed_in?
@@ -18,6 +18,10 @@ class PageController < ApplicationController
   end
 
   def relift
+    @item = Item.find(params[:post_id])
+  end
+
+  def share
     @item = Item.find(params[:post_id])
   end
 

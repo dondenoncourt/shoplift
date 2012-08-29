@@ -20,7 +20,12 @@
       <p class="productPrice">
         <span class="name"><%= min_name(item.post.name, 22) %></span>
         <span class="price"><%= number_to_currency(item.price, :precision => 0) %></span></p>
-        <a href="#" class="liftBtn modal" rel="#tsl-relift-popup" data-modalType="relift" data-modal-rails="relift?post_id=<%= item.id%>"></a>
+        <a href="#" class="liftBtn modal" 
+          rel="#tsl-relift-popup"
+          data-modalType="relift"
+          data-modal-rails="relift?post_id=<%= item.id%>"
+          data-modal-selector="#tsl-relift-popup">
+        </a>
     </div>  
   </div>
   <a href="#" id="slideBtn<%=item.id%>" class="slideBtn">Slide</a>
@@ -46,7 +51,14 @@
             set_aside_id="<%= item.aside_by(current_user).id if item.saved_by?(current_user) %>" >
                <%= item.saved_by?(current_user) ? 'UN-SAVE' : 'SAVE' %>
          </a>
-         <a href="#" class="shareBtn">SHARE</a>
+         <a href="#" class="shareBtn"
+              rel="#tsl-share-popup"
+              data-modalType="share"
+              data-modal-rails="share?post_id=<%= item.id%>"
+              data-modal-selector="#tsl-share-popup"
+           >
+           SHARE
+         </a>
        </div>
        <div class="bottomButtonPan-shadow"></div>
      </div>
