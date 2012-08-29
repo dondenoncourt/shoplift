@@ -315,7 +315,7 @@
       if(brandscript) brandscript.parentNode.removeChild(brandscript);
       brandscript=document.createElement('script');
       brandscript.onload = function (){response(jQuery.parseJSON(jQuery('#brand_autocomplete_list').val()));};
-      brandscript.setAttribute('src','http://localhost:3000/brandscript.js?prefix='+request.term);
+      brandscript.setAttribute('src','<%= brandscript_url(:format => :js) %>?prefix='+request.term);
       brandscript.setAttribute('type','text/javascript');
       brandscript.setAttribute('dynascript_id', brandscript_id);
       document.body.appendChild(brandscript);
