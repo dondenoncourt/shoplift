@@ -525,6 +525,9 @@ ul{
 .tag-txt a{
 	color:#D6FC56 !important;
 }
+a.has_aside {
+  color:#D6FC56 !important;
+}
 
 .bottomButtonPan{
 	width:166px;
@@ -582,6 +585,7 @@ ul{
 	position:absolute;
 	bottom: -9px;
 	left: -11px;
+	z-index: -1;
 }
 /* Video Page Style */
 .bodyPanel2{
