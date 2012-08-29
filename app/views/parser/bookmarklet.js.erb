@@ -293,19 +293,25 @@
 	});
 
   function loadJQueryUI(callStart) {
-    (function(){
-      var jqueryuiid='shoplift-bookmarklet-jqueryui';
-      var jqueryui=document.getElementById(jqueryuiid);
-      if(jqueryui) dynascript.parentNode.removeChild(jqueryui);
-      var jqueryui=document.createElement('script');
+    if (jQuery.ui) {
       if (callStart) {
-        jqueryui.onload = function() { start_bookmarklet(); };
+        start_bookmarklet();
       }
-      jqueryui.setAttribute('src','http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js');
-      jqueryui.setAttribute('type','text/javascript');
-      jqueryui.setAttribute('jqueryuiid',jqueryuiid);
-      document.body.appendChild(jqueryui);
-    })();
+    } else { // load jQuery
+      (function(){
+        var jqueryuiid='shoplift-bookmarklet-jqueryui';
+        var jqueryui=document.getElementById(jqueryuiid);
+        if(jqueryui) dynascript.parentNode.removeChild(jqueryui);
+        var jqueryui=document.createElement('script');
+        if (callStart) {
+          jqueryui.onload = function() { start_bookmarklet(); };
+        }
+        jqueryui.setAttribute('src','http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js');
+        jqueryui.setAttribute('type','text/javascript');
+        jqueryui.setAttribute('jqueryuiid',jqueryuiid);
+        document.body.appendChild(jqueryui);
+      })();
+    }
   }
 
   function getBrandNames(request, response) {
