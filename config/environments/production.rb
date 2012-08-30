@@ -68,7 +68,7 @@ App::Application.configure do
   config.action_mailer.smtp_settings = {
     :address              => "smtp.gmail.com",
     :port                 => 587,
-    :domain               => 'gmail.com',
+    :domain               => 'theshoplift.com',
     :user_name            => 'webmaster@theshoplift.com',
     :password             => 'retsambew4321',
     :authentication       => 'plain',
