@@ -108,7 +108,7 @@
 	z-index:0;
 }
 .tsl-share-popup-img	{
-	background:url(share-email-popup/share-img.jpg) no-repeat;
+	/*background:url(share-email-popup/share-img.jpg) no-repeat;*/
 	width:195px;
 	height:195px;
 	z-index:-5;

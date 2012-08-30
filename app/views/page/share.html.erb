@@ -19,12 +19,13 @@
         	<h4 class="share-above-image-txt">Email it:</h4>
         	<div class="tsl-share-popup-img-shadow"></div><!--/tsl-share-popup-img-wrap-->
             <div class="tsl-share-popup-img">
-            	<div class="tsl-share-popup-img-text-box">
-
-                  <div class="tsl-share-popup-brand-text">J. Crew</div>         
-                  <div class="tsl-share-popup-item-text">Polka-Dot Popover</div>
-                  <div class="tsl-share-popup-price-text">$35.00</div>     
-<div class="clear"></div>  	
+              <%= image_tag(@item.photo.url(:small), width: '197px', height: '197px')  %>
+              <div class="tsl-share-popup-img-text-box">
+                  
+                  <div class="tsl-share-popup-brand-text"><%= @item.post.brand.name %></div>         
+                  <div class="tsl-share-popup-item-text"><%= @item.post.name %></div>
+                  <div class="tsl-share-popup-price-text">$<%= @item.post.price.ceil %></div>     
+<div class="clear"></div>   
                 </div><!--/tsl-share-popup-img-text-box-->
             </div><!--/tsl-share-popup-img-->
 
@@ -52,3 +53,35 @@
     </div><!--/tsl-share-popup-->
     
 </div><!--/tsl-share-popup-wrap-->
+// initialize overlay when page is scriptable
+<script>
+	$('.tsl-share-popup-email-icon').click(function () {
+		$('.tsl-share-popup-scaffold').hide();
+		$('.tsl-share-popup-twitter-icon, .tsl-share-popup-facebook-icon, .tsl-share-popup-pinterest-icon').removeClass('icon-active');
+		$(this).addClass('icon-active');
+		$('.tsl-share-popup-scaffold').fadeIn('slow');
+	});
+	
+	$('.tsl-share-popup-pinterest-icon').click(function () {
+		$('.tsl-share-popup-scaffold').hide();
+		$('.tsl-share-popup-twitter-icon, .tsl-share-popup-facebook-icon, .tsl-share-popup-email-icon').removeClass('icon-active');
+		$(this).addClass('icon-active');
+		/*$('.tsl-share-popup-scaffold').fadeIn('slow');*/
+	});
+	
+	$('.tsl-share-popup-facebook-icon').click(function () {
+		$('.tsl-share-popup-scaffold').hide();
+		$('.tsl-share-popup-twitter-icon, .tsl-share-popup-pinterest-icon, .tsl-share-popup-email-icon').removeClass('icon-active');
+		$(this).addClass('icon-active');
+		/*$('.tsl-share-popup-scaffold').fadeIn('slow');*/
+	});
+	
+	$('.tsl-share-popup-twitter-icon').click(function () {
+		$('.tsl-share-popup-scaffold').hide();
+		$('.tsl-share-popup-facebook-icon, .tsl-share-popup-pinterest-icon, .tsl-share-popup-email-icon').removeClass('icon-active');
+		$(this).addClass('icon-active');
+		/*$('.tsl-share-popup-scaffold').fadeIn('slow');*/
+	});
+
+</script>
+					
