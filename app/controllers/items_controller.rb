@@ -286,7 +286,7 @@ class ItemsController < ApplicationController
   def email
     @item = Item.find(params[:id])
     if @item != nil
-      UserMailer.share(current_user, @item, 'dondenoncour@gmail.com', 'subject here', params[:thoughts]).deliver()
+      UserMailer.share(current_user, @item, params[:addresses], params[:subject], params[:thoughts]).deliver()
       respond_to do |format|
         format.json { render json:'{"response":"OK"}', :status => 200 }
       end

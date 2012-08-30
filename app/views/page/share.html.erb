@@ -19,11 +19,11 @@
         	<h4 class="share-above-image-txt">Email it:</h4>
         	<div class="tsl-share-popup-img-shadow"></div><!--/tsl-share-popup-img-wrap-->
             <div class="tsl-share-popup-img">
-              <%= image_tag(@item.photo.url(:small), width: '197px', height: '197px')  %>
+              <%= image_tag(@item.photo.url(:small), width: '195px', height: '195px')  %>
               <div class="tsl-share-popup-img-text-box">
                   
-                  <div class="tsl-share-popup-brand-text"><%= @item.post.brand.name %></div>         
-                  <div class="tsl-share-popup-item-text"><%= @item.post.name %></div>
+                  <div class="tsl-share-popup-brand-text"><%= min_name(@item.post.brand.name, 20) %></div>         
+                  <div class="tsl-share-popup-item-text"><%= min_name(@item.post.name, 22) %></div>
                   <div class="tsl-share-popup-price-text">$<%= @item.post.price.ceil %></div>     
 <div class="clear"></div>   
                 </div><!--/tsl-share-popup-img-text-box-->
@@ -34,7 +34,7 @@
 
                     <div class="tsl-share-popup-second-screen-form">
                         <h4>To</h4>
-                        <textarea class="tsl-share-popup-textarea-tags" name="tags"></textarea>
+                        <textarea class="tsl-share-popup-textarea-tags" id="addresses" name="addresses"></textarea>
 
                         <h4>Subject</h4>
                         <input class="tsl-share-popup-subject-input" name="subject" value=""></textarea>
@@ -84,6 +84,9 @@
 	});
 
   $('.tsl-share-popup-form').submit(function () {
+    if (!validate()) {
+      return false;
+    }
     $.ajax({
       url:'/items/<%= @item.id%>/email',
       type:'POST',
@@ -100,6 +103,32 @@
 		$('.tsl-share-popup-scaffold').hide();
     return false;
   });
+
+  function validateEmail(email) {
+      var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(email);
+  }
+
+  function validate() {
+    var valid = true;
+    var emailsIn = $("#addresses").val();
+    var emails = emailsIn.split(',');
+    if (emails.length == 1) {
+      emails = emailsIn.split(' ');
+    }
+    $.each(emails, function(index, email) {
+      if (!validateEmail(email.trim())) {
+        valid = false;
+        var bad = ''
+        if (email.length == 0) {
+          alert("Please enter an email address.");
+        } else {
+          alert("Please enter a properly formatted email address for "+email);
+        }
+      }
+    });
+    return valid;
+  }
 
 </script>
 					

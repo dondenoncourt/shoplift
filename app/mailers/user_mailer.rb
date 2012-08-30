@@ -1,5 +1,6 @@
 class UserMailer < ActionMailer::Base
   default from: "no-reply@theshoplift.com"
+  helper :users
 
   def todon
     @greeting = "Hi"
@@ -29,7 +30,6 @@ class UserMailer < ActionMailer::Base
   end
 
   def share(current_user, item, to, subject, thoughts)
-    puts "thoughts:"+thoughts
     @item = item
     @comment = thoughts # for some reason @thoughts does  not work
     mail to: to,

@@ -86,8 +86,8 @@
         <div class="tsl-share-popup-img">
           <%= image_tag(@item.photo.url(:small), width: '197px', height: '197px')  %>
           <div class="tsl-share-popup-img-text-box">
-              <div class="tsl-share-popup-brand-text"><%= @item.post.brand.name %></div>
-              <div class="tsl-share-popup-item-text"><%= @item.post.name %></div>
+              <div class="tsl-share-popup-brand-text"><%= min_name(@item.post.brand.name, 20) %></div>         
+              <div class="tsl-share-popup-item-text"><%= min_name(@item.post.name, 22) %></div>
               <div class="tsl-share-popup-price-text">$<%= @item.post.price.ceil %></div>
               <div class="clear"></div>   
             </div><!--/tsl-share-popup-img-text-box-->
@@ -96,4 +96,5 @@
   </div><!--/tsl-share-popup-->
  <div class="right">
   <p><%= @comment %></p>
+  <%= link_to "Visit", item_url(@item)  %>
  </div>
