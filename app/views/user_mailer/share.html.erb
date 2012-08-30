@@ -1,0 +1,99 @@
+ <!-- http://kb.mailchimp.com/article/css-in-html-email-->
+ <style>
+  .tsl-share-popup	{
+    width:486px;
+    margin:0 auto 0;
+    position:relative;
+  }
+  .tsl-share-popup-header-wrap	{
+    background:url(http://localhost:3000/assets/share-email-popup/share-email-header.png) no-repeat;
+    width:486px;
+    height:32px;
+    margin-top: 90px;
+    position:relative;
+  }
+  .tsl-share-popup-img-shadow	{
+    background:url(http://localhost:3000/assets/share-email-popup/share-img-overlay.png) no-repeat;
+    width:197px;
+    height:197px;
+    position:absolute;
+    top: 6px;
+    left: 8px;
+    z-index:0;
+  }
+  .tsl-share-popup-img	{
+    width:195px;
+    height:195px;
+    z-index:-5;
+    position:absolute;
+    top: 7px;
+    left: 9px;
+  }
+  .tsl-share-popup-img-text-box	{
+    background:url(http://localhost:3000/assets/share-email-popup/share-img-txt-box.png) no-repeat;
+    width:182px;
+    height:41px;
+    position:absolute;
+    bottom:0px;
+    left:0px;
+    overflow:hidden;
+    padding:9px 13px 0;
+    text-shadow: 1px 1px 1px #000;
+    filter: dropshadow(color=#000, offx=1, offy=1);
+  }
+  .tsl-share-popup-brand-text	{
+    font-family: "futura", arial;
+    font-weight:400;
+    font-size:15px !important;
+    color:#f8ece5 !important;
+    height:15px;
+    padding-bottom:4px;
+    text-wrap:none;
+  }
+  .tsl-share-popup-item-text	{
+    font-family: "futura", arial;
+    font-size:11px !important;
+    font-weight:400;
+    color:#f8ece5 !important;
+    height:11px;
+    text-wrap:none;
+    float:left;
+    min-width:20px;
+  }
+  .tsl-share-popup-price-text	{
+    font-family: "futura", arial;
+    font-weight:400;
+    font-size:11px !important;
+    color:#d6fc56 !important;
+    height:148px;
+    text-wrap:none;
+    float:left;
+    min-width:20px;
+    padding-left:3px;
+  }
+  div.right {
+    position:absolute;
+    top: 6px;
+    left: 228px;
+    width: 300px;
+  }
+ </style>
+
+
+
+  <div class="tsl-share-popup-scaffold">
+      <div class="tsl-share-popup-img-shadow"></div><!--/tsl-share-popup-img-wrap-->
+        <div class="tsl-share-popup-img">
+          <%= image_tag(@item.photo.url(:small), width: '197px', height: '197px')  %>
+          <div class="tsl-share-popup-img-text-box">
+              <div class="tsl-share-popup-brand-text"><%= @item.post.brand.name %></div>
+              <div class="tsl-share-popup-item-text"><%= @item.post.name %></div>
+              <div class="tsl-share-popup-price-text">$<%= @item.post.price.ceil %></div>
+              <div class="clear"></div>   
+            </div><!--/tsl-share-popup-img-text-box-->
+        </div><!--/tsl-share-popup-img-->
+    </div><!--/tsl-share-popup-scaffold-->
+  </div><!--/tsl-share-popup-->
+ <div class="right">
+  <p><%= @comment %></p>
+ </div>

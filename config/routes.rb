@@ -81,6 +81,8 @@ App::Application.routes.draw do
 
   get "createItem", :to => "items#create"
   get "history/:id", :to => "items#history"
+  post "items/:id/email", :to => "items#email"
+
   #
   # Hashtags
   #

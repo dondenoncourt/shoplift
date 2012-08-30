@@ -83,5 +83,23 @@
 		/*$('.tsl-share-popup-scaffold').fadeIn('slow');*/
 	});
 
+  $('.tsl-share-popup-form').submit(function () {
+    $.ajax({
+      url:'/items/<%= @item.id%>/email',
+      type:'POST',
+      dataType:'json',
+      data: $(this).serialize(),
+      success:function(data) {
+        if (window.console) console.log(data);
+      },
+      error:function(xhr,textStatus,errorThrown){
+        if (window.console) console.log(xhr.responseText);
+      }
+    });
+		$('.tsl-share-popup-email-icon').removeClass('icon-active');
+		$('.tsl-share-popup-scaffold').hide();
+    return false;
+  });
+
 </script>
 					
