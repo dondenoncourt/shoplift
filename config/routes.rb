@@ -1,5 +1,7 @@
 App::Application.routes.draw do
 
+  get "page/emaildon, :to => "page#emaildon"
+
   get "page/home", :to => "page#home"
   get "page/saved", :to => "page#saved"
   get "/terms_of_service", :to => 'page#terms_of_service'
