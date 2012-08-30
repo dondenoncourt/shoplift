@@ -69,8 +69,8 @@ App::Application.configure do
     :address              => "smtp.gmail.com",
     :port                 => 587,
     :domain               => 'gmail.com',
-    :user_name            => 'welcome@theshoplift.com',
-    :password             => 'emoclew4321',
+    :user_name            => 'webmaster@theshoplift.com',
+    :password             => 'retsambew4321',
     :authentication       => 'plain',
     :enable_starttls_auto => true
   }
