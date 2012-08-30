@@ -211,7 +211,7 @@
       var dynascript=document.getElementById(dynascriptid);
       if(dynascript) dynascript.parentNode.removeChild(dynascript);
       dynascript=document.createElement('script');
-      dynascript.setAttribute('src','http://localhost:3000/dynascript.js');
+      dynascript.setAttribute('src','<%= root_url %>/dynascript.js');
       dynascript.setAttribute('type','text/javascript');
       dynascript.setAttribute('dynascriptid',dynascriptid);
       document.body.appendChild(dynascript);
