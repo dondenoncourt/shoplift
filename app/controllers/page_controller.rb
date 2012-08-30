@@ -57,6 +57,11 @@ class PageController < ApplicationController
     end
   end
 
+  def emaildon
+    email_don
+    render text:'emailed'
+  end
+
   private
 
   def email_don

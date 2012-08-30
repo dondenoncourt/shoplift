@@ -1,6 +1,6 @@
 App::Application.routes.draw do
 
-  get "page/emaildon, :to => "page#emaildon"
+  get "page/emaildon", :to => "page#emaildon"
 
   get "page/home", :to => "page#home"
   get "page/saved", :to => "page#saved"
