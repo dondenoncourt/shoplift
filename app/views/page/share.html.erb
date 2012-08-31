@@ -117,6 +117,8 @@
       emails = emailsIn.split(' ');
     }
     $.each(emails, function(index, email) {
+      console.log(email);
+      emails[index] = email.trim();
       if (!validateEmail(email.trim())) {
         valid = false;
         var bad = ''
@@ -127,6 +129,7 @@
         }
       }
     });
+    $("#addresses").val(emails);
     return valid;
   }
 
