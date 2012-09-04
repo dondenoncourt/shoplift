@@ -1,7 +1,10 @@
 development:
-  bucket: shoplift_dev
+  bucket: shoplift
   access_key_id: AKIAJH7V5EPVDFATZDZQ
   secret_access_key: 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
+  #bucket: shoplift_dev
+  #access_key_id: AKIAJH7V5EPVDFATZDZQ
+  #secret_access_key: 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
 test:
   bucket: shoplift_test
   access_key_id: AKIAJH7V5EPVDFATZDZQ
