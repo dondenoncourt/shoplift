@@ -1,4 +1,18 @@
-json.extract(user, :id, :email, :username, :full_name, :first_name, :last_name, :url, :vanity_url, :country, :biography, :notify_new_follower, :notify_relift, :notify_missing, :hometown, :zipcode, :sex)
+json.id user.id
+json.email user.email
+json.username user.username
+json.full_name user.full_name
+json.first_name user.first_name
+json.last_name user.last_name
+json.url user.url
+json.vanity_url user.vanity_url
+json.country user.country
+json.biography user.biography
+json.notify_new_follower user.notify_new_follower
+json.notify_relift user.notify_relift
+json.notify_missing user.notify_missing
+json.hometown user.hometown
+json.zipcode user.zipcode
 json.sex sex_to_string(user)
 json.avatar_url_small user.avatar(:small)
 json.avatar_url_thumb user.avatar(:thumb)

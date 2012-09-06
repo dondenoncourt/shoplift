@@ -66,7 +66,6 @@ class SetAsidesController < ApplicationController
   # =end
   def destroy
     @set_aside = SetAside.where("id = ?",params[:id]).first!
-puts "yup, we are in here"
     if @set_aside.delete
       render :json => @set_aside, :status => 200
     else

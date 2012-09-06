@@ -2,6 +2,22 @@ class ItemsController < ApplicationController
   layout nil, :only => [:email]
   require 'open-uri'
   
+
+  def index
+    @items = Item.joins(:post,:user,:subscriptions)
+                 .joins("LEFT JOIN user_item_views ON user_item_views.user_id = subscriptions.follower_id AND user_item_views.item_id = items.id")
+                 .joins("INNER JOIN users AS post_users on posts.user_id = post_users.id AND users.status = 1")
+                 .where("items.status = 1 AND (subscriptions.follower_id = ? )",current_user.id)
+                 .between(params)
+                 .group("items.id")
+                 .order("user_item_views.created_at ASC, items.created_at DESC")
+                 .paginate(per_page: params[:per_page].present? ? params[:per_page]: 6, page: params[:page])
+    @items.each {|i| UserItemView.create({user_id:current_user.id, item_id:i.id})}
+
+    #render partial: @items
+    render :partial => 'items', :locals => {:items => @items}
+  end
+
   # =begin apidoc
   # url:: /items/:id.json
   # method:: GET
