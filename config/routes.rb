@@ -3,6 +3,7 @@ App::Application.routes.draw do
   get "page/emaildon", :to => "page#emaildon"
 
   get "page/home", :to => "page#home"
+  get "page/ember", :to => "page#ember"
   get "page/saved", :to => "page#saved"
   get "/terms_of_service", :to => 'page#terms_of_service'
   get "/buttons", :to => 'page#buttons'
@@ -24,7 +25,7 @@ App::Application.routes.draw do
   get "post/create", :to => "posts#create"
   post "posts/:id/update", :to => "posts#update"
 
-  root :to => "page#home"
+  root :to => "page#ember"
 
   #
   # Users

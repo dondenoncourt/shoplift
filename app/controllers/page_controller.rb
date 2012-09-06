@@ -4,9 +4,17 @@ class PageController < ApplicationController
   layout nil, :only => [:upload_avatar, :report_tag, :report_item, :relift, :share]
 
   def home
-    redirect_to timelines_path if user_signed_in?
+    redirect_to root_path if user_signed_in?
     path = Rails.root.to_s + "/app/assets/images/galleria/images/*"
     @images = Dir.glob(path).collect{|f| File.basename(f)}
+  end
+  
+  def ember
+    if user_signed_in?
+      render :layout => false
+    else
+      redirect_to page_home_path 
+    end
   end
 
   def saved
