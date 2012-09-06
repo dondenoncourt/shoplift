@@ -1,0 +1,92 @@
+Shoplift.Item.FIXTURES = [{ 
+	id: "1", 
+	user_id: "1",
+	post_id: "1",
+	relifts: "5",
+	name: "Something",
+	brand_id: "1",
+	description: "What a great item",
+	comment: "I love it",
+	url: "http://google.com",
+	price: "88",
+	photo_file_name: "img-old/product-large-dress.jpg"
+  }, 
+  { 
+	id: "2", 
+	user_id: "1",
+	post_id: "1",
+	relifts: "5",
+	name: "Something else",
+	brand_id: "1",
+	description: "What a great item",
+	comment: "I love it",
+	url: "http://google.com",
+	price: "88",
+	photo_file_name: "img-old/product-large-1.jpg"
+},
+  { 
+  	id: "3", 
+  	user_id: "1",
+  	post_id: "1",
+  	relifts: "5",
+  	name: "Something else",
+  	brand_id: "1",
+  	description: "What a great item",
+  	comment: "I love it",
+  	url: "http://google.com",
+  	price: "88",
+  	photo_file_name: "img-old/product-large-2.jpg"
+},
+    { 
+    	id: "4", 
+    	user_id: "1",
+    	post_id: "1",
+    	relifts: "5",
+    	name: "Something else",
+    	brand_id: "1",
+    	description: "What a great item",
+    	comment: "I love it",
+    	url: "http://google.com",
+    	price: "88",
+    	photo_file_name: "img-old/product-large-3.jpg"
+      },
+      { 
+      	id: "5", 
+      	user_id: "1",
+      	post_id: "1",
+      	relifts: "5",
+      	name: "Something else",
+      	brand_id: "1",
+      	description: "What a great item",
+      	comment: "I love it",
+      	url: "http://google.com",
+      	price: "88",
+      	photo_file_name: "img-old/product-large-4.jpg"
+    },
+        { 
+        	id: "6", 
+        	user_id: "1",
+        	post_id: "1",
+        	relifts: "5",
+        	name: "Something else",
+        	brand_id: "1",
+        	description: "What a great item",
+        	comment: "I love it",
+        	url: "http://google.com",
+        	price: "88",
+        	photo_file_name: "img-old/product-large-5.jpg"
+          }
+  // Shoplift.Store.createRecord(Shoplift.Item,  { 
+  // 	id: "3", 
+  // 	user_id: "1",
+  // 	post_id: "1",
+  // 	relifts: "5",
+  // 	name: "Something more",
+  // 	brand_id: "1",
+  // 	description: "What a great item",
+  // 	comment: "I love it",
+  // 	url: "http://google.com",
+  // 	price: "88",
+  // 	photo_file_name: "something.png"
+  // });
+];

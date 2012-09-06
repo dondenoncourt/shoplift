@@ -1,0 +1,69 @@
+<div id="carousel">
+{{#each content}}
+	<div class="product item">
+		<div class="product-container">
+			<!-- TODO: user went here -->
+			<div class="productImg">
+				<img {{bindAttr src="photoFileName"}} width="353" height="410" /> 
+			</div>
+			<div class="productPricePan">
+				<p class="productName">{{retailer}}<!-- TODO: brand went here --></p> <!-- NOTE: This is actually the brand name -->
+				<p class="productPrice">{{name}} <span>{{price}}</span></p>
+			</div>
+			<div class="product-sub-container">
+				<a {{action reliftItem href="true"}} class="relift-this icon-relift-button" rel="#tsl-relift-popup" title="Relift this!"></a>
+			</div>
+		</div>
+		
+	  
+	  <div class="product-drawer-container">
+		<div class="product-drawer drawer-hidden">
+			<ul class="drawer-tabs nav nav-pills">
+				<li class="active"><a class="icon-tags-button" {{action "showTags" target="postView"}}></a></li>
+				<li><a class="icon-quote-button" href="#quote{{id}}" data-toggle="pill"></a></li>
+				<li><a class="icon-clock-button" href="#history{{id}}" data-toggle="pill"></a></li>
+			</ul>
+			
+			<div class="tab-content">
+				<div class="tab-pane" {{bindAttr class="tabPane tagPane:active"}} id="tags{{id}}">
+					<div class="tag-list-container">
+						<ul class="tag-list">
+							<li>
+								<a><input type="text" id="newTag{{id}}" placeholder="Add a tag" /></a>
+							</li>
+							<!-- TODO: tags went here -->
+						</ul>
+					</div>
+				</div>
+				<div class="tab-pane active" {{bindAttr class="tabPane quotePane:active"}} id="quote{{id}}">
+					<div class="quote-container">
+						<p class="quote">{{{comment}}}</p>
+					</div>
+				</div>
+				<div class="tab-pane" {{bindAttr class="tabPane historyPane:active"}} id="history{{id}}">
+					<div class="history-container">
+						<div class="first-shoplifter">
+							Shoplifted first by
+							<!-- TODO: user went here -->
+						</div>
+						<div class="relifters">
+							Relifted by {{relifts}} members
+							<!-- TODO: relift went here -->
+						</div>
+					</div>
+				</div>
+			</div> <!-- end tab content -->
+			
+			<ul class="drawer-actions">
+				<li><a href="#" class="save-this icon-save-button"></a></li>
+				<li><a href="#" class="share-this icon-share-button" rel="#tsl-share-popup"></a></li>
+				<li><a href="#" class="buy-this icon-buy-button"></a></li>
+			</ul>
+			<a href="#" class="drawer-opener icon-plus-button"></a>
+		</div> <!-- end product drawer -->
+	  </div> <!-- end product drawer container -->
+	  
+	</div> <!-- end product -->
+{{/each}}
+</div>
+{{ outlet }}
