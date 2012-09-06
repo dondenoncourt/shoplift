@@ -8,26 +8,22 @@ class TimelinesController < ApplicationController
     #@item = Item.joins(:post,:user,"INNER JOIN subscriptions ON subscriptions.user_id = items.user_id AND subscriptions.status = 1")
     begin
     @items = Item.joins(:post,:user,:subscriptions)
-                 .joins("LEFT JOIN user_item_views ON user_item_views.user_id = subscriptions.follower_id AND user_item_views.item_id = items.id")
+                 .joins("LEFT JOIN user_item_views ON user_item_views.user_id = subscriptions.follower_id")
                  .joins("INNER JOIN users AS post_users on posts.user_id = post_users.id AND users.status = 1")
                  .where("items.status = 1 AND (subscriptions.follower_id = ?)",current_user.id)
                  .group("items.id")
-                 .order("user_item_views.created_at ASC, items.created_at DESC")
+                 .order("user_item_views.created_at ASC")
                  #.first
     rescue Exception => e
       puts "error: #{e}"
     end
     #UserItemView.create({user_id:current_user.id, item_id:@item.id})
   puts " @items:"
-  @items.each do |i|
-    #if (96..100) === i.id
-      puts i.id
-    #end
-    #if i.user_item_views.first == nil
-        #puts "no user item view"
-    #end
+  @items.each do |i| 
+    if (i.user_item_views.first == nil)
+        puts "no user item view"
+    end
   end
-  puts @items.count
 
     render :json => @item
   end
@@ -46,13 +42,12 @@ class TimelinesController < ApplicationController
   # =end
   def index
     authenticate_user!
-    @items = Item.joins(:post,:user,:subscriptions)
-                 .joins("LEFT JOIN user_item_views ON user_item_views.user_id = subscriptions.follower_id AND user_item_views.item_id = items.id")
+    @items = Item.joins(:post,:user,"INNER JOIN subscriptions ON subscriptions.user_id = items.user_id AND subscriptions.status = 1")
                  .joins("INNER JOIN users AS post_users on posts.user_id = post_users.id AND users.status = 1")
                  .where("items.status = 1 AND (subscriptions.follower_id = ? )",current_user.id)
                  .between(params)
+                 .order("items.created_at DESC")
                  .group("items.id")
-                 .order("user_item_views.created_at ASC, items.created_at DESC")
                  .paginate(per_page: params[:per_page].present? ? params[:per_page]: 6, page: params[:page])
     @items.each {|i| UserItemView.create({user_id:current_user.id, item_id:i.id})}
 

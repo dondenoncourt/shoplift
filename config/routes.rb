@@ -52,6 +52,7 @@ App::Application.routes.draw do
   #
   # Timelines
   #
+  get "unseen", :to => "timelines#unseen" # test method for console, delete if you'd like
   get "timelines", :to => "timelines#index"
   get "timelines/users/:id", :to => "timelines#show_user"
   get "timelines/recent", :to => "timelines#show_recent"

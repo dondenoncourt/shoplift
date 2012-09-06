@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120829130847) do
+ActiveRecord::Schema.define(:version => 20120906001800) do
 
   create_table "brands", :force => true do |t|
     t.string   "name"
@@ -198,6 +198,16 @@ ActiveRecord::Schema.define(:version => 20120829130847) do
 
   add_index "subscriptions", ["follower_id"], :name => "fk_subscriptions_followers"
   add_index "subscriptions", ["user_id"], :name => "fk_subscriptions_users"
+
+  create_table "user_item_views", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "item_id"
+    t.datetime "created_at"
+  end
+
+  add_index "user_item_views", ["item_id"], :name => "index_user_item_views_on_item_id"
+  add_index "user_item_views", ["user_id", "item_id"], :name => "index_user_item_views_on_user_id_and_item_id"
+  add_index "user_item_views", ["user_id"], :name => "index_user_item_views_on_user_id"
 
   create_table "username_blacklists", :primary_key => "name", :force => true do |t|
     t.datetime "created_at", :null => false

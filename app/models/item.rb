@@ -25,6 +25,8 @@ class Item < ActiveRecord::Base
   has_many :hashtag_values, :through => :hashtags
   has_many :suggestions
   has_many :set_asides
+  has_many :subscriptions, :foreign_key => :user_id, :primary_key => :user_id, :conditions => ["subscriptions.status = 1"]
+  has_many :user_item_views, :through => :subscriptions, :foreign_key => 'subscriptions.follower_id', :primary_key => 'subscriptions.user_id'
   belongs_to :parent, :class_name => "Item", :foreign_key => "parent_id", :conditions => ["items.status = 1"]
 
   validates :user_id, :post_id, :presence => true
