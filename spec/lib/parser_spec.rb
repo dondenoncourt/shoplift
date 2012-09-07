@@ -34,7 +34,8 @@ describe 'Parse' do
   describe "on bloomingdales" do
     it "returns a price of $235.99" do
       post = parse 'http://www1.bloomingdales.com/shop/product/theodora-callum-flats-primaballet-with-ankle-strap'
-      post[:price].should == 235.99
+      puts post[:price]
+      post[:price].should == 115.15
     end
   end
 
