@@ -1,0 +1,52 @@
+<!-- Relift popup -->
+<div class="tsl-relift-popup-wrap" id="tsl-relift-popup" style="display:none;">
+	
+	<div class="tsl-relift-popup">
+
+		<div class="tsl-relift-popup-header-wrap">
+			<div class="tsl-relift-popup-profile-ring"></div>
+			<div class="tsl-relift-popup-circle-overflow">
+				<img src="images/profile-img-test_06.jpg" width="116" height="87" /> 
+			</div><!--/tsl-relift-popup-circle-overflow-->
+
+			<h2>Brandon Fail</h2>
+
+<div class="clear"></div>
+		</div><!--/tsl-relift-popup-header-wrap-->
+
+		<a href="#" class="close"></a>
+
+		<div class="tsl-relift-popup-scaffold">
+			<div class="tsl-relift-popup-img-shadow"></div><!--/tsl-relift-popup-img-wrap-->
+			<div class="tsl-relift-popup-img">
+				<div class="tsl-relift-popup-img-text-box">
+
+				  <div class="tsl-relift-popup-brand-text"></div>         
+				  <div class="tsl-relift-popup-item-text"></div>
+				  <div class="tsl-relift-popup-price-text"></div>     
+<div class="clear"></div>  	
+				</div><!--/tsl-relift-popup-img-text-box-->
+			</div><!--/tsl-relift-popup-img-->
+
+			<div class="tsl-relift-popup-right-content">
+				<form class="tsl-relift-popup-form" action="">
+
+					<div class="tsl-relift-popup-second-screen-form">
+						<h4>Tags</h4>
+						<textarea class="tsl-relift-popup-textarea-tags" name="tags"></textarea>
+						<h4>Thoughts</h4>
+						<!--<textarea class="tsl-relift-popup-input-thoughts" name="thoughts"></textarea> -->
+						{{view Ember.TextField valueBinding="comment" placeholder="Thoughts"}}
+					</div><!--/tsl-relift-popup-second-screen-form-->
+
+				 <input type="image" class="relift-submit" src="images/relift-popup/images/relift-btn.png" alt="submit" name="submit" {{action submitForm}} />
+				 
+
+				</form>
+
+			</div><!--/tsl-relift-popup-right-content-->
+		</div><!--/tsl-relift-popup-scaffold-->
+
+	</div><!--/tsl-relift-popup-->
+	<div class="tsl-popup-bg"></div>
+</div><!--/tsl-relift-popup-wrap-->
