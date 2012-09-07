@@ -48,3 +48,7 @@ json.flag_total item.post.post_flags.count
 json.flags item.post.post_flags do |json, flag|
 	json.flag_type flag.flag_type.name
 end
+
+json.history do |json|
+  json.partial! 'items/history', :@post => item.post
+end
