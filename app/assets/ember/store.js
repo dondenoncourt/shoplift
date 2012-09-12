@@ -1,7 +1,7 @@
 
 
-Shoplift.Store = DS.Store.extend({
+Shoplift.store = DS.Store.create({
   revision: 4,
-  adapter: DS.RESTAdapter.create() //DS.fixtureAdapter 
+  adapter: DS.fixtureAdapter //DS.RESTAdapter.create()
 });
 

@@ -1,0 +1,23 @@
+
+  <div class="product-drawer-container">
+	<div class="product-drawer drawer-hidden">
+		<a class="icon-tags-button" {{action "showTags" target="drawerView"}}>Hello Hello</a>
+		<!--<ul>
+			<li><a class="icon-tags-button" {{action "showTags"}}></a></li>
+			<li><a class="icon-quote-button" href="#quote{{id}}" data-toggle="pill"></a></li>
+			<li><a class="icon-clock-button" href="#history{{id}}" data-toggle="pill"></a></li>
+		</ul>-->
+		
+		<div class="tab-content">
+			
+			{{view Shoplift.TagDrawerView}}
+		</div> <!-- end tab content -->
+		
+		<ul class="drawer-actions">
+			<li><a href="#" class="save-this icon-save-button"></a></li>
+			<li><a href="#" class="share-this icon-share-button" rel="#tsl-share-popup"></a></li>
+			<li><a href="#" class="buy-this icon-buy-button"></a></li>
+		</ul>
+		<a href="#" class="drawer-opener icon-plus-button"></a>
+	</div> <!-- end product drawer -->
+  </div> <!-- end product drawer container -->
