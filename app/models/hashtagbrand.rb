@@ -1,25 +1,32 @@
 class Hashtagbrand < ActiveRecord::Base
-  belongs_to :hashtag
+  belongs_to :hashtag_value
   belongs_to :brand
   def items
     if brand
       brand.items
     else
-      hashtag.items
+      hashtag_value.items
     end
   end
   def value
     if brand
       brand.name
     else
-      hashtag.hashtag_value.value
+      hashtag_value.value
     end
   end
   def image
     if brand
       brand.items.last.post.photo
     else
-      hashtag.post.photo
+      hashtag_value.hashtags.first.post.photo
+    end
+  end
+  def users
+    if brand
+      brand.users
+    else
+      hashtag_value.users
     end
   end
 end

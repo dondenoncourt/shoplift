@@ -79,12 +79,13 @@ ActiveRecord::Schema.define(:version => 20120913200319) do
 
   create_table "hashtagbrands", :force => true do |t|
     t.integer  "brand_id"
-    t.integer  "hashtag_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.integer  "hashtag_value_id"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
   end
 
-  add_index "hashtagbrands", ["hashtag_id"], :name => "index_hashtagbrands_on_hashtag_id"
+  add_index "hashtagbrands", ["brand_id"], :name => "index_hashtagbrands_on_brand_id"
+  add_index "hashtagbrands", ["hashtag_value_id"], :name => "index_hashtagbrands_on_hashtag_value_id"
 
   create_table "hashtags", :force => true do |t|
     t.integer  "hashtag_value_id",                :null => false

@@ -13,6 +13,7 @@
 class Brand < ActiveRecord::Base
   validates :name, presence: true
   has_many :posts
+  has_many :users, :through => :posts, :uniq => true
   has_many :hashtagbrands, :dependent => :delete_all
   after_create {|b| Hashtagbrand.create(:brand => b)}
   def items

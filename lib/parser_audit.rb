@@ -1,27 +1,32 @@
 =begin documentation
 When a user clicks the bookmarlet, the parser attempts to get brand, name, price, and description
 The popup then presents those for modification
-If the user modifies brand, name, or price, the parser audit routine is invoked to attempt to find
-an xpath for that retail site.
+If the user modifies brand, name, or price, the parser audit routine is invoked to "learn"
+the xpath for the specific retail site using the value keyed by the user.
 
-For brand, the following is used to find an xpath for an h1, h2, h3, or span tag whose text:
+For brand, the following is used to find an xpath for a discrete set of tags (such as h1, h2, h3, span) whose text:
 1) contains ONLY the user-keyed brand
-2) contains the user-keyed brand anywhere
+2) starts with the user-keyed brand and contains the item name
 3) starts with the user-keyed brand
-Otherwise look for any tag that contains ONLY the user-keyed brand
-Note, the xpath is saved only if there is one tag that matches the user-keyed brand
+4) contains the user-keyed brand anywhere
+n) Otherwise look for any tag that contains ONLY the user-keyed brand
+Note, the xpath is saved only if there is one xpath that matches the user-keyed brand
 
-For price, the following is used to find an xpath for an h1, h2, h3, or span tag whose text:
+For price, the following is used to find an xpath for a discrete set of tags whose text:
 1) contains ONLY the user-keyed price
-2) contains the user-keyed price anywhere
+2) contains the user-keyed price anywhere in its text
 Note, the xpath is saved only if there is one tag that matches the user-keyed price
 
-For name, the following is used to find an xpath for an h1, h2, h3, or span tag whose text:
+For item name, the following is used to find an xpath for a discrete set of tags whose  text:
 1) contains ONLY the user-keyed name
-2) contains the user-keyed name anywhere
+2) starts with the user-keyed name
+2) contains the user-keyed name anywhere in its text
+n) otherwise look for any tag that contains the user-keyed name
 Note, the xpath is saved only if there is one tag that matches the user-keyed name
 
-Note that m.ziray suggest a rating, which is planned to be added as we refine the learning parser
+
+General note:
+The final xpath is reduced to be as simple as possible so it may be used for page variants from that retail site
 
 =end
 
