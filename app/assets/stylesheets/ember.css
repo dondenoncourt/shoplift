@@ -290,7 +290,7 @@ ul{
 	  width:89px;
 	  height:84px;
 	  background:url(http://davidmazza.net/shoplift/images/item-box-profile-circle.png) 0 0 no-repeat;
-	   z-index:1000;
+	   z-index:990;
    }
    .circle-overflow {
 	  -webkit-border-radius: 40px;
@@ -322,7 +322,7 @@ ul{
 	  position:absolute;
 	  top:-47px;
 	  left:74px;
-	  z-index:1000;
+	  z-index:900;
 	  /* Reduce opacity to 99% to eliminate weird glitch on jQuery css changes */
 	  filter: alpha(opacity=99);
 	  -moz-opacity: .99;

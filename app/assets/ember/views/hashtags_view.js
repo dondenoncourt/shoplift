@@ -2,6 +2,7 @@ Shoplift.HashtagsView = Ember.View.extend({
 	templateName: 'hashtags'
 });
 
-Shoplift.HashTagView = Ember.View.extend({
-	templateName: 'hashtag'
+Shoplift.HashtagView = Ember.View.extend({
+	templateName: 'hashtag',
+	classNames: ['tag-brand', 'item']
 })

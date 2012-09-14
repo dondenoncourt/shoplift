@@ -4,10 +4,15 @@ Shoplift.Router = Ember.Router.extend({
     route: '/',
     index: Ember.Route.extend({
       route: '/',
-      redirectsTo: 'app.items'
+      redirectsTo: 'app.index'
     }),
     app: Ember.Route.extend({
-      showProfile: Ember.Route.transitionTo("users.show.items"),
+      route: '/app',
+      showProfile: Ember.Route.transitionTo("user.index"),
+      index: Ember.Route.extend({
+        route: '/',
+        redirectsTo: 'items'
+      }),
       items: Ember.Route.extend({
         route: '/items',
         connectOutlets: function(router, items) {
@@ -21,6 +26,10 @@ Shoplift.Router = Ember.Router.extend({
             name: 'logo',
             outletName: 'header'
           });
+          /* router.get("applicationController").connectOutlet({
+            
+            outletName: 'sidebar'
+          }); */
         },
         index: Ember.Route.extend({
           route: '/'
@@ -35,101 +44,88 @@ Shoplift.Router = Ember.Router.extend({
           }
         }) // end items/show
       }), //end items
-      /*users: Ember.Route.extend({
-        route: '/users',
-        connectOutlets: function(router, users) {
-          router.get('applicationController').connectOutlet({
-            name: 'users',
-            outletName: 'sidebar',
-            context: Shoplift.User.findAll()
-          });
-        },
-        index: Ember.Route.extend({
-          route: '/'
-        }) 
-      }),*/ //end users
       users: Ember.Route.extend({
         route: '/users',
-        showItems: Ember.Route.transitionTo("show.items"),
+        /*showItems: Ember.Route.transitionTo("show.items"),
         showFollowees: Ember.Route.transitionTo("show.followees"),
         showFollowers: Ember.Route.transitionTo("show.followers"),
-        showHashtags: Ember.Route.transitionTo("show.hashtags"),
+        showHashtags: Ember.Route.transitionTo("show.hashtags"),*/
         index: Ember.Route.extend({
           route: '/'
         }),
-        show: Ember.Route.extend({
-          route: '/:user_id',
-          connectOutlets: function(router, user) {
+      }),
+      user: Ember.Route.extend({
+        route: '/users/:user_id',
+        showItems: Ember.Route.transitionTo("items"),
+        showFollowees: Ember.Route.transitionTo("followees"),
+        showFollowers: Ember.Route.transitionTo("followers"),
+        showHashtags: Ember.Route.transitionTo("hashtags"),
+        connectOutlets: function(router, user) {
+          router.get("applicationController").connectOutlet({
+            viewClass: Shoplift.ProfileSidebarView,
+            controller: router.get("userController"),
+            outletName: 'carousel',
+            context: user
+          }); 
+          //console.dir(user.get("items"));
+          router.get("applicationController").connectOutlet({
+            viewClass: Shoplift.FaceView,
+            controller: router.get("userController"),
+            outletName: 'header',
+            context: user
+          })
+        },
+        index: Ember.Route.extend({
+          route: '/',
+        }),
+        items: Ember.Route.extend({
+          route: '/items',
+          connectOutlets: function(router, items) {
+            /*Shoplift.store.load(Shoplift.Item, {
+              id: 7,
+              name: "Something 7",
+              relifts: "5",
+              brand: "Salvation Army",
+              comment: "I love it",
+              url: "http://google.com",
+              price: "88",
+              photo_file_name: "http://davidmazza.net/shoplift/images/product-img.png",
+              user_id: 2
+            });*/
+            console.dir(items);
+            router.get("userController").connectOutlet({
+              name: 'carouselContainer',
+              context: items //router.get("userController").get("content").get("items")
+            });
+          }
+        }), //end users/show/items
+        followees: Ember.Route.extend({
+          route: '/followees',
+          connectOutlets: function(router) {
+            router.get("userController").connectOutlet('userCarouselContainer');
+          }
+        }), //end users/show/followees
+        followers: Ember.Route.extend({
+          route: '/followers',
+          connectOutlets: function(router, followers) {
             router.get("applicationController").connectOutlet({
-              viewClass: Shoplift.ProfileSidebarView,
-              controller: router.get("userController"),
-              outletName: 'sidebar',
-              context: user //Shoplift.store.find(Shoplift.User, 2) //Shoplift.store.find(Shoplift.User, user._id)
-            }); 
+              name: 'userCarouselContainer',
+              outletName: 'carousel',
+              context: followers //router.get("userController").get("content").get("followers")
+            });
+          }
+        }), //end users/show/followers
+        hashtagbrands: Ember.Route.extend({
+          route: '/tags',
+          connectOutlets: function(router, tags) {
             router.get("applicationController").connectOutlet({
-              viewClass: Shoplift.FaceView,
-              outletName: 'header',
-              controller: router.get("userController"),
-              context: user
+              name: 'hashtags',
+              outletName: 'carousel',
+              context: router.get("userController").get("content").get("hashtags")
             })
-          },
-          index: Ember.Route.extend({
-            route: '/',
-            redirectsTo: 'items'
-          }),
-          items: Ember.Route.extend({
-            route: '/items',
-            connectOutlets: function(router, user) {
-              /*Shoplift.store.load(Shoplift.Item, {
-                id: 7,
-                name: "Something 7",
-                relifts: "5",
-                brand: "Salvation Army",
-                comment: "I love it",
-                url: "http://google.com",
-                price: "88",
-                photo_file_name: "http://davidmazza.net/shoplift/images/product-img.png",
-                user_id: 2
-              });*/
-              router.get("applicationController").connectOutlet({
-                name: 'carouselContainer',
-                outletName: 'carousel',
-                context: router.get("userController").get("content").get("items")
-              });
-            }
-          }), //end users/show/items
-          followees: Ember.Route.extend({
-            route: '/followees',
-            connectOutlets: function(router, user) {
-              router.get("applicationController").connectOutlet({
-                name: 'userCarouselContainer',
-                outletName: 'carousel',
-                context: router.get("userController").get("content").get("followers")
-              });
-            }
-          }), //end users/show/followees
-          followers: Ember.Route.extend({
-            route: '/followers',
-            connectOutlets: function(router, user) {
-              router.get("applicationController").connectOutlet({
-                name: 'userCarouselContainer',
-                outletName: 'carousel',
-                context: router.get("userController").get("content").get("followers")
-              });
-            }
-          }), //end users/show/followers
-          hashtags: Ember.Route.extend({
-            route: '/hashtags',
-            connectOutlets: function(router, tags) {
-              router.get("applicationController").connectOutlet({
-                name: 'hashtags',
-                outletName: 'carousel',
-                context: Shoplift.store.findMany(Shoplift.Tag, [1,2,3]) //router.get("userController").get("content").get("hashtags")
-              })
-            }
-          }) // end users/show/hashtags
-        }) //end users/show
-      }) //end users
+          }
+        }) // end user/hashtags
+      }) //end user
     })
   }) //end root
 });

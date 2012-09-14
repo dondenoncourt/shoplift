@@ -21,5 +21,6 @@ Shoplift.CarouselContainerView = Ember.View.extend({
 });
 
 Shoplift.UserCarouselContainerView = Shoplift.CarouselContainerView.extend({
-	templateName: 'users',
+	elementId: 'carousel',
+	templateName: 'users'
 });

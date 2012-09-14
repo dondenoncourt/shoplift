@@ -1,7 +1,7 @@
-{{#with controller}}
+
 	<div class="profile-container">
 	  <ul>
-		<li class="profile-count of-items">{{items.length}}</li>
+		<li {{action showItems}} class="profile-count of-items">{{items.length}}</li>
 		<li {{action showFollowees}} class="profile-count of-followees">{{followeeCount}}</li>
 		<li {{action showFollowers}} class="profile-count of-followers">{{followerCount}}</li>
 		<li {{action showHashtags}} class="tags-brands">&nbsp;</li>
@@ -12,4 +12,5 @@
 		<a href="{{website}}" class="profile-website"><img src="http://davidmazza.net/shoplift/img/www.png" rel="tooltip" title="Visit website" alt="personal website" /></a>
 	</div>
 	<div class="sidebar-shadow"></div>
-{{/with}}
+
+{{outlet}}

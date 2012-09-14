@@ -2,13 +2,19 @@ Shoplift.Item.FIXTURES = [
   {
 	id: 1,
 	name: "Something 1",
-	relifts: "5",
-	brand: "Macy's",
 	comment: "I love it",
 	url: "http://google.com",
 	price: "88",
 	photo_file_name: "http://davidmazza.net/shoplift/images/product-img.png",
-	user_id: 2
+	views: "2100",
+	relifts: "5",
+	visits: "23",
+	user_id: 2,
+	brand: {
+		id: 12, //this is a hashtagbrand id
+		value: "Macy's"
+	},
+	hashtagbrand_ids: [1, 2, 4, 5]
   }, 
   { 
 	id: 2,
@@ -19,7 +25,12 @@ Shoplift.Item.FIXTURES = [
 	url: "http://google.com",
 	price: "88",
 	photo_file_name: "http://davidmazza.net/shoplift/images/product-img.png",
-	user_id: 2
+	user_id: 2,
+	brand: {
+		id: 18, //this is a hashtagbrand id
+		value: "Sears"
+	},
+	hashtagbrand_ids: [1, 2, 4, 5]
   },
   { 
 	id: 3,
@@ -30,7 +41,12 @@ Shoplift.Item.FIXTURES = [
 	url: "http://google.com",
 	price: "88",
 	photo_file_name: "http://davidmazza.net/shoplift/images/product-img.png",
-	user_id: 1
+	user_id: 1,
+	brand: {
+		id: 19, //this is a hashtagbrand id
+		value: "Walmart"
+	},
+	hashtagbrand_ids: [1, 2, 4, 5]
   },
   { 
 	id: 4,
@@ -41,7 +57,12 @@ Shoplift.Item.FIXTURES = [
 	url: "http://google.com",
 	price: "88",
 	photo_file_name: "http://davidmazza.net/shoplift/images/product-img.png",
-	user_id: 1
+	user_id: 1,
+	brand: {
+		id: 12, //this is a hashtagbrand id
+		value: "Macy's"
+	},
+	hashtagbrand_ids: [1, 2, 4, 5]
   },
   { 
 	id: 5,
@@ -52,7 +73,12 @@ Shoplift.Item.FIXTURES = [
 	url: "http://google.com",
 	price: "88",
 	photo_file_name: "http://davidmazza.net/shoplift/images/product-img.png",
-	user_id: 2
+	user_id: 2,
+	brand: {
+		id: 12, //this is a hashtagbrand id
+		value: "Macy's"
+	},
+	hashtagbrand_ids: [1, 2, 4, 5]
   },
   { 
 	id: 6,
@@ -63,7 +89,12 @@ Shoplift.Item.FIXTURES = [
 	url: "http://google.com",
 	price: "88",
 	photo_file_name: "http://davidmazza.net/shoplift/images/product-img.png",
-	user_id: 1
+	user_id: 1,
+	brand: {
+		id: 12, //this is a hashtagbrand id
+		value: "Macy's"
+	},
+	hashtagbrand_ids: [1, 2, 4, 5]
   }
 ];
 
@@ -79,7 +110,8 @@ Shoplift.User.FIXTURES = [
 	follower_count: "56",
 	item_ids: [3, 4, 6],
 	followee_ids: [2, 3],
-	follower_ids: [2]
+	follower_ids: [2],
+	hashtagbrand_ids: [1, 3, 4]
   },
   {
 	id: 2,
@@ -92,7 +124,8 @@ Shoplift.User.FIXTURES = [
 	follower_count: "1304",
 	item_ids: [1, 2, 5],
 	followee_ids: [1, 3],
-	follower_ids: [1]
+	follower_ids: [1],
+	hashtagbrand_ids: [1, 2]
   },
   {
 	id: 3,
@@ -105,6 +138,38 @@ Shoplift.User.FIXTURES = [
 	follower_count: "1304",
 	item_ids: [],
 	followee_ids: [],
-	follower_ids: [1, 2]
+	follower_ids: [1, 2],
+	hashtagbrand_ids: [1, 2, 3]
   }
+];
+
+Shoplift.Hashtagbrand.FIXTURES = [
+	{
+		id: 1,
+		name: "summer",
+		image: "http://davidmazza.net/shoplift/images/product-img.png",
+		item_ids: [1, 2, 5],
+		user_ids: [1, 2, 3]
+	},
+	{
+		id: 2,
+		name: "beach",
+		image: "http://davidmazza.net/shoplift/images/product-img.png",
+		item_ids: [1, 2, 4, 6],
+		user_ids: [2, 3]
+	},
+	{
+		id: 3,
+		name: "Sears",
+		image: "http://davidmazza.net/shoplift/images/product-img.png",
+		item_ids: [2, 4, 6],
+		user_ids: [1, 3]
+	},
+	{
+		id: 4,
+		name: "warm",
+		image: "http://davidmazza.net/shoplift/images/product-img.png",
+		item_ids: [5, 6],
+		user_ids: [1]
+	}
 ];
