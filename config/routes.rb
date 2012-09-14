@@ -18,6 +18,8 @@ App::Application.routes.draw do
 
   get '/shoplifters', :to => 'users#index'
 
+  resources :hashtagbrands
+
   #resources :images TODO delete this and any other image artifacts
   resources :posts
   resources :categories, :only => [:index, :edit, :update]

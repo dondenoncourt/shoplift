@@ -25,4 +25,8 @@ class Hashtag < ActiveRecord::Base
 
   validates :hashtag_value_id, :post_id, :user_id, :presence => true
   validates :hashtag_value_id, :uniqueness => {:scope => [:post_id, :user_id]}
+
+  def items
+    Item.where("post_id = ?", post_id)
+  end
 end
