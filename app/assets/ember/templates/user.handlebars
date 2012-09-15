@@ -1,0 +1,6 @@
+
+	<div class="profile-image"></div>
+	<div class="circle-overflow">
+	  <img {{bindAttr src="avatarUrlSmall"}} {{action showProfile this}} width="116" height="87" />
+	</div>
+	<h2 {{action showProfile this}}>{{fullName}}</h2>

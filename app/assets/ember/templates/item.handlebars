@@ -1,0 +1,17 @@
+{{#with view.content}}
+	<div class="product-container">
+	  {{#with user}}
+		{{view Shoplift.UserView}}
+	  {{/with}}
+		<div class="productImg">
+			<img {{bindAttr src="photoFileName"}} width="353" height="410" /> 
+		</div>
+		<div class="productPricePan">
+			<p class="productName">{{brand.value}}</p>
+			<p class="productPrice">{{name}} <span>{{price}}</span></p>
+		</div>
+		<div class="product-sub-container">
+			<a class="relift-this icon-relift-button" rel="#tsl-relift-popup" title="Relift this!"></a> <!-- TODO: Relift action should go here -->
+		</div>
+	</div>
+{{/with}}

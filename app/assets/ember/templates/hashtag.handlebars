@@ -1,0 +1,19 @@
+{{#with view.content}}
+	{{#even contentIndex }}
+		<div class="tag-brand item">
+			<img {{bindAttr src="image" alt="name"}} />
+			<div class="tag-brand-sub-container">
+				<ul class="tag-list">
+					<li>{{name}} {{contentIndex}}</li>
+				</ul>
+			</div>
+	{{else}}
+			<img {{bindAttr src="image" alt="name"}} />
+			<div class="tag-brand-sub-container">
+				<ul class="tag-list">
+					<li>{{name}} {{contentIndex}}</li>
+				</ul>
+			</div>
+		</div>
+	{{/even}}
+{{/with}}

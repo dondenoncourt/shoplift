@@ -1,0 +1,1 @@
+Shoplift.ProfileSidebarController = Ember.Controller.extend();
