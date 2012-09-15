@@ -17,6 +17,7 @@ class Brand < ActiveRecord::Base
   has_many :hashtagbrands, :dependent => :delete_all
   after_create {|b| Hashtagbrand.create(:brand => b)}
   def items
-    Post.joins(:items).where(:id => id).first.items
+    first = Post.joins(:items).where(:id => id).first
+    first.items if first
   end
 end

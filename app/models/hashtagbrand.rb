@@ -17,9 +17,9 @@ class Hashtagbrand < ActiveRecord::Base
   end
   def image
     if brand
-      brand.items.last.post.photo
+      brand.items.last.post.photo if brand.items
     else
-      hashtag_value.hashtags.first.post.photo
+      hashtag_value.hashtags.first.post.photo if hashtag_value.hashtags.first
     end
   end
   def users
