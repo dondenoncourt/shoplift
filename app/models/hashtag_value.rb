@@ -17,6 +17,6 @@ class HashtagValue < ActiveRecord::Base
   has_many :users, :through => :items
   has_many :hashtagbrands, :dependent => :delete_all
 
-  after_create {|h| Hashtagbrand.create(:hashtag => h)}
+  after_create {|h| Hashtagbrand.create(:hashtag_value => h)}
 
 end
