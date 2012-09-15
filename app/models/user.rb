@@ -61,6 +61,7 @@ class User < ActiveRecord::Base
                   :notify_new_follower, :notify_relift, :notify_missing,
                   :avatar, :tos
   has_many :posts
+  has_many :items
   has_many :subscriptions
   has_many :followers, :through => :subscriptions, :foreign_key => :follower_id, :class_name => 'User', :conditions => ["subscriptions.status = 1"]
   has_many :hashtags
@@ -241,5 +242,10 @@ class User < ActiveRecord::Base
   end
   geocoded_by :address   # can also be an IP address
   after_validation :geocode          # auto-fetch coordinates
+
+  def hashtagbrands
+    Hashtagbrand.where({:brand_id => posts.pluck('brand_id').compact.uniq} ||
+                       {:hashtag_value_id => hashtag_values.pluck('hashtag_value_id').compact.uniq})
+  end
   
 end

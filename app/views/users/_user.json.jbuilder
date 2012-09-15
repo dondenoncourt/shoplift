@@ -20,4 +20,5 @@ json.user do |json|
   json.followee_count current_user.followees.count if user_signed_in?
   json.followee_ids Subscription.where("user_id = ?", user.id).pluck(:follower_id)
   json.follower_ids Subscription.where("follower_id = ?", user.id).pluck(:user_id)
+  json.hashtagbrand_ids user.hashtagbrands.pluck(:id)
 end
