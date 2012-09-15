@@ -1,0 +1,19 @@
+</span>
+	{{#if view.isEven}}
+		<div class="tag-brand item">
+			<img {{bindAttr src="view.content.image" alt="name"}} />
+			<div {{action showHashtagbrand view.content}} class="tag-brand-sub-container">
+				<ul class="tag-list">
+					<li>{{view.content.value}}</li>
+				</ul>
+			</div>
+	{{else}}
+			<img {{bindAttr src="view.content.image" alt="name"}} />
+			<div {{action showHashtagbrand view.content}} class="tag-brand-sub-container">
+				<ul class="tag-list">
+					<li>{{view.content.value}}</li>
+				</ul>
+			</div>
+		</div>
+	{{/if}}
+<span>

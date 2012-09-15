@@ -12,4 +12,5 @@ Shoplift.UsersView = Ember.View.extend({
 Shoplift.ProfileView = Ember.View.extend({
 	templateName: 'profile',
 	classNames: ['product', 'item']
+	
 });

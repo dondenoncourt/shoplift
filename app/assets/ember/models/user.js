@@ -1,5 +1,4 @@
 Shoplift.User = DS.Model.extend({
-  //id: DS.attr('number'),
   email: DS.attr('string'),
   username: DS.attr('string'),
   fullName: DS.attr('string'),
@@ -12,6 +11,6 @@ Shoplift.User = DS.Model.extend({
   followers: DS.hasMany('Shoplift.User', { key: 'follower_ids' }),
   hashtagbrands: DS.hasMany('Shoplift.Hashtagbrand', { key: 'hashtagbrand_ids' }),
   htmldescription: function(){
-      return this.get('description').htmlSafe();
+      return this.get('description');//.htmlSafe();
   }.property('description')
 });

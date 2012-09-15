@@ -24,3 +24,8 @@ Shoplift.UserCarouselContainerView = Shoplift.CarouselContainerView.extend({
 	elementId: 'carousel',
 	templateName: 'users'
 });
+
+Shoplift.HashtagbrandCarouselContainerView = Shoplift.CarouselContainerView.extend({
+	elementId: 'carousel',
+	templateName: 'hashtagbrands'
+});
