@@ -42,6 +42,31 @@ describe ItemsController do
     end
     return item
   end
+
+  describe "GET index" do
+    it "returns status code of 200" do
+     sign_in @user
+     get :index, :format => :json
+      response.response_code.should == 200
+    end
+
+    it "returns 6 items" do
+      sign_in @user
+      get :index, :format => :json
+      json = JSON.parse(response.body)
+      json['items'].size.should == 6
+    end
+
+    it "returns in item 3, the right stuff" do
+      sign_in @user
+      get :index, :format => :json
+      json = JSON.parse(response.body)
+      json['items'][2]['id'].should == 3
+      json['items'][2]['brand'].should == 'New brand name'
+      response.body.should =~ /"id":#{Item.find_by_user_id(@user.id).id}/m
+    end
+  end
+
   
   describe "GET show" do
     describe "for public user without login" do

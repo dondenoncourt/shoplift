@@ -18,6 +18,30 @@ describe UsersController do
        :sex => true
       }
     end
+
+  describe "GET users" do
+    it "returns status code of 200" do
+      sign_in @user
+      get :show, :format => :json, :id => @user.id
+      response.response_code.should == 200
+    end
+
+    it "returns a list of followee_ids" do
+      sign_in @user
+      get :show, :format => :json, :id => @user.id
+      json = JSON.parse(response.body)
+      json['user']['followee_ids'].should == [2,3,4]
+      response.response_code.should == 200
+    end
+
+    it "returns a list of item_ids" do
+      sign_in @user
+      get :show, :format => :json, :id => @user.id
+      json = JSON.parse(response.body)
+      json['user']['item_ids'].should == [1,2]
+      response.response_code.should == 200
+    end
+  end
   
   describe "POST create" do
     describe "with valid params" do
