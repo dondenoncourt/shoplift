@@ -17,14 +17,10 @@ item.set_asides.each do |set_aside|
   end
 end
 
-
 if item.post.hashtags_allowed
-	json.hashtags item.post.hashtags do |json, hashtag|
-		json.id hashtag.id
-		json.value hashtag.hashtag_value.value
-	end
+  json.hashtagbrands item.hashtagbrands_hashtags.pluck('hashtagbrands.id')
 else
-	json.hashtags "Hashtags not allowed"
+  json.hashtagbrands '[]'
 end
 
 # Check if item is a relift

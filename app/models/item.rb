@@ -23,6 +23,7 @@ class Item < ActiveRecord::Base
   belongs_to :user, :conditions => ["users.status = 1"]
   has_many :hashtags, :through => :post, :conditions => ["hashtags.status = 1"]
   has_many :hashtag_values, :through => :hashtags
+  has_many :hashtagbrands_hashtags, :through => :hashtag_values, :source => :hashtagbrands
   has_many :suggestions
   has_many :set_asides
   has_many :subscriptions, :foreign_key => :user_id, :primary_key => :user_id, :conditions => ["subscriptions.status = 1"]
@@ -72,5 +73,6 @@ class Item < ActiveRecord::Base
     return false if user == nil
     set_asides.where(:user_id => user.id).first
   end
+
 
 end
