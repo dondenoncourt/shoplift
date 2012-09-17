@@ -153,7 +153,7 @@ class UsersController < ApplicationController
   # output:: URL
   # http://s3.amazonaws.com/shoplift_dev/thumb/2/headless.jpg?1337213827
   # ::output-end::
-  # Get the user's avatar URL
+  # see if a user is following the current logged in user
   # <br/><br/>Notes:<pre>curl -X POST --user aaronbartell@gmail.com:thinkpad -d "username=aaronbartell@gmail.com" -d "style=thumb" localhost:3000/users/avatar.json</pre>
   # =end
   def avatar
@@ -168,6 +168,25 @@ class UsersController < ApplicationController
     else
       render_error(404,"User not found")
     end
+  end
+
+
+  # =begin apidoc
+  # url:: /users/following/:id.json
+  # method:: GET
+  # access:: FREE
+  # return:: is_follower: true
+  # param:: id:int of the user that may be following the current user
+  # output:: URL
+  # {"is_following":true}
+  # ::output-end::
+  # Query if a user is following the currently logged in user
+  # <br/><br/>Notes:<pre>curl -X GET --user mark@elsewhere.net:vo2max -d "id=2" localhost:3000/users/following/1.json</pre>
+  # =end
+  def following
+    follower = current_user.followers.where('subscriptions.follower_id = :id', :id => params[:id]).first
+    json = {:is_following => follower != nil }.to_json
+    render :json => json
   end
 
   private

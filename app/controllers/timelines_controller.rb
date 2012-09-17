@@ -138,15 +138,16 @@ class TimelinesController < ApplicationController
   # Fetch unlimited items that match hashtag name. Default count retruned is 20 (if that many exist)
   # <br/><br/>Notes:<pre>url -X GET --user aaronbartell@gmail.com:poopydiaper localhost:3000/timelines/hashtags/jeans.json</pre>  
   # =end
-  def show_hashtags
-    limit = params[:limit].blank? ? 20 : params[:limit]
-    @items = Item.joins(:post,:user,:hashtags,:hashtag_values) \
-                  .where("items.status = 1 AND hashtag_values.value = ?",params[:name]) \
-                  .order("items.created_at DESC") \
-                  .group("items.id") \
-                  .limit(limit)
-    render :index
-  end
+# obsolete?
+  #def show_hashtags
+    #limit = params[:limit].blank? ? 20 : params[:limit]
+    #@items = Item.joins(:post,:user,:hashtags,:hashtag_values) \
+                  #.where("items.status = 1 AND hashtag_values.value = ?",params[:name]) \
+                  #.order("items.created_at DESC") \
+                  #.group("items.id") \
+                  #.limit(limit)
+    #render :index
+  #end
 
   private
 

@@ -18,8 +18,8 @@ json.user do |json|
   json.avatar_url_small user.avatar(:small)
   json.avatar_url_thumb user.avatar(:thumb)
   json.followee_count current_user.followees.count if user_signed_in?
-  json.followee_ids Subscription.where("user_id = ?", user.id).pluck(:follower_id)
-  json.follower_ids Subscription.where("follower_id = ?", user.id).pluck(:user_id)
+  json.followee_ids user.followees.pluck('subscriptions.user_id')
+  json.follower_ids user.followers.pluck('subscriptions.follower_id')
   json.item_ids user.items.pluck('items.id')
   json.hashtagbrand_ids user.hashtagbrands.pluck(:id)
 end

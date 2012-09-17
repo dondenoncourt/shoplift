@@ -41,6 +41,7 @@ App::Application.routes.draw do
     #delete "logout" => "devise/sessions#destroy"
     get '/users/auth/:provider' => 'users/omniauth_callbacks#passthru'
   end
+  get "users/following/:id", :to => "users#following"
   post "users/avatar", :to => "users#avatar"
   post "users/validate_username", :to => "users#validate_username"
   resources :users, :only => [:avatar,:show,:create,:update,:destroy] do

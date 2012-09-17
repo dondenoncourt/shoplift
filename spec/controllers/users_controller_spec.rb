@@ -19,6 +19,15 @@ describe UsersController do
       }
     end
 
+  describe "GET following" do
+    it "returns is_following false" do
+     sign_in @user
+     get :following, :id => 99, :format => :json
+     json = JSON.parse(response.body)
+     json['is_following'].should == false
+    end
+  end
+
   describe "GET users" do
     it "returns status code of 200" do
       sign_in @user
@@ -30,7 +39,7 @@ describe UsersController do
       sign_in @user
       get :show, :format => :json, :id => @user.id
       json = JSON.parse(response.body)
-      json['user']['followee_ids'].should == [2,3,4]
+      json['user']['followee_ids'].should == [2,3]
       response.response_code.should == 200
     end
 

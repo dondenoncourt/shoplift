@@ -1,0 +1,36 @@
+hashtagbrands_001:
+  id: 1
+  brand_id: nil
+  hashtag_value_id: 1
+  created_at: 2011-12-06 15:46:45.000000000Z
+  updated_at: 2011-12-06 15:46:45.000000000Z
+hashtagbrands_002:
+  id: 2
+  brand_id: nil
+  hashtag_value_id: 2
+  created_at: 2011-12-06 15:46:45.000000000Z
+  updated_at: 2011-12-06 15:46:45.000000000Z
+hashtagbrands_003:
+  id: 3
+  brand_id: nil
+  hashtag_value_id: 3
+  created_at: 2011-12-06 15:46:45.000000000Z
+  updated_at: 2011-12-06 15:46:45.000000000Z
+hashtagbrands_004:
+  id: 4
+  brand_id: nil
+  hashtag_value_id: 4
+  created_at: 2011-12-06 15:46:45.000000000Z
+  updated_at: 2011-12-06 15:46:45.000000000Z
+hashtagbrands_005:
+  id: 5
+  brand_id: 1
+  hashtag_value_id: nil
+  created_at: 2011-12-06 15:46:45.000000000Z
+  updated_at: 2011-12-06 15:46:45.000000000Z
+hashtagbrands_006:
+  id: 6
+  brand_id: 2
+  hashtag_value_id: nil
+  created_at: 2011-12-06 15:46:45.000000000Z
+  updated_at: 2011-12-06 15:46:45.000000000Z

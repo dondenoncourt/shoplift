@@ -64,6 +64,7 @@ class User < ActiveRecord::Base
   has_many :items
   has_many :subscriptions
   has_many :followers, :through => :subscriptions, :foreign_key => :follower_id, :class_name => 'User', :conditions => ["subscriptions.status = 1"]
+  has_many :followees, :through => :subscriptions, :foreign_key => :user_id, :class_name => 'User', :conditions => ["subscriptions.status = 1"]
   has_many :hashtags
   has_many :hashtag_values, :through => :hashtags
   has_and_belongs_to_many :roles

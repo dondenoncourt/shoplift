@@ -15,7 +15,11 @@ brands_001:
   id: 1
   name: Lorem ipsum dolor
   reviewed: 0
+  created_at: 2011-12-06 15:46:45.000000000Z
+  updated_at: 2011-12-06 15:46:45.000000000Z
 brands_002:
   id: 2
   name: New brand name
   reviewed: 0
+  created_at: 2011-12-06 15:46:45.000000000Z
+  updated_at: 2011-12-06 15:46:45.000000000Z

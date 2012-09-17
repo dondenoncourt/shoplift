@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe TimelinesController do
-  fixtures :items, :posts, :hashtags, :hashtag_values, :users
+  fixtures :items, :posts, :hashtags, :hashtag_values, :brands, :hashtagbrands, :users
 
   before do
     @user = users(:users_001)
@@ -97,16 +97,17 @@ describe TimelinesController do
     end
   end
 
-  describe "GET show_hashtags" do
-    it "returns status code of 200" do
-     get :show_hashtags, :name => hashtag_values(:hashtag_values_001).value, :format => :json
-      response.response_code.should == 200
-    end
+  #may have been obsoleted
+  #describe "GET show_hashtags" do
+    #it "returns status code of 200" do
+     #get :show_hashtags, :name => hashtag_values(:hashtag_values_001).value, :format => :json
+      #response.response_code.should == 200
+    #end
 
-    it "returns recent items" do
-      get :show_hashtags, :name => hashtag_values(:hashtag_values_001).value, :format => :json
-      response.body.should =~ /"value":"#{hashtag_values(:hashtag_values_001).value}"/m
-    end
-  end
+    #it "returns recent items" do
+      #get :show_hashtags, :name => hashtag_values(:hashtag_values_001).value, :format => :json
+      #response.body.should =~ /"value":"#{hashtag_values(:hashtag_values_001).value}"/m
+    #end
+  #end
 
 end
