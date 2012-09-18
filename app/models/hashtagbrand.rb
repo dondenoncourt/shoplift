@@ -39,4 +39,11 @@ class Hashtagbrand < ActiveRecord::Base
       hashtag_value.users
     end
   end
+  def related(limit)
+    if brand
+      brand.related_hashtagbrands(limit)
+    else
+      hashtag_value.related_hashtagbrands(limit)
+    end
+  end
 end

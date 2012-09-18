@@ -19,6 +19,7 @@ App::Application.routes.draw do
   get '/shoplifters', :to => 'users#index'
 
   get 'hashtagbrands/search', :to => 'hashtagbrands#search'
+  get 'hashtagbrands/:id/related', :to => 'hashtagbrands#related'
   resources :hashtagbrands
 
   #resources :images TODO delete this and any other image artifacts

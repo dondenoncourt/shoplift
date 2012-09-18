@@ -58,4 +58,26 @@ class HashtagbrandsController < ApplicationController
     render :json => @hashtagbrands, :status => 200
   end
 
+  # =begin apidoc
+  # url:: /hashtagsbrands/:id/relasted.json?limit=:limit
+  # method:: GET
+  # access:: FREE
+  # return:: hashtagbrand list 
+  # param:: limit:int - limit the count of hashtagbrands returned, defaults to 5 (optional)
+  # output:: json
+  # {"hashtagbrands":[{"id":32787,"value":"BTFtag2"}]}
+  # ::output-end::
+  # Search hashtags
+  # <br/><br/>Notes:<pre>curl -X GET --user mark@elsewhere.net:vo2max -d "limit=3" "localhost:3000/hashtagbrands/1/related.json"</pre>  
+  # =end     
+  def related
+    hashtagbrand = Hashtagbrand.find(params[:id])
+    if hashtagbrand
+      limit = params[:limit] ||= 5
+      @hashtagbrands = hashtagbrand.related(limit)
+    else
+      render_error 404, 'Hashtagbrand not found'
+    end
+  end
+
 end

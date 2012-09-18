@@ -1,7 +1,8 @@
 require 'spec_helper'
 
 describe FlagsController do
-  fixtures :users, :post_flags
+  fixtures :users, :items, :posts, :hashtags, :hashtag_values, :brands, :hashtagbrands
+
   
   before(:each) do
     sign_in users(:users_001)

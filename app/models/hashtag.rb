@@ -14,7 +14,7 @@
 class Hashtag < ActiveRecord::Base
   require 'status'
 
-  belongs_to :hashtag_value
+  belongs_to :hashtag_value, :counter_cache => true
   belongs_to :post, :conditions => ['posts.status = 1']
   belongs_to :user, :conditions => ['users.status = 1'], :counter_cache => :count_of_hashtags
 

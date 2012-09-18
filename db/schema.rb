@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120913200319) do
+ActiveRecord::Schema.define(:version => 20120917212220) do
 
   create_table "brands", :force => true do |t|
     t.string   "name"
@@ -72,9 +72,10 @@ ActiveRecord::Schema.define(:version => 20120913200319) do
   add_index "hashtag_flags", ["user_id"], :name => "fk_hashtag_flags_users"
 
   create_table "hashtag_values", :force => true do |t|
-    t.string   "value",      :limit => 60, :null => false
-    t.datetime "created_at",               :null => false
-    t.datetime "updated_at",               :null => false
+    t.string   "value",          :limit => 60,                :null => false
+    t.datetime "created_at",                                  :null => false
+    t.datetime "updated_at",                                  :null => false
+    t.integer  "hashtags_count",               :default => 0
   end
 
   create_table "hashtagbrands", :force => true do |t|

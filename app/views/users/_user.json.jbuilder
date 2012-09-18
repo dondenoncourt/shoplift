@@ -21,5 +21,5 @@ json.user do |json|
   json.followee_ids user.followees.pluck('subscriptions.user_id')
   json.follower_ids user.followers.pluck('subscriptions.follower_id')
   json.item_ids user.items.pluck('items.id')
-  json.hashtagbrand_ids user.hashtagbrands.pluck(:id)
+  json.hashtagbrand_ids ((user.hashtagbrands)?user.hashtagbrands.pluck(:id):'[]')
 end
