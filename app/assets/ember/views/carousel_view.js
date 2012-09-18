@@ -3,26 +3,47 @@ Shoplift.CarouselContainerView = Ember.View.extend({
   templateName: 'items',
   next: function(event) {
 	event.preventDefault();
-	//TODO: jquery code to animate the slide goes here
-
-	//this.$(".product").animate({left: "-=434"}, 500, function() {
-	  this.get('controller').next();
-	/*  $("#carousel").css({left: "434px"});
-	});*/
+	var that = this;
+	var once = true;
+	this.$(".item").animate({left: "-=434"}, 500, function() {
+	  if(once) {
+	    that.get('controller').next();
+	    once = false;
+	  }
+	//  $("#carousel").css({left: "434px"});
+	});
   },
   prev: function(event) {
-	//And here
 	this.get('controller').prev();
-	/*$("#carousel").css({left: "-434px"});
-	$("#carousel").animate({left: "+=434"}, 500);*/
+	$("#carousel").css({left: "-434px"});
+	$("#carousel").animate({left: "+=434"}, 500);
+  },
+  didInsertElement: function() {
+	  
   }
 
 
 });
 
 Shoplift.UserCarouselContainerView = Shoplift.CarouselContainerView.extend({
-	elementId: 'carousel',
-	templateName: 'users'
+	elementId: 'profiles',
+	templateName: 'users',
+	next: function(event) {
+		event.preventDefault();
+		var that = this;
+		var once = true;
+		this.$(".item").animate({left: "-=560"}, 500, function() {
+		  if(once) {
+			that.get('controller').next();
+			once = false;
+		  }
+		});
+	},
+	prev: function(event) {
+		this.get('controller').prev();
+		$("#profiles").css({"margin-left": "-560px"});
+		$("#profiles").animate({left: "+=560"}, 500);
+	},
 });
 
 Shoplift.HashtagbrandCarouselContainerView = Shoplift.CarouselContainerView.extend({

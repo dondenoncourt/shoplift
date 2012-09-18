@@ -81,11 +81,15 @@ Shoplift.UserRoute = Ember.Route.extend({
   followers: Ember.Route.extend({
 	route: '/followers',
 	connectOutlets: function(router) {
-	  router.get("userController").connectOutlet({ 
+		//var context = router.get("userController").get("content").get("followers");
+		Shoplift.User.find();
+		var context = Shoplift.store.findMany(Shoplift.User, ["1","2","3","4"]);
+		router.get("userController").connectOutlet('userCarouselContainer', context);
+	  /*router.get("userController").connectOutlet({ 
 		viewClass: Shoplift.UserCarouselContainerView,
 		controller: router.get("userFollowersController"),
 		context: router.get("userController").get("content").get("followers")
-	  });
+	  });*/
 	}
   }), //end users/show/followers
   hashtagbrands: Ember.Route.extend({

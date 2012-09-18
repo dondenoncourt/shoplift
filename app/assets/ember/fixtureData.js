@@ -41,7 +41,7 @@ Shoplift.Item.FIXTURES = [
 	url: "http://google.com",
 	price: "88",
 	photo_file_name: "img/item-box-product-image.jpg",
-	user_id: "1",
+	user_id: "3",
 	brand: {
 		id: 19, //this is a hashtagbrand id
 		value: "Walmart"
@@ -125,7 +125,8 @@ Shoplift.User.FIXTURES = [
 	item_ids: ["1", "2", "5", "4", "3"],
 	followee_ids: ["1", "3"],
 	follower_ids: ["1"],
-	hashtagbrand_ids: ["1", "2"]
+	hashtagbrand_ids: ["1", "2"],
+	recommended_ids: ["3"]
   },
   {
 	id: "3",
@@ -138,7 +139,49 @@ Shoplift.User.FIXTURES = [
 	follower_count: "1304",
 	item_ids: ["2", "4", "1", "3", "2"],
 	followee_ids: ["2"],
-	follower_ids: ["1", "2"],
+	follower_ids: ["1", "2", "1", "1", "2", "3"],
+	hashtagbrand_ids: ["1", "2", "3"]
+  },
+  {
+	id: "4",
+	email: "nadine@pert.com",
+	username: "npert",
+	full_name: "Someone Else",
+	description: "This is a description, I just haven't written anything for it yet.",
+	avatar_url_small: "http://davidmazza.net/shoplift/images/jane-randall.jpg",
+	followee_count: "136",
+	follower_count: "1304",
+	item_ids: ["2", "4", "1", "3", "2"],
+	followee_ids: ["2"],
+	follower_ids: ["1", "2", "1", "1", "2", "3"],
+	hashtagbrand_ids: ["1", "2", "3"]
+  },
+  {
+	id: "5",
+	email: "nadine@pert.com",
+	username: "npert",
+	full_name: "David Mazza",
+	description: "This is a description, I just haven't written anything for it yet.",
+	avatar_url_small: "http://davidmazza.net/shoplift/images/jane-randall.jpg",
+	followee_count: "136",
+	follower_count: "1304",
+	item_ids: ["2", "4", "1", "3", "2"],
+	followee_ids: ["2"],
+	follower_ids: ["1", "2", "1", "1", "2", "3"],
+	hashtagbrand_ids: ["1", "2", "3"]
+  },
+  {
+	id: "6",
+	email: "nadine@pert.com",
+	username: "npert",
+	full_name: "Brandon Fail",
+	description: "This is a description, I just haven't written anything for it yet.",
+	avatar_url_small: "http://davidmazza.net/shoplift/images/jane-randall.jpg",
+	followee_count: "136",
+	follower_count: "1304",
+	item_ids: ["2", "4", "1", "3", "2"],
+	followee_ids: ["2"],
+	follower_ids: ["1", "2", "1", "1", "2", "3"],
 	hashtagbrand_ids: ["1", "2", "3"]
   }
 ];

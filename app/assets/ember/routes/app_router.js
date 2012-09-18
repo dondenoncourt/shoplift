@@ -20,7 +20,8 @@ Shoplift.Router = Ember.Router.extend({
       item: Shoplift.ItemRoute,
       users: Shoplift.UsersRoute,
       user: Shoplift.UserRoute,
-      hashtagbrand: Shoplift.HashtagbrandRoute
+      hashtagbrand: Shoplift.HashtagbrandRoute,
+      explore: Shoplift.ExploreRoute
     })
   })
 });

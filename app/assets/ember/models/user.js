@@ -10,6 +10,7 @@ Shoplift.User = DS.Model.extend({
   followees: DS.hasMany('Shoplift.User', { key: 'followee_ids' }),
   followers: DS.hasMany('Shoplift.User', { key: 'follower_ids' }),
   hashtagbrands: DS.hasMany('Shoplift.Hashtagbrand', { key: 'hashtagbrand_ids' }),
+  recommended: DS.hasMany('Shoplift.User', { key: 'recommended_ids'}),
   htmldescription: function(){
       return this.get('description');//.htmlSafe();
   }.property('description')

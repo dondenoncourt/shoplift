@@ -1,6 +1,8 @@
 Shoplift.CarouselContainerController = Ember.ArrayController.extend({
   sortProperties: ['id'],
-  goTo: function(id) {
+  goTo: function(idString) {
+  	var id = parseInt(idString);
+  	console.log('item' + id);
 	var lookup = [id-1,id,id+1,id+2];
 	if(Shoplift.store.find(Shoplift.Item, id+2).get('isLoaded') === false) {
 	  //lookup = [id-1, id, 1];
@@ -19,9 +21,11 @@ Shoplift.CarouselContainerController = Ember.ArrayController.extend({
   }
 });
 
-Shoplift.UserCarouselContainerController = Ember.ArrayController.extend({
+Shoplift.UserCarouselContainerController = Shoplift.CarouselContainerController.extend({
 	sortProperties: ['id'],
-	goTo: function(id) {
+	goTo: function(idString) {
+		var id = parseInt(idString);
+		console.log('user' + id);
 		var lookup = [id-1,id,id+1,id+2];
 		if(Shoplift.store.find(Shoplift.User, id+2).get('isLoaded') === false) {
 		  //lookup = [id-1, id, 1];
@@ -32,10 +36,10 @@ Shoplift.UserCarouselContainerController = Ember.ArrayController.extend({
 		}
 		this.set('content', Shoplift.store.findMany(Shoplift.User, lookup));
 	},
-	next: function() {
+	/*next: function() {
 		this.goTo(this.get('content').objectAt(2).get('id'));
 	  },
 	  prev: function() {
 		this.goTo(this.get('content').objectAt(0).get('id'));
-	  }
+	  }*/
 });

@@ -5,7 +5,7 @@ Shoplift.ItemsRoute = Ember.Route.extend({
 	router.get("applicationController").connectOutlet({
 	  name: 'carouselContainer',
 	  outletName: 'carousel',
-	  context: Shoplift.store.findMany(Shoplift.Item, [1,2,3,4])
+	  context: Shoplift.store.findMany(Shoplift.Item, ["1","2","3","4"])
 	});
 	router.get("applicationController").connectOutlet({
 	  name: 'logo',
