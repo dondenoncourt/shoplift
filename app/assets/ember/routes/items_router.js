@@ -1,16 +1,21 @@
 Shoplift.ItemsRoute = Ember.Route.extend({
   route: '/items',
   connectOutlets: function(router, items) {
-	Shoplift.Item.find();
+	//Shoplift.Item.find();
 	router.get("applicationController").connectOutlet({
 	  name: 'carouselContainer',
 	  outletName: 'carousel',
-	  context: Shoplift.store.findMany(Shoplift.Item, ["1","2","3","4"])
+	  //context: Shoplift.store.findMany(Shoplift.Item, ["1","2","3","4"])
+	  context: Shoplift.store.findMany(Shoplift.Item, [1,2,3,4])
 	});
+	
+	//router.get('navController').set('target', Shoplift.NavManager);
+	//console.log(router.get('navController'));
 	router.get("applicationController").connectOutlet({
-	  name: 'logo',
+	  name: 'nav',
 	  outletName: 'header'
 	});
+	router.get("navController").connectOutlet('logo');
 	//console.dir(Shoplift.store.findMany(Shoplift.Item, [1,2,3,4]));
   },
   index: Ember.Route.extend({

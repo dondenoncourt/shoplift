@@ -1,10 +1,17 @@
 //= require_tree .
 //= require_self
 
+Shoplift.currentUser = 1;
+
 Shoplift.Router = Ember.Router.extend({
   enableLogging: true,
   root: Ember.Route.extend({
     route: '/',
+    goHome: Ember.Route.transitionTo("root.index"),
+    goAdd: Ember.Route.transitionTo("index"),
+    goExplore: Ember.Route.transitionTo("explore.index"),
+    goSearch: Ember.Route.transitionTo("hashtagbrand.index"),
+    goProfile: Ember.Route.transitionTo("user.index"),
     index: Ember.Route.extend({
       route: '/',
       redirectsTo: 'app.index'
@@ -12,6 +19,7 @@ Shoplift.Router = Ember.Router.extend({
     app: Ember.Route.extend({
       route: '/app',
       showProfile: Ember.Route.transitionTo("user.index"),
+      showTag: Ember.Route.transitionTo('hashtagbrand.index'),
       index: Ember.Route.extend({
         route: '/',
         redirectsTo: 'items'
@@ -23,7 +31,8 @@ Shoplift.Router = Ember.Router.extend({
       hashtagbrand: Shoplift.HashtagbrandRoute,
       explore: Shoplift.ExploreRoute
     })
-  })
+  })//,
+  //vanity: Shoplift.VanityRoute
 });
 
 

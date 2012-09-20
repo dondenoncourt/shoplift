@@ -7,7 +7,11 @@ Shoplift.ExploreRoute = Ember.Route.extend({
 	showInterests: Ember.Route.transitionTo('interests'),
 	connectOutlets: function(router) {
 		router.get("applicationController").connectOutlet('carousel', 'exploreSidebar');
-		router.get("applicationController").connectOutlet('header', 'logo');
+		router.get("applicationController").connectOutlet({
+		  name: 'nav',
+		  outletName: 'header'
+		});
+		router.get("navController").connectOutlet('logo');
 	},
 	index: Ember.Route.extend({
 		route: '/'

@@ -1,7 +1,10 @@
 // shoplift-app
 //= require "jquery.min"
 //= require "jquery_ujs"
-//= require "jquery.carouFredSel-5.6.1"
+//= require "jquery.effects.core"
+//= require "jquery.effects.slide"
+//= require "jquery.transit"
+//= require "bootstrap"
 //= require handlebars-latest
 //= require /javascripts/handlebars.runtime
 //= require ember-latest

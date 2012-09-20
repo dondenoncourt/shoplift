@@ -1,6 +1,6 @@
 Shoplift.User = DS.Model.extend({
   email: DS.attr('string'),
-  username: DS.attr('string'),
+  vanityUrl: DS.attr('string'),
   fullName: DS.attr('string'),
   description: DS.attr('string'),
   avatarUrlSmall: DS.attr('string'),

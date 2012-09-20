@@ -7,7 +7,7 @@
 			</ul>
 			<ul class="tag-list">
 				{{#each related}}
-					<li {{action showTag this}}><a>{{value}}</a></li>
+					<li><a {{action showTag this href=true}}>{{value}}</a></li>
 				{{/each}}
 			</ul>
 		</div>

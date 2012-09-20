@@ -14,7 +14,24 @@
   user: DS.belongsTo("Shoplift.User", {embedded: true})
 });*/
 
-Shoplift.Item = DS.Model.extend({
+Shoplift.ModelPromise = Ember.Mixin.create({
+  init: function() {
+    this._super();
+    this._deferred = $.Deferred();
+    this._deferred.promise(this);
+    this.one('didLoad', this, '_resolveModelPromise');
+    this.one('becameError', this, '_rejectModelPromise');
+  },
+  _resolveModelPromise: function() {
+    console.log("Resolving model promise of " + this.toString());
+    this._deferred.resolve(this);
+  },
+  _rejectModelPromise: function() {
+    this._deferred.reject(this);
+  }
+});
+
+Shoplift.Item = DS.Model.extend(Shoplift.ModelPromise, {
   name: DS.attr('string'),
   relifts: DS.attr('number'),
   brand: DS.attr('string'),
@@ -22,5 +39,8 @@ Shoplift.Item = DS.Model.extend({
   url: DS.attr('string'),
   price: DS.attr('number'),
   photoFileName: DS.attr('string'),
-  user: DS.belongsTo('Shoplift.User')
+  user: DS.belongsTo('Shoplift.User'),
+  relifts: DS.hasMany('Shoplift.User', { key: 'relift_ids' }),
+  hashtagbrands: DS.hasMany('Shoplift.Hashtagbrand', { key: 'hashtagbrand_ids' })
 });
+

@@ -13,9 +13,10 @@ Shoplift.HashtagbrandRoute = Ember.Route.extend({
 	  context: hashtagbrand
 	});
 	router.get("applicationController").connectOutlet({
-	  name: 'logo',
+	  name: 'nav',
 	  outletName: 'header'
 	});
+	router.get("navController").connectOutlet('logo');
   },
   index: Ember.Route.extend({
 	  route: '/',

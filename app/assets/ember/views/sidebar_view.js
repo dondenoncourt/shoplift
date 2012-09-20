@@ -5,7 +5,7 @@ Shoplift.ProfileSidebarView = Ember.View.extend({
 		this.$(".profile-overlay").css({left: "-308px"});
 		this.$(".profile-overlay").animate({left: "0px"}, 500);
   },
-  willRemoveElement: function() {
+  willDestroyElement: function() {
 	  this.$(".profile-overlay").animate({opacity: "0.0"}, 500);
   }
 });

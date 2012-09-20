@@ -24,10 +24,14 @@ Shoplift.UserRoute = Ember.Route.extend({
 	console.log(Shoplift.store.find(Shoplift.User, params.id));
 	return Shoplift.store.find(Shoplift.User, params.id);
   },*/
+  
   connectOutlets: function(router, user) {
 	//if(typeof user !== "undefined" && user !== null) {
 	//  user = Shoplift.User.find()
 	//}
+	if(!user) {
+		  user = Shoplift.User.find(3);
+	  }
 	router.get("applicationController").connectOutlet({
 	  viewClass: Shoplift.ProfileSidebarView,
 	  controller: router.get("userController"),
@@ -36,11 +40,14 @@ Shoplift.UserRoute = Ember.Route.extend({
 	}); 
 	//console.dir(user.get("items"));
 	router.get("applicationController").connectOutlet({
+	  name: 'nav',
+	  outletName: 'header'
+	});
+	router.get("navController").connectOutlet({
 	  viewClass: Shoplift.FaceView,
 	  controller: router.get("userController"),
-	  outletName: 'header',
 	  context: user
-	})
+	});
   },
   index: Ember.Route.extend({
 	route: '/',

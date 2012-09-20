@@ -1,0 +1,13 @@
+
+<div id="home">
+	<a {{action goHome href=true}}><img src="img/nav-home.png" /></a>
+</div>
+
+{{outlet}}
+
+<div id="menu">
+	<a {{action toggleMenu target="view"}}><img src="/img/nav-menu.png" /></a>
+	<ul>
+		{{collection contentBinding="controller" itemViewClass="Shoplift.MenuItemView"}}
+	</ul>
+</div>

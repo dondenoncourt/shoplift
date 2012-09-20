@@ -14,6 +14,7 @@ Shoplift.Item.FIXTURES = [
 		id: 12, //this is a hashtagbrand id
 		value: "Macy's"
 	},
+	relift_ids: ["1", "2", "3"],
 	hashtagbrand_ids: ["1", "2", "4", "5"]
   }, 
   { 
@@ -30,6 +31,7 @@ Shoplift.Item.FIXTURES = [
 		id: 18, //this is a hashtagbrand id
 		value: "Sears"
 	},
+	relift_ids: ["1", "2", "3"],
 	hashtagbrand_ids: ["1", "2", "4", "5"]
   },
   { 
@@ -46,6 +48,7 @@ Shoplift.Item.FIXTURES = [
 		id: 19, //this is a hashtagbrand id
 		value: "Walmart"
 	},
+	relift_ids: ["1", "2", "3"],
 	hashtagbrand_ids: ["1", "2", "4", "5"]
   },
   { 
@@ -62,6 +65,7 @@ Shoplift.Item.FIXTURES = [
 		id: 12, //this is a hashtagbrand id
 		value: "Macy's"
 	},
+	relift_ids: ["1", "2", "3"],
 	hashtagbrand_ids: ["1", "2", "4", "5"]
   },
   { 
@@ -78,6 +82,7 @@ Shoplift.Item.FIXTURES = [
 		id: 12, //this is a hashtagbrand id
 		value: "Macy's"
 	},
+	relift_ids: ["1", "2", "3"],
 	hashtagbrand_ids: ["1", "2", "4", "5"]
   },
   { 
@@ -94,6 +99,7 @@ Shoplift.Item.FIXTURES = [
 		id: 12, //this is a hashtagbrand id
 		value: "Macy's"
 	},
+	relift_ids: ["1", "2", "3"],
 	hashtagbrand_ids: ["1", "2", "4", "5"]
   }
 ];
@@ -102,7 +108,7 @@ Shoplift.User.FIXTURES = [
   {
 	id: "1",
 	email: "myriah@jackson.com",
-	username: "mjackson",
+	vanity_url: "mjackson",
 	full_name: "Myriah Jackson",
 	description: "I'm just as interested in fasion as I am in marketing! This are my products.",
 	avatar_url_small: "http://davidmazza.net/shoplift/images/jane-randall.jpg",
@@ -116,7 +122,7 @@ Shoplift.User.FIXTURES = [
   {
 	id: "2",
 	email: "nadine@pert.com",
-	username: "npert",
+	vanity_url: "npert",
 	full_name: "Nadine Pert",
 	description: "My description would go here if I had one.",
 	avatar_url_small: "http://davidmazza.net/shoplift/images/jane-randall.jpg",
@@ -131,7 +137,7 @@ Shoplift.User.FIXTURES = [
   {
 	id: "3",
 	email: "nadine@pert.com",
-	username: "npert",
+	vanity_url: "jroberts",
 	full_name: "Julia Roberts",
 	description: "This is a description, I just haven't written anything for it yet.",
 	avatar_url_small: "http://davidmazza.net/shoplift/images/jane-randall.jpg",
@@ -145,7 +151,7 @@ Shoplift.User.FIXTURES = [
   {
 	id: "4",
 	email: "nadine@pert.com",
-	username: "npert",
+	vanity_url: "selse",
 	full_name: "Someone Else",
 	description: "This is a description, I just haven't written anything for it yet.",
 	avatar_url_small: "http://davidmazza.net/shoplift/images/jane-randall.jpg",
@@ -159,7 +165,7 @@ Shoplift.User.FIXTURES = [
   {
 	id: "5",
 	email: "nadine@pert.com",
-	username: "npert",
+	vanity_url: "dmzza",
 	full_name: "David Mazza",
 	description: "This is a description, I just haven't written anything for it yet.",
 	avatar_url_small: "http://davidmazza.net/shoplift/images/jane-randall.jpg",
@@ -173,7 +179,7 @@ Shoplift.User.FIXTURES = [
   {
 	id: "6",
 	email: "nadine@pert.com",
-	username: "npert",
+	vanity_url: "bfail",
 	full_name: "Brandon Fail",
 	description: "This is a description, I just haven't written anything for it yet.",
 	avatar_url_small: "http://davidmazza.net/shoplift/images/jane-randall.jpg",
