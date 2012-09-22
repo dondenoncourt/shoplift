@@ -5,3 +5,8 @@ Handlebars.registerHelper('even', function(index, options) {
 	else
 		return options.inverse(this);
 });
+
+Handlebars.registerHelper('pluralize', function(number, single, plural) {
+  if (number === 1) { return single; }
+  else { return plural; }
+});

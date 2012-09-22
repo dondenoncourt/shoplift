@@ -24,6 +24,12 @@ Shoplift.HashtagbrandRoute = Ember.Route.extend({
   }),
   items: Ember.Route.extend({
 	  route: '/items',
+	  enter: function() {
+		  router.get("hashtagbrandController").set("showItemsClasses", "show-items-on tag-type");
+	  },
+	  exit: function() {
+		  router.get("hashtagbrandController").set("showItemsClasses", "show-items tag-type");
+	  },
 	  connectOutlets: function(router) {
 		  router.get("hashtagbrandController").connectOutlet({
 			  viewClass: Shoplift.CarouselContainerView,
@@ -34,6 +40,12 @@ Shoplift.HashtagbrandRoute = Ember.Route.extend({
   }),
   members: Ember.Route.extend({
 	  route: '/members',
+	  enter: function() {
+	  	  router.get("hashtagbrandController").set("orMembersClasses", "or-members-on tag-type");
+	  },
+	  exit: function() {
+	  	  router.get("hashtagbrandController").set("orMembersClasses", "or-members tag-type");
+	  },
 	  connectOutlets: function(router) {
 	  	//console.log(router.get("hashtagbrandUsersContoroller"));
 		  router.get("hashtagbrandController").connectOutlet({

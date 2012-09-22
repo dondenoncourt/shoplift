@@ -6,7 +6,8 @@ Shoplift.ItemsRoute = Ember.Route.extend({
 	  name: 'carouselContainer',
 	  outletName: 'carousel',
 	  //context: Shoplift.store.findMany(Shoplift.Item, ["1","2","3","4"])
-	  context: Shoplift.store.findMany(Shoplift.Item, [1,2,3,4])
+	  //context: Shoplift.store.findMany(Shoplift.Item, [1,2,3,4])
+	  context: Shoplift.Item.find()
 	});
 	
 	//router.get('navController').set('target', Shoplift.NavManager);

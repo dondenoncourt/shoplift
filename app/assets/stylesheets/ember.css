@@ -46,7 +46,7 @@ ul{
    margin: 0 auto;
    position: relative;
    width:450px;
-   top:-60px;
+   top:-78px;
 }
 #logo, #current-user {
    background: url(http://davidmazza.net/shoplift/img/logo-scaffolding.png) no-repeat;
@@ -213,11 +213,13 @@ ul{
    #carousel, #profiles, #tags-brands {
 	  width:200%;
 	  position:absolute;
-	  left: 320px;
-	  top:209px;
+	  /*left: 320px;*/
+	  top:210px;
+	  border-bottom: 1px #594969 solid;
    }
    #carousel .product, #profiles .profile-box, #tags-brands .tag-brand {
 	  float:left;	
+	  margin-bottom: -1px;
    }
    /* #carousel {  #profiles { 
 	  display:none;
@@ -404,7 +406,7 @@ ul{
 
    .product-drawer{
 	  max-width:193px;
-	  background:url(http://davidmazza.net/shoplift/img/drawer-scaffolding.png) 0 0 no-repeat;
+	  background:url(/img/drawer-scaffolding.png) 0 0 no-repeat;
 	  height:417px;
 	  /* display:none; */
 	  position:absolute;
@@ -491,7 +493,7 @@ ul{
    /* Tags Tab */
 
 	  .tag-list-container {
-		 max-width: 174px;
+		 max-width: 180px;
 		 overflow-x: hidden;
 
 		 height: 300px;
@@ -555,7 +557,7 @@ ul{
    /* Quote Tab */
 
 	  .quote-container {
-		 max-width: 174px;
+		 max-width: 180px;
 		 overflow-x: hidden;
 
 		 height: 300px;
@@ -585,7 +587,7 @@ ul{
    /* History Tab */
 
 	  .history-container {
-		 max-width: 174px;
+		 max-width: 180px;
 		 overflow-x: hidden;
 
 		 height: 300px;
@@ -749,24 +751,48 @@ ul{
 }
 
 .of-items {
-   background: url(http://davidmazza.net/shoplift/img/items.png) no-repeat;
-   background-position: 126px 0;
+   background: url(/img/profile-sidebar.png) no-repeat;
+   background-position: 126px -345px;
    margin-top: 31px;
 }
+.of-items-on {
+   background: url(/img/profile-sidebar.png) no-repeat;
+   background-position: 126px -276px;
+   margin-top: 31px;
+   color:#f8ece5;
+}
 .of-followees {
-   background: url(http://davidmazza.net/shoplift/img/followees.png) no-repeat;
-   background-position: 126px 0;
+   background: url(/img/profile-sidebar.png) no-repeat;
+   background-position: 126px -69px;
+}
+.of-followees-on {
+   background: url(/img/profile-sidebar.png) no-repeat;
+   background-position: 126px 0px;
+   color:#f8ece5;
 }
 .of-followers {
-   background: url(http://davidmazza.net/shoplift/img/followers.png) no-repeat;
-   background-position: 126px 0;
+   background: url(/img/profile-sidebar.png) no-repeat;
+   background-position: 126px -207px;
+}
+.of-followers-on {
+   background: url(/img/profile-sidebar.png) no-repeat;
+   background-position: 126px -138px;
+   color:#f8ece5;
 }
 .tags-brands {
-   background: url(http://davidmazza.net/shoplift/img/tags-brands.png) no-repeat;
-   background-position: 51px 0;
+   background: url(/img/profile-sidebar.png) no-repeat;
+   background-position: 51px -483px;
    width: 90px;
    padding-right: 180px;
    margin-bottom: 21px;
+}
+.tags-brands-on {
+   background: url(/img/profile-sidebar.png) no-repeat;
+   background-position: 51px -414px;
+   width: 90px;
+   padding-right: 180px;
+   margin-bottom: 21px;
+   color:#f8ece5;
 }
 .profile-description {
    background-color: #2e223c; /*#443755;*/
@@ -828,37 +854,51 @@ filter: dropshadow(color=#555, offx=1, offy=1);
 .tag-type {  
    font-size: 1.75em;
    width: 90px;
-   height: 20px;
+   height: 30px;
    margin-bottom: 21px;
    text-align: right;
    position: absolute;	
 }
 
 .on-now {
-   background: url(http://davidmazza.net/shoplift/img/on-now.png) no-repeat;
+   background: url(/img/on-now.png) no-repeat;
    background-position: 10px 0;
    top:100px;
    left: 28px;
 }
 .up-next {
-   background: url(http://davidmazza.net/shoplift/img/up-next.png) no-repeat;
+   background: url(/img/up-next.png) no-repeat;
    background-position: 10px 0;
    top:186px;
    left:28px;
 }
 
 .show-items {
-   background: url(http://davidmazza.net/shoplift/img/show-items.png) no-repeat;
+   background: url(/img/show-items.png) no-repeat;
    background-position: 10px 0;
    width: 150px;
-   top:362px;
+   top:353px;
+   left:46px;
+}
+.show-items-on {
+   background: url(/img/show-items-on.png) no-repeat;
+   background-position: 10px 0;
+   width: 150px;
+   top:353px;
    left:46px;
 }
 .or-members {
-   background: url(http://davidmazza.net/shoplift/img/or-members.png) no-repeat;
+   background: url(/img/or-members.png) no-repeat;
    background-position: 10px 0;
    width: 170px;
-   top:389px;
+   top:380px;
+   left:110px;
+}
+.or-members-on {
+   background: url(/img/or-members-on.png) no-repeat;
+   background-position: 10px 0;
+   width: 170px;
+   top:380px;
    left:110px;
 }
 
@@ -918,7 +958,7 @@ filter: dropshadow(color=#555, offx=1, offy=1);
 /* Profile Box */
    .profile-sub-container {
 	  position: absolute;
-	  background: url(http://davidmazza.net/shoplift/img/profile-box-scaffolding.png) 13px 31px no-repeat transparent;
+	  background: url(/img/profile-scaffolding.png) 13px 31px no-repeat transparent;
 	  width: 500px;
 	  height: 540px;
 	  top:-82px;
@@ -1083,7 +1123,7 @@ border-right: 1px solid #544564;
 
 #logo {
 	margin-left: -221px;
-	top:50px;
+	top:78px;
 }
 
 #current-user {

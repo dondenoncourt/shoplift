@@ -1,15 +1,17 @@
 <div class="profile-overlay">
 	<div class="profile-container">
 	  <ul>
-		<li {{action showItems}} class="profile-count of-items">{{items.length}}</li>
-		<li {{action showFollowees}} class="profile-count of-followees">{{followeeCount}}</li>
-		<li {{action showFollowers}} class="profile-count of-followers">{{followerCount}}</li>
-		<li {{action showHashtagbrands}} class="tags-brands">&nbsp;</li>
+		<li {{action showItems}} {{bindAttr class="controller.itemsClasses"}}>{{items.length}}</li>
+		<li {{action showFollowees}} {{bindAttr class="controller.followeesClasses"}}>{{followees.length}}</li>
+		<li {{action showFollowers}} {{bindAttr class="controller.followersClasses"}}>{{followers.length}}</li>
+		<li {{action showHashtagbrands}} {{bindAttr class="controller.tagsBrandsClasses"}}>&nbsp;</li>
 	  </ul>
+	  {{#if htmldescription}}
 	  <section class="profile-description">
 		{{{htmldescription}}}
 	  </section>
-		<a href="{{website}}" class="profile-website"><img src="http://davidmazza.net/shoplift/img/www.png" rel="tooltip" title="Visit website" alt="personal website" /></a>
+	  {{/if}}
+		<a {{bindAttr href="url"}} target="_blank" class="profile-website"><img src="http://davidmazza.net/shoplift/img/www.png" rel="tooltip" title="Visit website" alt="personal website" /></a>
 	</div>
 	<div class="sidebar-shadow"></div>
 </div>

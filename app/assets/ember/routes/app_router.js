@@ -14,7 +14,31 @@ Shoplift.Router = Ember.Router.extend({
     goProfile: Ember.Route.transitionTo("user.index"),
     index: Ember.Route.extend({
       route: '/',
-      redirectsTo: 'app.index'
+      redirectsTo: 'alpha.index'
+    }),
+    alpha: Ember.Route.extend({
+      route: '/alpha',
+      connectOutlets: function(router, user) {
+        if(!user) {
+          user = Shoplift.User.find(3);
+        }
+        console.dir(user.get("items"));
+        router.get("applicationController").connectOutlet({
+          viewClass: Shoplift.CarouselContainerView,
+          controller: router.get("userItemsController"),
+          outletName: 'carousel',
+          context: user.get("items")
+        }); 
+        router.get("applicationController").connectOutlet({
+          name: 'nav',
+          outletName: 'header'
+        });
+        router.get("navController").connectOutlet('logo');
+      },
+      index: Ember.Route.extend({
+        route: '/',
+        
+      })
     }),
     app: Ember.Route.extend({
       route: '/app',
@@ -29,11 +53,14 @@ Shoplift.Router = Ember.Router.extend({
       users: Shoplift.UsersRoute,
       user: Shoplift.UserRoute,
       hashtagbrand: Shoplift.HashtagbrandRoute,
+      search: Shoplift.SearchRoute,
       explore: Shoplift.ExploreRoute
     })
   })//,
   //vanity: Shoplift.VanityRoute
 });
+
+
 
 
 

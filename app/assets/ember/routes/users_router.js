@@ -55,6 +55,12 @@ Shoplift.UserRoute = Ember.Route.extend({
   }),
   items: Ember.Route.extend({
 	route: '/items',
+	enter: function() {
+		router.get("userController").set("itemsClasses", 'profile-count of-items-on');
+	},
+	exit: function() {
+		router.get("userController").set("itemsClasses", 'profile-count of-items');
+	},
 	connectOutlets: function(router) {
 	  /*Shoplift.store.load(Shoplift.Item, {
 		id: 7,
@@ -67,6 +73,7 @@ Shoplift.UserRoute = Ember.Route.extend({
 		photo_file_name: "http://davidmazza.net/shoplift/images/product-img.png",
 		user_id: 2
 	  });*/
+	  
 	  router.get("userController").connectOutlet({
 		viewClass: Shoplift.CarouselContainerView, //TODO: created extended version to handle lazy loading: Shoplift.UserItemCarouselContainerView,
 		controller: router.get("userItemsController"),
@@ -77,6 +84,12 @@ Shoplift.UserRoute = Ember.Route.extend({
   }), //end users/show/items
   followees: Ember.Route.extend({
 	route: '/followees',
+	enter: function() {
+		router.get("userController").set("followeesClasses", 'profile-count of-followees-on');
+	},
+	exit: function() {
+		router.get("userController").set("followeesClasses", 'profile-count of-followees');
+	},
 	connectOutlets: function(router) {
 	  router.get("userController").connectOutlet({ 
 		viewClass: Shoplift.UserCarouselContainerView,
@@ -87,6 +100,12 @@ Shoplift.UserRoute = Ember.Route.extend({
   }), //end users/show/followees
   followers: Ember.Route.extend({
 	route: '/followers',
+	enter: function() {
+		router.get("userController").set("followersClasses", 'profile-count of-followers-on');
+	},
+	exit: function() {
+		router.get("userController").set("followersClasses", 'profile-count of-followers');
+	},
 	connectOutlets: function(router) {
 		//var context = router.get("userController").get("content").get("followers");
 		Shoplift.User.find();
@@ -101,6 +120,12 @@ Shoplift.UserRoute = Ember.Route.extend({
   }), //end users/show/followers
   hashtagbrands: Ember.Route.extend({
 	route: '/tags',
+	enter: function() {
+		router.get("userController").set("tagsBrandsClasses", 'tags-brands-on');
+	},
+	exit: function() {
+		router.get("userController").set("tagsBrandsClasses", 'tags-brands');
+	},
 	connectOutlets: function(router) {
 	  router.get("userController").connectOutlet({ 
 		viewClass: Shoplift.HashtagbrandCarouselContainerView,

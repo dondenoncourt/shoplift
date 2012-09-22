@@ -48,7 +48,7 @@
 		      			  {{/with}}
 		      		  </div>
 		      		  <div class="relifters">
-		      		  	  Relifted by {{relifts.length}} members
+		      		  	  Relifted by {{relifts.length}} {{pluralize relifts.length "member" "members"}}
 		      		  	  {{#each relifts}}
 		      		  	  	  <div {{action showProfile this}}><img {{bindAttr src="avatarUrlSmall"}} {{bindAttr alt="fullName"}} /></div>
 		      		  	  {{/each}}

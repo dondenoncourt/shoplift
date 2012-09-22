@@ -1,0 +1,23 @@
+{{outlet}}
+<div id="tagline">
+	<img src="img/are-you-being-followed.png" alt="Are you being followed?" />
+</div>
+<div id="footer">
+	
+		{{view Ember.TextField valueBinding="controller.email" classBinding="controller.emailClass"}}
+		<br />
+		<a {{action learnMore}}><img src="/img/landing-wait.png" width="495" alt="Learn more about The Shoplift" /></a>
+
+	<!--
+	<ul>
+		<li>
+			<a id="seeMore" href="https://apps.facebook.com/offerpop/Contest.psp?c=181033&u=48416&a=202991206406825&p=452939401392046&rest=0&v=View" title="See more of jane"><img src="img/see-more-of-jane.png" alt="See more of jane" /></a>
+		</li>
+		<li id="slash">
+			<img src="img/slash.png" />
+		</li>
+		<li>
+			<a {{action learnMore}} title="Learn more about us"><img src="img/learn-more-about-us.png" alt="Learn more about us" /></a>
+		</li>
+	</ul>-->
+</div>

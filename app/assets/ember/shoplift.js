@@ -30,3 +30,4 @@ var router = Shoplift.router = Shoplift.Router.create({
 });*/
 
 Shoplift.initialize(router);
+

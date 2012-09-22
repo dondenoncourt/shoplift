@@ -13,8 +13,8 @@
 		</div>
 		<div class="on-now tag-type"></div>
 		<div class="up-next tag-type"></div>
-		<a {{action showItems href=true}} class="show-items tag-type"></a>
-		<a {{action showMembers href=true}} class="or-members tag-type"></a>
+		<a {{action showItems href=true}} {{bindAttr class="controller.showItemsClasses"}} class="show-items tag-type"></a>
+		<a {{action showMembers href=true}} {{bindAttr class="controller.orMembersClasses"}} class="or-members tag-type"></a>
 	</div>
 	<div class="sidebar-shadow"></div>
 </div>

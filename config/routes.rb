@@ -4,6 +4,7 @@ App::Application.routes.draw do
 
   get "page/home", :to => "page#home"
   get "page/ember", :to => "page#ember"
+  get "/landing", :to => "page#landing"
   get "page/saved", :to => "page#saved"
   get "/terms_of_service", :to => 'page#terms_of_service'
   get "/buttons", :to => 'page#buttons'
@@ -45,6 +46,7 @@ App::Application.routes.draw do
   get "users/following/:id", :to => "users#following"
   post "users/avatar", :to => "users#avatar"
   post "users/validate_username", :to => "users#validate_username"
+  get "users/validate_email", :to => "users#validate_email"
   resources :users, :only => [:avatar,:show,:create,:update,:destroy] do
     resources :followers, :only => [:index]
     resources :following, :only => [:index]

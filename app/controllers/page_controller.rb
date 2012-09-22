@@ -16,6 +16,10 @@ class PageController < ApplicationController
       redirect_to page_home_path 
     end
   end
+  
+  def landing
+    render :layout => false
+  end
 
   def saved
   end

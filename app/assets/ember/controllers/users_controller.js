@@ -1,7 +1,12 @@
 Shoplift.UsersController = Ember.ArrayController.extend();
 
 
-Shoplift.UserController = Ember.ObjectController.extend();
+Shoplift.UserController = Ember.ObjectController.extend({
+	itemsClasses: 'profile-count of-items',
+	followeesClasses: 'profile-count of-followees',
+	followersClasses: 'profile-count of-followers',
+	tagsBrangsClasses: 'tags-brands'
+});
 
 Shoplift.UserItemsController = Ember.ArrayController.extend({
 	//content: router.get("userController").get("items")

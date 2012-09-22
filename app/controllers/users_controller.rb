@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_filter :authenticate_user!
+  skip_before_filter :authenticate_user!, :only => [:validate_email]
 
   # =begin apidoc
   # url:: /shoplifters.json
@@ -40,19 +41,19 @@ class UsersController < ApplicationController
   # <br/><br/>Notes:<pre>curl -X GET --user aaronbartell@gmail.com:poopydiaper localhost:3000/users/1.json</pre>
   # =end
   def show
-    if request.xhr?
-      render partial: items
-    else
-      items
-      if user.private? && !current_user.subscribed_to(user)
-        render_error(403,"User is private or is not subscribed to by the logged in user")
-      else
+    #if request.xhr?
+    #  render partial: items
+    #else
+    #  items
+    #  if user.private? && !current_user.subscribed_to(user)
+    #    render_error(403,"User is private or is not subscribed to by the logged in user")
+    #  else
         respond_to do |format|
           format.html
           format.json { render user }
         end
-      end
-    end
+    #  end
+    #end
   end
 
   # =begin apidoc
@@ -72,6 +73,14 @@ class UsersController < ApplicationController
       render :partial => "user", :locals => {:user => @user}
     else
       render_error(404,"User not found")
+    end
+  end
+  
+  def validate_email
+    if @user = User.find_by_email(params[:email].downcase)
+      render :partial => "user", :locals => {:user => @user}
+    else
+      render_error(404,"User not found #{params[:email]} x")
     end
   end
 
