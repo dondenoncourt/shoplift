@@ -2,12 +2,12 @@ Shoplift.LoadMoreView = Ember.View.extend({
   templateName: 'load-more',
   elementId: 'load-more',
   didInsertElement: function() {
-	var view = this;
-	this.$().bind('inview', function(event, isInView, visiblePartX, visiblePartY) {
-	  if (isInView) {
-	  	Ember.tryInvoke(view.get('controller'), 'loadMore');
-	  }
-	});
+		var view = this;
+		this.$().bind('inview', function(event, isInView, visiblePartX, visiblePartY) {
+		  if (isInView) {
+		  	Ember.tryInvoke(view.get('controller'), 'loadMore');
+		  }
+		});
   }
 });
 
@@ -27,36 +27,37 @@ Shoplift.ScrollableMixin = Ember.Mixin.create(Ember.Evented, {
   
   scrollableMixinDidInsert: function() {
 	var that = this, 
-	namespaceKeydown = this.get("namespaceKeydown"),
-	time = 800,
-	options = { axis: 'x' },
-	KEY_RIGHT = 39,
-	KEY_LEFT = 37;
+		var that = this, 
+		namespaceKeydown = this.get("namespaceKeydown"),
+		time = 800,
+		options = { axis: 'x' },
+		KEY_RIGHT = 39,
+		KEY_LEFT = 37;
 	
-	$(document).on(namespaceKeydown, function(e) {
-	  e.preventDefault();
-	  
-	  var scrollWidth = that.get("scrollWidth");
-	  
-	  if(e.which === KEY_RIGHT) { 
-			$.scrollTo("+=" + scrollWidth, time, options);
-	  } else if(e.which === KEY_LEFT) { 
-			$.scrollTo("-=" + scrollWidth, time, options);
-	  } else {
-		  // noop
-	  }
-	});  
+		$(document).on(namespaceKeydown, function(e) {
+		  e.preventDefault();
+		  
+		  var scrollWidth = that.get("scrollWidth");
+		  
+		  if(e.which === KEY_RIGHT) { 
+				$.scrollTo("+=" + scrollWidth, time, options);
+		  } else if(e.which === KEY_LEFT) { 
+				$.scrollTo("-=" + scrollWidth, time, options);
+		  } else {
+			  // noop
+		  }
+		});  
   },
   
   scrollableMixinWillRemove: function() {
-	 $(document).off("keydown");
+		$(document).off("keydown");
   },
   
   didInsertElement: function() {
   	this.scrollableMixinDidInsert();
   },
   
-  willRemoveElement: function() {
+  willDestroyElement: function() {
 		this.scrollableMixinWillRemove();
   }
 
@@ -69,7 +70,7 @@ Shoplift.ItemsView = Ember.View.extend(Shoplift.ScrollableMixin, {
   didInsertElement: function() {
 	  this._super();
   },
-  willRemoveElement: function() {
+  willDestroyElement: function() {
 	  this._super();
   }
 });
@@ -81,7 +82,7 @@ Shoplift.UsersView = Ember.View.extend(Shoplift.ScrollableMixin, {
   didInsertElement: function() {
     this._super();
   },
-  willRemoveElement: function() {
+  willDestroyElement: function() {
 	  this._super();
 	}
 });

@@ -1,25 +1,3 @@
-/*Shoplift.ItemsView = Ember.View.extend({
-	templateName: 'items',
-	drawerView: Ember.View.extend({
-		// click: function(event) {
-		// 	alert("helo!");
-		// }
-		// tagTabView = Ember.View.extend({
-		// 	click: function(event) {
-		// 		alert('humba humba!');
-		// 	}
-		// }),
-		// tagsView = Ember.View.extend({
-		// 	
-		// })
-	}),
-	userViewClass: Ember.View.extend({
-		click: function(event) {
-			alert('user');
-		}
-	})
-});*/
-
 Shoplift.ItemView = Ember.View.extend({
   templateName: 'item',
   classNames: ['product', 'item'],
@@ -42,10 +20,16 @@ Shoplift.ItemView = Ember.View.extend({
   historyId: function() {
   	return 'history' + this.get('content.id');
   }.property('content.id'),
+  
+  
   didInsertElement: function(ev) {
+  	
+  	
   	
 	  this.$('.product-container').css({'opacity': '0.0'});
 	  this.$('.product-container').animate({'opacity': '1.0'}, 2000);
+	  
+	  
 	  
 	  // Right Drawer Toggle
 	  var that = this, drawerIsAnimating = false;
@@ -70,10 +54,7 @@ Shoplift.ItemView = Ember.View.extend({
 	  
 	  var toggleDrawer = function(drawer, container) {
 	  	if(!drawerIsAnimating) {
-	  		drawerIsAnimating = true
-	  		//$(this).addClass('slideOff');
-	  		//drawer.delay(100).fadeIn(200);
-	  		//drawer.toggle('slide', {direction: 'left'}, 300, function() { drawerIsAnimating = false; drawerIsOpen = true; });
+	  		drawerIsAnimating = true;
 	  		if(drawer.css('x') == '-170px') {
 	  			drawer.transition({x: '0'}, 300, 'out');
 	  		} else {
@@ -83,7 +64,6 @@ Shoplift.ItemView = Ember.View.extend({
 	  		if(container.css('width') == '567px') {
 	  			container.animate({width:"394px"}, 600, 'easeOutBack').animate({width:"374px"}, 200, 'linear');
 	  		} else {
-	  			//container.transition({width:"567px"}, 300, 'in');
 	  			container.delay(100).animate({width:"547px"}, 500, 'easeOutBack').animate({width:"567px"}, 200, 'linear');
 	  		}
 	  		var opener = drawer.children(".drawer-opener");
@@ -104,22 +84,3 @@ Shoplift.ItemView = Ember.View.extend({
 Shoplift.ItemReliftView = Ember.View.extend({
 	templateName: 'relift'
 });
-// 
-// Shoplift.DrawersView = Ember.View.extend({
-// 	templateName: 'drawers',
-// 	showTags: function(event) {
-// 		alert('hello hello!');
-// 	}
-// });
-// 
-// Shoplift.TagDrawerView = Ember.View.extend({
-// 	templateName: 'tag_drawer'
-// });
-
-// Shoplift.QuoteDrawerView = Ember.View.extend({
-// 	templateName: 'quoteDrawer'
-// });
-// 
-// Shoplift.HistoryDrawerView = Ember.View.extend({
-// 	templateName: 'historyDrawer'
-// });
