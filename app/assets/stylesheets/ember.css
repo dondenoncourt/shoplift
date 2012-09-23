@@ -226,7 +226,8 @@ ul{
    /* #carousel {  #profiles { 
 	  display:none;
    }*/
-   #load-more {
+   .load-more {
+   	 
 	   float: left;
    }
    #prev, #next {

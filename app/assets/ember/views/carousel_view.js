@@ -1,6 +1,6 @@
 Shoplift.LoadMoreView = Ember.View.extend({
   templateName: 'load-more',
-  elementId: 'load-more',
+  classNames: ['load-more'],
   didInsertElement: function() {
 		var view = this;
 		this.$().bind('inview', function(event, isInView, visiblePartX, visiblePartY) {
