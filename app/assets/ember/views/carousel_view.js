@@ -57,7 +57,7 @@ Shoplift.ScrollableMixin = Ember.Mixin.create(Ember.Evented, {
   },
   
   willRemoveElement: function() {
-	this.scrollableMixinWillRemove();
+		this.scrollableMixinWillRemove();
   }
 
 });
@@ -67,10 +67,10 @@ Shoplift.ItemsView = Ember.View.extend(Shoplift.ScrollableMixin, {
   templateName: 'items',
   scrollWidth: '434px',
   didInsertElement: function() {
-	  this.super();
+	  this._super();
   },
   willRemoveElement: function() {
-	  this.super();
+	  this._super();
   }
 });
 
@@ -79,10 +79,10 @@ Shoplift.UsersView = Ember.View.extend(Shoplift.ScrollableMixin, {
   templateName: 'users',
   scrollWidth: '434px',
   didInsertElement: function() {
-    this.super();
+    this._super();
   },
   willRemoveElement: function() {
-	  this.super();
+	  this._super();
 	}
 });
 
