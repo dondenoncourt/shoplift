@@ -4,6 +4,8 @@
 //= require "jquery.effects.core"
 //= require "jquery.effects.slide"
 //= require "jquery.transit"
+//= require "jquery.inview.min"
+//= require "jquery.scrollTo"
 //= require "bootstrap"
 //= require "modernizr-2.6.1.min"
 //= require "matchMedia"

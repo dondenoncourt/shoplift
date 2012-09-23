@@ -1,0 +1,9 @@
+{{#if isLoading}}
+	<img width="2" src="/img/ajax-loader.gif" />
+{{else}}
+	{{#if canLoadMore}}
+		<a {{action "loadMore" target="controller" }}>click to load more items</a>
+	{{else}}
+		<i>no more items</i>
+	{{/if}}
+{{/if}}

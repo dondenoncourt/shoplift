@@ -4,14 +4,16 @@
 		{{view Ember.Select contentBinding="controller.genders" valueBinding="controller.gender"}}
 	</li>
 	<li id="birthday">
-		{{view Ember.Select contentBinding="controller.months" valueBinding="controller.month"}} 
+		{{view Ember.Select contentBinding="controller.months" optionValuePath="content.id" optionLabelPath="content.month"}} 
 		{{view Ember.Select contentBinding="controller.days" valueBinding="controller.day"}} 
 	</li>
 	<li id="country">
 		{{view Ember.Select contentBinding="controller.countries" valueBinding="controller.country"}}
 	</li>
 	<li id="zipcode">
-		{{view Ember.TextField valueBinding="zipcode"}}
+		{{view Ember.TextField valueBinding="controller.content.shortUrl"}}
+		{{view Ember.TextField valueBinding="controller.content.url"}}
+		{{view Ember.TextField valueBinding="controller.content.handle"}}
 	</li>
 </ul>
 		

@@ -1,52 +1,57 @@
-Shoplift.CarouselContainerView = Ember.View.extend({
-  elementId: 'carousel',
-  templateName: 'items',
-  next: function(event) {
-	event.preventDefault();
-	var that = this;
-	var once = true;
-	this.$(".item").animate({left: "-=434"}, 500, function() {
-	  if(once) {
-	    that.get('controller').next();
-	    once = false;
+Shoplift.LoadMoreView = Ember.View.extend({
+  templateName: 'load-more',
+  elementId: 'load-more',
+  didInsertElement: function() {
+	var view = this;
+	this.$().bind('inview', function(event, isInView, visiblePartX, visiblePartY) {
+	  if (isInView) {
+	  	console.log(visiblePartX + " " + visiblePartY)
+	  	Ember.tryInvoke(view.get('controller'), 'loadMore');
 	  }
-	//  $("#carousel").css({left: "434px"});
 	});
+  }
+});
+
+Shoplift.ScrollableMixin = Ember.Mixin.create(Ember.Evented, {
+  namespaceKeydown: function() {
+  	  return "keydown." + this.get("elementId");
+  }.property('elementId'),
+  next: function() {
+  	var that = this;
+	$.scrollTo("+=" + that.get("scrollWidth"), 800, {axis: 'x'});
   },
-  prev: function(event) {
-	this.get('controller').prev();
-	$("#carousel").css({left: "-434px"});
-	$("#carousel").animate({left: "+=434"}, 500);
+  prev: function() {
+  	var that = this;
+  	$.scrollTo("-=" + that.get("scrollWidth"), 800, {axis: 'x'});
   },
   didInsertElement: function() {
-	  
+  	var that = this;
+	$(document).on("keydown", function(e) {
+	  if(e.which==39) { //next
+		e.preventDefault();
+		$.scrollTo("+=" + that.get("scrollWidth"), 800, {axis: 'x'});
+	  }
+	  if(e.which==37) { //prev
+		e.preventDefault();
+		$.scrollTo("-=" + that.get("scrollWidth"), 800, {axis: 'x'});
+	  }
+  	});  
+  },
+  willRemoveElement: function() {
+	  $(document).off("keydown");
   }
 
-
 });
 
-Shoplift.UserCarouselContainerView = Shoplift.CarouselContainerView.extend({
-	elementId: 'profiles',
-	templateName: 'users',
-	next: function(event) {
-		event.preventDefault();
-		var that = this;
-		var once = true;
-		this.$(".item").animate({left: "-=560"}, 500, function() {
-		  if(once) {
-			that.get('controller').next();
-			once = false;
-		  }
-		});
-	},
-	prev: function(event) {
-		this.get('controller').prev();
-		$("#profiles").css({"margin-left": "-560px"});
-		$("#profiles").animate({left: "+=560"}, 500);
-	},
+Shoplift.ItemsView = Ember.View.extend(Shoplift.ScrollableMixin, {
+  elementId: 'carousel',
+  templateName: 'items',
+  scrollWidth: '434px'
 });
 
-Shoplift.HashtagbrandCarouselContainerView = Shoplift.CarouselContainerView.extend({
-	elementId: 'carousel',
-	templateName: 'hashtagbrands'
+Shoplift.UsersView = Ember.View.extend(Shoplift.ScrollableMixin, {
+  elementId: 'profiles',
+  templateName: 'users',
+  scrollWidth: '434px'
 });
+

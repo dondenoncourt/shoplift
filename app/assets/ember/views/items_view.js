@@ -1,4 +1,4 @@
-Shoplift.ItemsView = Ember.View.extend({
+/*Shoplift.ItemsView = Ember.View.extend({
 	templateName: 'items',
 	drawerView: Ember.View.extend({
 		// click: function(event) {
@@ -18,20 +18,12 @@ Shoplift.ItemsView = Ember.View.extend({
 			alert('user');
 		}
 	})
-});
+});*/
 
 Shoplift.ItemView = Ember.View.extend({
   templateName: 'item',
   classNames: ['product', 'item'],
-  /*click: function(event) {
-	event.preventDefault();
-	 //console.dir(this._parentView._parentView.get('controller'));
-	//console.dir(this.get("content").get("id"));
-	//console.dir(this.get("controller").get('content'));
-	//this.get("controller").replaceContent(0, 1, Shoplift.store.find(Shoplift.Item, 3));
-	 //this.get("controller").goTo(this.get("content").get("id"));
-	this.$().animate({"width": "500px"});
-  },*/
+
   tagsHref: function() {
   	return '#tags' + this.get('content.id');
   }.property('content.id'),
@@ -51,6 +43,10 @@ Shoplift.ItemView = Ember.View.extend({
   	return 'history' + this.get('content.id');
   }.property('content.id'),
   didInsertElement: function(ev) {
+  	
+	  this.$('.product-container').css({'opacity': '0.0'});
+	  this.$('.product-container').animate({'opacity': '1.0'}, 2000);
+	  
 	  // Right Drawer Toggle
 	  var that = this, drawerIsAnimating = false;
 	  this.$('.product-drawer').css({x: '-170px'});

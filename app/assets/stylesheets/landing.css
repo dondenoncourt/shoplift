@@ -103,6 +103,23 @@
 	  	top:0;
 	  	overflow: hidden;
 	  }
+	  #prev, #next {
+	     /*	background-color: rgba(97, 90, 142, 0.7);*/
+	  	  display: block;
+	  	  height:58px;
+	  	  width:58px;
+	  	  top:300px;
+	  	  position: fixed;
+	  	  z-index:900;
+	 }
+	 #prev{
+	  background:url(http://davidmazza.net/shoplift/images/slide-prev.png) 0 0 no-repeat;
+	  left:0;
+	 }
+	 #next {
+	  background:url(http://davidmazza.net/shoplift/images/slide-next.png) 0 0 no-repeat;
+	  right:0;
+	 }
 	  #email-container {
 	  	position:absolute;
 	  	width: 100%;
@@ -184,7 +201,13 @@
 	  	background: url(/img/landing-birthday.png) no-repeat;
 	  	background-position: 63px 8px;
 	  	background-size: 122px 19px;
-	  	width: 175px
+	  	width: 225px
+	  }
+	  #demographics-container #birthday select {
+	  	width: 70px;
+	  }
+	  #demographics-container #birthday select:first-child {
+	  	width: 120px; 
 	  }
 	  #demographics-container #country { 
 	  	background: url(/img/landing-live.png) no-repeat;
@@ -196,7 +219,7 @@
 	  	background: url(/img/landing-zip.png) no-repeat;
 	  	background-position: 59px 8px;
 	  	background-size: 126px 19px;
-	  	width: 90px;
+	  	width: 190px;
 	  }
 	  #header {
 	  	position: relative;

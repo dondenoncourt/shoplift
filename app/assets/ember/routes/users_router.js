@@ -62,23 +62,32 @@ Shoplift.UserRoute = Ember.Route.extend({
 		router.get("userController").set("itemsClasses", 'profile-count of-items');
 	},
 	connectOutlets: function(router) {
-	  /*Shoplift.store.load(Shoplift.Item, {
-		id: 7,
-		name: "Something 7",
-		relifts: "5",
-		brand: "Salvation Army",
-		comment: "I love it",
-		url: "http://google.com",
-		price: "88",
-		photo_file_name: "http://davidmazza.net/shoplift/images/product-img.png",
-		user_id: 2
-	  });*/
+	  router.get('itemsController').resetLoadMore();
 	  
-	  router.get("userController").connectOutlet({
-		viewClass: Shoplift.CarouselContainerView, //TODO: created extended version to handle lazy loading: Shoplift.UserItemCarouselContainerView,
+	  // set current query
+	  var query = { user_id: router.get("userController").get("content").get("id"), isLoadedCallback: function() {
+	    router.set('itemsController.isLoading', false);
+	  }};
+	  router.set('itemsController.query', query);
+	  router.set('itemsController.isLoading', true);
+	  
+	  // get items shoplifted by user's followers
+	  //var userItems = Shoplift.store.findQuery(Shoplift.Item, {page: 1});
+	  
+	  
+	  // get all events for this repository
+	  var filter = function(data) {
+	    return true;
+	  };
+	  var userItems = Shoplift.store.filter(Shoplift.Item, query, filter);
+	  
+	  router.get('userController').connectOutlet('items', userItems);
+	  
+	  /*router.get("userController").connectOutlet({
+		viewClass: Shoplift.ItemsView, //TODO: created extended version to handle lazy loading: Shoplift.UserItemCarouselContainerView,
 		controller: router.get("userItemsController"),
 		context: router.get("userController").get("content").get("items")
-	  });
+	  });*/
 	  //router.get("userController").connectOutlet('carouselContainer');
 	}
   }), //end users/show/items
@@ -92,7 +101,7 @@ Shoplift.UserRoute = Ember.Route.extend({
 	},
 	connectOutlets: function(router) {
 	  router.get("userController").connectOutlet({ 
-		viewClass: Shoplift.UserCarouselContainerView,
+		viewClass: Shoplift.UsersView,
 		controller: router.get("userFolloweesController"),
 		context: router.get("userController").get("content").get("followees")
 	  });

@@ -1,7 +1,3 @@
-Shoplift.ItemsController = Ember.ArrayController.extend({
-	
-});
-
 Shoplift.ItemController = Ember.ObjectController.extend({
 
 });

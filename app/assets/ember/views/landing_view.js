@@ -17,13 +17,13 @@ Landing.EmailView = Ember.View.extend({
 	  // from *unmatched* to *matched*
 
 	  match: function() {
-		$.okvideo({ source: '47113550', //'UoV3IXDqexw',  
+		/*$.okvideo({ source: '47113550', //'UoV3IXDqexw',  
 			  volume: 1,
 			  disablekeyControl: false, 
 			  loop: false,
 			  hd:true, 
 			  adproof: false
-			 });
+			 });*/
 			that.$("#tagline").css({opacity: "0.0"});
 			setTimeout(function() {
 			  that.$("#tagline").animate({opacity: "1.0"}, 7000);

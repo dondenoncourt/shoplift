@@ -1,3 +1,57 @@
+Landing.User = Ember.Object.extend({
+  new: false,
+  email: null,
+  name: null,
+  birthday: null,
+  handle: null,
+  url: "theshoplift.com/",
+  shortUrl: function(key, value) {
+  	console.log('computing');
+	  if(arguments.length === 1) {
+	  	console.log('get');
+		return this.get('url') + this.get('handle');
+	  } else {
+	  	console.log('set');
+	  	if(value.indexOf("/") != -1) {
+	  		console.log('hasSlash');
+		  var x = value.split("/");
+		  this.set('handle', x[1]);
+		  return this.get('url') + this.get('handle');
+		} else {
+			console.log('slashMissing');
+			return this.get('url');
+		}
+	  }
+  }.property('url', 'handle'),
+  shortUrlChanged: function() {
+	  console.log(this.get("shortUrl"));
+  }.observes('shortUrl')
+});
+Landing.User.reopenClass({
+  //user: null,
+  findByEmail: function(email){
+	$.ajax({
+	  url: '/users',
+	  dataType: 'jsonp',
+	  data: {"email": email},
+	  context: this,
+	  success: function(response){
+		response.data.forEach(function(user){
+		  //this.users.addObject(Landing.User.create(user))
+		  this.set("pic", user.avatarUrlSmall);
+		  this.set("name", user.fullName);
+		}, this)
+	  },
+	  error: function() {
+		//this.users.addObject(Landing.User.create({"new": true, "email": email}));
+		this.set("new", true);
+	  }
+	})
+	return this;
+  }
+});
+
+
 Landing.ApplicationController = Ember.Controller.extend({
 
 });
@@ -22,6 +76,7 @@ Landing.SignupController = Ember.ObjectController.extend({
 	
 });
 Landing.DemographicsController = Ember.ObjectController.extend({
+	content: Landing.User.create(),
 	genders: ["male", "female", "niether"],
 	countries: ["United States", "Canada", "Mexico"],
 	months: [
