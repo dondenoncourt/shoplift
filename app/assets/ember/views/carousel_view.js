@@ -26,7 +26,6 @@ Shoplift.ScrollableMixin = Ember.Mixin.create(Ember.Evented, {
   },
   
   scrollableMixinDidInsert: function() {
-	var that = this, 
 		var that = this, 
 		namespaceKeydown = this.get("namespaceKeydown"),
 		time = 800,
