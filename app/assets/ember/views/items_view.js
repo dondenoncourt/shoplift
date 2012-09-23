@@ -6,13 +6,13 @@ Shoplift.ItemView = Ember.View.extend({
   	return '#tags' + this.get('content.id');
   }.property('content.id'),
   tagsId: function() {
-	return 'tags' + this.get('content.id');
+		return 'tags' + this.get('content.id');
   }.property('content.id'),
   quoteHref: function() {
-	return '#quote' + this.get('content.id');
+		return '#quote' + this.get('content.id');
   }.property('content.id'),
   quoteId: function() {
-	return 'quote' + this.get('content.id');
+		return 'quote' + this.get('content.id');
   }.property('content.id'),
   historyHref: function() {
   	return '#history' + this.get('content.id');
@@ -21,29 +21,34 @@ Shoplift.ItemView = Ember.View.extend({
   	return 'history' + this.get('content.id');
   }.property('content.id'),
   
+  isInView: false,
+  drawerIsOpen: false,
+  drawerIsAnimating: false,
   
-  didInsertElement: function(ev) {
-  	
-  	
-  	
-	  this.$('.product-container').css({'opacity': '0.0'});
-	  this.$('.product-container').animate({'opacity': '1.0'}, 2000);
-	  
-	  
-	  
+  didInsertElement: function(ev) {	 
+  	var that = this,
+		  	time = 800
+		  	drawerIsAnimating = that.get("drawerIsAnimating"),
+		  	drawerIsOpen = that.get("drawerIsOpen");
+		  	
+  	this.$().bind('inview', function(event, isInView, visiblePartX, visiblePartY) {
+  		if(isInView) {
+  			that.set("isInView", true);
+  		}
+  	});
+  	 
+  	  
 	  // Right Drawer Toggle
-	  var that = this, drawerIsAnimating = false;
-	  this.$('.product-drawer').css({x: '-170px'});
-	  this.$(".product-sub-container").on("click", function(e) {
+	  
+	  this.$().on("click", ".product-sub-container", function(e) {
 	  	e.preventDefault();
-	  	console.log(e);
 	  	if(!drawerIsAnimating && !$(e.toElement).hasClass("relift-this")) {
 	  		var drawer = that.$(this).parent().next('.product-drawer-container').children('.product-drawer');
 	  		var container = that.$(this).parent().parent('.product');
 	  		toggleDrawer(drawer, container);
 	  	}
 	  });
-	  this.$(".drawer-opener").on("click", function(e) {
+	  this.$().on("click", ".drawer-opener", function(e) {
 	  	e.preventDefault();
 	  	if(!drawerIsAnimating) {
 	  		var drawer = that.$(this).parent();
@@ -53,26 +58,49 @@ Shoplift.ItemView = Ember.View.extend({
 	  });
 	  
 	  var toggleDrawer = function(drawer, container) {
+	  	var opener = drawer.children(".drawer-opener"),
+	  			angle,
+	  			drawerIsAnimating = that.get("drawerIsAnimating"),
+	  			drawerIsOpen = that.get("drawerIsOpen");
+	  
 	  	if(!drawerIsAnimating) {
-	  		drawerIsAnimating = true;
-	  		if(drawer.css('x') == '-170px') {
-	  			drawer.transition({x: '0'}, 300, 'out');
-	  		} else {
-	  			drawer.delay(62).transition({x: '-170px'}, 300, 'out');
-	  		}
-	  		drawer.toggleClass("drawer-hidden");
-	  		if(container.css('width') == '567px') {
-	  			container.animate({width:"394px"}, 600, 'easeOutBack').animate({width:"374px"}, 200, 'linear');
-	  		} else {
-	  			container.delay(100).animate({width:"547px"}, 500, 'easeOutBack').animate({width:"567px"}, 200, 'linear');
-	  		}
-	  		var opener = drawer.children(".drawer-opener");
-	  		if(opener.css('rotate') == '+45deg') {
-	  			opener.transition({rotate: '0deg'}, 800, function() { drawerIsAnimating = false; drawerIsOpen = true; });
-	  		} else {
-	  			opener.transition({rotate: '+45deg'}, 800, function() { drawerIsAnimating = false; drawerIsOpen = true; });
-	  		}
-	  	}
+				that.set("drawerIsAnimating", true);
+	  	} else {
+				return;
+		  }
+	  	
+	  	if(drawerIsOpen) {
+		  	drawer.
+		  		delay(62).
+		  			transition({left: '-170px'}, 300, 'out');
+		  } else {
+		  	drawer.
+		  		transition({left: '0'}, 300, 'out');
+		  }
+		  
+		  drawer.toggleClass("drawer-hidden");
+		  
+		  if(drawerIsOpen) {
+		  	container.
+		  		animate({width:"394px"}, 600, 'easeOutBack').
+		  		animate({width:"374px"}, 200, 'linear');
+		  } else {
+		  	container.
+		  		delay(100).
+		  			animate({width:"547px"}, 500, 'easeOutBack').
+		  			animate({width:"567px"}, 200, 'linear');
+		  }
+		  		
+		  if(drawerIsOpen) {
+			  angle = '0deg';
+		  } else {
+		  	angle = '+45deg';
+		  }
+		  
+		  opener.transition({rotate: angle}, time, function() { 
+		  	that.set("drawerIsOpen", !drawerIsOpen); 
+		  	that.set("drawerIsAnimating", false);
+		  });
 	  };
   },
   /*willDestroyElement: function() {

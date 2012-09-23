@@ -12,30 +12,21 @@ Shoplift.ItemsRoute = Ember.Route.extend({
   	}};
   	router.set('itemsController.query', query);
   	router.set('itemsController.isLoading', true);
-
-  	// get items shoplifted by user's followers
-  	//var userItems = Shoplift.store.findQuery(Shoplift.Item, {page: 1});
-  	
   	
   	// get all events for this repository
   	var filter = function(data) {
   	  return true;
   	};
   	var userItems = Shoplift.store.filter(Shoplift.Item, query, filter);
-  	
-  	
-  	
-  	
+
   	router.get('applicationController').connectOutlet('carousel', 'items', userItems);
 	
-	//router.get('navController').set('target', Shoplift.NavManager);
-	//console.log(router.get('navController'));
-	router.get("applicationController").connectOutlet({
-	  name: 'nav',
-	  outletName: 'header'
-	});
-	router.get("navController").connectOutlet('logo');
-	//console.dir(Shoplift.store.findMany(Shoplift.Item, [1,2,3,4]));
+		router.get("applicationController").connectOutlet({
+		  name: 'nav',
+		  outletName: 'header'
+		});
+		
+		router.get("navController").connectOutlet('logo');
   },
   index: Ember.Route.extend({
 	route: '/'
@@ -43,10 +34,7 @@ Shoplift.ItemsRoute = Ember.Route.extend({
   loadMoreItems: function(router, page) {
     var query = router.get('itemsController.query');
     query.page = page;
-    //router.get('store').findQuery(Shoplift.Item, query);
     var results = Shoplift.store.findQuery(Shoplift.Item, query);
-    console.log(results);
-    //Shoplift.store.find(Shoplift.Item);
     router.set('itemsController.isLoading', true);
   },
 }); 

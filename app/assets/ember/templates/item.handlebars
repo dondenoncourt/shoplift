@@ -1,68 +1,70 @@
-{{#with view.content}}
-	<div class="product-container">
-	  {{#with user}}
-		{{view Shoplift.UserView}}
-	  {{/with}}
-		<div class="productImg">
-			<img {{bindAttr src="photoFileName"}} width="353" height="410" /> 
+{{#if view.isInView}}
+	{{#with view.content}}
+		<div class="product-container fade-in">
+		  {{#with user}}
+			{{view Shoplift.UserView}}
+		  {{/with}}
+			<div class="productImg">
+				<img {{bindAttr src="photoFileName"}} width="353" height="410" /> 
+			</div>
+			<div class="productPricePan">
+				<p class="productName">{{brand.value}}</p>
+				<p class="productPrice">{{name}} <span>{{price}}</span></p>
+			</div>
+			<div class="product-sub-container">
+				<a class="relift-this icon-relift-button" rel="#tsl-relift-popup" title="Relift this!"></a> <!-- TODO: Relift action should go here -->
+			</div>
 		</div>
-		<div class="productPricePan">
-			<p class="productName">{{brand.value}}</p>
-			<p class="productPrice">{{name}} <span>{{price}}</span></p>
-		</div>
-		<div class="product-sub-container">
-			<a class="relift-this icon-relift-button" rel="#tsl-relift-popup" title="Relift this!"></a> <!-- TODO: Relift action should go here -->
-		</div>
-	</div>
-	<div class="product-drawer-container">
-	  <div class="product-drawer drawer-hidden">
-		    <ul class="drawer-tabs nav nav-pills">
-		  	  <li class="active"><a class="icon-tags-button" {{bindAttr href="view.tagsHref"}} data-toggle="pill"></a></li>
-		  	  <li><a class="icon-quote-button" {{bindAttr href="view.quoteHref"}} data-toggle="pill"></a></li>
-		  	  <li><a class="icon-clock-button" {{bindAttr href="view.historyHref"}} data-toggle="pill"></a></li>
-		    </ul>
-		    <div class="tab-content">
-		      <div class="tab-pane active" {{bindAttr id="view.tagsId"}}>
-		    	  <div class="tag-list-container">
-		    		  <ul class="tag-list">
-		    			  <li>
-		    				  <a><input type="text" id="newTag{{id}}" placeholder="Add a tag" /></a>
-		    			  </li>
-		    			  {{#each hashtagbrands}}
-		    				  <li><a {{action showTag this href=true}}>{{value}}</a></li>
-		    			  {{/each}}
-		    		  </ul>
-		    	  </div>
-		      </div>
-		      <div class="tab-pane" {{bindAttr id="view.quoteId"}}>
-		      	  <div class="quote-container">
-		      		  <p class="quote">{{{comment}}}</p>
-		      	  </div>
-		      </div>
-		      <div class="tab-pane" {{bindAttr id="view.historyId"}}>
-		      	  <div class="history-container">
-		      		  <div class="first-shoplifter">
-		      			  Shoplifted first by
-		      			  {{#with user}}
-		      				  <div {{action showProfile this}}><img {{bindAttr src="avatarUrlSmall"}} {{bindAttr alt="fullName"}} /></div>
-		      			  {{/with}}
-		      		  </div>
-		      		  <div class="relifters">
-		      		  	  Relifted by {{relifts.length}} {{pluralize relifts.length "member" "members"}}
-		      		  	  {{#each relifts}}
-		      		  	  	  <div {{action showProfile this}}><img {{bindAttr src="avatarUrlSmall"}} {{bindAttr alt="fullName"}} /></div>
-		      		  	  {{/each}}
-		      		  </div>
-		      	  </div>
-		      </div>
-		    </div> <!-- end tab content -->
-		  
-		  <ul class="drawer-actions">
-			  <li><a href="#" class="save-this icon-save-button"></a></li>
-			  <li><a href="#" class="share-this icon-share-button" rel="#tsl-share-popup"></a></li>
-			  <li><a href="#" class="buy-this icon-buy-button"></a></li>
-		  </ul>
-		  <a href="#" class="drawer-opener icon-plus-button"></a>
-	  </div> <!-- end product drawer -->
-	</div> <!-- end product drawer container -->
-{{/with}}
+		<div class="product-drawer-container">
+		  <div class="product-drawer drawer-hidden">
+			    <ul class="drawer-tabs nav nav-pills">
+			  	  <li class="active"><a class="icon-tags-button" {{bindAttr href="view.tagsHref"}} data-toggle="pill"></a></li>
+			  	  <li><a class="icon-quote-button" {{bindAttr href="view.quoteHref"}} data-toggle="pill"></a></li>
+			  	  <li><a class="icon-clock-button" {{bindAttr href="view.historyHref"}} data-toggle="pill"></a></li>
+			    </ul>
+			    <div class="tab-content">
+			      <div class="tab-pane active" {{bindAttr id="view.tagsId"}}>
+			    	  <div class="tag-list-container">
+			    		  <ul class="tag-list">
+			    			  <li>
+			    				  <a><input type="text" id="newTag{{id}}" placeholder="Add a tag" /></a>
+			    			  </li>
+			    			  {{#each hashtagbrands}}
+			    				  <li><a {{action showTag this href=true}}>{{value}}</a></li>
+			    			  {{/each}}
+			    		  </ul>
+			    	  </div>
+			      </div>
+			      <div class="tab-pane" {{bindAttr id="view.quoteId"}}>
+			      	  <div class="quote-container">
+			      		  <p class="quote">{{{comment}}}</p>
+			      	  </div>
+			      </div>
+			      <div class="tab-pane" {{bindAttr id="view.historyId"}}>
+			      	  <div class="history-container">
+			      		  <div class="first-shoplifter">
+			      			  Shoplifted first by
+			      			  {{#with user}}
+			      				  <div {{action showProfile this}}><img {{bindAttr src="avatarUrlSmall"}} {{bindAttr alt="fullName"}} /></div>
+			      			  {{/with}}
+			      		  </div>
+			      		  <div class="relifters">
+			      		  	  Relifted by {{relifts.length}} {{pluralize relifts.length "member" "members"}}
+			      		  	  {{#each relifts}}
+			      		  	  	  <div {{action showProfile this}}><img {{bindAttr src="avatarUrlSmall"}} {{bindAttr alt="fullName"}} /></div>
+			      		  	  {{/each}}
+			      		  </div>
+			      	  </div>
+			      </div>
+			    </div> <!-- end tab content -->
+			  
+			  <ul class="drawer-actions">
+				  <li><a href="#" class="save-this icon-save-button"></a></li>
+				  <li><a href="#" class="share-this icon-share-button" rel="#tsl-share-popup"></a></li>
+				  <li><a href="#" class="buy-this icon-buy-button"></a></li>
+			  </ul>
+			  <a href="#" class="drawer-opener icon-plus-button"></a>
+		  </div> <!-- end product drawer -->
+		</div> <!-- end product drawer container -->
+	{{/with}}
+{{/if}}

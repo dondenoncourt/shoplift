@@ -269,8 +269,8 @@ ul{
 
    /* Carousel Items */
 	  .product {
-		 width:374px;/* 567px; */
-		 /* height:438px; */
+		 width:374px;
+		 height:427px;
 		 background:url(http://davidmazza.net/shoplift/images/product-container.png) 15px 17px no-repeat;
 		 margin:0px 30px 0; /* was 100px 30px 0 for some reason */
 		 position:relative;
@@ -388,14 +388,12 @@ ul{
 	  float:left;
 	  width: 374px;
 	  height: 427px;
-	  /* z-index: 1; */
    }
    .profile-box-container{
-   	  float:left;
-   	  width: 500px;
-   	  height: 427px;
-   	  /* z-index: 1; */
-      }
+   	float:left;
+   	width: 500px;
+   	height: 427px;
+   }
    .product-sub-container {
 	  position: absolute;
 	  background: url(/img/product-scaffolding.png) 10px 12px no-repeat transparent;
@@ -413,11 +411,10 @@ ul{
 	  max-width:193px;
 	  background:url(/img/drawer-scaffolding.png) 0 0 no-repeat;
 	  height:417px;
-	  /* display:none; */
+	  left:-170px;
 	  position:absolute;
 	  right:7px;
 	  top:-1px;
-	  /* z-index:-10; */
 	  margin-top:13px;
    }
 
@@ -430,7 +427,6 @@ ul{
 	  left: 368px;
 	  bottom: 0;
 	  z-index: 2;
-	  /* border: 1px solid white; */
    }
 
 /* Drawer Tabs */
@@ -1234,3 +1230,41 @@ border-right: 1px solid #544564;
 .menu-buttons-signout{ background-position: 0 -1693px; width: 98px; height: 31px; } 
 .menu-buttons-terms-on{ background-position: 0 -1774px; width: 61px; height: 36px; } 
 .menu-buttons-terms{ background-position: 0 -1860px; width: 61px; height: 36px; } 
+
+
+
+/* Animations */
+
+@-webkit-keyframes reset {
+	0%		{ opacity: 0; }
+	100%	{ opacity: 0; }
+}
+
+@-webkit-keyframes fade-in {
+	0%		{ opacity: 0; }
+	100%	{ opacity: 1; }
+}
+
+
+.fade-in
+{
+	-webkit-animation-name: reset, fade-in;
+	-webkit-animation-duration: 1s;
+	-webkit-animation-timing-function: ease-in;
+	-webkit-animation-delay: 0s;
+	/* Firefox 4 */
+	-moz-transition-property:opacity;
+	-moz-transition-duration:3s;
+	-moz-transition-timing-function:linear;
+	-moz-transition-delay:0s;
+	/* Safari and Chrome */
+	-webkit-transition-property:opacity;
+	-webkit-transition-duration:3s;
+	-webkit-transition-timing-function:linear;
+	-webkit-transition-delay:0s;
+	/* Opera */
+	-o-transition-property:opacity;
+	-o-transition-duration:3s;
+	-o-transition-timing-function:linear;
+	-o-transition-delay:0s;
+}
