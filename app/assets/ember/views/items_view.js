@@ -90,7 +90,7 @@ Shoplift.ItemView = Ember.View.extend(Shoplift.InViewMixin, {
 	  	if(drawerIsOpen) {
 	  		drawer.
 	  			delay(62).
-	  				transition({left: '-170px'}, 300, 'out');
+	  				transition({left: '-185px'}, 300, 'out');
 	  	} else {
 	  		drawer.
 	  			transition({left: '0'}, 300, 'out');

@@ -5,11 +5,11 @@
 			{{view Shoplift.UserView}}
 		  {{/with}}
 			<div class="productImg">
-				<img {{bindAttr src="photoFileName"}} width="353" height="410" /> 
+				<img {{bindAttr src="photoFileName"}} /> 
 			</div>
 			<div class="productPricePan">
 				<p class="productName">{{brand.value}}</p>
-				<p class="productPrice">{{name}} <span>{{price}}</span></p>
+				<p class="productPrice">{{name}}</p>
 			</div>
 			<div class="product-sub-container">
 				<a class="relift-this icon-relift-button" rel="#tsl-relift-popup" title="Relift this!"></a> <!-- TODO: Relift action should go here -->
@@ -33,6 +33,7 @@
 			    				  <li><a {{action showTag this href=true}}>{{value}}</a></li>
 			    			  {{/each}}
 			    		  </ul>
+			    		  <span>{{price}}</span>
 			    	  </div>
 			      </div>
 			      <div class="tab-pane" {{bindAttr id="view.quoteId"}}>
