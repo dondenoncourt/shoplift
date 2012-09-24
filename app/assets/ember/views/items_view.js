@@ -4,7 +4,7 @@ Shoplift.InViewMixin = Ember.Mixin.create({
 		var that = this;
 		
 		this.$().on('inview', function(event, isInView, visiblePartX, visiblePartY) {
-			if(isInView) {
+			if(isInView && !that.get("isInView")) {
 				that.set("isInView", true);
 			}
 		});
@@ -18,6 +18,15 @@ Shoplift.InViewMixin = Ember.Mixin.create({
 Shoplift.ItemView = Ember.View.extend(Shoplift.InViewMixin, {
   templateName: 'item',
   classNames: ['product', 'item'],
+  
+  isInViewDidChange: function() {
+	  var controller = this.get("controller"),
+	  		isInView = this.get("isInView");
+	  		
+	  if(isInView) {
+	  	controller.incrementProperty("isInViewCount");
+	  }
+  }.observes('isInView'),
 
   tagsHref: function() {
   	return '#tags' + this.get('content.id');

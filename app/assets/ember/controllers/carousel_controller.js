@@ -17,11 +17,28 @@ Shoplift.LoadMoreMixin = Ember.Mixin.create(Ember.Evented, {
 Shoplift.ItemsController = Ember.ArrayController.extend(Shoplift.LoadMoreMixin, {
   //sortProperties: ['id'],
   currentPage: 1,
+  isInViewCount: 0,
+  threshold: 10,
+  
+  thresholdIsMet: function() {
+	  var threshold = this.get("threshold"),
+	  		isInViewCount = this.get("isInViewCount"),
+	  		length = this.get("length");
+	  		
+	  return (length - isInViewCount) < threshold;
+	  
+  }.observes('threshold', 'isInViewCount', 'length'),
+  
+  isLoading: false,
   
   canLoadMore: function() {
     // can we load more entries? In this example only 10 pages are possible to fetch ...
     return this.get('currentPage') < 10;
   }.property('currentPage'),
+  
+  shouldLoadMore: function() {
+  		// if threshold met and can load more and is not loading more
+  }.observes('thresholdIsMet', 'canLoadMore', 'isLoading'),
   
   loadMore: function() {
     if (this.get('canLoadMore')) {
