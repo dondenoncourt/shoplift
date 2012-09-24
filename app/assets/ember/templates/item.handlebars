@@ -18,12 +18,12 @@
 		<div class="product-drawer-container">
 		  <div class="product-drawer drawer-hidden">
 			    <ul class="drawer-tabs nav nav-pills">
-			  	  <li class="active"><a class="icon-tags-button" {{bindAttr href="view.tagsHref"}} data-toggle="pill"></a></li>
-			  	  <li><a class="icon-quote-button" {{bindAttr href="view.quoteHref"}} data-toggle="pill"></a></li>
-			  	  <li><a class="icon-clock-button" {{bindAttr href="view.historyHref"}} data-toggle="pill"></a></li>
+			  	  <li class="active"><a class="drawer-hashtags" {{identify name="tags" href=true}} data-toggle="pill"></a></li>
+			  	  <li><a class="drawer-quote" {{identify name="quote" href=true}} data-toggle="pill"></a></li>
+			  	  <li><a class="drawer-history" {{identify name="history" href=true}} data-toggle="pill"></a></li>
 			    </ul>
 			    <div class="tab-content">
-			      <div class="tab-pane active" {{bindAttr id="view.tagsId"}}>
+			      <div class="tab-pane active" {{identify name="tags"}}>
 			    	  <div class="tag-list-container">
 			    		  <ul class="tag-list">
 			    			  <li>
@@ -36,12 +36,12 @@
 			    		  <span>{{price}}</span>
 			    	  </div>
 			      </div>
-			      <div class="tab-pane" {{bindAttr id="view.quoteId"}}>
+			      <div class="tab-pane" {{identify name="quote"}}>
 			      	  <div class="quote-container">
 			      		  <p class="quote">{{{comment}}}</p>
 			      	  </div>
 			      </div>
-			      <div class="tab-pane" {{bindAttr id="view.historyId"}}>
+			      <div class="tab-pane" {{identify name="history"}}>
 			      	  <div class="history-container">
 			      		  <div class="first-shoplifter">
 			      			  Shoplifted first by

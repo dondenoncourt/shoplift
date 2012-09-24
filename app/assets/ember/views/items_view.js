@@ -18,6 +18,9 @@ Shoplift.InViewMixin = Ember.Mixin.create({
 Shoplift.ItemView = Ember.View.extend(Shoplift.InViewMixin, {
   templateName: 'item',
   classNames: ['product', 'item'],
+  isInView: false,
+  drawerIsOpen: false,
+  drawerIsAnimating: false,
   
   isInViewDidChange: function() {
 	  var controller = this.get("controller"),
@@ -28,29 +31,6 @@ Shoplift.ItemView = Ember.View.extend(Shoplift.InViewMixin, {
 	  }
   }.observes('isInView'),
 
-  tagsHref: function() {
-  	return '#tags' + this.get('content.id');
-  }.property('content.id'),
-  tagsId: function() {
-		return 'tags' + this.get('content.id');
-  }.property('content.id'),
-  quoteHref: function() {
-		return '#quote' + this.get('content.id');
-  }.property('content.id'),
-  quoteId: function() {
-		return 'quote' + this.get('content.id');
-  }.property('content.id'),
-  historyHref: function() {
-  	return '#history' + this.get('content.id');
-  }.property('content.id'),
-  historyId: function() {
-  	return 'history' + this.get('content.id');
-  }.property('content.id'),
-  
-  isInView: false,
-  drawerIsOpen: false,
-  drawerIsAnimating: false,
-  
   initDrawer: function() {
 	  var that = this,
 	  time = 800
