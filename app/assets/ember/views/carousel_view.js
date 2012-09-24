@@ -32,15 +32,17 @@ Shoplift.ScrollableMixin = Ember.Mixin.create(Ember.Evented, {
 		options = { axis: 'x' },
 		KEY_RIGHT = 39,
 		KEY_LEFT = 37;
+		KEY_UP = 38;
+		KEY_DOWN = 40;
 	
 		$(document).on(namespaceKeydown, function(e) {
-		  e.preventDefault();
+		  if(e.which === KEY_RIGHT || e.which === KEY_LEFT || e.which === KEY_UP || e.which === KEY_DOWN) e.preventDefault();
 		  
 		  var scrollWidth = that.get("scrollWidth");
 		  
-		  if(e.which === KEY_RIGHT) { 
+		  if(e.which === KEY_RIGHT || e.which === KEY_DOWN) { 
 				$.scrollTo("+=" + scrollWidth, time, options);
-		  } else if(e.which === KEY_LEFT) { 
+		  } else if(e.which === KEY_LEFT || e.which === KEY_UP) { 
 				$.scrollTo("-=" + scrollWidth, time, options);
 		  } else {
 			  // noop
