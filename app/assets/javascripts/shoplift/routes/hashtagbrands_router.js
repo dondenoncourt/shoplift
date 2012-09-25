@@ -32,7 +32,7 @@ Shoplift.HashtagbrandRoute = Ember.Route.extend({
 	  },
 	  connectOutlets: function(router) {
 		  router.get("hashtagbrandController").connectOutlet({
-			  viewClass: Shoplift.CarouselContainerView,
+			  viewClass: Shoplift.ItemsView,
 			  controller: router.get("hashtagbrandItemsController"),
 			  context: router.get("hashtagbrandController").get("items")
 		  });
@@ -49,7 +49,7 @@ Shoplift.HashtagbrandRoute = Ember.Route.extend({
 	  connectOutlets: function(router) {
 	  	//console.log(router.get("hashtagbrandUsersContoroller"));
 		  router.get("hashtagbrandController").connectOutlet({
-			  viewClass: Shoplift.UserCarouselContainerView,
+			  viewClass: Shoplift.UsersView,
 			  controller: router.get("hashtagbrandUsersController"),
 			  context: router.get("hashtagbrandController").get("users")
 		  });

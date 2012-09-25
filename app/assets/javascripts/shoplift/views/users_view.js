@@ -6,10 +6,6 @@ Shoplift.UserView = Ember.View.extend({
   }
 });
 
-Shoplift.UsersView = Ember.View.extend({
-	templateName: 'shoplift/templates/users'
-});
-
 Shoplift.ProfileView = Ember.View.extend({
 	templateName: 'shoplift/templates/profile',
 	classNames: ['profile-box', 'item']

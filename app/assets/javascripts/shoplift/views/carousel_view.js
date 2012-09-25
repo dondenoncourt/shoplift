@@ -50,7 +50,7 @@ Shoplift.ScrollableMixin = Ember.Mixin.create(Ember.Evented, {
 		});  
   },
   
-  scrollableMixinWillRemove: function() {
+  scrollableMixinWillDestroy: function() {
 		$(document).off("keydown");
   },
   
@@ -59,7 +59,7 @@ Shoplift.ScrollableMixin = Ember.Mixin.create(Ember.Evented, {
   },
   
   willDestroyElement: function() {
-		this.scrollableMixinWillRemove();
+		this.scrollableMixinWillDestroy();
   }
 
 });

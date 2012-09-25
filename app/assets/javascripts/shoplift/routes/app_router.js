@@ -14,7 +14,7 @@ Shoplift.Router = Ember.Router.extend({
     goProfile: Ember.Route.transitionTo("user.index"),
     index: Ember.Route.extend({
       route: '/',
-      redirectsTo: 'alpha.index'
+      redirectsTo: 'app.index'
     }),
     alpha: Ember.Route.extend({
       route: '/alpha',
@@ -24,7 +24,7 @@ Shoplift.Router = Ember.Router.extend({
         }
         console.dir(user.get("items"));
         router.get("applicationController").connectOutlet({
-          viewClass: Shoplift.CarouselContainerView,
+          viewClass: Shoplift.ItemsView,
           controller: router.get("userItemsController"),
           outletName: 'carousel',
           context: user.get("items")
