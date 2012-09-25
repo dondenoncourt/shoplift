@@ -176,7 +176,7 @@ ul{
 	  }
 
 /* Shoplifter's Name and Pic */
-	.user {
+	.product-container .user {
 		position: absolute;
 		background-image: url(/img/product-top-scaffolding.png);
 		width: 413px;
