@@ -47,3 +47,4 @@ class Hashtagbrand < ActiveRecord::Base
     end
   end
 end
+
