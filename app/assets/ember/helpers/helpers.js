@@ -21,3 +21,18 @@ Handlebars.registerHelper('identify', function(options) {
 	
 	return attr + name + id + '';
 });
+
+
+Handlebars.registerHelper('truncate', function(context, options) { //str, length, omission) {
+	var length = options.hash['length'],
+			append = options.hash['append'],
+			str = this.get(context);
+	
+	if (str.length > length) {
+		return str.substring(0, length - append.length) + append;
+	} else {
+		return str;
+	}
+});
+
+	

@@ -1,5 +1,6 @@
 Shoplift.UserView = Ember.View.extend({
   templateName: 'user',
+  classNames: ['user'],
   didInsertElement: function() {
 	//debugger;
   }

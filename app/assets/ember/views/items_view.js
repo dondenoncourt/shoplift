@@ -37,11 +37,11 @@ Shoplift.ItemView = Ember.View.extend(Shoplift.InViewMixin, {
 	  drawerIsAnimating = that.get("drawerIsAnimating"),
 	  drawerIsOpen = that.get("drawerIsOpen");
 	  
-	  this.$().on("click", ".product-sub-container", function(e) {
+	  this.$().on("click", ".product-container", function(e) {
 	  	e.preventDefault();
 	  	if(!drawerIsAnimating && !$(e.toElement).hasClass("relift-this")) {
-	  		var drawer = that.$(this).parent().next('.product-drawer-container').children('.product-drawer');
-	  		var container = that.$(this).parent().parent('.product');
+	  		var drawer = that.$(this).next('.product-drawer-container').children('.product-drawer');
+	  		var container = that.$(this).parent('.product');
 	  		toggleDrawer(drawer, container);
 	  	}
 	  });
@@ -68,10 +68,14 @@ Shoplift.ItemView = Ember.View.extend(Shoplift.InViewMixin, {
 	  	}
 	  	
 	  	if(drawerIsOpen) {
+	  		
 	  		drawer.
 	  			delay(62).
-	  				transition({left: '-185px'}, 300, 'out');
+	  				transition({left: '-185px'}, 300, 'out', function() {
+							this.parent().css({'z-index': '-1'});
+						});
 	  	} else {
+	  		drawer.parent().css({'z-index': '2'});
 	  		drawer.
 	  			transition({left: '0'}, 300, 'out');
 	  	}

@@ -176,22 +176,23 @@ ul{
 	  }
 
 /* Shoplifter's Name and Pic */
-   .profile-image{
-	  position:absolute;
-	  top: -43px;
-	  left: -25px;
-	  width:89px;
-	  height:84px;
-	  background:url(http://davidmazza.net/shoplift/images/item-box-profile-circle.png) 0 0 no-repeat;
-	   z-index:990;
-   }
+	.user {
+		position: absolute;
+		background-image: url(/img/product-top-scaffolding.png);
+		width: 413px;
+		height: 100px;
+		top:-60px;
+		left: -42px;
+		z-index: 1;
+	}
    .circle-overflow {
+   
 	  -webkit-border-radius: 40px;
 	  -moz-border-radius: 40px;
 	  border-radius: 40px;
 	  position:absolute;
-	  top: -40px;
-	  left: -22px;
+	  top: 14px;
+	  left: 13px;
 	  z-index:500;
 	  overflow:hidden;
    }
@@ -199,8 +200,8 @@ ul{
 	  -webkit-border-radius: 40px;
 	  -moz-border-radius: 40px;
 	  border-radius: 40px;
-	  max-width:77px !important;
-	  max-height:79px !important;
+	  max-width:72px !important;
+	  max-height:74px !important;
 	  -webkit-transform: rotate(-30deg);
 	  -moz-transform: rotate(-30deg);
    }
@@ -209,12 +210,12 @@ ul{
 	  font-size:33px;
 	  line-height:60px;
 	  font-family:"Trebuchet MS" arial;
-	  font-weight:400;
+	  font-weight:bold;
 	  font-style: italic;
 	  color:#FFF;
 	  position:absolute;
-	  top:-47px;
-	  left:74px;
+	  top:20px;
+	  left:100px;
 	  z-index:900;
 	  /* Reduce opacity to 99% to eliminate weird glitch on jQuery css changes */
 	  filter: alpha(opacity=99);
@@ -227,7 +228,7 @@ ul{
 	  font-weight: bold;
    }
 
-.productImg{
+.product-img{
 	height:408px;
 	width:353px;
 	position:absolute;
@@ -237,23 +238,38 @@ ul{
 	background:white;
 }
 
-.productImg {
+.product-img {
 	height: 408px;
 	width: 353px;
 }
 
-.productPricePan p{
-	font-family:FuturaMdBTMedium;
+.product-meta{
+	width: 100%;
+	height: 52px;
+	position: absolute;
+	bottom: 5px;
+	left: 0px;
+	margin-left: 22px;
+	z-index: 1;
+	font-size: 1.6em;
+}
+
+.product-meta p{
+	font-family:'Trebuchet MS', arial;
+	font-style: italic;
 	color:#F8ECE5;
 	text-shadow:1px 1px 1px #413D48;
 	filter: dropshadow(color=#413D48, offx=1, offy=1);
 	margin: 0 0 0 0;
 }
-.productPricePan .productName{
-	font-size:20px;
-	padding-left: 26px;
-	font-family:"Futura PT", arial;
-	font-weight:100;
+.product-meta .product-brand {
+	
+}
+.product-meta .product-name{
+	padding-left: 10px;
+	padding-top: 4px;
+	font-size: 0.9em;
+	color: #bdbbbf;
 }
 
 
@@ -303,7 +319,7 @@ ul{
 	  top: 0;
 	  left: 366px;
 	  bottom: 0;
-	  z-index: 2;
+	  z-index: -1;
    }
    
    .drawer-opener {
@@ -886,63 +902,55 @@ filter: dropshadow(color=#555, offx=1, offy=1);
 	margin: 0;
 }
 
-.profile-box-container .productImg:nth-child(4) { /*4*/
+.profile-box-container .product-img:nth-child(4) { /*4*/
 	height:252px;
 	top: 18px;
 	left: 15px;
 	overflow: hidden;
 }
-.profile-box-container .productImg:nth-child(4) img {
+.profile-box-container .product-img:nth-child(4) img {
 	width: 294px;
 }
-.profile-box-container .productImg:nth-child(7) { /*5*/
+.profile-box-container .product-img:nth-child(7) { /*5*/
 	height:252px;
 	max-width:143px;
 	top: 18px;
 	left: 308px;
 	overflow: hidden;
 }
-.profile-box-container .productImg:nth-child(7) img {
+.profile-box-container .product-img:nth-child(7) img {
 	width: 143px;
 }
-.profile-box-container .productImg:nth-child(10) { /*6*/
+.profile-box-container .product-img:nth-child(10) { /*6*/
 	height:155px;
 	top: 270px;
 	left: 15px;
 	overflow: hidden;
 }
-.profile-box-container .productImg:nth-child(10) img {
+.profile-box-container .product-img:nth-child(10) img {
 	width: 146px;
 }
-.profile-box-container .productImg:nth-child(13) { /*7*/
+.profile-box-container .product-img:nth-child(13) { /*7*/
 	height:155px;
 	max-width: 143px;
 	top: 270px;
 	left: 162px;
 	overflow: hidden;
 }
-.profile-box-container .productImg:nth-child(13) img {
+.profile-box-container .product-img:nth-child(13) img {
 	width: 146px;
 }
-.profile-box-container .productImg:nth-child(16) { /*8*/
+.profile-box-container .product-img:nth-child(16) { /*8*/
 	max-height:155px;
 	max-width: 143px;
 	top: 270px;
 	left: 308px;
 	overflow: hidden;
 }
-.profile-box-container .productImg:nth-child(16) img {
+.profile-box-container .product-img:nth-child(16) img {
 	width: 143px;
 }
-.productPricePan{
-	width: 100%;
-	height: 37px;
-	padding-top: 13px;
-	position: absolute;
-	bottom: 5px;
-	left: 0px;
-	z-index: 1;
-}
+
 
 /* Tags + Brands Squares */
 
