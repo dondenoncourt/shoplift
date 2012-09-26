@@ -46,10 +46,18 @@ Shoplift.UserRoute = Ember.Route.extend({
 	  items: Ember.Route.extend({
 		route: '/items',
 		enter: function() {
-			router.get("userController").set("itemsClasses", 'profile-count of-items-on');
+			var itemsController = router.get('itemsController'),
+					userController = router.get('userController');
+			
+			userController.set("itemsClasses", 'profile-count of-items-on');
+			itemsController.set('marginLeft', '320px');
 		},
 		exit: function() {
-			router.get("userController").set("itemsClasses", 'profile-count of-items');
+			var itemsController = router.get('itemsController'),
+					userController = router.get('userController');
+			
+			userController.set("itemsClasses", 'profile-count of-items');
+			itemsController.set('marginLeft', '0px');
 		},
 		connectOutlets: function(router) {
 			var itemsController = router.get('itemsController'),
@@ -75,6 +83,8 @@ Shoplift.UserRoute = Ember.Route.extend({
 		  var userItems = Shoplift.store.filter(Shoplift.Item, query, filter);
 	
 		  userController.connectOutlet('items', userItems);
+		  
+		  
 	
 		  router.get("applicationController").connectOutlet({
 		  	name: 'nav',
@@ -98,10 +108,18 @@ Shoplift.UserRoute = Ember.Route.extend({
   followees: Ember.Route.extend({
 		route: '/followees',
 		enter: function() {
-			router.get("userController").set("followeesClasses", 'profile-count of-followees-on');
+			var usersController = router.get('userFolloweesController'),
+					userController = router.get('userController');
+			
+			userController.set("followeesClasses", 'profile-count of-followees-on');
+			usersController.set('marginLeft', '320px');
 		},
 		exit: function() {
-			router.get("userController").set("followeesClasses", 'profile-count of-followees');
+			var usersController = router.get('userFolloweesController'),
+					userController = router.get('userController');
+			
+			userController.set("followeesClasses", 'profile-count of-followees');
+			usersController.set('marginLeft', '0px');
 		},
 		connectOutlets: function(router) {
 		  router.get("userController").connectOutlet({ 
@@ -114,10 +132,18 @@ Shoplift.UserRoute = Ember.Route.extend({
   followers: Ember.Route.extend({
 		route: '/followers',
 		enter: function() {
-			router.get("userController").set("followersClasses", 'profile-count of-followers-on');
+			var usersController = router.get('userFollowersController'),
+					userController = router.get('userController');
+			
+			userController.set("followersClasses", 'profile-count of-followers-on');
+			usersController.set('marginLeft', '320px');
 		},
 		exit: function() {
-			router.get("userController").set("followersClasses", 'profile-count of-followers');
+			var usersController = router.get('userFollowersController'),
+					userController = router.get('userController');
+			
+			userController.set("followersClasses", 'profile-count of-followers');
+			usersController.set('marginLeft', '0px');
 		},
 		connectOutlets: function(router) {
 			router.get("userController").connectOutlet({ 
@@ -130,10 +156,18 @@ Shoplift.UserRoute = Ember.Route.extend({
   hashtagbrands: Ember.Route.extend({
 	route: '/tags',
 	enter: function() {
-		router.get("userController").set("tagsBrandsClasses", 'tags-brands-on');
+		var tagsController = router.get('userHashtagbrandsController'),
+				userController = router.get('userController');
+		
+		userController.set("tagsBrandsClasses", 'tags-brands-on');
+		tagsController.set('marginLeft', '320px');
 	},
 	exit: function() {
-		router.get("userController").set("tagsBrandsClasses", 'tags-brands');
+		var tagsController = router.get('userHashtagbrandsController'),
+				userController = router.get('userController');
+		
+		userController.set("tagsBrandsClasses", 'tags-brands');
+		tagsController.set('marginLeft', '0px');
 	},
 	connectOutlets: function(router) {
 	  router.get("userController").connectOutlet({ 

@@ -33,7 +33,8 @@ Shoplift.ScrollableMixin = Ember.Mixin.create(Ember.Evented, {
 		KEY_RIGHT = 39,
 		KEY_LEFT = 37;
 		KEY_UP = 38;
-		KEY_DOWN = 40;
+		KEY_DOWN = 40,
+		marginLeft = this.get('controller.marginLeft');
 	
 		$(document).on(namespaceKeydown, function(e) {
 		  if(e.which === KEY_RIGHT || e.which === KEY_LEFT || e.which === KEY_UP || e.which === KEY_DOWN) e.preventDefault();
@@ -47,7 +48,9 @@ Shoplift.ScrollableMixin = Ember.Mixin.create(Ember.Evented, {
 		  } else {
 			  // noop
 		  }
-		});  
+		});
+		
+		this.$().transition({left: marginLeft}, 500);
   },
   
   scrollableMixinWillDestroy: function() {
