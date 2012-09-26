@@ -22,6 +22,7 @@ gem 'koala'
 gem 'delayed_job_active_record'
 gem 'daemons'
 gem 'redis'
+gem 'ember-rails'
 
 group :test, :development do
   gem 'rspec-rails'
@@ -44,5 +45,5 @@ group :assets do
   #gem 'sass-rails', "  ~> 3.1.0"
   #gem 'coffee-rails', "~> 3.1.0"
   gem 'uglifier'
-  gem 'ember-rails'
+  #gem 'ember-rails'
 end
