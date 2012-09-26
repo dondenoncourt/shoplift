@@ -229,13 +229,21 @@ ul{
    }
 
 .product-container .product-img{
-	height:408px;
-	width:353px;
+	height:407px;
+	max-width:353px;
 	position:absolute;
 	top: 17px;
 	left: 13px;
 	z-index: -10;
 	background:white;
+	overflow: hidden;
+}
+
+.product-container .product-img img {
+	max-width: 407px;
+	height: 407px;
+	width: 407px;
+	margin-left: -27px;
 }
 
 .product-meta{
@@ -246,7 +254,7 @@ ul{
 	left: 0px;
 	margin-left: 22px;
 	z-index: 1;
-	font-size: 1.6em;
+	font-size: 1.7em;
 }
 
 .product-meta p{
@@ -263,7 +271,7 @@ ul{
 .product-meta .product-name{
 	padding-left: 10px;
 	padding-top: 4px;
-	font-size: 0.9em;
+	font-size: 0.7em;
 	color: #bdbbbf;
 }
 
