@@ -2,21 +2,17 @@
 {{#with view.content}}
 	<div class="profile-box-container">
 		{{view Shoplift.UserView}}
-		{{#each items}}
-			<div class="productImg">
+		{{#each recentItems}}
+			<div class="product-img">
 				<img {{bindAttr src="photoFileName"}} /> 
 			</div>
 		{{/each}}
 
 		<div class="profile-sub-container">
-			<div class="profile-description">
-				{{{htmldescription}}}
-			</div>
-			<div class="profile-count">
+			<div class="profile-meta">
 				<ul>
-					<li>{{items.length}} Items</li>
-					<li>{{followeeCount}} Followees</li>
-					<li>{{followerCount}} Followers</li>
+					<li>{{{htmldescription}}}</li>
+					<li>{{followers.length}} Followers</li>
 				</ul>
 			</div>
 		</div>

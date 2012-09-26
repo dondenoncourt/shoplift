@@ -14,5 +14,11 @@ Shoplift.User = DS.Model.extend({
   recommended: DS.hasMany('Shoplift.User', { key: 'recommended_ids'}),
   htmldescription: function(){
       return this.get('description');//.htmlSafe();
-  }.property('description')
+  }.property('description'),
+  recentItems: function() {
+    var limit = 4
+        items = this.get('items');
+        
+    return items.slice(0, limit);
+  }.property('items')
 });

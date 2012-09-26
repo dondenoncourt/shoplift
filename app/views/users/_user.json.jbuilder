@@ -8,7 +8,7 @@ json.user do |json|
   json.url user.url
   json.vanity_url user.vanity_url
   json.country user.country
-  json.biography user.biography
+  json.description user.biography
   json.notify_new_follower user.notify_new_follower
   json.notify_relift user.notify_relift
   json.notify_missing user.notify_missing

@@ -54,12 +54,11 @@ ul{
    padding-top:29px;
 }
 #current-user .profile-image, #current-user .circle-overflow {
-   margin-top:80px;
-   margin-left: 35px;
+   margin-top:30px;
+   margin-left: -1px;
 }
 #current-user h2 {
-   margin-top: 95px;
-   margin-left: 35px;
+   margin-top: 35px;
 }
 .check-container {
    background: url(http://davidmazza.net/shoplift/img/check-scaffolding.png) no-repeat;
@@ -228,7 +227,7 @@ ul{
 	  font-weight: bold;
    }
 
-.product-img{
+.product-container .product-img{
 	height:408px;
 	width:353px;
 	position:absolute;
@@ -236,11 +235,6 @@ ul{
 	left: 13px;
 	z-index: -10;
 	background:white;
-}
-
-.product-img {
-	height: 408px;
-	width: 353px;
 }
 
 .product-meta{
@@ -886,69 +880,62 @@ filter: dropshadow(color=#555, offx=1, offy=1);
 	width: 266px;
 	background: rgba(25,25,25,0.4);
 }
-.profile-sub-container .profile-count {
-	bottom:12px;
-	left:356px;
+.profile-sub-container .profile-meta {
+	bottom:35px;
+	left:66px;
 	padding: 10px;
-	font-size: 1.2em;
+	font-size: 1.4em;
+	font-style: italic;
 	text-align: left;
-	width: 123px;
+	width: 223px;
 	position: absolute;
 	overflow: hidden;
 	background: rgba(25,25,25,0.4);
 }
-.profile-sub-container .profile-count ul {
+.profile-sub-container .profile-meta ul {
 	padding: 0;
 	margin: 0;
 }
 
-.profile-box-container .product-img:nth-child(4) { /*4*/
-	height:252px;
-	top: 18px;
-	left: 15px;
+.profile-sub-container .profile-meta li {
+	padding-top: 8px;
+	line-height: 1.2em;
+}
+
+.profile-box-container .user {
+	position: absolute;
+	width: 413px;
+	height: 100px;
+	top:-60px;
+	left: -42px;
+	z-index: 1;
+}
+
+.profile-box-container .product-img {
+	position: absolute;
+	height:153px;
 	overflow: hidden;
 }
-.profile-box-container .product-img:nth-child(4) img {
-	width: 294px;
+
+.profile-box-container .product-img img {
+	width: 167px;
+}
+
+.profile-box-container .product-img:nth-child(4) { /*4*/
+	top: 18px;
+	left: 15px;
 }
 .profile-box-container .product-img:nth-child(7) { /*5*/
-	height:252px;
-	max-width:143px;
 	top: 18px;
-	left: 308px;
-	overflow: hidden;
-}
-.profile-box-container .product-img:nth-child(7) img {
-	width: 143px;
+	left: 183px;
 }
 .profile-box-container .product-img:nth-child(10) { /*6*/
-	height:155px;
-	top: 270px;
+	top: 171px;
 	left: 15px;
-	overflow: hidden;
-}
-.profile-box-container .product-img:nth-child(10) img {
-	width: 146px;
 }
 .profile-box-container .product-img:nth-child(13) { /*7*/
-	height:155px;
-	max-width: 143px;
-	top: 270px;
-	left: 162px;
-	overflow: hidden;
-}
-.profile-box-container .product-img:nth-child(13) img {
-	width: 146px;
-}
-.profile-box-container .product-img:nth-child(16) { /*8*/
-	max-height:155px;
-	max-width: 143px;
-	top: 270px;
-	left: 308px;
-	overflow: hidden;
-}
-.profile-box-container .product-img:nth-child(16) img {
-	width: 143px;
+	top: 171px;
+	left: 183px;
 }
 
 

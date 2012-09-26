@@ -17,7 +17,7 @@ App::Application.routes.draw do
   get "modal/relift", :to => "page#relift"
   get "modal/share", :to => "page#share"
 
-  get '/shoplifters', :to => 'users#index'
+  get '/users', :to => 'users#index'
 
   get 'hashtagbrands/search', :to => 'hashtagbrands#search'
   get 'hashtagbrands/:id/related', :to => 'hashtagbrands#related'
