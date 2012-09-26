@@ -731,3 +731,8 @@ a.has_aside {
 .loginBox .notMember a:hover{
   text-decoration:none; 
 }
+
+
+.new_user_signup {
+	color:#ccc;
+}
