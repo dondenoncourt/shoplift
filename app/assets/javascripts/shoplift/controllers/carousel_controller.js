@@ -20,6 +20,7 @@ Shoplift.ItemsController = Ember.ArrayController.extend(Shoplift.LoadMoreMixin, 
   isInViewCount: 0,
   threshold: 10,
   marginLeft: '0px',
+  showFaces: true,
   
   thresholdIsMet: function() {
 	  var threshold = this.get("threshold"),

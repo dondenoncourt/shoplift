@@ -1,9 +1,11 @@
 {{#if view.isInView}}
 	{{#with view.content}}
 		<div class="product-container fade-in">
-		  {{#with user}}
-			{{view Shoplift.UserView}}
-		  {{/with}}
+			{{#if controller.showFaces}}
+			  {{#with user}}
+				{{view Shoplift.UserView}}
+			  {{/with}}
+		  {{/if}}
 			<div class="product-img">
 				<img {{bindAttr src="photoFileName"}} /> 
 			</div>

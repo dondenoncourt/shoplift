@@ -2,7 +2,8 @@ Shoplift.UserController = Ember.ObjectController.extend({
 	itemsClasses: 'profile-count of-items',
 	followeesClasses: 'profile-count of-followees',
 	followersClasses: 'profile-count of-followers',
-	tagsBrandsClasses: 'tags-brands'
+	tagsBrandsClasses: 'tags-brands',
+	marginLeft: '307px'
 });
 
 Shoplift.UserItemsController = Ember.ArrayController.extend({
