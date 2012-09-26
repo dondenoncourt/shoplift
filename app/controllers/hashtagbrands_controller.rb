@@ -13,12 +13,12 @@ class HashtagbrandsController < ApplicationController
   # =end
   def index
     authenticate_user!
-    if params[:ids] && params[:ids] =~ /[\d\[\], ]*/ # be sure no hack injection
-      ids = eval params[:ids]
-      @hashtagbrands = Hashtagbrand.where(:id => ids)
-    else
-      return render_error 416, 'Error: an array of ids required'
-    end
+    #if params[:ids] && params[:ids] =~ /[\d\[\], ]*/ # be sure no hack injection
+      #ids = eval params[:ids]
+      @hashtagbrands = Hashtagbrand.where(:id => params[:ids])
+    #else
+    #  return render_error 416, 'Error: an array of ids required'
+    #end
     render :partial => 'hashtagbrands/hashtagbrands'
   end
 

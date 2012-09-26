@@ -52,33 +52,48 @@ Shoplift.UserRoute = Ember.Route.extend({
 			router.get("userController").set("itemsClasses", 'profile-count of-items');
 		},
 		connectOutlets: function(router) {
-		  /*router.get('itemsController').resetLoadMore();
-		  
+			var itemsController = router.get('itemsController'),
+					userController = router.get('userController');
+					
+		  itemsController.resetLoadMore();
+	
 		  // set current query
-		  var query = { user_id: router.get("userController").get("content").get("id"), isLoadedCallback: function() {
-		    router.set('itemsController.isLoading', false);
-		  }};
-		  router.set('itemsController.query', query);
-		  router.set('itemsController.isLoading', true);
+		  var query = { 
+		  	user_id: userController.get("content.id"), 
+		  	isLoadedCallback: function() {
+		  		router.set('itemsController.isLoading', false);
+		  	}
+		  };
 		  
-		  // get items shoplifted by user's followers
-		  //var userItems = Shoplift.store.findQuery(Shoplift.Item, {page: 1});
-		  
-		  
+		  itemsController.set('query', query);
+		  itemsController.set('isLoading', true);
+	
 		  // get all events for this repository
 		  var filter = function(data) {
-		    return true;
+		  	return true;
 		  };
 		  var userItems = Shoplift.store.filter(Shoplift.Item, query, filter);
+	
+		  userController.connectOutlet('items', userItems);
+	
+		  router.get("applicationController").connectOutlet({
+		  	name: 'nav',
+		  	outletName: 'header'
+		  });
+
 		  
-		  router.get('userController').connectOutlet('items', userItems);*/
-		  
-		  router.get("userController").connectOutlet({ 
+		  /*router.get("userController").connectOutlet({ 
 		  	viewClass: Shoplift.ItemsView,
 		  	controller: router.get("itemsController"),
 		  	context: router.get("userController").get("content").get("items")
-		  });
-		}
+		  });*/
+		},
+		loadMoreItems: function(router, page) {
+			var query = router.get('itemsController.query');
+			query.page = page;
+			var results = Shoplift.store.findQuery(Shoplift.Item, query);
+			router.set('itemsController.isLoading', true);
+		},
   }), //end users/show/items
   followees: Ember.Route.extend({
 		route: '/followees',

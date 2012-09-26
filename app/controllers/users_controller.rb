@@ -17,15 +17,20 @@ class UsersController < ApplicationController
   # <br/><br/>Notes:<pre>curl -X GET --user aaronbartell@gmail.com:poopydiaper localhost:3000/shoplifters.json</pre>
   # =end
   def index
-    users
-    if request.xhr?
-      render partial: users
+    if ids = params[:ids]
+      users = User.where(:id => ids)
     else
-      respond_to do |format|
-        format.html
-        format.json { render json: users }
-      end
+      users
     end
+    # if request.xhr?
+    #   render partial: users
+    # else
+    #   respond_to do |format|
+    #     format.html
+    #     format.json { render json: users }
+    #   end
+    # end
+    render :partial => 'users', :locals => {:users => users}
   end
 
   # =begin apidoc
@@ -48,10 +53,12 @@ class UsersController < ApplicationController
     #  if user.private? && !current_user.subscribed_to(user)
     #    render_error(403,"User is private or is not subscribed to by the logged in user")
     #  else
-        respond_to do |format|
-          format.html
-          format.json { render user }
-        end
+    @user = User.find(params[:id])
+    
+    respond_to do |format|
+      format.html
+      format.json { render :partial => 'user', :locals => {:user => @user}, :status => 200 }
+    end
     #  end
     #end
   end

@@ -14,7 +14,7 @@ class ItemsController < ApplicationController
   # Fetch array of items of your followees in least recently viewed order
   # <br/><br/>Notes:<pre>curl -X GET --user mark@elsewhere.net:vo2max localhost:3000/items.json</pre>  
   # =end  
-  def index
+  def page
     authenticate_user!
     @items = Item.joins(:post,:user,:subscriptions)
                  .joins("LEFT JOIN user_item_views ON user_item_views.user_id = subscriptions.follower_id AND user_item_views.item_id = items.id")
@@ -27,6 +27,36 @@ class ItemsController < ApplicationController
     @items.each {|i| UserItemView.create({user_id:current_user.id, item_id:i.id})}
 
     render :partial => 'items', :locals => {:items => @items}
+  end
+  
+  def index
+    authenticate_user!
+    if params[:page]
+      page = params[:page]
+    else
+      page = 1
+    end
+    
+    if ids = params[:ids]
+      items = Item.where(:id => ids)
+                  .paginate(per_page: 10, page: page)
+    elsif user = params[:user_id]
+      items = Item.where(:user_id => user)
+                  .paginate(per_page: 10, page: page)
+    else
+      items = Item.joins(:post,:user,:subscriptions)
+                  .joins("LEFT JOIN user_item_views ON user_item_views.user_id = subscriptions.follower_id AND user_item_views.item_id = items.id")
+                  .joins("INNER JOIN users AS post_users on posts.user_id = post_users.id AND users.status = 1")
+                  .where("items.status = 1 AND (subscriptions.follower_id = ? )",current_user.id)
+                  .between(params)
+                  .group("items.id")
+                  .order("user_item_views.created_at ASC, items.created_at DESC")
+                  .paginate(per_page: 10, page: page)
+    end
+    
+    
+    
+    render :partial => 'items', :locals => {:items => items}
   end
 
   # =begin apidoc

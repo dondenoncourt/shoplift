@@ -52,6 +52,7 @@ Shoplift.ScrollableMixin = Ember.Mixin.create(Ember.Evented, {
   
   scrollableMixinWillDestroy: function() {
 		$(document).off("keydown");
+		$.scrollTo("0", 800, {axis: 'x'});
   },
   
   didInsertElement: function() {

@@ -10,7 +10,7 @@
             </div>
             <ul id="mainMenu">
               <li><%= link_to "Add", new_post_path, :class => 'modal_link' %></li>
-              <li><%= link_to "Follow", shoplifters_path %> </li>
+              <li><%= link_to "Follow", users_path %> </li>
               <li><%= link_to "Profile", user_path(current_user) %></li>
               <li><%= link_to "Saved", user_path(current_user, :saved => true) %></li>
               <li><%= link_to_function "Search", "alert('Not yet!')" %></li>

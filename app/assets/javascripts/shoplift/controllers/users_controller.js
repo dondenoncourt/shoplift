@@ -9,7 +9,13 @@ Shoplift.UserItemsController = Ember.ArrayController.extend({
 	//content: router.get("userController").get("items")
 });
 
-Shoplift.UserFolloweesController = Ember.ArrayController.extend();
+Shoplift.UsersController = Ember.ArrayController.extend({
+	
+});
+
+Shoplift.UserFolloweesController = Shoplift.UsersController.extend({
+	
+});
 
 Shoplift.UserFollowersController = Ember.ArrayController.extend();
 

@@ -31,7 +31,7 @@ Shoplift.ModelPromise = Ember.Mixin.create({
   }
 });
 
-Shoplift.Item = DS.Model.extend(Shoplift.ModelPromise, {
+Shoplift.Item = DS.Model.extend({
   name: DS.attr('string'),
   relifts: DS.attr('number'),
   brand: DS.attr('string'),
