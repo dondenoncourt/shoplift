@@ -6,25 +6,28 @@ Landing.User = Ember.Object.extend({
   handle: null,
   url: "theshoplift.com/",
   shortUrl: function(key, value) {
-  	console.log('computing');
+  	var url = this.get('url'),
+  			handle = this.get('handle');
+  	
 	  if(arguments.length === 1) {
-	  	console.log('get');
-		return this.get('url') + this.get('handle');
+	  
+			return url + handle;
 	  } else {
-	  	console.log('set');
 	  	if(value.indexOf("/") != -1) {
-	  		console.log('hasSlash');
-		  var x = value.split("/");
-		  this.set('handle', x[1]);
-		  return this.get('url') + this.get('handle');
-		} else {
-			console.log('slashMissing');
-			return this.get('url');
-		}
+			  var x = value.split("/");
+			  
+			  this.set('handle', x[1]);
+			  
+			  return url + x[1];
+			} else {
+			
+				return url;
+			}
 	  }
   }.property('url', 'handle'),
+  
   shortUrlChanged: function() {
-	  console.log(this.get("shortUrl"));
+	  
   }.observes('shortUrl')
 });
 Landing.User.reopenClass({

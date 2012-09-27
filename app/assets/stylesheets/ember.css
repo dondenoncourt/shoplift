@@ -191,7 +191,7 @@ ul{
 		background-image: url(/img/product-top-scaffolding.png);
 		width: 408px;
 		height: 65px;
-		top:-54px;
+		top:-53px;
 		left: -38px;
 		z-index: 1;
 	}
@@ -252,7 +252,7 @@ ul{
    }
 
 .product-container .product-img{
-	height:407px;
+	height:408px;
 	max-width:353px;
 	position:absolute;
 	top: 17px;
@@ -263,9 +263,9 @@ ul{
 }
 
 .product-container .product-img img {
-	max-width: 407px;
-	height: 407px;
-	width: 407px;
+	max-width: 408px;
+	height: 408px;
+	width: 408px;
 	margin-left: -27px;
 }
 
@@ -316,6 +316,7 @@ ul{
    .product-sub-container {
 	  position: absolute;
 	  background: url(/img/product-scaffolding.png) 10px 12px no-repeat transparent;
+	  background-size: 360px 423px;
 	  width: 380px;
 	  height: 440px;
    }
@@ -686,7 +687,7 @@ ul{
    background-size: 307px 422px;
    width: 315px;
    height: 500px;
-   margin-top: 221px;
+   margin-top: 220px;
    overflow: hidden;
    color: #9c8d99;
    font-family: 'Century Gothic', arial;
@@ -901,6 +902,7 @@ ul{
 .profile-sub-container {
 	position: absolute;
 	background: url(/img/profile-scaffolding.png) 13px 31px no-repeat transparent;
+	background-size: 394px 484px;
 	width: 500px;
 	height: 540px;
 	top:-84px;
@@ -954,15 +956,15 @@ ul{
 }
 
 .profile-box-container .product-img img {
-	width: 167px;
+	width: 168px;
 }
 
 .profile-box-container .product-img:nth-child(4) { /*4*/
-	top: 18px;
+	top: 17px;
 	left: 15px;
 }
 .profile-box-container .product-img:nth-child(7) { /*5*/
-	top: 18px;
+	top: 17px;
 	left: 183px;
 }
 .profile-box-container .product-img:nth-child(10) { /*6*/
@@ -1074,7 +1076,7 @@ ul{
 	padding-top: 37px;
 	position: relative;
 	top: -173px;
-	margin-left: -7px;
+	margin-left: -8px;
 	padding-left: 0;
 	background-image: url(/img/menu-open-scaffolding.png);
 	background-position: 8px -1px;
