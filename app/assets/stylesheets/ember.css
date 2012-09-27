@@ -769,9 +769,8 @@ ul{
    background-color: #faf2ed;
    background-image: none;
    color: #443755;
-text-shadow: 1px 1px 1px #555;
-filter: dropshadow(color=#555, offx=1, offy=1);
-
+	text-shadow: 1px 1px 1px #555;
+	filter: dropshadow(color=#555, offx=1, offy=1);
 }
 .tag-type {  
    font-size: 1.75em;

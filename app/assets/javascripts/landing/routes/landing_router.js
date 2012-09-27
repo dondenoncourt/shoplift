@@ -30,24 +30,24 @@ Landing.User = Ember.Object.extend({
 Landing.User.reopenClass({
   //user: null,
   findByEmail: function(email){
-	$.ajax({
-	  url: '/users',
-	  dataType: 'jsonp',
-	  data: {"email": email},
-	  context: this,
-	  success: function(response){
-		response.data.forEach(function(user){
-		  //this.users.addObject(Landing.User.create(user))
-		  this.set("pic", user.avatarUrlSmall);
-		  this.set("name", user.fullName);
-		}, this)
-	  },
-	  error: function() {
-		//this.users.addObject(Landing.User.create({"new": true, "email": email}));
-		this.set("new", true);
-	  }
-	})
-	return this;
+		$.ajax({
+		  url: '/users',
+		  dataType: 'jsonp',
+		  data: {"email": email},
+		  context: this,
+		  success: function(response){
+			response.data.forEach(function(user){
+			  //this.users.addObject(Landing.User.create(user))
+			  this.set("pic", user.avatar);
+			  this.set("name", user.fullName);
+			}, this)
+		  },
+		  error: function() {
+			//this.users.addObject(Landing.User.create({"new": true, "email": email}));
+			this.set("new", true);
+		  }
+		});
+		return this;
   }
 });
 
