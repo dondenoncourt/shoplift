@@ -13,13 +13,17 @@ Shoplift.ItemsRoute = Ember.Route.extend({
   	router.set('itemsController.query', query);
   	router.set('itemsController.isLoading', true);
   	
-  	// get all events for this repository
   	var filter = function(data) {
   	  return true;
   	};
   	var userItems = Shoplift.store.filter(Shoplift.Item, query, filter);
 
-  	router.get('applicationController').connectOutlet('carousel', 'items', userItems);
+  	router.get('applicationController').connectOutlet({
+  		viewClass: Shoplift.ItemsView,
+  		controller: router.get('itemsController'),
+  		outletName: 'carousel', 
+  		context: userItems
+  	});
 	
 		router.get("applicationController").connectOutlet({
 		  name: 'nav',

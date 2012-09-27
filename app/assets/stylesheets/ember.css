@@ -101,7 +101,7 @@ ul{
 
 /* Carousel */
    #carousel, #profiles, #tags-brands {
-	  width:2000%;
+	  width:10000%;
 	  max-height: 408;
 	  position:absolute;
 	  /*left: 320px; TODO: this should be a controller property instead for any controller that has a carousel as it's output */
