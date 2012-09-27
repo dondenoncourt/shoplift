@@ -1,4 +1,4 @@
-//= require_tree ./models
+// landing/app
 //= require_tree ./controllers
 //= require_tree ./views
 //= require_tree ./helpers

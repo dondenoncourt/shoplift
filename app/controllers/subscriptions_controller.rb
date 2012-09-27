@@ -68,7 +68,7 @@ class SubscriptionsController < ApplicationController
   end
 
   # =begin apidoc
-  # url:: /subscriptions/users/:id
+  # url:: /subscriptions/:id
   # method:: DELETE
   # access:: FREE
   # return:: followee count

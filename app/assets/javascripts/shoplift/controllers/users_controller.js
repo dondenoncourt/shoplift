@@ -25,17 +25,36 @@ Shoplift.UserController = Ember.ObjectController.extend({
 	
 	follow: function() {
 		var userId = this.get('content.id'),
+				following = this.get('following'),
 				that = this;
-				
-		console.log(userId);
-		$.ajax({
-			url: "/subscriptions.json",
-			type: 'POST',
-			data: {"user_id": userId},
-			success: function() {
-				that.set('following', true)
-			}
-		});
+		
+		if(following) {
+			that.set('following', false);
+			$.ajax({
+				url: "/subscriptions/" + userId,
+				type: 'DELETE',
+				//data: {"user_id": userId},
+				success: function() {
+					that.set('following', false);
+				},
+				error: function() {
+					that.set('following', true);
+				}
+			});
+		} else {
+			that.set('following', true);
+			$.ajax({
+				url: "/subscriptions.json",
+				type: 'POST',
+				data: {"user_id": userId},
+				success: function() {
+					that.set('following', true);
+				},
+				error: function() {
+					that.set('following', false);
+				}
+			});
+		}
 		
 	}
 });

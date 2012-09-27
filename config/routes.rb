@@ -111,7 +111,7 @@ App::Application.routes.draw do
   get "subscriptions", :to => "subscriptions#index"
   get "subscriptions/users/:id", :to => "subscriptions#show"
   post "subscriptions", :to => "subscriptions#create"
-  delete "subscriptions/users/:id", :to => "subscriptions#destroy"
+  delete "subscriptions/:id", :to => "subscriptions#destroy"
   # Browser / system compatability
   post "subscriptions/users/:id/delete", :to => "subscriptions#destroy"
 
