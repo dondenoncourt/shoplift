@@ -3,7 +3,7 @@ Shoplift.User = DS.Model.extend({
   vanityUrl: DS.attr('string'),
   fullName: DS.attr('string'),
   description: DS.attr('string'),
-  avatarUrlSmall: DS.attr('string'),
+  avatar: DS.attr('string'),
   url: DS.attr('string'),
   followeeCount: DS.attr('number'),
   followerCount: DS.attr('number'),

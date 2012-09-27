@@ -3,7 +3,6 @@
 		<div class="product-container fade-in">
 			{{#if controller.showFaces}}
 			  {{#with user}}
-				{{view Shoplift.UserView}}
 					{{view Shoplift.UserView}}
 			  {{/with}}
 		  {{/if}}
@@ -46,18 +45,21 @@
 			      </div>
 			      <div class="tab-pane" {{identify name="history"}}>
 			      	  <div class="history-container">
-			      		  <div class="first-shoplifter">
-			      			  Shoplifted first by
-			      			  {{#with user}}
-			      				  <div {{action showProfile this}}><img {{bindAttr src="avatarUrlSmall"}} {{bindAttr alt="fullName"}} /></div>
-			      			  {{/with}}
-			      		  </div>
-			      		  <div class="relifters">
-			      		  	  Relifted by {{relifts.length}} {{pluralize relifts.length "member" "members"}}
-			      		  	  {{#each relifts}}
-			      		  	  	  <div {{action showProfile this}}><img {{bindAttr src="avatarUrlSmall"}} {{bindAttr alt="fullName"}} /></div>
-			      		  	  {{/each}}
-			      		  </div>
+				      	  
+				      	  {{#with history}}
+				      		  <div class="first-shoplifter">
+				      			  Shoplifted first by
+				      			  {{#with firstLifter}}
+				      				  <div {{action showProfile this}}><img {{bindAttr src="avatar"}} {{bindAttr alt="fullName"}} /></div>
+				      			  {{/with}}
+				      		  </div>
+				      		  <div class="relifters">
+				      		  		Relifted by {{items.length}} {{pluralize items.length single="member" plural="members"}}
+				      		  		{{#each item in items}}
+				      		  				<div {{action showProfile item.user}}><img {{bindAttr src="item.user.avatar" alt="item.user.fullName"}} /></div>
+				      		  		{{/each}}
+				      		  </div>
+			      		  {{/with}}
 			      	  </div>
 			      </div>
 			    </div> <!-- end tab content -->

@@ -46,6 +46,6 @@ end
 #	json.flag_type flag.flag_type.name
 # end
 
-# json.history do |json|
-#  json.partial! 'items/history', :@post => item.post
-# end
+json.history do |json|
+ json.partial! 'items/history', :@post => item.post
+end

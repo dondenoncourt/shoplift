@@ -40,7 +40,7 @@ Shoplift.Item = DS.Model.extend({
   price: DS.attr('number'),
   photoFileName: DS.attr('string'),
   user: DS.belongsTo('Shoplift.User'),
-  relifts: DS.hasMany('Shoplift.User', { key: 'relift_ids' }),
+  history: DS.belongsTo('Shoplift.History', {embedded: true}),
   hashtagbrands: DS.hasMany('Shoplift.Hashtagbrand', { key: 'hashtagbrand_ids' })
 });
 
