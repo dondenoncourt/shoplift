@@ -15,7 +15,7 @@ json.user do |json|
   json.hometown user.hometown
   json.zipcode user.zipcode
   json.sex sex_to_string(user)
-  json.avatar_url_small user.avatar(:small)
+  json.avatar user.avatar(:small)
   json.avatar_url_thumb user.avatar(:thumb)
   json.followee_count current_user.followees.count if user_signed_in?
   json.followee_ids user.followees.pluck('subscriptions.user_id')

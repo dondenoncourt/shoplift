@@ -522,11 +522,12 @@ ul{
 
 	  .first-shoplifter {
 		 font-family: 'Futura' arial;
-		 background-color: #443755;
+		 background-color: #1F1138;
+		 background-image: -webkit-linear-gradient(left, #16082A, #1F1138);
 		 margin: 30px 0;
 		 padding: 4px 10px 4px 12px;
 		 color: white;
-		 font-size: .85em;
+		 font-size: .95em;
 		 text-shadow: 1px 1px 1px #000;
 		 filter: dropshadow(color=#000, offx=1, offy=1);	
 	  }
@@ -539,7 +540,7 @@ ul{
 		 border:2px solid #fff;
 		 float: right;
 		 position: relative;
-		 margin-top: -20px;
+		 margin-top: -17px;
 	  }
 	  .first-shoplifter img {
 		 width: 44px;
@@ -556,11 +557,12 @@ ul{
 
 	  .relifters {
 		 font-family: 'Futura' arial;
-		 background-color: #443755;
+		 background-color: #1F1138;
+		 background-image: -webkit-linear-gradient(left, #16082A, #1F1138);
 		 margin: 10px 0;
 		 padding: 4px 10px 4px 12px;
 		 color: white;
-		 font-size: .85em;
+		 font-size: .95em;
 		 text-shadow: 1px 1px 1px #000;
 		 filter: dropshadow(color=#000, offx=1, offy=1);	
 		 overflow: hidden;
@@ -572,7 +574,7 @@ ul{
 		 -moz-border-radius: 20px;
 		 border-radius: 20px;
 		 border:1px solid #fff;
-		 float: left;
+		 /*float: left;*/
 		 margin: 10px 4px 0px 5px;
 	  }
 	  .relifters img {
@@ -875,7 +877,7 @@ ul{
 	background: url(/img/profile-scaffolding.png) 13px 31px no-repeat transparent;
 	width: 500px;
 	height: 540px;
-	top:-82px;
+	top:-84px;
 	left:-48px;
 	color: white;
 	font-family: 'Trebuchet MS';
