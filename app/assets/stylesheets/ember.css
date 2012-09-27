@@ -420,7 +420,7 @@ ul{
 		 max-width: 180px;
 		 overflow-x: hidden;
 
-		 height: 300px;
+		 height: 220px;
 		 overflow-y: scroll;
 
 		 position: relative;
@@ -458,6 +458,7 @@ ul{
 
 	  .tag-list li {
 		 width:110%;
+		 background-color: #1F1138;
 		 background-image: -webkit-linear-gradient(left, #16082a, #1f1138);
 		 color: white;
 		 font-family: 'Futura', arial;
@@ -481,11 +482,12 @@ ul{
 	  
 	  .tab-pane .price {
 	  	font-family: 'Trebuchet MS', arial;
-	  	font-size: 1.4em;
+	  	font-size: 1.7em;
 	  	color: #f8ece5;
-	  	left: 123px;
+	  	right: 3px;
+	  	padding-right: 10px;
+	  	padding-left: 5px;
 	  	border-bottom: 1px #594969 solid;
-	  	width: 60px;
 	  	top: 310px;
 	  	position: absolute;
 	  }
@@ -504,7 +506,8 @@ ul{
 	  }
 
 	  p.quote {
-		 background-color: #443755;
+		 background-color: #1F1138;
+		 background-image: -webkit-linear-gradient(left, #16082A, #1F1138);
 		 padding: 13px;
 		 margin-top: 25px;
 		 color: white;
