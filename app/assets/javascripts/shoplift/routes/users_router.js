@@ -46,7 +46,7 @@ Shoplift.UserRoute = Ember.Route.extend({
 	  items: Ember.Route.extend({
 		route: '/items',
 		enter: function() {
-			var itemsController = router.get('itemsController'),
+			var itemsController = router.get('userItemsController'),
 					userController = router.get('userController'),
 					marginLeft = userController.get('marginLeft');
 			
@@ -55,7 +55,7 @@ Shoplift.UserRoute = Ember.Route.extend({
 			itemsController.set('showFaces', false);
 		},
 		exit: function() {
-			var itemsController = router.get('itemsController'),
+			var itemsController = router.get('userItemsController'),
 					userController = router.get('userController');
 			
 			userController.set("itemsClasses", 'profile-count of-items');
@@ -63,7 +63,7 @@ Shoplift.UserRoute = Ember.Route.extend({
 			itemsController.set('showFaces', true);
 		},
 		connectOutlets: function(router) {
-			var itemsController = router.get('itemsController'),
+			var itemsController = router.get('userItemsController'),
 					userController = router.get('userController');
 					
 		  itemsController.resetLoadMore();
@@ -79,13 +79,17 @@ Shoplift.UserRoute = Ember.Route.extend({
 		  itemsController.set('query', query);
 		  itemsController.set('isLoading', true);
 	
-		  // get all events for this repository
 		  var filter = function(data) {
-		  	return true;
+		  	if(data.get('user_id') == userController.get("content.id")) return true;
+		  	else console.log('not mine! ' + data.get('user_id'));
 		  };
 		  var userItems = Shoplift.store.filter(Shoplift.Item, query, filter);
 	
-		  userController.connectOutlet('items', userItems);
+		  userController.connectOutlet({
+			  viewClass: Shoplift.ItemsView,
+			  controller: itemsController,
+			  context: userItems
+		  });
 		  
 		  
 	
@@ -102,10 +106,14 @@ Shoplift.UserRoute = Ember.Route.extend({
 		  });*/
 		},
 		loadMoreItems: function(router, page) {
-			var query = router.get('itemsController.query');
+			var itemsController = router.get('userItemsController')
+					query = itemsController.get('query');
+					
 			query.page = page;
+			
 			var results = Shoplift.store.findQuery(Shoplift.Item, query);
-			router.set('itemsController.isLoading', true);
+			
+			itemsController.set('isLoading', true);
 		},
   }), //end users/show/items
   followees: Ember.Route.extend({

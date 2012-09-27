@@ -8,54 +8,54 @@ Shoplift.LoadMoreMixin = Ember.Mixin.create(Ember.Evented, {
   canLoadMore: true,
   autoFetch: true,
   currentPage: 1,
-  resetLoadMore: function() {
-	this.set('currentPage', 1);
-  },
-  loadMore: Ember.K
-});
-
-Shoplift.ItemsController = Ember.ArrayController.extend(Shoplift.LoadMoreMixin, {
-  //sortProperties: ['id'],
-  currentPage: 1,
   isInViewCount: 0,
   threshold: 10,
   marginLeft: '0px',
   showFaces: true,
-  
-  thresholdIsMet: function() {
-	  var threshold = this.get("threshold"),
-	  		isInViewCount = this.get("isInViewCount"),
-	  		length = this.get("length");
-	  		
-	  return (length - isInViewCount) < threshold;
-	  
-  }.observes('threshold', 'isInViewCount', 'length'),
-  
+  loadMore: Ember.K,
   isLoading: false,
   
+  resetLoadMore: function() {
+		this.set('currentPage', 1);
+  },
+
+  thresholdIsMet: function() {
+  	var threshold = this.get("threshold"),
+  			isInViewCount = this.get("isInViewCount"),
+  			length = this.get("length");
+
+  	return (length - isInViewCount) < threshold;
+
+  }.observes('threshold', 'isInViewCount', 'length'),
+
   canLoadMore: function() {
-    // can we load more entries? In this example only 10 pages are possible to fetch ...
-    return this.get('currentPage') < 10;
+  	// can we load more entries? In this example only 10 pages are possible to fetch ...
+  	return this.get('currentPage') < 10;
   }.property('currentPage'),
-  
+
   shouldLoadMore: function() {
   		// if threshold met and can load more and is not loading more
   }.observes('thresholdIsMet', 'canLoadMore', 'isLoading'),
-  
+
   loadMore: function() {
-    if (this.get('canLoadMore')) {
-	  	this.set('isLoading', true);
-	  	var page = this.incrementProperty('currentPage');
-	  
-	  	// findQuery triggers somehing like /events?page=6 and this
-	  	// will load more models of type App.Event into the store
-	  	//this.get('store').findQuery(Shoplift.Item, { page: page });
-	  	
-	  	this.get('target').send('loadMoreItems', page);
-    } else {
+  	if (this.get('canLoadMore')) {
+  		this.set('isLoading', true);
+  		var page = this.incrementProperty('currentPage');
+
+  		// findQuery triggers somehing like /events?page=6 and this
+  		// will load more models of type App.Event into the store
+  		//this.get('store').findQuery(Shoplift.Item, { page: page });
+
+  		this.get('target').send('loadMoreItems', page);
+  	} else {
   		this.set('isLoading', false);
-    }
+  	}
   }
+});
+
+Shoplift.ItemsController = Ember.ArrayController.extend(Shoplift.LoadMoreMixin, {
+  //sortProperties: ['id'],
+  
 });
 
 

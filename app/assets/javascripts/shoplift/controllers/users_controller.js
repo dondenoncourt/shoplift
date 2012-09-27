@@ -6,9 +6,7 @@ Shoplift.UserController = Ember.ObjectController.extend({
 	marginLeft: '307px'
 });
 
-Shoplift.UserItemsController = Ember.ArrayController.extend({
-	//content: router.get("userController").get("items")
-});
+Shoplift.UserItemsController = Ember.ArrayController.extend(Shoplift.LoadMoreMixin, {});
 
 Shoplift.UsersController = Ember.ArrayController.extend({
 	
