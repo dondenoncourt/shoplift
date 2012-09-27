@@ -1,6 +1,6 @@
 <div id="current-user" class="profile-view">
 	<div class="check-container">
-		<div class="follow-check"></div>
+		<div {{bindAttr class="controller.following:follow-check-on:follow-check"}} {{action follow target="controller"}}></div>
 	</div>
 	{{view Shoplift.UserView}}
 </div>

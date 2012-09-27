@@ -38,6 +38,8 @@ Shoplift.UserRoute = Ember.Route.extend({
 		  controller: router.get("userController"),
 		  context: user
 		});
+		
+		console.log(router.get("userController").get('isFollowing'));
   },
   index: Ember.Route.extend({
 		route: '/',

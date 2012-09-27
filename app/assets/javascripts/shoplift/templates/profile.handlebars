@@ -1,6 +1,6 @@
 
 {{#with view.content}}
-	<div class="profile-box-container" {{action showProfile this}}>
+	<div class="profile-box-container">
 		{{view Shoplift.UserView}}
 		{{#each recentItems}}
 			<div class="product-img">
@@ -15,6 +15,7 @@
 					<li>{{followers.length}} Followers</li>
 				</ul>
 			</div>
+			<div {{bindAttr class="view.following:follow-check-on:follow-check"}} {{action follow target="view"}}></div>
 		</div>
 	</div>
 <!-- end profile-box -->

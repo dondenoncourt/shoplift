@@ -14,15 +14,16 @@ Shoplift.ExploreRoute = Ember.Route.extend({
 		router.get("navController").connectOutlet('logo');
 	},
 	index: Ember.Route.extend({
-		route: '/'
+		route: '/',
+		redirectsTo: 'recommended'
 	}),
 	recommended: Ember.Route.extend({
 		route: '/recommended',
 		connectOutlets: function(router) {
 			router.get("exploreSidebarController").connectOutlet({
-				viewClass: Shoplift.UserCarouselContainerView,
+				viewClass: Shoplift.UsersView,
 				controller: router.get("recommendedController"),
-				context: router.get("exploreSidebarController").get("content").get("recommended")
+				context: Shoplift.store.findAll(Shoplift.User) //router.get("exploreSidebarController").get("content").get("recommended")
 			});
 		}
 	}),

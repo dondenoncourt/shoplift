@@ -200,8 +200,32 @@ class UsersController < ApplicationController
   # <br/><br/>Notes:<pre>curl -X GET --user mark@elsewhere.net:vo2max -d "id=2" localhost:3000/users/following/1.json</pre>
   # =end
   def following
+    follower = current_user.followees.where('subscriptions.user_id = :id', :id => params[:id]).first
+    json = {:is_following => follower != nil }.to_json
+    render :json => json
+  end
+  
+  # =begin apidoc
+  # url:: /users/following/:id.json
+  # method:: GET
+  # access:: FREE
+  # return:: is_follower: true
+  # param:: id:int of the user that may be following the current user
+  # output:: URL
+  # {"is_following":true}
+  # ::output-end::
+  # Query if a user is following the currently logged in user
+  # <br/><br/>Notes:<pre>curl -X GET --user mark@elsewhere.net:vo2max -d "id=2" localhost:3000/users/following/1.json</pre>
+  # =end
+  def followed
     follower = current_user.followers.where('subscriptions.follower_id = :id', :id => params[:id]).first
     json = {:is_following => follower != nil }.to_json
+    render :json => json
+  end
+  
+  def whoami
+    user = current_user.id
+    json = {:user => user}.to_json
     render :json => json
   end
 

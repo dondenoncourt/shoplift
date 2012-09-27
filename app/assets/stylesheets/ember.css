@@ -70,14 +70,24 @@ ul{
    height: 75px;
 }
 .follow-check {
-   background: url(http://davidmazza.net/shoplift/img/check.png) no-repeat;
+   background: url(/img/check.png) no-repeat;
    position: relative;
    left: 4px;
    width: 83px;
    height: 74px;
 }
-.follow-check.on {
-   background: url(http://davidmazza.net/shoplift/img/check-on.png) no-repeat;
+.follow-check-on {
+   background: url(/img/check-on.png) no-repeat;
+   position: relative;
+   left: 4px;
+   width: 83px;
+   height: 74px;
+}
+
+.profile-sub-container .follow-check, .profile-sub-container .follow-check-on {
+	position: absolute;
+	bottom: 39px;
+	left: 311px;
 }
 
 /* Scaffolding */
@@ -119,7 +129,7 @@ ul{
 	   float: left;
    }
    #prev, #next {
-	  display: block;
+	  display: none;
 	  height:58px;
 	  width:58px;
 	  top:300px;
