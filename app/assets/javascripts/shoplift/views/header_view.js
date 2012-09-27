@@ -32,7 +32,19 @@ Shoplift.NavView = Ember.View.extend({
 	classNameBindings: ['closed'],
 	closedBinding: 'controller.closed',
 	toggleMenu: function() {
-		this.toggleProperty('closed');
+		var that = this;
+		
+		if(this.get('closed')) {
+			this.set('closed', false);
+			this.$("#menu ul").transition({y: '-=521px'}, 0);
+			this.$("#menu ul").transition({y: "+=521px"}, 200);
+		}
+		else {
+			this.$("#menu ul").transition({y: "-=521px"}, 200, function() {
+				that.set('closed', true);	
+				that.$("#menu ul").transition({y: '+=521px'}, 0);
+			});
+		}
 	}
 });
 
