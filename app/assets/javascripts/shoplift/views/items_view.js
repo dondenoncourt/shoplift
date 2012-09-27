@@ -25,6 +25,26 @@ Shoplift.ItemView = Ember.View.extend(Shoplift.InViewMixin, {
   isInView: false,
   drawerIsOpen: false,
   drawerIsAnimating: false,
+  tabClass: 'tab-pane',
+  tagsTab: true,
+  quoteTab: false,
+  historyTab: false,
+  
+  showTags: function() {
+	  this.set('tagsTab', true);
+	  this.set('quoteTab', false);
+	  this.set('historyTab', false);
+  },
+  showQuote: function() {
+  	this.set('tagsTab', false);
+  	this.set('quoteTab', true);
+  	this.set('historyTab', false);
+  },
+  showHistory: function() {
+  	this.set('tagsTab', false);
+  	this.set('quoteTab', false);
+  	this.set('historyTab', true);
+  },
   
   isInViewDidChange: function() {
 	  var controller = this.get("controller"),
