@@ -9,13 +9,24 @@ Shoplift.LogoView = Ember.View.extend({
 	classNames: ['header', 'navbar-fixed-top'],
 	menuView: Ember.ContainerView.create({*/
 	
+Shoplift.MenuFaceView = Ember.View.extend({
+	template: Handlebars.compile('<img {{bindAttr src="controller.currentUser.avatar"}} />{{avatar}} - {{controller}} - {{controller.currentUser}}')
+});
+	
 Shoplift.MenuItemView = Ember.View.extend({
 	classNameBindings: ['content.name', 'content.type'],
-	template: Ember.Handlebars.compile("&nbsp;"),
+	templateName: 'shoplift/templates/menuitem', //Ember.Handlebars.compile("&nbsp;"),
 	tagName: 'li',
+	
 	click: function(e) {
+		var action = this.get("content.action").split(" "),
+				that = this;
 		this.get("controller").toggleProperty('closed');
-		Shoplift.get('router').send(this.get("content.action"));
+		if(action.length == 2) {
+			Shoplift.get('router').send(action[0], this.get(action[1]));
+		}
+		else
+			Shoplift.get('router').send(action[0]);
 		/*Shoplift.get('router').send(this.get("content.action"), { 
 			user_id: '3' 
 		}); //this.get("content.params"));
@@ -31,6 +42,9 @@ Shoplift.NavView = Ember.View.extend({
 	classNames: ['header', 'navbar-fixed-top'],
 	classNameBindings: ['closed'],
 	closedBinding: 'controller.closed',
+	didInsertElement: function() {
+		this.get('controller.whoami');
+	},
 	toggleMenu: function() {
 		var that = this;
 		

@@ -50,7 +50,8 @@ Shoplift.NavController = Ember.ArrayController.extend({
 		{
 			name: 'menu-buttons-profile',
 			type: 'top',
-			action: 'goProfile'
+			action: 'goProfile controller.currentUser',
+			subview: 'Shoplift.MenuFaceView'
 		},
 		{
 			name: 'menu-buttons-invite',
@@ -88,7 +89,22 @@ Shoplift.NavController = Ember.ArrayController.extend({
 			action: 'goSearch'
 		}
 	],
-	closed: true
+	closed: true,
+	currentUser: Shoplift.store.find(Shoplift.User, 1),
+	whoami: function() {
+		
+		$.ajax({
+			url: '/users/whoami',
+			type: 'GET',
+			context: this,
+			success: function(response){
+				this.set('currentUser', Shoplift.store.find(Shoplift.User, response.user));
+			},
+			error: function() {
+				
+			}
+		});
+	}.property('currentUser')
 	/*target: Shoplift.NavManager,
 	childViews: [Shoplift.MenuItemView.create({id: 'search'})],
 	rootView: Ember.View.create({
