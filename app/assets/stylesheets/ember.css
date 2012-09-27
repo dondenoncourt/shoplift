@@ -1054,16 +1054,18 @@ ul{
 	height: 0px; /* 559px; */
 	top:173px;
 	margin-left: 315px;
-	background-image: url(/img/menu-open-scaffolding.png);
 }
 
 #menu ul {
 	width: 200px;
-	margin-top: 37px;
+	height: 521px;
+	padding-top: 37px;
 	position: relative;
-	top:-173px;
+	top: -173px;
 	margin-left: -7px;
 	padding-left: 0;
+	background-image: url(/img/menu-open-scaffolding.png);
+	background-position: 8px -1px;
 }
 #nav.closed {
 	background: none;
