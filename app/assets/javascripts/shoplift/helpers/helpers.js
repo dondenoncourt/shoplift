@@ -100,10 +100,12 @@ Ember.Handlebars.registerBoundHelper('truncate', function(context, options) { //
 			append = options['append'],
 			str = context; //this.get(context);
 			
-	if (str != null && str.length > length) {
+	if (str != null && str != "null" && str.length > length) {
 		return str.substring(0, length - append.length) + append;
-	} else {
+	} else if (str != null) {
 		return str;
+	} else {
+		return "";
 	}
 });
 

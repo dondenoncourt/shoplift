@@ -1,7 +1,15 @@
 Shoplift.ItemsRoute = Ember.Route.extend({
   route: '/items',
   connectOutlets: function(router, items) {
-  
+  	router.get("navController.whoami");
+  	setTimeout(function() {
+	  	if(router.get("navController.currentUser.followees.length") < 2) {
+		  	router.send("goExplore");
+		  	console.log("not enough followers");
+	  	}
+	  	console.log("enough" + router.get("navController.currentUser.followees.length"));
+  	}, 500);
+  	  
   	var store = router.get('store');
   	
   	router.get('itemsController').resetLoadMore();

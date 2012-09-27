@@ -2,4 +2,4 @@
 	<div class="circle-overflow">
 	  <img {{bindAttr src="avatar"}} {{action showProfile this}} width="116" height="87" />
 	</div>
-	<h2 {{action showProfile this}}>{{fullName}}</h2>
+	<h2 {{action showProfile this}}>{{truncate fullName length=15 append="..."}}</h2>
