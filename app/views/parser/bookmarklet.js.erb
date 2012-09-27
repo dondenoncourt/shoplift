@@ -231,6 +231,7 @@
 
       var value = jQuery(this).val().trim();
       console.log(value);
+      alert(value);
       switch (jQuery(this).attr('name')) {
         // Special case with the price
         case 'post[price]':
@@ -249,7 +250,8 @@
           if (value.length > 22) {
             value = value.substring(0, 21) + '...';
           }
-	        jQuery(".tsl-booklet-item-text").text(value);
+          console.log(value);
+	        jQuery(".tsl-booklet-input-item").val(value);
           break;
         case 'image':
           valid = value != '';
@@ -278,8 +280,9 @@
     jQuery('#sl-booklet-error').show();
 
     jQuery('.tsl-booklet-img-text-box').slideDown();
-    jQuery('.tsl-booklet-first-screen-form, .tsl-booklet-next-btn').hide();
-    jQuery('.tsl-booklet-second-screen-form, .tsl-booklet-back-btn').fadeIn();
+    jQuery('.tsl-booklet-one').addClass('tsl-booklet-two').removeClass('tsl-booklet-one');
+    //jQuery('.tsl-booklet-one, .tsl-booklet-next-btn').hide();
+    //jQuery('.tsl-booklet-two, .tsl-booklet-back-btn').fadeIn();
     jQuery('.booklet-submit').show();
     jQuery('.tsl-booklet-scaffold').addClass('tsl-booklet-second-screen-scaffold');
 	});
