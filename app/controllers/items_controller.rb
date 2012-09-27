@@ -54,8 +54,6 @@ class ItemsController < ApplicationController
                   .paginate(per_page: 10, page: page)
     end
     
-    
-    
     render :partial => 'items', :locals => {:items => items}
   end
 
