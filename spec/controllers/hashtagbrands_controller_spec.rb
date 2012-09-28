@@ -17,20 +17,20 @@ describe HashtagbrandsController do
 
     it "returns status code of 200" do
       sign_in @user
-      get :index, :ids => '[1,2,5]', :format => :json
+      get :index, :ids => ['1','2','5'], :format => :json
       response.response_code.should == 200
     end
 
     it "returns 3 hashtagbrands" do
       sign_in @user
-      get :index, :ids => '[1,2,5]', :format => :json
+      get :index, :ids => ['1','2','5'], :format => :json
       json = JSON.parse(response.body)
       json['hashtagbrands'].size.should == 3
     end
 
     it "returns a brand in index 3 and a hashtag in index 2" do
       sign_in @user
-      get :index, :ids => '[1,2,5]', :format => :json
+      get :index, :ids => ['1','2','5'], :format => :json
       json = JSON.parse(response.body)
       json['hashtagbrands'][2]['value'].should == 'Lorem ipsum dolor'
       json['hashtagbrands'][1]['value'].should == 'polo'

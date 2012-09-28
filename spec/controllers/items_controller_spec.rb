@@ -249,7 +249,7 @@ describe ItemsController do
     it "returns item's details" do
       sign_in @user
       post :relift, :id => items(:items_003).id, :format => :json
-      response.body.should =~ /"relift":/m
+      response.body.should =~ /"first_lifter":/m
     end
       
   end
