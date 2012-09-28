@@ -28,7 +28,6 @@ Shoplift.UserRoute = Ember.Route.extend({
 		  outletName: 'carousel',
 		  context: user
 		}); 
-		//console.dir(user.get("items"));
 		router.get("applicationController").connectOutlet({
 		  name: 'nav',
 		  outletName: 'header'
@@ -39,7 +38,7 @@ Shoplift.UserRoute = Ember.Route.extend({
 		  context: user
 		});
 		
-		console.log(router.get("userController").get('isFollowing'));
+		router.get("userController").get('isFollowing');
   },
   index: Ember.Route.extend({
 		route: '/',

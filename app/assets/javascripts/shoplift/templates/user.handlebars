@@ -1,5 +1,9 @@
 	<div class="face-circle"><img src="/img/face-circle.png" /></div>
 	<div class="circle-overflow">
-	  <img {{bindAttr src="avatar"}} {{action showProfile this}} width="116" height="87" />
+		{{#if avatar}}
+	  	<img {{bindAttr src="avatar"}} {{action showProfile this}} width="116" height="87" />
+	  {{else}}
+	  	<img src="/assets/images/avatars/small/missing.png" {{action showProfile this}} width="116" height="87" />
+	  {{/if}}
 	</div>
 	<h2 {{action showProfile this}}>{{truncate fullName length=15 append="..."}}</h2>
