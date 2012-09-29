@@ -1,5 +1,5 @@
 Shoplift.ExploreRoute = Ember.Route.extend({
-	route: '/explore',
+	route: '/follow',
 	showRecommended: Ember.Route.transitionTo('recommended'),
 	showPopular: Ember.Route.transitionTo('popular'),
 	showNearby: Ember.Route.transitionTo('nearby'),

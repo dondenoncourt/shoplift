@@ -30,6 +30,7 @@ Shoplift.UserController = Ember.ObjectController.extend({
 		
 		if(following) {
 			that.set('following', false);
+			router.get("navController.currentUser.followees").pushObject(that.get('content'));
 			$.ajax({
 				url: "/subscriptions/" + userId,
 				type: 'DELETE',
