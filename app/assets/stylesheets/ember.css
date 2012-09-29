@@ -601,7 +601,7 @@ ul{
 		 -moz-border-radius: 20px;
 		 border-radius: 20px;
 		 border:1px solid #fff;
-		 /*float: left;*/
+		 float: left;
 		 margin: 10px 4px 0px 5px;
 	  }
 	  .relifters img {

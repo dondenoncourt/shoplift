@@ -34,13 +34,13 @@ Shoplift.ModelPromise = Ember.Mixin.create({
 Shoplift.Item = DS.Model.extend({
   name: DS.attr('string'),
   relifts: DS.attr('number'),
-  brand: DS.attr('string'),
+  brand: DS.belongsTo('Shoplift.Hashtagbrand', {embedded: true}),
   comment: DS.attr('string'),
   url: DS.attr('string'),
   price: DS.attr('number'),
   photoFileName: DS.attr('string'),
   user: DS.belongsTo('Shoplift.User'),
   history: DS.belongsTo('Shoplift.History', {embedded: true}),
-  hashtagbrands: DS.hasMany('Shoplift.Hashtagbrand', { key: 'hashtagbrand_ids' })
+  hashtagbrands: DS.hasMany('Shoplift.Hashtagbrand', { key: 'hashtag_ids' })
 });
 
