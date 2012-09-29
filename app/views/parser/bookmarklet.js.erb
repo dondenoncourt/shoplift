@@ -2,112 +2,25 @@
 
 	var thebookmarklet = null;
   var item_tags = new Array();
-  
-  
-  
-  
-  
-  
-  
-  
 
-  // Load jquery library  
-  //if (typeof jQuery == 'undefined' || jQuery.fn.jquery != '1.4.2') {
+  /* Load jquery library  */
+  if (typeof jQuery == 'undefined' || jQuery.fn.jquery < '1.4.0') {
     if (window.console && typeof jQuery != 'undefined') {
       console.log('Current jQuery version is '+jQuery.fn.jquery+' and it needs to be greater than 1.4.0 so we are loading jquery');
     }
-    loadJQueryUI(false);
     var e = document.createElement('script');
     e.onload = function() { start_bookmarklet(); };
     e.setAttribute('type', 'text/javascript');
-    e.setAttribute('src', '//ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js');
+    e.setAttribute('src', '//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js');
     document.body.appendChild(e);
     e = document.createElement('script');
-    start_bookmarklet();
-  /*} else {
-    loadJQueryUI(true);
+  } else {
     if (window.console) console.log('Current jQuery version is >= the required 1.4.0 so NOT we are NOT loading jquery');
-    //start_bookmarklet();
-  }*/
-  
-  
-  jQuery(".tsl-booklet-next-btn").click(function (e) {
-  e.preventDefault();
-  	var	valid = true;
-  	var error = '';
-  	/*jQuery('#sl-booklet-error').html(error);
-  	jQuery('#sl-booklet-error').hide();
-  	jQuery('#sl-booklet-error').css('height', '0');
-  
-  	$('#tsl-booklet-form :input').each(function () {
-  		if(!valid) return;
-  
-  		//var nil = null; nil.forceJavaScriptError(); // handy for debugging 
-  
-  		var value = jQuery(this).val().trim();
-  		console.log(value);
-  		switch (jQuery(this).attr('name')) {
-  			// Special case with the price
-  			case 'post[price]':
-  				valid = value != '' && /^[$]?([0-9][0-9]?([,][0-9]{3}){0,4}([.][0-9]{0,4})?)$|^[$]?([0-9]{1,14})?([.][0-9]{1,4})$|^[$]?[0-9]{1,14}$/.test(value);
-  				if (!valid) error = 'please enter a price';
-  				jQuery(".tsl-booklet-price-text").text(value);
-  				break;
-  			case 'post[brand]':
-  				valid = value != '';
-  				if (!valid) error = 'Please enter a brand';
-  				jQuery(".tsl-booklet-brand-text").text(value);
-  				break;
-  			case 'post[name]':
-  				valid = value != '';
-  				if (!valid) error = 'Please enter an item name';
-  				if (value.length > 22) {
-  					value = value.substring(0, 21) + '...';
-  				}
-  				jQuery(".tsl-booklet-item-text").text(value);
-  				break;
-  			case 'image':
-  				valid = value != '';
-  				if (!valid) error = 'Please enter an image';
-  				break;
-  			case 'retailer':
-  				valid = value != '';
-  				if (!valid) error = 'Please enter a retailer';
-  				break;
-  			case 'url':
-  				valid = value != '';
-  				if (!valid) error = 'please enter a url';
-  				break;
-  			default:
-  				break;
-  		}
-  	});
-  
-  	if(!valid) {
-  		jQuery('#sl-booklet-error').html(error);
-  		jQuery('#sl-booklet-error').css('height', '40px');
-  		jQuery('#sl-booklet-error').show();
-  		return;
-  	}
-  
-  	jQuery('#sl-booklet-error').show();*/
-  
-  	jQuery('.tsl-booklet-img-text-box').slideDown();
-  	console.log('rape1');
-  	jQuery('.tsl-booklet-first-screen-form, .tsl-booklet-next-btn').hide();
-  	console.log('rape2');
-  	jQuery('.tsl-booklet-second-screen-form, .tsl-booklet-back-btn').fadeIn();
-  	console.log('rape3');
-  	jQuery('.booklet-submit').show();
-  	console.log('rape4');
-  	jQuery('.tsl-booklet-scaffold').addClass('tsl-booklet-second-screen-scaffold');
-  	console.log('rape5');
-  });
-  
-  
+    start_bookmarklet();
+  }
 
 	function start_bookmarklet() {
-		
+		/** Initiate the prototype */
 		function sl_bookmarklet() {
 			var self = this;
 			var	tmp;
@@ -132,8 +45,6 @@
 
       jQuery('#sl-bookmarklet-main').append('<%= raw @css %>');
       jQuery('#sl-bookmarklet-main').append('<%= raw @html %>');
-      
-      
 
       var images = this.parseImages();
       assembleImageGallery(images, jQuery('input[name=image]'));
@@ -192,7 +103,7 @@
 			return parsed.images;
 		}
 		
-		// Submit the form through the iframe 
+		/** Submit the form through the iframe */
 		sl_bookmarklet.prototype.submitForm = function() {
       jQuery('#sl-booklet-error').html('Item being shoplifted...');
       jQuery('#sl-booklet-error').css('height', '40px');
@@ -219,7 +130,7 @@
       });
 		}
 		
-		// Remove the container and the script for the bookmarklet 
+		/** Remove the container and the script for the bookmarklet */
 		sl_bookmarklet.prototype.destroy = function() {
 			this.el.container.remove();
 			jQuery('#shoplift-bookmarklet-script').remove();
@@ -237,13 +148,9 @@
       thebookmarklet.submitForm();
     });
 
-    jQuery('#post_brand').autocomplete({
-      source: getBrandNames
-    });
-
 	} // sl_bookmarklet function/object
 
-  
+  /** Create image gallery */
   function assembleImageGallery(images,input) {
     // Setup the styling for everything
     //var container = jQuery('<div></div>');
@@ -293,18 +200,74 @@
   }
 
 	jQuery("#tsl-booklet-close").click(function () {
-    (function(){
-      var dynascriptid='shoplift-bookmarklet-dynascript';
-      var dynascript=document.getElementById(dynascriptid);
-      if(dynascript) dynascript.parentNode.removeChild(dynascript);
-      dynascript=document.createElement('script');
-      dynascript.setAttribute('src','<%= root_url %>/dynascript.js');
-      dynascript.setAttribute('type','text/javascript');
-      dynascript.setAttribute('dynascriptid',dynascriptid);
-      document.body.appendChild(dynascript);
-    })();
+		thebookmarklet.destroy();
   });
-	
+	jQuery(".tsl-booklet-next-btn").click(function () {
+		var	valid = true;
+    var error = '';
+    jQuery('#sl-booklet-error').html(error);
+    jQuery('#sl-booklet-error').hide();
+    jQuery('#sl-booklet-error').css('height', '0');
+
+    $('#tsl-booklet-form :input').each(function () {
+      if(!valid) return;
+
+      //var nil = null; nil.forceJavaScriptError();
+
+      var value = jQuery(this).val().trim();
+      console.log(value);
+      switch (jQuery(this).attr('name')) {
+        // Special case with the price
+        case 'post[price]':
+          valid = value != '' && /^[$]?([0-9][0-9]?([,][0-9]{3}){0,4}([.][0-9]{0,4})?)$|^[$]?([0-9]{1,14})?([.][0-9]{1,4})$|^[$]?[0-9]{1,14}$/.test(value);
+          if (!valid) error = 'please enter a price';
+	        jQuery(".tsl-booklet-price-text").text(value);
+          break;
+        case 'post[brand]':
+          valid = value != '';
+          if (!valid) error = 'Please enter a brand';
+	        jQuery(".tsl-booklet-brand-text").text(value);
+          break;
+        case 'post[name]':
+          valid = value != '';
+          if (!valid) error = 'Please enter an item name';
+          if (value.length > 22) {
+            value = value.substring(0, 21) + '...';
+          }
+	        jQuery(".tsl-booklet-item-text").text(value);
+          break;
+        case 'image':
+          valid = value != '';
+          if (!valid) error = 'Please enter an image';
+          break;
+        case 'retailer':
+          valid = value != '';
+          if (!valid) error = 'Please enter a retailer';
+          break;
+        case 'url':
+          valid = value != '';
+          if (!valid) error = 'please enter a url';
+          break;
+        default:
+          break;
+      }
+    });
+
+    if(!valid) {
+      jQuery('#sl-booklet-error').html(error);
+      jQuery('#sl-booklet-error').css('height', '40px');
+      jQuery('#sl-booklet-error').show();
+      return;
+    }
+
+    jQuery('#sl-booklet-error').show();
+
+    jQuery('.tsl-booklet-img-text-box').slideDown();
+    jQuery('.tsl-booklet-first-screen-form, .tsl-booklet-next-btn').hide();
+    jQuery('.tsl-booklet-second-screen-form, .tsl-booklet-back-btn').fadeIn();
+    jQuery('.booklet-submit').show();
+    jQuery('.tsl-booklet-scaffold').addClass('tsl-booklet-second-screen-scaffold');
+	});
 
 	jQuery(".tsl-booklet-back-btn").click(function () {
 	  jQuery('.tsl-booklet-img-text-box').slideUp();
@@ -312,41 +275,5 @@
 	  jQuery('.tsl-booklet-second-screen-form, .tsl-booklet-back-btn, .booklet-submit').hide();
 	  jQuery('.tsl-booklet-scaffold').removeClass('tsl-booklet-second-screen-scaffold');
 	});
-
-  function loadJQueryUI(callStart) {
-    if (jQuery.ui) {
-      if (callStart) {
-        start_bookmarklet();
-      }
-    } else { // load jQuery
-      (function(){
-        var jqueryuiid='shoplift-bookmarklet-jqueryui';
-        var jqueryui=document.getElementById(jqueryuiid);
-        if(jqueryui) dynascript.parentNode.removeChild(jqueryui);
-        var jqueryui=document.createElement('script');
-        if (callStart) {
-          jqueryui.onload = function() { start_bookmarklet(); };
-        }
-        jqueryui.setAttribute('src','http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js');
-        jqueryui.setAttribute('type','text/javascript');
-        jqueryui.setAttribute('jqueryuiid',jqueryuiid);
-        document.body.appendChild(jqueryui);
-      })();
-    }
-  }
-
-  function getBrandNames(request, response) {
-    (function(){
-      var brandscript_id = 'shoplift-bookmarklet-brand-names';
-      var brandscript = document.getElementById(brandscript_id);
-      if(brandscript) brandscript.parentNode.removeChild(brandscript);
-      brandscript=document.createElement('script');
-      brandscript.onload = function (){response(jQuery.parseJSON(jQuery('#brand_autocomplete_list').val()));};
-      brandscript.setAttribute('src','<%= brandscript_url(:format => :js) %>?prefix='+request.term);
-      brandscript.setAttribute('type','text/javascript');
-      brandscript.setAttribute('dynascript_id', brandscript_id);
-      document.body.appendChild(brandscript);
-    })();
-  }
 
 })();
