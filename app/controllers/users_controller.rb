@@ -20,7 +20,7 @@ class UsersController < ApplicationController
     if ids = params[:ids]
       users = User.where(:id => ids)
     else
-      users
+      users = User.find(:all)
     end
     # if request.xhr?
     #   render partial: users

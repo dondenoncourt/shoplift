@@ -3,13 +3,7 @@
   <div class="videoWrapper2">
     <div class="videoWrapper3">
 
-      <!-- Header Start -->
-      <div class="videoHeader">
-        <div class="logoPan">
-          <img src="../images/logo.png" width="600" height="155" alt="" />
-        </div>
-      </div>
-      <!-- Header End -->
+      
 
       <!-- Video Container -->
       <div class="videoContainer">
@@ -17,26 +11,13 @@
 
           <!-- Video Box -->
           <div class="videoPan">
-            <!-- Video Box -->
-            <div class="videoBox">
-        
-              <video controls width="951" height="445" » poster="../video/video-placeholder.jpg">
-                <source src="../video/test-video.webm" type="video/webm"> 
-                <source src="../video/test-video.mp4" type="video/mp4"> 
-                <object width="951" height="445" type="application/x-shockwave-flash"
-                    data="../video/player.swf?image=video/video-placeholder.jpg.jpg&file=video/test-video.mp4">
-                    <param name="movie" value="../video/player.swf?image=gallery-img1.jpg&file=video/test-video.mp4" />
-                </object>
-              </video>
-        
-            </div>
-            <!-- Video Box -->
+            
             <!-- Login Container -->
             <div class="loginContainer">
               <div class="loginBox">
                   <p>Are you being followed?</p>
                   
-                  <%= link_to image_tag("../images/facebook-login.gif", width:"170px", height:"27px"), user_omniauth_authorize_path(:facebook) %>
+                  <%= link_to image_tag("/images/facebook-login.gif", width:"170px", height:"27px"), user_omniauth_authorize_path(:facebook) %>
                   <label>Or</label>
                   <%= form_for :user, :url => user_session_path, :class => 'signIn' do |f| %>
                     <%= devise_error_messages! %>                  

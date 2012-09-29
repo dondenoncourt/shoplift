@@ -86,7 +86,7 @@ Shoplift.NavController = Ember.ArrayController.extend({
 		{
 			name: 'menu-buttons-signout',
 			type: 'bottom',
-			action: 'goSearch'
+			action: 'signout'
 		}
 	],
 	closed: true,

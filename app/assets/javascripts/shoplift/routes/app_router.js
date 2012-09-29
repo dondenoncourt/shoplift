@@ -12,6 +12,12 @@ Shoplift.Router = Ember.Router.extend({
     goExplore: Ember.Route.transitionTo("explore.index"),
     goSearch: Ember.Route.transitionTo("hashtagbrand.index"),
     goProfile: Ember.Route.transitionTo("user.index"),
+    signout: Ember.Route.transitionTo("logout"),
+    logout: Ember.Route.extend({
+      enter: function() {
+        window.location = "/logout";
+      }
+    }),
     index: Ember.Route.extend({
       route: '/',
       redirectsTo: 'app.index'
