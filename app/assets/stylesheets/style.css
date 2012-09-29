@@ -647,6 +647,10 @@ a.has_aside {
   float:left;
 }
 
+.rightCol {
+	color:white;
+}
+
 
 /* Video Page Style */
 /*.videoContainer{
