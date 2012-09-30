@@ -1,7 +1,9 @@
 development:
   adapter: postgresql
   database: the_shoplift_development
+  host: localhost
 
 test:
   adapter: postgresql
   database: the_shoplift_test
+  host: localhost
