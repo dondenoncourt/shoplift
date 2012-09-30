@@ -1,6 +1,7 @@
 source 'http://rubygems.org'
 
 gem 'pg'
+gem 'thin'
 gem 'rails', '3.2'
 gem 'capistrano'
 gem 'devise'
