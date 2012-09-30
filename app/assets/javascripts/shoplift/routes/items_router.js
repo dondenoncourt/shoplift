@@ -8,7 +8,7 @@ Shoplift.ItemsRoute = Ember.Route.extend({
 		  	console.log("not enough followers");
 	  	}
 	  	console.log("enough" + router.get("navController.currentUser.followees.length"));
-  	}, 500);
+  	}, 1000);
   	  
   	var store = router.get('store');
   	
@@ -41,7 +41,7 @@ Shoplift.ItemsRoute = Ember.Route.extend({
 		router.get("navController").connectOutlet('logo');
   },
   index: Ember.Route.extend({
-	route: '/'
+		route: '/'
   }),
   loadMoreItems: function(router, page) {
     var query = router.get('itemsController.query');

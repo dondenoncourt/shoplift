@@ -8,43 +8,20 @@ Shoplift.Router = Ember.Router.extend({
   root: Ember.Route.extend({
     route: '/',
     goHome: Ember.Route.transitionTo("root.index"),
-    goAdd: Ember.Route.transitionTo("index"),
+    //goAdd: Ember.Route.transitionTo("buttons"), // this is going to be a page now!
     goExplore: Ember.Route.transitionTo("explore.index"),
     goSearch: Ember.Route.transitionTo("hashtagbrand.index"),
     goProfile: Ember.Route.transitionTo("user.index"),
-    signout: Ember.Route.transitionTo("logout"),
+    signout: Ember.Route.transitionTo("logout"), // I know there is a better way to do this without the second route
     logout: Ember.Route.extend({
       enter: function() {
         window.location = "/logout";
       }
     }),
+    //buttons: 
     index: Ember.Route.extend({
       route: '/',
       redirectsTo: 'app.index'
-    }),
-    alpha: Ember.Route.extend({
-      route: '/alpha',
-      connectOutlets: function(router, user) {
-        if(!user) {
-          user = Shoplift.User.find(3);
-        }
-        console.dir(user.get("items"));
-        router.get("applicationController").connectOutlet({
-          viewClass: Shoplift.ItemsView,
-          controller: router.get("userItemsController"),
-          outletName: 'carousel',
-          context: user.get("items")
-        }); 
-        router.get("applicationController").connectOutlet({
-          name: 'nav',
-          outletName: 'header'
-        });
-        router.get("navController").connectOutlet('logo');
-      },
-      index: Ember.Route.extend({
-        route: '/',
-        
-      })
     }),
     app: Ember.Route.extend({
       route: '/app',
