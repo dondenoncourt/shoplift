@@ -1195,3 +1195,27 @@ ul{
 	-o-transition-timing-function:linear;
 	-o-transition-delay:0s;
 }
+
+
+
+/* Content Page */
+
+#content-page {
+	position:absolute;
+	top: 4em;
+	left: -62em;
+	width: 59em;
+	height: 38em;
+	padding-right: 1em;
+	overflow-y: scroll;
+	overflow-x: hidden;
+	color: #f8ece5;
+}
+
+#content-page h1 {
+	margin-bottom: 1em;
+}
+
+#content-page p {
+	font-size: 1.5em;
+}

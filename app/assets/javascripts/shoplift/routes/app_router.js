@@ -8,12 +8,11 @@ Shoplift.Router = Ember.Router.extend({
   root: Ember.Route.extend({
     route: '/',
     goHome: Ember.Route.transitionTo("root.index"),
-    //goAdd: Ember.Route.transitionTo("buttons"), // this is going to be a page now!
     goExplore: Ember.Route.transitionTo("explore.index"),
     goSearch: Ember.Route.transitionTo("hashtagbrand.index"),
     goProfile: Ember.Route.transitionTo("user.index"),
-    signout: Ember.Route.transitionTo("logout"), // I know there is a better way to do this without the second route
-    logout: Ember.Route.extend({
+    goSignout: Ember.Route.transitionTo("signout"), // I know there is a better way to do this without the second route
+    signout: Ember.Route.extend({
       enter: function() {
         window.location = "/logout";
       }
@@ -27,6 +26,14 @@ Shoplift.Router = Ember.Router.extend({
       route: '/app',
       showProfile: Ember.Route.transitionTo("user.index"),
       showTag: Ember.Route.transitionTo('hashtagbrand.index'),
+      connectOutlets: function(router) {
+        var applicationController = router.get("applicationController"),
+            navController = router.get("navController"),
+            pagesManager = Shoplift.PagesManager.create({
+              appController: applicationController,
+              controller: navController
+            });
+      },
       index: Ember.Route.extend({
         route: '/',
         redirectsTo: 'items'
@@ -37,7 +44,8 @@ Shoplift.Router = Ember.Router.extend({
       user: Shoplift.UserRoute,
       hashtagbrand: Shoplift.HashtagbrandRoute,
       search: Shoplift.SearchRoute,
-      explore: Shoplift.ExploreRoute
+      explore: Shoplift.ExploreRoute,
+      //pages: Shoplift.PagesRoute 
     })
   })//,
   //vanity: Shoplift.VanityRoute

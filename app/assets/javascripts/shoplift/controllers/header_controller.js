@@ -71,7 +71,8 @@ Shoplift.NavController = Ember.ArrayController.extend({
 		{
 			name: 'menu-buttons-help',
 			type: 'bottom',
-			action: 'goSearch'
+			//target: 'pagesManager',
+			action: 'goHelp'
 		},
 		{
 			name: 'menu-buttons-about',
@@ -86,7 +87,7 @@ Shoplift.NavController = Ember.ArrayController.extend({
 		{
 			name: 'menu-buttons-signout',
 			type: 'bottom',
-			action: 'signout'
+			action: 'goSignout'
 		}
 	],
 	closed: true,

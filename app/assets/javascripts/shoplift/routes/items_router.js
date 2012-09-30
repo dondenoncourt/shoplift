@@ -33,12 +33,12 @@ Shoplift.ItemsRoute = Ember.Route.extend({
   		context: userItems
   	});
 	
-		router.get("applicationController").connectOutlet({
-		  name: 'nav',
-		  outletName: 'header'
-		});
 		
-		router.get("navController").connectOutlet('logo');
+		
+		router.get("navController").connectOutlet({
+			name: 'logo',
+			outletName: 'logo'
+		});
   },
   index: Ember.Route.extend({
 		route: '/'

@@ -20,13 +20,21 @@ Shoplift.MenuItemView = Ember.View.extend({
 	
 	click: function(e) {
 		var action = this.get("content.action").split(" "),
+				target = this.get("content.target"),
 				that = this;
-		this.get("controller").toggleProperty('closed');
-		if(action.length == 2) {
-			Shoplift.get('router').send(action[0], this.get(action[1]));
+		
+		if(target) {
+			this.get("controller").toggleProperty('closed');
+			Shoplift.get('router').get(target).send(action[0]);
+		} else {
+			if(action.length == 2) {
+				Shoplift.get('router').send(action[0], this.get(action[1]));
+			}
+			else {
+				//Shoplift.get('router').send(action[0]);
+				this.get("controller.target").send(action[0]);
+			}
 		}
-		else
-			Shoplift.get('router').send(action[0]);
 		/*Shoplift.get('router').send(this.get("content.action"), { 
 			user_id: '3' 
 		}); //this.get("content.params"));
