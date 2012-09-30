@@ -40,16 +40,19 @@ Shoplift.NavController = Ember.ArrayController.extend({
 		{
 			name: 'menu-buttons-follow',
 			type: 'top',
+			router: true,
 			action: 'goExplore'
 		},
 		{
 			name: 'menu-buttons-search',
 			type: 'top',
+			router: true,
 			action: 'goSearch'
 		},
 		{
 			name: 'menu-buttons-profile',
 			type: 'top',
+			router: true,
 			action: 'goProfile controller.currentUser',
 			subview: 'Shoplift.MenuFaceView'
 		},

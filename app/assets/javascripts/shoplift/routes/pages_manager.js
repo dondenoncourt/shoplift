@@ -3,6 +3,7 @@ Shoplift.PagesManager = Ember.StateManager.extend({
 	enableLogging: true,
 	page: 'shoplift/templates/page',
 	root: Ember.State.extend({
+		goHome: Ember.State.transitionTo('home'),
 		goHelp: Ember.State.transitionTo('help'),
 		setup: function(manager) {
 			manager.set('controller.target', manager)
@@ -12,6 +13,11 @@ Shoplift.PagesManager = Ember.StateManager.extend({
 				outletName: 'header'
 			})
 		},
+		home: Ember.State.extend({
+			enter: function(manager) {
+				Shoplift.get('router').send('goHome');
+			}
+		}),
 		help: Ember.State.extend({
 			setup: function(manager) {
 				manager.get('controller').connectOutlet({
