@@ -1,9 +1,5 @@
 Shoplift.UsersRoute = Ember.Route.extend({
   route: '/users',
-  /*showItems: Ember.Route.transitionTo("show.items"),
-  showFollowees: Ember.Route.transitionTo("show.followees"),
-  showFollowers: Ember.Route.transitionTo("show.followers"),
-  showHashtags: Ember.Route.transitionTo("show.hashtags"),*/
   index: Ember.Route.extend({
 	route: '/'
   }),
@@ -28,13 +24,10 @@ Shoplift.UserRoute = Ember.Route.extend({
 		  outletName: 'carousel',
 		  context: user
 		}); 
-		router.get("applicationController").connectOutlet({
-		  name: 'nav',
-		  outletName: 'header'
-		});
 		router.get("navController").connectOutlet({
 		  viewClass: Shoplift.FaceView,
 		  controller: router.get("userController"),
+		  outletName: 'logo',
 		  context: user
 		});
 		
@@ -43,8 +36,8 @@ Shoplift.UserRoute = Ember.Route.extend({
   index: Ember.Route.extend({
 		route: '/',
 		redirectsTo: 'items'
-	  }),
-	  items: Ember.Route.extend({
+	}),
+	items: Ember.Route.extend({
 		route: '/items',
 		enter: function() {
 			var itemsController = router.get('userItemsController'),
@@ -91,20 +84,6 @@ Shoplift.UserRoute = Ember.Route.extend({
 			  controller: itemsController,
 			  context: userItems
 		  });
-		  
-		  
-	
-		  router.get("applicationController").connectOutlet({
-		  	name: 'nav',
-		  	outletName: 'header'
-		  });
-
-		  
-		  /*router.get("userController").connectOutlet({ 
-		  	viewClass: Shoplift.ItemsView,
-		  	controller: router.get("itemsController"),
-		  	context: router.get("userController").get("content").get("items")
-		  });*/
 		},
 		loadMoreItems: function(router, page) {
 			var itemsController = router.get('userItemsController')
