@@ -1,9 +1,9 @@
 categories:
   controller_name: "categories_controller.rb"
-  
+
 flags:
   controller_name: "flags_controller.rb"
-  
+
 following:
   location: "/users/:user_id/following"
   controller_name: "following_controller.rb"
@@ -11,13 +11,13 @@ following:
 followers:
   location: "/users/:user_id/followers"
   controller_name: "followers_controller.rb"
-  
+
 hashtags:
   controller_name: "hashtags_controller.rb"
-  
+
 items:
   controller_name: "items_controller.rb"
-  
+
 posts:
   controller_name: "posts_controller.rb"
 
@@ -26,10 +26,10 @@ setasides:
 
 statistics:
   controller_name: "statistics_controller.rb"
-  
+
 subscriptions:
   controller_name: "subscriptions_controller.rb"
-  
+
 timelines:
   controller_name: "timelines_controller.rb"
 

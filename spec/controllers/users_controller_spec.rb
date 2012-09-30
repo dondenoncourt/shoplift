@@ -2,11 +2,11 @@ require 'spec_helper'
 
 describe UsersController do
   fixtures :users
-  
+
   before(:each) do
     @user = users(:users_001)
   end
-  
+
     def valid_attributes
       {
        :email => "test@test.com",
@@ -51,7 +51,7 @@ describe UsersController do
       response.response_code.should == 200
     end
   end
-  
+
   describe "POST create" do
     describe "with valid params" do
       it "creates a new User" do
@@ -77,7 +77,7 @@ describe UsersController do
       end
     end
   end
-  
+
   describe "PUT update" do
     describe "with valid params" do
       it "updates the requested user" do
@@ -102,7 +102,7 @@ describe UsersController do
       end
     end
   end
-  
+
   describe "POST update" do
     describe "with valid params" do
       it "updates the requested user" do
@@ -141,7 +141,7 @@ describe UsersController do
       response.response_code.should == 200
     end
   end
-  
+
   describe "POST destroy" do
     #it "destroys the requested user" do
       #sign_in @user

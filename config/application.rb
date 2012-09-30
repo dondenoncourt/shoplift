@@ -44,10 +44,10 @@ module App
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
-    
+
     # Silo ember stuff for organizational sanity
     config.assets.paths << Rails.root.join("app", "assets", "ember")
-    
+
     config.ember.variant = :production
 
     # to disable use of authenticity_token in login forms

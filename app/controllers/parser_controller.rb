@@ -30,5 +30,5 @@ class ParserController < ApplicationController
     end
     @brands = '['+ brandNames.map { |name| '"' + name.gsub(/&/, '&amp;').gsub(/'/, '&#39;') + '"' }.join(',') + ']'
   end
-  
+
 end

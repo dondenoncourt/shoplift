@@ -41,5 +41,4 @@ describe 'Visit various retail sites:' do
     end
   end
 
-
 end

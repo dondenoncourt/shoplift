@@ -1,6 +1,6 @@
 =begin apidoc
 When a user clicks the bookmarklet while on a retailer page
-posts_controller::create is invoked 
+posts_controller::create is invoked
 create calls Parser::parse to get the brand, name, price, and description (and images, which are currenlty ignored)
 note that the parsed value for brand is stored in a hidden parameter so the update action can determine
 if the user modified the brand.
@@ -33,7 +33,7 @@ class PostsController < ApplicationController
   # {"brand_id":null,"comment":null,"created_at":"2012-06-28T14:59:46-05:00","description":"","hashtags_allowed":true,"id":224,"name":"Amazon.com: Zoolander Derek Zoolander School Heathered Royal Men's T-shirt: Clothing","photo_content_type":null,"photo_file_name":null,"photo_file_size":null,"photo_updated_at":null,"price":"18.73","relifts":0,"retailer":"www.amazon.com","status":1,"updated_at":"2012-06-28T14:59:46-05:00","url":"http://www.amazon.com/Zoolander-Derek-School-Heathered-T-shirt/dp/B006UI5KUG/ref=sr_1_3?ie=UTF8&qid=1340810439&sr=8-3&keywords=heathered men tshirt","user_id":11,"views":0,"visits":0}
   # ::output-end::
   # Create post
-  # <br/><br/>Notes:<pre>curl -X GET --user dondenoncourt@gmail.com:vo2max localhost:3000/post/create.json?url=http%3A%2F%2Fwww.amazon.com%2FZoolander-Derek-School-Heathered-T-shirt%2Fdp%2FB006UI5KUG%2Fref%3Dsr_1_3%3Fie%3DUTF8%26qid%3D1340810439%26sr%3D8-3%26keywords%3Dheathered+men+tshirt</pre>  
+  # <br/><br/>Notes:<pre>curl -X GET --user dondenoncourt@gmail.com:vo2max localhost:3000/post/create.json?url=http%3A%2F%2Fwww.amazon.com%2FZoolander-Derek-School-Heathered-T-shirt%2Fdp%2FB006UI5KUG%2Fref%3Dsr_1_3%3Fie%3DUTF8%26qid%3D1340810439%26sr%3D8-3%26keywords%3Dheathered+men+tshirt</pre>
   # =end
   def create
     authenticate_user!
@@ -64,7 +64,7 @@ class PostsController < ApplicationController
   # {"item":{"comment":null,"created_at":null,"id":null,"parent_id":null,"post_id":223,"relifts":0,"status":1,"updated_at":null,"user_id":12,"views":0,"visits":0}}
   # ::output-end::
   # Update post
-  # <br/><br/>Notes:<pre>curl -X POST --user aaronbartell@gmail.com:poopydiaper -d "post[price]=12.35" localhost:3000/posts/223/update.json</pre>  
+  # <br/><br/>Notes:<pre>curl -X POST --user aaronbartell@gmail.com:poopydiaper -d "post[price]=12.35" localhost:3000/posts/223/update.json</pre>
   # =end
   def update
     @post = Post.find(params[:id])
@@ -90,11 +90,11 @@ class PostsController < ApplicationController
       # TODO delay.parser_audit...
       parser_audit(audit_params)
     end
-    
+
     @post.brand = Brand.find_or_create_by_name(params[:post][:brand])
     params[:post].delete(:brand)
     params[:post][:price] = params[:post][:price].gsub(/[^\d.]/, '') if params[:post][:price]
-    
+
     if @post.update_attributes!(params[:post])
       @item = @post.items.create({ :user_id => current_user.id })
       if @item.persisted?

@@ -148,11 +148,11 @@ class User < ActiveRecord::Base
       user.twitter_secret = fromTwitter['credentials']['secret']
       user.save
       user
-    else 
+    else
       #TODO this should be some form of an error
     end
   end
-  
+
   def twitter(tweet_text, oauth_token, oauth_token_secret)
     #TODO These twitter hard coded values are also stored in config/devise.rb and should be placed in a single global constant
     consumer = OAuth::Consumer.new("Mka8NshDT9rwsHZzU53lg", "m7nv7FfWMSH2h9pEr1RMJHUyaXZaAT4qfVTBa1mouI",
@@ -161,16 +161,16 @@ class User < ActiveRecord::Base
     # now create the access token object from passed values
     token_hash = { :oauth_token => oauth_token,
                    :oauth_token_secret => oauth_token_secret
-    }     
+    }
     acsTkn = OAuth::AccessToken.from_hash(consumer, token_hash)
     resp = acsTkn.request(:post, "http://api.twitter.com/1/statuses/update.json", :status => tweet_text)
   rescue Exception => e
-    puts e.message  
-    puts e.backtrace.inspect  
-  end  
+    puts e.message
+    puts e.backtrace.inspect
+  end
 
-  def self.share_lift(user_id, item_url)    
-    user = User.find(user_id) 
+  def self.share_lift(user_id, item_url)
+    user = User.find(user_id)
     if user.facebook_token
       # use this when the lift is commented
       #user.facebook.put_connections("me", "notes", :subject => "lifted", :message => item_url.gsub(/http:\/\/.*items/,'items'))
@@ -178,18 +178,18 @@ class User < ActiveRecord::Base
         # this works but comment until we go live
         user.facebook.put_connections("me", "the_shoplift:lift", object: item_url)
       rescue Exception => e
-        puts e.message  
-        puts e.backtrace.inspect  
+        puts e.message
+        puts e.backtrace.inspect
       end
     end
-    
-    if !user.twitter_token.blank? && !user.twitter_secret.blank?       
+
+    if !user.twitter_token.blank? && !user.twitter_secret.blank?
       tweetText = user.full_name + ' shoplifted ' + item_url
       user.twitter(tweetText, user.twitter_token, user.twitter_secret)
-    end    
+    end
   rescue Exception => e
-    puts e.message  
-    puts e.backtrace.inspect  
+    puts e.message
+    puts e.backtrace.inspect
   end
 
   def set_username
@@ -237,7 +237,6 @@ class User < ActiveRecord::Base
     %{hometown zipcode country}
   end
 
-  #geocoded_by :full_street_address   # can also be an IP address
   def address
     [hometown, zipcode, country].compact.join(', ')
   end
@@ -248,5 +247,5 @@ class User < ActiveRecord::Base
     Hashtagbrand.where({:brand_id => posts.pluck('brand_id').compact.uniq} ||
                        {:hashtag_value_id => hashtag_values.pluck('hashtag_value_id').compact.uniq})
   end
-  
+
 end

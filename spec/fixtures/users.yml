@@ -64,12 +64,12 @@ users_001:
   username: mroseboom
   first_name: Mark
   last_name: Roseboom
-  sex: 1
+  sex: '1'
   biography: I like computers
   url: http://38media.net
   hometown: Boston, MA
   birthdate: 1987-05-24
-  private: 0
+  private: '0'
   status: 1
   avatar_file_name: bella_4.5_mths.jpg
   avatar_content_type: image/jpeg
@@ -92,14 +92,14 @@ users_002:
   first_name: Patrick 
   last_name: Camacho
   username: camachgk
-  sex: 1
+  sex: '1'
   biography: I like dogs
   url: http://38media.net
   vanity_url: http://38media.net
   vanity_url: http://38media.net
   hometown: Waltham, MA
   birthdate: 1988-04-22
-  private: 0
+  private: '0'
   status: 1
   country: United States
   zipcode: 23238
@@ -127,12 +127,12 @@ users_003:
   first_name: Iain
   last_name: Duggan
   username: iduggan
-  sex: 1
+  sex: '1'
   biography: I like mobile development
   url: http://38media.net
   hometown: Waltham, MA
   birthdate: 1988-03-01
-  private: 1
+  private: '1'
   status: 1
   avatar_file_name: user-large-john.jpg
   avatar_content_type: image/jpeg
@@ -155,10 +155,10 @@ users_004:
   first_name: Dead User
   last_name: Dead User
   username: dead
-  sex: 1
+  sex: '1'
   biography: I like being dead
   url: http://styx-river-4ever.com
   hometown: River Styx
   birthdate: 1900-01-01
-  private: 0
+  private: '0'
   status: 0

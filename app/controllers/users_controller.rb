@@ -46,7 +46,6 @@ class UsersController < ApplicationController
   # <br/><br/>Notes:<pre>curl -X GET --user aaronbartell@gmail.com:poopydiaper localhost:3000/users/1.json</pre>
   # =end
   def show
-    #if request.xhr?
     #  render partial: items
     #else
     #  items
@@ -54,7 +53,7 @@ class UsersController < ApplicationController
     #    render_error(403,"User is private or is not subscribed to by the logged in user")
     #  else
     @user = User.find(params[:id])
-    
+
     respond_to do |format|
       format.html
       format.json { render :partial => 'user', :locals => {:user => @user}, :status => 200 }
@@ -82,7 +81,7 @@ class UsersController < ApplicationController
       render_error(404,"User not found")
     end
   end
-  
+
   def validate_email
     if @user = User.find_by_email(params[:email].downcase)
       render :partial => "user", :locals => {:user => @user}
@@ -165,7 +164,7 @@ class UsersController < ApplicationController
   # access:: FREE
   # return:: user data
   # param:: username:string (optional) - pass only if you want an avatar for a user that is different from the authenticated user.
-  # param:: style:string (optional) - Values tiny|thumb|small. Default is tiny. 
+  # param:: style:string (optional) - Values tiny|thumb|small. Default is tiny.
   # output:: URL
   # http://s3.amazonaws.com/shoplift_dev/thumb/2/headless.jpg?1337213827
   # ::output-end::
@@ -173,12 +172,11 @@ class UsersController < ApplicationController
   # <br/><br/>Notes:<pre>curl -X POST --user aaronbartell@gmail.com:thinkpad -d "username=aaronbartell@gmail.com" -d "style=thumb" localhost:3000/users/avatar.json</pre>
   # =end
   def avatar
-    @usrNam
     if params.has_key?(:username)
       @usrNam = params[:username]
     else
-      @usrNam = current_user.username 
-    end 
+      @usrNam = current_user.username
+    end
     if @user = User.find_by_username(@usrNam.downcase)
       render :text => @user.avatar.url( params[:style].blank? ? :tiny : params[:style] )
     else
@@ -204,7 +202,7 @@ class UsersController < ApplicationController
     json = {:is_following => follower != nil }.to_json
     render :json => json
   end
-  
+
   # =begin apidoc
   # url:: /users/following/:id.json
   # method:: GET
@@ -222,7 +220,7 @@ class UsersController < ApplicationController
     json = {:is_following => follower != nil }.to_json
     render :json => json
   end
-  
+
   def whoami
     user = current_user.id
     json = {:user => user}.to_json

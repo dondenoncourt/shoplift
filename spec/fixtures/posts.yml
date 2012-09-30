@@ -36,16 +36,16 @@ posts_001:
   retailer: Lorem ipsum dolor sit amet
   url: http://www.jcrew.com/index.jsp
   price: 1.1
-  hashtags_allowed: 1
-  comment: !!null 
+  hashtags_allowed: '1'
+  comment: !!null
   user_id: 1
   created_at: 2011-12-06 15:46:45.000000000Z
   updated_at: 2011-12-06 15:46:45.000000000Z
   status: 1
   photo_file_name: product-large-1.jpg
   photo_content_type: image/jpeg
+  photo_updated_at: 2012-05-17 00:02:25
   photo_file_size: 21759
-  photo_updated_at: 2012-05-17 00:02:24.000000000Z
   brand_id: 1
 posts_002:
   id: 2
@@ -58,8 +58,8 @@ posts_002:
   retailer: Lorem ipsum dolor sit amet
   url: http://www.jcrew.com/index.jsp
   price: 1.1
-  hashtags_allowed: 1
-  comment: !!null 
+  hashtags_allowed: '1'
+  comment: !!null
   user_id: 1
   created_at: 2011-12-06 15:47:42.000000000Z
   updated_at: 2011-12-06 15:47:42.000000000Z
@@ -77,7 +77,7 @@ posts_003:
   retailer: Lorem ipsum dolor sit amet
   url: http://www.jcrew.com/index.jsp
   price: 1.1
-  hashtags_allowed: 1
+  hashtags_allowed: '1'
   comment: testing comments
   user_id: 3
   created_at: 2011-12-06 23:21:49.000000000Z
@@ -86,7 +86,7 @@ posts_003:
   photo_file_name: product-large-3.jpg
   photo_content_type: image/jpeg
   photo_file_size: 55729
-  photo_updated_at: 55729
+  photo_updated_at: 2011-12-06 23:21:56.000000000Z
   brand_id: 2
 posts_004:
   id: 4
@@ -96,7 +96,7 @@ posts_004:
   retailer: Lorem ipsum dolor sit amet
   url: http://www.jcrew.com/index.jsp
   price: 1.1
-  hashtags_allowed: 1
+  hashtags_allowed: '1'
   comment: testing comments
   user_id: 3
   created_at: 2011-12-06 23:21:49.000000000Z
@@ -115,7 +115,7 @@ posts_005:
   retailer: Lorem ipsum dolor sit amet
   url: http://www.jcrew.com/index.jsp
   price: 1.1
-  hashtags_allowed: 1
+  hashtags_allowed: '1'
   comment: testing comments
   user_id: 4
   created_at: 2011-12-06 23:21:49.000000000Z

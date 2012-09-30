@@ -6,7 +6,7 @@ describe HashtagsController do
   before(:each) do
     sign_in users(:users_001)
   end
-  
+
   describe "DELETE destroy" do
     it "deactivate the requested hashtag" do
       delete :destroy, :id => hashtags(:hashtags_001).id, :format => :json
@@ -17,7 +17,7 @@ describe HashtagsController do
       delete :destroy, :id => hashtags(:hashtags_001).id, :format => :json
       response.response_code.should == 200
     end
-    
+
     it "returns hashtag details" do
       delete :destroy, :id => hashtags(:hashtags_001).id, :format => :json
       JSON.parse(response.body)[:status] == 0

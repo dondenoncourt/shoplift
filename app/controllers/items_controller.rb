@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
   layout nil, :only => [:email]
   require 'open-uri'
-  
+
 
   # =begin apidoc
   # url:: /items
@@ -12,8 +12,8 @@ class ItemsController < ApplicationController
   # {"items":[{"id":100,"parent_id":null,"name":"Men's Stainless Steel Curb Link Necklace","description":"","brand":"Adrianna Papell","retailer":"www.qvc.com","url":"http://www.qvc.com/Forza-Mens-Stainless-Steel-Curb-Link-Necklace.product.J107263.html?sc=J107263-Tailored&cm_sp=VIEWPOSITION-_-23-_-J107263&catentryImage=http://images-p.qvc.com/is/image/j/63/j107263.001?$uslarge$","price":"41.5","comment":"This is exactly the chain i needed to complete my White Mr T costume (i'm replacing all the gold cha","photo_url":"http://s3.amazonaws.com/shoplift/small/196/open-uri20120719-25124-p9s7pu?1342754381","hashtags_allowed":true,"created_at":"2012-07-19T22:18:04-05:00","hashtags":[],"user":{"id":10,"email":"btfail@gmail.com","username":"btfail@gmail.com","full_name":"Shoplift Sam","first_name":null,"last_name":null,"url":"","vanity_url":null,"country":"United States","biography":"","notify_new_follower":true,"notify_relift":true,"notify_missing":"daily","hometown":null,"zipcode":"10014","sex":"Male","avatar_url_small":"/assets/avatars/small/missing.png","avatar_url_thumb":"/assets/avatars/thumb/missing.png","followee_count":4},"flag_total":0,"flags":[]},{"id":99,"parent_id":null,"name":"Solace Goggle - Women's","description":"","brand":"Adriana Orsini","retailer":"www.backcountry.com","url":"http://www.backcountry.com/anon-solace-goggle","price":"134.95","comment":"Ladies... seriously... earmuffs and goggles.  On or off the slopes.  ","photo_url":"http://s3.amazonaws.com/shoplift/small/194/open-uri20120719-22351-1qrtlpg?1342754078","hashtags_allowed":true,"created_at":"2012-07-19T22:13:56-05:00","hashtags":[],"user":{"id":10,"email":"btfail@gmail.com","username":"btfail@gmail.com","full_name":"Shoplift Sam","first_name":null,"last_name":null,"url":"","vanity_url":null,"country":"United States","biography":"","notify_new_follower":true,"notify_relift":true,"notify_missing":"daily","hometown":null,"zipcode":"10014","sex":"Male","avatar_url_small":"/assets/avatars/small/missing.png","avatar_url_thumb":"/assets/avatars/thumb/missing.png","followee_count":4},"flag_total":0,"flags":[]},{"id":98,"parent_id":null,"name":"Hawkeye Goggle","description":"","brand":"Adriana Orsini","retailer":"www.backcountry.com","url":"http://www.backcountry.com/anon-hawkeye-goggle","price":"124.95","comment":"One word: GREEN.","photo_url":"http://s3.amazonaws.com/shoplift/small/193/open-uri20120719-22351-jqiu5y?1342754004","hashtags_allowed":true,"created_at":"2012-07-19T22:12:13-05:00","hashtags":[],"user":{"id":10,"email":"btfail@gmail.com","username":"btfail@gmail.com","full_name":"Shoplift Sam","first_name":null,"last_name":null,"url":"","vanity_url":null,"country":"United States","biography":"","notify_new_follower":true,"notify_relift":true,"notify_missing":"daily","hometown":null,"zipcode":"10014","sex":"Male","avatar_url_small":"/assets/avatars/small/missing.png","avatar_url_thumb":"/assets/avatars/thumb/missing.png","followee_count":4},"flag_total":0,"flags":[]},{"id":97,"parent_id":null,"name":"Ultra Lightweight Merino Ski Sock","description":"","brand":"Lorem ipsum dolor","retailer":"www.backcountry.com","url":"http://www.backcountry.com/patagonia-ultra-lightweight-merino-ski-sock","price":"22.0","comment":"THE sock to be seen in when you take off your ski boots at Goldminer's Daughter.  It won't even stin","photo_url":"http://s3.amazonaws.com/shoplift/small/191/open-uri20120719-25124-1qom862?1342753898","hashtags_allowed":true,"created_at":"2012-07-19T22:09:47-05:00","hashtags":[],"user":{"id":10,"email":"btfail@gmail.com","username":"btfail@gmail.com","full_name":"Shoplift Sam","first_name":null,"last_name":null,"url":"","vanity_url":null,"country":"United States","biography":"","notify_new_follower":true,"notify_relift":true,"notify_missing":"daily","hometown":null,"zipcode":"10014","sex":"Male","avatar_url_small":"/assets/avatars/small/missing.png","avatar_url_thumb":"/assets/avatars/thumb/missing.png","followee_count":4},"flag_total":0,"flags":[]},{"id":96,"parent_id":null,"name":"Snowshot Jacket - Men's","description":"","brand":"Lorem ipsum dolor","retailer":"www.backcountry.com","url":"http://www.backcountry.com/patagonia-ms-3-in-1-snowshot-jkt","price":"199.5","comment":"sick jacket at a sick price.  THIS is the color to be wearing in vail next season.  Ignore what your","photo_url":"http://s3.amazonaws.com/shoplift/small/190/open-uri20120719-25124-1a9mlg5?1342753755","hashtags_allowed":true,"created_at":"2012-07-19T22:07:39-05:00","hashtags":[],"user":{"id":10,"email":"btfail@gmail.com","username":"btfail@gmail.com","full_name":"Shoplift Sam","first_name":null,"last_name":null,"url":"","vanity_url":null,"country":"United States","biography":"","notify_new_follower":true,"notify_relift":true,"notify_missing":"daily","hometown":null,"zipcode":"10014","sex":"Male","avatar_url_small":"/assets/avatars/small/missing.png","avatar_url_thumb":"/assets/avatars/thumb/missing.png","followee_count":4},"flag_total":0,"flags":[]},{"id":4,"parent_id":null,"name":"Item 1","description":"Lorem ipsum dolor sit amet, aliquet feugiat. Convallis morbi fringilla gravida, phasellus feugiat dapibus velit nunc, pulvinar eget sollicitudin venenatis cum nullam, vivamus ut a sed, mollitia lectus. Nulla vestibulum massa neque ut et, id hendrerit sit, feugiat in taciti enim proin nibh, tempor dignissim, rhoncus duis vestibulum nunc mattis convallis.","brand":"Lorem ipsum dolor","retailer":"Lorem ipsum dolor sit amet","url":"http://www.jcrew.com/index.jsp","price":"1.1","comment":null,"photo_url":"http://s3.amazonaws.com/shoplift/small/1/product-large-1.jpg?1337212944","hashtags_allowed":true,"created_at":"2011-12-06T09:46:45-06:00","hashtags":[{"id":1,"value":"jeans"},{"id":2,"value":"polo"},{"id":6,"value":"Blues Brothers"},{"id":8,"value":"Prepster"},{"id":9,"value":"Weekday ties"},{"id":10,"value":"Wool ties"},{"id":11,"value":"TBD"},{"id":12,"value":"TBD2"},{"id":13,"value":"TBD3"},{"id":22,"value":"crazy embroidery"},{"id":24,"value":"Moretags"},{"id":25,"value":"BTFtag2"},{"id":39,"value":"wrinkle"},{"id":43,"value":"dd"}],"user":{"id":2,"email":"patrick@elsewhere.net","username":"patrick@elsewhere.net","full_name":"Patrick Camacho","first_name":"Patrick","last_name":"Camacho","url":"http://38media.net","vanity_url":"http://38media.net","country":"United States","biography":"I like dogs","notify_new_follower":true,"notify_relift":false,"notify_missing":"daily","hometown":"Waltham, MA","zipcode":"23238","sex":"Male","avatar_url_small":"http://s3.amazonaws.com/shoplift/small/2/headless.jpg?1337213827","avatar_url_thumb":"http://s3.amazonaws.com/shoplift/thumb/2/headless.jpg?1337213827","followee_count":4},"flag_total":2,"flags":[{"flag_type":"It contains inappropriate language"},{"flag_type":"It's not a real product"}]}]}
   # ::output-end::
   # Fetch array of items of your followees in least recently viewed order
-  # <br/><br/>Notes:<pre>curl -X GET --user mark@elsewhere.net:vo2max localhost:3000/items.json</pre>  
-  # =end  
+  # <br/><br/>Notes:<pre>curl -X GET --user mark@elsewhere.net:vo2max localhost:3000/items.json</pre>
+  # =end
   def page
     authenticate_user!
     @items = Item.joins(:post,:user,:subscriptions)
@@ -21,14 +21,14 @@ class ItemsController < ApplicationController
                  .joins("INNER JOIN users AS post_users on posts.user_id = post_users.id AND users.status = 1")
                  .where("items.status = 1 AND (subscriptions.follower_id = ? )",current_user.id)
                  .between(params)
-                 .group("items.id")
                  .order("user_item_views.created_at ASC, items.created_at DESC")
+                 .select("DISTINCT(items.id), items.*, user_item_views.created_at, items.created_at")
                  .paginate(per_page: params[:per_page].present? ? params[:per_page]: 6, page: params[:page])
     @items.each {|i| UserItemView.create({user_id:current_user.id, item_id:i.id})}
 
     render :partial => 'items', :locals => {:items => @items}
   end
-  
+
   def index
     authenticate_user!
     if params[:page]
@@ -36,7 +36,7 @@ class ItemsController < ApplicationController
     else
       page = 1
     end
-    
+
     if ids = params[:ids]
       items = Item.where(:id => ids)
                   .paginate(per_page: 10, page: page)
@@ -49,11 +49,11 @@ class ItemsController < ApplicationController
                   .joins("INNER JOIN users AS post_users on posts.user_id = post_users.id AND users.status = 1")
                   .where("items.status = 1 AND (subscriptions.follower_id = ? )",current_user.id)
                   .between(params)
-                  .group("items.id")
                   .order("user_item_views.created_at ASC, items.created_at DESC")
+                  .select("DISTINCT(items.id), items.*, user_item_views.created_at, items.created_at")
                   .paginate(per_page: 10, page: page)
     end
-    
+
     render :partial => 'items', :locals => {:items => items}
   end
 
@@ -67,8 +67,8 @@ class ItemsController < ApplicationController
   # {"id":1,"parent_id":null,"name":"Item 1","description":"Lorem ipsum dolor sit amet, aliquet feugiat. Convallis morbi fringilla gravida, phasellus feugiat dapibus velit nunc, pulvinar eget sollicitudin venenatis cum nullam, vivamus ut a sed, mollitia lectus. Nulla vestibulum massa neque ut et, id hendrerit sit, feugiat in taciti enim proin nibh, tempor dignissim, rhoncus duis vestibulum nunc mattis convallis.","brand":"Lorem ipsum dolor sit amet","retailer":"Lorem ipsum dolor sit amet","url":"http://www.jcrew.com/index.jsp","price":"1.1","comment":null,"photo_url":"http://s3.amazonaws.com/shoplift_dev/small/1/product-large-1.jpg?1337212944","hashtags_allowed":true,"created_at":"2011-12-06T09:46:45-06:00","hashtags":[{"id":1,"value":"jeans"},{"id":2,"value":"polo"},{"id":20,"value":"tie"}],"user":{"extract":{"id":1,"email":"mark@38media.net","username":"mark@38media.net","full_name":"Mark A. Roseboom","first_name":"Mark","last_name":"Roseboom","vanity_url":null,"country":null,"biography":"I like computers","notify_new_follower":null,"notify_relift":null,"notify_missing":null,"hometown":"Boston, MA","zipcode":"23238","sex":true},"sex":"Male","avatar_url_small":"http://s3.amazonaws.com/shoplift_dev/small/1/bella_4.5_mths.jpg?1337213157","avatar_url_thumb":"http://s3.amazonaws.com/shoplift_dev/thumb/1/bella_4.5_mths.jpg?1337213157"},"flag_total":1,"flags":[{"flag_type":"It contains inappropriate language"}]}
   # ::output-end::
   # Fetch item
-  # <br/><br/>Notes:<pre>curl -X GET --user aaronbartell@gmail.com:poopydiaper localhost:3000/items/1.json</pre>  
-  # =end  
+  # <br/><br/>Notes:<pre>curl -X GET --user aaronbartell@gmail.com:poopydiaper localhost:3000/items/1.json</pre>
+  # =end
   def show
     @item = Item.joins(:post,:user) \
                 .joins("INNER JOIN users AS post_users on posts.user_id = post_users.id AND users.status = 1") \
@@ -95,8 +95,8 @@ class ItemsController < ApplicationController
   # http://www.jcrew.com/index.jsp
   # ::output-end::
   # Fetch item URL
-  # <br/><br/>Notes:<pre>curl -X GET --user aaronbartell@gmail.com:poopydiaper localhost:3000/items/1/visit</pre>  
-  # =end  
+  # <br/><br/>Notes:<pre>curl -X GET --user aaronbartell@gmail.com:poopydiaper localhost:3000/items/1/visit</pre>
+  # =end
   def visit
     @item = Item.joins(:post,:user) \
                 .joins("INNER JOIN users AS post_users on posts.user_id = post_users.id AND users.status = 1") \
@@ -120,7 +120,7 @@ class ItemsController < ApplicationController
   # {"timeline":[{"id":1,"parent_id":null,"name":"Item 1","description":"Lorem ipsum dolor sit amet, aliquet feugiat. Convallis morbi fringilla gravida, phasellus feugiat dapibus velit nunc, pulvinar eget sollicitudin venenatis cum nullam, vivamus ut a sed, mollitia lectus. Nulla vestibulum massa neque ut et, id hendrerit sit, feugiat in taciti enim proin nibh, tempor dignissim, rhoncus duis vestibulum nunc mattis convallis.","brand":"Lorem ipsum dolor sit amet","retailer":"Lorem ipsum dolor sit amet","url":"http://www.jcrew.com/index.jsp","price":"1.1","comment":null,"photo_url":"http://s3.amazonaws.com/shoplift_dev/small/1/product-large-1.jpg?1337212944","hashtags_allowed":true,"created_at":"2011-12-06T09:46:45-06:00","set_aside":{"created_at":"2012-06-20T12:28:44-05:00","id":18,"parent_id":1,"status":1,"updated_at":"2012-06-20T12:28:44-05:00","user_id":12},"hashtags":[{"id":1,"value":"jeans"},{"id":2,"value":"polo"}],"user":{"extract":{"id":1,"email":"mark@38media.net","username":"mark@38media.net","full_name":"Mark A. Roseboom","first_name":"Mark","last_name":"Roseboom","vanity_url":null,"country":null,"biography":"I like computers","notify_new_follower":null,"notify_relift":null,"notify_missing":null,"hometown":"Boston, MA","zipcode":null,"sex":true},"sex":"Male","avatar_url_small":"http://s3.amazonaws.com/shoplift_dev/small/1/bella_4.5_mths.jpg?1337213157","avatar_url_thumb":"http://s3.amazonaws.com/shoplift_dev/thumb/1/bella_4.5_mths.jpg?1337213157","followee_count":1},"flag_total":1,"flags":[{"flag_type":"It contains inappropriate language"}]},{"id":4,"parent_id":null,"name":"Item 1","description":"Lorem ipsum dolor sit amet, aliquet feugiat. Convallis morbi fringilla gravida, phasellus feugiat dapibus velit nunc, pulvinar eget sollicitudin venenatis cum nullam, vivamus ut a sed, mollitia lectus. Nulla vestibulum massa neque ut et, id hendrerit sit, feugiat in taciti enim proin nibh, tempor dignissim, rhoncus duis vestibulum nunc mattis convallis.","brand":"Lorem ipsum dolor sit amet","retailer":"Lorem ipsum dolor sit amet","url":"http://www.jcrew.com/index.jsp","price":"1.1","comment":null,"photo_url":"http://s3.amazonaws.com/shoplift_dev/small/1/product-large-1.jpg?1337212944","hashtags_allowed":true,"created_at":"2011-12-06T09:46:45-06:00","hashtags":[{"id":1,"value":"jeans"},{"id":2,"value":"polo"}],"user":{"extract":{"id":2,"email":"patrick@38media.net","username":"camachgk","full_name":"Patrick Camacho","first_name":"Patrick","last_name":"Camacho","vanity_url":"http://38media.net","country":"United States","biography":"I like dogs","notify_new_follower":true,"notify_relift":false,"notify_missing":"daily","hometown":"Waltham, MA","zipcode":"23238","sex":true},"sex":"Male","avatar_url_small":"http://s3.amazonaws.com/shoplift_dev/small/2/headless.jpg?1337213827","avatar_url_thumb":"http://s3.amazonaws.com/shoplift_dev/thumb/2/headless.jpg?1337213827","followee_count":1},"flag_total":1,"flags":[{"flag_type":"It contains inappropriate language"}]}]}
   # ::output-end::
   # Search items
-  # <br/><br/>Notes:<pre>curl -X GET --user aaronbartell@gmail.com:poopydiaper localhost:3000/items/search.json?search=Item</pre>  
+  # <br/><br/>Notes:<pre>curl -X GET --user aaronbartell@gmail.com:poopydiaper localhost:3000/items/search.json?search=Item</pre>
   # =end
   def search
     @items = Item.joins(:post,:user) \
@@ -140,7 +140,7 @@ class ItemsController < ApplicationController
   # {"id":80,"parent_id":null,"name":"Zoolander Coolness","description":"Zoolander Derek Zoolander School Heathered Royal Men's T-shirt","brand":"Zoolander","retailer":"Amazon.com","url":"http://www.amazon.com/Zoolander-Derek-School-Heathered-T-shirt/dp/B006UI5KUG/ref=sr_1_3?ie=UTF8","price":null,"comment":null,"photo_url":"http://s3.amazonaws.com/shoplift_dev/small/223/open-uri20120627-16385-1h6troz?1340829554","hashtags_allowed":true,"created_at":"2012-06-27T15:39:14-05:00","hashtags":[],"user":{"extract":{"id":12,"email":"aaronbartell@gmail.com","username":"aaronbartell@gmail.com","full_name":"Aaron","first_name":null,"last_name":null,"vanity_url":null,"country":"United States","biography":null,"notify_new_follower":null,"notify_relift":null,"notify_missing":null,"hometown":null,"zipcode":"56001","sex":true},"sex":"Male","avatar_url_small":"/assets/avatars/small/missing.png","avatar_url_thumb":"/assets/avatars/thumb/missing.png","followee_count":1},"flag_total":0,"flags":[]}
   # ::output-end::
   # Create item
-  # <br/><br/>Notes:<pre>curl -X POST --user aaronbartell@gmail.com:poopydiaper -d "item[image]=http://ecx.images-amazon.com/images/I/51YeA77BaQL._SX342_.jpg" -d "item[retailer]=Amazon.com" -d "item[description]=Zoolander Derek Zoolander School Heathered Royal Men's T-shirt" -d "item[name]=Zoolander Coolness" -d "item[brand]=Zoolander" -d "item[url]=http://www.amazon.com/Zoolander-Derek-School-Heathered-T-shirt/dp/B006UI5KUG/ref=sr_1_3?ie=UTF8&qid=1340810439&sr=8-3&keywords=heathered+men+tshirt" localhost:3000/items.json</pre>  
+  # <br/><br/>Notes:<pre>curl -X POST --user aaronbartell@gmail.com:poopydiaper -d "item[image]=http://ecx.images-amazon.com/images/I/51YeA77BaQL._SX342_.jpg" -d "item[retailer]=Amazon.com" -d "item[description]=Zoolander Derek Zoolander School Heathered Royal Men's T-shirt" -d "item[name]=Zoolander Coolness" -d "item[brand]=Zoolander" -d "item[url]=http://www.amazon.com/Zoolander-Derek-School-Heathered-T-shirt/dp/B006UI5KUG/ref=sr_1_3?ie=UTF8&qid=1340810439&sr=8-3&keywords=heathered+men+tshirt" localhost:3000/items.json</pre>
   # =end
   def create
     authenticate_user!
@@ -165,7 +165,7 @@ class ItemsController < ApplicationController
       image = params[:image] ||= params[:item][:image]
       retailer = params[:retailer] ||= params[:item][:retailer]
       image = "http://"+retailer+image if !image.include? 'http:'
-      @post.photo = open(image.gsub(/\s/, "%20")) 
+      @post.photo = open(image.gsub(/\s/, "%20"))
       @post.brand = Brand.find_or_create_by_name(params[:item][:brand])
       if !@post.save
         return return_error_messages(@post,"Failed to create item")
@@ -193,7 +193,7 @@ class ItemsController < ApplicationController
   # {"id":81,"parent_id":2,"name":"Item 2","description":"Lorem ipsum dolor sit amet, aliquet feugiat. Convallis morbi fringilla gravida, phasellus feugiat dapibus velit nunc, pulvinar eget sollicitudin venenatis cum nullam, vivamus ut a sed, mollitia lectus. Nulla vestibulum massa neque ut et, id hendrerit sit, feugiat in taciti enim proin nibh, tempor dignissim, rhoncus duis vestibulum nunc mattis convallis.","brand":"Lorem ipsum dolor sit amet","retailer":"Lorem ipsum dolor sit amet","url":"http://www.jcrew.com/index.jsp","price":"1.1","comment":null,"photo_url":"http://s3.amazonaws.com/shoplift_dev/small/2/product-large-2.jpg?1337212961","hashtags_allowed":true,"created_at":"2011-12-06T09:47:42-06:00","hashtags":[{"id":4,"value":"polo"}],"relift":{"created_at":"2012-06-27T15:44:12-05:00","user":{"extract":{"id":1,"email":"mark@38media.net","username":"mark@38media.net","full_name":"Mark A. Roseboom","first_name":"Mark","last_name":"Roseboom","vanity_url":null,"country":null,"biography":"I like computers","notify_new_follower":null,"notify_relift":null,"notify_missing":null,"hometown":"Boston, MA","zipcode":null,"sex":true},"sex":"Male","avatar_url_small":"http://s3.amazonaws.com/shoplift_dev/small/1/bella_4.5_mths.jpg?1337213157","avatar_url_thumb":"http://s3.amazonaws.com/shoplift_dev/thumb/1/bella_4.5_mths.jpg?1337213157","followee_count":1}},"user":{"extract":{"id":12,"email":"aaronbartell@gmail.com","username":"aaronbartell@gmail.com","full_name":"Aaron","first_name":null,"last_name":null,"vanity_url":null,"country":"United States","biography":null,"notify_new_follower":null,"notify_relift":null,"notify_missing":null,"hometown":null,"zipcode":"56001","sex":true},"sex":"Male","avatar_url_small":"/assets/avatars/small/missing.png","avatar_url_thumb":"/assets/avatars/thumb/missing.png","followee_count":1},"flag_total":1,"flags":[{"flag_type":"It contains inappropriate language"}]}
   # ::output-end::
   # Create item
-  # <br/><br/>Notes:<pre>curl -X POST --user aaronbartell@gmail.com:poopydiaper localhost:3000/items/2/relift.json</pre>  
+  # <br/><br/>Notes:<pre>curl -X POST --user aaronbartell@gmail.com:poopydiaper localhost:3000/items/2/relift.json</pre>
   # =end
   def relift
     authenticate_user!
@@ -212,8 +212,8 @@ class ItemsController < ApplicationController
       render :partial => 'item', :locals => {:item => @new_item}, :status => 201
       if params[:hashtags]
         hashtags = params[:hashtags].include?(',') ? params[:hashtags].split(',') : params[:hashtags].split(' ')
-      
-        hashtags.each do |hashtag_value|   
+
+        hashtags.each do |hashtag_value|
           @hashtag_value = HashtagValue.where(:value => hashtag_value).first_or_create #.find_or_create_by_value(hashtag_value)
           if @hashtag_value.blank?
             # CONSIDER: post.errors[:base] << 'fails to create...' if entry_url.blank?
@@ -223,7 +223,7 @@ class ItemsController < ApplicationController
             return render_error(500,"Failed to create hashtag: "+hashtag_value+' '+@hashtag.errors[:hashtag_value_id][0])
           end
         end
-      end      
+      end
       #TODO social media posts.
     else
       return_error_messages(@new_item,"Failed to relift item")
@@ -238,16 +238,16 @@ class ItemsController < ApplicationController
   # param:: id:int - item id to update (URL)
   # param:: item object (POST content)
   # output:: json
-  # {"id":77,"parent_id":null,"name":"Nicole Miller Strapless Gown | Bloomingdale's","description":"Zoolander Dereee","brand":"Nicole Miller","retailer":"www1.bloomingdales.com","url":"http://www1.bloomingdales.com/shop/product/nicole-miller-strapless-gown?ID=573044&CategoryID=21683#fn=DRESS_OCCASION%3DProm%26spp%3D2%26ppp%3D96%26sp%3D1%26rid%3D61","price":"1320.0","comment":null,"photo_url":"http://s3.amazonaws.com/shoplift_dev/small/221/open-uri20120619-4539-q11om4?1340142491","hashtags_allowed":true,"created_at":"2012-06-19T16:47:52-05:00","hashtags":[],"user":{"extract":{"id":11,"email":"dondenoncourt@gmail.com","username":"dondenoncourt@gmail.com","full_name":"Don Denoncourt","first_name":null,"last_name":null,"vanity_url":null,"country":"United States","biography":null,"notify_new_follower":null,"notify_relift":null,"notify_missing":null,"hometown":null,"zipcode":"23238","sex":true},"sex":"Male","avatar_url_small":"/assets/avatars/small/missing.png","avatar_url_thumb":"/assets/avatars/thumb/missing.png","followee_count":2},"flag_total":0,"flags":[]} 
+  # {"id":77,"parent_id":null,"name":"Nicole Miller Strapless Gown | Bloomingdale's","description":"Zoolander Dereee","brand":"Nicole Miller","retailer":"www1.bloomingdales.com","url":"http://www1.bloomingdales.com/shop/product/nicole-miller-strapless-gown?ID=573044&CategoryID=21683#fn=DRESS_OCCASION%3DProm%26spp%3D2%26ppp%3D96%26sp%3D1%26rid%3D61","price":"1320.0","comment":null,"photo_url":"http://s3.amazonaws.com/shoplift_dev/small/221/open-uri20120619-4539-q11om4?1340142491","hashtags_allowed":true,"created_at":"2012-06-19T16:47:52-05:00","hashtags":[],"user":{"extract":{"id":11,"email":"dondenoncourt@gmail.com","username":"dondenoncourt@gmail.com","full_name":"Don Denoncourt","first_name":null,"last_name":null,"vanity_url":null,"country":"United States","biography":null,"notify_new_follower":null,"notify_relift":null,"notify_missing":null,"hometown":null,"zipcode":"23238","sex":true},"sex":"Male","avatar_url_small":"/assets/avatars/small/missing.png","avatar_url_thumb":"/assets/avatars/thumb/missing.png","followee_count":2},"flag_total":0,"flags":[]}
   # ::output-end::
   # Create item
-  # <br/><br/>Notes:<pre>curl -X POST --user dondenoncourt@gmail.com:vo2max -d "item[description]=Zoolander Dereee" -d "item[image]=http://ecx.images-amazon.com/images/I/51YeA77BaQL._SX342_.jpg" localhost:3000/items/77/edit.json</pre>  
+  # <br/><br/>Notes:<pre>curl -X POST --user dondenoncourt@gmail.com:vo2max -d "item[description]=Zoolander Dereee" -d "item[image]=http://ecx.images-amazon.com/images/I/51YeA77BaQL._SX342_.jpg" localhost:3000/items/77/edit.json</pre>
   # =end
-  def update  
+  def update
     authenticate_user!
     @item = Item.joins(:post,:user) \
                 .joins("INNER JOIN users AS post_users on posts.user_id = post_users.id AND users.status = 1") \
-                .where("items.id = ? AND items.user_id = ? AND ISNULL(items.parent_id) AND items.status = 1",
+                .where("items.id = ? AND items.user_id = ? AND items.parent_id IS NULL AND items.status = 1",
                         params[:id],current_user.id).first!
 
     post = {:user_id => current_user.id}
@@ -264,12 +264,12 @@ class ItemsController < ApplicationController
       end
       post[:brand]= Brand.find_or_create_by_name(params[:item][:brand]) if !params[:item][:brand].blank?
     end
-    
+
     # Delete any entries that are empty
     post.delete_if{ |k, v| v.nil? }
     if @item.post.update_attributes!(post)
       render :partial => 'item', :locals => {:item => @item}, :status => 200
-    else    
+    else
       return_error_messages(@item,"Failed to update item")
     end
   end
@@ -284,7 +284,7 @@ class ItemsController < ApplicationController
   # "Item successfully deleted"
   # ::output-end::
   # Delete item
-  # <br/><br/>Notes:<pre>curl -X POST --user dondenoncourt@gmail.com:vo2max localhost:3000/items/77/delete</pre>  
+  # <br/><br/>Notes:<pre>curl -X POST --user dondenoncourt@gmail.com:vo2max localhost:3000/items/77/delete</pre>
   # =end
   def destroy
     authenticate_user!
@@ -323,7 +323,7 @@ class ItemsController < ApplicationController
   # {"id":1,"items_count":6,"items":[{"id":1,"created_at":"2011-12-19T23:04:53-06:00","user":{"id":1,"full_name":"Mark A. Roseboom","avatar":"http://s3.amazonaws.com/shoplift_dev/thumb/1/bella_4.5_mths.jpg?1345218034"}},{"id":4,"created_at":"2011-12-19T23:04:53-06:00","user":{"id":2,"full_name":"Patrick Camacho","avatar":"http://s3.amazonaws.com/shoplift_dev/thumb/2/headless.jpg?1337213827"}},{"id":12,"created_at":"2011-12-19T23:04:53-06:00","user":{}},{"id":17,"created_at":"2012-06-01T04:07:07-05:00","user":{"id":6,"full_name":"Mike","avatar":"http://s3.amazonaws.com/shoplift_dev/thumb/6/Mike.jpg?1338540852"}},{"id":20,"created_at":"2012-06-01T08:07:51-05:00","user":{"id":7,"full_name":"Brandon Fail","avatar":"/assets/avatars/thumb/missing.png"}},{"id":23,"created_at":"2012-06-01T17:19:15-05:00","user":{"id":12,"full_name":"John Harrington","avatar":"http://s3.amazonaws.com/shoplift_dev/thumb/12/pgt_beauregard_sm.jpg?1338588970"}}],"first_lifter":{"created_at":"2011-12-06T09:46:45-06:00","id":1,"full_name":"Mark A. Roseboom","avatar":"http://s3.amazonaws.com/shoplift_dev/thumb/1/bella_4.5_mths.jpg?1345218034"}}
   # ::output-end::
   # Show item history
-  # <br/><br/>Notes:<pre> curl -X GET --user mark@elsewhere.net:vo2max localhost:3000/history/1.json</pre>  
+  # <br/><br/>Notes:<pre> curl -X GET --user mark@elsewhere.net:vo2max localhost:3000/history/1.json</pre>
   # =end
   def history
     @post = Post.find(params[:id])

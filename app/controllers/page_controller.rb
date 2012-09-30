@@ -8,15 +8,15 @@ class PageController < ApplicationController
     path = Rails.root.to_s + "/app/assets/images/galleria/images/*"
     @images = Dir.glob(path).collect{|f| File.basename(f)}
   end
-  
+
   def ember
     if user_signed_in?
       render :layout => false
     else
-      redirect_to page_home_path 
+      redirect_to page_home_path
     end
   end
-  
+
   def landing
     render :layout => false
   end

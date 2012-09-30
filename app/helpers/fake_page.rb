@@ -3,17 +3,17 @@
 module FakePage
   def getRace()
     @html = <<ENDHTML
-    <html xmlns="http://www.w3.org/1999/xhtml"> 
-    <head> 
-      <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/> 
+    <html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
       <title>RACE | fitness | exercise bikes </title>
-        <meta name="description" content="RACE"/> 
-        <meta name="keywords" content="upright bike cycle trainer cycling racing indoor spinner spin spinning free inside delivery"/>     
+        <meta name="description" content="RACE"/>
+        <meta name="keywords" content="upright bike cycle trainer cycling racing indoor spinner spin spinning free inside delivery"/>
         <meta name="layout" content="fitness"/>
-    </head> 
-    <body> 
-    <div id="container"> 
-    <div id="header"> 
+    </head>
+    <body>
+    <div id="container">
+    <div id="header">
     <div class="navTop">
       <ul>
         <li> <a class="kettlerusa"  href="http://www.kettlerusa.com/" > Kettler USA </a> </li>
@@ -23,19 +23,19 @@ module FakePage
         <li> <a href="http://www.kettlerusa.com/table-tennis" title="KETTLER TABLE TENNIS online sales for table tennis, tables, ping pong, paddles, balls, accessories, indoor, outdoor home"> table tennis </a> </li>
         <li> <a href="http://www.kettlerusa.com/toys" title="KETTLER TOYS online sales for buy, toys, online, swing sets, balance bikes, tricycles, ride on, scooters, pedal powered home"> toys </a> </li>
       </ul>
-      <div id="loginSearchCart"> 
-        <div id="loginAndSearch"> 
+      <div id="loginSearchCart">
+        <div id="loginAndSearch">
                   <a href="/register/register.gsp?division=fitness" title="Click to create a Kettler account. Note you can auto-register during checkout">Register</a>
                   <a href="/register/login.gsp?division=fitness" title="Click to log in to your Kettler account with your email and password">Login</a>
           <br/>
               <form action="/shop/search" method="post" name="searchForm" id="searchForm" >
                   <input type="hidden" name="division" value="fitness"/>
                   <input type="hidden" name="mode" value=""/>
-                  <input type="text" id="where" name="where" size="11" title="Key search words such as tricycle or elliptical"/> 
+                  <input type="text" id="where" name="where" size="11" title="Key search words such as tricycle or elliptical"/>
                   <input type="submit" name="search" value="Search" title="Click to search" />
               </form>
         </div>
-        <div class="cart"> 
+        <div class="cart">
               <a href="/shop/cart?division=fitness" title="Click to view your shopping cart details">Cart</a>
               <br/>
                   <div id="miniCart"></div>
@@ -43,7 +43,7 @@ module FakePage
       </div>
     </div>
       <div id="eightHundred">888.253.8853</div>
-            <div class="navSecond"> 
+            <div class="navSecond">
         <ul>
           <li><a id="crosstrainers"    href="http://www.kettlerusa.com/fitness/crosstrainers" title="Buy Elliptical Machines & Cross Trainers Online | Kettler USA">crosstrainers</a></li>
           <li><a id="exercisebikes"    href="http://www.kettlerusa.com/fitness/exercise-bikes"  title="Exercise Bikes | Stationary Bikes, Recumbents & More | Kettler USA">exercise bikes</a></li>
@@ -57,15 +57,15 @@ module FakePage
       <a href="https://www.facebook.com/kettlerusa"><img src="http://www.kettlerusa.com/images/facebook24x24.png" class="socialmedia"></img></a>
       <a href="http://www.youtube.com/user/KETTLERUSA"><img src="http://www.kettlerusa.com/images/youtube24x24.png" class="socialmedia"></img></a>
     </span>
-            </div> 
-        </div> 
-    <div id="main"> 
+            </div>
+        </div>
+    <div id="main">
         <div id="buy">
-            <div id="otherImages">  
+            <div id="otherImages">
                     <div>
                         <a>
-                           <img class="otherImage" id="7938-189.A" 
-                                src="/images/fitness/exercise bikes/7938-189.A.jpg" 
+                           <img class="otherImage" id="7938-189.A"
+                                src="/images/fitness/exercise bikes/7938-189.A.jpg"
                                 alt="RACE" title="RACE"/>
                         </a>
                     </div>
@@ -106,8 +106,8 @@ module FakePage
                                    <input type="submit" name="buy" id="buyId" value="Add to Cart" class="button" /><br/>
                                    <span class="emphasis">free</span>
                                         Truck Shipping and Inside Delivery
-                                        <a href="#" id="questionTruckShipping"><img src="/images/question16x16.png"  /></a> 
-                                      <br/><span class="fineprint">(Usually arrives in 4-10 business days)</span> 
+                                        <a href="#" id="questionTruckShipping"><img src="/images/question16x16.png"  /></a>
+                                      <br/><span class="fineprint">(Usually arrives in 4-10 business days)</span>
                             </form>
                     </div>
             </div>
@@ -143,11 +143,11 @@ module FakePage
                 <div id="partsAndService">
                     <ul class="pdf">
                             <li><a class="pdf" href="/manuals/fitness/exercise bikes/7938-189.A.pdf">
-                                  Computer Manual 
+                                  Computer Manual
                                 </a>
                             </li>
                             <li><a class="pdf" href="/manuals/fitness/exercise bikes/7938-189.pdf">
-                                  Assembly Manual 
+                                  Assembly Manual
                                 </a>
                             </li>
                     </ul>
@@ -159,8 +159,8 @@ module FakePage
                 </div>
                     <div id="accessories2"></div>
             </div>
-        </div> 
-      <ul id="footer"> 
+        </div>
+      <ul id="footer">
                    <li><a href="/homePage/termsAndConditions?division=fitness">Terms &amp; Conditions</a></li>
                 <li><a href="/shop/archives?division=fitness">Archive Items</a></li>
             <li><a href="/homePage/contactUs.gsp?mode=">Contact Us</a></li>
@@ -174,12 +174,12 @@ module FakePage
                     Where To Buy
                   </a>
                 </li>
-        <li id="copyright" class="lastItem"> 
+        <li id="copyright" class="lastItem">
             &copy; 2012 Kettler
           </li>
       </ul>
-    </div> 
-    </div> 
+    </div>
+    </div>
     </body>
     </html>
 ENDHTML
@@ -204,11 +204,11 @@ ENDHTML
 
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <meta http-equiv="X-UA-Compatible" content="IE9=EmulateIE8" />
-<link href="http://www.bcoutlet.com/styles/1024_master_77437.ChmCss" rel="stylesheet" type="text/css" />   
-<link href="http://www.bcoutlet.com/Microsite/FixCssFile.aspx?cssPath=/styles/1024_certona.css" rel="Stylesheet" type="text/css" /> 
+<link href="http://www.bcoutlet.com/styles/1024_master_77437.ChmCss" rel="stylesheet" type="text/css" />
+<link href="http://www.bcoutlet.com/Microsite/FixCssFile.aspx?cssPath=/styles/1024_certona.css" rel="Stylesheet" type="text/css" />
 <script type="text/javascript" src="http://www.bcoutlet.com/Scripts/jquery-1.7.min.js"></script>
-<script src="http://www.bcoutlet.com/scripts/global.js" type="text/javascript"></script> 
-<script src="http://www.bcoutlet.com/scripts/cookies_script.js" type="text/javascript"></script> 
+<script src="http://www.bcoutlet.com/scripts/global.js" type="text/javascript"></script>
+<script src="http://www.bcoutlet.com/scripts/cookies_script.js" type="text/javascript"></script>
 <!--[if gte 7 ]
         <script type="text/javascript" src="http://www.bcoutlet.com/Scripts/IE7JS/IE9.js"></script>
         <script type="text/javascript" src="http://www.bcoutlet.com/Scripts/IE7JS/ie7-squish.js"></script>
@@ -217,27 +217,27 @@ ENDHTML
 <script type="text/javascript" src="http://www.bcoutlet.com/Scripts/ABTesting.js"></script>
 <script type="text/javascript" src="http://www.bcoutlet.com/Scripts/mbox.js"></script>
 <script type="text/javascript" src="http://www.bcoutlet.com/SiteAnalytics/Omniture/Development/s_code.js"></script>
- 
-  
-  
-  
+
+
+
+
     <script type="text/javascript" src="http://www.bcoutlet.com/Scripts/HeaderInit.js"></script>
     <script type="text/javascript">
         var elm=document.getElementById('deptid_9367Active');
         if(elm) {elm.style.display="none";}
-    </script> 
-  
-  
- 
+    </script>
+
+
+
     <link rel="canonical" href="http://www.bargaincatalogoutlet.com" />
 <!-- MAXCHMB BCO_AffiliateTracking_Header -->
         <!-- MAXCHME BCO_AffiliateTracking_Header  -->
         <script type="text/javascript" src="http://www.bcoutlet.com/Scripts/newZoom.js"></script>
-        
-   
+
+
         <script type="text/javascript" src="http://www.bcoutlet.com/Scripts/swatch-control.js"></script>
-        <script type="text/javascript" src="http://www.bcoutlet.com/Scripts/jQuery/jquery.hoverIntent.js"></script>     
-    
+        <script type="text/javascript" src="http://www.bcoutlet.com/Scripts/jQuery/jquery.hoverIntent.js"></script>
+
 <script type="text/javascript" src="http://www.bcoutlet.com/Scripts/Microsite.js"></script>
 <script type="text/javascript">var _runningFromMicrosite = true;</script>
 <link href="/Sites/BCOutlet/designer/site.css" rel="stylesheet" type="text/css" /><link href="/Sites/BCOutlet/designer/favicon.ico" rel="shortcut icon" type="image/x-icon" /><link href="/Sites/BCOutlet/designer/favicon.ico" rel="icon" type="image/x-icon" /><meta name="server" content="Assembly BuildVersion: 12.7.178.0" /><meta name="server" content="Server Name: bags.bcoutlet.com" /></head>
@@ -247,7 +247,7 @@ ENDHTML
 <input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwULLTE3NzI5ODg3NzlkZKMJcNJATBAaEtulMz8qqyI9ovJk" />
 
         <div id="controlWrapper">
-            
+
 
 <script type="text/javascript">
     if(typeof(_runningFromMicrosite) == "undefined") { this.SetVendorCookie("vendor"); }
@@ -280,14 +280,14 @@ ENDHTML
         var product_search_default_text = "Ex: Blue Blouse";
         var catalog_search_default_text = "Ex: 1311-509-186";
         var email_default_text = "First-time registrants only";
-    </script> 
+    </script>
 
     <div class="bco-header-main">
         <a class="header-logo" href="http://www.bcoutlet.com/"><em>Return to BCO home page</em></a>
-        
+
         <div class="account-options">
             <span class="account-message">
-                <a href="http://www.bcoutlet.com/account/acct_main.aspx">Sign in</a> or 
+                <a href="http://www.bcoutlet.com/account/acct_main.aspx">Sign in</a> or
                 <a href="http://www.bcoutlet.com/account/acct_createprofile.aspx?ReturnUrl=/account/acct_main.aspx">Register</a>
             </span>
             <a href="http://www.bcoutlet.com/Account/Acct_Main.aspx">My Account</a>
@@ -396,26 +396,26 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$ctl00$ScriptManager1', 'eBags
 </script>
 
                 <div id="ebagsMainWrap">
-    <div id="ebagsTopMenuWrap"> 
-        <ul id="ebagsTopMenu"> 
-            <li><a href="/search/search-results/?N=70014">Handbags</a></li> 
-            <li><a href="/search/search-results/?N=70018">Luggage</a></li> 
-            <li><a href="/search/search-results/?N=7005">Business &amp; Laptop</a></li> 
-            <li><a href="/search/search-results/?N=7002">Backpacks</a></li> 
-            <li><a href="/search/search-results/?N=70026">Travel Accessories</a></li> 
-        </ul> 
+    <div id="ebagsTopMenuWrap">
+        <ul id="ebagsTopMenu">
+            <li><a href="/search/search-results/?N=70014">Handbags</a></li>
+            <li><a href="/search/search-results/?N=70018">Luggage</a></li>
+            <li><a href="/search/search-results/?N=7005">Business &amp; Laptop</a></li>
+            <li><a href="/search/search-results/?N=7002">Backpacks</a></li>
+            <li><a href="/search/search-results/?N=70026">Travel Accessories</a></li>
+        </ul>
     </div><!-- / ebagsTopMenuWrap -->
 
     <div id="ebagsSearchWrap">
         <div id="ebagsSearch"><span>Search</span><input name="ctl00$ctl00$cphRedcatsPage$_ucSearchBox$_txtSearch" type="text" value="Handbags, Totes, Laptop bags" maxlength="50" id="ctl00_ctl00_cphRedcatsPage__ucSearchBox__txtSearch" class="searchfield" AUTOCOMPLETE="off" onfocus="if (this.value === &#39;Handbags, Totes, Laptop bags&#39;) { this.value = &#39;&#39;; }" onkeyup="CleanInvalidSearchBoxCharacters(ctl00_ctl00_cphRedcatsPage__ucSearchBox__txtSearch);" />
-<input name="ctl00$ctl00$cphRedcatsPage$_ucSearchBox$DummyTextBoxThatMakesSubmitOnEnterWorkInIE" type="text" id="ctl00_ctl00_cphRedcatsPage__ucSearchBox_DummyTextBoxThatMakesSubmitOnEnterWorkInIE" style="visibility:hidden;display:none;" />  
+<input name="ctl00$ctl00$cphRedcatsPage$_ucSearchBox$DummyTextBoxThatMakesSubmitOnEnterWorkInIE" type="text" id="ctl00_ctl00_cphRedcatsPage__ucSearchBox_DummyTextBoxThatMakesSubmitOnEnterWorkInIE" style="visibility:hidden;display:none;" />
 <input type="image" name="ctl00$ctl00$cphRedcatsPage$_ucSearchBox$_imgbtnSearch" id="ctl00_ctl00_cphRedcatsPage__ucSearchBox__imgbtnSearch" class="searchbutton" src="//cdn2.ebags.com/images/btn-Search-BCOutlet.gif" style="border-width:0px;" />
 <div id="divAutoCompleteTermList" class="autoCompleteContainer" style="display: block;"></div>
 <script language="javascript" type="text/javascript">
     eBags.autoFill("#ctl00_ctl00_cphRedcatsPage__ucSearchBox__txtSearch", {
         formSelector: '#eBagsForm',
         ajaxUrl: '/WebService/SearchAutoComplete.asmx/GetAutoSuggestionsForSearch',
-        resultCount: 10, 
+        resultCount: 10,
         containerSelector: '#divAutoCompleteTermList',
         submitButton: '#ctl00_ctl00_cphRedcatsPage__ucSearchBox__imgbtnSearch'
     }
@@ -435,7 +435,7 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$ctl00$ScriptManager1', 'eBags
         <div id="ebagsLogo"><a href="/home/"><img src="//cdn2.ebags.com/images/partner/redcats/btn-ebags.png" width="139" height="37" alt="Powered by eBags" border="0" /></a></div>
     </div>
     <div id="ebagsMainContent">
-         
+
     <div id="ebagsDetailWrap">
 		
 
@@ -452,16 +452,16 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$ctl00$ScriptManager1', 'eBags
 		
     <h2></h2>
     <div id="ebagsBreadcrumb">
-        
+
     </div>
 
 	</div>
 </div>
-        
+
                 <div id="ebagsDetailImageWrap">
     	            <!-- ******************* Display when user clicks add to cart button ******************* -->
-                    
-                    
+
+
 <div id="ebagsDetailImage">
     <img id="ctl00_ctl00_cphRedcatsPage_cphLayout_UcMainImageViewer__imgStaticMainImage" src="//cdn1.ebags.com/is/image/im9/130799_3_1?resmode=4&amp;op_usm=1,1,1,&amp;qlt=95,1&amp;hei=280&amp;wid=280" style="height:280px;width:280px;border-width:0px;" />
 </div>
@@ -469,7 +469,7 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$ctl00$ScriptManager1', 'eBags
     function SwapHeroImage(ipsid,folder) {
         var heroImage = $get('ctl00_ctl00_cphRedcatsPage_cphLayout_UcMainImageViewer__imgStaticMainImage');
         heroImage.src = GetImage(ipsid, folder);
-        return false;    
+        return false;
     }
 
     function ResetHeroImage() {
@@ -482,7 +482,7 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$ctl00$ScriptManager1', 'eBags
         heroImageUrl = GetImage(ipsid, folder);
         return false;
     }
-    
+
     function GetImage(ipsid, folder)
     {
         return '//cdn1.ebags.com/is/image/im' + folder + '/' + ipsid + '?resmode=4&op_usm=1,1,1,&qlt=95,1&hei=280&wid=280';
@@ -494,72 +494,72 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$ctl00$ScriptManager1', 'eBags
                     </div>
                     <div id="ctl00_ctl00_cphRedcatsPage_cphLayout_UcProductImage__pnlFeaturePhotos">
 		
-    
+
             <div id="ebagsThumbWrap" class="ebagsThumbWrap">
-        
+
             <div class="ebagsThumb">
                 <a id="ctl00_ctl00_cphRedcatsPage_cphLayout_UcProductImage__rptFeaturePhotos_ctl01__imgbtnFeatureImageLink" onmouseover="javascript: SwapHeroImage(&#39;130799_1_2&#39;,&#39;9&#39;);" onmouseout="javascript: SwapHeroImage(&#39;130799_3_1&#39;,&#39;9&#39;);" href="javascript: void(0);" style="display:inline-block;border-style:None;"><img id="ctl00_ctl00_cphRedcatsPage_cphLayout_UcProductImage__rptFeaturePhotos_ctl01__imgbtnFeaturePhotoImage" title="FeaturePhotoAltText" src="//cdn1.ebags.com/is/image/im9/130799_1_2?resmode=4&amp;op_usm=1,1,1,&amp;qlt=95,1&amp;hei=50&amp;wid=50" style="border-style:None;" /></a>
                 <img id="ctl00_ctl00_cphRedcatsPage_cphLayout_UcProductImage__rptFeaturePhotos_ctl01__imgPreload" src="//cdn1.ebags.com/is/image/im9/130799_1_2?resmode=4&amp;op_usm=1,1,1,&amp;qlt=95,1&amp;hei=280&amp;wid=280" alt="Image 01" style="height:1px;width:1px;border-width:0px;display:none;" />
             </div>
-        
+
             <div class="ebagsThumb">
                 <a id="ctl00_ctl00_cphRedcatsPage_cphLayout_UcProductImage__rptFeaturePhotos_ctl02__imgbtnFeatureImageLink" onmouseover="javascript: SwapHeroImage(&#39;130799_1_3&#39;,&#39;9&#39;);" onmouseout="javascript: SwapHeroImage(&#39;130799_3_1&#39;,&#39;9&#39;);" href="javascript: void(0);" style="display:inline-block;border-style:None;"><img id="ctl00_ctl00_cphRedcatsPage_cphLayout_UcProductImage__rptFeaturePhotos_ctl02__imgbtnFeaturePhotoImage" title="FeaturePhotoAltText" src="//cdn1.ebags.com/is/image/im9/130799_1_3?resmode=4&amp;op_usm=1,1,1,&amp;qlt=95,1&amp;hei=50&amp;wid=50" style="border-style:None;" /></a>
                 <img id="ctl00_ctl00_cphRedcatsPage_cphLayout_UcProductImage__rptFeaturePhotos_ctl02__imgPreload" src="//cdn1.ebags.com/is/image/im9/130799_1_3?resmode=4&amp;op_usm=1,1,1,&amp;qlt=95,1&amp;hei=280&amp;wid=280" alt="Image 01" style="height:1px;width:1px;border-width:0px;display:none;" />
             </div>
-        
+
             <div class="ebagsThumb">
                 <a id="ctl00_ctl00_cphRedcatsPage_cphLayout_UcProductImage__rptFeaturePhotos_ctl03__imgbtnFeatureImageLink" onmouseover="javascript: SwapHeroImage(&#39;130799_1_4&#39;,&#39;9&#39;);" onmouseout="javascript: SwapHeroImage(&#39;130799_3_1&#39;,&#39;9&#39;);" href="javascript: void(0);" style="display:inline-block;border-style:None;"><img id="ctl00_ctl00_cphRedcatsPage_cphLayout_UcProductImage__rptFeaturePhotos_ctl03__imgbtnFeaturePhotoImage" title="FeaturePhotoAltText" src="//cdn1.ebags.com/is/image/im9/130799_1_4?resmode=4&amp;op_usm=1,1,1,&amp;qlt=95,1&amp;hei=50&amp;wid=50" style="border-style:None;" /></a>
                 <img id="ctl00_ctl00_cphRedcatsPage_cphLayout_UcProductImage__rptFeaturePhotos_ctl03__imgPreload" src="//cdn1.ebags.com/is/image/im9/130799_1_4?resmode=4&amp;op_usm=1,1,1,&amp;qlt=95,1&amp;hei=280&amp;wid=280" alt="Image 01" style="height:1px;width:1px;border-width:0px;display:none;" />
             </div>
-        
+
             </div><!-- /ebagsThumbWrap -->
-        
+
 
 	</div>
 
                 </div><!-- ebagsDetailImageWrap -->
                 <div id="ebagsDetailProdInfoWrap">
-                    
+
     <!-- Full Retail Line -->
-    
+
     <!-- eBags Price Line -->
-    
+
         <div id="ebagsPrice">
             <span id="ctl00_ctl00_cphRedcatsPage_cphLayout_UcPriceDisplay_lblNormalPriceLabelCaption">Our Price:</span><span id="ctl00_ctl00_cphRedcatsPage_cphLayout_UcPriceDisplay_spnNormalPrice" class="priceBold">
                 <span id="ctl00_ctl00_cphRedcatsPage_cphLayout_UcPriceDisplay_lblNormalPrice">$89.00</span>
             </span><span id="ctl00_ctl00_cphRedcatsPage_cphLayout_UcPriceDisplay_lblNormalPricePercentageOff" class="priceRed"></span>
         </div>
-    
+
     <p>&nbsp;</p>
 
 
-                     
+
         <div id="priceForModelGroup">Available Colors at $89.00</div>
-        
+
                 <div id="ebagsThumbWrap" class="ebagsThumbWrap">
-            
+
                 <div id="ctl00_ctl00_cphRedcatsPage_cphLayout_UcColorSelect_rptModelPriceGroup_ctl00_rptProductSwatches_ctl01_ebagsThumb" class="ebagsThumb" onmouseover="javascript: SwapHeroImage(&#39;130799_3_1&#39;,&#39;9&#39;);" onmouseout="javascript: ResetHeroImage();" onmousedown="javascript: SetHeroImage(&#39;130799_3_1&#39;,&#39;9&#39;);">
                     <a id="ctl00_ctl00_cphRedcatsPage_cphLayout_UcColorSelect_rptModelPriceGroup_ctl00_rptProductSwatches_ctl01_lnkbtnSwatchImage" title="Honey" Color="Honey" href="javascript:__doPostBack(&#39;ctl00$ctl00$cphRedcatsPage$cphLayout$UcColorSelect$rptModelPriceGroup$ctl00$rptProductSwatches$ctl01$lnkbtnSwatchImage&#39;,&#39;&#39;)"><img id="ctl00_ctl00_cphRedcatsPage_cphLayout_UcColorSelect_rptModelPriceGroup_ctl00_rptProductSwatches_ctl01_lnkbtnImage" src="//cdn1.ebags.com/is/image/im9/130799_3_1?resmode=4&amp;op_usm=1,1,1,&amp;qlt=95,1&amp;hei=50&amp;wid=50" style="border-width:0px;" /></a>
                 </div><img id="ctl00_ctl00_cphRedcatsPage_cphLayout_UcColorSelect_rptModelPriceGroup_ctl00_rptProductSwatches_ctl01__imgPreload" src="//cdn1.ebags.com/is/image/im9/130799_3_1?resmode=4&amp;op_usm=1,1,1,&amp;qlt=95,1&amp;hei=280&amp;wid=280" alt="Image 01" style="height:1px;width:1px;border-width:0px;display:none;" />
-            
+
                 </div><!-- /ebagsThumbWrap -->
-            
-    
+
+
         <div id="priceForModelGroup">Clearance at $69.99</div>
-        
+
                 <div id="ebagsThumbWrap" class="ebagsThumbWrap">
-            
+
                 <div id="ctl00_ctl00_cphRedcatsPage_cphLayout_UcColorSelect_rptModelPriceGroup_ctl01_rptProductSwatches_ctl01_ebagsThumb" class="ebagsThumb" onmouseover="javascript: SwapHeroImage(&#39;130799_6_1&#39;,&#39;9&#39;);" onmouseout="javascript: ResetHeroImage();" onmousedown="javascript: SetHeroImage(&#39;130799_6_1&#39;,&#39;9&#39;);">
                     <a id="ctl00_ctl00_cphRedcatsPage_cphLayout_UcColorSelect_rptModelPriceGroup_ctl01_rptProductSwatches_ctl01_lnkbtnSwatchImage" title="White" Color="White" href="javascript:__doPostBack(&#39;ctl00$ctl00$cphRedcatsPage$cphLayout$UcColorSelect$rptModelPriceGroup$ctl01$rptProductSwatches$ctl01$lnkbtnSwatchImage&#39;,&#39;&#39;)"><img id="ctl00_ctl00_cphRedcatsPage_cphLayout_UcColorSelect_rptModelPriceGroup_ctl01_rptProductSwatches_ctl01_lnkbtnImage" src="//cdn1.ebags.com/is/image/im9/130799_6_1?resmode=4&amp;op_usm=1,1,1,&amp;qlt=95,1&amp;hei=50&amp;wid=50" style="border-width:0px;" /></a>
                 </div><img id="ctl00_ctl00_cphRedcatsPage_cphLayout_UcColorSelect_rptModelPriceGroup_ctl01_rptProductSwatches_ctl01__imgPreload" src="//cdn1.ebags.com/is/image/im9/130799_6_1?resmode=4&amp;op_usm=1,1,1,&amp;qlt=95,1&amp;hei=280&amp;wid=280" alt="Image 01" style="height:1px;width:1px;border-width:0px;display:none;" />
-            
+
                 <div id="ctl00_ctl00_cphRedcatsPage_cphLayout_UcColorSelect_rptModelPriceGroup_ctl01_rptProductSwatches_ctl02_ebagsThumb" class="ebagsThumb" onmouseover="javascript: SwapHeroImage(&#39;130799_11_1&#39;,&#39;9&#39;);" onmouseout="javascript: ResetHeroImage();" onmousedown="javascript: SetHeroImage(&#39;130799_11_1&#39;,&#39;9&#39;);">
                     <a id="ctl00_ctl00_cphRedcatsPage_cphLayout_UcColorSelect_rptModelPriceGroup_ctl01_rptProductSwatches_ctl02_lnkbtnSwatchImage" title="Glam Red" Color="Glam Red" href="javascript:__doPostBack(&#39;ctl00$ctl00$cphRedcatsPage$cphLayout$UcColorSelect$rptModelPriceGroup$ctl01$rptProductSwatches$ctl02$lnkbtnSwatchImage&#39;,&#39;&#39;)"><img id="ctl00_ctl00_cphRedcatsPage_cphLayout_UcColorSelect_rptModelPriceGroup_ctl01_rptProductSwatches_ctl02_lnkbtnImage" src="//cdn1.ebags.com/is/image/im9/130799_11_1?resmode=4&amp;op_usm=1,1,1,&amp;qlt=95,1&amp;hei=50&amp;wid=50" style="border-width:0px;" /></a>
                 </div><img id="ctl00_ctl00_cphRedcatsPage_cphLayout_UcColorSelect_rptModelPriceGroup_ctl01_rptProductSwatches_ctl02__imgPreload" src="//cdn1.ebags.com/is/image/im9/130799_11_1?resmode=4&amp;op_usm=1,1,1,&amp;qlt=95,1&amp;hei=280&amp;wid=280" alt="Image 01" style="height:1px;width:1px;border-width:0px;display:none;" />
-            
+
                 </div><!-- /ebagsThumbWrap -->
-            
-    
+
+
 <div id="ebagsColorSelect">
     <span>
         Select a color
@@ -572,7 +572,7 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$ctl00$ScriptManager1', 'eBags
 	</select></div>
 </div>
 
-                    
+
 <div id="ebagsQuantity">
     <span>Quantity</span>
     <input name="ctl00$ctl00$cphRedcatsPage$cphLayout$UcAddToCartButton$txtQuantity" type="text" value="1" maxlength="2" id="ctl00_ctl00_cphRedcatsPage_cphLayout_UcAddToCartButton_txtQuantity" style="width:40px;" />
@@ -580,7 +580,7 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$ctl00$ScriptManager1', 'eBags
 <div id="ebagsAddtoCart">
     <a id="ctl00_ctl00_cphRedcatsPage_cphLayout_UcAddToCartButton_lnkButtonAddToCart" title="Add Tignanello Multi Pocket Organizer Crossbody to cart" href="javascript:__doPostBack(&#39;ctl00$ctl00$cphRedcatsPage$cphLayout$UcAddToCartButton$lnkButtonAddToCart&#39;,&#39;&#39;)"><img id="ctl00_ctl00_cphRedcatsPage_cphLayout_UcAddToCartButton_imgAddToCart" src="//cdn2.ebags.com/Images/btn-AddToCart-BCOutlet.gif" style="border-width:0px;" /></a>
     <strong></strong>
-</div>    
+</div>
 <script type="text/javascript">
     eBags(function() {
         jQuery('form#eBagsForm').validate({
@@ -602,7 +602,7 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$ctl00$ScriptManager1', 'eBags
             messages:
             {
                 required: 'Quantity is required.',
-                range: 'Quantity must be between 1 and 40.' 
+                range: 'Quantity must be between 1 and 40.'
             }
         });
 
@@ -649,160 +649,160 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$ctl00$ScriptManager1', 'eBags
                             <span>17"</span>
                         </li>
                     </ul>
-                    
+
 <div id="ebagsProdFeatures">
     <h2>Product Features</h2>
-    
+
             <ul>
-        
+
             <li>
                 Top zipper closure
             </li>
-        
+
             <li>
                 Interior lining
             </li>
-        
+
             <li>
                 Two interior slide pockets
             </li>
-        
+
             <li>
                 Back wall zipper pocket
             </li>
-        
+
             <li>
                 Shoulder strap with a 23.5 inch drop length and a 50 inch strap length
             </li>
-        
+
             <li>
                 Front exterior cell phone pocket
             </li>
-        
+
             <li>
                 Front exterior zipper pocket
             </li>
-        
+
             <li>
                 Back exterior zipper compartment that has: 12 card slots, clear i.d. slot, zipper pocket
             </li>
-        
+
 </div>
 
                 </div><!-- ebagsDetailProdInfoWrap -->
-            
+
 </div>
-        
+
 <div id="ebagsRightCertonaWrap">
     <h3>You May Also Like</h3>
     <div id="edetail">
-        
+
                 <div class="ebagsRightCertona">
                     <a id="ctl00_ctl00_cphRedcatsPage_cphLayout_rightCertonaRecommender__dataListRecommender_ctl00__hyperLink" href="/product/ebags/packing-cubes-3pc-set/13032/p/949922"><img id="ctl00_ctl00_cphRedcatsPage_cphLayout_rightCertonaRecommender__dataListRecommender_ctl00__imageSource" src="//cdn1.ebags.com/is/image/im2/13032_9_1?resmode=4&amp;op_usm=1,1,1,&amp;qlt=95,1&amp;hei=115&amp;wid=115&amp;align=0,1" style="border-width:0px;height:115px;width:115px;" />
                         <span class="ebagsBrand">eBags</span>
                         <span class="ebagsProdName">Packing Cubes - 3pc Set</span>
-                        
+
 <span class="ebagsWasPrice"></span>
 <span class="ebagsPrice">$29.99</span>
 
 </a>		
                 </div>
-            
+
                 <div class="ebagsRightCertona">
                     <a id="ctl00_ctl00_cphRedcatsPage_cphLayout_rightCertonaRecommender__dataListRecommender_ctl01__hyperLink" href="/product/ebags/piazza-day-bag/94553/p/1318670"><img id="ctl00_ctl00_cphRedcatsPage_cphLayout_rightCertonaRecommender__dataListRecommender_ctl01__imageSource" src="//cdn1.ebags.com/is/image/im3/94553_8_1?resmode=4&amp;op_usm=1,1,1,&amp;qlt=95,1&amp;hei=115&amp;wid=115&amp;align=0,1" style="border-width:0px;height:115px;width:115px;" />
                         <span class="ebagsBrand">eBags</span>
                         <span class="ebagsProdName">Piazza Day Bag</span>
-                        
+
 <span class="ebagsWasPrice"></span>
 <span class="ebagsPrice">$39.99</span>
 
 </a>		
                 </div>
-            
+
                 <div class="ebagsRightCertona">
                     <a id="ctl00_ctl00_cphRedcatsPage_cphLayout_rightCertonaRecommender__dataListRecommender_ctl02__hyperLink" href="/product/tignanello/zip-top-x-body-organizer/210996/p/10157105"><img id="ctl00_ctl00_cphRedcatsPage_cphLayout_rightCertonaRecommender__dataListRecommender_ctl02__imageSource" src="//cdn1.ebags.com/is/image/im6/210996_7_1?resmode=4&amp;op_usm=1,1,1,&amp;qlt=95,1&amp;hei=115&amp;wid=115&amp;align=0,1" style="border-width:0px;height:115px;width:115px;" />
                         <span class="ebagsBrand">Tignanello</span>
                         <span class="ebagsProdName">Item Zip Top Cross-Body Organizer</span>
-                        
+
 <span class="ebagsWasPrice">Was: $89.00</span>
 <span class="ebagsPrice">Now: $69.99</span>
 
 </a>		
                 </div>
-            
+
                 <div class="ebagsRightCertona">
                     <a id="ctl00_ctl00_cphRedcatsPage_cphLayout_rightCertonaRecommender__dataListRecommender_ctl03__hyperLink" href="/product/ebags/villa-cross-body/204598/p/10109635"><img id="ctl00_ctl00_cphRedcatsPage_cphLayout_rightCertonaRecommender__dataListRecommender_ctl03__imageSource" src="//cdn1.ebags.com/is/image/im8/204598_5_1?resmode=4&amp;op_usm=1,1,1,&amp;qlt=95,1&amp;hei=115&amp;wid=115&amp;align=0,1" style="border-width:0px;height:115px;width:115px;" />
                         <span class="ebagsBrand">eBags</span>
                         <span class="ebagsProdName">Villa Cross Body</span>
-                        
+
 <span class="ebagsWasPrice"></span>
 <span class="ebagsPrice">$29.99</span>
 
 </a>		
                 </div>
-            
+
     </div>
 </div>
-        
+
 <div id="ebagsBottomCertonaWrap">
     <h3>Customers Who Viewed This Also Viewed</h3>
     <div id="edetail_ai">
-        
+
                 <div class="ebagsBottomCertona">
                     <a id="ctl00_ctl00_cphRedcatsPage_cphLayout_bottomCertonaRecommender__dataListRecommender_ctl00__hyperLink" href="/product/baggallini/triple-zip-bagg/127324/p/1330217"><img id="ctl00_ctl00_cphRedcatsPage_cphLayout_bottomCertonaRecommender__dataListRecommender_ctl00__imageSource" src="//cdn1.ebags.com/is/image/im4/127324_6_1?resmode=4&amp;op_usm=1,1,1,&amp;qlt=95,1&amp;hei=115&amp;wid=115&amp;align=0,1" style="border-width:0px;height:115px;width:115px;" />
                         <span class="ebagsBrand">baggallini</span>
                         <span class="ebagsProdName">Triple Zip Bagg</span>
-                        
+
 <span class="ebagsWasPrice">Was: $39.95</span>
 <span class="ebagsPrice">Now: $29.99</span>
 
 </a>		
                 </div>
-            
+
                 <div class="ebagsBottomCertona">
                     <a id="ctl00_ctl00_cphRedcatsPage_cphLayout_bottomCertonaRecommender__dataListRecommender_ctl01__hyperLink" href="/product/baggallini/sydney-bagg-silver-hardware/143936/p/10146856"><img id="ctl00_ctl00_cphRedcatsPage_cphLayout_bottomCertonaRecommender__dataListRecommender_ctl01__imageSource" src="//cdn1.ebags.com/is/image/im6/143936_12_1?resmode=4&amp;op_usm=1,1,1,&amp;qlt=95,1&amp;hei=115&amp;wid=115&amp;align=0,1" style="border-width:0px;height:115px;width:115px;" />
                         <span class="ebagsBrand">baggallini</span>
                         <span class="ebagsProdName">Sydney Bagg Silver Hardware</span>
-                        
+
 <span class="ebagsWasPrice">Was: $89.95</span>
 <span class="ebagsPrice">Now: $69.99</span>
 
 </a>		
                 </div>
-            
+
                 <div class="ebagsBottomCertona">
                     <a id="ctl00_ctl00_cphRedcatsPage_cphLayout_bottomCertonaRecommender__dataListRecommender_ctl02__hyperLink" href="/product/the-sak/iris-crossbody/144187/p/10163431"><img id="ctl00_ctl00_cphRedcatsPage_cphLayout_bottomCertonaRecommender__dataListRecommender_ctl02__imageSource" src="//cdn1.ebags.com/is/image/im7/144187_21_1?resmode=4&amp;op_usm=1,1,1,&amp;qlt=95,1&amp;hei=115&amp;wid=115&amp;align=0,1" style="border-width:0px;height:115px;width:115px;" />
                         <span class="ebagsBrand">The Sak</span>
                         <span class="ebagsProdName">Iris Crossbody</span>
-                        
+
 <span class="ebagsWasPrice"></span>
 <span class="ebagsPrice">$59.00</span>
 
 </a>		
                 </div>
-            
+
                 <div class="ebagsBottomCertona">
                     <a id="ctl00_ctl00_cphRedcatsPage_cphLayout_bottomCertonaRecommender__dataListRecommender_ctl03__hyperLink" href="/product/the-sak/iris-crossbody/144187/p/10002223"><img id="ctl00_ctl00_cphRedcatsPage_cphLayout_bottomCertonaRecommender__dataListRecommender_ctl03__imageSource" src="//cdn1.ebags.com/is/image/im7/144187_8_1?resmode=4&amp;op_usm=1,1,1,&amp;qlt=95,1&amp;hei=115&amp;wid=115&amp;align=0,1" style="border-width:0px;height:115px;width:115px;" />
                         <span class="ebagsBrand">The Sak</span>
                         <span class="ebagsProdName">Iris Crossbody</span>
-                        
+
 <span class="ebagsWasPrice"></span>
 <span class="ebagsPrice">$59.00</span>
 
 </a>		
                 </div>
-            
+
                 <div class="ebagsBottomCertona">
                     <a id="ctl00_ctl00_cphRedcatsPage_cphLayout_bottomCertonaRecommender__dataListRecommender_ctl04__hyperLink" href="/product/relic/organizer-item/205691/p/10113174"><img id="ctl00_ctl00_cphRedcatsPage_cphLayout_bottomCertonaRecommender__dataListRecommender_ctl04__imageSource" src="//cdn1.ebags.com/is/image/im1/205691_3_1?resmode=4&amp;op_usm=1,1,1,&amp;qlt=95,1&amp;hei=115&amp;wid=115&amp;align=0,1" style="border-width:0px;height:115px;width:115px;" />
                         <span class="ebagsBrand">Relic</span>
                         <span class="ebagsProdName">Organizer Item</span>
-                        
+
 <span class="ebagsWasPrice"></span>
 <span class="ebagsPrice">$48.00</span>
 
 </a>		
                 </div>
-            
+
     </div>
 </div>
     </div><!-- eBagsDetailWrap -->
@@ -815,7 +815,7 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$ctl00$ScriptManager1', 'eBags
         } else {
             hidReload.value = "newvalue"
         }
-    } 
+    }
 
 </script>
 
@@ -829,7 +829,7 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$ctl00$ScriptManager1', 'eBags
 <input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwULLTE3NzI5ODg3NzlkZKMJcNJATBAaEtulMz8qqyI9ovJk" />
 
         <div id="controlWrapper">
-            
+
 
 <div class="bco-footer">
     <!-- MAXCHMB BCO_Footer_Top --><!-- From Cache CHM3 ContentId: 79118 --><div class="communication">
@@ -915,22 +915,22 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$ctl00$ScriptManager1', 'eBags
 
             <div class="clear"></div>
         </div><!-- MAXCHME BCO_Footer_Top  -->
-        
+
      <!-- MAXCHMB BCO_Footer_Bottom --><!-- From Cache CHM3 ContentId: 83094 --><p class="copyright">*Here's how to redeem your promo code:<br />
         1. Place one or more eligible items in your Shopping Cart.<br />
         2. Type promo code <strong>BC16280</strong> into the Promotion Code Box, then click apply.<br />
         3. The $1.99 standard shipping charge will be automatically applied, if eligible*.<br />
         4. Continue shopping or begin checkout.<br />  <br />
-        
-        <strong>*Promo code restrictions:</strong> offer ends 11:59PM E.S.T. TUESDAY, 7/03/12. Heavy weight items may incur additional freight costs.  
-        May not be redeemed for cash or combined with other offers. Not applicable to payment of bills or charges. Discount may not be applied to 
-        prior purchases, or E-Gift cards. Limited to one offer per customer. 
+
+        <strong>*Promo code restrictions:</strong> offer ends 11:59PM E.S.T. TUESDAY, 7/03/12. Heavy weight items may incur additional freight costs.
+        May not be redeemed for cash or combined with other offers. Not applicable to payment of bills or charges. Discount may not be applied to
+        prior purchases, or E-Gift cards. Limited to one offer per customer.
 <br /><br />
-          
-          Add BCOutlet@email.BCOutlet.com to your email address book and keep the deals coming!<br /> 
+
+          Add BCOutlet@email.BCOutlet.com to your email address book and keep the deals coming!<br />
         Be the first to know about online deals and special promotions. <br /><br />
-        
-          <br /><br />Register with us to access all of our convenient site features!<a href="http://www.bcoutlet.com/Account/Acct_CreateProfile.aspx?mid=%%MASTER_PID%%">Click Here</a> It's fast, easy and secure. To reply to this email, please use our  <a href="http://www.bcoutlet.com/ContactUs/ContactUs.aspx?mid=%%MASTER_PID%%">Customer Contact Form.</a> ScanAlert(tm) Hacker Safe BCOutlet.com respects your privacy.<a href="https://www.scanalert.com/RatingVerify?ref=www.bcoutlet.com">Click Here</a> We Ship UPS(r) 
+
+          <br /><br />Register with us to access all of our convenient site features!<a href="http://www.bcoutlet.com/Account/Acct_CreateProfile.aspx?mid=%%MASTER_PID%%">Click Here</a> It's fast, easy and secure. To reply to this email, please use our  <a href="http://www.bcoutlet.com/ContactUs/ContactUs.aspx?mid=%%MASTER_PID%%">Customer Contact Form.</a> ScanAlert(tm) Hacker Safe BCOutlet.com respects your privacy.<a href="https://www.scanalert.com/RatingVerify?ref=www.bcoutlet.com">Click Here</a> We Ship UPS(r)
 UPS and the UPS brandmark are registered trademarks used with permission by its owner, United Parcel Service of America, Inc. All rights reserved.To <a href="https://www.bcoutlet.com/Account/Email_Unsubscribe.aspx?mid=%%MASTER_PID%%">unsubscribe</a> from our email list Please read about our <a href="http://www.bcoutlet.com/Help/PrivacySecurity.aspx">Privacy Policy</a> and <a href="http://www.bcoutlet.com/Help/PrivacySecurity.aspx?mid=%%MASTER_PID%%">Terms of Use</a> (last updated on 4-11-11)  <a target="_blank" href="http://www.redcats.com/eng#/eng">&copy;2012 Redcats USA, L.P</a>. All Rights Reserved.
  </p><!-- MAXCHME BCO_Footer_Bottom  -->
 
@@ -982,10 +982,10 @@ UPS and the UPS brandmark are registered trademarks used with permission by its 
         </script>
     <!-- MAXCHME BCO_Common_JavaScript  -->
 
-    
- 
+
+
 </div>
- 
+
 
 
         </div><!-- end container div -->
@@ -1085,7 +1085,7 @@ ENDHTML
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-us" lang="en-us" xmlns:og='http://ogp.me/ns#' xmlns:fb='http://www.facebook.com/2008/fbml'>
 <head>
 <title>Theodora &amp; Callum Flats - Primaballet with Ankle Strap | Bloomingdale&#039;s</title>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" /> 
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <meta http-equiv="Content-Script-Type" content="text/javascript" />
 <meta http-equiv="Content-Style-Type" content="text/css" />
 <meta property="og:title" content="Theodora & Callum Flats - Primaballet with Ankle Strap | Bloomingdale's" />
@@ -1235,7 +1235,7 @@ document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.
 <script type="text/javascript">
 var pageTracker = _gat._getTracker("UA-4092090-1");
 pageTracker._setDomainName("bloomingdales.com");
-pageTracker._setCookieTimeout("2592000"); 
+pageTracker._setCookieTimeout("2592000");
 pageTracker._initData();
 pageTracker._trackPageview();
 </script>
@@ -1271,7 +1271,7 @@ var flWidth = "375";
 var flHeight = "30";
 var flMinVersion = "5";
 var flContainerID = "flashContent_top_banner";
-swfobject.embedSWF(flMovie, flContainerID, flWidth, flHeight, flMinVersion, "http://assets.bloomingdales.com/navapp/media/expressInstall.swf", null, flParams, flAttr); 
+swfobject.embedSWF(flMovie, flContainerID, flWidth, flHeight, flMinVersion, "http://assets.bloomingdales.com/navapp/media/expressInstall.swf", null, flParams, flAttr);
 </script>
 <div id="flashContent_top_banner">
 <a href="javascript:pop(&#039;/popup.ognc?popupID=23133&amp;cm_sp=NAVIGATION-_-GLOBAL_BANNER-_-FREE_SHIPPING&#039;,&#039;myDynaPop&#039;,&#039;width=575,height=350&#039;)">
@@ -1298,8 +1298,8 @@ swfobject.embedSWF(flMovie, flContainerID, flWidth, flHeight, flMinVersion, "htt
 <div id="qb_headerItemContainer">
 <div id="qb_showBagItems" class="yui-skin-sam">
 <a href="http://www1.bloomingdales.com/bag/index.ognc" id="qb_addToBagOverlayLabel" class="qb_closedOverlayLabel">
-<script type="text/javascript">thisUser.qb_writeWelcome();</script> 
-BROWN BAG: 
+<script type="text/javascript">thisUser.qb_writeWelcome();</script>
+BROWN BAG:
 <span id="brownBagItemsTotal">
 <script type="text/javascript">
 thisUser.writeCartItems();
@@ -1328,7 +1328,7 @@ document.write(thisUser.getCartItemTotal()==="1"? " ITEM" : " ITEMS");
 <div class="bl_nav_top_section_navigation_options_last"><a class="white" onmouseout="rollMouseOut(this);" onmouseover="rollMouseOver(this);" href="http://www1.bloomingdales.com/catalog/index.ognc?CategoryID=3977&amp;cm_sp=NAVIGATION-_-TOP_NAV-_-SALE"><img class="displayBlock" alt="Sale" src="http://assets.bloomingdales.com/navapp/img/nav/r09/topnav/topnav_sale_off.gif"/></a></div>
 <div class="clearLeft"></div>	
 </div>
-<div class="clearLeft"></div> 
+<div class="clearLeft"></div>
 <div class="bl_nav_top_sub">
 <div class="bl_nav_top_sub_search">
 <form id="keywordSearch" method="get" action="http://www1.bloomingdales.com/search/index.ognc">
@@ -1407,27 +1407,27 @@ s.parentNode.insertBefore(m, s);
 <a name="skipToContent"></a>
 <div class="pdp_altImages">
 <div id="pdp_alt_images_container" class="pdp_alt_images_container">
-<div class="bl_pdp_thumb"> 
+<div class="bl_pdp_thumb">
 <a href="javascript:void(0)" class="pdp_alt_image_link">
-<img id="altImage_0" src="http://images.bloomingdales.com/is/image/BLM/products/4/optimized/1281004_fpx.tif?wid=52&qlt=90,0&layer=comp&op_sharpen=0&resMode=sharp2&op_usm=0.7,1.0,0.5,0&fmt=jpeg" 
+<img id="altImage_0" src="http://images.bloomingdales.com/is/image/BLM/products/4/optimized/1281004_fpx.tif?wid=52&qlt=90,0&layer=comp&op_sharpen=0&resMode=sharp2&op_usm=0.7,1.0,0.5,0&fmt=jpeg"
 class="altImage PDPImageDisplayBlackBorder">
-</a> 
+</a>
 </div>
-<div class="bl_pdp_thumb"> 
+<div class="bl_pdp_thumb">
 <a href="javascript:void(0)" class="pdp_alt_image_link">
-<img id="altImage_1" src="http://images.bloomingdales.com/is/image/BLM/products/2/optimized/1281002_fpx.tif?wid=52&qlt=90,0&layer=comp&op_sharpen=0&resMode=sharp2&op_usm=0.7,1.0,0.5,0&fmt=jpeg" 
+<img id="altImage_1" src="http://images.bloomingdales.com/is/image/BLM/products/2/optimized/1281002_fpx.tif?wid=52&qlt=90,0&layer=comp&op_sharpen=0&resMode=sharp2&op_usm=0.7,1.0,0.5,0&fmt=jpeg"
 class="altImage PDPImageDisplay">
 </a>
 </div>
-<div class="bl_pdp_thumb"> 
+<div class="bl_pdp_thumb">
 <a href="javascript:void(0)" class="pdp_alt_image_link">
-<img id="altImage_2" src="http://images.bloomingdales.com/is/image/BLM/products/3/optimized/1281003_fpx.tif?wid=52&qlt=90,0&layer=comp&op_sharpen=0&resMode=sharp2&op_usm=0.7,1.0,0.5,0&fmt=jpeg" 
+<img id="altImage_2" src="http://images.bloomingdales.com/is/image/BLM/products/3/optimized/1281003_fpx.tif?wid=52&qlt=90,0&layer=comp&op_sharpen=0&resMode=sharp2&op_usm=0.7,1.0,0.5,0&fmt=jpeg"
 class="altImage PDPImageDisplay">
 </a>
 </div>
 </div>
 <div id="alt_images_scroll_down_area">	
-<div id="alt_images_scroll_down_container"> 
+<div id="alt_images_scroll_down_container">
 <img src="http://assets.bloomingdales.com/navapp/img/pdp/pdp_arrowUp.gif" class="displayBlock" id="alt_images_scroll_up">
 </div>
 </div>
@@ -1547,7 +1547,7 @@ SIZE:
 <label for="color"> COLOR: </label>
 </div>
 <div class="pdp_color_box">
-</div> 
+</div>
 </div>
 <div class="pdp_qty" id="pdpQty">
 <span>QTY:</span>
@@ -1607,7 +1607,7 @@ Bag&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;Subtotal :
 </div>
 </div>
 </div>
-<input type="submit" id="ADDTOBAG_BUTTON" value="" class="pdp_add_to_bag_right addToBagBtn" /> 
+<input type="submit" id="ADDTOBAG_BUTTON" value="" class="pdp_add_to_bag_right addToBagBtn" />
 </div>
 <div class="clearBoth"></div>
 <div class="clearBoth"></div>
@@ -1740,7 +1740,7 @@ document.getElementById('twitterIcon').src = 'http://assets.bloomingdales.com/na
 <a href="https://customerservice.bloomingdales.com/app/answers/detail/a_id/356/?cm_sp=NAVIGATION-_-BOTTOM_LINKS-_-LEGAL_NOTICES" class="footer_link">Legal Notice</a>&nbsp;&nbsp;&nbsp;
 <a href="https://customerservice.bloomingdales.com/app/answers/detail/a_id/357/?cm_sp=NAVIGATION-_-BOTTOM_LINKS-_-PRIVACY_POLICY" class="footer_link">Privacy Policy</a>&nbsp;&nbsp;&nbsp;&nbsp;
 <a href="https://customerservice.bloomingdales.com/app/answers/detail/a_id/358/?cm_sp=NAVIGATION-_-BOTTOM_LINKS-_-CA_PRIVACY_RIGHTS" class="footer_link" id="footer_link_CA">CA Privacy Rights</a>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://www1.bloomingdales.com/accessibility/start_en.html" class="footer_link">visually impaired customers</a> <a href="https://customerservice.bloomingdales.com/app/answers/detail/a_id/619" class="footer_link"><img src="http://assets.bloomingdales.com/navapp/img/nav/r09/botnav/EasyWebB.gif" alt="visually impaired customers essential accessibility" /></a> <a href="https://customerservice.bloomingdales.com/app/answers/detail/a_id/619" class="footer_link">essential accessibility</a>&trade; 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://www1.bloomingdales.com/accessibility/start_en.html" class="footer_link">visually impaired customers</a> <a href="https://customerservice.bloomingdales.com/app/answers/detail/a_id/619" class="footer_link"><img src="http://assets.bloomingdales.com/navapp/img/nav/r09/botnav/EasyWebB.gif" alt="visually impaired customers essential accessibility" /></a> <a href="https://customerservice.bloomingdales.com/app/answers/detail/a_id/619" class="footer_link">essential accessibility</a>&trade;
 </div>
 <div class="bl_nav_bot_service_container_2">
 &copy; 2012 Bloomingdale's, Inc. 1000 Third Avenue New York, NY 10022. <a href="javascript:pop('http://www.macysinc.com/contact/general.aspx?cm_sp=NAVIGATION-_-BOTTOM_LINKS-_-CORP_NAME_ADDRESS')" class="footer_link">Request our corporate name and address</a>.
@@ -1779,15 +1779,15 @@ Secure: false
 Request URI: /web20/catalog/tiles/pdpMemberSwitch.jsp
 Server Physical Name: macyws324Node_B
 Server Clone Name: bloomies-navapp_cluster1_macyws324_m02
-CustomDate (Timestamp): 
-Registry Type: 
-JSP Page Encoding: 
+CustomDate (Timestamp):
+Registry Type:
+JSP Page Encoding:
 Framework: Web20 (Spring/JSTL/Tiles)
 Release Number: 12D
 -->
-<!-- 
-Build Date: Thu Jun 14 15:40:20 PDT 2012 
-NavApp Version:	2.7.7 
+<!--
+Build Date: Thu Jun 14 15:40:20 PDT 2012
+NavApp Version:	2.7.7
 -->
 </html>
 

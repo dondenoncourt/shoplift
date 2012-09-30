@@ -6,13 +6,13 @@ describe SetAsidesController do
   before(:each) do
     sign_in users(:users_001)
   end
-  
+
   describe "GET index" do
     it "returns status code of 200" do
       get :index, :format => :json
       response.response_code.should == 200
     end
-    
+
     it "returns current user's set asides" do
       get :index, :format => :json
       response.body.should =~ /"id":#{set_asides(:set_asides_001).item_id}/m
@@ -31,7 +31,7 @@ describe SetAsidesController do
         post :create, :item_id => 3, :format => :json
         response.response_code.should == 201
       end
-      
+
       it "returns set aside details" do
         post :create, :item_id => 3, :format => :json
         response.body.should =~ /"id":3/m
@@ -50,7 +50,7 @@ describe SetAsidesController do
       delete :destroy, :id => set_asides(:set_asides_001).item_id, :format => :json
       response.response_code.should == 200
     end
-    
+
     it "returns subscription details" do
       delete :destroy, :id => set_asides(:set_asides_001).item_id, :format => :json
       response.response_code.should == 200

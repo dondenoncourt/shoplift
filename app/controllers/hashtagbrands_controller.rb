@@ -9,7 +9,7 @@ class HashtagbrandsController < ApplicationController
   # {"hashtagbrands":[{"id":1,"value":"Lorem ipsum dolor","image":"http://s3.amazonaws.com/shoplift/small/1/product-large-1.jpg?1337212944","item_ids":[1,4,12,17,20,23],"user_ids":[1,6,8,10,11,13,14,18,20,22]},{"id":2,"value":"New brand name","image":"http://s3.amazonaws.com/shoplift/small/2/product-large-2.jpg?1337212961","item_ids":[2,5,10,30],"user_ids":[3]},{"id":3,"value":"kettler","image":null,"item_ids":"[]","user_ids":[1]}]}
   # ::output-end::
   # Fetch all the hashtagbrands that have ids in the passed URI ids parameter
-  # <br/><br/>Notes:<pre>curl -X GET --user mark@elsewhere.net:vo2max -d "ids=1,2,3" "localhost:3000/hashtagbrands.json"</pre>  
+  # <br/><br/>Notes:<pre>curl -X GET --user mark@elsewhere.net:vo2max -d "ids=1,2,3" "localhost:3000/hashtagbrands.json"</pre>
   # =end
   def index
     authenticate_user!
@@ -31,7 +31,7 @@ class HashtagbrandsController < ApplicationController
   # {"hashtagbrand":{"id":1,"value":"Lorem ipsum dolor","image":"http://s3.amazonaws.com/shoplift/small/1/product-large-1.jpg?1337212944","item_ids":[1,4,12,17,20,23],"user_ids":[1,6,8,10,11,13,14,18,20,22]}}
   # ::output-end::
   # Fetch all the hashtagbrands that have ids in the passed URI ids parameter
-  # <br/><br/>Notes:<pre>curl -X GET --user mark@elsewhere.net:vo2max "localhost:3000/hashtagbrands/2.json"</pre>  
+  # <br/><br/>Notes:<pre>curl -X GET --user mark@elsewhere.net:vo2max "localhost:3000/hashtagbrands/2.json"</pre>
   # =end
   def show
     authenticate_user!
@@ -42,14 +42,14 @@ class HashtagbrandsController < ApplicationController
   # url:: /hashtagsbrands/search.json?query=:query
   # method:: GET
   # access:: FREE
-  # return:: hashtags list 
+  # return:: hashtags list
   # param:: search:string - search string value to be used on LIKE clause against table hashtag_values
   # output:: json
   # {"hashtagbrands":[{"brand_id":null,"created_at":null,"hashtag_value_id":1,"id":32768,"updated_at":null}]}
   # ::output-end::
   # Search hashtags
-  # <br/><br/>Notes:<pre>curl -X GET --user mark@elsewhere.net:vo2max -d "query=jeans" "localhost:3000/hashtagbrands/search.json"</pre>  
-  # =end     
+  # <br/><br/>Notes:<pre>curl -X GET --user mark@elsewhere.net:vo2max -d "query=jeans" "localhost:3000/hashtagbrands/search.json"</pre>
+  # =end
   def search
     authenticate_user!
     @hashtagbrands = Hashtagbrand.includes(:brand, :hashtag_value).where("brands.name = :query or hashtag_values.value = :query",
@@ -61,14 +61,14 @@ class HashtagbrandsController < ApplicationController
   # url:: /hashtagsbrands/:id/relasted.json?limit=:limit
   # method:: GET
   # access:: FREE
-  # return:: hashtagbrand list 
+  # return:: hashtagbrand list
   # param:: limit:int - limit the count of hashtagbrands returned, defaults to 5 (optional)
   # output:: json
   # {"hashtagbrands":[{"id":32787,"value":"BTFtag2"}]}
   # ::output-end::
   # Search hashtags
-  # <br/><br/>Notes:<pre>curl -X GET --user mark@elsewhere.net:vo2max -d "limit=3" "localhost:3000/hashtagbrands/1/related.json"</pre>  
-  # =end     
+  # <br/><br/>Notes:<pre>curl -X GET --user mark@elsewhere.net:vo2max -d "limit=3" "localhost:3000/hashtagbrands/1/related.json"</pre>
+  # =end
   def related
     hashtagbrand = Hashtagbrand.find(params[:id])
     if hashtagbrand
