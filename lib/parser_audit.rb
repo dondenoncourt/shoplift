@@ -30,7 +30,6 @@ The final xpath is reduced to be as simple as possible so it may be used for pag
 
 =end
 
-include Parser
 module ParserAudit
 
   # Add log for issues for humans to review

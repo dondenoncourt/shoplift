@@ -23,6 +23,7 @@ images
 =end
 
 module Parser
+  extend self
 
   REGISTERED_TRADEMARK = "\u00AE"
 

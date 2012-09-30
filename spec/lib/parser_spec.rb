@@ -1,6 +1,5 @@
 require 'spec_helper'
 require 'fakeweb'
-include Parser
 include FakePage
 
 FakeWeb.register_uri(:get, "http://www.kettlerusa.com/fitness/exercise-bikes/2761", :body => getRace(), :content_type => "text/html")
@@ -10,33 +9,25 @@ FakeWeb.register_uri(:get, "http://www1.bloomingdales.com/shop/product/theodora-
 
 describe 'Parse' do
 
-  describe " on Kettler " do
-    it "returns a " do
-      post = parse 'http://www.kettlerusa.com/fitness/exercise-bikes/2761'
-      post[:retailer].should match(/www.kettlerusa.com/)
-    end
+  let(:parsed) do
+    Parser.parse(url)
   end
 
-  describe "on kettler" do
-    it "returns a price of $1,499" do
-      post = parse 'http://www.kettlerusa.com/fitness/exercise-bikes/2761'
-      post[:price].should == 1499
-    end
+  subject { parsed }
+
+  describe " on Kettler " do
+    let(:url) { 'http://www.kettlerusa.com/fitness/exercise-bikes/2761' }
+
+    its([:retailer]) { should match(/www.kettlerusa.com/) }
+    its([:price])    { should == 1499 }
   end
 
   describe "on bcoutlet" do
-    it "returns a price of $89" do
-      post = parse 'http://bags.bcoutlet.com/product/tignanello/multi-pocket-organizer-crossbody/130799/p/1338439'
-      post[:price].should == 89
+    let(:url) do
+      'http://bags.bcoutlet.com/product/tignanello/multi-pocket-organizer-crossbody/130799/p/1338439'
     end
-  end
 
-  describe "on bloomingdales" do
-    it "returns a price of $235.99" do
-      post = parse 'http://www1.bloomingdales.com/shop/product/theodora-callum-flats-primaballet-with-ankle-strap'
-      puts post[:price]
-      post[:price].should == 115.15
-    end
+    its([:price]) { should == 89 }
+    its([:price]) { should == 115.15 }
   end
-
 end

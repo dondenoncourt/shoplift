@@ -1,6 +1,5 @@
 class ParserController < ApplicationController
   layout nil, :only => [:bookmarklet]
-  include Parser
 
   def bookmarklet
     @css = render_to_string(:partial => 'style', :layout => false).gsub(/\n/,'')
@@ -19,7 +18,12 @@ class ParserController < ApplicationController
     #render :template => "parser/bookmarklet_old"
   end
 
+  def parse
+    Parser.parse(params[:url])
+  end
+
   def dynascript
+
   end
 
   def brandscript
@@ -30,5 +34,4 @@ class ParserController < ApplicationController
     end
     @brands = '['+ brandNames.map { |name| '"' + name.gsub(/&/, '&amp;').gsub(/'/, '&#39;') + '"' }.join(',') + ']'
   end
-
 end
