@@ -11,8 +11,8 @@ class TimelinesController < ApplicationController
                  .joins("LEFT JOIN user_item_views ON user_item_views.user_id = subscriptions.follower_id AND user_item_views.item_id = items.id")
                  .joins("INNER JOIN users AS post_users on posts.user_id = post_users.id AND users.status = '1'")
                  .where("items.status = '1' AND (subscriptions.follower_id = ?)",current_user.id)
-                 .group("items.id")
                  .order("user_item_views.created_at ASC, items.created_at DESC")
+                 .select("DISTINCT ON (id) items.*, user_item_views.created_at")
                  #.first
     rescue Exception => e
       puts "error: #{e}"
@@ -51,8 +51,8 @@ class TimelinesController < ApplicationController
                  .joins("INNER JOIN users AS post_users on posts.user_id = post_users.id AND users.status = '1'")
                  .where("items.status = '1' AND (subscriptions.follower_id = ? )",current_user.id)
                  .between(params)
-                 .group("items.id")
-                 .order("user_item_views.created_at ASC, items.created_at DESC")
+                 .order("id, user_item_views.created_at ASC, items.created_at DESC")
+                 .select("DISTINCT ON (id) items.*, user_item_views.created_at")
                  .paginate(per_page: params[:per_page].present? ? params[:per_page]: 6, page: params[:page])
     @items.each {|i| UserItemView.create({user_id:current_user.id, item_id:i.id})}
 
@@ -90,8 +90,8 @@ class TimelinesController < ApplicationController
                  .joins("INNER JOIN users AS post_users on posts.user_id = post_users.id AND users.status = '1'") \
                  .where("items.status = '1' AND items.user_id = ?",@user.id) \
                  .between(params)
-                 .order("items.created_at DESC") \
-                 .group("items.id") \
+                 .order("id, items.created_at DESC") \
+                 .select("DISTINCT ON (id) items.*")
                  .limit(limit)
      render :index
   end
@@ -118,8 +118,8 @@ class TimelinesController < ApplicationController
                  .joins("INNER JOIN users AS post_users on posts.user_id = post_users.id AND users.status = '1'") \
                  .where("items.status = '1' AND users.private != '1'") \
                  .between(params)
-                 .order("items.created_at DESC") \
-                 .group("items.id") \
+                 .order("id, items.created_at DESC") \
+                 .select("DISTINCT ON (id) items.*")
                  .limit(limit)
      render :index
 

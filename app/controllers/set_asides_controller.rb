@@ -18,7 +18,7 @@ class SetAsidesController < ApplicationController
                           .joins("INNER JOIN users AS post_users on posts.user_id = post_users.id AND users.status = 1") \
                           .joins("INNER JOIN users AS item_users on items.user_id = item_users.id AND users.status = 1") \
                           .where("set_asides.user_id = ? AND set_asides.status = 1",current_user.id) \
-                          .group("items.id")
+                          .select("DISTINCT ON (items.id) set_asides.*")
   end
 
   # =begin apidoc
