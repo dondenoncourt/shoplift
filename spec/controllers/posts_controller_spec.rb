@@ -34,7 +34,7 @@ describe PostsController do
       post :create, {url:'http://www1.bloomingdales.com/shop/product/theodora-callum-flats-primaballet-with-ankle-strap'}
       xpathCount = Xpath.count
       @post = Post.first(:order => 'id DESC')
-      post :update, {id: @post.id, parser_brand: '', parser_price: '123.45', 
+      post :update, {id: @post.id, parser_brand: '', parser_price: '123.45',
                     post:{id: @post.id,
                           retailer: 'www1.bloomingdales.com',
                           brand:'Theodora & Callum Flats', name: 'Primaballet with Ankle Strap',
@@ -43,8 +43,8 @@ describe PostsController do
                          }
                     }
       xpathCount.should < Xpath.count
-      Xpath.first().brand.should == "//h1[@itemprop='name']"
-      Xpath.first().price.should == "//span[@class='salePrice']"
+      Xpath.first.brand.should == "//html/body/div[2]/div[2]/div/div[1]/div[6]/div[2]/div[1]/div[2]/h1"
+      Xpath.first.price.should == "//html/body/div[2]/div[2]/div/div[1]/div[6]/div[2]/div[1]/div[2]/div/div/div[2]/span[2][@class='priceBig']"
     end
   end
 

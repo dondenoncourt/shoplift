@@ -39,7 +39,7 @@ describe UsersController do
       sign_in @user
       get :show, :format => :json, :id => @user.id
       json = JSON.parse(response.body)
-      json['user']['followee_ids'].should == [2,3]
+      json['user']['followee_ids'].map(&:to_i).should == [2,3]
       response.response_code.should == 200
     end
 
