@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-description ParserController do
+describe ParserController do
   describe 'anonymous user store in cookie...'
   describe 'logged in user shop lifts........'
   describe 'empty url' do
