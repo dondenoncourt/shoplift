@@ -11,12 +11,6 @@ Shoplift.Router = Ember.Router.extend({
     goExplore: Ember.Route.transitionTo("explore.index"),
     goSearch: Ember.Route.transitionTo("hashtagbrand.index"),
     goProfile: Ember.Route.transitionTo("user.index"),
-    goSignout: Ember.Route.transitionTo("signout"), // I know there is a better way to do this without the second route
-    signout: Ember.Route.extend({
-      enter: function() {
-        window.location = "/logout";
-      }
-    }),
     //buttons: 
     index: Ember.Route.extend({
       route: '/',

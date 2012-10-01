@@ -74,7 +74,6 @@ Shoplift.NavController = Ember.ArrayController.extend({
 		{
 			name: 'menu-buttons-help',
 			type: 'bottom',
-			//target: 'pagesManager',
 			action: 'goHelp'
 		},
 		{
