@@ -27,6 +27,7 @@ gem 'ember-rails'
 
 group :test, :development do
   gem 'pry'
+  gem 'pry-debugger'
   gem 'vcr'
   gem 'rspec-rails'
   gem 'autotest-rails'
