@@ -1,9 +1,8 @@
 // landing/app
-//= require ./shared/shared
+//= require vendor
 //= require_self
+//= require ./shared/shared
 //= require ./landing/landing
-
-Shoplift = {};
 
 Landing = Ember.Application.create({
 	rootElement: 'div#landing-container'

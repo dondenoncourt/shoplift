@@ -24,6 +24,9 @@ gem 'delayed_job_active_record'
 gem 'daemons'
 gem 'redis'
 gem 'ember-rails'
+gem 'hamlbars', '~> 1.1'
+gem 'state_machine'
+gem "active_model_serializers", :git => "git://github.com/josevalim/active_model_serializers.git"
 
 group :test, :development do
   gem 'pry'
@@ -47,4 +50,9 @@ end
 group :assets do
   gem 'therubyracer'
   gem 'uglifier'
+  gem 'coffee-rails', '~> 3.2.1'
+  gem 'sass'
+  gem 'sass-rails', '~> 3.2.3'
+  gem 'bourbon'
 end
+

@@ -17,8 +17,6 @@ App::Application.routes.draw do
   get "modal/relift", :to => "page#relift"
   get "modal/share", :to => "page#share"
 
-  get '/users', :to => 'users#index'
-
   get 'hashtagbrands/search', :to => 'hashtagbrands#search'
   get 'hashtagbrands/:id/related', :to => 'hashtagbrands#related'
   resources :hashtagbrands
@@ -43,15 +41,20 @@ App::Application.routes.draw do
     #delete "logout" => "devise/sessions#destroy"
     get '/users/auth/:provider' => 'users/omniauth_callbacks#passthru'
   end
-  get "users/following/:id", :to => "users#following"
-  get "users/whoami", :to => "users#whoami"
-  post "users/avatar", :to => "users#avatar"
-  post "users/validate_username", :to => "users#validate_username"
-  get "users/validate_email", :to => "users#validate_email"
-  resources :users, :only => [:avatar,:show,:create,:update,:destroy] do
+
+  resources :users do
+    collection do
+      get :whoami
+      post :avatar
+      post :validate_username
+      get :validate_email
+    end
+
     resources :followers, :only => [:index]
     resources :following, :only => [:index]
   end
+
+  get "users/following/:id", :to => "users#following"
 
   get "users/username/:username", :to => "users#show", :identifier => "username"
   # Browser / system compatability

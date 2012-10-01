@@ -45,6 +45,7 @@
 #  facebook_token         :string(255)
 #  twitter_token          :string(255)
 #  twitter_secret         :string(255)
+#  signup_state           :string(255)
 #
 
 users_001:
@@ -75,6 +76,7 @@ users_001:
   avatar_content_type: image/jpeg
   avatar_file_size: 151209
   avatar_updated_at: 2012-05-17 00:05:57.000000000Z
+  signup_state: member
 users_002:
   id: 2
   email: patrick@38media.net
@@ -110,6 +112,7 @@ users_002:
   avatar_content_type: image/jpeg
   avatar_file_size: 1508425
   avatar_updated_at: 2012-05-17 00:17:07.000000000Z
+  signup_state: member
 users_003:
   id: 3
   email: iain@38media.net
@@ -138,6 +141,7 @@ users_003:
   avatar_content_type: image/jpeg
   avatar_file_size: 12812
   avatar_updated_at: 2012-05-17 00:18:33.000000000Z
+  signup_state: member
 users_004:
   id: 4
   email: dead@38media.net
@@ -162,3 +166,4 @@ users_004:
   birthdate: 1900-01-01
   private: '0'
   status: 0
+  signup_state: member

@@ -45,6 +45,7 @@
 #  facebook_token         :string(255)
 #  twitter_token          :string(255)
 #  twitter_secret         :string(255)
+#  signup_state           :string(255)
 #
 
 class User < ActiveRecord::Base
@@ -59,12 +60,12 @@ class User < ActiveRecord::Base
                   :biography, :url, :hometown, :birthdate, :private, :status,
                   :first_name, :last_name, :country, :vanity_url, :zipcode,
                   :notify_new_follower, :notify_relift, :notify_missing,
-                  :avatar, :tos
+                  :avatar, :tos, :signup_state
   has_many :posts
   has_many :items
   has_many :subscriptions
-  has_many :followers, :through => :subscriptions, :foreign_key => :follower_id, :class_name => 'User', :conditions => ["subscriptions.status = 1"]
-  has_many :followees, :through => :subscriptions, :foreign_key => :user_id, :class_name => 'User', :conditions => ["subscriptions.status = 1"]
+  has_many :followers, :through => :subscriptions, :source => :user, :foreign_key => :follower_id, :class_name => 'User', :conditions => ["subscriptions.status = 1"]
+  has_many :followees, :through => :subscriptions, :source => :follower, :foreign_key => :user_id, :class_name => 'User', :conditions => ["subscriptions.status = 1"]
   has_many :hashtags
   has_many :hashtag_values, :through => :hashtags
   has_and_belongs_to_many :roles
@@ -80,15 +81,12 @@ class User < ActiveRecord::Base
                     :path => "/:style/:id/:filename",
                     :default_url => "/assets/avatars/:style/missing.png"
 
-  validates :username, :full_name, presence: true
-  validates :tos, :acceptance => true
 
   before_validation :set_username
   before_save :ensure_authentication_token
   after_create :send_welcome_email
 
-
-  default_scope where('users.status = 1')
+  default_scope { where(status: 1) }
   #
   ### Scopes for followee suggestions. They could also be methods if needed but must return an AR relation
   #
@@ -99,6 +97,38 @@ class User < ActiveRecord::Base
   scope :local_favorites, lambda{ |user| User.near([user.latitude, user.longitude], 20) }
   # scope :friends
   scope :without_user, lambda{ |user| where('users.id != ?', user.id) }
+
+  # To maintain the different validations that kick in depending
+  # on how much information the user has typed in, we'll use a state machine.
+  # The states are:
+  # 1) User created / email entered (:email)
+  # 2) Name entered (:name)
+  # 3) member / password and vanity url entered (:member)
+  state_machine :signup_state, :initial => :email do
+    state :name do
+      validates :tos, :acceptance => true
+    end
+
+    state :member do
+      validates :tos, :acceptance => true
+    end
+
+    state all do
+      # All states require email and username to have been set.
+      validates :email, :username, presence: true
+    end
+
+    state all - [:email] do
+      # All states after entering e-mail require
+      # the name to have been entered
+      validates :full_name, presence: true
+    end
+
+    state :member do
+      #validates :vanity_url, presence: true
+      validates :tos, :acceptance => true
+    end
+  end
 
   def self.by_option(option, args=nil)
     if option.present? && self.respond_to?(option)
@@ -203,10 +233,6 @@ class User < ActiveRecord::Base
 
   def send_welcome_email
     UserMailer.welcome(self).deliver
-  end
-
-  def followees
-    User.joins(:subscriptions).where('subscriptions.follower_id = ? AND subscriptions.status = 1', self.id)
   end
 
   def items

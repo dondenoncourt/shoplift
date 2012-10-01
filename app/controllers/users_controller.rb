@@ -17,20 +17,16 @@ class UsersController < ApplicationController
   # <br/><br/>Notes:<pre>curl -X GET --user aaronbartell@gmail.com:poopydiaper localhost:3000/shoplifters.json</pre>
   # =end
   def index
-    if ids = params[:ids]
+    if email = params[:email]
+      # TODO: find a better way for ember to lookup email
+      users = User.find_all_by_email(email)
+    elsif ids = params[:ids]
       users = User.where(:id => ids)
     else
       users = User.find(:all)
     end
-    # if request.xhr?
-    #   render partial: users
-    # else
-    #   respond_to do |format|
-    #     format.html
-    #     format.json { render json: users }
-    #   end
-    # end
-    render :partial => 'users', :locals => {:users => users}
+
+    render json: users, each_serializer: UserSerializer
   end
 
   # =begin apidoc
@@ -46,20 +42,14 @@ class UsersController < ApplicationController
   # <br/><br/>Notes:<pre>curl -X GET --user aaronbartell@gmail.com:poopydiaper localhost:3000/users/1.json</pre>
   # =end
   def show
-    #  render partial: items
-    #else
-    #  items
     #  if user.private? && !current_user.subscribed_to(user)
     #    render_error(403,"User is private or is not subscribed to by the logged in user")
-    #  else
     @user = User.find(params[:id])
 
     respond_to do |format|
       format.html
-      format.json { render :partial => 'user', :locals => {:user => @user}, :status => 200 }
+      format.json { render json: @user, status: 200 }
     end
-    #  end
-    #end
   end
 
   # =begin apidoc
@@ -105,8 +95,10 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
     if @user.save
-      render :partial => 'user', :locals => {:user => @user}, :status => 201
+      render json: @user, :status => 201
     else
+      5.times { @user.errors.each { |e,v| puts "#{e} #{v}"  } }
+      puts @user.signup_state
       return_error_messages(@user,"Failed to create user")
     end
   end
@@ -128,8 +120,10 @@ class UsersController < ApplicationController
     ## Check if user is updating themselve or another (must be admin) ##
     @user = User.find(params[:id])
     if @user.update_attributes(params[:user])
-      render :partial => 'user', :locals => {:user => @user}
+      render json: @user
     else
+      5.times { @user.errors.each { |e,v| puts "#{e} #{v}"  } }
+      puts @user.signup_state
       return_error_messages(@user,"Failed to update user")
     end
   end

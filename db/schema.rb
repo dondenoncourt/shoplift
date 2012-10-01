@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120917212220) do
+ActiveRecord::Schema.define(:version => 20121001055647) do
 
   create_table "brands", :force => true do |t|
     t.string   "name"
@@ -230,7 +230,7 @@ ActiveRecord::Schema.define(:version => 20120917212220) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                                               :null => false
     t.datetime "updated_at",                                               :null => false
-    t.string   "full_name",              :limit => 110,                    :null => false
+    t.string   "full_name"
     t.string   "username",               :limit => 40,                     :null => false
     t.boolean  "sex"
     t.string   "biography",              :limit => 110
@@ -261,10 +261,12 @@ ActiveRecord::Schema.define(:version => 20120917212220) do
     t.string   "facebook_token"
     t.string   "twitter_token"
     t.string   "twitter_secret"
+    t.string   "signup_state"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+  add_index "users", ["signup_state"], :name => "index_users_on_signup_state"
 
   create_table "xpaths", :force => true do |t|
     t.string   "retailer",   :null => false

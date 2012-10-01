@@ -1,3 +1,5 @@
+@import 'bourbon';
+
 	  /* ==========================================================================
 	  	 HTML5 Boilerplate styles - h5bp.com (generated via initializr.com)
 	  	 ========================================================================== */
@@ -263,6 +265,10 @@
 	  	color:#c7de55;
 	  	
 	  	margin-bottom: 19px;
+
+      &.is-saving {
+        opacity: 0.4;
+      }
 	  }
 	  #footer input.active {
 		  background: url(/img/landing-email-bg-on.png) no-repeat;
@@ -447,3 +453,47 @@
 	  		display: none;
 	  	}
 	  }
+
+@mixin shoplift-text-input {
+  outline: none;
+  border: 0;
+  border:none !important;
+  box-shadow:none !important;
+  background: rgba(255,255,255,0.3);
+  background-image: url('img/email-bg.png');
+  background-size: contain;
+  width: 250px;
+  height: 22px;
+  font-size: 16px;
+  padding-left: 10px;
+  font-family: "Helvetica Neue UltraLight", "Helvetica Neue Light", "Helvetica Neue", "Helvetica", arial;
+  letter-spacing: .12em;
+  font-weight: 100;
+  color: #C7DE55;
+  @include border-radius(0px);
+  &::-webkit-input-placeholder {
+    color: white;
+  }
+
+  &::-webkit-input-placeholder, &:-ms-input-placeholder, &:-moz-placeholder {
+    color: white;
+  }
+  &.is-saving {
+    opacity: 0.4;
+  }
+}
+
+#returning-user-password {
+  @include position(absolute, 400px 0 0 50%);
+  margin-left: -230px;
+  background-image: image-url('welcome-back-bg.png');
+  width: 460px;
+  height: 91px;
+  input {
+    @include shoplift-text-input;
+    @include position(absolute, 40px 0 0 90px);
+    color: white;
+    width: 365px;
+    padding: 20px 10px;
+  }
+}

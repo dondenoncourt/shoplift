@@ -52,5 +52,7 @@ module App
 
     # to disable use of authenticity_token in login forms
     config.action_controller.allow_forgery_protection = false
+
+    Hamlbars::Template.render_templates_for :ember
   end
 end
