@@ -1,8 +1,8 @@
 json.id item.id
 json.name item.post.name
 json.brand do |json|
-  json.id item.post.brand.hashtagbrand.id
-  json.value item.post.brand.name
+  json.id item.post.brand.hashtagbrand.id rescue ''
+  json.value item.post.brand.name rescue '' 
 end
 json.url item.post.url
 json.price item.post.price
