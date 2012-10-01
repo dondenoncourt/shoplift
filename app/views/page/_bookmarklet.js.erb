@@ -1,0 +1,17 @@
+(function(){
+  var i = 'shoplift-bookmarklet',
+      d = document,
+      e = d.getElementById(i),
+      s = d.createElement('script'),
+      t = (new Date()).getTime(),
+      u = '<%= bookmarklet_url %>?z=' + t;
+
+  if( e ) {
+    e.parentNode.removeChild(e);
+  }
+
+  s.setAttribute('src', u);
+  s.setAttribute('id', i);
+
+  d.head.appendChild(s);
+})();

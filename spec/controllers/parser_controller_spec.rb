@@ -1,20 +1,41 @@
 require 'spec_helper'
 
 describe ParserController do
-  describe 'anonymous user store in cookie...'
-  describe 'logged in user shop lifts........'
-  describe 'empty url' do
+  fixtures :users
 
-    before do
-      post :parse
+  let(:user) { users(:users_001) }
+
+  before do
+     @request.env['HTTP_REFERER'] = url
+  end
+
+  describe 'empty url' do
+    let(:url) { }
+
+    it do
+      expect {
+        get :bookmarklet
+      }.to raise_exception(ParserController::NoReferrer)
     end
   end
 
   describe 'invalid url' do
+    let(:url) { 'bro' }
+
+    it do
+      expect {
+        get :bookmarklet
+      }.to raise_exception(ParserController::InvalidReferrer)
+    end
 
   end
 
   describe 'valid url' do
+    let(:url) { 'http://www.etsy.com/listing/107263351/halloween-banner-decoration-beware-black?ref=fp_treasury_1' }
 
+    it do
+      get :bookmarklet
+      response.should be_ok
+    end
   end
 end

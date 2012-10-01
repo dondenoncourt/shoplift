@@ -12,7 +12,7 @@
       <li>
         Click and drag the Bookmarklet button directly to your Bookmarks Bar. Place it somewhere each to spot.
         <center>
-          <%= link_to "lift It", "javascript:(function(){var%20id='shoplift-bookmarklet-script',s=document.getElementById(id);if(s)s.parentNode.removeChild(s);s=document.createElement('script');s.setAttribute('src','#{bookmarklet_url(:format => :js)}?z='+(Math.random()));s.setAttribute('type','text/javascript');s.setAttribute('id',id);document.body.appendChild(s);})();", :class => 'button' %>
+          <%= link_to "lift It", "javascript:#{compress_js(render partial: 'bookmarklet.js', locals: { bookmarklet_url: bookmarklet_url(:js) }) }" %>
           </center>
       </li>
       <li>When you see an item you like, just click the button to Shoplift it - we'll take care of all the rest.</li>

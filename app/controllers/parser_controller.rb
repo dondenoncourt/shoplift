@@ -1,25 +1,33 @@
+require 'uri'
+
 class ParserController < ApplicationController
+  NoReferrer = Class.new(Exception)
+  InvalidReferrer = Class.new(Exception)
+
   layout nil, :only => [:bookmarklet]
 
   def bookmarklet
-    @css = render_to_string(:partial => 'style', :layout => false).gsub(/\n/,'')
 
-    if current_user
-      post_params = parse(params[:url])
-      @brand_name = post_params[:brand]
-      post_params[:brand] = nil
-      @images = post_params.delete(:images)
-      @post = current_user.posts.create(post_params)
+    raise NoReferrer           unless url = request.referrer
+    raise InvalidReferrer, url unless URI.parse(url).scheme
+
+
+    parsed = Parser.parse(url)
+
+    @brand  = parsed.delete(:brand)
+    @images = parsed.delete(:images)
+
+    post_scope = if current_user
+      current_user.posts
     else
-      @post = Post.new
+      # store on user session, and let the user know to login to claim post
+      Post
     end
 
-    @html = render_to_string(:partial => 'prompt', :layout => false).gsub(/\n/,'')
-    #render :template => "parser/bookmarklet_old"
-  end
+    @post = post_scope.create(parsed)
 
-  def parse
-    Parser.parse(params[:url])
+    @css  = render_to_string(:partial => 'style',  :layout => false).gsub(/\n/,'')
+    @html = render_to_string(:partial => 'prompt', :layout => false).gsub(/\n/,'')
   end
 
   def dynascript
