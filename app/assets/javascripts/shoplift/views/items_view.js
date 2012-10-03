@@ -18,6 +18,28 @@ Shoplift.InViewMixin = Ember.Mixin.create({
 	}
 })
 
+Shoplift.TagField = Ember.TextField.extend({
+	keyUp: function(e) {
+		if(e.which === 13) {
+			this.addTag();
+		}
+	},
+	addTag: function() {
+		var tagVal = this.get("value"),
+				newTag = Shoplift.store.find(Shoplift.Hashtagbrand, {value: tagVal}),
+				item = this.get("context");
+		
+		setTimeout(function() {
+		debugger;
+		console.log(newTag);
+		if(!newTag.isLoaded) {
+			newTag = Shoplift.store.createRecord(Shoplift.Hashtagbrand, {value: tagVal});
+		}
+		item.get("hashtagbrands").pushObject(newTag);
+		console.log(item.get("hashtagbrands"));
+		}, 2000);
+	}
+});
 
 Shoplift.ItemView = Ember.View.extend(Shoplift.InViewMixin, {
   templateName: 'shoplift/templates/item',
@@ -29,6 +51,18 @@ Shoplift.ItemView = Ember.View.extend(Shoplift.InViewMixin, {
   tagsTab: true,
   quoteTab: false,
   historyTab: false,
+  
+  /*tags: function() {
+  	var hashtagbrands = this.get('content.hashtagbrands.content'),
+  			tags = Ember.ArrayProxy.create(),
+  			i = hashtagbrands.length;
+  	console.log(hashtagbrands);
+  	while(i > 0) {
+  		tags.pushObject(hashtagbrands.objectAt(i));
+  		i--;
+  	}
+  	return tags;
+  }.property('content.hashtagbrands'),*/
   
   showTags: function() {
 	  this.set('tagsTab', true);

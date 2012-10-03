@@ -29,7 +29,7 @@
 			    	  <div class="tag-list-container">
 			    		  <ul class="tag-list">
 			    			  <li>
-			    				  <a><input type="text" id="newTag{{id}}" placeholder="Add a tag" /></a>
+			    				  <a>{{view Shoplift.TagField}} <!-- <input type="text" id="newTag{{id}}" placeholder="Add a tag" /> --></a>
 			    			  </li>
 			    			  {{#each hashtagbrands}}
 			    				  <li><a {{action showTag this href=true}}>{{value}}</a></li>

@@ -15,10 +15,15 @@ class HashtagbrandsController < ApplicationController
     authenticate_user!
     if params[:ids]
       @hashtagbrands = Hashtagbrand.where(:id => params[:ids])
+      render :partial => 'hashtagbrands/hashtagbrands'
+    elsif params[:value]
+      @hashtag = HashtagValue.find_by_value(params[:value])
+      @hashtagbrand = Hashtagbrand.find_by_hashtag_value_id(@hashtag.id)
+      render :partial => 'hashtagbrands/hashtagbrand'
     else
       return render_error 416, 'Error: an array of ids required'
     end
-    render :partial => 'hashtagbrands/hashtagbrands'
+    
   end
 
   # =begin apidoc
@@ -58,7 +63,7 @@ class HashtagbrandsController < ApplicationController
   end
 
   # =begin apidoc
-  # url:: /hashtagsbrands/:id/relasted.json?limit=:limit
+  # url:: /hashtagsbrands/:id/related.json?limit=:limit
   # method:: GET
   # access:: FREE
   # return:: hashtagbrand list
