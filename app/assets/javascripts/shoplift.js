@@ -9,3 +9,4 @@ Shoplift = Ember.Application.create({
 
 
 
+Ember.ENV.RAISE_ON_DEPRECATION = false;

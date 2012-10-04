@@ -24,18 +24,31 @@ Shoplift.TagField = Ember.TextField.extend({
 	},
 	addTag: function() {
 		var tagVal = this.get("value"),
-				newTag = Shoplift.store.find(Shoplift.Hashtagbrand, {value: tagVal}),
-				item = this.get("context");
+				//newTag = Shoplift.store.find(Shoplift.Hashtagbrand, {value: tagVal}),
+				item = this.get("context"),
+				postData = {
+					"item_id": item.get('id'),
+					"hashtag_value": tagVal
+				};
 		
-		setTimeout(function() {
-		debugger;
-		console.log(newTag);
-		if(!newTag.isLoaded) {
+		//setTimeout(function() {
+		//debugger;
+		//console.log(newTag);
+		//if(!newTag.isLoaded) {
 			newTag = Shoplift.store.createRecord(Shoplift.Hashtagbrand, {value: tagVal});
-		}
+		//}
 		item.get("hashtagbrands").pushObject(newTag);
-		console.log(item.get("hashtagbrands"));
-		}, 2000);
+		
+		$.ajax({
+			url: '/hashtags/create',
+			type: 'POST',
+			data: postData
+		});
+		
+		this.set("value", "");
+		//item.store.commit();
+		//console.log(item.get("hashtagbrands"));
+		//}, 2000);
 	}
 });
 
