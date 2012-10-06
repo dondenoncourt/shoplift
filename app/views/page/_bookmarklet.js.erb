@@ -1,17 +1,18 @@
 (function(){
-  var i = 'shoplift-bookmarklet',
+  var i = 'the-shoplift-script',
+      c = 'the-shoplift-container',
       d = document,
       e = d.getElementById(i),
-      s = d.createElement('script'),
+      f = d.getElementById(c),
+      j = d.createElement('script'),
       t = (new Date()).getTime(),
-      u = '<%= bookmarklet_url %>?z=' + t;
+      u = ('<%= bookmarklet_url %>?z=' + t);
 
-  if( e ) {
-    e.parentNode.removeChild(e);
-  }
+  if( e ) { e.parentNode.removeChild(e); }
+  if( f ) { f.parentNode.removeChild(f); }
 
-  s.setAttribute('src', u);
-  s.setAttribute('id', i);
+  j.setAttribute('src', u);
+  j.setAttribute('id', i);
 
-  d.head.appendChild(s);
+  d.head.appendChild(j);
 })();
