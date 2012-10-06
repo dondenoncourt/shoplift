@@ -1,0 +1,26 @@
+<img src="/img/learn-scaffolding-top.png" id="top" />
+<div id="modal">
+	<div>
+		<img src="/img/bio-instructions.png" alt="Choose a photo or logo. We’ll frame it and display it as the face of your account. (You can skip this for now and do it later if you prefer.)" />
+		<form accept-charset="UTF-8" action="/users" class="new_user" id="new_user" method="post">
+			<input name="utf8" type="hidden" value="&#x2713;" />
+			<input name="user[email]" type="hidden" {{bindAttr value="content.email"}} />
+			<input name="user[password]" type="hidden" {{bindAttr value="content.password"}} />
+			<input name="user[password_confirmation]" type="hidden" {{bindAttr value="content.password"}} />
+			<input name="user[full_name]" type="hidden" {{bindAttr value="content.name"}} />
+			<input name="user[country]" type="hidden" {{bindAttr value="content.country"}} />
+			<input name="user[zipcode]" type="hidden" {{bindAttr value="content.zip"}} />
+			<!-- <input name="user[sex]" type="hidden" {{bindAttr value="content.gender"}} /> needs to be true/false or blank-->
+			<textarea cols="80" id="user_biography" name="user[biography]" placeholder="120 characters max" rows="5"></textarea>
+			<input class="text" id="user_url" name="user[url]" placeholder="Enter your personal URL here." size="30" type="text">
+		
+			<input name="user[tos]" type="hidden" value="0" /><input id="user_tos" name="user[tos]" type="checkbox" value="1" />
+		
+			<label for="user_tos">I agree to the <a href="/terms_of_service" target="_blank">terms of service</a></label>
+			<input type="submit" />
+		</form>
+
+	</div>
+</div>
+<a {{action next}}><img src="/img/chevron-next.png" alt="next" /></a>
+<img src="/img/learn-scaffolding-bottom.png" id="bottom" />

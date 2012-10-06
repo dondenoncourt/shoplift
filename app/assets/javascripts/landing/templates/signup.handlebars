@@ -1,0 +1,7 @@
+<img src="/img/landing-signup.png" alt="Ready to join now? Sign up." />
+<div id="signup-form">
+	{{view Landing.EmailField contentBinding="controller"}}
+	{{view Landing.PasswordField contentBinding="controller"}}
+	<a {{action prev}} id="close"><img src="/img/landing-close.png" alt="previous" /></a>
+	<a {{action next}} id="next"><img src="/img/chevron-next.png" alt="next" /></a>
+</div>

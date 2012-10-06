@@ -3,21 +3,50 @@ Landing.Router = Ember.Router.extend
   enableLogging: true
   root: Ember.Route.extend
 
-    index: Ember.Route.extend
-      route: '/'
-      redirectsTo: 'app.enterEmail.index'
+    # index: Ember.Route.extend
+    #   route: '/'
+    #   redirectsTo: 'app.home'
 
     app: Ember.Route.extend
+      route: '/'
 
       # Transitions
       learnMore: Ember.Route.transitionTo('letter')
       goHome: Ember.Route.transitionTo('index')
 
       # Child routes
+      home: Ember.Route.extend
+        route: '/'
+        goSignin: Ember.Route.transitionTo('signin')
+        goLearn: Ember.Route.transitionTo('learn')
+        goSignup: Ember.Route.transitionTo('signup')
+        connectOutlets: (router) ->
+          router.get("applicationController").connectOutlet('home')
+      
+      learn: Ember.Route.extend
+        route: '/learn'
+        goSignup: Ember.Route.transitionTo('signup')
+        prev: Ember.Route.transitionTo('home')
+        connectOutlets: (router) ->
+          router.get('applicationController').connectOutlet('letter')
+          
       enterEmail: Ember.Route.extend
+        route: '/email'
         connectOutlets: (router) ->
           router.get("applicationController").connectOutlet
             viewClass: Landing.EmailView
+        
+        user: null,
+        
+        userExists: ( ->
+          user = this.get('user')
+          if user?
+            if user
+              router.transitionTo 'returningUserPassword'
+            else
+              router.transitionTo 'checkYourEmail'
+          user
+        ).observes('user'),
 
         submit: (router) ->
           unless email = router.get('applicationController.email')
@@ -25,28 +54,41 @@ Landing.Router = Ember.Router.extend
             return
 
           user = router.get('applicationController.content')
+          
+          
+          router.transitionTo('signup', user)
+          
+          
+          # this.set('user', user.get('exists'));
+          
+          
+          
+                    
 
           # Here, we try to create a user with the password provided.
           # If we get an error, that means the user already exists, so we
           # should take that user to sign in.
-          user.one 'didCreate', =>
+          #user.one 'didCreate', =>
             # Successfully created new user. Confirmation e-mail
             # has been sent. Redirect to the page that tells them
             # to check their email.
-            router.transitionTo 'checkYourEmail'
+            #router.transitionTo 'returningUserPassword'
+            #router.transitionTo 'checkYourEmail'
 
-          user.one 'becameInvalid', =>
+          #user.one 'becameInvalid', =>
             # There were errors creating the user, which means the
             # email was already taken, which means this user's
             # trying to log in.
-            router.transitionTo 'returningUserPassword'
+            #router.transitionTo 'checkYourEmail'
+            #router.transitionTo 'returningUserPassword'
 
           # Commit the transaction.
-          user.store.commit()
+          #user.store.commit()
 
         # index: enter email.
         index: Ember.Route.extend
-          connectOutlets: (router) ->
+          route: '/'
+          #connectOutlets: (router) ->
           prev: Em.K
           next: (router) -> router.send 'submit'
 
@@ -97,14 +139,107 @@ Landing.Router = Ember.Router.extend
 
       signup: Ember.Route.extend
         route: '/signup'
-        goDemographics: Ember.Route.transitionTo('demographics')
+        prev: (router) -> router.transitionTo('home')
+        next: (router) -> router.send 'submit'
         connectOutlets: (router, context) ->
           router.get("applicationController").connectOutlet('signup', context)
+          
+        submit: (router) ->
+          unless email = router.get('applicationController.email')
+            router.get('applicationController.view.emailView').$().focus()
+            return
+          unless password = router.get('applicationController.password')
+            router.get('applicationController.view.passwordView').$().focus()
+            return
+        
+          user = router.get('applicationController.content')
+          router.transitionTo('fullname', user)
+      
+      signin: Ember.Route.extend
+        route: '/signin'
+        prev: (router) -> router.transitionTo('home')
+        next: (router) -> router.send 'submit'
+        connectOutlets: (router, context) ->
+          router.get("applicationController").connectOutlet('signin', context)
+          
+        # submit: (router) ->
+        #   unless email = router.get('applicationController.email')
+        #     router.get('applicationController.view.emailView').$().focus()
+        #     return
+        #   unless password = router.get('applicationController.password')
+        #     router.get('applicationController.view.passwordView').$().focus()
+        #     return
+        # 
+        #   user = router.get('applicationController.content')
+        #   $.ajax
+        #     url: '/users/sign_in'
+        #     type: 'POST'
+        #     data: 
+        #       commit: 'Sign In'
+        #       user:
+        #         email: 'shoplift@dmzza.com'
+        #         password: 't6ygfr5t'
+          #TODO: Sumbit the form to rails for sign-in
+      
+      fullname: Ember.Route.extend
+        route: '/fullname'
+        prev: (router) -> router.transitionTo('signup')
+        next: (router) -> router.send 'submit'
+        connectOutlets: (router, context) ->
+          router.get("applicationController").connectOutlet('name', context)
+          
+        submit: (router) ->
+          unless name = router.get('applicationController.name')
+            router.get('applicationController.view.nameView').$().focus()
+            return
+        
+          user = router.get('applicationController.content')
+          router.transitionTo('demographics', user)
+      
+      demographics: Ember.Route.extend
+        route: '/demographics'
+        prev: Em.K
+        next: (router) -> router.send 'submit'
+        connectOutlets: (router, context) ->
+          router.get("applicationController").connectOutlet('demographics', context)
+        
+        submit: (router) ->
+          unless zip = router.get('applicationController.zip')
+            router.get('applicationController.view.zipView').$().focus()
+            return
+        
+          user = router.get('applicationController.content')
+          router.transitionTo('photo', user)
+      
       password: Ember.Route.extend
         route: '/password'
         connectOutlets: (router, context) ->
           router.get("applicationController").connectOutlet('password')
-      demographics: Ember.Route.extend
-        route: '/demographics'
+        
+        submit: (router) ->
+          unless password = router.get('applicationController.password')
+            router.get('applicationController.view.passwordView').$().focus()
+            return
+          unless vanity = router.get('applicationController.vanity')
+            router.get('applicationController.view.vanityView').$().focus()
+            return
+        
+          user = router.get('applicationController.content')
+          router.transitionTo('photo', user)
+      
+      photo: Ember.Route.extend
+        route: '/photo'
+        prev: Em.K
+        next: (router) -> router.send 'submit'
         connectOutlets: (router, context) ->
-          router.get("applicationController").connectOutlet('demographics', context)
+          router.get("applicationController").connectOutlet('photo', context)
+        
+        submit: (router) ->
+          user = router.get('applicationController.content')
+          router.transitionTo('bio', user)
+      
+      bio: Ember.Route.extend
+        route: '/bio'
+        prev: Em.K
+        connectOutlets: (router, context) ->
+          router.get("applicationController").connectOutlet('bio', context)

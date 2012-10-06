@@ -93,14 +93,20 @@ class UsersController < ApplicationController
   # <br/><br/>Notes:<pre>curl -d "user[full_name]=Aaron Bartell3" -d "user[email]=aaronbartell@gmail.com3" -d "user[password]=poopydiaper" localhost:3000/users.json</pre>
   # =end
   def create
-    @user = User.new(params[:user])
-    if @user.save
-      render json: @user, :status => 201
-    else
-      5.times { @user.errors.each { |e,v| puts "#{e} #{v}"  } }
-      puts @user.signup_state
-      return_error_messages(@user,"Failed to create user")
-    end
+    # @user = User.new(params[:user])
+    # if @user.save
+    #   render json: @user, :status => 201
+    # else
+      if @newuser = User.find_by_email(params[:user][:email].downcase)
+       render :partial => "user", :locals => {:user => @newuser}
+      else
+       render_error(404,"User not found #{params[:user][:email]} x")
+      end
+
+      # 5.times { @user.errors.each { |e,v| puts "#{e} #{v}"  } }
+      # puts @user.signup_state
+      # return_error_messages(@user,"Failed to create user")
+      # d
   end
 
   # =begin apidoc

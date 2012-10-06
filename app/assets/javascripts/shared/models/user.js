@@ -23,5 +23,19 @@ Shoplift.User = DS.Model.extend({
         items = this.get('items');
         
     return items.slice(0, limit);
-  }.property('items')
+  }.property('items'),
+  user: null,
+  exists: function() {
+    $.ajax({
+      url: "/users",
+      type: 'POST',
+      data: this,
+      context: this
+    });/*.success(function(data) {
+      this.user = true;
+    }).error(function() {
+      this.user = false;
+    });*/
+    return this.user;
+  }.property()
 });

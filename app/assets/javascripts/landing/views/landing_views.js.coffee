@@ -72,25 +72,41 @@ Landing.EmailField = Landing.TextField.extend
   viewName: 'emailView'
   elementId: 'email-field'
   valueBinding: 'content.email'
+  placeholder: 'Enter your email address'
 
 Landing.PasswordField = Landing.TextField.extend
   viewName: 'passwordView'
   elementId: 'password-field'
   valueBinding: 'content.password'
+  placeholderBinding: 'parentView.passwordPlaceholder'
   type: 'password'
+  
+Landing.NameField = Landing.TextField.extend
+  viewName: 'nameView'
+  elementId: 'name-field'
+  valueBinding: 'content.name'
+
+Landing.ZipField = Landing.TextField.extend
+  viewName: 'zipView'
+  elementId: 'zip-field'
+  valueBinding: 'content.zip'
+
+Landing.HomeView = Ember.View.extend
+  templateName: 'landing/templates/home'
+  elementId: 'home-container'
 
 Landing.LetterView = Ember.View.extend
   templateName: 'landing/templates/letter'
   elementId: 'letter-container'
-  didInsertElement: ->
-    @$().css({top: '1000px'})
-    @$().transition({top: '0px'}, 800, 'out')
+  # didInsertElement: ->
+  #   @$().css({top: '1000px'})
+  #   @$().transition({top: '0px'}, 800, 'out')
 
   close: ->
-    @$().transition({top: '1000px'}, 800, 'out')
+    # @$().transition({top: '1000px'}, 800, 'out')
     setTimeout =>
-      Landing.router.send("goHome")
-    , 850
+      Landing.router.send("prev")
+    , 450
 
 Landing.ReturningUserPasswordView  = Ember.View.extend
   templateName: 'landing/templates/returning_user_password'
@@ -101,13 +117,37 @@ Landing.CheckingView = Ember.View.extend
 Landing.SignupView = Ember.View.extend
   templateName: 'landing/templates/signup'
   elementId: 'signup-container'
+  passwordPlaceholder: 'And choose a password'
+  didInsertElement: ->
+    this.get("emailView").$().focus()
+
+Landing.SigninView = Ember.View.extend
+  templateName: 'landing/templates/signin'
+  elementId: 'signin-container'
+  passwordPlaceholder: 'And your password'
+  didInsertElement: ->
+    this.get("emailView").$().focus()
 
 Landing.PasswordView = Ember.View.extend
   templateName: 'landing/templates/password'
+  
+Landing.NameView = Ember.View.extend
+  templateName: 'landing/templates/name'
+  elementId: 'name-container'
+  didInsertElement: ->
+    this.get("nameView").$().focus()
 
 Landing.DemographicsView = Ember.View.extend
   templateName: 'landing/templates/demographics'
   elementId: 'demographics-container'
+  
+Landing.PhotoView = Ember.View.extend
+  templateName: 'landing/templates/photo'
+  elementId: 'photo-container'
+
+Landing.BioView = Ember.View.extend
+  templateName: 'landing/templates/bio'
+  elementId: 'bio-container'
 
 Landing.CheckYourEmailView = Em.View.extend
   templateName: 'landing/templates/check_your_email'
