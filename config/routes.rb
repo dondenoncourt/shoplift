@@ -70,7 +70,9 @@ App::Application.routes.draw do
   #
   # Parser and Bookmarklet
   #
-  get "bookmarklet", :to => "parser#bookmarklet"
+  get 'bookmarklet/iframe', :to => 'parser#iframe',      :as => :bookmarklet_iframe
+  get 'bookmarklet',        :to => 'parser#bookmarklet', :as => :bookmarklet
+
   post "parse", :to => "parser#parse"
   get "dynascript", :to => "parser#dynascript"
   get "brandscript", :to => "parser#brandscript"

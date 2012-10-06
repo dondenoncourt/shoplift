@@ -7,10 +7,14 @@ class ParserController < ApplicationController
   layout nil, :only => [:bookmarklet]
 
   def bookmarklet
+  end
 
-    raise NoReferrer           unless url = request.referrer
-    raise InvalidReferrer, url unless URI.parse(url).scheme
+  def iframe
 
+    url, uri = referrer
+
+    raise NoReferrer           unless url
+    raise InvalidReferrer, url unless uri.scheme
 
     parsed = Parser.parse(url)
 
@@ -21,13 +25,14 @@ class ParserController < ApplicationController
       current_user.posts
     else
       # store on user session, and let the user know to login to claim post
+      # all unclaimed posts will have a user_id of -1
+      parsed[:user_id] = -1
       Post
     end
 
     @post = post_scope.create(parsed)
 
-    @css  = render_to_string(:partial => 'style',  :layout => false).gsub(/\n/,'')
-    @html = render_to_string(:partial => 'prompt', :layout => false).gsub(/\n/,'')
+    render layout: 'iframe'
   end
 
   def dynascript
@@ -41,5 +46,14 @@ class ParserController < ApplicationController
       brandNames << brand.name
     end
     @brands = '['+ brandNames.map { |name| '"' + name.gsub(/&/, '&amp;').gsub(/'/, '&#39;') + '"' }.join(',') + ']'
+  end
+
+  private
+
+  def referrer
+    url = params[:referrer] || request.referrer
+    uri = URI.parse(url)
+
+    [url, uri]
   end
 end
