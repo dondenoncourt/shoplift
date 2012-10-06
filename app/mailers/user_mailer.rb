@@ -2,15 +2,6 @@ class UserMailer < ActionMailer::Base
   default from: "no-reply@theshoplift.com"
   helper :users
 
-  def todon
-    @greeting = "Hi"
-
-    mail to: "dondenoncourt@gmail.com",
-        subject: "test",
-        from: "dondenoncourt@comcast.net"
-
-  end
-
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:
   #

@@ -15,6 +15,13 @@
 	    body {
 	    	font-size: 1em;
 	    	line-height: 1.4;
+	    	font-family: 'Source Sans Pro', sans-serif;
+	    	font-weight: 200;
+	    }
+	    
+	    input, textarea, select {
+		    font-family: 'Source Sans Pro', sans-serif;
+		    font-weight: 200;
 	    }
 	  
 	    ::-moz-selection {
@@ -71,10 +78,6 @@
 	    /* ===== Initializr Styles ==================================================
 	  	 Author: Jonathan Verrecchia - verekia.com/initializr/responsive-template
 	  	 ========================================================================== */
-	  
-	    body {
-	    	font: 16px/26px Helvetica, Helvetica Neue, Arial;
-	    }
 	  
 	    .wrapper {
 	    	width: 90%;
@@ -148,7 +151,7 @@
 		  margin-top: -120px;
 		  /*z-index: 900;*/
 		  #letter {
-		  	font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+		  	font-style: italic;
 		  	color: #f8ece5;
 			  margin: 0 9px 0 6px;
 			  border-width: 0 1px 0 1px;
@@ -173,7 +176,7 @@
 		  }
 		  #bottom {
 		  	position: absolute;
-			  top:751px;
+			  top:741px;
 		  }
 	  }
 	  #close-letter {
@@ -198,9 +201,8 @@
 			  margin-left: 203px;
 			  margin-top: 7px;
 			  font-size: 16px;
-			  font-family: "Helvetica Neue UltraLight", "Helvetica Neue Light", "Helvetica Neue", "Helvetica", arial;
+			  /* font-family: "Helvetica Neue UltraLight", "Helvetica Neue Light", "Helvetica Neue", "Helvetica", arial;*/
 			  letter-spacing: .12em;
-			  font-weight: 100;
 			  border-radius:0px;
 			  -webkit-border-radius: 0px;
 			  -moz-border-radius: 0px;
@@ -310,7 +312,6 @@
 				  	
 				  	margin-top: 50px;
 				  	font-size: 16px;
-				  	font-family: "Helvetica Neue UltraLight", "Helvetica Neue Light", "Helvetica Neue", "Helvetica", arial;
 				  	letter-spacing: .12em;
 				  	font-weight: 100;
 				  }
@@ -359,7 +360,6 @@
 					  height: 100%;
 					  width: 100%;
 					  font-size: 16px;
-					  font-family: "Helvetica Neue UltraLight", "Helvetica Neue Light", "Helvetica Neue", "Helvetica", arial;
 					  letter-spacing: .12em;
 					  font-weight: 100;
 				  }
@@ -373,7 +373,7 @@
 				  	background: url(/img/landing-birthday.png) no-repeat;
 				  	background-position: 63px 8px;
 				  	background-size: 122px 19px;
-				  	width: 195px;
+				  	width: 266px;
 				  	select {
 				  		width: 70px;
 				  		&:first-child {
@@ -427,6 +427,23 @@
 					img {
 						width: 100%;
 					}
+					input#file {
+						color: #F8ECE5;
+						font-family: arial;
+						font-size: 1.5em;
+						padding-top: 20px;
+						height: 40px;
+						width: 300px;
+					}
+					input#upload {
+						background-image: url(/img/photo-upload.png);
+						background-color: transparent;
+						background-size: cover;
+						height: 38px;
+						width: 128px;
+						margin-top: 15px;
+						border: none;
+					}
 				}
 			}
 			a {
@@ -439,6 +456,14 @@
 					bottom: 15px;
 					position: relative;
 				}
+			}
+			form {
+				position: absolute;
+				top: 150px;
+				left: 50%;
+				width: 250px;
+				margin-left: -125px;
+				overflow: hidden;
 			}
 		}
 		#bio-container {
@@ -461,6 +486,38 @@
 					img {
 						width: 100%;
 					}
+					textarea {
+						position: absolute;
+						top: 65px;
+						left: 190px;
+						width: 320px;
+						height: 100px;
+						line-height: 1.4em;
+						font-size: 1.1em;
+						-webkit-border-radius: 0px;
+						-moz-border-radius: 0px;
+					}
+					input {
+						position: absolute;
+						top: 215px;
+						left: 190px;
+						width: 320px;
+						height: 31px;
+						font-size: 1.1em;
+						-webkit-border-radius: 0px;
+						-moz-border-radius: 0px;
+					}
+					#remaining {
+						position: absolute;
+						top: 138px;
+						left: 440px;
+						font-size: 1.3em;
+						color: #f8ece5;
+					}
+					.red {
+						color: #9a1218;
+						background-color: #fb9190;
+					}
 				}
 			}
 			a {
@@ -474,6 +531,13 @@
 					position: relative;
 				}
 			}
+		}
+		#confirm-container {
+			position: absolute;
+			top: 300px;
+			width:600px;
+			left: 50%;
+			margin-left: -300px;
 		}
 	  #header {
 	  	position: relative;
@@ -506,7 +570,6 @@
 	  	height: 45px;
 	  	font-size: 16px;
 	  	padding-left: 95px;
-	  	font-family: "Helvetica Neue UltraLight", "Helvetica Neue Light", "Helvetica Neue", "Helvetica", arial;
 	  	letter-spacing: .12em;
 	  	font-weight: 100;
 	  	color:#c7de55;
@@ -606,7 +669,6 @@
 	  		height: 34px;
 	  		font-size: 16px;
 	  		padding-left: 10px;
-	  		font-family: "Helvetica Neue UltraLight", "Helvetica Neue Light", "Helvetica Neue", "Helvetica", arial;
 	  		letter-spacing: .12em;
 	  		font-weight: 100;
 	  		color:#314408;
@@ -695,7 +757,6 @@
 	  		height: 22px;
 	  		font-size: 16px;
 	  		padding-left: 10px;
-	  		font-family: "Helvetica Neue UltraLight", "Helvetica Neue Light", "Helvetica Neue", "Helvetica", arial;
 	  		letter-spacing: .12em;
 	  		font-weight: 100;
 	  		color:#314408;
@@ -738,7 +799,6 @@
   height: 22px;
   font-size: 16px;
   padding-left: 10px;
-  font-family: "Helvetica Neue UltraLight", "Helvetica Neue Light", "Helvetica Neue", "Helvetica", arial;
   letter-spacing: .12em;
   font-weight: 100;
   color: #C7DE55;

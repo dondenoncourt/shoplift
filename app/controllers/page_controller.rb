@@ -13,7 +13,7 @@ class PageController < ApplicationController
     if user_signed_in?
       render :layout => false
     else
-      redirect_to page_home_path
+      redirect_to landing_path
     end
   end
 

@@ -204,11 +204,39 @@ Landing.Router = Ember.Router.extend
           router.get("applicationController").connectOutlet('demographics', context)
         
         submit: (router) ->
+          unless router.get('applicationController.gender') isnt ""
+            # router.get('applicationController.view.genderView').$().focus()
+            return
+          unless parseInt(router.get('applicationController.year')) < 2000
+            console.log parseInt(router.get('applicationController.year'))
+            # router.get('applicationController.view.yearView').$().focus()
+            return
           unless zip = router.get('applicationController.zip')
             router.get('applicationController.view.zipView').$().focus()
             return
         
           user = router.get('applicationController.content')
+          gender = (user.get("gender") is "male")
+          if user.get("gender") is "neither"
+            gender = ""
+            
+          $.ajax
+            url: '/users'
+            type: 'POST'
+            data: 
+              user:
+                email: user.get("email")
+                password: user.get("password")
+                password_confirmation: user.get("password")
+                full_name: user.get("name")
+                country: user.get("country")
+                zipcode: user.get("zip")
+                "birthdate(2i)": user.get("month")
+                "birthdate(3i)": user.get("day")
+                "birthdate(1i)": user.get("year")
+                sex: gender
+                tos: 1
+                
           router.transitionTo('photo', user)
       
       password: Ember.Route.extend
@@ -241,5 +269,26 @@ Landing.Router = Ember.Router.extend
       bio: Ember.Route.extend
         route: '/bio'
         prev: Em.K
+        next: (router) -> router.send 'submit'
         connectOutlets: (router, context) ->
           router.get("applicationController").connectOutlet('bio', context)
+        
+        submit: (router) ->
+          if router.get("applicationController.view.red")
+            return
+          
+          user = router.get('applicationController.content')
+          $.ajax
+            url: '/users'
+            type: 'PUT'
+            data: 
+              user:
+                biography: user.get("bio")
+                url: user.get("url")
+          
+          router.transitionTo('confirm')
+      
+      confirm: Ember.Route.extend
+        route: '/confirm'
+        connectOutlets: (router) ->
+          router.get("applicationController").connectOutlet('confirm')

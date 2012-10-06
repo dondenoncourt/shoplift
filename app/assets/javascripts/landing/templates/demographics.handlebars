@@ -7,8 +7,9 @@
 				{{view Ember.Select contentBinding="controller.genders" valueBinding="controller.gender"}}
 			</li>
 			<li id="birthday">
-				{{view Ember.Select contentBinding="controller.months" optionValuePath="content.id" optionLabelPath="content.month"}} 
+				{{view Ember.Select contentBinding="controller.months" optionValuePath="content.id" optionLabelPath="content.month" valueBinding="controller.month"}} 
 				{{view Ember.Select contentBinding="controller.days" valueBinding="controller.day"}} 
+				{{view Ember.Select contentBinding="controller.years" valueBinding="controller.year"}} 
 			</li>
 			<li id="country">
 				{{view Ember.Select contentBinding="controller.countries" valueBinding="controller.country"}}

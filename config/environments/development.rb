@@ -38,7 +38,7 @@ App::Application.configure do
     #:port                 => 1025,
     #:domain               => "theshoplift.com"
   #}
-  config.action_mailer.default_url_options = { :host => 'test.theshoplift.com' }
+  config.action_mailer.default_url_options = { :host => 'localhost', :port => 3000 }
 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {

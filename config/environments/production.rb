@@ -60,7 +60,7 @@ App::Application.configure do
   
   # Devise mailer
   #config.action_mailer.default_url_options = { :host => 'app.shoplift.it' }
-  config.action_mailer.default_url_options = { :host => 'test.theshoplift.com' }
+  config.action_mailer.default_url_options = { :host => 'beta.theshoplift.com' }
 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.raise_delivery_errors = false

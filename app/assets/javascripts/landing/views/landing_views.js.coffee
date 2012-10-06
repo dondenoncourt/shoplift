@@ -91,6 +91,18 @@ Landing.ZipField = Landing.TextField.extend
   elementId: 'zip-field'
   valueBinding: 'content.zip'
 
+Landing.BioField = Em.TextArea.extend 
+  viewName: 'bioView'
+  elementId: 'bio-field'
+  valueBinding: 'content.bio'
+  placeholder: '110 characters max'
+
+Landing.UrlField = Landing.TextField.extend
+  viewName: 'urlView'
+  elementId: 'url-field'
+  valueBinding: 'content.url'
+  placeholder: 'Enter your personal URL here.'
+
 Landing.HomeView = Ember.View.extend
   templateName: 'landing/templates/home'
   elementId: 'home-container'
@@ -148,7 +160,22 @@ Landing.PhotoView = Ember.View.extend
 Landing.BioView = Ember.View.extend
   templateName: 'landing/templates/bio'
   elementId: 'bio-container'
+  red: false,
+  charsRemaining: (() ->
+    bio = @get('controller.content.bio')
+    red = @get('red')
+    length = 110
+    console.log('controller.content.hit')
+    unless bio?
+      return length
+    if bio.length > length && !red
+      @set('red', true)
+    else if bio.length <= length && red
+      @set('red', false)
+    return length - bio.length 
+  ).property('controller.content.bio')
 
-Landing.CheckYourEmailView = Em.View.extend
+Landing.ConfirmView = Em.View.extend
   templateName: 'landing/templates/check_your_email'
+  elementId: 'confirm-container'
 

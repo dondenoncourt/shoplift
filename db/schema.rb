@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121001055647) do
+ActiveRecord::Schema.define(:version => 20121006164852) do
 
   create_table "brands", :force => true do |t|
     t.string   "name"
@@ -269,8 +269,13 @@ ActiveRecord::Schema.define(:version => 20121001055647) do
     t.string   "twitter_token"
     t.string   "twitter_secret"
     t.string   "signup_state"
+    t.string   "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string   "unconfirmed_email"
   end
 
+  add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
   add_index "users", ["signup_state"], :name => "index_users_on_signup_state"
