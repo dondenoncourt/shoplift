@@ -110,10 +110,9 @@
 
     B.container.
       append(B.iframe.css(B.iframeCss)).
-      click(function(e){
-        var element = $(this);
-
-        element.remove()
+      one('click',function(e){
+        var element = B.$(this);
+        if(element) { element.remove(); }
     });
 
   }
