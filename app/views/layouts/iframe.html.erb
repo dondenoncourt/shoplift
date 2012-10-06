@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <style>
+    /* http://meyerweb.com/eric/tools/css/reset/
+       v2.0 | 20110126
+       License: none (public domain)
+    */
+
+    html, body, div, span, applet, object, iframe,
+    h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+    a, abbr, acronym, address, big, cite, code,
+    del, dfn, em, img, ins, kbd, q, s, samp,
+    small, strike, strong, sub, sup, tt, var,
+    b, u, i, center,
+    dl, dt, dd, ol, ul, li,
+    fieldset, form, label, legend,
+    table, caption, tbody, tfoot, thead, tr, th, td,
+    article, aside, canvas, details, embed,
+    figure, figcaption, footer, header, hgroup,
+    menu, nav, output, ruby, section, summary,
+    time, mark, audio, video {
+      margin: 0;
+      padding: 0;
+      border: 0;
+      font-size: 100%;
+      font: inherit;
+      vertical-align: baseline;
+    }
+    /* HTML5 display-role reset for older browsers */
+    article, aside, details, figcaption, figure,
+    footer, header, hgroup, menu, nav, section {
+      display: block;
+    }
+    body {
+      line-height: 1;
+    }
+    ol, ul {
+      list-style: none;
+    }
+    blockquote, q {
+      quotes: none;
+    }
+    blockquote:before, blockquote:after,
+    q:before, q:after {
+      content: '';
+      content: none;
+    }
+    table {
+      border-collapse: collapse;
+      border-spacing: 0;
+    }
+    .clear {
+     clear:both;
+    }
+
+    .hidden {
+      opacity: 0;
+    }
+
+    #sl-bookmarklet-main {
+      position : fixed;
+      width : 100%;
+      height : 100%;
+      z-index : 2147483647;
+      top : 0;
+      left : 0;
+      cursor : pointer;
+    }
+    #sl-bookmarklet-background {
+      position : absolute;
+      width : 100%;
+      height : 100%;
+      background : #19032f; /* purple */
+      top : 0;
+      left : 0;
+      opacity:.8;
+    }
+    #sl-booklet-error {
+      margin-top:-20px;
+      margin-bottom:20px;
+      color : #EFFFB0; /* yellow */
+      text-align: center;
+     font-family: "futura", arial;
+      font-size: 26px;
+      font-weight: bold;
+      font-style: italic;
+      height: 40px;
+      display:none;
+    }
+    .tsl-booklet-wrap {
+     background:url(<%= root_url %>/assets/tsl-booklet-vert-scaffolding.png) center repeat-y;
+     width:100%;
+     height:100%;
+     padding-top:70px;
+    }
+    .tsl-booklet {
+     width:486px;
+     margin:0 auto 0;
+     position:relative;
+      opacity:.9;
+    }
+    .tsl-booklet-header-logo {
+     background:url(<%= root_url %>/assets/tsl-booklet-header-logo.png) no-repeat;
+     width:486px;
+     height:120px;
+    }
+    .close {
+     background:url(<%= root_url %>/assets/tsl-booklet-close-btn.png) no-repeat;
+     width:41px;
+     height:42px;
+     display:block;
+     position:absolute;
+     top: 24px;
+     right: -18px;
+    }
+    .tsl-booklet-scaffold {
+     background:url(<%= root_url %>/assets/first-pop-up-content-scaffolding.png) no-repeat;
+     width:486px;
+     height:251px;
+     margin-top:-17px;
+     position:relative;
+    }
+    .tsl-booklet-second-screen-scaffold {
+     background:url(<%= root_url %>/assets/second-pop-up-content-scaffolding.png) no-repeat !important;
+     height:327px;
+    }
+    .tsl-booklet-second-screen-scaffold .tsl-booklet-right-content {
+     width:218px;
+     height:294px;
+    }
+    .tsl-booklet-img-shadow {
+    /* background:url(<%= root_url %>/assets/tsl-booklet-first-screen-img-shadow.png) no-repeat;*/
+     width:242px;
+     height:243px;
+     position:absolute;
+     top: 4px;
+     left: 4px;
+     z-index:0;
+    }
+    .tsl-booklet-img {
+     /*background:url(<%= root_url %>/assets/tsl-booklet-first-screen-img.jpg) no-repeat;*/
+     width:242px;
+     height:243px;
+     z-index:-445;
+     position:absolute;
+      /*
+     top:4px;
+     left:4px;
+      */
+    }
+    .tsl-booklet-img-text-box {
+     background:url(<%= root_url %>/assets/tsl-booklet-img-text-box.png) no-repeat;
+     width:214px;
+     height:50px;
+     position:absolute;
+     bottom:0px;
+     left:5px;
+     overflow:hidden;
+     padding:1px 13px 0;
+     display:none;
+     text-shadow: 1px 1px 1px #000;
+     filter: dropshadow(color=#000, offx=1, offy=1);
+    }
+    .tsl-booklet-brand-text {
+     font-family: "futura", arial;
+     font-size:18px !important;
+     color:#f8ece5 !important;
+     height:18px;
+     padding-bottom:4px;
+     text-wrap:none;
+    }
+    .tsl-booklet-item-text {
+     font-family: "futura", arial;
+     font-size:14px !important;
+     color:#f8ece5 !important;
+     height:18px;
+     text-wrap:none;
+     float:left;
+     min-width:20px;
+    }
+    .tsl-booklet-price-text {
+     font-family: "futura", arial;
+     font-size:14px !important;
+     color:#d6fc56 !important;
+     height:148px;
+     text-wrap:none;
+     float:left;
+     min-width:20px;
+     padding-left:3px;
+    }
+    .tsl-booklet-right-content {
+     width:207px;
+     height:208px;
+     position:absolute;
+     top:17px;
+     right:6px;
+    }
+    .tsl-booklet-form {
+     width:207px;
+     padding-top:3px;
+    }
+    .tsl-booklet-form input {
+     width:186px;
+     height:30px;
+     font-family: "futura", arial;
+     font-size:15px !important;
+     color:#18022e !important;
+     padding:0 8px;
+    }
+    .blank-input {
+     background-color:#FF99A4;
+    }
+    .tsl-booklet-input-brand {
+     margin-bottom:10px
+    }
+    .tsl-booklet-input-item {
+     margin-bottom:7px
+    }
+    .tsl-booklet-input-price {
+     margin-bottom:7px
+    }
+
+    .tsl-booklet-form h4 {
+     font-family: "futura", arial;
+     font-size:14px !important;
+     line-height:14px;
+     padding-bottom:1px;
+      margin-top:1px;
+      margin-bottom:1px;
+     color:#ffece6 !important;
+    }
+    .tsl-booklet-next-btn {
+     background:url(<%= root_url %>/assets/tsl-booklet-next-btn-arrow.png) right center no-repeat;
+     display:block;
+     padding-right:29px;
+     font-family: "futura", arial;
+     font-size:19px !important;
+      font-weight: bold;
+     color:#efffb0 !important;
+     text-decoration:none;
+     position:absolute;
+     bottom:-4px;
+     right:0px;
+    }
+    .tsl-booklet-back-btn {
+     background:url(<%= root_url %>/assets/tsl-booklet-back-btn-arrow.png) left center no-repeat;
+     display:none;
+     padding-left:29px;
+     font-family: "futura", arial;
+     font-size:19px !important;
+      font-weight: bold;
+     color:#efffb0 !important;
+     text-decoration:none;
+     position:absolute;
+     bottom: -10px;
+     left: -5px;
+    }
+    .tsl-booklet-second-screen-form {
+     display:none;
+     padding-top:7px;
+    }
+    .tsl-booklet-second-screen-form  h4 {
+     padding-bottom:5px;
+    }
+    .tsl-booklet-second-screen-form textarea{
+     font-family: "futura", arial;
+     font-size:15px !important;
+     color:#18022e !important;
+      background-color: white;
+     padding:0 8px;
+    }
+    .tsl-booklet-textarea-tags {
+     width:200px;
+     height:61px;
+     max-height:61px;
+     margin-bottom:19px;
+    }
+    .tsl-booklet-input-thoughts {
+     width:200px;
+     height:98px;
+     max-height:98px;
+    }
+    .booklet-submit {
+     background:url(<%= root_url %>/assets/booklet-submit-btn.png) left center no-repeat;
+      border-style: none;
+     width:116px !important;
+     height:46px !important;
+     margin:0px !important;
+     padding:0px !important;
+     position:absolute;
+     bottom: -9px;
+     right: -4px;
+     display:none;
+    }
+
+    @-webkit-keyframes reset {
+      0%   { opacity: 0; }
+      100% { opacity: 0; }
+    }
+
+    @-webkit-keyframes fade-in {
+      0%    { opacity: 0; }
+      100%  { opacity: 1; }
+    }
+
+    @-webkit-keyframes fade-in-late {
+      0%    { opacity: 0; }
+      90%   { opacity: 0; }
+      100%  { opacity: 1; }
+    }
+    .fade-in {
+      -webkit-animation-name: reset, fade-in;
+         -moz-animation-name: reset, fade-in;
+          -ms-animation-name: reset, fade-in;
+           -o-animation-name: reset, fade-in;
+              animation-name: reset, fade-in;
+
+      -webkit-animation-duration: 0.5s;
+         -moz-animation-duration: 0.5s;
+          -ms-animation-duration: 0.5s;
+           -o-animation-duration: 0.5s;
+              animation-duration: 0.5s;
+
+      -webkit-animation-timing-function: ease-in;
+         -moz-animation-timing-function: ease-in;
+          -ms-animation-timing-function: ease-in;
+           -o-animation-timing-function: ease-in;
+              animation-timing-function: ease-in;
+
+      -webkit-animation-iteration-count: 1;
+         -moz-animation-iteration-count: 1;
+          -ms-animation-iteration-count: 1;
+           -o-animation-iteration-count: 1;
+    }
+
+  </style>
+  </head>
+  <body class="fade-in">
+    <%= yield %>
+  </body>
+</html>

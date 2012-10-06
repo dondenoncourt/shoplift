@@ -1,24 +1,22 @@
 <div class="tsl-booklet-wrap" id="tsl-booklet" >
-
     <div class="tsl-booklet">
       <div class="tsl-booklet-header-logo">
-      </div><!--/tsl-booklet-header-logo-->
-    		<a id="tsl-booklet-close" href="#" class="close"></a>
+      </div>
+      <a id="tsl-booklet-close" href="#" class="close"></a>
       <div id="sl-booklet-error"></div>
-    	<div class="tsl-booklet-scaffold">
+     <div class="tsl-booklet-scaffold">
             <div class="tsl-booklet-img">
               <span class="tsl-booklet-img-holder"></span>
-            	<div class="tsl-booklet-img-text-box">
+             <div class="tsl-booklet-img-text-box">
                   <div class="tsl-booklet-brand-text"></div>
                   <div class="tsl-booklet-item-text"></div>
                   <div class="tsl-booklet-price-text"></div>
                   <div class="clear"></div>
-               </div><!--/tsl-booklet-img-text-box-->
-            </div><!--/tsl-booklet-img-->
-
+               </div>
+            </div>
             <div class="tsl-booklet-right-content">
-            	<form id="tsl-booklet-form" class="tsl-booklet-form" >
-                	<div class="tsl-booklet-first-screen-form" onsubmit="return false;">
+             <form id="tsl-booklet-form" class="tsl-booklet-form" >
+                 <div class="tsl-booklet-first-screen-form" onsubmit="return false;">
                         <input type="hidden" name="parser_name" value="<%= j @post.name %>"/>
                         <input type="hidden" name="parser_brand" value="<%= j @brand_name %>"/>
                         <input type="hidden" name="parser_price" value="<%= @post.price %>"/>
@@ -31,25 +29,18 @@
                         <input class="tsl-booklet-input-item" id="post_item" name="post[name]" value="<%=  j @post.name %>" />
                         <h4>Price</h4>
                         <input class="tsl-booklet-input-price" id="post_price" name="post[price]" value="<%= number_to_currency(@post.price, :precision => 2) %>"/>
-                    </div><!--/tsl-booklet-first-screen-form-->
-
+                    </div>
                     <div class="tsl-booklet-second-screen-form">
                         <h4>Tags</h4>
                         <textarea class="tsl-booklet-textarea-tags" name="tags" id="tag_entry"></textarea>
                         <h4>Thoughts</h4>
                         <textarea class="tsl-booklet-input-thoughts" id="comment_area" maxlength="90" name="post[comment]"></textarea>
-                    </div><!--/tsl-booklet-second-screen-form-->
-
+                    </div>
                  <input type="button" class="booklet-submit" src="<%= root_url %>/assets/booklet-submit-btn.png" alt="submit"  />
-
                 </form>
-
                 <a href="javascript:;" class="tsl-booklet-next-btn">NEXT</a>
                 <a href="javascript:;" class="tsl-booklet-back-btn">BACK</a>
-
-            </div><!--/tsl-booklet-right-content-->
-        </div><!--/tsl-booklet-scaffold-->
-
-    </div><!--/tsl-booklet-->
-
-</div><!--/tsl-booklet-wrap-->
+            </div>
+        </div>
+    </div>
+</div>
