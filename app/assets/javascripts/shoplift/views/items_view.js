@@ -52,6 +52,7 @@ Shoplift.ItemView = Ember.View.extend(Shoplift.InViewMixin, {
   quoteTab: false,
   historyTab: false,
   
+<<<<<<< HEAD
   /*tags: function() {
   	var hashtagbrands = this.get('content.hashtagbrands.content'),
   			tags = Ember.ArrayProxy.create(),
@@ -64,6 +65,8 @@ Shoplift.ItemView = Ember.View.extend(Shoplift.InViewMixin, {
   	return tags;
   }.property('content.hashtagbrands'),*/
   
+=======
+>>>>>>> origin/bookmarklet
   showTags: function() {
 	  this.set('tagsTab', true);
 	  this.set('quoteTab', false);

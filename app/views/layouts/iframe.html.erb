@@ -50,14 +50,10 @@
       border-collapse: collapse;
       border-spacing: 0;
     }
+
     .clear {
      clear:both;
     }
-
-    .hidden {
-      opacity: 0;
-    }
-
     #sl-bookmarklet-main {
       position : fixed;
       width : 100%;
@@ -77,14 +73,15 @@
       opacity:.8;
     }
     #sl-booklet-error {
-      margin-top:-20px;
-      margin-bottom:20px;
+     position: absolute;
       color : #EFFFB0; /* yellow */
       text-align: center;
      font-family: "futura", arial;
       font-size: 26px;
       font-weight: bold;
       font-style: italic;
+      top: 179px;
+      left: 86px;
       height: 40px;
       display:none;
     }
@@ -92,18 +89,27 @@
      background:url(<%= root_url %>/assets/tsl-booklet-vert-scaffolding.png) center repeat-y;
      width:100%;
      height:100%;
-     padding-top:70px;
+     padding-top:0px;
     }
-    .tsl-booklet {
-     width:486px;
+    .tsl-booklet-one {
+     width:439px;
+     height: 512px;
      margin:0 auto 0;
      position:relative;
       opacity:.9;
+      background-image: url(<%= root_url %>/img/bookmarklet-scaffolding.png);
+    }
+    .tsl-booklet-two {
+     width:439px;
+     height: 631px;
+     margin:0 auto 0;
+     position:relative;
+     opacity:.9;
+     background-image: url(<%= root_url %>/img/bookmarklet-scaffolding-2.png);
     }
     .tsl-booklet-header-logo {
-     background:url(<%= root_url %>/assets/tsl-booklet-header-logo.png) no-repeat;
-     width:486px;
-     height:120px;
+     width:439px;
+     height:235px;
     }
     .close {
      background:url(<%= root_url %>/assets/tsl-booklet-close-btn.png) no-repeat;
@@ -115,33 +121,29 @@
      right: -18px;
     }
     .tsl-booklet-scaffold {
-     background:url(<%= root_url %>/assets/first-pop-up-content-scaffolding.png) no-repeat;
-     width:486px;
-     height:251px;
+     width:449px;
+     height:300px;
      margin-top:-17px;
      position:relative;
     }
-    .tsl-booklet-second-screen-scaffold {
-     background:url(<%= root_url %>/assets/second-pop-up-content-scaffolding.png) no-repeat !important;
-     height:327px;
-    }
+
     .tsl-booklet-second-screen-scaffold .tsl-booklet-right-content {
      width:218px;
      height:294px;
     }
     .tsl-booklet-img-shadow {
     /* background:url(<%= root_url %>/assets/tsl-booklet-first-screen-img-shadow.png) no-repeat;*/
-     width:242px;
-     height:243px;
+     width:180px;
+     height:192px;
      position:absolute;
-     top: 4px;
-     left: 4px;
+     top: 24px;
+     left: 13px;
      z-index:0;
     }
     .tsl-booklet-img {
      /*background:url(<%= root_url %>/assets/tsl-booklet-first-screen-img.jpg) no-repeat;*/
-     width:242px;
-     height:243px;
+     width:180px;
+     height:192px;
      z-index:-445;
      position:absolute;
       /*
@@ -189,24 +191,40 @@
      min-width:20px;
      padding-left:3px;
     }
-    .tsl-booklet-right-content {
-     width:207px;
-     height:208px;
-     position:absolute;
-     top:17px;
-     right:6px;
+    .tsl-booklet-one .tsl-booklet-right-content {
+     width: 207px;
+     height: 266px;
+     background-image: url(http://shoplift.dev/img/bookmarklet-right-bg.png);
+     background-repeat: no-repeat;
+     position: absolute;
+     top: 5px;
+     padding-top: 16px;
+     right: 21px;
     }
     .tsl-booklet-form {
      width:207px;
      padding-top:3px;
     }
+    .tsl-booklet-two .tsl-booklet-first-screen-form {
+     display: none;
+    }
     .tsl-booklet-form input {
-     width:186px;
+     width:205px;
      height:30px;
      font-family: "futura", arial;
      font-size:15px !important;
      color:#18022e !important;
-     padding:0 8px;
+     padding:0;
+     margin-bottom: 25px;
+    }
+    .tsl-booklet-first-screen-form textarea {
+     width:191px;
+     height:69px;
+     font-family: "futura", arial;
+     font-size:15px !important;
+     color:#18022e !important;
+     padding:0;
+     margin-bottom: 28px;
     }
     .blank-input {
      background-color:#FF99A4;
@@ -224,46 +242,66 @@
     .tsl-booklet-form h4 {
      font-family: "futura", arial;
      font-size:14px !important;
-     line-height:14px;
      padding-bottom:1px;
       margin-top:1px;
       margin-bottom:1px;
      color:#ffece6 !important;
     }
     .tsl-booklet-next-btn {
-     background:url(<%= root_url %>/assets/tsl-booklet-next-btn-arrow.png) right center no-repeat;
      display:block;
-     padding-right:29px;
-     font-family: "futura", arial;
-     font-size:19px !important;
-      font-weight: bold;
-     color:#efffb0 !important;
-     text-decoration:none;
-     position:absolute;
-     bottom:-4px;
-     right:0px;
+     height: 17px;
+     position: absolute;
     }
     .tsl-booklet-back-btn {
-     background:url(<%= root_url %>/assets/tsl-booklet-back-btn-arrow.png) left center no-repeat;
-     display:none;
-     padding-left:29px;
-     font-family: "futura", arial;
-     font-size:19px !important;
-      font-weight: bold;
-     color:#efffb0 !important;
-     text-decoration:none;
-     position:absolute;
-     bottom: -10px;
-     left: -5px;
+     background:url(<%= root_url %>/img/bookmarklet-cancel.png) left center no-repeat;
+     width: 93px;
+     height: 17px;
+     position: absolute;
+    }
+
+    .tsl-booklet-one .tsl-booklet-next-btn {
+     background:url(<%= root_url %>/img/bookmarklet-continue.png) right center no-repeat;
+     margin-right: -6px;
+     width: 119px;
+     bottom: 29px;
+     right: 0px;
+    }
+    .tsl-booklet-one .tsl-booklet-back-btn {
+     bottom: -1px;
+     right: -7px;
+    }
+
+    .tsl-booklet-two .tsl-booklet-next-btn {
+     background:url(<%= root_url %>/img/bookmarklet-shoplift-now.png) right center no-repeat;
+     margin-right: -6px;
+     width: 175px;
+     bottom: 36px;
+     right: 0px;
+    }
+    .tsl-booklet-two .tsl-booklet-back-btn {
+     bottom: 5px;
+     right: -7px;
+    }
+    .tsl-booklet-two .tsl-booklet-right-content {
+     width: 207px;
+     height: 394px;
+     background-repeat: no-repeat;
+     position: absolute;
+     top: 5px;
+     padding-top: 16px;
+     right: 21px;
     }
     .tsl-booklet-second-screen-form {
-     display:none;
      padding-top:7px;
+     display: block;
     }
-    .tsl-booklet-second-screen-form  h4 {
+    .tsl-booklet-one .tsl-booklet-second-screen-form {
+     display:none;
+    }
+    .tsl-booklet-second-screen-formgh4 {
      padding-bottom:5px;
     }
-    .tsl-booklet-second-screen-form textarea{
+    .tsl-booklet-first-screen-form textarea{
      font-family: "futura", arial;
      font-size:15px !important;
      color:#18022e !important;
@@ -271,15 +309,18 @@
      padding:0 8px;
     }
     .tsl-booklet-textarea-tags {
-     width:200px;
-     height:61px;
-     max-height:61px;
-     margin-bottom:19px;
+     width: 154px;
+     height: 186px;
+     left: 49px;
+     top: 19px;
+     position: absolute;
     }
     .tsl-booklet-input-thoughts {
-     width:200px;
-     height:98px;
-     max-height:98px;
+     position: absolute;
+     top: 242px;
+     left: -163px;
+     width: 366px;
+     height: 87px;
     }
     .booklet-submit {
      background:url(<%= root_url %>/assets/booklet-submit-btn.png) left center no-repeat;

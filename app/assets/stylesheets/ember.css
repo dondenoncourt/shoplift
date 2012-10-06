@@ -190,8 +190,13 @@ ul{
 		background-image: url(/img/product-top-scaffolding.png);
 		width: 408px;
 		height: 65px;
+<<<<<<< HEAD
 		top:-53px;
 		left: -38px;
+=======
+		top:-54px;
+		left: -37px;
+>>>>>>> origin/bookmarklet
 		z-index: 1;
 	}
 	.user:hover {
@@ -600,7 +605,7 @@ ul{
 		 -moz-border-radius: 20px;
 		 border-radius: 20px;
 		 border:1px solid #fff;
-		 float: left;
+		 /*float: left;*/
 		 margin: 10px 4px 0px 5px;
 	  }
 	  .relifters img {
@@ -1075,7 +1080,11 @@ ul{
 	padding-top: 37px;
 	position: relative;
 	top: -173px;
+<<<<<<< HEAD
 	margin-left: -8px;
+=======
+	margin-left: -7px;
+>>>>>>> origin/bookmarklet
 	padding-left: 0;
 	background-image: url(/img/menu-open-scaffolding.png);
 	background-position: 8px -1px;

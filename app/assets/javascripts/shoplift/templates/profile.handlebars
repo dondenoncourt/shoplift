@@ -1,6 +1,6 @@
 
 {{#with view.content}}
-	<div class="profile-box-container">
+	<div class="profile-box-container" {{action showProfile this}}>
 		{{view Shoplift.UserView}}
 		{{#each recentItems}}
 			<div class="product-img">

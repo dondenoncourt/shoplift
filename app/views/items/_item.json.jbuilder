@@ -22,6 +22,31 @@ else
   json.hashtag_ids '[]'
 end
 
+<<<<<<< HEAD
+=======
+# Check if item is a relift
+# if item.parent_id.blank?
+#	json.user do |json|
+#    json.partial! item.user if item.user
+#	end
+# else
+#	json.relift do |json|
+#		json.created_at item.created_at
+#		json.user do |json|
+#			json.partial! item.post.user
+#		end
+#	end
+#	json.user do |json|
+#		json.partial! item.user
+#	end
+# end
+
+# json.flag_total item.post.post_flags.count
+# json.flags item.post.post_flags do |json, flag|
+#	json.flag_type flag.flag_type.name
+# end
+
+>>>>>>> origin/bookmarklet
 json.history do |json|
  json.partial! 'items/history', :@post => item.post
 end

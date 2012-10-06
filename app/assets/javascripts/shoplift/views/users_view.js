@@ -8,6 +8,7 @@ Shoplift.UserView = Ember.View.extend({
 
 Shoplift.ProfileView = Ember.View.extend({
 	templateName: 'shoplift/templates/profile',
+<<<<<<< HEAD
 	classNames: ['profile-box', 'item'],
 	following: false,
 	
@@ -65,4 +66,7 @@ Shoplift.ProfileView = Ember.View.extend({
 			});
 		}
 	}
+=======
+	classNames: ['profile-box', 'item']
+>>>>>>> origin/bookmarklet
 });
