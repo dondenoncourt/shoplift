@@ -393,7 +393,18 @@ ul{
 	  .icon-buy-button{ background: url(http://davidmazza.net/shoplift/img/csg-504273d10c77e.png) no-repeat 0 -74px; width: 40px; height: 24px; } 
 	  .icon-plus-button:hover{ background: url(http://davidmazza.net/shoplift/img/csg-504273d10c77e.png) no-repeat 0 -392px; width: 15px; height: 16px; } 
 	  .icon-plus-button{ background: url(http://davidmazza.net/shoplift/img/csg-504273d10c77e.png) no-repeat 0 -458px; width: 15px; height: 16px; } 
-	  .icon-relift-button:hover{ background: url(http://davidmazza.net/shoplift/img/csg-504273d10c77e.png) no-repeat 0 -764px; width: 69px; height: 65px; top:359px; left: 280px; } 
+	  .icon-relift-button:hover{ 
+	  	background: url(http://davidmazza.net/shoplift/img/csg-504273d10c77e.png) no-repeat 0 -764px; 
+	  	width: 69px; 
+	  	height: 65px; 
+	  	top:359px;
+	  	left: 280px; 
+	  	-webkit-transform: scale(1.3) rotate(5deg); 
+	  	-moz-transform: scale(1.3) rotate(5deg); 
+	  	-ms-transform: scale(1.3) rotate(5deg); 
+	  	-o-transform: scale(1.3) rotate(5deg); 
+	  	transform: scale(1.3) rotate(5deg); 
+	  } 
 	  .icon-relift-button{ background: url(http://davidmazza.net/shoplift/img/csg-504273d10c77e.png) no-repeat 0 -879px; width: 69px; height: 65px;  top:359px; left: 280px; } 
 	  .icon-save-button:hover{ background: url(http://davidmazza.net/shoplift/img/csg-504273d10c77e.png) no-repeat 0 -994px; width: 44px; height: 26px; } 
 	  .icon-save-button{ background: url(http://davidmazza.net/shoplift/img/csg-504273d10c77e.png) no-repeat 0 -1070px; width: 44px; height: 26px; } 
