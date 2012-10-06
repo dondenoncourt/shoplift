@@ -53,11 +53,7 @@ class ItemsController < ApplicationController
                   .select("DISTINCT(items.id), items.*, user_item_views.created_at, items.created_at")
                   .paginate(per_page: 10, page: page)
     end
-<<<<<<< HEAD
 
-=======
-    
->>>>>>> origin/bookmarklet
     render :partial => 'items', :locals => {:items => items}
   end
 

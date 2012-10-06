@@ -83,16 +83,6 @@ Shoplift.UserRoute = Ember.Route.extend({
 			  viewClass: Shoplift.ItemsView,
 			  controller: itemsController,
 			  context: userItems
-<<<<<<< HEAD
-=======
-		  });
-		  
-		  
-	
-		  router.get("applicationController").connectOutlet({
-		  	name: 'nav',
-		  	outletName: 'header'
->>>>>>> origin/bookmarklet
 		  });
 		},
 		loadMoreItems: function(router, page) {

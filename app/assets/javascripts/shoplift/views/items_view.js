@@ -12,9 +12,7 @@ Shoplift.InViewMixin = Ember.Mixin.create({
 	inViewWillDestroy: function() {
 		if(this.$()) {
 			this.$().off("inview");
-			//console.log('1');
 		}
-		//else console.log(this);
 	}
 })
 
@@ -52,21 +50,6 @@ Shoplift.ItemView = Ember.View.extend(Shoplift.InViewMixin, {
   quoteTab: false,
   historyTab: false,
   
-<<<<<<< HEAD
-  /*tags: function() {
-  	var hashtagbrands = this.get('content.hashtagbrands.content'),
-  			tags = Ember.ArrayProxy.create(),
-  			i = hashtagbrands.length;
-  	console.log(hashtagbrands);
-  	while(i > 0) {
-  		tags.pushObject(hashtagbrands.objectAt(i));
-  		i--;
-  	}
-  	return tags;
-  }.property('content.hashtagbrands'),*/
-  
-=======
->>>>>>> origin/bookmarklet
   showTags: function() {
 	  this.set('tagsTab', true);
 	  this.set('quoteTab', false);
