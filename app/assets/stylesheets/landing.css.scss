@@ -427,7 +427,7 @@
 					img {
 						width: 100%;
 					}
-					input#file {
+					.photo-file-input {
 						color: #F8ECE5;
 						font-family: arial;
 						font-size: 1.5em;
@@ -435,7 +435,7 @@
 						height: 40px;
 						width: 300px;
 					}
-					input#upload {
+					.photo-upload-submit {
 						background-image: url(/img/photo-upload.png);
 						background-color: transparent;
 						background-size: cover;

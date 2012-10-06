@@ -219,8 +219,8 @@ Landing.Router = Ember.Router.extend
           gender = (user.get("gender") is "male")
           if user.get("gender") is "neither"
             gender = ""
-            
-          $.ajax
+          
+          $.ajax(
             url: '/users'
             type: 'POST'
             data: 
@@ -236,8 +236,8 @@ Landing.Router = Ember.Router.extend
                 "birthdate(1i)": user.get("year")
                 sex: gender
                 tos: 1
-                
-          router.transitionTo('photo', user)
+          ).done( -> router.transitionTo('photo', user) )
+           .fail( -> alert('Unexpected Error: Please try again') )
       
       password: Ember.Route.extend
         route: '/password'
@@ -260,7 +260,11 @@ Landing.Router = Ember.Router.extend
         prev: Em.K
         next: (router) -> router.send 'submit'
         connectOutlets: (router, context) ->
-          router.get("applicationController").connectOutlet('photo', context)
+          controller = router.get("applicationController")
+          user  = controller.get('content')
+          
+          controller.connectOutlet('photo')
+          controller.connectOutlet('photoUpload', 'photoUpload', user)
         
         submit: (router) ->
           user = router.get('applicationController.content')

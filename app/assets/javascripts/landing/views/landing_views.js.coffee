@@ -152,7 +152,97 @@ Landing.NameView = Ember.View.extend
 Landing.DemographicsView = Ember.View.extend
   templateName: 'landing/templates/demographics'
   elementId: 'demographics-container'
+
+
+Landing.PhotoUploadController = Ember.ObjectController.extend({
+  isUploading: false
+  hasUploaded: false
+  isDisabled: Em.computed.not('canUpload')
+  fileIsDirty: false
   
+  canUpload:   (->
+    isDirty = @get('fileIsDirty')
+    hasUploaded = @get('hasUploaded')
+    isUploading = @get('isUploading')
+    # is valid?
+    
+    isDirty and not hasUploaded and not isUploading
+  ).property('fileIsDirty','hasUploaded','isUploading')
+  
+  didSucceed: (results) ->
+    originalUrl = results[':original'][0].url
+    largeUrl = results.large[0].url
+    thumbUrl = results.thumb[0].url
+    
+    @setProperties({
+      originalUrl: originalUrl
+      largeUrl: largeUrl
+      thumbUrl: thumbUrl
+      isUploading: false
+      hasUploaded: true
+    })
+   
+  didStart:  -> @set('isUploading', true)
+  didUpload: -> 
+  didResult: ->
+  didCancel: -> @set('isUploading', false)
+  didError:  -> @set('isUploading', false)
+  
+  fileDidChange: -> @set('fileIsDirty', true)
+})
+  
+Landing.PhotoUploadView = Ember.View.extend
+  tagName: 'form'
+  action:  'http://api2.transloadit.com/assemblies'
+  enctype: 'multipart/form-data'
+  method:  'POST'
+  
+  attributeBindings: 'tagName action enctype method'.w()
+  
+  template: Ember.Handlebars.compile('''
+  {{#if hasUploaded}}
+    <img {{bindAttr src="thumbUrl"}} alt="your thumbnail"/>  
+  {{else}}
+    <input type="hidden" name="params" value="{&quot;auth&quot;:{&quot;key&quot;:&quot;148166321cf34366a6696f36e79c4964&quot;},&quot;template_id&quot;:&quot;06560a762b784ecbbc7f3aca769b475d&quot;}" /> <!-- ,&quot;notify_url&quot;:&quot;http://beta.theshoplift.com/users&quot;}" /> -->
+    <input class="photo-file-input" type="file" name="my_file" />
+    <input class="photo-upload-submit" {{bindAttr disabled="isDisabled" }} type="submit" value="" />
+  {{/if}}
+  ''')
+  
+  init: -> window.a = @
+
+  inputFileDidChange: (e) ->
+    controller = @get('controller')
+    
+    controller.fileDidChange()
+    
+  setupTransloadit: ->
+    controller = @get('controller')
+    @.$().transloadit
+      wait: true
+      autoSubmit: false
+      processZeroFiles: false
+      onSuccess:  => 
+        results = @.$().data('transloadit.uploader').results
+        controller.didSucceed(results)
+        
+      onStart:    => controller.didStart()
+      onUpload:   => controller.didUpload()
+      onResult:   => controller.didResult()
+      onCancel:   => controller.didCancel()
+      onError:    => controller.didError()
+    
+    
+  destroyTransloadit: ->
+    
+ 
+  didInsertElement: ->
+    @setupTransloadit()
+    @.$('input[type=file]').on('change', (e) => @inputFileDidChange(e) )
+    
+  willDestroyElement: ->
+    @destroyTransloadit()
+
 Landing.PhotoView = Ember.View.extend
   templateName: 'landing/templates/photo'
   elementId: 'photo-container'

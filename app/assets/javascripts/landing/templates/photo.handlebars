@@ -1,3 +1,4 @@
+
 <img src="/img/learn-scaffolding-top.png" id="top" />
 <div id="modal">
 	<div>
@@ -5,13 +6,9 @@
 		<img src="/img/photo-instructions.png" alt="Choose a photo or logo. We’ll frame it and display it as the face of your account. (You can skip this for now and do it later if you prefer.)" />
 		<!-- <iframe src="/transloadit/index.html" seamless="seamless"></iframe>-->
 		
-		<form id="MyForm" action="http://api2.transloadit.com/assemblies" enctype="multipart/form-data" method="POST">
-			<!-- TODO: Change the redirect URL when the site goes live! -->
-		<input type="hidden" name="params" value="{&quot;auth&quot;:{&quot;key&quot;:&quot;148166321cf34366a6696f36e79c4964&quot;},&quot;template_id&quot;:&quot;06560a762b784ecbbc7f3aca769b475d&quot;,&quot;notify_url&quot;:&quot;http://beta.theshoplift.com/users&quot;}" />
-		<input id="file" type="file" name="my_file" />
-		<input id="upload" type="submit" value="" />
-		</form>
+		{{outlet photoUpload}}
 	</div>
 </div>
 <a {{action next}}><img src="/img/chevron-next.png" alt="next" /></a>
 <img src="/img/learn-scaffolding-bottom.png" id="bottom" />
+
