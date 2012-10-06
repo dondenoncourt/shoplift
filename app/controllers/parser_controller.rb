@@ -31,7 +31,7 @@ class ParserController < ApplicationController
     end
 
     @post = post_scope.create(parsed)
-
+    @background =  params[:background]
     render layout: 'iframe'
   end
 
