@@ -1,279 +1,139 @@
-(function(){
+// This could work without jQuery, but why? it only costs us afew extra ms.
+(function(window) {
 
-	var thebookmarklet = null;
-  var item_tags = new Array();
+  var TheShopLift = TheShopLift || {};
 
-  /* Load jquery library  */
-  if (typeof jQuery == 'undefined' || jQuery.fn.jquery < '1.4.0') {
-    if (window.console && typeof jQuery != 'undefined') {
-      console.log('Current jQuery version is '+jQuery.fn.jquery+' and it needs to be greater than 1.4.0 so we are loading jquery');
-    }
-    var e = document.createElement('script');
-    e.onload = function() { start_bookmarklet(); };
-    e.setAttribute('type', 'text/javascript');
-    e.setAttribute('src', '//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js');
-    document.body.appendChild(e);
-    e = document.createElement('script');
-  } else {
-    if (window.console) console.log('Current jQuery version is >= the required 1.4.0 so NOT we are NOT loading jquery');
-    start_bookmarklet();
-  }
+// TODO: less hacky lazy load
+  var image = new Image();
+  image.setAttribute('src','<%= root_url %>/assets/ajax-loader.gif');
+// /TODO
 
-	function start_bookmarklet() {
-		/** Initiate the prototype */
-		function sl_bookmarklet() {
-			var self = this;
-			var	tmp;
-			
-			jQuery('.sl-bookmarklet').remove();
-			
-      this.form_url = '<%= url_for(:controller => 'posts', :only_path => false, :trailing_slash => true) %><%= @post.id %>/update'
-			
-			this.defaultCSS = { display : 'block'};
-			this.min = { height : 100, width : 100 } // for images
-			
-			this.el = {
-				container : jQuery('<div id="sl-bookmarklet-main" class="sl-bookmarklet"></div>')
-					.appendTo(document.body),
-				background : jQuery('<div title="close" id="sl-bookmarklet-background" class="sl-bookmarklet"><div/>')
-					.click(function(){ self.destroy(); }),
-				iframe : jQuery('<iframe style="display:none !important;" id="shoplift-iframe" action="' + this.form_url + '" class="sl-bookmarklet"></iframe>')
-			};
-			
-      jQuery('#sl-bookmarklet-main').append(this.el.background);
-      jQuery('#sl-bookmarklet-main').append(this.el.iframe);
+  window.TheShopLift = TheShopLift;
 
-      jQuery('#sl-bookmarklet-main').append('<%= raw @css %>');
-      jQuery('#sl-bookmarklet-main').append('<%= raw @html %>');
+  // don't check if already loaded, simply remove
+  TheShopLift.Bookmarklet = {
+    config: {
+      url: '<%= root_url %>',
+      jquery: '//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js'
+    },
+    element: null,
+    state: 'idle',
 
-      var images = this.parseImages();
-      assembleImageGallery(images, jQuery('input[name=image]'));
-		} // sl_bookmarklet
-		
-		sl_bookmarklet.prototype.parseImages = function() {
-			var self = this;
-			var	fb     = { images : 'og:image' };
-			var parsed = { images : [] };
-		  var tmp;
-			
-			for(var i in fb) { // Check for facebook meta
-				tmp = jQuery('meta[property="' + fb[i] + '"]');
-				if(tmp.length) {
-          var image;
-					if(i == 'images') { // Images has to be an array
-            image = [tmp.attr('content')];
-					} else {
-						image = tmp.attr('content');
-					}
-          if (image != null && image != '') {
-						parsed[i] = image;
-          }
-				}
-			}
-			
-			tmp = {};
-			
-			// Grab all the images you can find (if no fb image set)
-			if(!parsed.images.length) {	
-				tmp = [];
-				
-				jQuery('img').filter(function(){
-						return jQuery(this).height() >= self.min.height && jQuery(this).width() > self.min.width;
-					})
-					.filter(':visible')
-					.each(function(index,el) {
-						// Order by size with largest being last
-						var size = jQuery(this).height() * jQuery(this).width();
-						
-						for(var i=0;i<=parsed.images.length;i++) {
-							// No more images
-							if(i==parsed.images.length) {
-								parsed.images.push(jQuery(this).attr('src'));
-								tmp.push(size);
-								break;
-							} else if(size < tmp[i]) { //smaller image
-									parsed.images.splice(i-1,0,jQuery(this).attr('src'));
-									tmp.splice(i-1,0,size);
-									break;
-							}
-						}
-					});
-			}
-			
-			return parsed.images;
-		}
-		
-		/** Submit the form through the iframe */
-		sl_bookmarklet.prototype.submitForm = function() {
-      jQuery('#sl-booklet-error').html('Item being shoplifted...');
-      jQuery('#sl-booklet-error').css('height', '40px');
-      jQuery('#sl-booklet-error').show();
-			var self = this;
-			var ifrm = this.el.iframe[0].contentWindow.document;
-			ifrm.open();
-			jQuery('#tsl-booklet-form').clone().appendTo(jQuery('body',ifrm)).submit();
-      var authentication_token = '<%= current_user ? current_user.authentication_token : ""%>';
-      var queryString = jQuery('#tsl-booklet-form').serialize()+'&authentication_token='+authentication_token;
-      jQuery.each( item_tags, function(index, tag){
-         if (window.console) console.log(" tag: " +tag );
-         queryString += '&hashtags['+index+']='+tag;
-       });
-      jQuery.ajax({
-        url: this.form_url+'.json',
-        type: 'POST',
-        dataType: 'json',
-        data: queryString,
-        complete: function() {
-          jQuery('#sl-booklet-error').html('Item successfully shoplifted');
-          setTimeout(function(){self.destroy()},1000);
-        }
-      });
-		}
-		
-		/** Remove the container and the script for the bookmarklet */
-		sl_bookmarklet.prototype.destroy = function() {
-			this.el.container.remove();
-			jQuery('#shoplift-bookmarklet-script').remove();
-		}
-		
-    var authentication_token = '<%= current_user ? current_user.authentication_token : ""%>';
-    if ( authentication_token.length == 0) {
-      window.open('<%= post_create_url %>?url='+escape(document.location.href),'','width=900,height=800');
-      return;
-    }
+    containerCss: {
 
-    thebookmarklet = new sl_bookmarklet();
+      /* Reset */
+      'margin': 0,
+      'padding': 0,
+      'border': 0,
+      'font-size': '100%',
+      'font': 'inherit',
+      'vertical-align':' baseline',
+      'display': 'block',
 
-    jQuery('.booklet-submit').click(function () {
-      thebookmarklet.submitForm();
-    });
+      'top': 0,
+      'left': 0,
+      'position': 'absolute',
+      'width': '100%',
+      'height': '100%',
+      'z-index': '999999999999',
+      'filter': 'progid:DXImageTransform.Microsoft.gradient(startColorstr=#50990000,endColorstr=#50990000)',
+      'zoom': 1,
+      'background-color': 'rgba(0,0,0,0.8)',
+      'background-image': 'url(<%= root_url %>/assets/ajax-loader.gif)',
+      'background-position': '50% 50%',
+      'background-repeat': 'no-repeat'
+    },
 
-	} // sl_bookmarklet function/object
+    iframeCss: {
 
-  /** Create image gallery */
-  function assembleImageGallery(images,input) {
-    // Setup the styling for everything
-    //var container = jQuery('<div></div>');
-    //var imageHolder = jQuery('<div></div>').appendTo(container);
-    var container = jQuery('.tsl-booklet-img');
-    var imageHolder = jQuery('.tsl-booklet-img-holder');
-    var prev = jQuery('<div>&lsaquo;</div>');
-    var next = jQuery('<div>&rsaquo;</div>');
-    var image_el = [];
-    var current = 0;
-    var new_images = images;
+      /* Reset */
+      'margin': 0,
+      'padding': 0,
+      'border': 0,
+      'font-size': '100%',
+      'font': 'inherit',
+      'vertical-align':' baseline',
+      'display': 'block',
 
-    if(images.length > 1) {
-      container.append(prev,next);
-      next.click(function(){
-        current++;
-        if(current >= image_el.length) {
-          current = 0; // Circle back to first image if we are on last
-        }
-        imageHolder.html(image_el[current]);
-        input.val(image_el[current].attr('src'));
-        return false;
-      });
+      'position': 'fixed',
+      'top': '50%',
+      'left': '50%',
+      'width': '500px',
+      'height': '500px',
+      'margin-top': '-200px',
+      'margin-left': '-200px',
+      'z-index': '9999999999999',
+      'background': 'transparent'
+    },
 
-      prev.click(function(){
-        current--;
-        if(current < 0) {
-          current = image_el.length-1; // On first image, so we go to last image
-        }
-        imageHolder.html(image_el[current]);
-        input.val(image_el[current].attr('src'));
-        return false;
-      });
-    }
+    containerHtml: '<div id="the-shoplift-container"></div>',
+    iframeHtml:    "<iframe id='the-shoplift-iframe' src='<%= bookmarklet_iframe_url %>' frameborder='0' scrolling='no' style='visibility:hidden;';\"></iframe>"
+  };
 
-    // Create the image objects
-    while(new_images.length > 0) {
-      image_el.push(jQuery('<img src="' + new_images.pop() + '" class="tsl-booklet-img-shadow"/>')); //.css(img_style));
-    }
+  var B = TheShopLift.Bookmarklet;
 
-    // Add the first image
-    imageHolder.html(image_el[current]);
-    // Set the input value for the first image
-    input.val(image_el[current].attr('src'));
+  // may aswell just inline jquery here
+  function loadJQuery() {
+    var script = window.document.createElement("script"),
+    done  = false;
 
-    return container; // div
-  }
+    script.setAttribute("src", TheShopLift.Bookmarklet.config.jquery);
 
-	jQuery("#tsl-booklet-close").click(function () {
-		thebookmarklet.destroy();
-  });
-	jQuery(".tsl-booklet-next-btn").click(function () {
-		var	valid = true;
-    var error = '';
-    jQuery('#sl-booklet-error').html(error);
-    jQuery('#sl-booklet-error').hide();
-    jQuery('#sl-booklet-error').css('height', '0');
+    script.onload = script.onreadystatechange = function() {
+      if (!done && (!this.readyState || this.readyState == "loaded" || this.readyState == "complete")) {
+        done = true;
 
-    $('#tsl-booklet-form :input').each(function () {
-      if(!valid) return;
-
-      //var nil = null; nil.forceJavaScriptError();
-
-      var value = jQuery(this).val().trim();
-      console.log(value);
-      switch (jQuery(this).attr('name')) {
-        // Special case with the price
-        case 'post[price]':
-          valid = value != '' && /^[$]?([0-9][0-9]?([,][0-9]{3}){0,4}([.][0-9]{0,4})?)$|^[$]?([0-9]{1,14})?([.][0-9]{1,4})$|^[$]?[0-9]{1,14}$/.test(value);
-          if (!valid) error = 'please enter a price';
-	        jQuery(".tsl-booklet-price-text").text(value);
-          break;
-        case 'post[brand]':
-          valid = value != '';
-          if (!valid) error = 'Please enter a brand';
-	        jQuery(".tsl-booklet-brand-text").text(value);
-          break;
-        case 'post[name]':
-          valid = value != '';
-          if (!valid) error = 'Please enter an item name';
-          if (value.length > 22) {
-            value = value.substring(0, 21) + '...';
-          }
-	        jQuery(".tsl-booklet-item-text").text(value);
-          break;
-        case 'image':
-          valid = value != '';
-          if (!valid) error = 'Please enter an image';
-          break;
-        case 'retailer':
-          valid = value != '';
-          if (!valid) error = 'Please enter a retailer';
-          break;
-        case 'url':
-          valid = value != '';
-          if (!valid) error = 'please enter a url';
-          break;
-        default:
-          break;
+        B.$ = jQuery.noConflict(true);
+        setTimeout(ready,0);
       }
+    };
+
+    window.document.body.appendChild(script);
+  }
+
+  function show(){
+
+    B.$(document.body).append(B.container);
+
+    B.container.css(B.containerCss);
+
+    B.$(B.iframe).load(function(){
+      B.container.css({
+        'background-image': 'none'
+      });
+
+      B.iframe.css({
+        'visibility': 'visible' /* prevent iframe flickering */
+      });
     });
 
-    if(!valid) {
-      jQuery('#sl-booklet-error').html(error);
-      jQuery('#sl-booklet-error').css('height', '40px');
-      jQuery('#sl-booklet-error').show();
-      return;
-    }
+    B.container.
+      append(B.iframe.css(B.iframeCss)).
+      click(function(e){
+        var element = $(this);
 
-    jQuery('#sl-booklet-error').show();
+        element.remove()
+    });
 
-    jQuery('.tsl-booklet-img-text-box').slideDown();
-    jQuery('.tsl-booklet-first-screen-form, .tsl-booklet-next-btn').hide();
-    jQuery('.tsl-booklet-second-screen-form, .tsl-booklet-back-btn').fadeIn();
-    jQuery('.booklet-submit').show();
-    jQuery('.tsl-booklet-scaffold').addClass('tsl-booklet-second-screen-scaffold');
-	});
+  }
 
-	jQuery(".tsl-booklet-back-btn").click(function () {
-	  jQuery('.tsl-booklet-img-text-box').slideUp();
-	  jQuery('.tsl-booklet-first-screen-form, .tsl-booklet-next-btn').fadeIn();
-	  jQuery('.tsl-booklet-second-screen-form, .tsl-booklet-back-btn, .booklet-submit').hide();
-	  jQuery('.tsl-booklet-scaffold').removeClass('tsl-booklet-second-screen-scaffold');
-	});
+  function build() {
+    B.container = B.$(B.containerHtml);
+    B.iframe    = B.$(B.iframeHtml);
+  }
 
-})();
+  function ready() {
+    build();
+    show();
+  }
+
+  function boot()  {
+    loadJQuery();
+  }
+
+  boot();
+
+  // export
+  B.boot = boot, B.ready = ready, B.show = show, B.build = build;
+
+})(window);
