@@ -17,11 +17,12 @@ class User < ActiveRecord::Base
   has_many :posts
   has_many :items
   has_many :subscriptions
-  has_many :followers, :source      => :user,
-                       :class_name  => 'User',
-                       :through     => :subscriptions,
-                       :primary_key => :follower_id,
-                       :conditions  => ["subscriptions.status = #{Status::ACTIVATED}"]
+  # has_many :followers, :source      => :user,
+  #                      :class_name  => 'User',
+  #                      :through     => :subscriptions,
+  #                      :primary_key => :follower_id,
+  #                      :conditions  => ["subscriptions.status = #{Status::ACTIVATED}"]
+
 
   def followers
     query = User.
@@ -35,14 +36,37 @@ class User < ActiveRecord::Base
   end
 
   def follower_ids
-    followers.map(&:id)
+    followers.pluck(:id)
   end
 
-  has_many :followees, :source      => :follower,
-                       :class_name  => 'User',
-                       :through     => :subscriptions,
-                       :foreign_key => :user_id,
-                       :conditions  => ["subscriptions.status = 1"]
+  def followees
+    query = User.
+      joins(:subscriptions).
+      where('subscriptions.follower_id' => id).
+      select('subscriptions.user_id').to_sql
+
+    ids = User.connection.execute(query).values.flatten.map(&:to_i)
+
+    User.where(id: ids)
+  end
+
+  def followee_ids
+    followees.pluck(:id)
+  end
+
+  def follows?(user_id)
+    followers.where(id: user_id).first.present?
+  end
+
+  def followed?(user_id)
+    User.where(id: user_id).first.followers.where(id: id).first.present?
+  end
+
+  #has_many :followees, :source      => :follower,
+  #                     :class_name  => 'User',
+  #                     :through     => :subscriptions,
+  #                     :foreign_key => :user_id,
+  #                     :conditions  => ["subscriptions.status = 1"]
 
   has_many :hashtags
   has_many :hashtag_values, :through => :hashtags

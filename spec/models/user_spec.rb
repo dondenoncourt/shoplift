@@ -3,11 +3,11 @@ require 'spec_helper'
 describe User do
   fixtures :users
 
+  subject { user }
+
+  let(:user)  { users(:users_001) }
+
   describe '#followers' do
-    subject { user }
-
-    let(:user)  { users(:users_001) }
-
     let(:expected_follower_ids) do
       [:users_002, :users_003].map do |key|
         users(key).id
@@ -18,6 +18,12 @@ describe User do
   end
 
   describe '#followees' do
+    let(:expected_followee_ids) do
+      [:users_002, :users_003].map do |key|
+        users(key).id
+      end
+    end
 
+    its(:followee_ids) { should =~ expected_followee_ids }
   end
 end

@@ -71,15 +71,15 @@ class UsersController < ApplicationController
   end
 
   def following
-    follower = current_user.followees.where('subscriptions.user_id = :id', :id => params[:id]).first
-    json = {:is_following => follower != nil }.to_json
-    render :json => json
+    render json: {
+      :is_following => current_user.follows?(params[:id])
+    }.to_json
   end
 
   def followed
-    follower = current_user.followers.where('subscriptions.follower_id = :id', :id => params[:id]).first
-    json = {:is_following => follower != nil }.to_json
-    render :json => json
+    render json: {
+      is_followed: current_user.follwed?(params[:id])
+    }.to_json
   end
 
   def whoami
