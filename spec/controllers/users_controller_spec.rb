@@ -32,49 +32,23 @@ describe UsersController do
     it "returns status code of 200" do
       sign_in @user
       get :show, :format => :json, :id => @user.id
-      response.response_code.should == 200
+      response.should be_ok
     end
 
     it "returns a list of followee_ids" do
       sign_in @user
       get :show, :format => :json, :id => @user.id
       json = JSON.parse(response.body)
-      json['user']['followee_ids'].map(&:to_i).should == [2,3]
-      response.response_code.should == 200
+      json['user']['followees'].map(&:to_i).should =~ @user.followee_ids
+      response.should be_ok
     end
 
     it "returns a list of item_ids" do
       sign_in @user
       get :show, :format => :json, :id => @user.id
       json = JSON.parse(response.body)
-      json['user']['item_ids'].should == [2,1]
-      response.response_code.should == 200
-    end
-  end
-
-  describe "POST create" do
-    describe "with valid params" do
-      it "creates a new User" do
-        sign_in @user
-        expect {
-            post :create, :user => valid_attributes,  :format => :json
-        }.to change(User, :count).by(1)
-      end
-
-      it "returns status code of 201" do
-        sign_in @user
-        post :create, :user => valid_attributes, :format => :json
-        response.response_code.should == 201
-      end
-    end
-
-    describe "with invalid params" do
-      it "returns status code of 404" do
-        sign_in @user
-        User.any_instance.stub(:save).and_return(false)
-        post :create, :user => {}, :format => :json
-        response.response_code.should == 406
-      end
+      json['user']['items'].should =~ @user.item_ids
+      response.should be_ok
     end
   end
 
@@ -89,7 +63,7 @@ describe UsersController do
       it "returns status code of 200" do
         sign_in @user
         put :update, :id => users(:users_001).id, :user => {:full_name => "New Name", :zipcode => "23238", :sex => true}, :format => :json
-        response.response_code.should == 200
+        response.should be_ok
       end
     end
 
@@ -114,7 +88,7 @@ describe UsersController do
       it "returns status code of 200" do
         sign_in @user
         post :update, :id => users(:users_001).id, :user => {:full_name => "New Name", :zipcode => "23238", :sex => true}, :format => :json
-        response.response_code.should == 200
+        response.should be_ok
       end
     end
 
@@ -127,33 +101,4 @@ describe UsersController do
       end
     end
   end
-
-  describe "DELETE destroy" do
-    #it "destroys the requested user" do
-      #sign_in @user
-      #delete :destroy, :id => users(:users_001).id, :format => :json
-      #User.find(users(:users_001).id).status.should == 0
-    #end
-
-    it "returns status code of 200" do
-      sign_in @user
-      delete :destroy, :id => users(:users_001).id, :format => :json
-      response.response_code.should == 200
-    end
-  end
-
-  describe "POST destroy" do
-    #it "destroys the requested user" do
-      #sign_in @user
-      #post :destroy, :id => users(:users_001).id, :format => :json
-      #User.find(users(:users_001).id).status.should == 0
-    #end
-
-    it "returns status code of 200" do
-      sign_in @user
-      post :destroy, :id => users(:users_001).id, :format => :json
-      response.response_code.should == 200
-    end
-  end
-
 end

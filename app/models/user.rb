@@ -130,6 +130,14 @@ class User < ActiveRecord::Base
     end
   end
 
+  def followers_ids
+    followers.pluck('users.id')
+  end
+
+  def follwees_ids
+    followees.pluck('users.id')
+  end
+
   def self.by_option(option, args=nil)
     if option.present? && self.respond_to?(option)
       self.send(option, args)

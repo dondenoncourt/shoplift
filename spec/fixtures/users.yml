@@ -77,6 +77,7 @@ users_001:
   avatar_file_size: 151209
   avatar_updated_at: 2012-05-17 00:05:57.000000000Z
   signup_state: member
+  confirmed_at: 2012-05-17 00:05:57.000000000Z
 users_002:
   id: 2
   email: patrick@38media.net
@@ -113,6 +114,7 @@ users_002:
   avatar_file_size: 1508425
   avatar_updated_at: 2012-05-17 00:17:07.000000000Z
   signup_state: member
+  confirmed_at: 2012-05-17 00:05:57.000000000Z
 users_003:
   id: 3
   email: iain@38media.net
@@ -142,6 +144,7 @@ users_003:
   avatar_file_size: 12812
   avatar_updated_at: 2012-05-17 00:18:33.000000000Z
   signup_state: member
+  confirmed_at: 2012-05-17 00:05:57.000000000Z
 users_004:
   id: 4
   email: dead@38media.net
@@ -167,3 +170,4 @@ users_004:
   private: '0'
   status: 0
   signup_state: member
+  confirmed_at: 2012-05-17 00:05:57.000000000Z
