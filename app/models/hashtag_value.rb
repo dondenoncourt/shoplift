@@ -1,14 +1,3 @@
-# == Schema Information
-#
-# Table name: hashtag_values
-#
-#  id             :integer(4)      not null, primary key
-#  value          :string(60)      not null
-#  created_at     :datetime        not null
-#  updated_at     :datetime        not null
-#  hashtags_count :integer(4)      default(0)
-#
-
 class HashtagValue < ActiveRecord::Base
   has_many :hashtags
   has_many :category_hashtag_values
@@ -19,7 +8,9 @@ class HashtagValue < ActiveRecord::Base
   has_many :users, :through => :items
   has_one :hashtagbrand, :dependent => :delete
 
-  after_create {|h| Hashtagbrand.create(:hashtag_value => h)}
+  after_create do |h|
+    Hashtagbrand.create(:hashtag_value => h)
+  end
 
   def related_hashtagbrands(limit)
     brands.order('posts_count desc').limit(limit).map(&:hashtagbrand)

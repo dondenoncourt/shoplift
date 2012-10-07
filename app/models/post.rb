@@ -1,32 +1,4 @@
-# == Schema Information
-#
-# Table name: posts
-#
-#  id                 :integer(4)      not null, primary key
-#  name               :string(110)     not null
-#  description        :text            default(""), not null
-#  retailer           :string(255)     not null
-#  url                :string(2083)    not null
-#  price              :decimal(10, 2)
-#  hashtags_allowed   :boolean(1)      default(TRUE), not null
-#  comment            :string(100)
-#  user_id            :integer(4)      not null
-#  created_at         :datetime        not null
-#  updated_at         :datetime        not null
-#  status             :integer(4)      default(1), not null
-#  views              :integer(4)      default(0), not null
-#  visits             :integer(4)      default(0), not null
-#  relifts            :integer(4)      default(0), not null
-#  photo_file_name    :string(255)
-#  photo_content_type :string(255)
-#  photo_file_size    :integer(4)
-#  photo_updated_at   :datetime
-#  brand_id           :integer(4)
-#
-
 class Post < ActiveRecord::Base
-  require 'status'
-
   belongs_to :user, :conditions => ["users.status = 1"], :counter_cache => :count_of_posts
   belongs_to :brand, :counter_cache => true
   has_many :hashtags, :conditions => ["hashtags.status = 1"]

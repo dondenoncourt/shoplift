@@ -1,16 +1,7 @@
-# == Schema Information
-#
-# Table name: hashtagbrands
-#
-#  id               :integer(4)      not null, primary key
-#  brand_id         :integer(4)
-#  hashtag_value_id :integer(4)
-#  created_at       :datetime        not null
-#  updated_at       :datetime        not null
-#
 class Hashtagbrand < ActiveRecord::Base
   belongs_to :hashtag_value
   belongs_to :brand
+
   def items
     if brand
       brand.items
@@ -18,6 +9,7 @@ class Hashtagbrand < ActiveRecord::Base
       hashtag_value.items
     end
   end
+
   def value
     if brand
       brand.name
@@ -25,6 +17,7 @@ class Hashtagbrand < ActiveRecord::Base
       hashtag_value.value
     end
   end
+
   def image
     if brand
       brand.items.last.post.photo if brand.items
@@ -32,6 +25,7 @@ class Hashtagbrand < ActiveRecord::Base
       hashtag_value.hashtags.first.post.photo if hashtag_value.hashtags.first
     end
   end
+
   def users
     if brand
       brand.users
@@ -39,6 +33,7 @@ class Hashtagbrand < ActiveRecord::Base
       hashtag_value.users
     end
   end
+
   def related(limit)
     if brand
       brand.related_hashtagbrands(limit)
