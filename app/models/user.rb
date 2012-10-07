@@ -55,11 +55,15 @@ class User < ActiveRecord::Base
   end
 
   def follows?(user_id)
-    followers.where(id: user_id).first.present?
+    followees.find(user_id).present?
+  rescue ActiveRecord::RecordNotFound
+    false
   end
 
   def followed?(user_id)
-    User.where(id: user_id).first.followers.where(id: id).first.present?
+    User.find(user_id).first.followers.find(id).first.present?
+  rescue ActiveRecord::RecordNotFound
+    false
   end
 
   #has_many :followees, :source      => :follower,
