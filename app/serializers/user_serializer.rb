@@ -3,9 +3,10 @@ class UserSerializer < ActiveModel::Serializer
   attributes :id, :email, :vanity_url, :full_name, :signup_state,
              :username, :first_name, :last_name,:item_ids, :followee_count
 
-  has_many :followers, :include => false
-  has_many :followees, :include => false
-  has_many :items,     :include => false
+  has_many :followers,     :include => false
+  has_many :followees,     :include => false
+  has_many :items,         :include => false
+  has_many :hashtagbrands, :include => false
 
   def followee_count
     object.followees.count
