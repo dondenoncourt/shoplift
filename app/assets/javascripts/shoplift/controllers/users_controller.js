@@ -31,11 +31,13 @@ Shoplift.UserController = Ember.ObjectController.extend({
 		if(following) {
 			that.set('following', false);
 			router.get("navController.currentUser.followees").pushObject(that.get('content'));
+
 			$.ajax({
 				url: "/subscriptions/" + userId,
 				type: 'DELETE',
 				//data: {"user_id": userId},
-				success: function() {
+				success: function(response) {
+          Shoplift.store.loadMany(Shoplift.User, response.users)
 					that.set('following', false);
 				},
 				error: function() {
@@ -48,7 +50,9 @@ Shoplift.UserController = Ember.ObjectController.extend({
 				url: "/subscriptions.json",
 				type: 'POST',
 				data: {"user_id": userId},
-				success: function() {
+				success: function(response) {
+
+          Shoplift.store.loadMany(Shoplift.User, response.users)
 					that.set('following', true);
 				},
 				error: function() {

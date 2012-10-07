@@ -29,20 +29,22 @@ class SubscriptionsController < ApplicationController
     subscription = Subscription.where(:user_id => user.id, :follower_id => current_user.id).first_or_create
     subscription.update_attribute(:status, status)
 
-    binding.pry
     if subscription.persisted?
-      render json: { status: 200 }
+      render json: [ user, current_user], each_serializer: user.active_model_serializer, root: :users
     else
       return_error_messages(subscription, "Error adding subscription")
     end
   end
 
   def destroy
+
+    user = User.find(params[:id])
     subscription = Subscription.where(:user_id => params[:id], :follower_id => current_user.id).first
+
 
     # TODO: deactivate rather then delete
     if subscription.destroy
-      render :json => { status: 200 }
+      render json: [ user, current_user], each_serializer: user.active_model_serializer, root: :users
     else
       return_error_messages(subscription, "Failed to delete subscription")
     end
