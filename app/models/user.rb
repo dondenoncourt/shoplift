@@ -50,6 +50,9 @@
 
 class User < ActiveRecord::Base
   require 'status'
+  default_scope { where(status: Status::ACTIVATED ) }
+
+  geocoded_by :address   # can also be an IP address
 
   # Include default devise modules. Others available are:
   # :encryptable, :confirmable, :lockable, :timeoutable
@@ -61,11 +64,37 @@ class User < ActiveRecord::Base
                   :first_name, :last_name, :country, :vanity_url, :zipcode,
                   :notify_new_follower, :notify_relift, :notify_missing,
                   :avatar, :tos, :signup_state
+
   has_many :posts
   has_many :items
   has_many :subscriptions
-  has_many :followers, :through => :subscriptions, :source => :user, :foreign_key => :follower_id, :class_name => 'User', :conditions => ["subscriptions.status = 1"]
-  has_many :followees, :through => :subscriptions, :source => :follower, :foreign_key => :user_id, :class_name => 'User', :conditions => ["subscriptions.status = 1"]
+  has_many :followers, :source      => :user,
+                       :class_name  => 'User',
+                       :through     => :subscriptions,
+                       :primary_key => :follower_id,
+                       :conditions  => ["subscriptions.status = #{Status::ACTIVATED}"]
+
+  def followers
+    query = User.
+      joins(:subscriptions).
+      where('subscriptions.user_id' => id).
+      select('subscriptions.follower_id').to_sql
+
+    ids = User.connection.execute(query).values.flatten.map(&:to_i)
+
+    User.where(id: ids)
+  end
+
+  def follower_ids
+    followers.map(&:id)
+  end
+
+  has_many :followees, :source      => :follower,
+                       :class_name  => 'User',
+                       :through     => :subscriptions,
+                       :foreign_key => :user_id,
+                       :conditions  => ["subscriptions.status = 1"]
+
   has_many :hashtags
   has_many :hashtag_values, :through => :hashtags
   has_and_belongs_to_many :roles
@@ -83,10 +112,10 @@ class User < ActiveRecord::Base
 
 
   before_validation :set_username
+  after_validation :geocode
   before_save :ensure_authentication_token
   after_create :send_welcome_email
 
-  default_scope { where(status: 1) }
   #
   ### Scopes for followee suggestions. They could also be methods if needed but must return an AR relation
   #
@@ -274,12 +303,9 @@ class User < ActiveRecord::Base
   def address
     [hometown, zipcode, country].compact.join(', ')
   end
-  geocoded_by :address   # can also be an IP address
-  after_validation :geocode          # auto-fetch coordinates
 
   def hashtagbrands
     Hashtagbrand.where({:brand_id => posts.pluck('brand_id').compact.uniq} ||
                        {:hashtag_value_id => hashtag_values.pluck('hashtag_value_id').compact.uniq})
   end
-
 end
