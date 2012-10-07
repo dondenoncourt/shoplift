@@ -3,7 +3,7 @@ Shoplift.ItemsRoute = Ember.Route.extend({
   connectOutlets: function(router, items) {
   	router.get("navController.whoami");
   	setTimeout(function() {
-	  	if(router.get("navController.currentUser.followees.length") < 2) {
+	  	if(router.get("navController.currentUser.followees.length") < 5) {
 		  	router.send("goExplore");
 		  	console.log("not enough followers");
 	  	}

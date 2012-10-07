@@ -41,7 +41,8 @@ Shoplift.ProfileView = Ember.View.extend({
 				url: "/subscriptions/" + userId,
 				type: 'DELETE',
 				//data: {"user_id": userId},
-				success: function() {
+				success: function(response) {
+					Shoplift.store.loadMany(Shoplift.User, response.users)
 					that.set('following', false);
 				},
 				error: function() {
@@ -54,7 +55,8 @@ Shoplift.ProfileView = Ember.View.extend({
 				url: "/subscriptions.json",
 				type: 'POST',
 				data: {"user_id": userId},
-				success: function() {
+				success: function(response) {
+					Shoplift.store.loadMany(Shoplift.User, response.users)
 					that.set('following', true);
 				},
 				error: function() {
