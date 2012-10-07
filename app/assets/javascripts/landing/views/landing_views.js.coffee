@@ -201,7 +201,8 @@ Landing.PhotoUploadView = Ember.View.extend
   
   template: Ember.Handlebars.compile('''
   {{#if hasUploaded}}
-    <img {{bindAttr src="thumbUrl"}} alt="your thumbnail"/>  
+    <div class="face-circle"><img src="/img/face-circle.png"></div>
+    <div class="circle-overflow"><img {{bindAttr src="thumbUrl"}} alt="your thumbnail"/> </div> 
   {{else}}
     <input type="hidden" name="params" value="{&quot;auth&quot;:{&quot;key&quot;:&quot;148166321cf34366a6696f36e79c4964&quot;},&quot;template_id&quot;:&quot;06560a762b784ecbbc7f3aca769b475d&quot;}" /> <!-- ,&quot;notify_url&quot;:&quot;http://beta.theshoplift.com/users&quot;}" /> -->
     <input class="photo-file-input" type="file" name="my_file" />

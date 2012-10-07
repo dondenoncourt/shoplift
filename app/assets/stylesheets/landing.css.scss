@@ -425,7 +425,6 @@
 					position: relative;
 					text-align: center;
 					img {
-						width: 100%;
 					}
 					.photo-file-input {
 						color: #F8ECE5;
@@ -466,6 +465,39 @@
 				overflow: hidden;
 			}
 		}
+		
+		.face-circle {
+			position: absolute;
+			z-index: 501;
+			top: 7px;
+			left: 5px;
+		}
+		#current-user .face-circle {
+			top:36px;
+			left:4px;
+		}
+		#photo-container #modal div.circle-overflow {
+			-webkit-border-radius: 40px;
+			-moz-border-radius: 40px;
+			border-radius: 40px;
+			position:absolute;
+			top: 19px;
+			left: 93px;
+			z-index:500;
+			overflow:hidden;
+			margin: 0 0;
+			
+		}
+		.circle-overflow img {
+			-webkit-border-radius: 40px;
+			-moz-border-radius: 40px;
+			border-radius: 40px;
+			max-width:74px !important;
+			max-height:75px !important;
+			-webkit-transform: rotate(-30deg);
+			-moz-transform: rotate(-30deg);
+		}
+		
 		#bio-container {
 			position: absolute;
 			top: 300px;
