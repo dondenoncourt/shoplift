@@ -4,7 +4,7 @@
 		<img src="/img/landing-demographics.png" alt="Now tell us about you" />
 		<ul>
 			<li id="gender">
-				{{view Ember.Select contentBinding="controller.genders" valueBinding="controller.gender"}}
+				{{view Ember.Select contentBinding="controller.genders" valueBinding="content.gender"}}
 			</li>
 			<li id="birthday">
 				{{view Ember.Select contentBinding="controller.months" optionValuePath="content.id" optionLabelPath="content.month" valueBinding="controller.month"}} 

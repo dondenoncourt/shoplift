@@ -25,9 +25,7 @@ Shoplift.MenuItemView = Ember.View.extend({
 				that = this;
 		
 		if(router) {
-			this.get("controller").toggleProperty('closed');
-			//Shoplift.NavView.send("toggleMenu");
-			//debugger;
+			this.get("controller").toggleMenu();
 			target = Shoplift.get('router');
 		}
 		
@@ -44,24 +42,57 @@ Shoplift.NavView = Ember.View.extend({
 	elementId: 'nav',
 	classNames: ['header', 'navbar-fixed-top'],
 	classNameBindings: ['closed'],
-	closedBinding: 'controller.closed',
+	closedBinding: 'controller.menuIsClosed',
+	menuIsOpeningBinding: 'controller.menuIsOpening',
+	menuIsClosingBinding: 'controller.menuIsClosing',
+	height: 521,
+	animationTime: 200,
+	
 	didInsertElement: function() {
-		this.get('controller.whoami');
-	},
-	toggleMenu: function() {
-		var that = this;
+		var menu = this.$("#menu ul"),
+				height = this.get("height");
 		
-		if(this.get('closed')) {
-			this.set('closed', false);
-			this.$("#menu ul").transition({y: '-=521px'}, 0);
-			this.$("#menu ul").transition({y: "+=521px"}, 200);
+		this.get('controller.whoami');
+		menu.transition({y: '-=' + height + 'px'}, 0);
+		this.addObserver('controller.menuIsOpening', this, this.toggleMenu);
+		this.addObserver('controller.menuIsClosing', this, this.toggleMenu);
+	},
+	
+	openMenu: function() {
+		var menu = this.$("#menu ul"),
+				height = this.get("height"),
+				time = this.get("animationTime"),
+				controller = this.get("controller");
+		
+		controller.menuWillOpen();
+		//menu.transition({y: '-=' + height + 'px'}, 0);
+		menu.transition({y: '+=' + height + 'px'}, time, function() {
+			controller.menuDidOpen()
+		});
+	},
+	
+	closeMenu: function() {
+		var menu = this.$("#menu ul"),
+				height = this.get("height"),
+				time = this.get("animationTime"),
+				controller = this.get("controller");
+		
+		menu.transition({y: '-=' + height + 'px'}, time, function() {
+			controller.menuDidClose();
+			//menu.transition({y: '+=' + height + 'px'}, 0);
+		});
+	},
+	
+	toggleMenu: function() {
+		if(this.get('controller.menuIsOpening')) {
+			this.openMenu();
+			return;
 		}
-		else {
-			this.$("#menu ul").transition({y: "-=521px"}, 200, function() {
-				that.set('closed', true);	
-				that.$("#menu ul").transition({y: '+=521px'}, 0);
-			});
+		if(this.get('controller.menuIsClosing')) {
+			this.closeMenu();
+			return;
 		}
 	}
+	
 });
 

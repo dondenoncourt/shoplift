@@ -1,7 +1,9 @@
 class UserSerializer < ActiveModel::Serializer
   embed :ids
   attributes :id, :email, :vanity_url, :full_name, :signup_state,
-             :username, :first_name, :last_name, :item_ids
+             :username, :first_name, :last_name, :item_ids, :zipcode,
+             :sex, :vanity_url, :country, :month, :day, :year, :biography, :url,
+             :original_url, :large_url, :thumb_url
 
   has_many :followers,     :include => false
   has_many :followees,     :include => false

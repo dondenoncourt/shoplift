@@ -33,6 +33,10 @@
 	    	background: #b3d4fc;
 	    	text-shadow: none;
 	    }
+	    
+	    a {
+		    cursor: pointer;
+	    }
 	  
 	    hr {
 	    	display: block;
@@ -288,7 +292,7 @@
 	  }
 	  #name-container {
 	  	position: absolute;
-	  	top: 300px;
+	  	top: 31%;
 	  	width:800px;
 	  	left: 50%;
 	  	margin-left: -400px;
@@ -373,9 +377,10 @@
 				  	background: url(/img/landing-birthday.png) no-repeat;
 				  	background-position: 63px 8px;
 				  	background-size: 122px 19px;
-				  	width: 266px;
+				  	width: 268px;
 				  	select {
 				  		width: 70px;
+				  		font-size: 0.9em;
 				  		&:first-child {
 				  			width: 120px; 
 				  		}
@@ -442,6 +447,11 @@
 						width: 128px;
 						margin-top: 15px;
 						border: none;
+					}
+					.photo-retry {
+						right: 6px;
+						top: 47px;
+						z-index: 900;
 					}
 				}
 			}

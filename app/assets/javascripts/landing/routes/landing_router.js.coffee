@@ -57,33 +57,6 @@ Landing.Router = Ember.Router.extend
           
           
           router.transitionTo('signup', user)
-          
-          
-          # this.set('user', user.get('exists'));
-          
-          
-          
-                    
-
-          # Here, we try to create a user with the password provided.
-          # If we get an error, that means the user already exists, so we
-          # should take that user to sign in.
-          #user.one 'didCreate', =>
-            # Successfully created new user. Confirmation e-mail
-            # has been sent. Redirect to the page that tells them
-            # to check their email.
-            #router.transitionTo 'returningUserPassword'
-            #router.transitionTo 'checkYourEmail'
-
-          #user.one 'becameInvalid', =>
-            # There were errors creating the user, which means the
-            # email was already taken, which means this user's
-            # trying to log in.
-            #router.transitionTo 'checkYourEmail'
-            #router.transitionTo 'returningUserPassword'
-
-          # Commit the transaction.
-          #user.store.commit()
 
         # index: enter email.
         index: Ember.Route.extend
@@ -102,23 +75,6 @@ Landing.Router = Ember.Router.extend
             router.get("applicationController").disconnectOutlet('letterView')
           prev: Ember.Route.transitionTo('index')
           next: Ember.Route.transitionTo('letter')
-
-      # Where existing users enter their password.
-      returningUserPassword: Ember.Route.extend
-        connectOutlets: (router) ->
-          router.get("applicationController").connectOutlet
-            viewClass: Landing.ReturningUserPasswordView
-
-        prev: Em.K
-        next: (router) -> router.send 'submit'
-
-        submit: (router) ->
-          unless password = router.get('applicationController.password')
-            router.get('applicationController.view.passwordView').$().focus()
-            return
-
-          alert "log in w password #{password}"
-          #Landing.router.transitionTo 'returningUserPassword'
 
       checkYourEmail: Em.Route.extend
         route: '/check_email'
@@ -151,8 +107,14 @@ Landing.Router = Ember.Router.extend
           unless password = router.get('applicationController.password')
             router.get('applicationController.view.passwordView').$().focus()
             return
+          unless password.length >= 6
+            alert 'Password must be at least 6 characters long'
+            router.get('applicationController.view.passwordView').$().val('')
+            router.get('applicationController.view.passwordView').$().focus()
+            return
         
           user = router.get('applicationController.content')
+          user.set('passwordConfirmation', user.get('password'))
           router.transitionTo('fullname', user)
       
       signin: Ember.Route.extend
@@ -162,23 +124,32 @@ Landing.Router = Ember.Router.extend
         connectOutlets: (router, context) ->
           router.get("applicationController").connectOutlet('signin', context)
           
-        # submit: (router) ->
-        #   unless email = router.get('applicationController.email')
-        #     router.get('applicationController.view.emailView').$().focus()
-        #     return
-        #   unless password = router.get('applicationController.password')
-        #     router.get('applicationController.view.passwordView').$().focus()
-        #     return
-        # 
-        #   user = router.get('applicationController.content')
-        #   $.ajax
-        #     url: '/users/sign_in'
-        #     type: 'POST'
-        #     data: 
-        #       commit: 'Sign In'
-        #       user:
-        #         email: 'shoplift@dmzza.com'
-        #         password: 't6ygfr5t'
+        submit: (router) ->
+          unless email = router.get('applicationController.email')
+            router.get('applicationController.view.emailView').$().focus()
+            return
+          unless password = router.get('applicationController.password')
+            router.get('applicationController.view.passwordView').$().focus()
+            return
+        
+          user = router.get('applicationController.content')
+          router.get('applicationController.view.passwordView').$().attr('disabled', 'disabled')
+          $.ajax
+            url: '/users/sign_in'
+            type: 'POST'
+            data: 
+              user:
+                email: email
+                password: password
+          .done( ->
+            window.location = '/'
+          )
+          .fail( ->
+            alert 'Wrong email or password'
+            router.get('applicationController.view.passwordView').$().removeAttr('disabled')
+            router.get('applicationController.view.passwordView').$().val('')
+            router.get('applicationController.view.passwordView').$().focus()
+          )
           #TODO: Sumbit the form to rails for sign-in
       
       fullname: Ember.Route.extend
@@ -189,7 +160,7 @@ Landing.Router = Ember.Router.extend
           router.get("applicationController").connectOutlet('name', context)
           
         submit: (router) ->
-          unless name = router.get('applicationController.name')
+          unless fullName = router.get('applicationController.fullName')
             router.get('applicationController.view.nameView').$().focus()
             return
         
@@ -204,40 +175,47 @@ Landing.Router = Ember.Router.extend
           router.get("applicationController").connectOutlet('demographics', context)
         
         submit: (router) ->
-          unless router.get('applicationController.gender') isnt ""
-            # router.get('applicationController.view.genderView').$().focus()
-            return
-          unless parseInt(router.get('applicationController.year')) < 2000
-            console.log parseInt(router.get('applicationController.year'))
-            # router.get('applicationController.view.yearView').$().focus()
-            return
-          unless zip = router.get('applicationController.zip')
-            router.get('applicationController.view.zipView').$().focus()
-            return
+          # unless gender = router.get('applicationController.gender') and gender isnt ""
+          #   #router.get('applicationController.view.genderView').$().focus()
+          #   return
+          # unless parseInt(router.get('applicationController.year')) < 2000
+          #   console.log parseInt(router.get('applicationController.year'))
+          #   #router.get('applicationController.view.yearView').$().focus()
+          #   return
+          # unless zip = router.get('applicationController.zipcode')
+          #   router.get('applicationController.view.zipView').$().focus()
+          #   return
         
           user = router.get('applicationController.content')
-          gender = (user.get("gender") is "male")
-          if user.get("gender") is "neither"
-            gender = ""
+          # gender = (user.get("gender") is "male")
+          # if user.get("gender") is "neither"
+          #   gender = ""
+          # switch gender
+          #   when "male" then user.set("sex", true)
+          #   when "female" then user.set("sex", false)
+          #   when "" then user.set("sex", "")
           
-          $.ajax(
-            url: '/users'
-            type: 'POST'
-            data: 
-              user:
-                email: user.get("email")
-                password: user.get("password")
-                password_confirmation: user.get("password")
-                full_name: user.get("name")
-                country: user.get("country")
-                zipcode: user.get("zip")
-                "birthdate(2i)": user.get("month")
-                "birthdate(3i)": user.get("day")
-                "birthdate(1i)": user.get("year")
-                sex: gender
-                tos: 1
-          ).done( -> router.transitionTo('photo', user) )
-           .fail( -> alert('Unexpected Error: Please try again') )
+          # $.ajax(
+          #   url: '/users'
+          #   type: 'POST'
+          #   data: 
+          #     user:
+          #       email: user.get("email")
+          #       password: user.get("password")
+          #       password_confirmation: user.get("password")
+          #       full_name: user.get("fullName")
+          #       country: user.get("country")
+          #       zipcode: user.get("zip")
+          #       "birthdate(2i)": user.get("month")
+          #       "birthdate(3i)": user.get("day")
+          #       "birthdate(1i)": user.get("year")
+          #       sex: user.get("sex")
+          #       tos: 1
+          # ).done( -> router.transitionTo('photo', user) )
+          #  .fail( -> alert('Unexpected Error: Please try again') )
+          
+          user.store.commit()
+          router.transitionTo('photo', user)
       
       password: Ember.Route.extend
         route: '/password'
@@ -259,6 +237,7 @@ Landing.Router = Ember.Router.extend
         route: '/photo'
         prev: Em.K
         next: (router) -> router.send 'submit'
+        retry: (router) -> router.get("photoUploadController").retry()
         connectOutlets: (router, context) ->
           controller = router.get("applicationController")
           user  = controller.get('content')
@@ -267,7 +246,15 @@ Landing.Router = Ember.Router.extend
           controller.connectOutlet('photoUpload', 'photoUpload', user)
         
         submit: (router) ->
+          controller = router.get('photoUploadController')
+          router.get('applicationController.content').setProperties({
+            originalUrl: controller.get('originalUrl')
+            largeUrl: controller.get('largeUrl')
+            thumbUrl: controller.get('thumbUrl')
+          })
+          
           user = router.get('applicationController.content')
+          user.store.commit()
           router.transitionTo('bio', user)
       
       bio: Ember.Route.extend
@@ -287,7 +274,7 @@ Landing.Router = Ember.Router.extend
             type: 'PUT'
             data: 
               user:
-                biography: user.get("bio")
+                biography: user.get("biography")
                 url: user.get("url")
           
           router.transitionTo('confirm')

@@ -9,10 +9,10 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :full_name, :username, :sex,
-                  :biography, :url, :hometown, :birthdate, :private, :status,
+                  :biography, :url, :hometown, :month, :day, :year, :private, :status,
                   :first_name, :last_name, :country, :vanity_url, :zipcode,
                   :notify_new_follower, :notify_relift, :notify_missing,
-                  :avatar, :tos, :signup_state
+                  :avatar, :tos, :signup_state, :original_url, :large_url, :thumb_url
 
   has_many :posts
   has_many :items
@@ -76,21 +76,10 @@ class User < ActiveRecord::Base
   has_many :hashtag_values, :through => :hashtags
   has_and_belongs_to_many :roles
 
-  has_attached_file :avatar,
-                    :styles => {
-                      :tiny => "20x20#",
-                      :thumb => "70x70#",
-                      :small => "200x200>"
-                    },
-                    :storage => :s3,
-                    :s3_credentials => "#{Rails.root}/config/s3.yml",
-                    :path => "/:style/:id/:filename",
-                    :default_url => "/assets/avatars/:style/missing.png"
-
 
   before_validation :set_username
   after_validation :geocode
-  before_save :ensure_authentication_token
+  before_save :ensure_authentication_token #, :deserialize_date
   after_create :send_welcome_email
 
   #
@@ -110,31 +99,31 @@ class User < ActiveRecord::Base
   # 1) User created / email entered (:email)
   # 2) Name entered (:name)
   # 3) member / password and vanity url entered (:member)
-  state_machine :signup_state, :initial => :email do
-    state :name do
-      validates :tos, :acceptance => true
-    end
-
-    state :member do
-      validates :tos, :acceptance => true
-    end
-
-    state all do
-      # All states require email and username to have been set.
-      validates :email, :username, presence: true
-    end
-
-    state all - [:email] do
-      # All states after entering e-mail require
-      # the name to have been entered
-      validates :full_name, presence: true
-    end
-
-    state :member do
-      #validates :vanity_url, presence: true
-      validates :tos, :acceptance => true
-    end
-  end
+  # state_machine :signup_state, :initial => :email do
+  #   state :name do
+  #     validates :tos, :acceptance => true
+  #   end
+  # 
+  #   state :member do
+  #     validates :tos, :acceptance => true
+  #   end
+  # 
+  #   state all do
+  #     # All states require email and username to have been set.
+  #     validates :email, :username, presence: true
+  #   end
+  # 
+  #   state all - [:email] do
+  #     # All states after entering e-mail require
+  #     # the name to have been entered
+  #     validates :full_name, presence: true
+  #   end
+  # 
+  #   state :member do
+  #     #validates :vanity_url, presence: true
+  #     validates :tos, :acceptance => true
+  #   end
+  # end
 
   def followers_ids
     followers.pluck('users.id')
@@ -158,6 +147,29 @@ class User < ActiveRecord::Base
     else
       scoped
     end
+  end
+  
+  def deserialize_date
+    birthdate = Date.new(read_attribute(:year), read_attribute(:month), read_attribute(:day))
+  end
+  
+  def year=(year)
+    write_attribute(:birthdate, Date.new(1990, 3, 28))
+  end
+  def month=(month)
+    #read_attribute(:birthdate).month
+  end
+  def day=(day)
+    #read_attribute(:birthdate).day
+  end
+  def year
+    read_attribute(:birthdate).year
+  end
+  def month
+    read_attribute(:birthdate).month
+  end
+  def day
+    read_attribute(:birthdate).day
   end
 
   def self.find_for_facebook_oauth(response, signed_in_resource=nil)

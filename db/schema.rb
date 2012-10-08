@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121006164852) do
+ActiveRecord::Schema.define(:version => 20121008120647) do
 
   create_table "brands", :force => true do |t|
     t.string   "name"
@@ -255,10 +255,6 @@ ActiveRecord::Schema.define(:version => 20121006164852) do
     t.boolean  "notify_new_follower"
     t.boolean  "notify_relift"
     t.string   "notify_missing"
-    t.string   "avatar_file_name"
-    t.string   "avatar_content_type"
-    t.integer  "avatar_file_size"
-    t.datetime "avatar_updated_at"
     t.string   "authentication_token"
     t.integer  "count_of_followers",                    :default => 0
     t.float    "latitude"
@@ -273,6 +269,9 @@ ActiveRecord::Schema.define(:version => 20121006164852) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email"
+    t.string   "original_url"
+    t.string   "large_url"
+    t.string   "thumb_url"
   end
 
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true
