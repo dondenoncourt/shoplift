@@ -115,6 +115,7 @@ Landing.Router = Ember.Router.extend
         
           user = router.get('applicationController.content')
           user.set('passwordConfirmation', user.get('password'))
+          router.set('passwordCopy', user.get('password'))
           router.transitionTo('fullname', user)
       
       signin: Ember.Route.extend
@@ -254,8 +255,21 @@ Landing.Router = Ember.Router.extend
           })
           
           user = router.get('applicationController.content')
-          user.store.commit()
-          router.transitionTo('bio', user)
+          
+          $.ajax
+            url: '/users/sign_in'
+            type: 'POST'
+            data: 
+              user:
+                email: user.get('email')
+                password: router.get('passwordCopy')
+          .done( ->
+            user.store.commit()
+            router.transitionTo('bio', user)
+          )
+          .fail( ->
+            console.log 'Wrong email or password'
+          )
       
       bio: Ember.Route.extend
         route: '/bio'
