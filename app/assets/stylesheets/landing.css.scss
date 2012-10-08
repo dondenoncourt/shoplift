@@ -857,17 +857,3 @@
   }
 }
 
-#returning-user-password {
-  @include position(absolute, 400px 0 0 50%);
-  margin-left: -230px;
-  background-image: image-url('welcome-back-bg.png');
-  width: 460px;
-  height: 91px;
-  input {
-    @include shoplift-text-input;
-    @include position(absolute, 40px 0 0 90px);
-    color: white;
-    width: 365px;
-    padding: 20px 10px;
-  }
-}
