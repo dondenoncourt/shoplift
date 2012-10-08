@@ -214,7 +214,7 @@ Landing.Router = Ember.Router.extend
           #       tos: 1
           # ).done( -> router.transitionTo('photo', user) )
           #  .fail( -> alert('Unexpected Error: Please try again') )
-          
+          console.log('before commit')
           user.store.commit()
           router.transitionTo('photo', user)
       
@@ -240,11 +240,13 @@ Landing.Router = Ember.Router.extend
         next: (router) -> router.send 'submit'
         retry: (router) -> router.get("photoUploadController").retry()
         connectOutlets: (router, context) ->
+          console.log 'photo connect start'
           controller = router.get("applicationController")
           user  = controller.get('content')
           
           controller.connectOutlet('photo')
           controller.connectOutlet('photoUpload', 'photoUpload', user)
+          console.log 'photo connect finish'
         
         submit: (router) ->
           controller = router.get('photoUploadController')
