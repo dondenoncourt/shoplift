@@ -6,7 +6,7 @@
 {{outlet logo}}
 
 <div id="menu">
-	<a {{action toggleMenu target="controller"}}><img src="/img/nav-menu.png" /></a>
+	<a {{action toggleMenu target="controller"}}><img src="/img/nav-menu.png" id="header-menu-dropdown" /></a>
 	<ul>
 		{{collection contentBinding="controller" itemViewClass="Shoplift.MenuItemView"}}
 		{{outlet page}}

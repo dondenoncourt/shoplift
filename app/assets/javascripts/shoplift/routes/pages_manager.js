@@ -25,7 +25,7 @@ Shoplift.PagesManager = Ember.StateManager.extend({
 				manager.get('controller').connectOutlet({
 					viewClass: Ember.View.extend({
 						templateName: 'shoplift/templates/add',
-						elementId: 'content-page'
+						classNames: ['content-page']
 					}),
 					outletName: 'page'
 				});
@@ -41,7 +41,7 @@ Shoplift.PagesManager = Ember.StateManager.extend({
 				manager.get('controller').connectOutlet({
 					viewClass: Ember.View.extend({
 						templateName: 'shoplift/templates/help',
-						elementId: 'content-page'
+						classNames: ['content-page']
 					}),
 					outletName: 'page'
 				});
