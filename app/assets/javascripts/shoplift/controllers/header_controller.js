@@ -30,7 +30,14 @@
 	})
 });*/
 
+Shoplift.LogoController = Ember.Controller.extend();
+
 Shoplift.NavController = Ember.ArrayController.extend({
+	menuIsClosed: true,
+	menuIsOpening: false,
+	menuIsClosing: false,
+	currentUser: Shoplift.store.find(Shoplift.User, 1),
+	
 	content: [
 		{
 			name: 'menu-buttons-add',
@@ -92,8 +99,7 @@ Shoplift.NavController = Ember.ArrayController.extend({
 			action: 'goSignout'
 		}
 	],
-	closed: true,
-	currentUser: Shoplift.store.find(Shoplift.User, 1),
+	
 	whoami: function() {
 		
 		$.ajax({
@@ -107,19 +113,34 @@ Shoplift.NavController = Ember.ArrayController.extend({
 				
 			}
 		});
-	}.property('currentUser')
-	/*target: Shoplift.NavManager,
-	childViews: [Shoplift.MenuItemView.create({id: 'search'})],
-	rootView: Ember.View.create({
-		tagName: 'li',
-		template: Ember.Handlebars.compile("<img {{action openMenu}} src='img/nav-menu.png' />"),
-		didInsertElement: function() {
-			var controller = this.get('controller')
-			controller.set('target', Shoplift.NavManager);
-			console.dir(this.get('controller.target'));
-		}
-	}),
-	scaffoldingView: Ember.View.create({
+	}.property('currentUser'),
+	
+	goHome: function() {
+		var router = Shoplift.get("router"),
+				view = Shoplift.NavView;
 		
-	})*/
+		if(!this.get('menuIsClosed')) {
+			this.set("menuIsClosing", true);
+		}
+		
+		router.send("goHome");
+	},
+	toggleMenu: function() {
+		if(!this.get('menuIsClosed')) {
+			this.set("menuIsClosing", true);
+		}
+		else {
+			this.set("menuIsOpening", true);
+		}
+	},
+	menuWillOpen: function() {
+		this.set('menuIsClosed', false);
+	},
+	menuDidOpen: function() {
+		this.set("menuIsOpening", false);
+	},
+	menuDidClose: function() {
+		this.set("menuIsClosing", false);
+		this.set("menuIsClosed", true);
+	}
 });

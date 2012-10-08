@@ -11,7 +11,7 @@ Shoplift.ExploreRoute = Ember.Route.extend({
 		  name: 'nav',
 		  outletName: 'header'
 		});
-		router.get("navController").connectOutlet('logo');
+		router.get("navController").connectOutlet('logo', 'logo');
 	},
 	index: Ember.Route.extend({
 		route: '/',

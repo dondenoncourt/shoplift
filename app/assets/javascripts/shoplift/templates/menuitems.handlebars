@@ -1,12 +1,12 @@
 
 <div id="home">
-	<a {{action goHome href=true}}><img src="img/nav-home.png" /></a>
+	<a {{action goHome target="controller"}}><img src="img/nav-home.png" /></a>
 </div>
 
 {{outlet logo}}
 
 <div id="menu">
-	<a {{action toggleMenu target="view"}}><img src="/img/nav-menu.png" /></a>
+	<a {{action toggleMenu target="controller"}}><img src="/img/nav-menu.png" /></a>
 	<ul>
 		{{collection contentBinding="controller" itemViewClass="Shoplift.MenuItemView"}}
 		{{outlet page}}

@@ -20,6 +20,7 @@ Shoplift.Router = Ember.Router.extend({
       route: '/app',
       showProfile: Ember.Route.transitionTo("user.index"),
       showTag: Ember.Route.transitionTo('hashtagbrand.index'),
+      
       connectOutlets: function(router) {
         var applicationController = router.get("applicationController"),
             navController = router.get("navController"),
@@ -28,6 +29,7 @@ Shoplift.Router = Ember.Router.extend({
               controller: navController
             });
       },
+      
       index: Ember.Route.extend({
         route: '/',
         redirectsTo: 'items'
