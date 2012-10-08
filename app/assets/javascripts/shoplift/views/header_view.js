@@ -10,7 +10,8 @@ Shoplift.LogoView = Ember.View.extend({
 	menuView: Ember.ContainerView.create({*/
 	
 Shoplift.MenuFaceView = Ember.View.extend({
-	template: Handlebars.compile('<img {{bindAttr src="controller.currentUser.avatar"}} />{{avatar}} - {{controller}} - {{controller.currentUser}}')
+	//TODO: what the heck is going on in this template?
+	template: Handlebars.compile('<img {{bindAttr src="controller.currentUser.thumbUrl"}} />{{controller.currentUser}}')
 });
 	
 Shoplift.MenuItemView = Ember.View.extend({

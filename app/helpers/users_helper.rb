@@ -4,7 +4,7 @@ module UsersHelper
   end
 
   def user_image_and_value(user, value)
-    image_tag(user.avatar.url(:tiny), size: '20x20') + ' ' + value
+    image_tag(user.thumb_url) + ' ' + value
   end
 
   def min_name(name, min=32)

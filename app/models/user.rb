@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
                   :biography, :url, :hometown, :month, :day, :year, :private, :status,
                   :first_name, :last_name, :country, :vanity_url, :zipcode,
                   :notify_new_follower, :notify_relift, :notify_missing,
-                  :avatar, :tos, :signup_state, :original_url, :large_url, :thumb_url
+                  :tos, :signup_state, :original_url, :large_url, :thumb_url
 
   has_many :posts
   has_many :items

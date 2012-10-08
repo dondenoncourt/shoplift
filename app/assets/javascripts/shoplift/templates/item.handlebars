@@ -50,13 +50,13 @@
 				      		  <div class="first-shoplifter">
 				      			  Shoplifted first by
 				      			  {{#with firstLifter}}
-				      				  <div {{action showProfile this}}><img {{bindAttr src="avatar"}} {{bindAttr alt="fullName"}} /></div>
+				      				  <div {{action showProfile this}}><img {{bindAttr src="thumbUrl"}} {{bindAttr alt="fullName"}} /></div>
 				      			  {{/with}}
 				      		  </div>
 				      		  <div class="relifters">
 				      		  		Relifted by {{items.length}} {{pluralize items.length single="member" plural="members"}}
 				      		  		{{#each item in items}}
-				      		  				<div {{action showProfile item.user}}><img {{bindAttr src="item.user.avatar" alt="item.user.fullName"}} /></div>
+				      		  				<div {{action showProfile item.user}}><img {{bindAttr src="item.user.thumbUrl" alt="item.user.fullName"}} /></div>
 				      		  		{{/each}}
 				      		  </div>
 			      		  {{/with}}

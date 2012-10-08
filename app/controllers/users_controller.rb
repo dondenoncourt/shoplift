@@ -64,7 +64,7 @@ class UsersController < ApplicationController
       @usrNam = current_user.username
     end
     if @user = User.find_by_username(@usrNam.downcase)
-      render :text => @user.avatar.url( params[:style].blank? ? :tiny : params[:style] )
+      render :text => @user.thumb_url
     else
       render_error(404,"User not found")
     end

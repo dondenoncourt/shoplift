@@ -46,11 +46,14 @@ $(document).ready(function() {
       dataType:'json',
       data: $(this).serialize(),
       success:function(data) {
-        $.get('users/avatar', function(url) {
+        /*$.get('users/avatar', function(url) {
           this_form.parent().parent().find('.tagList').prepend(
             '<li><a href="#"><img src="' + url + '" alt="user-thumb-holder" width="25" height="25" class="user-tiny-thumb"/>'+data.value+'</a></li>'
           );
-        });        
+        }); */
+        this_form.parent().parent().find('.tagList').prepend(
+          '<li><a href="#">'+data.value+'</a></li>'
+        );
         $(this_form).find('input[name=hashtag_value]').val('');
       },
       error:function(xhr,textStatus,errorThrown){
