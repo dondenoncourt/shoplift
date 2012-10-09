@@ -1326,3 +1326,7 @@ ul{
 	padding: 2px 2px;
 }
 
+.coming-soon, #menu li.coming-soon, a.coming-soon, .coming-soon a {
+	cursor: default;
+}
+
