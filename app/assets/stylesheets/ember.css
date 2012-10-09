@@ -1214,6 +1214,40 @@ ul{
 	-o-transition-delay:0s;
 }
 
+.fade-in-fast
+{
+	-webkit-animation-name: reset, fade-in;
+	-webkit-animation-duration: 0.2s;
+	-webkit-animation-timing-function: ease-in;
+	-webkit-animation-delay: 0s;
+	/* Firefox 4 */
+	-moz-transition: opacity 0.2s linear;
+	/* Safari and Chrome */
+	-webkit-transition: opacity 0.2s linear;
+	/* Opera */
+	-o-transition: opacity 0.2s linear;
+	/* All */
+	visibility: visible;
+	opacity: 1;
+	transition: opacity 0.2s linear;
+}
+.fade-out-fast
+{
+	-webkit-animation-name: fade-out;
+	-webkit-animation-duration: 0.2s;
+	-webkit-animation-timing-function: ease-in;
+	-webkit-animation-delay: 0s;
+	/* Firefox 4 */
+	-moz-transition: visibility 0s 0.2s, opacity 0.2s linear;
+	/* Safari and Chrome */
+	-webkit-transition: visibility 0s 0.2s, opacity 0.2s linear;
+	/* Opera */
+	-o-transition: visibility 0s 0.2s, opacity 0.2s linear;
+	/* All */
+	visibility: hidden;
+	opacity: 0;
+	transition: visibility 0s 0.2s, opacity 0.2s linear;
+}
 
 
 /* Content Page */
@@ -1274,9 +1308,21 @@ ul{
 	right: 266px;
 }
 
-.tooltip {
-	z-index: 1000;
-	margin-top: 100px;
+.coming-soon-popup {
 	position: absolute;
+	width: 108px;
+	height: 21px;
+	background-color: rgba(0, 0, 0, 0.65);
+	border: 1px #765D8A solid;
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	font-size: 14px;
+	margin-top: -1.5em;
+	margin-left: -55px;
+	left: 50%;
+	text-align: center;
+	font-family: 'Source Sans Pro' sans-serif;
+	color: #B0A7B8;
+	padding: 2px 2px;
 }
 
