@@ -34,6 +34,7 @@ Shoplift.User = DS.Model.extend({
   largeUrl: DS.attr('string'),
   thumbUrl: DS.attr('string'),
   url: DS.attr('string'),
+  countOfPosts: DS.attr('number'),
   followerCount: (function(){ this.get('followers.length'); }).property('followers.length'),
   followeeCount: (function(){ this.get('followees.length'); }).property('followees.length'),
   items: DS.hasMany('Shoplift.Item'),

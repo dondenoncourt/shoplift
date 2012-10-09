@@ -3,7 +3,7 @@ class UserSerializer < ActiveModel::Serializer
   attributes :id, :email, :vanity_url, :full_name, :signup_state,
              :username, :first_name, :last_name, :item_ids, :zipcode,
              :sex, :vanity_url, :country, :month, :day, :year, :biography, :url,
-             :original_url, :large_url, :thumb_url
+             :original_url, :large_url, :thumb_url, :count_of_posts
 
   has_many :followers,     :include => false
   has_many :followees,     :include => false

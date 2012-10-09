@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :full_name, :username, :sex,
                   :biography, :url, :hometown, :month, :day, :year, :private, :status,
                   :first_name, :last_name, :country, :vanity_url, :zipcode,
-                  :notify_new_follower, :notify_relift, :notify_missing,
+                  :notify_new_follower, :notify_relift, :notify_missing, :count_of_posts,
                   :tos, :signup_state, :original_url, :large_url, :thumb_url
 
   has_many :posts
@@ -23,7 +23,9 @@ class User < ActiveRecord::Base
   #                      :primary_key => :follower_id,
   #                      :conditions  => ["subscriptions.status = #{Status::ACTIVATED}"]
 
-
+  
+  order :count_of_posts
+  
   def followers
     query = User.
       joins(:subscriptions).
