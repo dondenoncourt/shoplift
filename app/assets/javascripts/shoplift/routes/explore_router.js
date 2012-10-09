@@ -28,6 +28,7 @@ Shoplift.ExploreRoute = Ember.Route.extend({
 				controller: router.get("recommendedController"),
 				context: Shoplift.store.findAll(Shoplift.User) //router.get("exploreSidebarController").get("content").get("recommended")
 			});
+			router.get("recommendedController").connectOutlet('onboarding');
 		}
 	}),
 	popular: Ember.Route.extend({

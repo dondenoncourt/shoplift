@@ -37,4 +37,9 @@ Shoplift.CountdownView = Ember.View.extend({
 		console.log(this.get('content'));
 		return 5 - this.get('content.followees').length;
 	}.property('content.followees')
+});
+
+Shoplift.OnboardingController = Ember.Controller.extend();
+Shoplift.OnboardingView = Ember.View.extend({
+	template: Ember.Handlebars.compile('<div class="profile-box-container follow-instructions"><img src="/img/follow-instructions.png" alt="START HERE. Get to know the other members.  Follow at least five of them and you can start shopping." /></div>'),
 })
