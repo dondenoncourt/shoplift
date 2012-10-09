@@ -8,6 +8,7 @@
 //= require jquery.inview.min
 //= require jquery.scrollTo
 //= require bootstrap
+//= require bootstrap.min
 //= require modernizr-2.6.1.min
 //= require matchMedia
 //= require enquire.min

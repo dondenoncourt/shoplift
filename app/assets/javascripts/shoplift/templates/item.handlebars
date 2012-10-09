@@ -10,11 +10,11 @@
 				<img {{bindAttr src="photoFileName"}} /> 
 			</div>
 			<div class="product-meta">
-				<p class="product-brand">{{truncate brand.value length=23 append="..."}}</p>
+				<p class="product-brand" {{action showTag brand}}>{{truncate brand.value length=23 append="..."}}</p>
 				<p class="product-name">{{truncate name length=31 append="..."}}</p>
 			</div>
 			<div class="product-sub-container">
-				<a class="relift-this icon-relift-button" rel="#tsl-relift-popup" title="Relift this!"></a> <!-- TODO: Relift action should go here -->
+				<a class="relift-this icon-relift-button coming-soon" rel="#tsl-relift-popup" title="Relift this!"></a> <!-- TODO: Relift action should go here -->
 			</div>
 		</div>
 		<div class="product-drawer-container">
@@ -65,8 +65,8 @@
 			    </div> <!-- end tab content -->
 			  
 			  <ul class="drawer-actions">
-				  <li><a href="#" class="save-this icon-save-button"></a></li>
-				  <li><a href="#" class="share-this icon-share-button" rel="#tsl-share-popup"></a></li>
+				  <li><a href="#" class="save-this icon-save-button coming-soon"></a></li>
+				  <li><a href="#" class="share-this icon-share-button coming-soon" rel="#tsl-share-popup"></a></li>
 				  <li><a {{bindAttr href="url"}} target="_blank" class="buy-this icon-buy-button"></a></li>
 			  </ul>
 			  <a href="#" class="drawer-opener icon-plus-button"></a>

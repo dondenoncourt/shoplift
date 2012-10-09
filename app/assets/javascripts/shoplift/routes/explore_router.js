@@ -6,7 +6,10 @@ Shoplift.ExploreRoute = Ember.Route.extend({
 	showFriends: Ember.Route.transitionTo('friends'),
 	showInterests: Ember.Route.transitionTo('interests'),
 	connectOutlets: function(router) {
+		var user = router.get("navController.currentUser");
+		
 		router.get("applicationController").connectOutlet('carousel', 'exploreSidebar');
+		//router.get("exploreSidebarController").connectOutlet('countdown', 'countdown', user);
 		router.get("applicationController").connectOutlet({
 		  name: 'nav',
 		  outletName: 'header'

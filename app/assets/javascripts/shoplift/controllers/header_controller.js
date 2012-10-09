@@ -52,9 +52,9 @@ Shoplift.NavController = Ember.ArrayController.extend({
 		},
 		{
 			name: 'menu-buttons-search',
-			type: 'top',
+			type: 'top coming-soon',
 			router: true,
-			action: 'goSearch'
+			/*action: 'goSearch'*/
 		},
 		{
 			name: 'menu-buttons-profile',

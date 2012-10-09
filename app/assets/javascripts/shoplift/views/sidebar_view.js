@@ -26,4 +26,15 @@ Shoplift.ExploreSidebarView = Ember.View.extend({
 		this.$(".explore-overlay").css({left: "-308px"});
 		this.$(".explore-overlay").animate({left: "0px"}, 500);
 	}
+});
+
+Shoplift.CountdownController = Ember.Controller.extend();
+Shoplift.CountdownView = Ember.View.extend({
+	template: Ember.Handlebars.compile("Follow {{view.countdown}} more people and then <a {{action goHome href=true}}>Start Shoplifting!</a>"),
+	classNames: ['follow-countdown'],
+	
+	countdown: function() {
+		console.log(this.get('content'));
+		return 5 - this.get('content.followees').length;
+	}.property('content.followees')
 })
