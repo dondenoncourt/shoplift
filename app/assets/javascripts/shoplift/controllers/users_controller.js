@@ -2,7 +2,7 @@ Shoplift.UserController = Ember.ObjectController.extend({
 	itemsClasses: 'profile-count of-items',
 	followeesClasses: 'profile-count of-followees',
 	followersClasses: 'profile-count of-followers',
-	tagsBrandsClasses: 'tags-brands',
+	tagsBrandsClasses: 'tags-brands coming-soon',
 	marginLeft: '307px',
 	following: false,
 	

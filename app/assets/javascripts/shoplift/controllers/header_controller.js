@@ -65,32 +65,32 @@ Shoplift.NavController = Ember.ArrayController.extend({
 		},
 		{
 			name: 'menu-buttons-invite',
-			type: 'middle',
+			type: 'middle coming-soon',
 			action: 'goSearch'
 		},
 		{
 			name: 'menu-buttons-embed',
-			type: 'middle',
+			type: 'middle coming-soon',
 			action: 'goSearch'
 		},
 		{
 			name: 'menu-buttons-feedback',
-			type: 'middle',
+			type: 'middle coming-soon',
 			action: 'goSearch'
 		},
 		{
 			name: 'menu-buttons-help',
-			type: 'bottom',
+			type: 'bottom coming-soon',
 			action: 'goHelp'
 		},
 		{
 			name: 'menu-buttons-about',
-			type: 'bottom',
+			type: 'bottom coming-soon',
 			action: 'goSearch'
 		},
 		{
 			name: 'menu-buttons-terms',
-			type: 'bottom',
+			type: 'bottom coming-soon',
 			action: 'goSearch'
 		},
 		{
