@@ -29,7 +29,7 @@
 			    	  <div class="tag-list-container">
 			    		  <ul class="tag-list">
 			    			  <li>
-			    				  <a>{{view Shoplift.TagField}} <!-- <input type="text" id="newTag{{id}}" placeholder="Add a tag" /> --></a>
+			    				  <a>{{view Shoplift.TagField}}</a>
 			    			  </li>
 			    			  {{#each hashtagbrands}}
 			    				  <li><a {{action showTag this href=true}}>{{value}}</a></li>
@@ -43,7 +43,7 @@
 			      		  <p class="quote">{{{comment}}}</p>
 			      	  </div>
 			      </div>
-			      <div {{bindAttr class="view.tabClass view.historyTab:active"}}>
+			      <!--<div {{bindAttr class="view.tabClass view.historyTab:active"}}>
 			      	  <div class="history-container">
 				      	  
 				      	  {{#with history}}
@@ -61,7 +61,7 @@
 				      		  </div>
 			      		  {{/with}}
 			      	  </div>
-			      </div>
+			      </div>-->
 			    </div> <!-- end tab content -->
 			  
 			  <ul class="drawer-actions">
