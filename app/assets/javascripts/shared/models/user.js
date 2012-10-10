@@ -45,12 +45,13 @@ Shoplift.User = DS.Model.extend({
   htmldescription: function(){
       return this.get('biography');//.htmlSafe();
   }.property('description'),
-  recentItems: function() {
+  recents: DS.hasMany('Shoplift.Item', { key: 'recent_ids'}),
+  /*recentItems: function() {
     var limit = 4
         items = this.get('items');
         
     return items.slice(0, limit);
-  }.property('items'),
+  }.property('items'),*/
   user: null,
   exists: function() {
     $.ajax({

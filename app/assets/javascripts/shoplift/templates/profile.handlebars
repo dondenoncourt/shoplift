@@ -2,7 +2,7 @@
 {{#with view.content}}
 	<div class="profile-box-container"><!-- {{action showProfile this}}>-->
 		{{view Shoplift.UserView}}
-		{{#each recentItems}}
+		{{#each recents}}
 			<div class="product-img">
 				<img {{bindAttr src="photoFileName"}} /> 
 			</div>
