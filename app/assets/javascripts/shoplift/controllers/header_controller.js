@@ -32,11 +32,26 @@
 
 Shoplift.LogoController = Ember.Controller.extend();
 
+Shoplift.CurrentUserController = Ember.ObjectController.extend({
+	content: null,
+	
+	retrieveCurrentUser: function() {
+		var controller = this;
+		console.log('hello');
+		Ember.$.getJSON('/users/whoami', function(data) {
+			//Shoplift.store.load(Shoplift.User, data);
+			var currentUser = Shoplift.store.find(Shoplift.User, data.user);
+			controller.set('content', currentUser);
+			console.log('back');
+		});
+	}
+});
+
 Shoplift.NavController = Ember.ArrayController.extend({
 	menuIsClosed: true,
 	menuIsOpening: false,
 	menuIsClosing: false,
-	currentUser: Shoplift.store.find(Shoplift.User, 1),
+	currentUserBinding: Ember.Binding.oneWay('currentUserController.content'),
 	
 	content: [
 		{
@@ -99,21 +114,6 @@ Shoplift.NavController = Ember.ArrayController.extend({
 			action: 'goSignout'
 		}
 	],
-	
-	whoami: function() {
-		
-		$.ajax({
-			url: '/users/whoami',
-			type: 'GET',
-			context: this,
-			success: function(response){
-				this.set('currentUser', Shoplift.store.find(Shoplift.User, response.user));
-			},
-			error: function() {
-				
-			}
-		});
-	}.property('currentUser'),
 	
 	goHome: function() {
 		var router = Shoplift.get("router"),

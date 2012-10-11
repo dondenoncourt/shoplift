@@ -902,8 +902,14 @@ ul{
 .explore-nearby{ background-position: 0 -460px; width: 139px; height: 42px; } 
 .explore-popular-on{ background-position: 0 -552px; width: 162px; height: 42px; } 
 .explore-popular{ background-position: 0 -644px; width: 162px; height: 42px; } 
-.explore-recommended-on{ background-position: 0 -736px; width: 261px; height: 42px; } 
+/*.explore-recommended-on{ background-position: 0 -736px; width: 261px; height: 42px; } 
 .explore-recommended{ background-position: 0 -828px; width: 261px; height: 42px; } 
+*/
+.explore-overlay li.explore-recommended-on {
+	background-image: url(/img/follow-everyone.png);
+	width: 0px; height: 42px;
+	padding-right: 170px;
+}
 .explore-scaffolding{ background-position: 0 -920px; width: 308px; height: 421px; } 
 
 
@@ -992,7 +998,15 @@ ul{
 	padding: 100px 0;
 }
 .follow-instructions img {
-	margin-left: 58px;
+	margin-left: 64px;
+}
+.follow-countdown {
+	color: white;
+	top: 660px;
+	left: 50%;
+	margin-left: -250px;
+	position: fixed;
+	font-size: 2em;
 }
 
 /* Tags + Brands Squares */
@@ -1068,6 +1082,9 @@ ul{
 #logo {
 	margin-left: -221px;
 	top:78px;
+}
+#logo img {
+	margin-left: -4px;
 }
 
 #current-user {

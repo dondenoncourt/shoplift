@@ -30,13 +30,32 @@ Shoplift.ExploreSidebarView = Ember.View.extend({
 
 Shoplift.CountdownController = Ember.Controller.extend();
 Shoplift.CountdownView = Ember.View.extend({
-	template: Ember.Handlebars.compile("Follow {{view.countdown}} more people and then <a {{action goHome href=true}}>Start Shoplifting!</a>"),
+	template: Ember.Handlebars.compile('{{#if view.followMore}}<img {{bindAttr src="view.countdownImg"}} />{{else}}<a {{action goHome href=true}}><img {{bindAttr src="view.countdownImg"}} /></a>{{/if}}'),
 	classNames: ['follow-countdown'],
 	
 	countdown: function() {
-		console.log(this.get('content'));
-		return 5 - this.get('content.followees').length;
-	}.property('content.followees')
+		var followees = this.get('controller.content.followees.content');
+		console.log(followees);
+		//debugger;
+		if(typeof followees !== "undefined" && followees !== null)
+			return Math.max((5 - followees.length), 0);
+		return 5;
+	}.property('controller.content.followees.content'),
+	
+	followMore: function() {
+		if(this.get('countdown') === 0)
+			return false;
+		return true;
+	}.property('countdown'),
+	
+	countdownImg: function() {
+		return '/img/follow-' + this.get("countdown") + '-more.png';
+	}.property('countdown'),
+	
+	countdownAlt: function() {
+		return 'Follow ' + this.get("countdown") + ' more people and then start shoplifting'
+	}.property('countdown')
+	
 });
 
 Shoplift.OnboardingController = Ember.Controller.extend();

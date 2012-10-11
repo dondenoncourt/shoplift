@@ -6,10 +6,10 @@ Shoplift.ExploreRoute = Ember.Route.extend({
 	showFriends: Ember.Route.transitionTo('friends'),
 	showInterests: Ember.Route.transitionTo('interests'),
 	connectOutlets: function(router) {
-		var user = router.get("navController.currentUser");
+		var user = router.get("currentUserController.content");
 		
-		router.get("applicationController").connectOutlet('carousel', 'exploreSidebar');
-		//router.get("exploreSidebarController").connectOutlet('countdown', 'countdown', user);
+		router.get("exploreSidebarController").connectControllers('currentUser');
+		router.get("applicationController").connectOutlet('carousel', 'exploreSidebar', user);
 		router.get("applicationController").connectOutlet({
 		  name: 'nav',
 		  outletName: 'header'
@@ -23,13 +23,24 @@ Shoplift.ExploreRoute = Ember.Route.extend({
 	recommended: Ember.Route.extend({
 		route: '/recommended',
 		connectOutlets: function(router) {
+			var user = router.get("exploreSidebarController.content");
+				
 			router.get("exploreSidebarController").connectOutlet({
 				viewClass: Shoplift.UsersView,
 				controller: router.get("recommendedController"),
 				context: Shoplift.store.findAll(Shoplift.User) //router.get("exploreSidebarController").get("content").get("recommended")
 			});
-			router.get("recommendedController").connectOutlet('onboarding');
+			
+			if(typeof user === "undefined" || user.get("followees.content").length < 5) {
+				router.get("exploreSidebarController").connectOutlet({
+					viewClass: Shoplift.CountdownView,
+					outletName: 'countdown'
+				});
+				
+				router.get("recommendedController").connectOutlet('onboarding');
+			}
 		}
+		
 	}),
 	popular: Ember.Route.extend({
 		route: '/popular',
