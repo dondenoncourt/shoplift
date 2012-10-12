@@ -17,6 +17,9 @@ Shoplift.InViewMixin = Ember.Mixin.create({
 })
 
 Shoplift.TagField = Ember.TextField.extend({
+	maxlength: 20,
+	placeholder: 'Add a tag',
+	attributeBindings: ['maxlength', 'placeholder'],
 	keyUp: function(e) {
 		if(e.which === 13) {
 			this.addTag();
@@ -90,9 +93,31 @@ Shoplift.ItemView = Ember.View.extend(Shoplift.InViewMixin, {
 
   initDrawer: function() {
 	  var that = this,
-	  time = 800
-	  drawerIsAnimating = that.get("drawerIsAnimating"),
-	  drawerIsOpen = that.get("drawerIsOpen");
+	  		time = 800
+	  		drawerIsAnimating = that.get("drawerIsAnimating"),
+	  		drawerIsOpen = that.get("drawerIsOpen");
+	  
+	  
+	  /* User circles hover */
+	  this.$().on("mouseover", ".relifter-circle", function(e) {
+	  	var fullName = $(this).children("img").attr("alt");
+	  	
+	  	if(e.fromElement === null || (!$(e.fromElement).hasClass("fullname-popup") && e.fromElement !== e.currentTarget)) {
+	  		$(this).append('<div class="fullname-popup fade-in-fast">' + fullName + '</div>');
+	  	}
+	  });
+	  this.$().on("mouseout", ".relifter-circle", function(e) {
+	  	var that = this;
+	  	if(!$(e.relatedTarget).hasClass("fullname-popup") && !$(e.relatedTarget).parent().hasClass("relifter-circle") && e.relatedTarget !== e.currentTarget) {
+	  		$(this).children(".fullname-popup").removeClass('fade-in-fast');
+	  		$(this).children(".fullname-popup").addClass('fade-out-fast');
+	  		setTimeout(function() {
+	  			$(that).children(".fullname-popup").remove();
+	  		}, 200);
+	  	}
+	  });
+	  
+	  
 	  
 	  this.$().on("click", ".product-container", function(e) {
 	  	var clickedElement = $(e.toElement);
@@ -119,7 +144,7 @@ Shoplift.ItemView = Ember.View.extend(Shoplift.InViewMixin, {
 	  			angle,
 	  			drawerIsAnimating = that.get("drawerIsAnimating"),
 	  			drawerIsOpen = that.get("drawerIsOpen");
-	  
+	  		  
 	  	if(!drawerIsAnimating) {
 	  		that.set("drawerIsAnimating", true);
 	  	} else {

@@ -341,7 +341,6 @@ ul{
    .product-drawer-container {
 	  width:193px;
 	  overflow: hidden;
-	  cursor: pointer;
 	  position: absolute;
 	  top: 0;
 	  left: 366px;
@@ -463,11 +462,11 @@ ul{
 		 box-shadow:none !important;
 		 color: white;
 		 position: relative;
-		 top:-1px;
-		 left: -8px;
+		 top: -3px;
+		 left: -6px;
 		 height: 30px;
-		 font-family: 'Futura' arial;
-		 font-size: 1.2em;
+		 font-family: 'Source Sans Pro' sans-serif;
+		 font-size: 1em;
 		 text-shadow: 1px 1px 1px #000;
 		 filter: dropshadow(color=#000, offx=1, offy=1);	
 	  }
@@ -483,8 +482,8 @@ ul{
 		 background-color: #1F1138;
 		 background-image: -webkit-linear-gradient(left, #16082a, #1f1138);
 		 color: white;
-		 font-family: 'Futura', arial;
-		 font-size: 1.2em;
+		 font-family: 'Source Sans Pro', sans-serif;
+		 font-size: 1.15em;
 		 height: 25px;
 		 margin-top: 7px;
 		 padding: 4px 0 0px 29px;
@@ -533,8 +532,8 @@ ul{
 		 padding: 13px;
 		 margin-top: 25px;
 		 color: white;
-		 font-family: 'Futura' arial;
-		 font-size: .85em;
+		 font-family: 'Source Sans Pro' sans-serif;
+		 font-size: 1.15em;
 		 line-height: normal;
 		 text-shadow: 1px 1px 3px #111;
 		 filter: dropshadow(color=#111, offx=1, offy=1);	
@@ -559,13 +558,13 @@ ul{
 	  }
 
 	  .first-shoplifter {
-		 font-family: 'Futura' arial;
+		 font-family: 'Source Sans Pro' sans-serif;
 		 background-color: #1F1138;
 		 background-image: -webkit-linear-gradient(left, #16082A, #1F1138);
 		 margin: 30px 0;
 		 padding: 4px 10px 4px 12px;
 		 color: white;
-		 font-size: .95em;
+		 font-size: 1.15em;
 		 text-shadow: 1px 1px 1px #000;
 		 filter: dropshadow(color=#000, offx=1, offy=1);	
 	  }
@@ -581,11 +580,11 @@ ul{
 		 margin-top: -17px;
 	  }
 	  .first-shoplifter img {
-		 width: 44px;
+		 width: 45px;
 		 -webkit-border-radius: 30px;
 		 -moz-border-radius: 30px;
 		 border-radius: 30px;
-		 margin-left: 1px;
+		 margin-left: 0px;
 		 -moz-transform: rotate(-20deg);
 		 -webkit-transform: rotate(-20deg);
 		 -ms-transform: rotate(-20deg);
@@ -594,13 +593,13 @@ ul{
 	  }
 
 	  .relifters {
-		 font-family: 'Futura' arial;
+		 font-family: 'Source Sans Pro' sans-serif;
 		 background-color: #1F1138;
 		 background-image: -webkit-linear-gradient(left, #16082A, #1F1138);
 		 margin: 10px 0;
 		 padding: 4px 10px 4px 12px;
 		 color: white;
-		 font-size: .95em;
+		 font-size: 1.15em;
 		 text-shadow: 1px 1px 1px #000;
 		 filter: dropshadow(color=#000, offx=1, offy=1);	
 		 overflow: hidden;
@@ -1347,3 +1346,29 @@ ul{
 	cursor: default;
 }
 
+.first-shoplifter div.fullname-popup, .relifters div.fullname-popup {
+	position: absolute;
+	width: 108px;
+	height: 21px;
+	background-color: rgba(0, 0, 0, 0.65);
+	border: 1px #765D8A solid;
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	font-size: 14px;
+	
+	text-align: center;
+	font-family: 'Source Sans Pro' sans-serif;
+	color: #B0A7B8;
+	padding: 2px 2px;
+}
+
+.first-shoplifter div.fullname-popup {
+	margin-top: -4.5em;
+	right: 50%;
+}
+
+.relifters div.fullname-popup {
+	margin-top: -3.5em;
+	margin-left: -55px;
+	left: 50%;
+}

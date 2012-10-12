@@ -32,7 +32,7 @@ Shoplift.User = DS.Model.extend({
   tos: DS.attr('number'),
   originalUrl: DS.attr('string'),
   largeUrl: DS.attr('string'),
-  thumbUrl: DS.attr('string'),
+  thumbUrl: DS.attr('string', { defaultValue: '/assets/avatars/small/missing.png' }),
   url: DS.attr('string'),
   countOfPosts: DS.attr('number'),
   followerCount: (function(){ this.get('followers.length'); }).property('followers.length'),

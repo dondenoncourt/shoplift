@@ -17,7 +17,7 @@ item.set_asides.each do |set_aside|
 end
 
 if item.post.hashtags_allowed
-  json.hashtag_ids item.hashtagbrands_hashtags.pluck('hashtagbrands.id')
+  json.hashtagbrand_ids item.hashtagbrands_hashtags.pluck('hashtagbrands.id')
 else
   json.hashtag_ids '[]'
 end

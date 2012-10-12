@@ -1,15 +1,17 @@
 json.id @post.id
-json.items_count @post.items.size
+json.items_count (@post.items.size - 1)
 json.items @post.items.sort do |json, item|
-  json.id item.id
-  json.created_at item.created_at
-	json.user do |json|
-    if item.user
-      json.id item.user.id
-      json.full_name item.user.full_name
-      json.thumb_url item.user.thumb_url
-      json.full_name item.user.full_name
-			#json.partial! item.user    user this should we want to list more user info
+  if item.user && @post.user && item.user.id != @post.user.id
+    json.id item.id
+    json.created_at item.created_at
+  	json.user do |json|
+      if item.user
+        json.id item.user.id
+        json.full_name item.user.full_name
+        json.thumb_url item.user.thumb_url
+        json.full_name item.user.full_name
+  			#json.partial! item.user    user this should we want to list more user info
+      end
     end
   end
 end
